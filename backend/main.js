@@ -712,93 +712,31 @@ app.use(
 =========================================================
 */
 
-const server =
-  app.listen(
-    PORT,
-    HOST,
-    function () {
+if (require.main === module) {
+  const server = app.listen(PORT, HOST, function () {
+    console.log("");
+    console.log("==============================================");
+    console.log(" GTF BANKING API SERVER");
+    console.log("==============================================");
+    console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+    console.log(`Server: http://${HOST}:${PORT}`);
+    console.log(`Frontend: ${FRONTEND_DIR}`);
+    console.log("API base: /api");
+    console.log("Health: /api/health");
+    console.log("==============================================");
+    console.log("");
+  });
 
-      console.log('');
-      console.log(
-        '=============================================='
-      );
-      console.log(
-        ' GTF BANKING API SERVER'
-      );
-      console.log(
-        '=============================================='
-      );
-
-      console.log(
-        `Environment: ${
-          process.env.NODE_ENV ||
-          'development'
-        }`
-      );
-
-      console.log(
-        `Server: http://${HOST}:${PORT}`
-      );
-
-      console.log(
-        `Frontend: ${FRONTEND_DIR}`
-      );
-
-      console.log(
-        'API base: /api'
-      );
-
-      console.log(
-        'Health: /api/health'
-      );
-
-      console.log(
-        '=============================================='
-      );
-      console.log('');
-
-    }
-  );
-
-
-/*
-=========================================================
- GRACEFUL SHUTDOWN
-=========================================================
-*/
-
-function shutdown(
-  signal
-) {
-
-  console.log(
-    `${signal} received. Shutting down GTF server...`
-  );
-
-  server.close(
-    function () {
-
-      console.log(
-        'GTF server stopped.'
-      );
-
+  function shutdown(signal) {
+    console.log(`${signal} received. Shutting down GTF server...`);
+    server.close(function () {
+      console.log("GTF server stopped.");
       process.exit(0);
+    });
+  }
 
-    }
-  );
-
+  process.on("SIGTERM", () => shutdown("SIGTERM"));
+  process.on("SIGINT", () => shutdown("SIGINT"));
 }
-
-
-process.on(
-  'SIGTERM',
-  () => shutdown('SIGTERM')
-);
-
-process.on(
-  'SIGINT',
-  () => shutdown('SIGINT')
-);
-
 
 module.exports = app;
