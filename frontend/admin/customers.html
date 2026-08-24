@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="GTF Banking customer administration portal."
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b2a4a"
+  >
+
+  <title>Customers | GTF Banking Administration</title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <style>
+    :root {
+      --navy: #0b2a4a;
+      --blue: #145da0;
+      --blue-light: #eaf3fb;
+      --background: #f4f7fa;
+      --white: #ffffff;
+      --text: #172b3a;
+      --muted: #66788a;
+      --border: #d8e1e9;
+      --success: #16794c;
+      --danger: #b42318;
+      --warning: #9a6700;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .admin-header {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .header-inner {
+      max-width: 1450px;
+      margin: 0 auto;
+      min-height: 72px;
+      padding: 14px 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      display: block;
+      font-size: 1.12rem;
+      font-weight: 700;
+    }
+
+    .brand-subtitle {
+      display: block;
+      color: #c8d7e4;
+      font-size: .72rem;
+    }
+
+    .header-title {
+      color: #d9e5ef;
+      font-size: .9rem;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .header-button {
+      border: 1px solid rgba(255,255,255,.3);
+      background: transparent;
+      color: #fff;
+      border-radius: 6px;
+      padding: 9px 13px;
+    }
+
+    .header-button:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    .layout {
+      max-width: 1450px;
+      margin: 0 auto;
+      min-height: calc(100vh - 72px);
+
+      display: grid;
+      grid-template-columns: 230px 1fr;
+    }
+
+    .sidebar {
+      background: #fff;
+      border-right: 1px solid var(--border);
+      padding: 22px 14px;
+    }
+
+    .sidebar-title {
+      margin: 0 10px 12px;
+
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav a {
+      padding: 11px 12px;
+      border-radius: 6px;
+
+      color: var(--text);
+      text-decoration: none;
+
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav a.active {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 5px;
+      color: var(--navy);
+      font-size: 1.8rem;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .refresh-btn {
+      border: 1px solid var(--blue);
+      background: #fff;
+      color: var(--blue);
+      border-radius: 6px;
+      padding: 10px 15px;
+      font-weight: 700;
+    }
+
+    .refresh-btn:hover {
+      background: var(--blue-light);
+    }
+
+    .notice {
+      display: none;
+      padding: 13px 15px;
+      border-radius: 7px;
+      margin-bottom: 20px;
+    }
+
+    .notice.visible {
+      display: block;
+    }
+
+    .notice.error {
+      background: #fff0ee;
+      border: 1px solid #f0c4bf;
+      color: var(--danger);
+    }
+
+    .notice.success {
+      background: #eaf8f0;
+      border: 1px solid #b9dec9;
+      color: var(--success);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 20px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .stat-value {
+      color: var(--navy);
+      font-size: 1.65rem;
+      font-weight: 700;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      margin: 0 0 4px;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    .panel-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .filters {
+      padding: 18px 20px;
+
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+
+      color: var(--text);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      padding: 10px;
+
+      background: #fff;
+      color: var(--text);
+
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(20,93,160,.1);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 6px;
+      padding: 10px 15px;
+      font-weight: 700;
+    }
+
+    .primary-btn:hover {
+      background: var(--navy);
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 6px;
+      padding: 9px 13px;
+    }
+
+    .secondary-btn:hover {
+      background: #f7fafc;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1050px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 13px 15px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #edf1f4;
+    }
+
+    th {
+      background: #f8fafc;
+      color: var(--muted);
+
+      font-size: .73rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    td {
+      font-size: .84rem;
+    }
+
+    tbody tr:hover {
+      background: #fafcfe;
+    }
+
+    .customer-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .customer-email {
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 9px;
+
+      border-radius: 999px;
+
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    .badge.active,
+    .badge.verified,
+    .badge.approved {
+      background: #eaf8f0;
+      color: var(--success);
+    }
+
+    .badge.pending,
+    .badge.review {
+      background: #fff7df;
+      color: var(--warning);
+    }
+
+    .badge.blocked,
+    .badge.suspended,
+    .badge.rejected {
+      background: #fff0ee;
+      color: var(--danger);
+    }
+
+    .badge.unverified {
+      background: #eef2f5;
+      color: #586a78;
+    }
+
+    .action-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--blue);
+      border-radius: 5px;
+      padding: 6px 9px;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+
+    .action-btn:hover {
+      background: var(--blue-light);
+    }
+
+    .empty {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .modal {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+
+      background: rgba(0,0,0,.48);
+
+      padding: 20px;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.visible {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(760px, 100%);
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 1.1rem;
+    }
+
+    .close {
+      border: 0;
+      background: transparent;
+
+      color: var(--muted);
+
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .detail.full {
+      grid-column: 1 / -1;
+    }
+
+    .detail-label {
+      margin-bottom: 4px;
+
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .detail-value {
+      overflow-wrap: anywhere;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+
+      margin-top: 22px;
+      padding-top: 15px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .danger-btn {
+      border: 1px solid #e2b5b0;
+      background: #fff0ee;
+      color: var(--danger);
+      border-radius: 6px;
+      padding: 9px 13px;
+      font-weight: 700;
+    }
+
+    .danger-btn:hover {
+      background: #ffe5e1;
+    }
+
+    .loading {
+      opacity: .65;
+      pointer-events: none;
+    }
+
+    @media (max-width: 1100px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filters {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      main {
+        padding: 20px 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .header-title {
+        display: none;
+      }
+
+      .stats,
+      .filters,
+      .sidebar-nav,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail.full {
+        grid-column: auto;
+      }
+
+      .page-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+       ====================================================== -->
+
+  <header class="admin-header">
+
+    <div class="header-inner">
+
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="GTF Banking Administration"
+      >
+
+        <img
+          src="../assets/gtf-logo.svg"
+          alt="GTF Banking"
+          onerror="this.style.display='none'"
+        >
+
+        <span>
+          <span class="brand-name">
+            GTF Banking
+          </span>
+
+          <span class="brand-subtitle">
+            Administration
+          </span>
+        </span>
+
+      </a>
+
+
+      <span class="header-title">
+        Customer Management
+      </span>
+
+
+      <div class="header-actions">
+
+        <button
+          id="dashboardButton"
+          class="header-button"
+          type="button"
+        >
+          Dashboard
+        </button>
+
+        <button
+          id="logoutButton"
+          class="header-button"
+          type="button"
+        >
+          Sign Out
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       APPLICATION LAYOUT
+       ====================================================== -->
+
+  <div class="layout">
+
+
+    <!-- ===================================================
+         SIDEBAR
+         ==================================================== -->
+
+    <aside class="sidebar">
+
+      <p class="sidebar-title">
+        Administration
+      </p>
+
+
+      <nav class="sidebar-nav">
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a
+          href="customers.html"
+          class="active"
+          aria-current="page"
+        >
+          Customers
+        </a>
+
+        <a href="users.html">
+          Users
+        </a>
+
+        <a href="accounts.html">
+          Accounts
+        </a>
+
+        <a href="transactions.html">
+          Transactions
+        </a>
+
+        <a href="audit.html">
+          Audit Log
+        </a>
+
+        <a href="compliance.html">
+          Compliance
+        </a>
+
+        <a href="reports.html">
+          Reports
+        </a>
+
+        <a href="settings.html">
+          Settings
+        </a>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- ===================================================
+         MAIN
+         ==================================================== -->
+
+    <main>
+
+      <div class="page-header">
+
+        <div>
+
+          <h1>
+            Customers
+          </h1>
+
+          <p>
+            View customer records and review
+            account and verification status.
+          </p>
+
+        </div>
+
+
+        <button
+          id="refreshButton"
+          class="refresh-btn"
+          type="button"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           NOTICES
+           ================================================== -->
+
+      <div
+        id="errorNotice"
+        class="notice error"
+        role="alert"
+      ></div>
+
+
+      <div
+        id="successNotice"
+        class="notice success"
+        role="status"
+      ></div>
+
+
+      <!-- =================================================
+           STATISTICS
+           ================================================== -->
+
+      <section class="stats">
+
+        <article class="stat">
+
+          <div class="stat-label">
+            Total Customers
+          </div>
+
+          <div
+            id="totalCustomers"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </article>
+
+
+        <article class="stat">
+
+          <div class="stat-label">
+            Active
+          </div>
+
+          <div
+            id="activeCustomers"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </article>
+
+
+        <article class="stat">
+
+          <div class="stat-label">
+            Pending Verification
+          </div>
+
+          <div
+            id="pendingCustomers"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </article>
+
+
+        <article class="stat">
+
+          <div class="stat-label">
+            Suspended
+          </div>
+
+          <div
+            id="suspendedCustomers"
+            class="stat-value"
+          >
+            —
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- =================================================
+           FILTERS
+           ================================================== -->
+
+      <section class="panel">
+
+        <div class="panel-header">
+
+          <h2>
+            Customer Search
+          </h2>
+
+          <p>
+            Search customer records and filter
+            by account status.
+          </p>
+
+        </div>
+
+
+        <form
+          id="filterForm"
+          class="filters"
+        >
+
+          <div class="field">
+
+            <label for="search">
+              Search
+            </label>
+
+            <input
+              id="search"
+              name="search"
+              type="search"
+              placeholder="Name, email, customer ID..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="status">
+              Status
+            </label>
+
+            <select
+              id="status"
+              name="status"
+            >
+
+              <option value="">
+                All statuses
+              </option>
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="suspended">
+                Suspended
+              </option>
+
+              <option value="blocked">
+                Blocked
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="verification">
+              Verification
+            </label>
+
+            <select
+              id="verification"
+              name="verification"
+            >
+
+              <option value="">
+                All
+              </option>
+
+              <option value="verified">
+                Verified
+              </option>
+
+              <option value="unverified">
+                Unverified
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            id="filterButton"
+            class="primary-btn"
+            type="submit"
+          >
+            Search
+          </button>
+
+        </form>
+
+      </section>
+
+
+      <!-- =================================================
+           CUSTOMER TABLE
+           ================================================== -->
+
+      <section class="panel">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Customer ID
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Verification
+                </th>
+
+                <th>
+                  Accounts
+                </th>
+
+                <th>
+                  Created
+                </th>
+
+                <th>
+                  Action
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody id="customersBody">
+
+              <tr>
+
+                <td
+                  colspan="7"
+                  class="empty"
+                >
+                  Loading customers...
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       CUSTOMER DETAILS MODAL
+       ====================================================== -->
+
+  <div
+    id="customerModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="customerModalTitle"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-header">
+
+        <h2 id="customerModalTitle">
+          Customer Details
+        </h2>
+
+        <button
+          id="closeModal"
+          class="close"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        id="modalBody"
+        class="modal-body"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       APPLICATION SCRIPT
+       ====================================================== -->
+
+  <script
+    src="../js/app.js"
+    defer
+  ></script>
+
+
+  <script>
+    "use strict";
+
+
+    /* =====================================================
+       STATE
+       ===================================================== */
+
+    const state = {
+      customers: [],
+
+      filters: {
+        search: "",
+        status: "",
+        verification: ""
+      }
+    };
+
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const customersBody =
+      document.getElementById(
+        "customersBody"
+      );
+
+    const customerModal =
+      document.getElementById(
+        "customerModal"
+      );
+
+    const modalBody =
+      document.getElementById(
+        "modalBody"
+      );
+
+    const closeModalButton =
+      document.getElementById(
+        "closeModal"
+      );
+
+    const filterForm =
+      document.getElementById(
+        "filterForm"
+      );
+
+    const errorNotice =
+      document.getElementById(
+        "errorNotice"
+      );
+
+    const successNotice =
+      document.getElementById(
+        "successNotice"
+      );
+
+
+    /* =====================================================
+       HTML ESCAPING
+       ===================================================== */
+
+    function escapeHtml(value) {
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+        return "";
+      }
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+
+    /* =====================================================
+       NOTICES
+       ===================================================== */
+
+    function showError(message) {
+
+      successNotice.classList.remove(
+        "visible"
+      );
+
+      errorNotice.textContent =
+        message ||
+        "An error occurred.";
+
+      errorNotice.classList.add(
+        "visible"
+      );
+    }
+
+
+    function showSuccess(message) {
+
+      errorNotice.classList.remove(
+        "visible"
+      );
+
+      successNotice.textContent =
+        message ||
+        "Operation completed.";
+
+      successNotice.classList.add(
+        "visible"
+      );
+
+      window.setTimeout(() => {
+
+        successNotice.classList.remove(
+          "visible"
+        );
+
+      }, 4000);
+    }
+
+
+    /* =====================================================
+       BADGES
+       ===================================================== */
+
+    function statusBadge(status) {
+
+      const value =
+        String(
+          status || "pending"
+        ).toLowerCase();
+
+      let className =
+        "pending";
+
+      if (
+        value === "active" ||
+        value === "approved"
+      ) {
+        className =
+          "active";
+      }
+
+      if (
+        value === "suspended"
+      ) {
+        className =
+          "suspended";
+      }
+
+      if (
+        value === "blocked"
+      ) {
+        className =
+          "blocked";
+      }
+
+      const label =
+        value
+          .replaceAll("_", " ")
+          .replace(
+            /\b\w/g,
+            character =>
+              character.toUpperCase()
+          );
+
+      return `
+        <span class="badge ${className}">
+          ${escapeHtml(label)}
+        </span>
+      `;
+    }
+
+
+    function verificationBadge(value) {
+
+      const status =
+        String(
+          value || "unverified"
+        ).toLowerCase();
+
+      let className =
+        "unverified";
+
+      if (
+        status === "verified"
+      ) {
+        className =
+          "verified";
+      }
+
+      if (
+        status === "pending"
+      ) {
+        className =
+          "pending";
+      }
+
+      const label =
+        status
+          .replaceAll("_", " ")
+          .replace(
+            /\b\w/g,
+            character =>
+              character.toUpperCase()
+          );
+
+      return `
+        <span class="badge ${className}">
+          ${escapeHtml(label)}
+        </span>
+      `;
+    }
+
+
+    /* =====================================================
+       DATE FORMATTER
+       ===================================================== */
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "—";
+      }
+
+      const date =
+        new Date(value);
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return escapeHtml(
+          value
+        );
+      }
+
+      return date.toLocaleString();
+    }
+
+
+    /* =====================================================
+       LOAD CUSTOMERS
+       ===================================================== */
+
+    async function loadCustomers() {
+
+      customersBody.innerHTML = `
+        <tr>
+          <td
+            colspan="7"
+            class="empty"
+          >
+            Loading customers...
+          </td>
+        </tr>
+      `;
+
+
+      try {
+
+        /*
+         * app.js/backend integration point.
+         *
+         * The actual API request should be performed
+         * by your authenticated backend.
+         *
+         * Do not put a Supabase service-role key
+         * in this browser file.
+         */
+
+        if (
+          typeof window.gtfAdminGetCustomers !==
+          "function"
+        ) {
+
+          throw new Error(
+            "Customer API is not connected."
+          );
+        }
+
+
+        const result =
+          await window.gtfAdminGetCustomers(
+            state.filters
+          );
+
+
+        if (
+          result?.forbidden
+        ) {
+
+          showError(
+            "You do not have permission to view customers."
+          );
+
+          renderCustomers([]);
+
+          return;
+        }
+
+
+        if (
+          !result ||
+          result.success === false
+        ) {
+
+          throw new Error(
+            result?.message ||
+            "Unable to load customers."
+          );
+        }
+
+
+        state.customers =
+          Array.isArray(
+            result.customers
+          )
+            ? result.customers
+            : Array.isArray(
+                result.data
+              )
+              ? result.data
+              : [];
+
+
+        renderCustomers(
+          state.customers
+        );
+
+
+        updateStatistics(
+          state.customers
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Customer loading error:",
+          error
+        );
+
+
+        showError(
+          error.message ||
+          "Unable to load customers."
+        );
+
+
+        customersBody.innerHTML = `
+          <tr>
+            <td
+              colspan="7"
+              class="empty"
+            >
+              Customer records could not be loaded.
+            </td>
+          </tr>
+        `;
+
+      }
+    }
+
+
+    /* =====================================================
+       RENDER CUSTOMERS
+       ===================================================== */
+
+    function renderCustomers(
+      customers
+    ) {
+
+      customersBody.innerHTML =
+        "";
+
+
+      if (
+        !customers ||
+        customers.length === 0
+      ) {
+
+        customersBody.innerHTML = `
+          <tr>
+            <td
+              colspan="7"
+              class="empty"
+            >
+              No customers found.
+            </td>
+          </tr>
+        `;
+
+        return;
+      }
+
+
+      customers.forEach(
+        customer => {
+
+          const id =
+            customer.id ||
+            customer.customer_id ||
+            "—";
+
+
+          const name =
+            customer.full_name ||
+            customer.name ||
+            [
+              customer.first_name,
+              customer.last_name
+            ]
+              .filter(Boolean)
+              .join(" ") ||
+            "Unknown Customer";
+
+
+          const email =
+            customer.email ||
+            "No email";
+
+
+          const status =
+            customer.status ||
+            customer.account_status ||
+            "pending";
+
+
+          const verification =
+            customer.verification_status ||
+            customer.kyc_status ||
+            (
+              customer.verified
+                ? "verified"
+                : "unverified"
+            );
+
+
+          const accounts =
+            customer.account_count ??
+            customer.accounts_count ??
+            (
+              Array.isArray(
+                customer.accounts
+              )
+                ? customer.accounts.length
+                : 0
+            );
+
+
+          const created =
+            customer.created_at;
+
+
+          const row =
+            document.createElement(
+              "tr"
+            );
+
+
+          row.innerHTML = `
+
+            <td>
+
+              <div class="customer-name">
+                ${escapeHtml(name)}
+              </div>
+
+              <div class="customer-email">
+                ${escapeHtml(email)}
+              </div>
+
+            </td>
+
+
+            <td>
+              ${escapeHtml(id)}
+            </td>
+
+
+            <td>
+              ${statusBadge(status)}
+            </td>
+
+
+            <td>
+              ${verificationBadge(
+                verification
+              )}
+            </td>
+
+
+            <td>
+              ${escapeHtml(accounts)}
+            </td>
+
+
+            <td>
+              ${formatDate(created)}
+            </td>
+
+
+            <td>
+
+              <button
+                class="action-btn"
+                type="button"
+                data-customer-id="${escapeHtml(id)}"
+              >
+                View
+              </button>
+
+            </td>
+
+          `;
+
+
+          customersBody.appendChild(
+            row
+          );
+
+        }
+      );
+
+
+      document
+        .querySelectorAll(
+          "[data-customer-id]"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              () => {
+
+                openCustomer(
+                  button.dataset.customerId
+                );
+
+              }
+            );
+
+          }
+        );
+    }
+
+
+    /* =====================================================
+       STATISTICS
+       ===================================================== */
+
+    function updateStatistics(
+      customers
+    ) {
+
+      const total =
+        customers.length;
+
+
+      const active =
+        customers.filter(
+          customer =>
+            String(
+              customer.status ||
+              customer.account_status ||
+              ""
+            ).toLowerCase() ===
+            "active"
+        ).length;
+
+
+      const pending =
+        customers.filter(
+          customer => {
+
+            const value =
+              String(
+                customer.verification_status ||
+                customer.kyc_status ||
+                ""
+              ).toLowerCase();
+
+            return (
+              value === "pending"
+            );
+
+          }
+        ).length;
+
+
+      const suspended =
+        customers.filter(
+          customer =>
+            ["suspended", "blocked"]
+              .includes(
+                String(
+                  customer.status ||
+                  customer.account_status ||
+                  ""
+                ).toLowerCase()
+              )
+        ).length;
+
+
+      document.getElementById(
+        "totalCustomers"
+      ).textContent =
+        total;
+
+
+      document.getElementById(
+        "activeCustomers"
+      ).textContent =
+        active;
+
+
+      document.getElementById(
+        "pendingCustomers"
+      ).textContent =
+        pending;
+
+
+      document.getElementById(
+        "suspendedCustomers"
+      ).textContent =
+        suspended;
+    }
+
+
+    /* =====================================================
+       OPEN CUSTOMER
+       ===================================================== */
+
+    function openCustomer(
+      customerId
+    ) {
+
+      const customer =
+        state.customers.find(
+          item =>
+            String(
+              item.id ||
+              item.customer_id
+            ) ===
+            String(customerId)
+        );
+
+
+      if (!customer) {
+        return;
+      }
+
+
+      const id =
+        customer.id ||
+        customer.customer_id ||
+        "—";
+
+
+      const name =
+        customer.full_name ||
+        customer.name ||
+        [
+          customer.first_name,
+          customer.last_name
+        ]
+          .filter(Boolean)
+          .join(" ") ||
+        "Unknown Customer";
+
+
+      const email =
+        customer.email ||
+        "—";
+
+
+      const phone =
+        customer.phone ||
+        customer.phone_number ||
+        "—";
+
+
+      const status =
+        customer.status ||
+        customer.account_status ||
+        "pending";
+
+
+      const verification =
+        customer.verification_status ||
+        customer.kyc_status ||
+        (
+          customer.verified
+            ? "verified"
+            : "unverified"
+        );
+
+
+      const accounts =
+        customer.account_count ??
+        customer.accounts_count ??
+        (
+          Array.isArray(
+            customer.accounts
+          )
+            ? customer.accounts.length
+            : 0
+        );
+
+
+      modalBody.innerHTML = `
+
+        <div class="detail-grid">
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Customer ID
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(id)}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Customer Name
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(name)}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Email
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(email)}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Phone
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(phone)}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Account Status
+            </div>
+
+            <div class="detail-value">
+              ${statusBadge(status)}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Verification
+            </div>
+
+            <div class="detail-value">
+              ${verificationBadge(
+                verification
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Accounts
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(accounts)}
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Created
+            </div>
+
+            <div class="detail-value">
+              ${formatDate(
+                customer.created_at
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="detail full">
+
+            <div class="detail-label">
+              Address
+            </div>
+
+            <div class="detail-value">
+              ${escapeHtml(
+                customer.address ||
+                customer.mailing_address ||
+                "Not provided"
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="detail full">
+
+            <div class="detail-label">
+              Last Updated
+            </div>
+
+            <div class="detail-value">
+              ${formatDate(
+                customer.updated_at
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            id="closeCustomerButton"
+            class="secondary-btn"
+            type="button"
+          >
+            Close
+          </button>
+
+        </div>
+
+      `;
+
+
+      customerModal.classList.add(
+        "visible"
+      );
+
+
+      document
+        .getElementById(
+          "closeCustomerButton"
+        )
+        .addEventListener(
+          "click",
+          closeCustomer
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL
+       ===================================================== */
+
+    function closeCustomer() {
+
+      customerModal.classList.remove(
+        "visible"
+      );
+    }
+
+
+    closeModalButton.addEventListener(
+      "click",
+      closeCustomer
+    );
+
+
+    customerModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target ===
+          customerModal
+        ) {
+
+          closeCustomer();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeCustomer();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       FILTERS
+       ===================================================== */
+
+    filterForm.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        state.filters = {
+
+          search:
+            document.getElementById(
+              "search"
+            ).value.trim(),
+
+          status:
+            document.getElementById(
+              "status"
+            ).value,
+
+          verification:
+            document.getElementById(
+              "verification"
+            ).value
+
+        };
+
+
+        loadCustomers();
+
+      }
+    );
+
+
+    /* =====================================================
+       REFRESH
+       ===================================================== */
+
+    document
+      .getElementById(
+        "refreshButton"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          loadCustomers();
+
+        }
+      );
+
+
+    /* =====================================================
+       DASHBOARD
+       ===================================================== */
+
+    document
+      .getElementById(
+        "dashboardButton"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          window.location.href =
+            "index.html";
+
+        }
+      );
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    document
+      .getElementById(
+        "logoutButton"
+      )
+      .addEventListener(
+        "click",
+        async () => {
+
+          try {
+
+            if (
+              typeof window.gtfLogout ===
+              "function"
+            ) {
+
+              await window.gtfLogout();
+
+            }
+
+          } catch (error) {
+
+            console.error(
+              "Logout error:",
+              error
+            );
+
+          }
+
+
+          window.location.href =
+            "../login.html";
+
+        }
+      );
+
+
+    /* =====================================================
+       INITIALIZE
+       ===================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        loadCustomers();
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>

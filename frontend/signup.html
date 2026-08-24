@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Create your GTF Banking account."
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b2a4a"
+  >
+
+  <title>Create Account | GTF Banking</title>
+
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  >
+
+  <style>
+    :root {
+      --gtf-navy: #0b2a4a;
+      --gtf-blue: #145da0;
+      --gtf-light: #f5f8fb;
+      --gtf-border: #d9e2ea;
+      --gtf-text: #172b3a;
+      --gtf-muted: #66788a;
+      --gtf-danger: #b42318;
+      --gtf-success: #16794c;
+      --gtf-white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      color: var(--gtf-text);
+      background: var(--gtf-light);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .topbar {
+      background: var(--gtf-navy);
+      color: white;
+    }
+
+    .topbar-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+      font-size: 0.88rem;
+    }
+
+    .topbar a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      background: white;
+      border-bottom: 1px solid var(--gtf-border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gtf-navy);
+      font-weight: 700;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--gtf-muted);
+      font-weight: 400;
+    }
+
+    .back-home {
+      color: var(--gtf-blue);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .signup-page {
+      padding: 45px 20px 60px;
+    }
+
+    .signup-container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border: 1px solid var(--gtf-border);
+      border-radius: 14px;
+      box-shadow:
+        0 15px 45px
+        rgba(11, 42, 74, 0.08);
+      overflow: hidden;
+    }
+
+    .signup-header {
+      background: var(--gtf-navy);
+      color: white;
+      padding: 35px 45px;
+    }
+
+    .signup-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .signup-header p {
+      margin: 0;
+      color: #d9e5ef;
+    }
+
+    .signup-form-area {
+      padding: 40px 45px;
+    }
+
+    .section-title {
+      margin: 0 0 20px;
+      color: var(--gtf-navy);
+      font-size: 1.25rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+
+    .required {
+      color: var(--gtf-danger);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--gtf-border);
+      border-radius: 7px;
+      outline: none;
+      background: white;
+      color: var(--gtf-text);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--gtf-blue);
+      box-shadow:
+        0 0 0 3px
+        rgba(20, 93, 160, 0.12);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .password-input {
+      padding-right: 80px !important;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: var(--gtf-blue);
+      font-weight: 700;
+      cursor: pointer;
+      padding: 7px;
+    }
+
+    .field-help {
+      margin: 6px 0 0;
+      color: var(--gtf-muted);
+      font-size: 0.8rem;
+    }
+
+    .password-strength {
+      margin-top: 8px;
+      height: 5px;
+      border-radius: 5px;
+      background: #e5eaf0;
+      overflow: hidden;
+    }
+
+    .password-strength-bar {
+      height: 100%;
+      width: 0;
+      transition: width 0.2s ease;
+    }
+
+    .password-status {
+      margin-top: 5px;
+      font-size: 0.8rem;
+      color: var(--gtf-muted);
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 10px 0 25px;
+      color: var(--gtf-muted);
+      font-size: 0.88rem;
+    }
+
+    .terms input {
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .terms a {
+      color: var(--gtf-blue);
+      font-weight: 600;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    .alert {
+      display: none;
+      margin-bottom: 22px;
+      padding: 13px 15px;
+      border-radius: 7px;
+      font-size: 0.9rem;
+    }
+
+    .alert.error {
+      display: block;
+      color: var(--gtf-danger);
+      background: #fff1f0;
+      border: 1px solid #f3c7c3;
+    }
+
+    .alert.success {
+      display: block;
+      color: var(--gtf-success);
+      background: #effaf4;
+      border: 1px solid #b8e2ca;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--gtf-blue);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: var(--gtf-navy);
+    }
+
+    .submit-button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .login-prompt {
+      text-align: center;
+      margin-top: 25px;
+      color: var(--gtf-muted);
+      font-size: 0.92rem;
+    }
+
+    .login-prompt a {
+      color: var(--gtf-blue);
+      font-weight: 700;
+    }
+
+    .security-note {
+      margin-top: 25px;
+      padding: 14px;
+      border: 1px solid var(--gtf-border);
+      border-radius: 7px;
+      background: #f5f8fb;
+      color: var(--gtf-muted);
+      font-size: 0.8rem;
+    }
+
+    .footer {
+      background: var(--gtf-navy);
+      color: white;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #d2dee8;
+    }
+
+    @media (max-width: 700px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width {
+        grid-column: auto;
+      }
+
+      .signup-header,
+      .signup-form-area {
+        padding: 30px 22px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .topbar-inner {
+        justify-content: center;
+      }
+
+      .back-home {
+        display: none;
+      }
+
+      .signup-page {
+        padding: 20px 10px 35px;
+      }
+
+      .signup-header h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       TOP BAR
+       ====================================================== -->
+
+  <div class="topbar">
+    <div class="topbar-inner">
+
+      <a href="support.html">
+        Support
+      </a>
+
+      <a href="pages/security.html">
+        Security
+      </a>
+
+      <a href="pages/contact.html">
+        Contact
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+       ====================================================== -->
+
+  <header class="site-header">
+
+    <div class="nav-container">
+
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="GTF Banking home"
+      >
+
+        <img
+          src="assets/gtf-logo.svg"
+          alt="GTF Banking logo"
+          onerror="this.style.display='none'"
+        >
+
+        <span class="brand-text">
+
+          <span class="brand-name">
+            GTF Banking
+          </span>
+
+          <span class="brand-subtitle">
+            Global Trust Fund
+          </span>
+
+        </span>
+
+      </a>
+
+      <a
+        href="index.html"
+        class="back-home"
+      >
+        ← Back to Home
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       SIGNUP
+       ====================================================== -->
+
+  <main class="signup-page">
+
+    <section
+      class="signup-container"
+      aria-labelledby="signup-title"
+    >
+
+      <div class="signup-header">
+
+        <h1 id="signup-title">
+          Create your GTF Banking account
+        </h1>
+
+        <p>
+          Complete the form below to create your account.
+        </p>
+
+      </div>
+
+
+      <div class="signup-form-area">
+
+        <div
+          id="signupMessage"
+          class="alert"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+
+        <form
+          id="signupForm"
+          novalidate
+        >
+
+          <!-- =================================================
+               PERSONAL INFORMATION
+               ================================================== -->
+
+          <h2 class="section-title">
+            Personal information
+          </h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label for="firstName">
+                First name
+                <span class="required">*</span>
+              </label>
+
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                autocomplete="given-name"
+                maxlength="80"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="lastName">
+                Last name
+                <span class="required">*</span>
+              </label>
+
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                autocomplete="family-name"
+                maxlength="80"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Email address
+                <span class="required">*</span>
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                inputmode="email"
+                maxlength="254"
+                placeholder="you@example.com"
+                required
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="phone">
+                Phone number
+              </label>
+
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                inputmode="tel"
+                maxlength="30"
+                placeholder="+234..."
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               ACCOUNT INFORMATION
+               ================================================== -->
+
+          <h2 class="section-title">
+            Account information
+          </h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label for="accountType">
+                Account type
+                <span class="required">*</span>
+              </label>
+
+              <select
+                id="accountType"
+                name="accountType"
+                required
+              >
+
+                <option
+                  value=""
+                  selected
+                  disabled
+                >
+                  Select account type
+                </option>
+
+                <option value="personal">
+                  Personal
+                </option>
+
+                <option value="business">
+                  Business
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="country">
+                Country
+                <span class="required">*</span>
+              </label>
+
+              <select
+                id="country"
+                name="country"
+                autocomplete="country"
+                required
+              >
+
+                <option
+                  value=""
+                  selected
+                  disabled
+                >
+                  Select country
+                </option>
+
+                <option value="NG">
+                  Nigeria
+                </option>
+
+                <option value="US">
+                  United States
+                </option>
+
+                <option value="GB">
+                  United Kingdom
+                </option>
+
+                <option value="CA">
+                  Canada
+                </option>
+
+                <option value="GH">
+                  Ghana
+                </option>
+
+                <option value="ZA">
+                  South Africa
+                </option>
+
+                <option value="OTHER">
+                  Other
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               PASSWORD
+               ================================================== -->
+
+          <h2 class="section-title">
+            Create a password
+          </h2>
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label for="password">
+                Password
+                <span class="required">*</span>
+              </label>
+
+              <div class="input-wrapper">
+
+                <input
+                  id="password"
+                  name="password"
+                  class="password-input"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  maxlength="128"
+                  required
+                >
+
+                <button
+                  type="button"
+                  id="togglePassword"
+                  class="password-toggle"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  Show
+                </button>
+
+              </div>
+
+              <p class="field-help">
+                Use at least 8 characters.
+              </p>
+
+              <div
+                class="password-strength"
+                aria-hidden="true"
+              >
+                <div
+                  id="passwordStrengthBar"
+                  class="password-strength-bar"
+                ></div>
+              </div>
+
+              <div
+                id="passwordStatus"
+                class="password-status"
+              ></div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="confirmPassword">
+                Confirm password
+                <span class="required">*</span>
+              </label>
+
+              <div class="input-wrapper">
+
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  class="password-input"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  maxlength="128"
+                  required
+                >
+
+                <button
+                  type="button"
+                  id="toggleConfirmPassword"
+                  class="password-toggle"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               TERMS
+               ================================================== -->
+
+          <label class="terms">
+
+            <input
+              id="terms"
+              name="terms"
+              type="checkbox"
+              required
+            >
+
+            <span>
+              I agree to the applicable
+              <a href="pages/privacy.html">
+                privacy policy
+              </a>
+              and understand that account creation is
+              subject to applicable terms and requirements.
+            </span>
+
+          </label>
+
+
+          <button
+            id="signupButton"
+            class="submit-button"
+            type="submit"
+          >
+            Create Account
+          </button>
+
+        </form>
+
+
+        <div class="login-prompt">
+
+          Already have an account?
+
+          <a href="login.html">
+            Sign in
+          </a>
+
+        </div>
+
+
+        <div class="security-note">
+
+          <strong>Security reminder:</strong>
+          Never share your password or authentication
+          codes with another person.
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+       ====================================================== -->
+
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <span>
+        ©
+        <span id="currentYear"></span>
+        GTF Banking. All rights reserved.
+      </span>
+
+      <div class="footer-links">
+
+        <a href="pages/privacy.html">
+          Privacy
+        </a>
+
+        <a href="pages/security.html">
+          Security
+        </a>
+
+        <a href="support.html">
+          Support
+        </a>
+
+        <a href="pages/contact.html">
+          Contact
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       APPLICATION SCRIPT
+       ====================================================== -->
+
+  <script
+    src="js/app.js"
+    defer
+  ></script>
+
+
+  <!-- =====================================================
+       SIGNUP SCRIPT
+       ====================================================== -->
+
+  <script type="module">
+
+    "use strict";
+
+
+    /* =====================================================
+       ELEMENTS
+       ====================================================== */
+
+    const form =
+      document.getElementById(
+        "signupForm"
+      );
+
+    const message =
+      document.getElementById(
+        "signupMessage"
+      );
+
+    const signupButton =
+      document.getElementById(
+        "signupButton"
+      );
+
+    const firstName =
+      document.getElementById(
+        "firstName"
+      );
+
+    const lastName =
+      document.getElementById(
+        "lastName"
+      );
+
+    const email =
+      document.getElementById(
+        "email"
+      );
+
+    const phone =
+      document.getElementById(
+        "phone"
+      );
+
+    const accountType =
+      document.getElementById(
+        "accountType"
+      );
+
+    const country =
+      document.getElementById(
+        "country"
+      );
+
+    const password =
+      document.getElementById(
+        "password"
+      );
+
+    const confirmPassword =
+      document.getElementById(
+        "confirmPassword"
+      );
+
+    const terms =
+      document.getElementById(
+        "terms"
+      );
+
+    const togglePassword =
+      document.getElementById(
+        "togglePassword"
+      );
+
+    const toggleConfirmPassword =
+      document.getElementById(
+        "toggleConfirmPassword"
+      );
+
+    const strengthBar =
+      document.getElementById(
+        "passwordStrengthBar"
+      );
+
+    const passwordStatus =
+      document.getElementById(
+        "passwordStatus"
+      );
+
+    const currentYear =
+      document.getElementById(
+        "currentYear"
+      );
+
+
+    /* =====================================================
+       YEAR
+       ====================================================== */
+
+    if (currentYear) {
+
+      currentYear.textContent =
+        new Date().getFullYear();
+
+    }
+
+
+    /* =====================================================
+       MESSAGE HELPERS
+       ====================================================== */
+
+    function showMessage(
+      text,
+      type = "error"
+    ) {
+
+      message.textContent =
+        text;
+
+      message.className =
+        "alert " + type;
+
+    }
+
+
+    function clearMessage() {
+
+      message.textContent =
+        "";
+
+      message.className =
+        "alert";
+
+    }
+
+
+    /* =====================================================
+       PASSWORD VISIBILITY
+       ====================================================== */
+
+    function setupPasswordToggle(
+      button,
+      input
+    ) {
+
+      if (!button || !input) {
+        return;
+      }
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          const visible =
+            input.type === "text";
+
+          input.type =
+            visible
+              ? "password"
+              : "text";
+
+          button.textContent =
+            visible
+              ? "Show"
+              : "Hide";
+
+          button.setAttribute(
+            "aria-label",
+            visible
+              ? "Show password"
+              : "Hide password"
+          );
+
+          button.setAttribute(
+            "aria-pressed",
+            String(!visible)
+          );
+
+        }
+      );
+
+    }
+
+
+    setupPasswordToggle(
+      togglePassword,
+      password
+    );
+
+    setupPasswordToggle(
+      toggleConfirmPassword,
+      confirmPassword
+    );
+
+
+    /* =====================================================
+       PASSWORD STRENGTH
+       ====================================================== */
+
+    function getPasswordStrength(
+      value
+    ) {
+
+      let score = 0;
+
+      if (value.length >= 8) {
+        score++;
+      }
+
+      if (value.length >= 12) {
+        score++;
+      }
+
+      if (/[a-z]/.test(value)) {
+        score++;
+      }
+
+      if (/[A-Z]/.test(value)) {
+        score++;
+      }
+
+      if (/[0-9]/.test(value)) {
+        score++;
+      }
+
+      if (/[^A-Za-z0-9]/.test(value)) {
+        score++;
+      }
+
+      return score;
+
+    }
+
+
+    function updatePasswordStrength() {
+
+      const value =
+        password.value;
+
+      const score =
+        getPasswordStrength(
+          value
+        );
+
+
+      const widths = [
+        "0%",
+        "20%",
+        "35%",
+        "55%",
+        "75%",
+        "90%",
+        "100%"
+      ];
+
+
+      strengthBar.style.width =
+        widths[score];
+
+
+      if (!value) {
+
+        passwordStatus.textContent =
+          "";
+
+        return;
+
+      }
+
+
+      if (score <= 2) {
+
+        passwordStatus.textContent =
+          "Password strength: weak";
+
+      } else if (score <= 4) {
+
+        passwordStatus.textContent =
+          "Password strength: moderate";
+
+      } else {
+
+        passwordStatus.textContent =
+          "Password strength: strong";
+
+      }
+
+    }
+
+
+    password.addEventListener(
+      "input",
+      updatePasswordStrength
+    );
+
+
+    /* =====================================================
+       VALIDATION
+       ====================================================== */
+
+    function validateForm() {
+
+      if (
+        !firstName.value.trim()
+      ) {
+
+        return "Please enter your first name.";
+
+      }
+
+
+      if (
+        !lastName.value.trim()
+      ) {
+
+        return "Please enter your last name.";
+
+      }
+
+
+      if (
+        !email.value.trim() ||
+        !email.checkValidity()
+      ) {
+
+        return "Please enter a valid email address.";
+
+      }
+
+
+      if (
+        !accountType.value
+      ) {
+
+        return "Please select an account type.";
+
+      }
+
+
+      if (
+        !country.value
+      ) {
+
+        return "Please select your country.";
+
+      }
+
+
+      if (
+        password.value.length < 8
+      ) {
+
+        return "Your password must contain at least 8 characters.";
+
+      }
+
+
+      if (
+        password.value !==
+        confirmPassword.value
+      ) {
+
+        return "The passwords do not match.";
+
+      }
+
+
+      if (!terms.checked) {
+
+        return "Please agree to the applicable terms before creating your account.";
+
+      }
+
+
+      return null;
+
+    }
+
+
+    /* =====================================================
+       SUBMIT
+       ====================================================== */
+
+    form.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+        clearMessage();
+
+
+        const validationError =
+          validateForm();
+
+
+        if (validationError) {
+
+          showMessage(
+            validationError
+          );
+
+          return;
+
+        }
+
+
+        signupButton.disabled =
+          true;
+
+        signupButton.textContent =
+          "Creating Account...";
+
+
+        /*
+         * Never send the password to localStorage.
+         * Authentication should be handled by Supabase.
+         */
+
+        const userData = {
+
+          firstName:
+            firstName.value.trim(),
+
+          lastName:
+            lastName.value.trim(),
+
+          email:
+            email.value.trim()
+              .toLowerCase(),
+
+          phone:
+            phone.value.trim(),
+
+          accountType:
+            accountType.value,
+
+          country:
+            country.value
+
+        };
+
+
+        try {
+
+          /*
+           * app.js should expose:
+           *
+           * window.gtfSignup(userData, password)
+           *
+           * The function should call Supabase Auth and,
+           * after successful authentication, create/update
+           * the user's profile in the database.
+           */
+
+          if (
+            typeof window.gtfSignup !==
+            "function"
+          ) {
+
+            throw new Error(
+              "Authentication service is not connected."
+            );
+
+          }
+
+
+          const result =
+            await window.gtfSignup(
+              userData,
+              password.value
+            );
+
+
+          if (
+            !result ||
+            result.success === false
+          ) {
+
+            throw new Error(
+              result?.message ||
+              "Account creation failed."
+            );
+
+          }
+
+
+          showMessage(
+            result.message ||
+            "Your account has been created successfully.",
+            "success"
+          );
+
+
+          /*
+           * If email confirmation is enabled,
+           * the user may need to verify their email
+           * before signing in.
+           */
+
+          if (
+            result.requiresEmailConfirmation
+          ) {
+
+            signupButton.disabled =
+              true;
+
+            signupButton.textContent =
+              "Account Created";
+
+            return;
+
+          }
+
+
+          const destination =
+            result.redirectTo ||
+            "dashboard/index.html";
+
+
+          setTimeout(
+            function () {
+
+              window.location.href =
+                destination;
+
+            },
+            700
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "GTF Banking signup error:",
+            error
+          );
+
+
+          let errorMessage =
+            "We could not create your account. Please try again.";
+
+
+          if (
+            error &&
+            typeof error.message ===
+            "string"
+          ) {
+
+            const lower =
+              error.message.toLowerCase();
+
+
+            if (
+              lower.includes(
+                "already registered"
+              ) ||
+              lower.includes(
+                "already exists"
+              )
+            ) {
+
+              errorMessage =
+                "An account may already exist for this email address.";
+
+            } else if (
+              lower.includes(
+                "password"
+              ) &&
+              lower.includes(
+                "weak"
+              )
+            ) {
+
+              errorMessage =
+                "Please choose a stronger password.";
+
+            }
+
+          }
+
+
+          showMessage(
+            errorMessage
+          );
+
+
+          signupButton.disabled =
+            false;
+
+          signupButton.textContent =
+            "Create Account";
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>

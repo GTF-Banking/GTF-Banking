@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="GTF Banking customer profile and account settings"
+  >
+
+  <meta name="theme-color" content="#0b2a4a">
+
+  <title>My Profile | GTF Banking</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <style>
+    :root {
+      --navy: #0b2a4a;
+      --blue: #145da0;
+      --blue-dark: #0d477c;
+      --gold: #c9962b;
+      --background: #f4f7fa;
+      --surface: #ffffff;
+      --text: #172b3a;
+      --muted: #66788a;
+      --border: #d8e1e9;
+      --success: #16794c;
+      --success-bg: #eaf8f0;
+      --warning: #946200;
+      --warning-bg: #fff7df;
+      --danger: #b42318;
+      --danger-bg: #fff0ee;
+      --shadow: 0 5px 20px rgba(11, 42, 74, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* HEADER */
+
+    .gtf-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      min-height: 70px;
+      background: var(--navy);
+      color: #fff;
+
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+    }
+
+    .header-inner {
+      width: min(1500px, 100%);
+      min-height: 70px;
+      margin: auto;
+      padding: 10px 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 2px;
+      color: #cbd9e6;
+      font-size: .68rem;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-short-name {
+      color: #dce7ef;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+
+    .logout-button {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 6px;
+      background: transparent;
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    .logout-button:hover {
+      background: rgba(255,255,255,.1);
+    }
+
+    /* LAYOUT */
+
+    .layout {
+      width: min(1500px, 100%);
+      min-height: calc(100vh - 70px);
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 235px minmax(0, 1fr);
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      padding: 22px 14px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+    }
+
+    .sidebar-heading {
+      margin: 0 10px 12px;
+
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .navigation {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .navigation a {
+      padding: 10px 12px;
+      border-radius: 6px;
+
+      color: var(--text);
+      font-size: .78rem;
+      font-weight: 600;
+    }
+
+    .navigation a:hover {
+      background: #eef5fa;
+      color: var(--blue);
+    }
+
+    .navigation a.active {
+      background: #e7f1f9;
+      color: var(--blue);
+    }
+
+    /* MAIN */
+
+    .main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .page-header {
+      margin-bottom: 22px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 5px;
+
+      color: var(--navy);
+      font-size: 1.8rem;
+    }
+
+    .page-header p {
+      margin: 0;
+
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.5;
+    }
+
+    /* ALERTS */
+
+    .alert {
+      display: none;
+
+      margin-bottom: 18px;
+      padding: 12px 14px;
+
+      border-radius: 7px;
+
+      font-size: .74rem;
+      line-height: 1.45;
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .alert-success {
+      border: 1px solid #b9dec9;
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .alert-error {
+      border: 1px solid #efc1bc;
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    /* PROFILE HERO */
+
+    .profile-card {
+      margin-bottom: 20px;
+      padding: 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      border: 1px solid var(--border);
+      border-radius: 10px;
+
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-identity {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .avatar {
+      width: 68px;
+      height: 68px;
+      flex: 0 0 68px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .profile-name {
+      margin: 0 0 4px;
+
+      color: var(--navy);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .profile-email {
+      margin: 0 0 7px;
+
+      color: var(--muted);
+      font-size: .74rem;
+    }
+
+    .account-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      background: var(--success-bg);
+      color: var(--success);
+
+      font-size: .62rem;
+      font-weight: 700;
+    }
+
+    .account-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .profile-id {
+      color: var(--muted);
+      text-align: right;
+      font-size: .68rem;
+    }
+
+    .profile-id strong {
+      display: block;
+      margin-top: 4px;
+
+      color: var(--text);
+      font-size: .76rem;
+    }
+
+    /* CONTENT GRID */
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      gap: 20px;
+    }
+
+    .column {
+      min-width: 0;
+
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* CARD */
+
+    .card {
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      padding: 17px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 {
+      margin: 0 0 4px;
+
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    .card-header p {
+      margin: 0;
+
+      color: var(--muted);
+      font-size: .7rem;
+      line-height: 1.45;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* FORM */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+
+      color: var(--text);
+      font-size: .72rem;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      min-height: 41px;
+      padding: 9px 10px;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      background: #fff;
+      color: var(--text);
+
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(20, 93, 160, .1);
+    }
+
+    .field input[readonly] {
+      background: #f7f9fb;
+      color: var(--muted);
+      cursor: not-allowed;
+    }
+
+    .help {
+      margin-top: 5px;
+
+      color: var(--muted);
+      font-size: .63rem;
+      line-height: 1.4;
+    }
+
+    .button-row {
+      margin-top: 18px;
+
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .button {
+      min-height: 40px;
+      padding: 9px 15px;
+
+      border-radius: 6px;
+
+      font-size: .74rem;
+      font-weight: 700;
+    }
+
+    .primary {
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .primary:hover {
+      background: var(--blue-dark);
+    }
+
+    .secondary {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+    }
+
+    .secondary:hover {
+      background: #f7f9fb;
+    }
+
+    .button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    /* INFORMATION LIST */
+
+    .info-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .info-row {
+      padding: 11px 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      border-bottom: 1px solid #edf1f4;
+    }
+
+    .info-row:last-child {
+      border-bottom: 0;
+    }
+
+    .info-label {
+      color: var(--muted);
+      font-size: .68rem;
+    }
+
+    .info-value {
+      color: var(--text);
+      font-size: .7rem;
+      font-weight: 700;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    /* SECURITY */
+
+    .security-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+
+      padding: 12px 0;
+
+      border-bottom: 1px solid #edf1f4;
+    }
+
+    .security-item:last-child {
+      border-bottom: 0;
+    }
+
+    .security-icon {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+      background: #eaf3fb;
+
+      color: var(--blue);
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    .security-content strong {
+      display: block;
+      margin-bottom: 3px;
+
+      color: var(--text);
+      font-size: .71rem;
+    }
+
+    .security-content span {
+      display: block;
+
+      color: var(--muted);
+      font-size: .63rem;
+      line-height: 1.45;
+    }
+
+    /* NOTICE */
+
+    .notice {
+      padding: 13px;
+
+      border: 1px solid #d5e4f0;
+      border-radius: 7px;
+
+      background: #f3f8fc;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 4px;
+
+      color: var(--navy);
+      font-size: .72rem;
+    }
+
+    .notice p {
+      margin: 0;
+
+      color: var(--muted);
+      font-size: .64rem;
+      line-height: 1.5;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      padding: 25px 0 5px;
+
+      color: var(--muted);
+      text-align: center;
+      font-size: .65rem;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 1100px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        padding: 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .navigation {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .main {
+        padding: 20px 14px;
+      }
+
+      .profile-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .profile-id {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        padding: 10px 14px;
+      }
+
+      .user-short-name {
+        display: none;
+      }
+
+      .profile-card {
+        padding: 18px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .button-row {
+        justify-content: stretch;
+        flex-direction: column-reverse;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="gtf-header">
+
+    <div class="header-inner">
+
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="GTF Banking Dashboard"
+      >
+
+        <img
+          src="../assets/gtf-logo.svg"
+          alt="GTF Banking"
+          class="brand-logo"
+          width="44"
+          height="44"
+        >
+
+        <span>
+
+          <span class="brand-name">
+            GTF Banking
+          </span>
+
+          <span class="brand-subtitle">
+            Global TrustFund
+          </span>
+
+        </span>
+
+      </a>
+
+      <div class="header-right">
+
+        <span
+          id="headerUserName"
+          class="user-short-name"
+        >
+          Account
+        </span>
+
+        <button
+          id="logoutButton"
+          type="button"
+          class="logout-button"
+        >
+          Sign Out
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- APPLICATION LAYOUT -->
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+      <div class="sidebar-heading">
+        My Banking
+      </div>
+
+      <nav class="navigation">
+
+        <a href="index.html">
+          Dashboard
+        </a>
+
+        <a href="accounts.html">
+          Accounts
+        </a>
+
+        <a href="transactions.html">
+          Transactions
+        </a>
+
+        <a
+          href="profile.html"
+          class="active"
+          aria-current="page"
+        >
+          My Profile
+        </a>
+
+        <a href="../index.html">
+          Main Website
+        </a>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+      <section class="page-header">
+
+        <h1>
+          My Profile
+        </h1>
+
+        <p>
+          Review and manage your personal banking profile
+          information.
+        </p>
+
+      </section>
+
+
+      <!-- ALERTS -->
+
+      <div
+        id="successAlert"
+        class="alert alert-success"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+      <div
+        id="errorAlert"
+        class="alert alert-error"
+        role="alert"
+        aria-live="assertive"
+      ></div>
+
+
+      <!-- PROFILE SUMMARY -->
+
+      <section class="profile-card">
+
+        <div class="profile-identity">
+
+          <div
+            id="avatar"
+            class="avatar"
+            aria-hidden="true"
+          >
+            —
+          </div>
+
+          <div>
+
+            <h2
+              id="profileName"
+              class="profile-name"
+            >
+              Loading...
+            </h2>
+
+            <p
+              id="profileEmail"
+              class="profile-email"
+            >
+              Loading profile...
+            </p>
+
+            <span
+              id="accountStatus"
+              class="account-status"
+            >
+              Checking status
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="profile-id">
+
+          Customer ID
+
+          <strong id="customerId">
+            —
+          </strong>
+
+        </div>
+
+      </section>
+
+
+      <div class="content-grid">
+
+        <!-- LEFT COLUMN -->
+
+        <div class="column">
+
+          <!-- PERSONAL INFORMATION -->
+
+          <section class="card">
+
+            <div class="card-header">
+
+              <h2>
+                Personal Information
+              </h2>
+
+              <p>
+                Update information that can be changed
+                through your customer profile.
+              </p>
+
+            </div>
+
+            <div class="card-body">
+
+              <form id="profileForm">
+
+                <div class="form-grid">
+
+                  <div class="field">
+
+                    <label for="firstName">
+                      First Name
+                    </label>
+
+                    <input
+                      id="firstName"
+                      name="first_name"
+                      type="text"
+                      maxlength="100"
+                      autocomplete="given-name"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="lastName">
+                      Last Name
+                    </label>
+
+                    <input
+                      id="lastName"
+                      name="last_name"
+                      type="text"
+                      maxlength="100"
+                      autocomplete="family-name"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="email">
+                      Email Address
+                    </label>
+
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      maxlength="200"
+                      autocomplete="email"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="phone">
+                      Phone Number
+                    </label>
+
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      maxlength="40"
+                      autocomplete="tel"
+                    >
+
+                  </div>
+
+
+                  <div class="field full">
+
+                    <label for="address">
+                      Address
+                    </label>
+
+                    <input
+                      id="address"
+                      name="address"
+                      type="text"
+                      maxlength="250"
+                      autocomplete="street-address"
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="city">
+                      City
+                    </label>
+
+                    <input
+                      id="city"
+                      name="city"
+                      type="text"
+                      maxlength="100"
+                      autocomplete="address-level2"
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="country">
+                      Country
+                    </label>
+
+                    <input
+                      id="country"
+                      name="country"
+                      type="text"
+                      maxlength="100"
+                      autocomplete="country-name"
+                    >
+
+                  </div>
+
+                </div>
+
+
+                <div class="button-row">
+
+                  <button
+                    type="reset"
+                    id="resetButton"
+                    class="button secondary"
+                  >
+                    Reset
+                  </button>
+
+                  <button
+                    type="submit"
+                    id="saveButton"
+                    class="button primary"
+                  >
+                    Save Changes
+                  </button>
+
+                </div>
+
+              </form>
+
+            </div>
+
+          </section>
+
+
+          <!-- ACCOUNT INFORMATION -->
+
+          <section class="card">
+
+            <div class="card-header">
+
+              <h2>
+                Account Information
+              </h2>
+
+              <p>
+                Basic information associated with your
+                GTF Banking relationship.
+              </p>
+
+            </div>
+
+            <div class="card-body">
+
+              <ul class="info-list">
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Customer ID
+                  </span>
+
+                  <span
+                    id="infoCustomerId"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Account Type
+                  </span>
+
+                  <span
+                    id="infoAccountType"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Primary Currency
+                  </span>
+
+                  <span
+                    id="infoCurrency"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Customer Since
+                  </span>
+
+                  <span
+                    id="infoCreatedAt"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <div class="column">
+
+          <!-- CONTACT DETAILS -->
+
+          <section class="card">
+
+            <div class="card-header">
+
+              <h2>
+                Contact Details
+              </h2>
+
+              <p>
+                Information used for account communication.
+              </p>
+
+            </div>
+
+            <div class="card-body">
+
+              <ul class="info-list">
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Email
+                  </span>
+
+                  <span
+                    id="contactEmail"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Phone
+                  </span>
+
+                  <span
+                    id="contactPhone"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+
+                <li class="info-row">
+
+                  <span class="info-label">
+                    Country
+                  </span>
+
+                  <span
+                    id="contactCountry"
+                    class="info-value"
+                  >
+                    —
+                  </span>
+
+                </li>
+
+              </ul>
+
+            </div>
+
+          </section>
+
+
+          <!-- SECURITY -->
+
+          <section class="card">
+
+            <div class="card-header">
+
+              <h2>
+                Security
+              </h2>
+
+              <p>
+                Review your account security status.
+              </p>
+
+            </div>
+
+            <div class="card-body">
+
+              <div class="security-item">
+
+                <div class="security-icon">
+                  ✓
+                </div>
+
+                <div class="security-content">
+
+                  <strong>
+                    Authenticated Session
+                  </strong>
+
+                  <span id="sessionSecurity">
+                    Checking your current session.
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="security-item">
+
+                <div class="security-icon">
+                  ✓
+                </div>
+
+                <div class="security-content">
+
+                  <strong>
+                    Account Status
+                  </strong>
+
+                  <span id="securityAccountStatus">
+                    Checking account status.
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="security-item">
+
+                <div class="security-icon">
+                  !
+                </div>
+
+                <div class="security-content">
+
+                  <strong>
+                    Password & Authentication
+                  </strong>
+
+                  <span>
+                    Password changes and authentication
+                    controls should be handled through the
+                    secure authentication service.
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- PRIVACY NOTICE -->
+
+          <section class="card">
+
+            <div class="card-header">
+
+              <h2>
+                Privacy
+              </h2>
+
+            </div>
+
+            <div class="card-body">
+
+              <div class="notice">
+
+                <strong>
+                  Protect your account information
+                </strong>
+
+                <p>
+                  GTF Banking will never ask you to provide
+                  your password, PIN, one-time authentication
+                  code, or other confidential authentication
+                  secret through this profile form.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </div>
+
+
+      <footer class="footer">
+        GTF Banking · Customer Profile
+      </footer>
+
+    </main>
+
+  </div>
+
+
+  <!-- APPLICATION SCRIPT -->
+
+  <script src="../js/app.js" defer></script>
+
+
+  <script>
+    "use strict";
+
+    const state = {
+      user: null,
+      originalProfile: null
+    };
+
+
+    /* -----------------------------
+       ELEMENT HELPER
+    ----------------------------- */
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+
+    /* -----------------------------
+       ALERTS
+    ----------------------------- */
+
+    function clearAlerts() {
+
+      $("successAlert").classList.remove("show");
+      $("errorAlert").classList.remove("show");
+
+      $("successAlert").textContent = "";
+      $("errorAlert").textContent = "";
+    }
+
+
+    function showSuccess(message) {
+
+      $("errorAlert").classList.remove("show");
+
+      $("successAlert").textContent = message;
+      $("successAlert").classList.add("show");
+    }
+
+
+    function showError(message) {
+
+      $("successAlert").classList.remove("show");
+
+      $("errorAlert").textContent = message;
+      $("errorAlert").classList.add("show");
+    }
+
+
+    /* -----------------------------
+       API REQUEST
+    ----------------------------- */
+
+    async function apiRequest(
+      url,
+      options = {}
+    ) {
+
+      const response =
+        await fetch(
+          url,
+          {
+            credentials: "include",
+
+            headers: {
+              "Accept":
+                "application/json",
+
+              "Content-Type":
+                "application/json",
+
+              ...(options.headers || {})
+            },
+
+            ...options
+          }
+        );
+
+
+      let data = null;
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch {
+
+        data = null;
+      }
+
+
+      if (!response.ok) {
+
+        const error =
+          new Error(
+            data?.message ||
+            data?.error ||
+            `Request failed (${response.status})`
+          );
+
+        error.status =
+          response.status;
+
+        throw error;
+      }
+
+
+      return data;
+    }
+
+
+    /* -----------------------------
+       GET CURRENT USER
+    ----------------------------- */
+
+    async function loadProfile() {
+
+      clearAlerts();
+
+      try {
+
+        const data =
+          await apiRequest(
+            "/api/auth/me"
+          );
+
+
+        const user =
+          data?.user ||
+          data?.data?.user ||
+          data?.data ||
+          data;
+
+
+        if (!user) {
+
+          throw new Error(
+            "No authenticated user was returned."
+          );
+        }
+
+
+        state.user =
+          user;
+
+
+        state.originalProfile =
+          normalizeUser(user);
+
+
+        renderProfile(
+          state.originalProfile
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Profile loading failed:",
+          error
+        );
+
+
+        showError(
+          error.message ||
+          "Unable to load your profile."
+        );
+
+
+        $("sessionSecurity")
+          .textContent =
+          "Your authenticated session could not be verified.";
+
+
+        setTimeout(
+          () => {
+
+            if (
+              error.status === 401 ||
+              error.status === 403
+            ) {
+
+              window.location.href =
+                "../login.html";
+            }
+
+          },
+          900
+        );
+      }
+    }
+
+
+    /* -----------------------------
+       NORMALIZE USER DATA
+    ----------------------------- */
+
+    function normalizeUser(user) {
+
+      return {
+
+        id:
+          user.id ||
+          user.user_id ||
+          "",
+
+        customerId:
+          user.customer_id ||
+          user.customerId ||
+          user.customer_number ||
+          user.id ||
+          "—",
+
+        firstName:
+          user.first_name ||
+          user.firstName ||
+          "",
+
+        lastName:
+          user.last_name ||
+          user.lastName ||
+          "",
+
+        email:
+          user.email ||
+          "",
+
+        phone:
+          user.phone ||
+          user.phone_number ||
+          "",
+
+        address:
+          user.address ||
+          user.street_address ||
+          "",
+
+        city:
+          user.city ||
+          "",
+
+        country:
+          user.country ||
+          "",
+
+        status:
+          user.status ||
+          user.account_status ||
+          "Active",
+
+        accountType:
+          user.account_type ||
+          user.accountType ||
+          "Customer",
+
+        currency:
+          user.currency ||
+          user.primary_currency ||
+          "—",
+
+        createdAt:
+          user.created_at ||
+          user.createdAt ||
+          null
+
+      };
+    }
+
+
+    /* -----------------------------
+       RENDER PROFILE
+    ----------------------------- */
+
+    function renderProfile(profile) {
+
+      const fullName =
+        [
+          profile.firstName,
+          profile.lastName
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .trim() ||
+        "GTF Banking Customer";
+
+
+      $("profileName")
+        .textContent =
+        fullName;
+
+
+      $("headerUserName")
+        .textContent =
+        fullName;
+
+
+      $("profileEmail")
+        .textContent =
+        profile.email ||
+        "No email address available";
+
+
+      $("customerId")
+        .textContent =
+        profile.customerId ||
+        "—";
+
+
+      $("avatar")
+        .textContent =
+        getInitials(
+          fullName
+        );
+
+
+      const status =
+        String(
+          profile.status ||
+          "Active"
+        );
+
+
+      $("accountStatus")
+        .textContent =
+        status;
+
+
+      $("securityAccountStatus")
+        .textContent =
+        `Account status: ${status}.`;
+
+
+      $("firstName").value =
+        profile.firstName;
+
+
+      $("lastName").value =
+        profile.lastName;
+
+
+      $("email").value =
+        profile.email;
+
+
+      $("phone").value =
+        profile.phone;
+
+
+      $("address").value =
+        profile.address;
+
+
+      $("city").value =
+        profile.city;
+
+
+      $("country").value =
+        profile.country;
+
+
+      $("infoCustomerId")
+        .textContent =
+        profile.customerId;
+
+
+      $("infoAccountType")
+        .textContent =
+        profile.accountType;
+
+
+      $("infoCurrency")
+        .textContent =
+        profile.currency;
+
+
+      $("infoCreatedAt")
+        .textContent =
+        formatDate(
+          profile.createdAt
+        );
+
+
+      $("contactEmail")
+        .textContent =
+        profile.email ||
+        "—";
+
+
+      $("contactPhone")
+        .textContent =
+        profile.phone ||
+        "—";
+
+
+      $("contactCountry")
+        .textContent =
+        profile.country ||
+        "—";
+
+
+      $("sessionSecurity")
+        .textContent =
+        "Authenticated session detected.";
+    }
+
+
+    /* -----------------------------
+       INITIALS
+    ----------------------------- */
+
+    function getInitials(name) {
+
+      const words =
+        String(name)
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+
+      if (!words.length) {
+        return "G";
+      }
+
+
+      if (words.length === 1) {
+
+        return words[0]
+          .substring(0, 2)
+          .toUpperCase();
+      }
+
+
+      return (
+        words[0][0] +
+        words[words.length - 1][0]
+      )
+        .toUpperCase();
+    }
+
+
+    /* -----------------------------
+       DATE FORMAT
+    ----------------------------- */
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "—";
+      }
+
+
+      const date =
+        new Date(value);
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "—";
+      }
+
+
+      return date.toLocaleDateString(
+        undefined,
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }
+      );
+    }
+
+
+    /* -----------------------------
+       SAVE PROFILE
+    ----------------------------- */
+
+    async function saveProfile(
+      event
+    ) {
+
+      event.preventDefault();
+
+      clearAlerts();
+
+
+      if (!state.user) {
+
+        showError(
+          "Your profile session is not available."
+        );
+
+        return;
+      }
+
+
+      const firstName =
+        $("firstName")
+          .value
+          .trim();
+
+      const lastName =
+        $("lastName")
+          .value
+          .trim();
+
+      const email =
+        $("email")
+          .value
+          .trim();
+
+      const phone =
+        $("phone")
+          .value
+          .trim();
+
+      const address =
+        $("address")
+          .value
+          .trim();
+
+      const city =
+        $("city")
+          .value
+          .trim();
+
+      const country =
+        $("country")
+          .value
+          .trim();
+
+
+      if (!firstName) {
+
+        showError(
+          "Enter your first name."
+        );
+
+        $("firstName").focus();
+
+        return;
+      }
+
+
+      if (!lastName) {
+
+        showError(
+          "Enter your last name."
+        );
+
+        $("lastName").focus();
+
+        return;
+      }
+
+
+      if (!email) {
+
+        showError(
+          "Enter your email address."
+        );
+
+        $("email").focus();
+
+        return;
+      }
+
+
+      const button =
+        $("saveButton");
+
+
+      button.disabled =
+        true;
+
+      button.textContent =
+        "Saving...";
+
+
+      try {
+
+        const payload = {
+
+          first_name:
+            firstName,
+
+          last_name:
+            lastName,
+
+          email:
+            email,
+
+          phone:
+            phone || null,
+
+          address:
+            address || null,
+
+          city:
+            city || null,
+
+          country:
+            country || null
+
+        };
+
+
+        /*
+         * The backend must authenticate the session
+         * and determine which user is allowed to
+         * update the profile.
+         *
+         * Do not trust a user ID supplied by the
+         * browser to determine ownership.
+         */
+
+        const data =
+          await apiRequest(
+            "/api/users/me",
+            {
+              method: "PATCH",
+
+              body:
+                JSON.stringify(
+                  payload
+                )
+            }
+          );
+
+
+        const updatedUser =
+          data?.user ||
+          data?.data?.user ||
+          data?.data ||
+          state.user;
+
+
+        state.user =
+          updatedUser;
+
+
+        state.originalProfile =
+          normalizeUser(
+            updatedUser
+          );
+
+
+        renderProfile(
+          state.originalProfile
+        );
+
+
+        showSuccess(
+          data?.message ||
+          "Your profile has been updated successfully."
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Profile update failed:",
+          error
+        );
+
+
+        showError(
+          error.message ||
+          "Unable to save your profile."
+        );
+
+      } finally {
+
+        button.disabled =
+          false;
+
+        button.textContent =
+          "Save Changes";
+      }
+    }
+
+
+    $("profileForm")
+      .addEventListener(
+        "submit",
+        saveProfile
+      );
+
+
+    /* -----------------------------
+       RESET FORM
+    ----------------------------- */
+
+    $("resetButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          clearAlerts();
+
+
+          if (
+            state.originalProfile
+          ) {
+
+            renderProfile(
+              state.originalProfile
+            );
+          }
+
+        }
+      );
+
+
+    /* -----------------------------
+       LOGOUT
+    ----------------------------- */
+
+    $("logoutButton")
+      .addEventListener(
+        "click",
+        async () => {
+
+          const button =
+            $("logoutButton");
+
+
+          button.disabled =
+            true;
+
+          button.textContent =
+            "Signing Out...";
+
+
+          try {
+
+            await fetch(
+              "/api/auth/logout",
+              {
+                method: "POST",
+
+                credentials:
+                  "include",
+
+                headers: {
+                  "Accept":
+                    "application/json"
+                }
+              }
+            );
+
+          } catch (error) {
+
+            console.warn(
+              "Logout request failed:",
+              error
+            );
+
+          } finally {
+
+            window.location.href =
+              "../login.html";
+          }
+        }
+      );
+
+
+    /* -----------------------------
+       INITIALIZE
+    ----------------------------- */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        loadProfile();
+
+      }
+    );
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="GTF Banking Privacy Policy - information about privacy, data protection, account security and customer information."
+  >
+
+  <meta name="theme-color" content="#0b2a4a">
+
+  <title>Privacy Policy | GTF Banking</title>
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="../assets/gtf-logo.svg"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <style>
+    :root {
+      --gtf-navy: #0b2a4a;
+      --gtf-blue: #145da0;
+      --gtf-blue-dark: #0d477c;
+      --gtf-gold: #c9962b;
+      --gtf-bg: #f4f7fa;
+      --gtf-white: #fff;
+      --gtf-text: #172b3a;
+      --gtf-muted: #66788a;
+      --gtf-border: #dce4eb;
+      --gtf-shadow: 0 8px 25px rgba(11, 42, 74, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--gtf-bg);
+      color: var(--gtf-text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .privacy-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      background: #fff;
+      border-bottom: 1px solid var(--gtf-border);
+      box-shadow: 0 2px 10px rgba(11, 42, 74, .04);
+    }
+
+    .privacy-nav {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 72px;
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .privacy-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .privacy-brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+    }
+
+    .privacy-brand-text strong {
+      display: block;
+      color: var(--gtf-navy);
+      font-size: .94rem;
+    }
+
+    .privacy-brand-text span {
+      display: block;
+      color: var(--gtf-muted);
+      font-size: .52rem;
+    }
+
+    .privacy-main-nav {
+      display: flex;
+      align-items: center;
+      gap: 21px;
+    }
+
+    .privacy-main-nav a {
+      position: relative;
+      padding: 26px 0;
+
+      color: #42586b;
+      font-size: .64rem;
+      font-weight: 700;
+    }
+
+    .privacy-main-nav a:hover,
+    .privacy-main-nav a.active {
+      color: var(--gtf-blue);
+    }
+
+    .privacy-main-nav a.active::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 17px;
+
+      height: 2px;
+      background: var(--gtf-gold);
+    }
+
+    .privacy-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .privacy-action {
+      min-height: 35px;
+      padding: 7px 13px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 5px;
+
+      font-size: .59rem;
+      font-weight: 700;
+    }
+
+    .privacy-login {
+      border: 1px solid var(--gtf-blue);
+      color: var(--gtf-blue);
+      background: #fff;
+    }
+
+    .privacy-signup {
+      border: 1px solid var(--gtf-blue);
+      color: #fff;
+      background: var(--gtf-blue);
+    }
+
+    .privacy-signup:hover {
+      background: var(--gtf-blue-dark);
+    }
+
+    .privacy-mobile-toggle {
+      display: none;
+
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--gtf-border);
+      border-radius: 6px;
+
+      background: #fff;
+      color: var(--gtf-navy);
+
+      cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .privacy-hero {
+      background:
+        linear-gradient(
+          110deg,
+          var(--gtf-navy),
+          var(--gtf-blue)
+        );
+
+      color: #fff;
+    }
+
+    .privacy-hero-inner {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 60px 0;
+    }
+
+    .privacy-eyebrow {
+      margin: 0 0 9px;
+
+      color: #d9b866;
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .privacy-hero h1 {
+      margin: 0;
+
+      color: #fff;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1.1;
+    }
+
+    .privacy-hero p {
+      max-width: 700px;
+      margin: 15px 0 0;
+
+      color: #dbe7f1;
+      font-size: .67rem;
+    }
+
+    .privacy-effective {
+      display: inline-flex;
+      margin-top: 20px;
+      padding: 7px 11px;
+
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 5px;
+
+      background: rgba(255,255,255,.08);
+      color: #dbe7f1;
+
+      font-size: .53rem;
+    }
+
+    /* =========================
+       PAGE LAYOUT
+    ========================== */
+
+    .privacy-page {
+      padding: 55px 0;
+    }
+
+    .privacy-container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: 245px 1fr;
+      gap: 35px;
+
+      align-items: start;
+    }
+
+    /* =========================
+       SIDE NAVIGATION
+    ========================== */
+
+    .privacy-sidebar {
+      position: sticky;
+      top: 92px;
+
+      padding: 20px;
+
+      border: 1px solid var(--gtf-border);
+      border-radius: 8px;
+
+      background: #fff;
+      box-shadow: var(--gtf-shadow);
+    }
+
+    .privacy-sidebar-title {
+      margin: 0 0 12px;
+
+      color: var(--gtf-navy);
+      font-size: .65rem;
+      font-weight: 700;
+    }
+
+    .privacy-sidebar a {
+      display: block;
+
+      padding: 8px 0;
+
+      border-bottom: 1px solid #edf1f4;
+
+      color: var(--gtf-muted);
+      font-size: .55rem;
+    }
+
+    .privacy-sidebar a:last-child {
+      border-bottom: 0;
+    }
+
+    .privacy-sidebar a:hover,
+    .privacy-sidebar a.active {
+      color: var(--gtf-blue);
+    }
+
+    /* =========================
+       CONTENT
+    ========================== */
+
+    .privacy-content {
+      min-width: 0;
+
+      padding: 35px;
+
+      border: 1px solid var(--gtf-border);
+      border-radius: 9px;
+
+      background: #fff;
+      box-shadow: var(--gtf-shadow);
+    }
+
+    .privacy-introduction {
+      margin: 0 0 30px;
+      padding: 17px 19px;
+
+      border-left: 3px solid var(--gtf-blue);
+
+      background: #f5f9fc;
+      color: #536879;
+
+      font-size: .61rem;
+    }
+
+    .privacy-section {
+      scroll-margin-top: 100px;
+
+      padding: 0 0 30px;
+      margin: 0 0 30px;
+
+      border-bottom: 1px solid var(--gtf-border);
+    }
+
+    .privacy-section:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .privacy-section h2 {
+      margin: 0 0 12px;
+
+      color: var(--gtf-navy);
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
+
+    .privacy-section h3 {
+      margin: 20px 0 7px;
+
+      color: var(--gtf-navy);
+      font-size: .69rem;
+    }
+
+    .privacy-section p {
+      margin: 0 0 12px;
+
+      color: var(--gtf-muted);
+      font-size: .59rem;
+    }
+
+    .privacy-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .privacy-section ul {
+      margin: 10px 0 14px;
+      padding-left: 20px;
+    }
+
+    .privacy-section li {
+      margin-bottom: 7px;
+
+      color: var(--gtf-muted);
+      font-size: .58rem;
+    }
+
+    .privacy-section strong {
+      color: #41596b;
+    }
+
+    /* =========================
+       INFORMATION CARDS
+    ========================== */
+
+    .privacy-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+
+      margin-top: 15px;
+    }
+
+    .privacy-info-card {
+      padding: 18px;
+
+      border: 1px solid var(--gtf-border);
+      border-radius: 7px;
+
+      background: #fbfcfd;
+    }
+
+    .privacy-info-card h3 {
+      margin: 0 0 7px;
+
+      color: var(--gtf-navy);
+      font-size: .64rem;
+    }
+
+    .privacy-info-card p {
+      margin: 0;
+
+      font-size: .55rem;
+    }
+
+    /* =========================
+       HIGHLIGHT
+    ========================== */
+
+    .privacy-highlight {
+      margin: 16px 0;
+      padding: 18px;
+
+      border-radius: 7px;
+
+      background: #edf5fb;
+    }
+
+    .privacy-highlight strong {
+      display: block;
+      margin-bottom: 5px;
+
+      color: var(--gtf-navy);
+      font-size: .63rem;
+    }
+
+    .privacy-highlight span {
+      color: var(--gtf-muted);
+      font-size: .56rem;
+    }
+
+    /* =========================
+       CONTACT BOX
+    ========================== */
+
+    .privacy-contact {
+      margin-top: 17px;
+      padding: 20px;
+
+      border-radius: 7px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--gtf-navy),
+          var(--gtf-blue)
+        );
+
+      color: #fff;
+    }
+
+    .privacy-contact h3 {
+      margin: 0 0 7px;
+
+      color: #fff;
+      font-size: .7rem;
+    }
+
+    .privacy-contact p {
+      margin: 0 0 13px;
+
+      color: #d9e6ef;
+      font-size: .56rem;
+    }
+
+    .privacy-contact a {
+      color: #fff;
+      font-size: .57rem;
+      font-weight: 700;
+    }
+
+    /* =========================
+       CTA
+    ========================== */
+
+    .privacy-cta {
+      padding: 45px 0;
+
+      background: #fff;
+    }
+
+    .privacy-cta-inner {
+      width: min(900px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px;
+
+      border: 1px solid var(--gtf-border);
+      border-radius: 9px;
+
+      text-align: center;
+      box-shadow: var(--gtf-shadow);
+    }
+
+    .privacy-cta h2 {
+      margin: 0;
+
+      color: var(--gtf-navy);
+      font-size: 1.25rem;
+    }
+
+    .privacy-cta p {
+      max-width: 650px;
+      margin: 9px auto 19px;
+
+      color: var(--gtf-muted);
+      font-size: .6rem;
+    }
+
+    .privacy-cta-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .privacy-cta-button {
+      min-height: 38px;
+      padding: 9px 16px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid var(--gtf-blue);
+      border-radius: 5px;
+
+      background: var(--gtf-blue);
+      color: #fff;
+
+      font-size: .58rem;
+      font-weight: 700;
+    }
+
+    .privacy-cta-button.secondary {
+      background: #fff;
+      color: var(--gtf-blue);
+    }
+
+    .privacy-cta-button:hover {
+      background: var(--gtf-blue-dark);
+      color: #fff;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .privacy-footer {
+      padding: 40px 0 22px;
+
+      background: var(--gtf-navy);
+      color: #fff;
+    }
+
+    .privacy-footer-inner {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .privacy-footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 35px;
+
+      padding-bottom: 30px;
+    }
+
+    .privacy-footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .privacy-footer-brand img {
+      width: 40px;
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+
+    .privacy-footer-brand strong {
+      display: block;
+      font-size: .82rem;
+    }
+
+    .privacy-footer-brand span {
+      display: block;
+      color: #9fb4c5;
+      font-size: .5rem;
+    }
+
+    .privacy-footer-description {
+      max-width: 290px;
+      margin: 14px 0 0;
+
+      color: #aebfcd;
+      font-size: .57rem;
+    }
+
+    .privacy-footer-column h3 {
+      margin: 0 0 11px;
+      font-size: .61rem;
+    }
+
+    .privacy-footer-column a {
+      display: block;
+      margin-bottom: 7px;
+
+      color: #aebfcd;
+      font-size: .56rem;
+    }
+
+    .privacy-footer-column a:hover {
+      color: #fff;
+    }
+
+    .privacy-footer-bottom {
+      padding-top: 18px;
+
+      border-top: 1px solid rgba(255,255,255,.1);
+
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+
+      color: #8fa5b6;
+      font-size: .52rem;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 1050px) {
+
+      .privacy-main-nav,
+      .privacy-actions {
+        display: none;
+      }
+
+      .privacy-mobile-toggle {
+        display: block;
+      }
+
+      .privacy-nav.mobile-open {
+        flex-wrap: wrap;
+      }
+
+      .privacy-nav.mobile-open .privacy-main-nav {
+        display: flex;
+        width: 100%;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0;
+        padding: 7px 0 15px;
+      }
+
+      .privacy-nav.mobile-open .privacy-main-nav a {
+        padding: 9px 0;
+      }
+
+      .privacy-nav.mobile-open
+      .privacy-main-nav
+      a.active::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 850px) {
+
+      .privacy-container {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-sidebar {
+        position: static;
+      }
+
+      .privacy-sidebar-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .privacy-content {
+        padding: 23px 19px;
+      }
+
+      .privacy-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-sidebar-links {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .privacy-footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-footer-bottom {
+        flex-direction: column;
+      }
+
+      .privacy-cta-inner {
+        padding: 25px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =================================
+       HEADER
+  ================================== -->
+
+  <header class="privacy-header">
+
+    <div
+      id="privacyNav"
+      class="privacy-nav"
+    >
+
+      <a
+        href="../index.html"
+        class="privacy-brand"
+        aria-label="GTF Banking home"
+      >
+
+        <img
+          src="../assets/gtf-logo.svg"
+          alt="GTF Banking logo"
+          width="43"
+          height="43"
+        >
+
+        <span class="privacy-brand-text">
+
+          <strong>
+            GTF Banking
+          </strong>
+
+          <span>
+            Banking made simple
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <nav
+        class="privacy-main-nav"
+        aria-label="Main navigation"
+      >
+
+        <a href="../index.html">
+          Home
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="personal.html">
+          Personal
+        </a>
+
+        <a href="business.html">
+          Business
+        </a>
+
+        <a href="cards.html">
+          Cards
+        </a>
+
+        <a href="checking.html">
+          Checking
+        </a>
+
+        <a href="savings.html">
+          Savings
+        </a>
+
+        <a href="loans.html">
+          Loans
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+
+      <div class="privacy-actions">
+
+        <a
+          href="../login.html"
+          class="privacy-action privacy-login"
+        >
+          Sign In
+        </a>
+
+        <a
+          href="../signup.html"
+          class="privacy-action privacy-signup"
+        >
+          Open Account
+        </a>
+
+      </div>
+
+
+      <button
+        id="privacyMobileToggle"
+        class="privacy-mobile-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =================================
+       HERO
+  ================================== -->
+
+  <section class="privacy-hero">
+
+    <div class="privacy-hero-inner">
+
+      <p class="privacy-eyebrow">
+        Privacy & Data Protection
+      </p>
+
+      <h1>
+        Privacy Policy
+      </h1>
+
+      <p>
+        This page explains how GTF Banking may handle
+        information associated with customers, visitors,
+        accounts and use of its banking services.
+      </p>
+
+      <div class="privacy-effective">
+        Last updated:
+        <span id="privacyUpdatedDate">
+          August 24, 2026
+        </span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================
+       PRIVACY CONTENT
+  ================================== -->
+
+  <main class="privacy-page">
+
+    <div class="privacy-container">
+
+
+      <!-- SIDEBAR -->
+
+      <aside class="privacy-sidebar">
+
+        <p class="privacy-sidebar-title">
+          Privacy Policy
+        </p>
+
+        <div class="privacy-sidebar-links">
+
+          <a
+            href="#overview"
+            class="active"
+          >
+            Overview
+          </a>
+
+          <a href="#information">
+            Information We Collect
+          </a>
+
+          <a href="#use">
+            How We Use Information
+          </a>
+
+          <a href="#sharing">
+            Information Sharing
+          </a>
+
+          <a href="#security">
+            Data Security
+          </a>
+
+          <a href="#retention">
+            Data Retention
+          </a>
+
+          <a href="#rights">
+            Your Privacy Choices
+          </a>
+
+          <a href="#cookies">
+            Cookies & Technologies
+          </a>
+
+          <a href="#children">
+            Children's Privacy
+          </a>
+
+          <a href="#changes">
+            Policy Changes
+          </a>
+
+          <a href="#contact">
+            Contact
+          </a>
+
+        </div>
+
+      </aside>
+
+
+      <!-- CONTENT -->
+
+      <article class="privacy-content">
+
+
+        <div class="privacy-introduction">
+
+          This Privacy Policy is intended to provide
+          general information about GTF Banking's
+          approach to privacy and information protection.
+          It should be read together with applicable
+          account agreements, product terms, notices and
+          other disclosures that apply to a particular
+          banking service.
+
+        </div>
+
+
+        <!-- OVERVIEW -->
+
+        <section
+          id="overview"
+          class="privacy-section"
+        >
+
+          <h2>
+            1. Overview
+          </h2>
+
+          <p>
+            GTF Banking respects the importance of
+            protecting information associated with its
+            customers and visitors. We seek to handle
+            information responsibly and use appropriate
+            safeguards based on the nature of the
+            information and the services involved.
+          </p>
+
+          <p>
+            By using a GTF Banking website, digital
+            service or account, you may provide or
+            generate information that is necessary to
+            provide services, maintain security, comply
+            with applicable requirements and improve the
+            banking experience.
+          </p>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+
+        <section
+          id="information"
+          class="privacy-section"
+        >
+
+          <h2>
+            2. Information We Collect
+          </h2>
+
+          <p>
+            The information collected may vary depending
+            on the products and services you use and how
+            you interact with GTF Banking.
+          </p>
+
+
+          <div class="privacy-info-grid">
+
+            <div class="privacy-info-card">
+
+              <h3>
+                Information you provide
+              </h3>
+
+              <p>
+                This may include information provided when
+                opening an account, submitting forms,
+                contacting support or applying for a
+                banking product.
+              </p>
+
+            </div>
+
+
+            <div class="privacy-info-card">
+
+              <h3>
+                Account information
+              </h3>
+
+              <p>
+                Banking relationships may involve account,
+                transaction, product and service information
+                required to operate your account.
+              </p>
+
+            </div>
+
+
+            <div class="privacy-info-card">
+
+              <h3>
+                Technical information
+              </h3>
+
+              <p>
+                Websites and digital services may collect
+                technical information such as device,
+                browser, connection and service-use data.
+              </p>
+
+            </div>
+
+
+            <div class="privacy-info-card">
+
+              <h3>
+                Communications
+              </h3>
+
+              <p>
+                Information associated with customer
+                support requests, service communications
+                and other interactions may be retained
+                where appropriate.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <h3>
+            Information from other sources
+          </h3>
+
+          <p>
+            Where permitted and appropriate, information
+            may also be obtained from service providers,
+            verification services, fraud-prevention
+            systems or other lawful sources.
+          </p>
+
+        </section>
+
+
+        <!-- USE -->
+
+        <section
+          id="use"
+          class="privacy-section"
+        >
+
+          <h2>
+            3. How We Use Information
+          </h2>
+
+          <p>
+            Information may be used for legitimate
+            banking, operational, security and customer
+            service purposes, including:
+          </p>
+
+          <ul>
+
+            <li>
+              Providing and administering requested
+              banking products and services.
+            </li>
+
+            <li>
+              Processing and maintaining account and
+              transaction records.
+            </li>
+
+            <li>
+              Authenticating customers and protecting
+              accounts from unauthorized activity.
+            </li>
+
+            <li>
+              Responding to customer questions,
+              requests and support inquiries.
+            </li>
+
+            <li>
+              Detecting, preventing and investigating
+              fraud, abuse and other unauthorized activity.
+            </li>
+
+            <li>
+              Maintaining and improving websites,
+              applications and banking services.
+            </li>
+
+            <li>
+              Meeting applicable legal, regulatory and
+              compliance obligations.
+            </li>
+
+          </ul>
+
+
+          <div class="privacy-highlight">
+
+            <strong>
+              Important
+            </strong>
+
+            <span>
+              GTF Banking will not use account information
+              for a purpose that is materially inconsistent
+              with applicable notices, agreements or
+              requirements without an appropriate basis
+              for doing so.
+            </span>
+
+          </div>
+
+        </section>
+
+
+        <!-- SHARING -->
+
+        <section
+          id="sharing"
+          class="privacy-section"
+        >
+
+          <h2>
+            4. Information Sharing
+          </h2>
+
+          <p>
+            GTF Banking may share information where
+            necessary to provide services, protect
+            customers and the banking environment, operate
+            systems, or meet applicable legal and
+            regulatory obligations.
+          </p>
+
+
+          <h3>
+            Service providers
+          </h3>
+
+          <p>
+            Certain functions may be performed by
+            technology providers, payment providers,
+            infrastructure providers, professional
+            services firms or other authorized service
+            providers.
+          </p>
+
+
+          <h3>
+            Legal and regulatory requirements
+          </h3>
+
+          <p>
+            Information may be disclosed when required or
+            permitted by applicable law, regulation,
+            court order or lawful governmental request.
+          </p>
+
+
+          <h3>
+            Security and fraud prevention
+          </h3>
+
+          <p>
+            Information may be shared with appropriate
+            parties when reasonably necessary to detect,
+            investigate or prevent fraud, security
+            incidents or unauthorized activity.
+          </p>
+
+
+          <h3>
+            Business operations
+          </h3>
+
+          <p>
+            Information may be used or transferred as
+            necessary to support legitimate corporate,
+            operational or service-management activities,
+            subject to applicable requirements.
+          </p>
+
+        </section>
+
+
+        <!-- SECURITY -->
+
+        <section
+          id="security"
+          class="privacy-section"
+        >
+
+          <h2>
+            5. Data Security
+          </h2>
+
+          <p>
+            GTF Banking uses administrative, technical
+            and organizational measures designed to help
+            protect information against unauthorized
+            access, use, alteration or disclosure.
+          </p>
+
+          <p>
+            Security controls may include authentication,
+            access controls, monitoring, encryption or
+            other protective measures appropriate to the
+            systems and information involved.
+          </p>
+
+
+          <div class="privacy-highlight">
+
+            <strong>
+              Protect your credentials
+            </strong>
+
+            <span>
+              Never share your password, authentication
+              code, PIN or other security credentials with
+              another person. GTF Banking will not ask you
+              to disclose sensitive authentication
+              credentials through an unexpected message.
+            </span>
+
+          </div>
+
+
+          <p>
+            No internet transmission or electronic storage
+            system can be guaranteed to be completely
+            secure. Customers should also take reasonable
+            steps to protect their devices, credentials and
+            account information.
+          </p>
+
+        </section>
+
+
+        <!-- RETENTION -->
+
+        <section
+          id="retention"
+          class="privacy-section"
+        >
+
+          <h2>
+            6. Data Retention
+          </h2>
+
+          <p>
+            Information may be retained for as long as
+            reasonably necessary to provide services,
+            maintain business and financial records,
+            resolve disputes, protect against fraud,
+            enforce agreements and meet applicable legal,
+            regulatory or operational requirements.
+          </p>
+
+          <p>
+            Retention periods may vary depending on the
+            type of information, the purpose for which it
+            is used and applicable requirements.
+          </p>
+
+        </section>
+
+
+        <!-- RIGHTS -->
+
+        <section
+          id="rights"
+          class="privacy-section"
+        >
+
+          <h2>
+            7. Your Privacy Choices
+          </h2>
+
+          <p>
+            Depending on the applicable service,
+            jurisdiction and legal requirements, customers
+            may have choices or rights relating to their
+            personal information.
+          </p>
+
+          <ul>
+
+            <li>
+              Request access to certain information.
+            </li>
+
+            <li>
+              Request correction of inaccurate information.
+            </li>
+
+            <li>
+              Ask questions about how information is used.
+            </li>
+
+            <li>
+              Manage certain communications or
+              preferences where available.
+            </li>
+
+            <li>
+              Request information about applicable privacy
+              processes and controls.
+            </li>
+
+          </ul>
+
+          <p>
+            Requests may be subject to identity
+            verification, applicable law, contractual
+            requirements and other legitimate limitations.
+          </p>
+
+        </section>
+
+
+        <!-- COOKIES -->
+
+        <section
+          id="cookies"
+          class="privacy-section"
+        >
+
+          <h2>
+            8. Cookies & Similar Technologies
+          </h2>
+
+          <p>
+            GTF Banking websites or digital services may
+            use cookies and similar technologies to support
+            website functionality, security, preferences,
+            performance and service analytics.
+          </p>
+
+          <p>
+            Your browser may provide controls for managing
+            cookies. Disabling certain cookies may affect
+            the operation or availability of some website
+            functions.
+          </p>
+
+        </section>
+
+
+        <!-- CHILDREN -->
+
+        <section
+          id="children"
+          class="privacy-section"
+        >
+
+          <h2>
+            9. Children's Privacy
+          </h2>
+
+          <p>
+            GTF Banking services are not generally designed
+            to knowingly collect personal information from
+            children in circumstances where such collection
+            is prohibited by applicable law.
+          </p>
+
+          <p>
+            If you believe information has been submitted
+            improperly by a child, contact GTF Banking
+            through the appropriate support channel so the
+            matter can be reviewed.
+          </p>
+
+        </section>
+
+
+        <!-- INTERNATIONAL -->
+
+        <section class="privacy-section">
+
+          <h2>
+            10. Information Transfers
+          </h2>
+
+          <p>
+            Depending on the banking service,
+            infrastructure and service providers involved,
+            information may be processed or stored in
+            locations different from the location where
+            you access the service.
+          </p>
+
+          <p>
+            Where applicable, GTF Banking will use
+            appropriate measures and follow relevant legal
+            requirements governing information transfers.
+          </p>
+
+        </section>
+
+
+        <!-- THIRD PARTY -->
+
+        <section class="privacy-section">
+
+          <h2>
+            11. Third-Party Services
+          </h2>
+
+          <p>
+            GTF Banking may provide links or integrations
+            to third-party websites or services. Those
+            third parties may have their own privacy
+            policies and practices.
+          </p>
+
+          <p>
+            GTF Banking is not responsible for the privacy
+            practices of independent third-party websites
+            that are outside its control. Review the
+            applicable privacy notice before submitting
+            information to a third party.
+          </p>
+
+        </section>
+
+
+        <!-- CHANGES -->
+
+        <section
+          id="changes"
+          class="privacy-section"
+        >
+
+          <h2>
+            12. Changes to This Privacy Policy
+          </h2>
+
+          <p>
+            GTF Banking may update this Privacy Policy
+            from time to time to reflect changes in
+            services, technology, legal requirements or
+            privacy practices.
+          </p>
+
+          <p>
+            When changes are made, the updated version will
+            be posted through the appropriate GTF Banking
+            channel and the effective or updated date may
+            be revised.
+          </p>
+
+        </section>
+
+
+        <!-- CONTACT -->
+
+        <section
+          id="contact"
+          class="privacy-section"
+        >
+
+          <h2>
+            13. Contact Us About Privacy
+          </h2>
+
+          <p>
+            If you have questions or concerns regarding
+            this Privacy Policy or the handling of your
+            information, contact GTF Banking through its
+            customer-support channel.
+          </p>
+
+
+          <div class="privacy-contact">
+
+            <h3>
+              Privacy & Customer Support
+            </h3>
+
+            <p>
+              For account-specific questions, use the
+              secure support channel after signing in
+              whenever possible.
+            </p>
+
+            <a href="contact.html">
+              Visit Contact Us →
+            </a>
+
+          </div>
+
+        </section>
+
+
+      </article>
+
+    </div>
+
+  </main>
+
+
+  <!-- =================================
+       CTA
+  ================================== -->
+
+  <section class="privacy-cta">
+
+    <div class="privacy-cta-inner">
+
+      <h2>
+        Have a question about your privacy?
+      </h2>
+
+      <p>
+        Visit the GTF Banking support or contact page
+        for assistance with privacy and account-related
+        questions.
+      </p>
+
+
+      <div class="privacy-cta-buttons">
+
+        <a
+          href="contact.html"
+          class="privacy-cta-button"
+        >
+          Contact Us
+        </a>
+
+        <a
+          href="../support.html"
+          class="privacy-cta-button secondary"
+        >
+          Support Center
+        </a>
+
+        <a
+          href="security.html"
+          class="privacy-cta-button secondary"
+        >
+          Security Center
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =================================
+       FOOTER
+  ================================== -->
+
+  <footer class="privacy-footer">
+
+    <div class="privacy-footer-inner">
+
+      <div class="privacy-footer-grid">
+
+
+        <div>
+
+          <a
+            href="../index.html"
+            class="privacy-footer-brand"
+          >
+
+            <img
+              src="../assets/gtf-logo.svg"
+              alt="GTF Banking logo"
+              width="40"
+              height="40"
+            >
+
+            <span>
+
+              <strong>
+                GTF Banking
+              </strong>
+
+              <span>
+                Banking made simple
+              </span>
+
+            </span>
+
+          </a>
+
+
+          <p class="privacy-footer-description">
+            A modern banking experience for personal
+            and business financial needs.
+          </p>
+
+        </div>
+
+
+        <div class="privacy-footer-column">
+
+          <h3>
+            Banking
+          </h3>
+
+          <a href="checking.html">
+            Checking
+          </a>
+
+          <a href="savings.html">
+            Savings
+          </a>
+
+          <a href="cards.html">
+            Cards
+          </a>
+
+          <a href="loans.html">
+            Loans
+          </a>
+
+        </div>
+
+
+        <div class="privacy-footer-column">
+
+          <h3>
+            Company
+          </h3>
+
+          <a href="about.html">
+            About
+          </a>
+
+          <a href="personal.html">
+            Personal
+          </a>
+
+          <a href="business.html">
+            Business
+          </a>
+
+          <a href="contact.html">
+            Contact
+          </a>
+
+        </div>
+
+
+        <div class="privacy-footer-column">
+
+          <h3>
+            Legal & Security
+          </h3>
+
+          <a
+            href="privacy.html"
+            aria-current="page"
+          >
+            Privacy
+          </a>
+
+          <a href="security.html">
+            Security
+          </a>
+
+          <a href="terms.html">
+            Terms
+          </a>
+
+          <a href="../support.html">
+            Support
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="privacy-footer-bottom">
+
+        <span>
+          ©
+          <span id="privacyFooterYear"></span>
+          GTF Banking. All rights reserved.
+        </span>
+
+        <span>
+          Privacy & secure banking
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =================================
+       JAVASCRIPT
+  ================================== -->
+
+  <script>
+    "use strict";
+
+
+    /*
+     * Mobile navigation
+     */
+
+    const privacyNav =
+      document.getElementById(
+        "privacyNav"
+      );
+
+    const privacyMobileToggle =
+      document.getElementById(
+        "privacyMobileToggle"
+      );
+
+
+    privacyMobileToggle.addEventListener(
+      "click",
+      function () {
+
+        const open =
+          privacyNav.classList.toggle(
+            "mobile-open"
+          );
+
+        privacyMobileToggle.setAttribute(
+          "aria-expanded",
+          String(open)
+        );
+
+        privacyMobileToggle.setAttribute(
+          "aria-label",
+          open
+            ? "Close navigation"
+            : "Open navigation"
+        );
+
+        privacyMobileToggle.textContent =
+          open ? "×" : "☰";
+
+      }
+    );
+
+
+    /*
+     * Close mobile menu after navigation.
+     */
+
+    document
+      .querySelectorAll(
+        ".privacy-main-nav a"
+      )
+      .forEach(function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            privacyNav.classList.remove(
+              "mobile-open"
+            );
+
+            privacyMobileToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+            privacyMobileToggle.setAttribute(
+              "aria-label",
+              "Open navigation"
+            );
+
+            privacyMobileToggle.textContent =
+              "☰";
+
+          }
+        );
+
+      });
+
+
+    /*
+     * Highlight the privacy section currently
+     * visible on the page.
+     */
+
+    const privacySections =
+      document.querySelectorAll(
+        ".privacy-section[id]"
+      );
+
+    const privacySidebarLinks =
+      document.querySelectorAll(
+        ".privacy-sidebar a"
+      );
+
+
+    function updatePrivacyNavigation() {
+
+      let currentId = "overview";
+
+      const scrollPosition =
+        window.scrollY + 150;
+
+
+      privacySections.forEach(
+        function (section) {
+
+          if (
+            scrollPosition >=
+            section.offsetTop
+          ) {
+
+            currentId =
+              section.id;
+
+          }
+
+        }
+      );
+
+
+      privacySidebarLinks.forEach(
+        function (link) {
+
+          link.classList.remove(
+            "active"
+          );
+
+
+          if (
+            link.getAttribute("href") ===
+            "#" + currentId
+          ) {
+
+            link.classList.add(
+              "active"
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+
+    window.addEventListener(
+      "scroll",
+      updatePrivacyNavigation,
+      { passive: true }
+    );
+
+
+    updatePrivacyNavigation();
+
+
+    /*
+     * Footer year.
+     */
+
+    const privacyFooterYear =
+      document.getElementById(
+        "privacyFooterYear"
+      );
+
+
+    if (privacyFooterYear) {
+
+      privacyFooterYear.textContent =
+        new Date().getFullYear();
+
+    }
+
+  </script>
+
+</body>
+</html>

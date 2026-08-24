@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="GTF Banking - Secure digital banking for personal and business customers."
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b2a4a"
+  >
+
+  <title>GTF Banking | Global Trust Fund</title>
+
+  <!-- Existing project stylesheet -->
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  >
+
+  <style>
+    /*
+     * Page-specific fallback styles.
+     * Your main styles.css can override these.
+     */
+
+    :root {
+      --gtf-navy: #0b2a4a;
+      --gtf-blue: #145da0;
+      --gtf-light-blue: #eaf3fb;
+      --gtf-gold: #c99a2e;
+      --gtf-white: #ffffff;
+      --gtf-text: #172b3a;
+      --gtf-muted: #66788a;
+      --gtf-border: #dce5ed;
+      --gtf-background: #f5f8fb;
+      --gtf-success: #16794c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+      color: var(--gtf-text);
+      background: var(--gtf-background);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .topbar {
+      background: var(--gtf-navy);
+      color: white;
+      font-size: 0.88rem;
+    }
+
+    .topbar-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 8px 20px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 22px;
+    }
+
+    .topbar a:hover {
+      text-decoration: underline;
+    }
+
+    .site-header {
+      background: white;
+      border-bottom: 1px solid var(--gtf-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--gtf-navy);
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-name {
+      font-size: 1.2rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--gtf-muted);
+      font-weight: 400;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .main-nav a {
+      color: var(--gtf-text);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .main-nav a:hover {
+      color: var(--gtf-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 7px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--gtf-blue);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--gtf-navy);
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--gtf-blue);
+      border: 1px solid var(--gtf-blue);
+    }
+
+    .btn-outline:hover {
+      background: var(--gtf-light-blue);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--gtf-border);
+      background: white;
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .hero {
+      background:
+        linear-gradient(
+          135deg,
+          #0b2a4a,
+          #145da0
+        );
+      color: white;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero h1 {
+      margin: 0 0 20px;
+      font-size: clamp(
+        2.2rem,
+        5vw,
+        4rem
+      );
+      line-height: 1.1;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.08rem;
+      color: #e6eef5;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero .btn-primary {
+      background: white;
+      color: var(--gtf-navy);
+    }
+
+    .hero .btn-outline {
+      background: transparent;
+      color: white;
+      border-color: white;
+    }
+
+    .hero-card {
+      background: rgba(
+        255,
+        255,
+        255,
+        0.1
+      );
+      border: 1px solid rgba(
+        255,
+        255,
+        255,
+        0.2
+      );
+      border-radius: 14px;
+      padding: 28px;
+      backdrop-filter: blur(5px);
+    }
+
+    .hero-card h2 {
+      margin-top: 0;
+    }
+
+    .hero-card ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .hero-card li {
+      margin-bottom: 12px;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 45px;
+    }
+
+    .section-heading h2 {
+      color: var(--gtf-navy);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: var(--gtf-muted);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          4,
+          1fr
+        );
+      gap: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border: 1px solid var(--gtf-border);
+      border-radius: 10px;
+      padding: 25px;
+      transition: 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 8px 24px
+        rgba(
+          11,
+          42,
+          74,
+          0.08
+        );
+    }
+
+    .product-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--gtf-light-blue);
+      color: var(--gtf-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .product-card h3 {
+      margin: 0 0 8px;
+      color: var(--gtf-navy);
+    }
+
+    .product-card p {
+      color: var(--gtf-muted);
+      font-size: 0.92rem;
+    }
+
+    .product-card a {
+      color: var(--gtf-blue);
+      font-weight: 700;
+    }
+
+    .security-section {
+      background: white;
+    }
+
+    .security-grid {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 20px;
+      display: grid;
+      grid-template-columns:
+        repeat(
+          3,
+          1fr
+        );
+      gap: 25px;
+    }
+
+    .security-card {
+      padding: 28px;
+      border: 1px solid var(--gtf-border);
+      border-radius: 10px;
+    }
+
+    .security-card h3 {
+      color: var(--gtf-navy);
+    }
+
+    .security-card p {
+      color: var(--gtf-muted);
+    }
+
+    .cta {
+      background: var(--gtf-light-blue);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 800px;
+      margin: auto;
+      padding: 70px 20px;
+    }
+
+    .cta h2 {
+      color: var(--gtf-navy);
+      font-size: 2rem;
+    }
+
+    .cta p {
+      color: var(--gtf-muted);
+      margin-bottom: 25px;
+    }
+
+    .footer {
+      background: var(--gtf-navy);
+      color: white;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 55px 20px 25px;
+      display: grid;
+      grid-template-columns:
+        1.4fr
+        repeat(
+          3,
+          1fr
+        );
+      gap: 35px;
+    }
+
+    .footer h3,
+    .footer h4 {
+      margin-top: 0;
+    }
+
+    .footer p,
+    .footer a {
+      color: #c7d5e1;
+    }
+
+    .footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: auto;
+      border-top: 1px solid
+        rgba(
+          255,
+          255,
+          255,
+          0.15
+        );
+      padding: 18px 20px;
+      color: #c7d5e1;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .status-message {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      color: var(--gtf-success);
+    }
+
+    @media (max-width: 900px) {
+      .main-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-container {
+        flex-wrap: wrap;
+      }
+
+      .main-nav.mobile-open {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 15px;
+      }
+
+      .hero-container {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
+      }
+
+      .security-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns:
+          repeat(
+            2,
+            1fr
+          );
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar-inner {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .hero-container {
+        padding: 65px 20px;
+      }
+
+      .hero h1 {
+        font-size: 2.35rem;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       TOP BAR
+       ====================================================== -->
+
+  <div class="topbar">
+    <div class="topbar-inner">
+
+      <a href="support.html">
+        Support
+      </a>
+
+      <a href="pages/security.html">
+        Security
+      </a>
+
+      <a href="pages/contact.html">
+        Contact
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       HEADER
+       ====================================================== -->
+
+  <header class="site-header">
+
+    <div class="nav-container">
+
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="GTF Banking home"
+      >
+
+        <img
+          src="assets/gtf-logo.svg"
+          alt="GTF Banking logo"
+          onerror="this.style.display='none'"
+        >
+
+        <span class="brand-text">
+
+          <span class="brand-name">
+            GTF Banking
+          </span>
+
+          <span class="brand-subtitle">
+            Global Trust Fund
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mainNav"
+      >
+        ☰
+      </button>
+
+
+      <nav
+        class="main-nav"
+        id="mainNav"
+        aria-label="Main navigation"
+      >
+
+        <a href="pages/personal.html">
+          Personal
+        </a>
+
+        <a href="pages/business.html">
+          Business
+        </a>
+
+        <a href="cards.html">
+          Cards
+        </a>
+
+        <a href="checking.html">
+          Checking
+        </a>
+
+        <a href="savings.html">
+          Savings
+        </a>
+
+        <a href="loan.html">
+          Loans
+        </a>
+
+        <a href="pages/about.html">
+          About
+        </a>
+
+      </nav>
+
+
+      <div class="nav-actions">
+
+        <a
+          href="login.html"
+          class="btn btn-outline"
+        >
+          Sign In
+        </a>
+
+        <a
+          href="signup.html"
+          class="btn btn-primary"
+        >
+          Open an Account
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+       ====================================================== -->
+
+  <main>
+
+    <section
+      class="hero"
+      aria-labelledby="hero-title"
+    >
+
+      <div class="hero-container">
+
+        <div>
+
+          <h1 id="hero-title">
+            Banking built around your financial goals.
+          </h1>
+
+          <p>
+            Manage your money, explore banking products,
+            and access your account through the GTF Banking
+            digital platform.
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              href="signup.html"
+              class="btn btn-primary"
+            >
+              Open an Account
+            </a>
+
+            <a
+              href="login.html"
+              class="btn btn-outline"
+            >
+              Sign In
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <aside
+          class="hero-card"
+          aria-label="GTF Banking highlights"
+        >
+
+          <h2>
+            Banking made simpler
+          </h2>
+
+          <ul>
+
+            <li>
+              Personal and business banking options
+            </li>
+
+            <li>
+              Online account access
+            </li>
+
+            <li>
+              Checking and savings products
+            </li>
+
+            <li>
+              Card and lending solutions
+            </li>
+
+            <li>
+              Customer support when you need it
+            </li>
+
+          </ul>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         BANKING PRODUCTS
+         ==================================================== -->
+
+    <section
+      class="section"
+      aria-labelledby="products-title"
+    >
+
+      <div class="section-heading">
+
+        <h2 id="products-title">
+          Banking for your needs
+        </h2>
+
+        <p>
+          Explore the banking services available through
+          GTF Banking.
+        </p>
+
+      </div>
+
+
+      <div class="products">
+
+        <article class="product-card">
+
+          <div
+            class="product-icon"
+            aria-hidden="true"
+          >
+            C
+          </div>
+
+          <h3>
+            Checking
+          </h3>
+
+          <p>
+            Everyday banking designed to help you manage
+            spending, deposits, transfers, and payments.
+          </p>
+
+          <a href="checking.html">
+            Explore Checking →
+          </a>
+
+        </article>
+
+
+        <article class="product-card">
+
+          <div
+            class="product-icon"
+            aria-hidden="true"
+          >
+            S
+          </div>
+
+          <h3>
+            Savings
+          </h3>
+
+          <p>
+            Organize your savings and work toward your
+            financial goals with dedicated savings options.
+          </p>
+
+          <a href="savings.html">
+            Explore Savings →
+          </a>
+
+        </article>
+
+
+        <article class="product-card">
+
+          <div
+            class="product-icon"
+            aria-hidden="true"
+          >
+            C
+          </div>
+
+          <h3>
+            Cards
+          </h3>
+
+          <p>
+            Explore card services designed for convenient
+            everyday payments and account access.
+          </p>
+
+          <a href="cards.html">
+            Explore Cards →
+          </a>
+
+        </article>
+
+
+        <article class="product-card">
+
+          <div
+            class="product-icon"
+            aria-hidden="true"
+          >
+            L
+          </div>
+
+          <h3>
+            Loans
+          </h3>
+
+          <p>
+            Explore lending options and learn about the
+            application process.
+          </p>
+
+          <a href="loan.html">
+            Explore Loans →
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PERSONAL & BUSINESS
+         ==================================================== -->
+
+    <section
+      class="section security-section"
+      aria-labelledby="banking-options-title"
+    >
+
+      <div class="section-heading">
+
+        <h2 id="banking-options-title">
+          Banking that fits your world
+        </h2>
+
+        <p>
+          Choose the banking experience that matches
+          your needs.
+        </p>
+
+      </div>
+
+
+      <div class="security-grid">
+
+        <article class="security-card">
+
+          <h3>
+            Personal Banking
+          </h3>
+
+          <p>
+            Manage everyday finances, savings, cards,
+            payments, and other personal banking needs.
+          </p>
+
+          <a
+            href="pages/personal.html"
+            class="btn btn-outline"
+          >
+            Personal Banking
+          </a>
+
+        </article>
+
+
+        <article class="security-card">
+
+          <h3>
+            Business Banking
+          </h3>
+
+          <p>
+            Banking services for businesses and
+            organizations managing their financial
+            operations.
+          </p>
+
+          <a
+            href="pages/business.html"
+            class="btn btn-outline"
+          >
+            Business Banking
+          </a>
+
+        </article>
+
+
+        <article class="security-card">
+
+          <h3>
+            Online Banking
+          </h3>
+
+          <p>
+            Sign in to your account to view account
+            information and access available banking
+            features.
+          </p>
+
+          <a
+            href="login.html"
+            class="btn btn-primary"
+          >
+            Sign In
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SECURITY
+         ==================================================== -->
+
+    <section
+      class="section"
+      aria-labelledby="security-title"
+    >
+
+      <div class="section-heading">
+
+        <h2 id="security-title">
+          Security matters
+        </h2>
+
+        <p>
+          We design the GTF Banking platform with
+          security and responsible handling of account
+          information in mind.
+        </p>
+
+      </div>
+
+
+      <div class="security-grid">
+
+        <article class="security-card">
+
+          <h3>
+            Account Protection
+          </h3>
+
+          <p>
+            Authentication and authorization controls
+            help protect access to customer accounts.
+          </p>
+
+        </article>
+
+
+        <article class="security-card">
+
+          <h3>
+            Secure Access
+          </h3>
+
+          <p>
+            Customers should only access their own
+            account information using their authenticated
+            session.
+          </p>
+
+        </article>
+
+
+        <article class="security-card">
+
+          <h3>
+            Privacy
+          </h3>
+
+          <p>
+            Review our privacy information to understand
+            how information is handled within the platform.
+          </p>
+
+          <a href="pages/privacy.html">
+            Privacy Information →
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CTA
+         ==================================================== -->
+
+    <section
+      class="cta"
+      aria-labelledby="cta-title"
+    >
+
+      <div class="cta-inner">
+
+        <h2 id="cta-title">
+          Ready to get started?
+        </h2>
+
+        <p>
+          Create an account or sign in to access the
+          GTF Banking platform.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="signup.html"
+            class="btn btn-primary"
+          >
+            Open an Account
+          </a>
+
+          <a
+            href="support.html"
+            class="btn btn-outline"
+          >
+            Get Support
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+       ====================================================== -->
+
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <div>
+
+        <h3>
+          GTF Banking
+        </h3>
+
+        <p>
+          Global Trust Fund digital banking platform.
+        </p>
+
+        <p>
+          Banking services and account features are
+          subject to applicable terms and requirements.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Banking
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="checking.html">
+            Checking
+          </a>
+
+          <a href="savings.html">
+            Savings
+          </a>
+
+          <a href="cards.html">
+            Cards
+          </a>
+
+          <a href="loan.html">
+            Loans
+          </a>
+
+          <a href="pages/personal.html">
+            Personal
+          </a>
+
+          <a href="pages/business.html">
+            Business
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Company
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="pages/about.html">
+            About
+          </a>
+
+          <a href="pages/security.html">
+            Security
+          </a>
+
+          <a href="pages/privacy.html">
+            Privacy
+          </a>
+
+          <a href="pages/contact.html">
+            Contact
+          </a>
+
+          <a href="support.html">
+            Support
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Account
+        </h4>
+
+        <div class="footer-links">
+
+          <a href="login.html">
+            Sign In
+          </a>
+
+          <a href="signup.html">
+            Open an Account
+          </a>
+
+          <a href="dashboard/index.html">
+            Online Banking
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © <span id="currentYear"></span>
+        GTF Banking. All rights reserved.
+      </span>
+
+      <span>
+        Use of this website is subject to applicable
+        terms and policies.
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       PAGE SCRIPT
+       ====================================================== -->
+
+  <script>
+    "use strict";
+
+    /*
+     * Current year.
+     */
+
+    const yearElement =
+      document.getElementById(
+        "currentYear"
+      );
+
+    if (yearElement) {
+      yearElement.textContent =
+        new Date().getFullYear();
+    }
+
+
+    /*
+     * Mobile navigation.
+     */
+
+    const menuToggle =
+      document.getElementById(
+        "menuToggle"
+      );
+
+    const mainNav =
+      document.getElementById(
+        "mainNav"
+      );
+
+
+    if (
+      menuToggle &&
+      mainNav
+    ) {
+
+      menuToggle.addEventListener(
+        "click",
+        function () {
+
+          const isOpen =
+            mainNav.classList.toggle(
+              "mobile-open"
+            );
+
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+          );
+
+        }
+      );
+
+    }
+
+
+    /*
+     * Close mobile navigation after
+     * selecting a navigation link.
+     */
+
+    if (mainNav) {
+
+      mainNav
+        .querySelectorAll("a")
+        .forEach(
+          function (link) {
+
+            link.addEventListener(
+              "click",
+              function () {
+
+                mainNav.classList.remove(
+                  "mobile-open"
+                );
+
+                if (menuToggle) {
+
+                  menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                  );
+
+                }
+
+              }
+            );
+
+          }
+        );
+
+    }
+
+  </script>
+
+
+  <!-- Existing application JavaScript -->
+  <script
+    src="js/app.js"
+    defer
+  ></script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+Testing area for frontend, API, authentication, authorization and security tests.

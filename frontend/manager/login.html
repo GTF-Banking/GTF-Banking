@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="GTF Banking Manager Portal Login"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b2a4a"
+  >
+
+  <title>Manager Login | GTF Banking</title>
+
+  <link
+    rel="icon"
+    href="../assets/gtf-logo.svg"
+    type="image/svg+xml"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <style>
+    :root {
+      --gtf-navy: #0b2a4a;
+      --gtf-blue: #145da0;
+      --gtf-blue-dark: #0d477c;
+      --gtf-gold: #c9962b;
+
+      --background: #f4f7fa;
+      --surface: #ffffff;
+      --text: #172b3a;
+      --muted: #66788a;
+      --border: #d8e1e9;
+
+      --success: #16794c;
+      --success-bg: #eaf8f0;
+
+      --danger: #b42318;
+      --danger-bg: #fff0ee;
+
+      --shadow:
+        0 18px 50px rgba(11, 42, 74, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          #eef4f8 0%,
+          #f7f9fb 50%,
+          #edf3f7 100%
+        );
+
+      color: var(--text);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .login-page {
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .top-header {
+      min-height: 70px;
+
+      background: var(--gtf-navy);
+      color: #fff;
+
+      box-shadow:
+        0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-inner {
+      width: min(1200px, 100%);
+
+      min-height: 70px;
+
+      margin: 0 auto;
+      padding: 10px 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-logo {
+      width: 45px;
+      height: 45px;
+
+      object-fit: contain;
+    }
+
+    .brand-name {
+      display: block;
+
+      color: #fff;
+
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .brand-subtitle {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #cbd9e6;
+
+      font-size: .67rem;
+    }
+
+    .header-link {
+      padding: 8px 12px;
+
+      border: 1px solid
+        rgba(255, 255, 255, .25);
+
+      border-radius: 6px;
+
+      color: #fff;
+
+      font-size: .68rem;
+      font-weight: 700;
+    }
+
+    .header-link:hover {
+      background:
+        rgba(255, 255, 255, .09);
+    }
+
+    /* =========================================
+       MAIN
+    ========================================= */
+
+    .login-main {
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 40px 18px;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 430px;
+    }
+
+    /* =========================================
+       LOGIN CARD
+    ========================================= */
+
+    .login-card {
+      overflow: hidden;
+
+      background: var(--surface);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 12px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .login-card-top {
+      padding: 30px 30px 22px;
+
+      border-bottom:
+        1px solid #edf1f4;
+
+      text-align: center;
+    }
+
+    .logo-container {
+      width: 72px;
+      height: 72px;
+
+      margin: 0 auto 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 12px;
+
+      background: #fff;
+
+      box-shadow:
+        0 4px 15px
+        rgba(11, 42, 74, .06);
+    }
+
+    .login-logo {
+      width: 57px;
+      height: 57px;
+
+      object-fit: contain;
+    }
+
+    .login-title {
+      margin: 0;
+
+      color: var(--gtf-navy);
+
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+
+    .login-subtitle {
+      margin: 7px 0 0;
+
+      color: var(--muted);
+
+      font-size: .73rem;
+      line-height: 1.5;
+    }
+
+    .manager-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 13px;
+      padding: 6px 10px;
+
+      border:
+        1px solid #c9dceb;
+
+      border-radius: 999px;
+
+      background: #f1f7fc;
+
+      color: var(--gtf-blue);
+
+      font-size: .6rem;
+      font-weight: 700;
+    }
+
+    /* =========================================
+       FORM
+    ========================================= */
+
+    .login-form {
+      padding: 25px 30px 30px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: var(--text);
+
+      font-size: .68rem;
+      font-weight: 700;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .form-input {
+      width: 100%;
+
+      min-height: 45px;
+
+      padding:
+        11px 13px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 6px;
+
+      outline: none;
+
+      background: #fff;
+
+      color: var(--text);
+
+      font-size: .75rem;
+
+      transition:
+        border-color .15s ease,
+        box-shadow .15s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--gtf-blue);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(20, 93, 160, .09);
+    }
+
+    .form-input::placeholder {
+      color: #9aa9b6;
+    }
+
+    .password-input {
+      padding-right: 72px;
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      top: 50%;
+      right: 9px;
+
+      transform:
+        translateY(-50%);
+
+      min-height: 30px;
+
+      padding: 5px 7px;
+
+      border: 0;
+
+      background: transparent;
+
+      color: var(--gtf-blue);
+
+      font-size: .62rem;
+      font-weight: 700;
+    }
+
+    .password-toggle:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================================
+       FORM OPTIONS
+    ========================================= */
+
+    .form-options {
+      margin-top: -2px;
+      margin-bottom: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+    }
+
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      color: var(--muted);
+
+      font-size: .64rem;
+    }
+
+    .remember-label input {
+      width: 14px;
+      height: 14px;
+
+      accent-color:
+        var(--gtf-blue);
+    }
+
+    .forgot-link {
+      color: var(--gtf-blue);
+
+      font-size: .64rem;
+      font-weight: 700;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================================
+       ALERT
+    ========================================= */
+
+    .alert {
+      display: none;
+
+      margin-bottom: 17px;
+
+      padding: 11px 12px;
+
+      border-radius: 6px;
+
+      font-size: .66rem;
+      line-height: 1.45;
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .alert.error {
+      border:
+        1px solid #efc1bc;
+
+      background:
+        var(--danger-bg);
+
+      color:
+        var(--danger);
+    }
+
+    .alert.success {
+      border:
+        1px solid #b9dec9;
+
+      background:
+        var(--success-bg);
+
+      color:
+        var(--success);
+    }
+
+    /* =========================================
+       LOGIN BUTTON
+    ========================================= */
+
+    .login-button {
+      width: 100%;
+
+      min-height: 46px;
+
+      padding: 11px 15px;
+
+      border:
+        1px solid var(--gtf-blue);
+
+      border-radius: 6px;
+
+      background:
+        var(--gtf-blue);
+
+      color: #fff;
+
+      font-size: .74rem;
+      font-weight: 700;
+
+      transition:
+        background .15s ease,
+        transform .1s ease;
+    }
+
+    .login-button:hover {
+      background:
+        var(--gtf-blue-dark);
+    }
+
+    .login-button:active {
+      transform: translateY(1px);
+    }
+
+    .login-button:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .button-spinner {
+      display: none;
+
+      width: 14px;
+      height: 14px;
+
+      margin-right: 7px;
+
+      vertical-align: -2px;
+
+      border:
+        2px solid
+        rgba(255, 255, 255, .45);
+
+      border-top-color:
+        #fff;
+
+      border-radius: 50%;
+
+      animation:
+        spin .7s linear infinite;
+    }
+
+    .login-button.loading
+    .button-spinner {
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================
+       SECURITY NOTICE
+    ========================================= */
+
+    .security-notice {
+      margin-top: 18px;
+
+      padding: 12px;
+
+      border:
+        1px solid #d5e4f0;
+
+      border-radius: 7px;
+
+      background:
+        #f3f8fc;
+    }
+
+    .security-title {
+      margin: 0 0 5px;
+
+      color: var(--gtf-navy);
+
+      font-size: .67rem;
+      font-weight: 700;
+    }
+
+    .security-text {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: .6rem;
+      line-height: 1.5;
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .page-footer {
+      padding: 18px;
+
+      color: var(--muted);
+
+      text-align: center;
+
+      font-size: .6rem;
+    }
+
+    .footer-links {
+      margin-top: 5px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 12px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gtf-blue);
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+      .header-inner {
+        padding:
+          9px 14px;
+      }
+
+      .header-link {
+        padding:
+          7px 9px;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .login-main {
+        padding:
+          25px 13px;
+      }
+
+      .login-card-top {
+        padding:
+          25px 20px 20px;
+      }
+
+      .login-form {
+        padding:
+          22px 20px 25px;
+      }
+
+      .form-options {
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-page">
+
+
+    <!-- =======================================
+         HEADER
+    ======================================== -->
+
+    <header class="top-header">
+
+      <div class="header-inner">
+
+        <a
+          href="../index.html"
+          class="brand"
+          aria-label="GTF Banking home"
+        >
+
+          <img
+            src="../assets/gtf-logo.svg"
+            alt="GTF Banking"
+            class="brand-logo"
+            width="45"
+            height="45"
+          >
+
+          <span>
+
+            <span class="brand-name">
+              GTF Banking
+            </span>
+
+            <span class="brand-subtitle">
+              Global TrustFund
+            </span>
+
+          </span>
+
+        </a>
+
+
+        <a
+          href="../login.html"
+          class="header-link"
+        >
+          Customer Login
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- =======================================
+         MAIN
+    ======================================== -->
+
+    <main class="login-main">
+
+      <div class="login-wrapper">
+
+
+        <!-- LOGIN CARD -->
+
+        <section
+          class="login-card"
+          aria-labelledby="loginTitle"
+        >
+
+
+          <!-- CARD HEADER -->
+
+          <div class="login-card-top">
+
+            <div class="logo-container">
+
+              <img
+                src="../assets/gtf-logo.svg"
+                alt="GTF Banking logo"
+                class="login-logo"
+                width="57"
+                height="57"
+              >
+
+            </div>
+
+
+            <h1
+              id="loginTitle"
+              class="login-title"
+            >
+              Manager Login
+            </h1>
+
+
+            <p class="login-subtitle">
+              Sign in to access the GTF Banking
+              management operations portal.
+            </p>
+
+
+            <span class="manager-badge">
+              ● Authorized Management Portal
+            </span>
+
+          </div>
+
+
+          <!-- FORM -->
+
+          <form
+            id="managerLoginForm"
+            class="login-form"
+            novalidate
+          >
+
+
+            <!-- ALERT -->
+
+            <div
+              id="loginAlert"
+              class="alert"
+              role="alert"
+              aria-live="assertive"
+            ></div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+              <label
+                for="email"
+                class="form-label"
+              >
+                Manager Email
+              </label>
+
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                class="form-input"
+                autocomplete="username"
+                placeholder="Enter your manager email"
+                required
+              >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+              <label
+                for="password"
+                class="form-label"
+              >
+                Password
+              </label>
+
+
+              <div class="input-wrapper">
+
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  class="form-input password-input"
+                  autocomplete="current-password"
+                  placeholder="Enter your password"
+                  minlength="8"
+                  required
+                >
+
+
+                <button
+                  id="togglePassword"
+                  type="button"
+                  class="password-toggle"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="form-options">
+
+              <label class="remember-label">
+
+                <input
+                  id="remember"
+                  name="remember"
+                  type="checkbox"
+                >
+
+                <span>
+                  Keep me signed in
+                </span>
+
+              </label>
+
+
+              <a
+                href="../forgot-password.html"
+                class="forgot-link"
+              >
+                Forgot password?
+              </a>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+              id="loginButton"
+              type="submit"
+              class="login-button"
+            >
+
+              <span
+                class="button-spinner"
+                aria-hidden="true"
+              ></span>
+
+              <span id="loginButtonText">
+                Sign In to Manager Portal
+              </span>
+
+            </button>
+
+
+            <!-- SECURITY -->
+
+            <div class="security-notice">
+
+              <p class="security-title">
+                Secure management access
+              </p>
+
+              <p class="security-text">
+                Manager access is protected by backend
+                authentication and role authorization.
+                Never share your password, verification
+                codes or active session credentials.
+              </p>
+
+            </div>
+
+          </form>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="page-footer">
+
+          <div>
+            © <span id="currentYear"></span>
+            GTF Banking. All rights reserved.
+          </div>
+
+
+          <div class="footer-links">
+
+            <a href="../privacy.html">
+              Privacy
+            </a>
+
+            <a href="../security.html">
+              Security
+            </a>
+
+            <a href="../contact.html">
+              Contact
+            </a>
+
+            <a href="../index.html">
+              Main Website
+            </a>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================
+       APPLICATION SCRIPT
+  ========================================== -->
+
+  <script src="../js/app.js" defer></script>
+
+
+  <script>
+    "use strict";
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
+    const form =
+      document.getElementById(
+        "managerLoginForm"
+      );
+
+    const emailInput =
+      document.getElementById(
+        "email"
+      );
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+    const rememberInput =
+      document.getElementById(
+        "remember"
+      );
+
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+    const loginButtonText =
+      document.getElementById(
+        "loginButtonText"
+      );
+
+    const loginAlert =
+      document.getElementById(
+        "loginAlert"
+      );
+
+    const togglePassword =
+      document.getElementById(
+        "togglePassword"
+      );
+
+
+    /* =========================================
+       YEAR
+    ========================================== */
+
+    document.getElementById(
+      "currentYear"
+    ).textContent =
+      new Date().getFullYear();
+
+
+    /* =========================================
+       ALERT
+    ========================================== */
+
+    function showAlert(
+      message,
+      type = "error"
+    ) {
+
+      loginAlert.textContent =
+        message;
+
+      loginAlert.className =
+        `alert ${type} show`;
+    }
+
+
+    function clearAlert() {
+
+      loginAlert.textContent = "";
+
+      loginAlert.className =
+        "alert";
+    }
+
+
+    /* =========================================
+       PASSWORD VISIBILITY
+    ========================================== */
+
+    togglePassword.addEventListener(
+      "click",
+      () => {
+
+        const isPassword =
+          passwordInput.type ===
+          "password";
+
+
+        passwordInput.type =
+          isPassword
+            ? "text"
+            : "password";
+
+
+        togglePassword.textContent =
+          isPassword
+            ? "Hide"
+            : "Show";
+
+
+        togglePassword
+          .setAttribute(
+            "aria-label",
+            isPassword
+              ? "Hide password"
+              : "Show password"
+          );
+
+
+        togglePassword
+          .setAttribute(
+            "aria-pressed",
+            String(isPassword)
+          );
+      }
+    );
+
+
+    /* =========================================
+       LOADING STATE
+    ========================================== */
+
+    function setLoading(
+      loading
+    ) {
+
+      loginButton.disabled =
+        loading;
+
+
+      loginButton.classList.toggle(
+        "loading",
+        loading
+      );
+
+
+      loginButtonText.textContent =
+        loading
+          ? "Signing In..."
+          : "Sign In to Manager Portal";
+    }
+
+
+    /* =========================================
+       VALIDATION
+    ========================================== */
+
+    function validateForm() {
+
+      const email =
+        emailInput.value.trim();
+
+      const password =
+        passwordInput.value;
+
+
+      if (!email) {
+
+        showAlert(
+          "Please enter your manager email."
+        );
+
+        emailInput.focus();
+
+        return false;
+      }
+
+
+      if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          .test(email)
+      ) {
+
+        showAlert(
+          "Please enter a valid email address."
+        );
+
+        emailInput.focus();
+
+        return false;
+      }
+
+
+      if (!password) {
+
+        showAlert(
+          "Please enter your password."
+        );
+
+        passwordInput.focus();
+
+        return false;
+      }
+
+
+      if (password.length < 8) {
+
+        showAlert(
+          "Your password must contain at least 8 characters."
+        );
+
+        passwordInput.focus();
+
+        return false;
+      }
+
+
+      return true;
+    }
+
+
+    /* =========================================
+       API LOGIN
+    ========================================== */
+
+    async function managerLogin(
+      email,
+      password,
+      remember
+    ) {
+
+      const response =
+        await fetch(
+          "/api/auth/login",
+          {
+            method: "POST",
+
+            credentials: "include",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+
+              "Accept":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              email,
+              password,
+              remember
+            })
+          }
+        );
+
+
+      let data = null;
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch {
+
+        data = null;
+      }
+
+
+      if (!response.ok) {
+
+        const error =
+          new Error(
+            data?.message ||
+            data?.error ||
+            "Unable to sign in."
+          );
+
+
+        error.status =
+          response.status;
+
+
+        throw error;
+      }
+
+
+      return data;
+    }
+
+
+    /* =========================================
+       ROLE CHECK
+    ========================================== */
+
+    function getUserFromResponse(
+      data
+    ) {
+
+      return (
+        data?.user ||
+        data?.data?.user ||
+        data?.profile ||
+        null
+      );
+    }
+
+
+    function getUserRole(
+      user,
+      data
+    ) {
+
+      return (
+        user?.role ||
+        user?.user_role ||
+        user?.userRole ||
+        data?.role ||
+        data?.userRole ||
+        data?.data?.role ||
+        ""
+      )
+        .toString()
+        .trim()
+        .toLowerCase();
+    }
+
+
+    function isManagerRole(
+      role
+    ) {
+
+      const allowedRoles = [
+        "manager",
+        "branch_manager",
+        "branch manager",
+        "bank_manager",
+        "bank manager",
+        "operations_manager",
+        "operations manager"
+      ];
+
+
+      return allowedRoles.includes(
+        role
+      );
+    }
+
+
+    /* =========================================
+       FORM SUBMISSION
+    ========================================== */
+
+    form.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+        clearAlert();
+
+
+        if (!validateForm()) {
+          return;
+        }
+
+
+        const email =
+          emailInput.value.trim();
+
+
+        const password =
+          passwordInput.value;
+
+
+        const remember =
+          rememberInput.checked;
+
+
+        setLoading(true);
+
+
+        try {
+
+          const data =
+            await managerLogin(
+              email,
+              password,
+              remember
+            );
+
+
+          const user =
+            getUserFromResponse(
+              data
+            );
+
+
+          /*
+           * Prefer the backend's authenticated
+           * role. The server must remain the
+           * source of truth for authorization.
+           */
+
+          const role =
+            getUserRole(
+              user,
+              data
+            );
+
+
+          if (
+            role &&
+            !isManagerRole(role)
+          ) {
+
+            showAlert(
+              "This account is not authorized to access the manager portal."
+            );
+
+            return;
+          }
+
+
+          /*
+           * Store only non-sensitive UI
+           * information locally.
+           *
+           * Never store passwords or
+           * authentication tokens here.
+           */
+
+          try {
+
+            if (remember) {
+
+              localStorage.setItem(
+                "gtf_manager_email",
+                email
+              );
+
+            } else {
+
+              localStorage.removeItem(
+                "gtf_manager_email"
+              );
+            }
+
+
+            if (user) {
+
+              const safeUser = {
+                id:
+                  user.id || null,
+
+                full_name:
+                  user.full_name ||
+                  user.fullName ||
+                  user.name ||
+                  null,
+
+                role:
+                  user.role ||
+                  user.user_role ||
+                  null
+              };
+
+
+              sessionStorage.setItem(
+                "gtf_manager_user",
+                JSON.stringify(
+                  safeUser
+                )
+              );
+            }
+
+          } catch (storageError) {
+
+            console.warn(
+              "Local storage unavailable:",
+              storageError
+            );
+          }
+
+
+          showAlert(
+            "Sign-in successful. Opening manager dashboard...",
+            "success"
+          );
+
+
+          /*
+           * Give the success message a
+           * moment to render before redirect.
+           */
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "index.html";
+
+            },
+            350
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Manager login failed:",
+            error
+          );
+
+
+          if (
+            error.status === 401
+          ) {
+
+            showAlert(
+              "Invalid manager email or password."
+            );
+
+          } else if (
+            error.status === 403
+          ) {
+
+            showAlert(
+              "Your account is not authorized for manager access."
+            );
+
+          } else {
+
+            showAlert(
+              error.message ||
+              "Unable to sign in right now. Please try again."
+            );
+          }
+
+
+        } finally {
+
+          setLoading(false);
+        }
+      }
+    );
+
+
+    /* =========================================
+       RESTORE REMEMBERED EMAIL
+    ========================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        try {
+
+          const rememberedEmail =
+            localStorage.getItem(
+              "gtf_manager_email"
+            );
+
+
+          if (rememberedEmail) {
+
+            emailInput.value =
+              rememberedEmail;
+
+            rememberInput.checked =
+              true;
+
+            passwordInput.focus();
+
+          } else {
+
+            emailInput.focus();
+          }
+
+        } catch {
+
+          emailInput.focus();
+        }
+      }
+    );
+
+
+    /* =========================================
+       ENTER KEY / INPUT CLEANUP
+    ========================================== */
+
+    emailInput.addEventListener(
+      "input",
+      clearAlert
+    );
+
+
+    passwordInput.addEventListener(
+      "input",
+      clearAlert
+    );
+
+
+    /* =========================================
+       PREVENT ACCIDENTAL DOUBLE SUBMISSION
+    ========================================== */
+
+    form.addEventListener(
+      "submit",
+      event => {
+
+        if (
+          loginButton.disabled
+        ) {
+
+          event.preventDefault();
+        }
+      },
+      true
+    );
+
+  </script>
+
+</body>
+</html>

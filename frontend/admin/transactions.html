@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Transactions | GTF Admin</title>
+
+  <meta
+    name="description"
+    content="GTF Banking administration transaction management."
+  >
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="../assets/gtf-logo.svg"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <style>
+    .admin-page {
+      min-height: 100vh;
+      background: #f4f7fa;
+    }
+
+    .transactions-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .transactions-search {
+      min-width: 280px;
+      flex: 1;
+      max-width: 440px;
+    }
+
+    .transactions-search input,
+    .transactions-filter select {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid #d9e2ea;
+      border-radius: 6px;
+      background: #fff;
+      color: #172b3a;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .transactions-search input:focus,
+    .transactions-filter select:focus {
+      border-color: #145da0;
+      box-shadow: 0 0 0 3px rgba(20, 93, 160, .08);
+    }
+
+    .transactions-filters {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .transactions-filter {
+      min-width: 145px;
+    }
+
+    .transactions-action {
+      min-height: 40px;
+      padding: 9px 14px;
+      border: 1px solid #145da0;
+      border-radius: 6px;
+      background: #145da0;
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .transactions-action:hover {
+      background: #0d477c;
+    }
+
+    .transactions-action.secondary {
+      background: #fff;
+      color: #145da0;
+    }
+
+    .transactions-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .transaction-summary-card {
+      padding: 18px;
+      border: 1px solid #dce4eb;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 7px 22px rgba(11, 42, 74, .05);
+    }
+
+    .transaction-summary-card span {
+      display: block;
+      color: #66788a;
+      font-size: .65rem;
+      font-weight: 600;
+    }
+
+    .transaction-summary-card strong {
+      display: block;
+      margin-top: 5px;
+      color: #0b2a4a;
+      font-size: 1.25rem;
+    }
+
+    .transaction-summary-card small {
+      display: block;
+      margin-top: 5px;
+      color: #8495a4;
+      font-size: .52rem;
+    }
+
+    .transactions-table-card {
+      overflow: hidden;
+      border: 1px solid #dce4eb;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 7px 22px rgba(11, 42, 74, .05);
+    }
+
+    .transactions-table-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e3e9ee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .transactions-table-header h2 {
+      margin: 0;
+      color: #0b2a4a;
+      font-size: 1rem;
+    }
+
+    .transactions-table-header span {
+      color: #66788a;
+      font-size: .62rem;
+    }
+
+    .transactions-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .transactions-table {
+      width: 100%;
+      min-width: 1100px;
+      border-collapse: collapse;
+    }
+
+    .transactions-table th {
+      padding: 13px 15px;
+      background: #f8fafc;
+      color: #607386;
+      border-bottom: 1px solid #dce4eb;
+      text-align: left;
+      font-size: .58rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .transactions-table td {
+      padding: 14px 15px;
+      border-bottom: 1px solid #edf1f4;
+      color: #334b5d;
+      font-size: .62rem;
+      vertical-align: middle;
+    }
+
+    .transactions-table tr:hover td {
+      background: #fbfdff;
+    }
+
+    .transaction-id {
+      color: #145da0;
+      font-family: monospace;
+      font-size: .58rem;
+      font-weight: 700;
+    }
+
+    .transaction-customer {
+      color: #0b2a4a;
+      font-weight: 700;
+    }
+
+    .transaction-account {
+      margin-top: 3px;
+      color: #8495a4;
+      font-family: monospace;
+      font-size: .52rem;
+    }
+
+    .transaction-type {
+      color: #42586b;
+      font-weight: 600;
+    }
+
+    .transaction-amount {
+      color: #0b2a4a;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .transaction-amount.credit {
+      color: #18733c;
+    }
+
+    .transaction-amount.debit {
+      color: #a52d36;
+    }
+
+    .transaction-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 4px 9px;
+      border-radius: 20px;
+      font-size: .5rem;
+      font-weight: 700;
+    }
+
+    .transaction-status.completed {
+      background: #e7f6ed;
+      color: #18733c;
+    }
+
+    .transaction-status.pending {
+      background: #fff5dc;
+      color: #8a6816;
+    }
+
+    .transaction-status.failed,
+    .transaction-status.reversed {
+      background: #fdebec;
+      color: #a52d36;
+    }
+
+    .transaction-status.cancelled {
+      background: #edf0f3;
+      color: #5d6d7c;
+    }
+
+    .transaction-method {
+      color: #607386;
+      font-size: .57rem;
+    }
+
+    .transaction-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .row-button {
+      min-height: 30px;
+      padding: 5px 9px;
+      border: 1px solid #d5e0e8;
+      border-radius: 5px;
+      background: #fff;
+      color: #145da0;
+      font-size: .52rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .row-button:hover {
+      background: #edf5fb;
+    }
+
+    .row-button.danger {
+      color: #a52d36;
+    }
+
+    .transactions-empty {
+      display: none;
+      padding: 45px 20px;
+      text-align: center;
+      color: #66788a;
+      font-size: .65rem;
+    }
+
+    .transactions-pagination {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid #e7edf1;
+    }
+
+    .transactions-pagination-info {
+      color: #66788a;
+      font-size: .56rem;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pagination-button {
+      min-width: 31px;
+      min-height: 31px;
+      border: 1px solid #d6e0e7;
+      border-radius: 5px;
+      background: #fff;
+      color: #42586b;
+      font-size: .55rem;
+      cursor: pointer;
+    }
+
+    .pagination-button.active {
+      background: #145da0;
+      border-color: #145da0;
+      color: #fff;
+    }
+
+    .transactions-notice {
+      margin-bottom: 18px;
+      padding: 12px 15px;
+      border-left: 3px solid #c9962b;
+      border-radius: 4px;
+      background: #fffaf0;
+      color: #6e5a2b;
+      font-size: .57rem;
+    }
+
+    .date-filter {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .date-filter input {
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid #d9e2ea;
+      border-radius: 6px;
+      background: #fff;
+      color: #172b3a;
+      font-size: .62rem;
+    }
+
+    @media (max-width: 1100px) {
+      .transactions-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .transactions-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .transactions-toolbar {
+        align-items: stretch;
+      }
+
+      .transactions-search {
+        max-width: none;
+      }
+
+      .transactions-filters {
+        width: 100%;
+      }
+
+      .transactions-filter {
+        flex: 1;
+      }
+
+      .date-filter {
+        width: 100%;
+      }
+
+      .date-filter input {
+        flex: 1;
+      }
+
+      .transactions-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="admin-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="side-brand">
+      <img
+        src="../assets/gtf-logo.svg"
+        alt="GTF Banking"
+        style="width:38px;height:38px;object-fit:contain;"
+      >
+
+      <span>GTF</span> ADMIN
+    </div>
+
+    <nav class="side-nav">
+
+      <a href="index.html">
+        Dashboard
+      </a>
+
+      <a href="customers.html">
+        Customers
+      </a>
+
+      <a href="accounts.html">
+        Accounts
+      </a>
+
+      <a
+        href="transactions.html"
+        class="active"
+        aria-current="page"
+      >
+        Transactions
+      </a>
+
+      <a href="audit.html">
+        Audit Logs
+      </a>
+
+      <a href="compliance.html">
+        Compliance
+      </a>
+
+      <a href="reports.html">
+        Reports
+      </a>
+
+      <a href="settings.html">
+        Settings
+      </a>
+
+    </nav>
+
+  </aside>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <header class="topbar">
+
+      <div>
+
+        <h1>
+          Transactions
+        </h1>
+
+        <p>
+          Monitor and review customer banking transactions.
+        </p>
+
+      </div>
+
+      <div class="topbar-actions">
+
+        <a
+          href="../index.html"
+          class="btn btn-secondary"
+        >
+          View Website
+        </a>
+
+        <button
+          id="logoutButton"
+          class="btn btn-danger"
+          type="button"
+        >
+          Sign Out
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <section class="content-section">
+
+      <div class="transactions-notice">
+        Transaction information is retrieved from the authenticated
+        GTF backend. Administrative actions must be authorized by
+        the backend and must not rely on frontend-only permissions.
+      </div>
+
+
+      <!-- SUMMARY -->
+      <div class="transactions-summary">
+
+        <div class="transaction-summary-card">
+
+          <span>
+            Total Transactions
+          </span>
+
+          <strong id="totalTransactions">
+            0
+          </strong>
+
+          <small>
+            Loaded transaction records
+          </small>
+
+        </div>
+
+
+        <div class="transaction-summary-card">
+
+          <span>
+            Completed
+          </span>
+
+          <strong id="completedTransactions">
+            0
+          </strong>
+
+          <small>
+            Successfully processed
+          </small>
+
+        </div>
+
+
+        <div class="transaction-summary-card">
+
+          <span>
+            Pending
+          </span>
+
+          <strong id="pendingTransactions">
+            0
+          </strong>
+
+          <small>
+            Awaiting processing
+          </small>
+
+        </div>
+
+
+        <div class="transaction-summary-card">
+
+          <span>
+            Failed / Reversed
+          </span>
+
+          <strong id="failedTransactions">
+            0
+          </strong>
+
+          <small>
+            Requires review
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- TOOLBAR -->
+      <div class="transactions-toolbar">
+
+        <div class="transactions-search">
+
+          <input
+            id="transactionSearch"
+            type="search"
+            placeholder="Search transaction, customer or account..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="transactions-filters">
+
+          <div class="transactions-filter">
+
+            <select id="transactionTypeFilter">
+
+              <option value="all">
+                All transaction types
+              </option>
+
+              <option value="transfer">
+                Transfer
+              </option>
+
+              <option value="deposit">
+                Deposit
+              </option>
+
+              <option value="withdrawal">
+                Withdrawal
+              </option>
+
+              <option value="payment">
+                Payment
+              </option>
+
+              <option value="fee">
+                Fee
+              </option>
+
+              <option value="refund">
+                Refund
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="transactions-filter">
+
+            <select id="transactionStatusFilter">
+
+              <option value="all">
+                All statuses
+              </option>
+
+              <option value="completed">
+                Completed
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="failed">
+                Failed
+              </option>
+
+              <option value="reversed">
+                Reversed
+              </option>
+
+              <option value="cancelled">
+                Cancelled
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="transactions-filter">
+
+            <select id="transactionDirectionFilter">
+
+              <option value="all">
+                All directions
+              </option>
+
+              <option value="credit">
+                Credit
+              </option>
+
+              <option value="debit">
+                Debit
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            id="refreshTransactions"
+            class="transactions-action secondary"
+            type="button"
+          >
+            Refresh
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- TRANSACTION TABLE -->
+      <section class="transactions-table-card">
+
+        <div class="transactions-table-header">
+
+          <div>
+
+            <h2>
+              Transaction Ledger
+            </h2>
+
+            <span id="transactionResultCount">
+              0 transactions
+            </span>
+
+          </div>
+
+          <button
+            id="exportTransactions"
+            class="transactions-action"
+            type="button"
+          >
+            Export CSV
+          </button>
+
+        </div>
+
+
+        <div class="transactions-table-wrap">
+
+          <table class="transactions-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Transaction
+                </th>
+
+                <th>
+                  Customer
+                </th>
+
+                <th>
+                  Account
+                </th>
+
+                <th>
+                  Type
+                </th>
+
+                <th>
+                  Direction
+                </th>
+
+                <th>
+                  Amount
+                </th>
+
+                <th>
+                  Currency
+                </th>
+
+                <th>
+                  Method
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Date
+                </th>
+
+                <th>
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="transactionsTableBody">
+              <!-- Backend transaction records -->
+            </tbody>
+
+          </table>
+
+
+          <div
+            id="transactionsEmpty"
+            class="transactions-empty"
+          >
+            No transactions match the current filters.
+          </div>
+
+        </div>
+
+
+        <div class="transactions-pagination">
+
+          <div
+            id="paginationInfo"
+            class="transactions-pagination-info"
+          >
+            Showing 0 transactions
+          </div>
+
+          <div class="pagination-buttons">
+
+            <button
+              id="previousPage"
+              class="pagination-button"
+              type="button"
+            >
+              ‹
+            </button>
+
+            <button
+              class="pagination-button active"
+              type="button"
+            >
+              1
+            </button>
+
+            <button
+              id="nextPage"
+              class="pagination-button"
+              type="button"
+            >
+              ›
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script>
+"use strict";
+
+/*
+=========================================================
+ GTF BANKING ADMIN — TRANSACTIONS
+=========================================================
+
+Frontend transaction management interface.
+
+The frontend does NOT contain:
+- database credentials
+- Supabase service-role keys
+- private API keys
+- authorization secrets
+
+All authorization and transaction operations must be
+validated by the backend.
+
+Expected endpoint:
+
+GET  /api/transactions
+POST /api/auth/logout
+
+Optional transaction detail page:
+
+transaction.html?id=<transaction-id>
+
+=========================================================
+*/
+
+const API_BASE =
+  window.GTF_API_BASE || "/api";
+
+const TRANSACTIONS_ENDPOINT =
+  API_BASE + "/transactions";
+
+
+let allTransactions = [];
+
+
+const tableBody =
+  document.getElementById(
+    "transactionsTableBody"
+  );
+
+const emptyState =
+  document.getElementById(
+    "transactionsEmpty"
+  );
+
+const searchInput =
+  document.getElementById(
+    "transactionSearch"
+  );
+
+const typeFilter =
+  document.getElementById(
+    "transactionTypeFilter"
+  );
+
+const statusFilter =
+  document.getElementById(
+    "transactionStatusFilter"
+  );
+
+const directionFilter =
+  document.getElementById(
+    "transactionDirectionFilter"
+  );
+
+
+const totalTransactions =
+  document.getElementById(
+    "totalTransactions"
+  );
+
+const completedTransactions =
+  document.getElementById(
+    "completedTransactions"
+  );
+
+const pendingTransactions =
+  document.getElementById(
+    "pendingTransactions"
+  );
+
+const failedTransactions =
+  document.getElementById(
+    "failedTransactions"
+  );
+
+const resultCount =
+  document.getElementById(
+    "transactionResultCount"
+  );
+
+const paginationInfo =
+  document.getElementById(
+    "paginationInfo"
+  );
+
+
+/*
+=========================================================
+ HTML ESCAPING
+=========================================================
+*/
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/*
+=========================================================
+ NORMALIZE BACKEND RECORD
+=========================================================
+*/
+
+function normalizeTransaction(transaction) {
+
+  return {
+
+    id:
+      transaction.id ||
+      transaction.transaction_id ||
+      "",
+
+    customerName:
+      transaction.customerName ||
+      transaction.customer_name ||
+      transaction.user_name ||
+      transaction.name ||
+      "Unknown customer",
+
+    email:
+      transaction.email ||
+      "",
+
+    accountNumber:
+      transaction.accountNumber ||
+      transaction.account_number ||
+      "—",
+
+    type:
+      String(
+        transaction.type ||
+        transaction.transaction_type ||
+        "transfer"
+      ).toLowerCase(),
+
+    direction:
+      String(
+        transaction.direction ||
+        (
+          Number(transaction.amount) < 0
+            ? "debit"
+            : "credit"
+        )
+      ).toLowerCase(),
+
+    amount:
+      Math.abs(
+        Number(
+          transaction.amount ??
+          transaction.transaction_amount ??
+          0
+        )
+      ),
+
+    currency:
+      transaction.currency ||
+      "USD",
+
+    method:
+      transaction.method ||
+      transaction.payment_method ||
+      transaction.channel ||
+      "—",
+
+    status:
+      String(
+        transaction.status ||
+        "pending"
+      ).toLowerCase(),
+
+    createdAt:
+      transaction.createdAt ||
+      transaction.created_at ||
+      transaction.date ||
+      "",
+
+    description:
+      transaction.description ||
+      ""
+
+  };
+
+}
+
+
+/*
+=========================================================
+ MONEY FORMAT
+=========================================================
+*/
+
+function formatMoney(
+  amount,
+  currency
+) {
+
+  try {
+
+    return new Intl.NumberFormat(
+      undefined,
+      {
+        style: "currency",
+        currency: currency || "USD",
+        maximumFractionDigits: 2
+      }
+    ).format(
+      Number(amount) || 0
+    );
+
+  } catch (error) {
+
+    return (
+      String(currency || "USD") +
+      " " +
+      Number(amount || 0).toFixed(2)
+    );
+
+  }
+
+}
+
+
+/*
+=========================================================
+ DATE FORMAT
+=========================================================
+*/
+
+function formatDate(value) {
+
+  if (!value) {
+    return "—";
+  }
+
+  const date =
+    new Date(value);
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return "—";
+  }
+
+  return date.toLocaleString(
+    undefined,
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+
+}
+
+
+/*
+=========================================================
+ STATUS CLASS
+=========================================================
+*/
+
+function getStatusClass(status) {
+
+  const allowed = [
+    "completed",
+    "pending",
+    "failed",
+    "reversed",
+    "cancelled"
+  ];
+
+  return allowed.includes(status)
+    ? status
+    : "pending";
+
+}
+
+
+/*
+=========================================================
+ RENDER TRANSACTIONS
+=========================================================
+*/
+
+function renderTransactions(
+  transactions
+) {
+
+  tableBody.innerHTML = "";
+
+
+  if (!transactions.length) {
+
+    emptyState.style.display =
+      "block";
+
+    resultCount.textContent =
+      "0 transactions";
+
+    paginationInfo.textContent =
+      "Showing 0 transactions";
+
+    return;
+
+  }
+
+
+  emptyState.style.display =
+    "none";
+
+
+  transactions.forEach(
+    function (transaction) {
+
+      const row =
+        document.createElement(
+          "tr"
+        );
+
+
+      const status =
+        getStatusClass(
+          transaction.status
+        );
+
+
+      const direction =
+        transaction.direction === "debit"
+          ? "debit"
+          : "credit";
+
+
+      const amountPrefix =
+        direction === "debit"
+          ? "−"
+          : "+";
+
+
+      row.innerHTML = `
+
+        <td>
+
+          <div class="transaction-id">
+            ${escapeHTML(
+              transaction.id || "—"
+            )}
+          </div>
+
+          ${
+            transaction.description
+              ? `
+                <div
+                  style="
+                    color:#8495a4;
+                    font-size:.51rem;
+                    margin-top:3px;
+                    max-width:180px;
+                  "
+                >
+                  ${escapeHTML(
+                    transaction.description
+                  )}
+                </div>
+              `
+              : ""
+          }
+
+        </td>
+
+
+        <td>
+
+          <div class="transaction-customer">
+            ${escapeHTML(
+              transaction.customerName
+            )}
+          </div>
+
+          ${
+            transaction.email
+              ? `
+                <div
+                  style="
+                    color:#8495a4;
+                    font-size:.51rem;
+                    margin-top:2px;
+                  "
+                >
+                  ${escapeHTML(
+                    transaction.email
+                  )}
+                </div>
+              `
+              : ""
+          }
+
+        </td>
+
+
+        <td>
+
+          <div class="transaction-account">
+            ${escapeHTML(
+              transaction.accountNumber
+            )}
+          </div>
+
+        </td>
+
+
+        <td>
+
+          <span class="transaction-type">
+            ${escapeHTML(
+              transaction.type
+                .charAt(0)
+                .toUpperCase() +
+              transaction.type.slice(1)
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span
+            class="transaction-amount ${direction}"
+          >
+            ${direction === "debit"
+              ? "Debit"
+              : "Credit"}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span
+            class="transaction-amount ${direction}"
+          >
+            ${amountPrefix}${formatMoney(
+              transaction.amount,
+              transaction.currency
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+          ${escapeHTML(
+            transaction.currency
+          )}
+        </td>
+
+
+        <td>
+
+          <span class="transaction-method">
+            ${escapeHTML(
+              transaction.method
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span
+            class="transaction-status ${status}"
+          >
+            ${escapeHTML(
+              transaction.status
+                .charAt(0)
+                .toUpperCase() +
+              transaction.status.slice(1)
+            )}
+          </span>
+
+        </td>
+
+
+        <td>
+          ${escapeHTML(
+            formatDate(
+              transaction.createdAt
+            )
+          )}
+        </td>
+
+
+        <td>
+
+          <div class="transaction-actions">
+
+            <button
+              type="button"
+              class="row-button"
+              data-action="view"
+              data-id="${escapeHTML(
+                transaction.id
+              )}"
+            >
+              View
+            </button>
+
+            ${
+              transaction.status === "pending"
+                ? `
+                  <button
+                    type="button"
+                    class="row-button"
+                    data-action="review"
+                    data-id="${escapeHTML(
+                      transaction.id
+                    )}"
+                  >
+                    Review
+                  </button>
+                `
+                : ""
+            }
+
+          </div>
+
+        </td>
+
+      `;
+
+
+      tableBody.appendChild(
+        row
+      );
+
+    }
+  );
+
+
+  resultCount.textContent =
+    `${transactions.length} transaction${
+      transactions.length === 1
+        ? ""
+        : "s"
+    }`;
+
+
+  paginationInfo.textContent =
+    `Showing ${transactions.length} transaction${
+      transactions.length === 1
+        ? ""
+        : "s"
+    }`;
+
+}
+
+
+/*
+=========================================================
+ SUMMARY
+=========================================================
+*/
+
+function updateSummary() {
+
+  totalTransactions.textContent =
+    allTransactions.length;
+
+
+  completedTransactions.textContent =
+    allTransactions.filter(
+      function (transaction) {
+
+        return transaction.status ===
+          "completed";
+
+      }
+    ).length;
+
+
+  pendingTransactions.textContent =
+    allTransactions.filter(
+      function (transaction) {
+
+        return transaction.status ===
+          "pending";
+
+      }
+    ).length;
+
+
+  failedTransactions.textContent =
+    allTransactions.filter(
+      function (transaction) {
+
+        return (
+          transaction.status ===
+            "failed" ||
+          transaction.status ===
+            "reversed"
+        );
+
+      }
+    ).length;
+
+}
+
+
+/*
+=========================================================
+ FILTERS
+=========================================================
+*/
+
+function applyFilters() {
+
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+  const selectedType =
+    typeFilter.value;
+
+  const selectedStatus =
+    statusFilter.value;
+
+  const selectedDirection =
+    directionFilter.value;
+
+
+  const filtered =
+    allTransactions.filter(
+      function (transaction) {
+
+        const searchable =
+          [
+            transaction.id,
+            transaction.customerName,
+            transaction.email,
+            transaction.accountNumber,
+            transaction.type,
+            transaction.direction,
+            transaction.currency,
+            transaction.method,
+            transaction.status,
+            transaction.description
+          ]
+            .join(" ")
+            .toLowerCase();
+
+
+        const matchesSearch =
+          !search ||
+          searchable.includes(
+            search
+          );
+
+
+        const matchesType =
+          selectedType === "all" ||
+          transaction.type ===
+            selectedType;
+
+
+        const matchesStatus =
+          selectedStatus === "all" ||
+          transaction.status ===
+            selectedStatus;
+
+
+        const matchesDirection =
+          selectedDirection === "all" ||
+          transaction.direction ===
+            selectedDirection;
+
+
+        return (
+          matchesSearch &&
+          matchesType &&
+          matchesStatus &&
+          matchesDirection
+        );
+
+      }
+    );
+
+
+  renderTransactions(
+    filtered
+  );
+
+}
+
+
+/*
+=========================================================
+ LOAD TRANSACTIONS
+=========================================================
+*/
+
+async function loadTransactions() {
+
+  tableBody.innerHTML = "";
+
+  emptyState.style.display =
+    "none";
+
+  resultCount.textContent =
+    "Loading transactions...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        TRANSACTIONS_ENDPOINT,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Accept":
+              "application/json"
+          }
+        }
+      );
+
+
+    if (
+      response.status === 401 ||
+      response.status === 403
+    ) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        `Transaction request failed (${response.status})`
+      );
+
+    }
+
+
+    const payload =
+      await response.json();
+
+
+    const data =
+      Array.isArray(payload)
+        ? payload
+        : (
+          payload.transactions ||
+          payload.data ||
+          []
+        );
+
+
+    allTransactions =
+      data.map(
+        normalizeTransaction
+      );
+
+
+    updateSummary();
+
+    applyFilters();
+
+
+  } catch (error) {
+
+    console.error(
+      "Unable to load transactions:",
+      error
+    );
+
+
+    allTransactions = [];
+
+    updateSummary();
+
+
+    tableBody.innerHTML = "";
+
+    emptyState.style.display =
+      "block";
+
+    emptyState.textContent =
+      "Transactions could not be loaded from the backend. Check the authenticated API connection.";
+
+
+    resultCount.textContent =
+      "Unable to load transactions";
+
+
+    paginationInfo.textContent =
+      "No transaction data loaded";
+
+  }
+
+}
+
+
+/*
+=========================================================
+ CSV EXPORT
+=========================================================
+*/
+
+function exportTransactions() {
+
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+  const selectedType =
+    typeFilter.value;
+
+  const selectedStatus =
+    statusFilter.value;
+
+  const selectedDirection =
+    directionFilter.value;
+
+
+  const transactions =
+    allTransactions.filter(
+      function (transaction) {
+
+        const searchable =
+          [
+            transaction.id,
+            transaction.customerName,
+            transaction.email,
+            transaction.accountNumber,
+            transaction.type,
+            transaction.direction,
+            transaction.currency,
+            transaction.method,
+            transaction.status,
+            transaction.description
+          ]
+            .join(" ")
+            .toLowerCase();
+
+
+        return (
+          (!search ||
+            searchable.includes(
+              search
+            )) &&
+
+          (
+            selectedType === "all" ||
+            transaction.type ===
+              selectedType
+          ) &&
+
+          (
+            selectedStatus === "all" ||
+            transaction.status ===
+              selectedStatus
+          ) &&
+
+          (
+            selectedDirection === "all" ||
+            transaction.direction ===
+              selectedDirection
+          )
+        );
+
+      }
+    );
+
+
+  if (!transactions.length) {
+
+    alert(
+      "There are no transaction records to export."
+    );
+
+    return;
+
+  }
+
+
+  const headers = [
+    "Transaction ID",
+    "Customer",
+    "Email",
+    "Account Number",
+    "Type",
+    "Direction",
+    "Amount",
+    "Currency",
+    "Method",
+    "Status",
+    "Date"
+  ];
+
+
+  const rows =
+    transactions.map(
+      function (transaction) {
+
+        return [
+
+          transaction.id,
+
+          transaction.customerName,
+
+          transaction.email,
+
+          transaction.accountNumber,
+
+          transaction.type,
+
+          transaction.direction,
+
+          transaction.amount,
+
+          transaction.currency,
+
+          transaction.method,
+
+          transaction.status,
+
+          formatDate(
+            transaction.createdAt
+          )
+
+        ];
+
+      }
+    );
+
+
+  const csv =
+    [
+      headers,
+      ...rows
+    ]
+      .map(
+        function (row) {
+
+          return row
+            .map(
+              function (value) {
+
+                return `"${String(
+                  value ?? ""
+                ).replace(
+                  /"/g,
+                  '""'
+                )}"`;
+
+              }
+            )
+            .join(",");
+
+        }
+      )
+      .join("\n");
+
+
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:
+          "text/csv;charset=utf-8;"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+
+  const link =
+    document.createElement(
+      "a"
+    );
+
+  link.href = url;
+
+  link.download =
+    "gtf-transactions.csv";
+
+
+  document.body.appendChild(
+    link
+  );
+
+  link.click();
+
+  link.remove();
+
+  URL.revokeObjectURL(
+    url
+  );
+
+}
+
+
+/*
+=========================================================
+ TABLE ACTIONS
+=========================================================
+*/
+
+tableBody.addEventListener(
+  "click",
+  function (event) {
+
+    const button =
+      event.target.closest(
+        "button[data-action]"
+      );
+
+
+    if (!button) {
+      return;
+    }
+
+
+    const transactionId =
+      button.dataset.id;
+
+    const action =
+      button.dataset.action;
+
+
+    if (!transactionId) {
+
+      alert(
+        "This transaction does not have a valid ID."
+      );
+
+      return;
+
+    }
+
+
+    if (action === "view") {
+
+      window.location.href =
+        `transaction.html?id=${encodeURIComponent(
+          transactionId
+        )}`;
+
+      return;
+
+    }
+
+
+    if (action === "review") {
+
+      window.location.href =
+        `transaction.html?id=${encodeURIComponent(
+          transactionId
+        )}&mode=review`;
+
+    }
+
+  }
+);
+
+
+/*
+=========================================================
+ EVENTS
+=========================================================
+*/
+
+searchInput.addEventListener(
+  "input",
+  applyFilters
+);
+
+typeFilter.addEventListener(
+  "change",
+  applyFilters
+);
+
+statusFilter.addEventListener(
+  "change",
+  applyFilters
+);
+
+directionFilter.addEventListener(
+  "change",
+  applyFilters
+);
+
+
+document
+  .getElementById(
+    "refreshTransactions"
+  )
+  .addEventListener(
+    "click",
+    loadTransactions
+);
+
+
+document
+  .getElementById(
+    "exportTransactions"
+  )
+  .addEventListener(
+    "click",
+    exportTransactions
+);
+
+
+/*
+=========================================================
+ LOGOUT
+=========================================================
+*/
+
+document
+  .getElementById(
+    "logoutButton"
+  )
+  .addEventListener(
+    "click",
+    async function () {
+
+      try {
+
+        await fetch(
+          API_BASE + "/auth/logout",
+          {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Accept":
+                "application/json"
+            }
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Logout request failed:",
+          error
+        );
+
+      } finally {
+
+        window.location.href =
+          "login.html";
+
+      }
+
+    }
+  );
+
+
+/*
+=========================================================
+ PAGINATION PLACEHOLDERS
+=========================================================
+*/
+
+document
+  .getElementById(
+    "previousPage"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      alert(
+        "You are already on the first page."
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "nextPage"
+  )
+  .addEventListener(
+    "click",
+    function () {
+
+      alert(
+        "Additional pages will be enabled when server-side pagination is connected."
+      );
+
+    }
+  );
+
+
+/*
+=========================================================
+ INITIAL LOAD
+=========================================================
+*/
+
+loadTransactions();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+node_modules/
+npm-debug.log*
+.DS_Store
+.vercel/
+
+# Local backups
+backup-before-role-portals-*/
+
+# Backup copies
+**/*.backup*
+**/*backup*

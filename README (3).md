@@ -1,0 +1,1 @@
+Admin dashboard integration placeholder. Frontend staff console lives under frontend/admin/.

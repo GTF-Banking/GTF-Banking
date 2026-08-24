@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="GTF Banking customer support and assistance"
+  >
+
+  <meta name="theme-color" content="#0b2a4a">
+
+  <title>Support | GTF Banking</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    .support-page {
+      min-height: calc(100vh - 70px);
+      background: #f5f7fa;
+      padding: 32px 20px 50px;
+    }
+
+    .support-container {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+    }
+
+    .support-hero {
+      background: #0b2a4a;
+      color: #fff;
+      border-radius: 12px;
+      padding: 34px;
+      margin-bottom: 22px;
+    }
+
+    .support-hero h1 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+    }
+
+    .support-hero p {
+      max-width: 720px;
+      margin: 0;
+      color: #d9e5ef;
+      line-height: 1.6;
+      font-size: .85rem;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .support-card {
+      background: #fff;
+      border: 1px solid #d9e1e8;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 18px rgba(11, 42, 74, .06);
+    }
+
+    .support-card h2 {
+      margin: 0 0 7px;
+      color: #0b2a4a;
+      font-size: 1rem;
+    }
+
+    .support-card p {
+      margin: 0;
+      color: #66788a;
+      font-size: .74rem;
+      line-height: 1.55;
+    }
+
+    .support-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 13px;
+      border-radius: 8px;
+      background: #eaf3fb;
+      color: #145da0;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .support-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(260px, .6fr);
+      gap: 20px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid #d9e1e8;
+      border-radius: 10px;
+      box-shadow: 0 4px 18px rgba(11, 42, 74, .06);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #e3e8ed;
+    }
+
+    .panel-header h2 {
+      margin: 0 0 4px;
+      color: #0b2a4a;
+      font-size: 1rem;
+    }
+
+    .panel-header p {
+      margin: 0;
+      color: #66788a;
+      font-size: .7rem;
+    }
+
+    .panel-body {
+      padding: 20px;
+    }
+
+    .alert {
+      display: none;
+      margin-bottom: 16px;
+      padding: 11px 13px;
+      border-radius: 7px;
+      font-size: .72rem;
+      line-height: 1.5;
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .alert-success {
+      background: #eaf8f0;
+      border: 1px solid #b9dec9;
+      color: #16794c;
+    }
+
+    .alert-error {
+      background: #fff0ee;
+      border: 1px solid #efc1bc;
+      color: #b42318;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #172b3a;
+      font-size: .73rem;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #d8e1e9;
+      border-radius: 7px;
+      padding: 10px;
+      background: #fff;
+      color: #172b3a;
+      font: inherit;
+      outline: none;
+    }
+
+    .form-group input,
+    .form-group select {
+      min-height: 42px;
+    }
+
+    .form-group textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #145da0;
+      box-shadow: 0 0 0 3px rgba(20, 93, 160, .1);
+    }
+
+    .form-help {
+      margin-top: 5px;
+      color: #66788a;
+      font-size: .62rem;
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 43px;
+      border: 1px solid #145da0;
+      border-radius: 7px;
+      background: #145da0;
+      color: #fff;
+      font-size: .76rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background: #0d477c;
+    }
+
+    .submit-button:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .contact-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contact-item {
+      padding: 13px 0;
+      border-bottom: 1px solid #edf1f4;
+    }
+
+    .contact-item:last-child {
+      border-bottom: 0;
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #66788a;
+      font-size: .64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      color: #172b3a;
+      font-size: .74rem;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .contact-value a {
+      color: #145da0;
+    }
+
+    .faq {
+      margin-top: 20px;
+    }
+
+    .faq details {
+      border-bottom: 1px solid #e3e8ed;
+      padding: 12px 0;
+    }
+
+    .faq details:last-child {
+      border-bottom: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      color: #172b3a;
+      font-size: .74rem;
+      font-weight: 700;
+    }
+
+    .faq p {
+      margin: 9px 0 0;
+      color: #66788a;
+      font-size: .68rem;
+      line-height: 1.55;
+    }
+
+    .security-note {
+      margin-top: 18px;
+      padding: 13px;
+      border: 1px solid #d5e4f0;
+      border-radius: 7px;
+      background: #f3f8fc;
+    }
+
+    .security-note strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #0b2a4a;
+      font-size: .7rem;
+    }
+
+    .security-note p {
+      margin: 0;
+      color: #66788a;
+      font-size: .64rem;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 28px;
+      color: #66788a;
+      text-align: center;
+      font-size: .65rem;
+    }
+
+    @media (max-width: 850px) {
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .support-main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .support-page {
+        padding: 20px 12px 40px;
+      }
+
+      .support-hero {
+        padding: 25px 20px;
+      }
+
+      .support-hero h1 {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Shared navigation can be inserted here if your app.js
+       provides a common navigation component. -->
+
+  <main class="support-page">
+
+    <div class="support-container">
+
+      <section class="support-hero">
+        <h1>How can we help?</h1>
+
+        <p>
+          Welcome to GTF Banking Support. Find answers to
+          common questions or submit a support request to
+          the appropriate banking support team.
+        </p>
+      </section>
+
+
+      <!-- SUPPORT OPTIONS -->
+
+      <section class="support-grid">
+
+        <article class="support-card">
+
+          <div class="support-icon">?</div>
+
+          <h2>Account Assistance</h2>
+
+          <p>
+            Get help with account access, profile
+            information, account services, and general
+            customer questions.
+          </p>
+
+        </article>
+
+
+        <article class="support-card">
+
+          <div class="support-icon">T</div>
+
+          <h2>Transaction Support</h2>
+
+          <p>
+            Request assistance with transactions,
+            transfers, deposits, withdrawals, or
+            transaction status questions.
+          </p>
+
+        </article>
+
+
+        <article class="support-card">
+
+          <div class="support-icon">S</div>
+
+          <h2>Security Support</h2>
+
+          <p>
+            Report suspicious account activity or
+            request assistance with account-security
+            concerns.
+          </p>
+
+        </article>
+
+      </section>
+
+
+      <div class="support-main">
+
+        <!-- CONTACT FORM -->
+
+        <section class="panel">
+
+          <div class="panel-header">
+
+            <h2>Contact Support</h2>
+
+            <p>
+              Submit your request using the form below.
+            </p>
+
+          </div>
+
+          <div class="panel-body">
+
+            <div
+              id="successAlert"
+              class="alert alert-success"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+            <div
+              id="errorAlert"
+              class="alert alert-error"
+              role="alert"
+              aria-live="assertive"
+            ></div>
+
+
+            <form
+              id="supportForm"
+              novalidate
+            >
+
+              <div class="form-group">
+
+                <label for="subject">
+                  Subject
+                </label>
+
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  maxlength="150"
+                  placeholder="Briefly describe your issue"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="category">
+                  Support Category
+                </label>
+
+                <select
+                  id="category"
+                  name="category"
+                  required
+                >
+
+                  <option value="">
+                    Select a category
+                  </option>
+
+                  <option value="account">
+                    Account
+                  </option>
+
+                  <option value="transaction">
+                    Transaction
+                  </option>
+
+                  <option value="card">
+                    Card
+                  </option>
+
+                  <option value="transfer">
+                    Transfer
+                  </option>
+
+                  <option value="security">
+                    Security
+                  </option>
+
+                  <option value="technical">
+                    Technical Issue
+                  </option>
+
+                  <option value="other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="message">
+                  Message
+                </label>
+
+                <textarea
+                  id="message"
+                  name="message"
+                  maxlength="2000"
+                  placeholder="Describe how we can help..."
+                  required
+                ></textarea>
+
+                <div class="form-help">
+                  Do not include your password, PIN, one-time
+                  code, full card security code, or other
+                  authentication credentials.
+                </div>
+
+              </div>
+
+
+              <button
+                id="submitButton"
+                type="submit"
+                class="submit-button"
+              >
+                Submit Support Request
+              </button>
+
+            </form>
+
+          </div>
+
+        </section>
+
+
+        <!-- SUPPORT INFORMATION -->
+
+        <aside>
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h2>Support Information</h2>
+
+              <p>
+                General support channels.
+              </p>
+
+            </div>
+
+            <div class="panel-body">
+
+              <ul class="contact-list">
+
+                <li class="contact-item">
+
+                  <span class="contact-label">
+                    Support
+                  </span>
+
+                  <span class="contact-value">
+                    Use the support request form
+                    for account assistance.
+                  </span>
+
+                </li>
+
+
+                <li class="contact-item">
+
+                  <span class="contact-label">
+                    Account
+                  </span>
+
+                  <span class="contact-value">
+                    Sign in to your account for
+                    account-specific assistance.
+                  </span>
+
+                </li>
+
+
+                <li class="contact-item">
+
+                  <span class="contact-label">
+                    Security
+                  </span>
+
+                  <span class="contact-value">
+                    Report suspicious activity
+                    through an authorized support
+                    channel.
+                  </span>
+
+                </li>
+
+              </ul>
+
+
+              <div class="security-note">
+
+                <strong>
+                  Protect your information
+                </strong>
+
+                <p>
+                  GTF Banking support will not need your
+                  password, PIN, or one-time authentication
+                  code to process a normal support request.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- FAQ -->
+
+          <section class="panel faq">
+
+            <div class="panel-header">
+
+              <h2>Frequently Asked Questions</h2>
+
+              <p>
+                Common support topics.
+              </p>
+
+            </div>
+
+            <div class="panel-body">
+
+              <details>
+
+                <summary>
+                  I cannot sign in. What should I do?
+                </summary>
+
+                <p>
+                  Verify that you are using the correct
+                  sign-in information. If the problem
+                  continues, submit a support request.
+                </p>
+
+              </details>
+
+
+              <details>
+
+                <summary>
+                  How can I check a transaction?
+                </summary>
+
+                <p>
+                  Open your account transaction history
+                  and review the transaction status and
+                  available reference information.
+                </p>
+
+              </details>
+
+
+              <details>
+
+                <summary>
+                  What should I do about suspicious activity?
+                </summary>
+
+                <p>
+                  Contact the appropriate authorized
+                  banking support channel as soon as
+                  possible and avoid sharing sensitive
+                  authentication information.
+                </p>
+
+              </details>
+
+
+              <details>
+
+                <summary>
+                  Can I update my account information?
+                </summary>
+
+                <p>
+                  Account information that can be changed
+                  by customers should be updated through
+                  the appropriate authenticated account
+                  settings.
+                </p>
+
+              </details>
+
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div>
+
+
+      <footer class="footer">
+        GTF Banking · Customer Support
+      </footer>
+
+    </div>
+
+  </main>
+
+
+  <script>
+    "use strict";
+
+    const form =
+      document.getElementById("supportForm");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const successAlert =
+      document.getElementById("successAlert");
+
+    const errorAlert =
+      document.getElementById("errorAlert");
+
+
+    function clearAlerts() {
+
+      successAlert.classList.remove("show");
+      errorAlert.classList.remove("show");
+
+      successAlert.textContent = "";
+      errorAlert.textContent = "";
+    }
+
+
+    function showSuccess(message) {
+
+      errorAlert.classList.remove("show");
+
+      successAlert.textContent =
+        message;
+
+      successAlert.classList.add("show");
+    }
+
+
+    function showError(message) {
+
+      successAlert.classList.remove("show");
+
+      errorAlert.textContent =
+        message;
+
+      errorAlert.classList.add("show");
+    }
+
+
+    async function submitSupportRequest(payload) {
+
+      const response =
+        await fetch(
+          "/api/support",
+          {
+            method: "POST",
+
+            credentials: "include",
+
+            headers: {
+              "Accept":
+                "application/json",
+
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify(payload)
+          }
+        );
+
+
+      let data = null;
+
+      try {
+        data =
+          await response.json();
+      } catch {
+        data = null;
+      }
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data?.message ||
+          data?.error ||
+          "Unable to submit the support request."
+        );
+      }
+
+
+      return data;
+    }
+
+
+    form.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+        clearAlerts();
+
+
+        const subject =
+          document
+            .getElementById("subject")
+            .value
+            .trim();
+
+        const category =
+          document
+            .getElementById("category")
+            .value;
+
+        const message =
+          document
+            .getElementById("message")
+            .value
+            .trim();
+
+
+        if (!subject) {
+
+          showError(
+            "Please enter a subject."
+          );
+
+          return;
+        }
+
+
+        if (!category) {
+
+          showError(
+            "Please select a support category."
+          );
+
+          return;
+        }
+
+
+        if (!message) {
+
+          showError(
+            "Please enter your support message."
+          );
+
+          return;
+        }
+
+
+        if (message.length < 10) {
+
+          showError(
+            "Please provide a little more information about your request."
+          );
+
+          return;
+        }
+
+
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
+          "Submitting...";
+
+
+        try {
+
+          await submitSupportRequest({
+
+            subject,
+
+            category,
+
+            message
+
+          });
+
+
+          form.reset();
+
+
+          showSuccess(
+            "Your support request has been submitted successfully."
+          );
+
+
+        } catch (error) {
+
+          console.error(
+            "Support request error:",
+            error
+          );
+
+
+          showError(
+            error.message ||
+            "Unable to submit your request. Please try again."
+          );
+
+
+        } finally {
+
+          submitButton.disabled =
+            false;
+
+          submitButton.textContent =
+            "Submit Support Request";
+        }
+
+      }
+    );
+  </script>
+
+</body>
+</html>
