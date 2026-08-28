@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund Banking administrator sign out."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b2a4a"
+    >
+
+    <title>Sign Out | GTF Banking Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <style>
+        :root {
+            --gtf-blue: #0b2a4a;
+            --gtf-blue-light: #145da0;
+            --gtf-gold: #c9962b;
+            --gtf-bg: #f4f7fa;
+            --gtf-border: #dce4eb;
+            --gtf-text: #183247;
+            --gtf-muted: #71808d;
+            --gtf-success: #19734b;
+            --gtf-success-bg: #eaf6ef;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f7fa 0%,
+                    #eaf0f5 100%
+                );
+            color: var(--gtf-text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        .signout-page {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .card {
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid var(--gtf-border);
+            border-radius: 14px;
+            box-shadow:
+                0 20px 50px rgba(11, 42, 74, .12);
+        }
+
+        .card-top {
+            height: 7px;
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--gtf-blue),
+                    var(--gtf-blue-light),
+                    var(--gtf-gold)
+                );
+        }
+
+        .content {
+            padding: 38px 32px 32px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: contain;
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--gtf-blue);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .message {
+            margin: 11px auto 0;
+            max-width: 330px;
+            color: var(--gtf-muted);
+            font-size: 9px;
+            line-height: 1.7;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            margin: 24px 0;
+            padding: 11px 14px;
+            border: 1px solid #d8eadf;
+            border-radius: 8px;
+            background: var(--gtf-success-bg);
+            color: var(--gtf-success);
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gtf-success);
+        }
+
+        .actions {
+            display: grid;
+            gap: 9px;
+        }
+
+        .button {
+            width: 100%;
+            min-height: 42px;
+            border: 0;
+            border-radius: 7px;
+            font-size: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition:
+                background .2s ease,
+                transform .2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .primary {
+            background: var(--gtf-blue);
+            color: #fff;
+        }
+
+        .primary:hover {
+            background: var(--gtf-blue-light);
+        }
+
+        .secondary {
+            background: #eef3f7;
+            color: var(--gtf-blue);
+        }
+
+        .secondary:hover {
+            background: #e2eaf0;
+        }
+
+        .security-note {
+            margin-top: 22px;
+            padding-top: 17px;
+            border-top: 1px solid var(--gtf-border);
+            color: var(--gtf-muted);
+            font-size: 7px;
+            line-height: 1.6;
+        }
+
+        .footer {
+            padding: 14px 20px;
+            border-top: 1px solid var(--gtf-border);
+            background: #fafcfd;
+            color: var(--gtf-muted);
+            font-size: 7px;
+            text-align: center;
+        }
+
+        .loading {
+            pointer-events: none;
+            opacity: .7;
+        }
+
+        @media (max-width: 500px) {
+            .content {
+                padding: 30px 22px 25px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="signout-page">
+
+        <section class="card">
+
+            <div class="card-top"></div>
+
+            <div class="content">
+
+                <img
+                    class="logo"
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund Banking"
+                >
+
+                <h1>
+                    Signing Out
+                </h1>
+
+                <p class="message">
+                    Your administrator session is being securely
+                    terminated. Please wait while we complete the
+                    sign-out process.
+                </p>
+
+                <div
+                    class="status"
+                    id="statusMessage"
+                >
+                    <span class="status-dot"></span>
+
+                    <span id="statusText">
+                        Signing out securely...
+                    </span>
+                </div>
+
+                <div class="actions">
+
+                    <button
+                        type="button"
+                        class="button primary"
+                        id="loginButton"
+                        style="display:none;"
+                    >
+                        Return to Administrator Login
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button secondary"
+                        id="dashboardButton"
+                        style="display:none;"
+                    >
+                        Return to Dashboard
+                    </button>
+
+                </div>
+
+                <div class="security-note">
+                    For your security, always sign out when using
+                    the administrator portal on a shared device.
+                </div>
+
+            </div>
+
+            <footer class="footer">
+                © 2026 Global TrustFund Banking · Administrator Portal
+            </footer>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /*
+         * =====================================================
+         * GTF BANKING ADMINISTRATOR SIGN OUT
+         * =====================================================
+         *
+         * Primary API:
+         *
+         * POST /api/auth/signout
+         *
+         * The request uses credentials: "include" so that
+         * cookie-based sessions can be invalidated by the
+         * backend.
+         *
+         * If the endpoint is unavailable, local authentication
+         * state is still cleared before returning to login.
+         */
+
+
+        const API_BASE = "/api";
+
+
+        const statusText =
+            document.getElementById(
+                "statusText"
+            );
+
+
+        const statusMessage =
+            document.getElementById(
+                "statusMessage"
+            );
+
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+
+        const dashboardButton =
+            document.getElementById(
+                "dashboardButton"
+            );
+
+
+        function clearLocalSession() {
+
+            /*
+             * Clear frontend session information.
+             *
+             * These names cover the authentication keys
+             * commonly used by the GTF frontend.
+             */
+
+            const keysToRemove = [
+
+                "gtf_user",
+
+                "gtf_admin",
+
+                "gtf_admin_user",
+
+                "gtf_session",
+
+                "gtf_access_token",
+
+                "gtf_refresh_token",
+
+                "access_token",
+
+                "refresh_token",
+
+                "supabase.auth.token"
+
+            ];
+
+
+            keysToRemove.forEach(
+                key => {
+                    try {
+                        localStorage.removeItem(key);
+                    } catch (error) {
+                        console.warn(
+                            "Unable to remove localStorage key:",
+                            key
+                        );
+                    }
+                }
+            );
+
+
+            /*
+             * Also clear sessionStorage.
+             */
+
+            try {
+
+                sessionStorage.clear();
+
+            } catch (error) {
+
+                console.warn(
+                    "Unable to clear sessionStorage.",
+                    error
+                );
+
+            }
+
+        }
+
+
+        function showLoginButton() {
+
+            loginButton.style.display =
+                "block";
+
+            dashboardButton.style.display =
+                "none";
+
+        }
+
+
+        async function signOut() {
+
+            statusText.textContent =
+                "Signing out securely...";
+
+
+            try {
+
+                /*
+                 * Attempt to terminate the server-side
+                 * authentication session.
+                 */
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/auth/signout`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Accept":
+                                    "application/json",
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            credentials:
+                                "include",
+
+                            body: JSON.stringify({
+                                role: "administrator"
+                            })
+                        }
+                    );
+
+
+                /*
+                 * Whether the API succeeds or returns an
+                 * authentication-related error, local
+                 * credentials should not remain active.
+                 */
+
+                clearLocalSession();
+
+
+                if (response.ok) {
+
+                    statusText.textContent =
+                        "You have been signed out successfully.";
+
+                } else {
+
+                    statusText.textContent =
+                        "Your local administrator session has been cleared.";
+
+                }
+
+
+            } catch (error) {
+
+                /*
+                 * Backend may not be running during frontend
+                 * development. Do not leave local credentials
+                 * behind in that situation.
+                 */
+
+                console.warn(
+                    "Sign-out API unavailable:",
+                    error
+                );
+
+
+                clearLocalSession();
+
+
+                statusText.textContent =
+                    "Your local administrator session has been cleared.";
+
+            }
+
+
+            /*
+             * Give the user a short confirmation before
+             * returning to the administrator login page.
+             */
+
+            setTimeout(
+                () => {
+
+                    window.location.replace(
+                        "./login.html"
+                    );
+
+                },
+                1200
+            );
+
+        }
+
+
+        loginButton.addEventListener(
+            "click",
+            function() {
+
+                window.location.replace(
+                    "./login.html"
+                );
+
+            }
+        );
+
+
+        dashboardButton.addEventListener(
+            "click",
+            function() {
+
+                window.location.replace(
+                    "./index.html"
+                );
+
+            }
+        );
+
+
+        /*
+         * Prevent accidental browser back navigation from
+         * exposing an old administrator page.
+         */
+
+        window.history.replaceState(
+            null,
+            "",
+            window.location.href
+        );
+
+
+        window.addEventListener(
+            "popstate",
+            function() {
+
+                window.location.replace(
+                    "./login.html"
+                );
+
+            }
+        );
+
+
+        /*
+         * Start sign-out immediately.
+         */
+
+        signOut();
+
+    </script>
+
+</body>
+</html>
