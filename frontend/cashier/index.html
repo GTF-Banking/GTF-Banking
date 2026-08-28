@@ -1,2359 +1,2477 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="GTF Banking Cashier Portal"
-  >
-
-  <meta name="theme-color" content="#0b2a4a">
-
-  <title>Cashier Portal | GTF Banking</title>
-
-  <link rel="stylesheet" href="../css/styles.css">
-
-  <style>
-    :root {
-      --navy: #0b2a4a;
-      --blue: #145da0;
-      --blue-dark: #0d477c;
-      --background: #f4f7fa;
-      --surface: #ffffff;
-      --text: #172b3a;
-      --muted: #66788a;
-      --border: #d8e1e9;
-      --success: #16794c;
-      --success-bg: #eaf8f0;
-      --warning: #946200;
-      --warning-bg: #fff7df;
-      --danger: #b42318;
-      --danger-bg: #fff0ee;
-      --shadow: 0 5px 20px rgba(11, 42, 74, 0.06);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .cashier-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--navy);
-      color: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-    }
-
-    .header-inner {
-      width: min(1500px, 100%);
-      min-height: 70px;
-      margin: 0 auto;
-      padding: 12px 22px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-    }
-
-    .brand-name {
-      display: block;
-      font-size: 1.05rem;
-      font-weight: 700;
-    }
-
-    .brand-subtitle {
-      display: block;
-      margin-top: 1px;
-      color: #cbd9e6;
-      font-size: .7rem;
-    }
-
-    .header-title {
-      color: #d9e5ef;
-      font-size: .88rem;
-      font-weight: 700;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header-button {
-      padding: 9px 13px;
-      border: 1px solid rgba(255,255,255,.28);
-      border-radius: 6px;
-      background: transparent;
-      color: #fff;
-      font-size: .76rem;
-      font-weight: 700;
-    }
-
-    .header-button:hover {
-      background: rgba(255,255,255,.1);
-    }
-
-    .layout {
-      width: min(1500px, 100%);
-      min-height: calc(100vh - 70px);
-      margin: 0 auto;
-
-      display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
-    }
-
-    .sidebar {
-      padding: 22px 14px;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-    }
-
-    .sidebar-title {
-      margin: 0 10px 12px;
-      color: var(--muted);
-      font-size: .7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .nav a {
-      padding: 10px 12px;
-      border-radius: 6px;
-      color: var(--text);
-      font-size: .82rem;
-      font-weight: 600;
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      background: #eaf3fb;
-      color: var(--blue);
-    }
-
-    .main {
-      min-width: 0;
-      padding: 28px;
-    }
-
-    .page-heading {
-      margin-bottom: 22px;
-
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .page-heading h1 {
-      margin: 0 0 5px;
-      color: var(--navy);
-      font-size: 1.8rem;
-    }
-
-    .page-heading p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .84rem;
-    }
-
-    .cashier-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 7px 10px;
-      border: 1px solid #b9dec9;
-      border-radius: 999px;
-
-      background: var(--success-bg);
-      color: var(--success);
-
-      font-size: .68rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .alert {
-      display: none;
-      margin-bottom: 20px;
-      padding: 12px 15px;
-      border-radius: 7px;
-      font-size: .78rem;
-    }
-
-    .alert.show {
-      display: block;
-    }
-
-    .alert-success {
-      border: 1px solid #b9dec9;
-      background: var(--success-bg);
-      color: var(--success);
-    }
-
-    .alert-error {
-      border: 1px solid #efc1bc;
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .summary-card {
-      padding: 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      box-shadow: var(--shadow);
-    }
-
-    .summary-label {
-      color: var(--muted);
-      font-size: .7rem;
-      font-weight: 700;
-    }
-
-    .summary-value {
-      margin-top: 7px;
-      color: var(--navy);
-      font-size: 1.45rem;
-      font-weight: 700;
-    }
-
-    .summary-note {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .64rem;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
-      gap: 20px;
-    }
-
-    .column {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      min-width: 0;
-    }
-
-    .card {
-      overflow: hidden;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      box-shadow: var(--shadow);
-    }
-
-    .card-header {
-      padding: 17px 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .card-header h2 {
-      margin: 0 0 4px;
-      color: var(--navy);
-      font-size: 1rem;
-    }
-
-    .card-header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .72rem;
-    }
-
-    .card-body {
-      padding: 20px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .field {
-      min-width: 0;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--text);
-      font-size: .73rem;
-      font-weight: 700;
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      min-height: 40px;
-      padding: 9px 10px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--text);
-      outline: none;
-    }
-
-    .field input:focus,
-    .field select:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(20,93,160,.1);
-    }
-
-    .help {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: .64rem;
-    }
-
-    .button-row {
-      margin-top: 18px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    .button {
-      min-height: 40px;
-      padding: 9px 15px;
-      border-radius: 6px;
-      font-size: .76rem;
-      font-weight: 700;
-    }
-
-    .primary {
-      border: 1px solid var(--blue);
-      background: var(--blue);
-      color: #fff;
-    }
-
-    .primary:hover {
-      background: var(--blue-dark);
-    }
-
-    .secondary {
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
-    }
-
-    .secondary:hover {
-      background: #f7f9fb;
-    }
-
-    .danger {
-      border: 1px solid #d9aaa5;
-      background: #fff;
-      color: var(--danger);
-    }
-
-    .danger:hover {
-      background: var(--danger-bg);
-    }
-
-    .button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-    }
-
-    .search-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .search-row input {
-      min-height: 40px;
-      padding: 9px 10px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      outline: none;
-    }
-
-    .search-row input:focus {
-      border-color: var(--blue);
-    }
-
-    .customer-result {
-      display: none;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      background: #fbfcfd;
-    }
-
-    .customer-result.show {
-      display: block;
-    }
-
-    .customer-name {
-      color: var(--navy);
-      font-size: .88rem;
-      font-weight: 700;
-    }
-
-    .customer-detail {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: .68rem;
-    }
-
-    .status {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: var(--success-bg);
-      color: var(--success);
-      font-size: .62rem;
-      font-weight: 700;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 620px;
-    }
-
-    th,
-    td {
-      padding: 11px 10px;
-      border-bottom: 1px solid #edf1f4;
-      text-align: left;
-      font-size: .7rem;
-    }
-
-    th {
-      color: var(--muted);
-      background: #fafbfd;
-      font-size: .65rem;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-
-    td {
-      color: var(--text);
-    }
-
-    .transaction-status {
-      display: inline-block;
-      padding: 4px 7px;
-      border-radius: 999px;
-      font-size: .6rem;
-      font-weight: 700;
-    }
-
-    .completed {
-      background: var(--success-bg);
-      color: var(--success);
-    }
-
-    .pending {
-      background: var(--warning-bg);
-      color: var(--warning);
-    }
-
-    .failed {
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    .info-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .info-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 11px 0;
-      border-bottom: 1px solid #edf1f4;
-    }
-
-    .info-row:last-child {
-      border-bottom: 0;
-    }
-
-    .info-label {
-      color: var(--muted);
-      font-size: .69rem;
-    }
-
-    .info-value {
-      color: var(--text);
-      font-size: .7rem;
-      font-weight: 700;
-      text-align: right;
-    }
-
-    .notice {
-      padding: 13px;
-      border: 1px solid #d5e4f0;
-      border-radius: 7px;
-      background: #f3f8fc;
-    }
-
-    .notice strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--navy);
-      font-size: .75rem;
-    }
-
-    .notice p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .66rem;
-    }
-
-    .footer {
-      padding: 24px 0 5px;
-      color: var(--muted);
-      text-align: center;
-      font-size: .68rem;
-    }
-
-    @media (max-width: 1100px) {
-      .summary-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 800px) {
-      .layout {
-        display: block;
-      }
-
-      .sidebar {
-        padding: 12px;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .nav {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .main {
-        padding: 20px 14px;
-      }
-
-      .header-title {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .summary-grid,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .field.full {
-        grid-column: auto;
-      }
-
-      .page-heading {
-        display: block;
-      }
-
-      .cashier-badge {
-        margin-top: 12px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund Banking cashier operations dashboard."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b2a4a"
+    >
+
+    <title>Cashier Dashboard | GTF Banking</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <style>
+        :root {
+            --gtf-blue: #0b2a4a;
+            --gtf-blue-light: #145da0;
+            --gtf-gold: #c9962b;
+            --gtf-bg: #f4f7fa;
+            --gtf-card: #ffffff;
+            --gtf-border: #dce4eb;
+            --gtf-text: #183247;
+            --gtf-muted: #71808d;
+            --gtf-success: #19734b;
+            --gtf-success-bg: #eaf6ef;
+            --gtf-warning: #946b17;
+            --gtf-warning-bg: #fff7df;
+            --gtf-danger: #a04444;
+            --gtf-danger-bg: #fbeded;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================
+           APPLICATION
+        ========================================= */
+
+        .cashier-app {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 22px 16px;
+            background: var(--gtf-blue);
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 8px 24px;
+            border-bottom: 1px solid rgba(255,255,255,.12);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text strong {
+            font-size: 13px;
+        }
+
+        .brand-text span {
+            margin-top: 3px;
+            color: rgba(255,255,255,.58);
+            font-size: 8px;
+        }
+
+        .nav-title {
+            margin: 24px 9px 9px;
+            color: rgba(255,255,255,.42);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: grid;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 38px;
+            padding: 0 11px;
+            border-radius: 7px;
+            color: rgba(255,255,255,.72);
+            font-size: 9px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.10);
+            color: #fff;
+        }
+
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .cashier-profile {
+            margin-top: 30px;
+            padding: 13px;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 9px;
+            background: rgba(255,255,255,.05);
+        }
+
+        .cashier-profile strong {
+            display: block;
+            font-size: 9px;
+        }
+
+        .cashier-profile span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .logout {
+            width: 100%;
+            min-height: 30px;
+            margin-top: 10px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 6px;
+            background: transparent;
+            color: rgba(255,255,255,.75);
+            font-size: 8px;
+        }
+
+        .logout:hover {
+            background: rgba(255,255,255,.08);
+        }
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 68px;
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            color: var(--gtf-blue);
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 5px 0 0;
+            color: var(--gtf-muted);
+            font-size: 8px;
+        }
+
+        .session {
+            padding: 7px 10px;
+            border-radius: 20px;
+            background: var(--gtf-success-bg);
+            color: var(--gtf-success);
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .content {
+            padding: 27px;
+        }
+
+        /* =========================================
+           STATISTICS
+        ========================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 17px;
+            background: #fff;
+            border: 1px solid var(--gtf-border);
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            color: var(--gtf-muted);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            margin-top: 7px;
+            color: var(--gtf-blue);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .stat-note {
+            margin-top: 5px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        /* =========================================
+           QUICK ACTIONS
+        ========================================= */
+
+        .section {
+            margin-bottom: 20px;
+            background: #fff;
+            border: 1px solid var(--gtf-border);
+            border-radius: 11px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 17px 18px;
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: var(--gtf-blue);
+            font-size: 13px;
+        }
+
+        .section-header p {
+            margin: 5px 0 0;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 17px;
+        }
+
+        .action {
+            min-height: 95px;
+            padding: 15px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 9px;
+            background: #fff;
+            color: var(--gtf-text);
+            text-align: left;
+            transition:
+                border-color .2s ease,
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .action:hover {
+            transform: translateY(-2px);
+            border-color: var(--gtf-blue-light);
+            box-shadow: 0 7px 20px rgba(11,42,74,.08);
+        }
+
+        .action-icon {
+            width: 31px;
+            height: 31px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 9px;
+            border-radius: 7px;
+            background: #eef3f7;
+            color: var(--gtf-blue);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .action strong {
+            display: block;
+            color: var(--gtf-blue);
+            font-size: 9px;
+        }
+
+        .action span {
+            display: block;
+            margin-top: 4px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+            line-height: 1.4;
+        }
+
+        /* =========================================
+           WORKSPACE
+        ========================================= */
+
+        .workspace {
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            gap: 20px;
+        }
+
+        /* =========================================
+           TRANSACTIONS
+        ========================================= */
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 11px 14px;
+            background: #f8fafb;
+            border-bottom: 1px solid var(--gtf-border);
+            color: var(--gtf-muted);
+            font-size: 7px;
+            font-weight: 800;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #edf1f4;
+            font-size: 8px;
+        }
+
+        tbody tr:hover {
+            background: #fafcfd;
+        }
+
+        .transaction {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .transaction-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eef3f7;
+            color: var(--gtf-blue);
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .transaction-info strong {
+            display: block;
+            color: var(--gtf-blue);
+            font-size: 8px;
+        }
+
+        .transaction-info span {
+            display: block;
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 7px;
+            border-radius: 20px;
+            font-size: 6px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .status.completed {
+            background: var(--gtf-success-bg);
+            color: var(--gtf-success);
+        }
+
+        .status.pending {
+            background: var(--gtf-warning-bg);
+            color: var(--gtf-warning);
+        }
+
+        .status.failed {
+            background: var(--gtf-danger-bg);
+            color: var(--gtf-danger);
+        }
+
+        /* =========================================
+           CASH DRAWER
+        ========================================= */
+
+        .drawer {
+            padding: 17px;
+        }
+
+        .drawer-balance {
+            padding: 17px;
+            border-radius: 9px;
+            background: var(--gtf-blue);
+            color: #fff;
+        }
+
+        .drawer-balance span {
+            display: block;
+            color: rgba(255,255,255,.65);
+            font-size: 7px;
+        }
+
+        .drawer-balance strong {
+            display: block;
+            margin-top: 7px;
+            font-size: 24px;
+        }
+
+        .drawer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 13px;
+        }
+
+        .drawer-item {
+            padding: 12px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 7px;
+        }
+
+        .drawer-item span {
+            display: block;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .drawer-item strong {
+            display: block;
+            margin-top: 5px;
+            color: var(--gtf-blue);
+            font-size: 11px;
+        }
+
+        .drawer-buttons {
+            display: grid;
+            gap: 8px;
+            margin-top: 13px;
+        }
+
+        .button {
+            min-height: 37px;
+            border: 0;
+            border-radius: 6px;
+            background: var(--gtf-blue);
+            color: #fff;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .button:hover {
+            background: var(--gtf-blue-light);
+        }
+
+        .button.secondary {
+            background: #eef3f7;
+            color: var(--gtf-blue);
+        }
+
+        /* =========================================
+           CUSTOMER SEARCH
+        ========================================= */
+
+        .customer-search {
+            padding: 17px;
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 9px;
+        }
+
+        .search-row input {
+            width: 100%;
+            min-height: 38px;
+            padding: 0 11px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+            outline: none;
+            font-size: 8px;
+        }
+
+        .search-row input:focus {
+            border-color: var(--gtf-blue-light);
+        }
+
+        .search-result {
+            display: none;
+            margin-top: 13px;
+            padding: 13px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 7px;
+        }
+
+        .search-result.visible {
+            display: block;
+        }
+
+        .customer-name {
+            color: var(--gtf-blue);
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .customer-meta {
+            margin-top: 4px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(5,20,32,.55);
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-card {
+            width: min(520px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 23px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 25px 70px rgba(0,0,0,.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--gtf-blue);
+            font-size: 16px;
+        }
+
+        .close {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 50%;
+            background: #eef2f5;
+            color: var(--gtf-blue);
+            font-size: 16px;
+        }
+
+        .form {
+            display: grid;
+            gap: 13px;
+        }
+
+        .field {
+            display: grid;
+            gap: 5px;
+        }
+
+        .field label {
+            color: var(--gtf-text);
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            min-height: 37px;
+            padding: 0 9px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+            outline: none;
+            color: var(--gtf-text);
+            font-size: 8px;
+            background: #fff;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: var(--gtf-blue-light);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .cashier-app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+
+            .nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cashier-profile {
+                display: none;
+            }
+
+            .content {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .stats,
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 13px 17px;
+            }
+
+            .session {
+                display: none;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="cashier-header">
+<div class="cashier-app">
 
-  <div class="header-inner">
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
 
-    <a href="../index.html" class="brand">
+    <aside class="sidebar">
 
-      <img
-        src="../assets/gtf-logo.svg"
-        alt="GTF Banking"
-        class="brand-logo"
-        width="42"
-        height="42"
-      >
-
-      <span>
-        <span class="brand-name">
-          GTF Banking
-        </span>
-
-        <span class="brand-subtitle">
-          Cashier Portal
-        </span>
-      </span>
-
-    </a>
-
-    <div class="header-title">
-      Branch Cash Operations
-    </div>
-
-    <div class="header-actions">
-
-      <button
-        id="refreshButton"
-        type="button"
-        class="header-button"
-      >
-        Refresh
-      </button>
-
-      <button
-        id="logoutButton"
-        type="button"
-        class="header-button"
-      >
-        Sign Out
-      </button>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<div class="layout">
-
-  <aside class="sidebar">
-
-    <div class="sidebar-title">
-      Cashier
-    </div>
-
-    <nav class="nav">
-
-      <a
-        href="index.html"
-        class="active"
-        aria-current="page"
-      >
-        Cashier Dashboard
-      </a>
-
-      <a href="deposits.html">
-        Deposits
-      </a>
-
-      <a href="withdrawals.html">
-        Withdrawals
-      </a>
-
-      <a href="transfers.html">
-        Transfers
-      </a>
-
-      <a href="transactions.html">
-        Transactions
-      </a>
-
-      <a href="customers.html">
-        Customers
-      </a>
-
-      <a href="../index.html">
-        Main Website
-      </a>
-
-    </nav>
-
-  </aside>
-
-
-  <main class="main">
-
-    <section class="page-heading">
-
-      <div>
-
-        <h1>
-          Cashier Dashboard
-        </h1>
-
-        <p>
-          Process authorized branch cash transactions
-          and review today's cashier activity.
-        </p>
-
-      </div>
-
-      <span class="cashier-badge">
-        ● Cashier Session Active
-      </span>
-
-    </section>
-
-
-    <div
-      id="successAlert"
-      class="alert alert-success"
-      role="status"
-      aria-live="polite"
-    ></div>
-
-    <div
-      id="errorAlert"
-      class="alert alert-error"
-      role="alert"
-      aria-live="assertive"
-    ></div>
-
-
-    <section class="summary-grid">
-
-      <article class="summary-card">
-
-        <div class="summary-label">
-          Today's Deposits
-        </div>
-
-        <div
-          id="depositTotal"
-          class="summary-value"
+        <a
+            href="./index.html"
+            class="brand"
         >
-          —
-        </div>
 
-        <div class="summary-note">
-          Authorized completed deposits
-        </div>
-
-      </article>
-
-
-      <article class="summary-card">
-
-        <div class="summary-label">
-          Today's Withdrawals
-        </div>
-
-        <div
-          id="withdrawalTotal"
-          class="summary-value"
-        >
-          —
-        </div>
-
-        <div class="summary-note">
-          Authorized completed withdrawals
-        </div>
-
-      </article>
-
-
-      <article class="summary-card">
-
-        <div class="summary-label">
-          Transactions
-        </div>
-
-        <div
-          id="transactionCount"
-          class="summary-value"
-        >
-          —
-        </div>
-
-        <div class="summary-note">
-          Cashier activity today
-        </div>
-
-      </article>
-
-
-      <article class="summary-card">
-
-        <div class="summary-label">
-          Cashier Status
-        </div>
-
-        <div
-          id="cashierStatus"
-          class="summary-value"
-        >
-          Active
-        </div>
-
-        <div class="summary-note">
-          Current session
-        </div>
-
-      </article>
-
-    </section>
-
-
-    <div class="content-grid">
-
-      <div class="column">
-
-        <!-- CUSTOMER LOOKUP -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Customer Lookup
-            </h2>
-
-            <p>
-              Locate an authorized customer before
-              starting a transaction.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="search-row">
-
-              <input
-                id="customerSearch"
-                type="search"
-                placeholder="Account number or customer reference"
-                autocomplete="off"
-              >
-
-              <button
-                id="searchCustomerButton"
-                type="button"
-                class="button primary"
-              >
-                Search
-              </button>
-
-            </div>
-
-
-            <div
-              id="customerResult"
-              class="customer-result"
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
             >
 
-              <div
-                id="customerName"
-                class="customer-name"
-              >
-                —
-              </div>
+            <span class="brand-text">
+                <strong>Global TrustFund</strong>
+                <span>Cashier Operations Portal</span>
+            </span>
 
-              <div
-                id="customerAccount"
-                class="customer-detail"
-              >
-                Account: —
-              </div>
+        </a>
 
-              <div
-                id="customerCurrency"
-                class="customer-detail"
-              >
-                Currency: —
-              </div>
 
-              <div
-                id="customerBalance"
-                class="customer-detail"
-              >
-                Available Balance: —
-              </div>
+        <div class="nav-title">
+            Cashier Operations
+        </div>
 
-              <span
-                id="customerStatus"
-                class="status"
-              >
-                Verified
-              </span>
+
+        <nav class="nav">
+
+            <a
+                href="./index.html"
+                class="active"
+            >
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="./transactions.html">
+                <span class="nav-icon">⇄</span>
+                Transactions
+            </a>
+
+            <a href="./customers.html">
+                <span class="nav-icon">♙</span>
+                Customers
+            </a>
+
+            <a href="./deposits.html">
+                <span class="nav-icon">↓</span>
+                Deposits
+            </a>
+
+            <a href="./withdrawals.html">
+                <span class="nav-icon">↑</span>
+                Withdrawals
+            </a>
+
+            <a href="./transfers.html">
+                <span class="nav-icon">↔</span>
+                Transfers
+            </a>
+
+            <a href="./drawer.html">
+                <span class="nav-icon">▣</span>
+                Cash Drawer
+            </a>
+
+            <a href="./support.html">
+                <span class="nav-icon">?</span>
+                Support
+            </a>
+
+        </nav>
+
+
+        <div class="cashier-profile">
+
+            <strong id="cashierName">
+                Cashier
+            </strong>
+
+            <span id="cashierRole">
+                Cashier Operations
+            </span>
+
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Cashier Dashboard
+                </h1>
+
+                <p>
+                    Manage daily branch transactions and customer service operations.
+                </p>
 
             </div>
 
-          </div>
+            <span class="session">
+                ● Cashier Session Active
+            </span>
 
-        </section>
+        </header>
 
 
-        <!-- TRANSACTION -->
+        <section class="content">
 
-        <section class="card">
 
-          <div class="card-header">
+            <!-- =====================================
+                 STATISTICS
+            ====================================== -->
 
-            <h2>
-              New Cash Transaction
-            </h2>
+            <section class="stats">
 
-            <p>
-              Submit a deposit or withdrawal for backend
-              authorization and processing.
-            </p>
+                <div class="stat">
 
-          </div>
+                    <div class="stat-label">
+                        Today's Transactions
+                    </div>
 
-          <div class="card-body">
+                    <div
+                        class="stat-value"
+                        id="todayTransactions"
+                    >
+                        0
+                    </div>
 
-            <form id="transactionForm">
-
-              <div class="form-grid">
-
-                <div class="field">
-
-                  <label for="transactionType">
-                    Transaction Type
-                  </label>
-
-                  <select
-                    id="transactionType"
-                    required
-                  >
-                    <option value="">
-                      Select transaction
-                    </option>
-
-                    <option value="deposit">
-                      Cash Deposit
-                    </option>
-
-                    <option value="withdrawal">
-                      Cash Withdrawal
-                    </option>
-                  </select>
+                    <div class="stat-note">
+                        Processed during current shift
+                    </div>
 
                 </div>
 
 
-                <div class="field">
+                <div class="stat">
 
-                  <label for="transactionCurrency">
-                    Currency
-                  </label>
+                    <div class="stat-label">
+                        Deposits
+                    </div>
 
-                  <select
-                    id="transactionCurrency"
-                    required
-                  >
-                    <option value="USD">
-                      USD — US Dollar
-                    </option>
+                    <div
+                        class="stat-value"
+                        id="todayDeposits"
+                    >
+                        0
+                    </div>
 
-                    <option value="NGN">
-                      NGN — Nigerian Naira
-                    </option>
-
-                    <option value="EUR">
-                      EUR — Euro
-                    </option>
-
-                    <option value="GBP">
-                      GBP — Pound Sterling
-                    </option>
-
-                    <option value="CAD">
-                      CAD — Canadian Dollar
-                    </option>
-
-                    <option value="AUD">
-                      AUD — Australian Dollar
-                    </option>
-
-                    <option value="JPY">
-                      JPY — Japanese Yen
-                    </option>
-
-                    <option value="CNY">
-                      CNY — Chinese Yuan
-                    </option>
-
-                    <option value="ZAR">
-                      ZAR — South African Rand
-                    </option>
-
-                    <option value="GHS">
-                      GHS — Ghanaian Cedi
-                    </option>
-
-                    <option value="KES">
-                      KES — Kenyan Shilling
-                    </option>
-
-                    <option value="AED">
-                      AED — UAE Dirham
-                    </option>
-                  </select>
+                    <div class="stat-note">
+                        Customer deposits processed
+                    </div>
 
                 </div>
 
 
-                <div class="field">
+                <div class="stat">
 
-                  <label for="transactionAmount">
-                    Amount
-                  </label>
+                    <div class="stat-label">
+                        Withdrawals
+                    </div>
 
-                  <input
-                    id="transactionAmount"
-                    type="number"
-                    min="0.01"
-                    step="0.01"
-                    inputmode="decimal"
-                    placeholder="0.00"
-                    required
-                  >
+                    <div
+                        class="stat-value"
+                        id="todayWithdrawals"
+                    >
+                        0
+                    </div>
 
-                </div>
-
-
-                <div class="field">
-
-                  <label for="reference">
-                    Reference
-                  </label>
-
-                  <input
-                    id="reference"
-                    type="text"
-                    maxlength="100"
-                    placeholder="Optional reference"
-                  >
+                    <div class="stat-note">
+                        Customer withdrawals processed
+                    </div>
 
                 </div>
 
 
-                <div class="field full">
+                <div class="stat">
 
-                  <label for="transactionNote">
-                    Transaction Note
-                  </label>
+                    <div class="stat-label">
+                        Pending
+                    </div>
 
-                  <input
-                    id="transactionNote"
-                    type="text"
-                    maxlength="250"
-                    placeholder="Reason or cashier note"
-                  >
+                    <div
+                        class="stat-value"
+                        id="pendingTransactions"
+                    >
+                        0
+                    </div>
 
-                  <div class="help">
-                    Do not enter passwords, PINs, card security
-                    codes, or other authentication secrets.
-                  </div>
+                    <div class="stat-note">
+                        Transactions awaiting processing
+                    </div>
 
                 </div>
 
-              </div>
+            </section>
 
 
-              <div class="button-row">
+            <!-- =====================================
+                 QUICK ACTIONS
+            ====================================== -->
 
-                <button
-                  type="reset"
-                  class="button secondary"
-                >
-                  Clear
-                </button>
+            <section class="section">
 
-                <button
-                  id="submitTransactionButton"
-                  type="submit"
-                  class="button primary"
-                >
-                  Submit Transaction
-                </button>
+                <div class="section-header">
 
-              </div>
+                    <h2>
+                        Quick Operations
+                    </h2>
 
-            </form>
+                    <p>
+                        Start a common cashier transaction.
+                    </p>
 
-          </div>
+                </div>
+
+
+                <div class="actions">
+
+                    <button
+                        type="button"
+                        class="action"
+                        data-operation="deposit"
+                    >
+
+                        <div class="action-icon">
+                            ↓
+                        </div>
+
+                        <strong>
+                            Cash Deposit
+                        </strong>
+
+                        <span>
+                            Record a customer deposit.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="action"
+                        data-operation="withdrawal"
+                    >
+
+                        <div class="action-icon">
+                            ↑
+                        </div>
+
+                        <strong>
+                            Cash Withdrawal
+                        </strong>
+
+                        <span>
+                            Process an approved withdrawal.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="action"
+                        data-operation="transfer"
+                    >
+
+                        <div class="action-icon">
+                            ↔
+                        </div>
+
+                        <strong>
+                            Account Transfer
+                        </strong>
+
+                        <span>
+                            Initiate an internal account transfer.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="action"
+                        data-operation="customer"
+                    >
+
+                        <div class="action-icon">
+                            ♙
+                        </div>
+
+                        <strong>
+                            Find Customer
+                        </strong>
+
+                        <span>
+                            Search customer account information.
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 WORKSPACE
+            ====================================== -->
+
+            <section class="workspace">
+
+
+                <!-- RECENT TRANSACTIONS -->
+
+                <section class="section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Recent Transactions
+                        </h2>
+
+                        <p>
+                            Latest transactions processed by the cashier.
+                        </p>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Transaction</th>
+                                    <th>Account</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="transactionTable">
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CASH DRAWER -->
+
+                <section class="section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Cash Drawer
+                        </h2>
+
+                        <p>
+                            Current shift cash position.
+                        </p>
+
+                    </div>
+
+
+                    <div class="drawer">
+
+                        <div class="drawer-balance">
+
+                            <span>
+                                Current Drawer Balance
+                            </span>
+
+                            <strong id="drawerBalance">
+                                ₦0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="drawer-grid">
+
+                            <div class="drawer-item">
+
+                                <span>
+                                    Opening Balance
+                                </span>
+
+                                <strong id="openingBalance">
+                                    ₦0.00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="drawer-item">
+
+                                <span>
+                                    Cash Received
+                                </span>
+
+                                <strong id="cashReceived">
+                                    ₦0.00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="drawer-item">
+
+                                <span>
+                                    Cash Paid
+                                </span>
+
+                                <strong id="cashPaid">
+                                    ₦0.00
+                                </strong>
+
+                            </div>
+
+
+                            <div class="drawer-item">
+
+                                <span>
+                                    Expected
+                                </span>
+
+                                <strong id="expectedBalance">
+                                    ₦0.00
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="drawer-buttons">
+
+                            <button
+                                type="button"
+                                class="button"
+                                id="openDrawerButton"
+                            >
+                                Open / Start Shift
+                            </button>
+
+                            <button
+                                type="button"
+                                class="button secondary"
+                                id="reconcileButton"
+                            >
+                                Reconcile Drawer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- =====================================
+                 CUSTOMER SEARCH
+            ====================================== -->
+
+            <section class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Customer Lookup
+                    </h2>
+
+                    <p>
+                        Search by account number, customer ID or name.
+                    </p>
+
+                </div>
+
+
+                <div class="customer-search">
+
+                    <div class="search-row">
+
+                        <input
+                            type="search"
+                            id="customerSearch"
+                            placeholder="Enter account number or customer name..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            class="button"
+                            id="searchButton"
+                        >
+                            Search
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="search-result"
+                        id="searchResult"
+                    >
+
+                        <div
+                            class="customer-name"
+                            id="customerName"
+                        >
+                            Customer
+                        </div>
+
+                        <div
+                            class="customer-meta"
+                            id="customerMeta"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
 
         </section>
 
-
-        <!-- TRANSACTIONS -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Recent Cashier Transactions
-            </h2>
-
-            <p>
-              Recent activity returned by the backend.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-
-                  <tr>
-                    <th>Reference</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Account</th>
-                    <th>Status</th>
-                    <th>Time</th>
-                  </tr>
-
-                </thead>
-
-                <tbody id="transactionsBody">
-
-                  <tr>
-
-                    <td colspan="6">
-                      No transaction data loaded.
-                    </td>
-
-                  </tr>
-
-                </tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      </div>
-
-
-      <div class="column">
-
-        <!-- SESSION -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Cashier Session
-            </h2>
-
-            <p>
-              Current authenticated session information.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <ul class="info-list">
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  Cashier
-                </span>
-
-                <span
-                  id="cashierName"
-                  class="info-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  Role
-                </span>
-
-                <span
-                  id="cashierRole"
-                  class="info-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  Branch
-                </span>
-
-                <span
-                  id="branchName"
-                  class="info-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  Session
-                </span>
-
-                <span
-                  id="sessionId"
-                  class="info-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-            </ul>
-
-          </div>
-
-        </section>
-
-
-        <!-- SECURITY NOTICE -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Security Controls
-            </h2>
-
-            <p>
-              Important cashier operating rules.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="notice">
-
-              <strong>
-                Backend authorization required
-              </strong>
-
-              <p>
-                This interface does not authorize
-                transactions by itself. Every transaction
-                must be validated by the backend according
-                to the authenticated user's role and
-                applicable account controls.
-              </p>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- HEALTH -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Service Status
-            </h2>
-
-            <p>
-              Connectivity checks for the cashier portal.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <ul class="info-list">
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  API
-                </span>
-
-                <span
-                  id="apiStatus"
-                  class="info-value"
-                >
-                  Checking...
-                </span>
-
-              </li>
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  Session
-                </span>
-
-                <span
-                  id="serviceSession"
-                  class="info-value"
-                >
-                  Checking...
-                </span>
-
-              </li>
-
-              <li class="info-row">
-
-                <span class="info-label">
-                  Last Refresh
-                </span>
-
-                <span
-                  id="lastRefresh"
-                  class="info-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-            </ul>
-
-          </div>
-
-        </section>
-
-      </div>
-
-    </div>
-
-
-    <footer class="footer">
-      GTF Banking Cashier Portal
-    </footer>
-
-  </main>
+    </main>
 
 </div>
 
 
-<script src="../js/app.js" defer></script>
+<!-- =========================================
+     OPERATION MODAL
+========================================== -->
+
+<div
+    class="modal"
+    id="operationModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="operationTitle"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2 id="operationTitle">
+                Cashier Operation
+            </h2>
+
+            <button
+                type="button"
+                class="close"
+                id="closeModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form
+            class="form"
+            id="operationForm"
+        >
+
+            <div class="field">
+
+                <label for="accountNumber">
+                    Account Number
+                </label>
+
+                <input
+                    type="text"
+                    id="accountNumber"
+                    required
+                    placeholder="Enter account number"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="amount">
+                    Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="amount"
+                    min="0"
+                    step="0.01"
+                    required
+                    placeholder="0.00"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="operationType">
+                    Operation
+                </label>
+
+                <select id="operationType">
+
+                    <option value="deposit">
+                        Cash Deposit
+                    </option>
+
+                    <option value="withdrawal">
+                        Cash Withdrawal
+                    </option>
+
+                    <option value="transfer">
+                        Account Transfer
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="button secondary"
+                    id="cancelOperation"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="button"
+                >
+                    Continue
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 
 <script>
-"use strict";
 
-const state = {
-  customer: null,
-  transactions: []
-};
-
-const $ = (id) =>
-  document.getElementById(id);
-
-
-/* -----------------------------
-   ALERTS
------------------------------ */
-
-function showSuccess(message) {
-
-  $("errorAlert").classList.remove("show");
-
-  $("successAlert").textContent =
-    message;
-
-  $("successAlert").classList.add("show");
-}
-
-function showError(message) {
-
-  $("successAlert").classList.remove("show");
-
-  $("errorAlert").textContent =
-    message;
-
-  $("errorAlert").classList.add("show");
-}
-
-function clearAlerts() {
-
-  $("successAlert").classList.remove("show");
-  $("errorAlert").classList.remove("show");
-
-  $("successAlert").textContent = "";
-  $("errorAlert").textContent = "";
-}
+    /*
+     * ========================================================
+     * GTF BANKING CASHIER DASHBOARD
+     * ========================================================
+     *
+     * API integration points:
+     *
+     * GET  /api/dashboard/summary
+     * GET  /api/transactions
+     * POST /api/transactions
+     * GET  /api/users
+     * GET  /api/users/:id
+     *
+     * Authentication should be enforced by the backend
+     * role middleware.
+     */
 
 
-/* -----------------------------
-   API REQUEST
------------------------------ */
+    const API_BASE = "/api";
 
-async function apiRequest(
-  url,
-  options = {}
-) {
 
-  const response =
-    await fetch(
-      url,
-      {
-        credentials: "include",
+    const demoData = {
 
-        headers: {
-          "Accept":
-            "application/json",
-
-          "Content-Type":
-            "application/json",
-
-          ...(options.headers || {})
+        statistics: {
+            transactions: 24,
+            deposits: 11,
+            withdrawals: 8,
+            pending: 5
         },
 
-        ...options
-      }
-    );
-
-
-  let data = null;
-
-  try {
-
-    data =
-      await response.json();
-
-  } catch {
-
-    data = null;
-  }
-
-
-  if (!response.ok) {
-
-    const error =
-      new Error(
-        data?.message ||
-        data?.error ||
-        `Request failed (${response.status})`
-      );
-
-    error.status =
-      response.status;
-
-    throw error;
-  }
-
-
-  return data;
-}
-
-
-/* -----------------------------
-   CUSTOMER SEARCH
------------------------------ */
-
-async function searchCustomer() {
-
-  clearAlerts();
-
-  const query =
-    $("customerSearch")
-      .value
-      .trim();
-
-
-  if (!query) {
-
-    showError(
-      "Enter an account number or customer reference."
-    );
-
-    return;
-  }
-
-
-  const button =
-    $("searchCustomerButton");
-
-  button.disabled = true;
-  button.textContent =
-    "Searching...";
-
-
-  try {
-
-    const data =
-      await apiRequest(
-        `/api/users/search?q=${encodeURIComponent(query)}`
-      );
-
-
-    const customer =
-      data?.customer ||
-      data?.user ||
-      data?.data;
-
-
-    if (!customer) {
-
-      throw new Error(
-        "No matching customer was found."
-      );
-    }
-
-
-    state.customer =
-      customer;
-
-
-    $("customerResult")
-      .classList.add("show");
-
-
-    $("customerName")
-      .textContent =
-      customer.full_name ||
-      customer.fullName ||
-      customer.name ||
-      "Customer";
-
-
-    $("customerAccount")
-      .textContent =
-      `Account: ${
-        customer.account_number ||
-        customer.accountNumber ||
-        customer.account_id ||
-        "—"
-      }`;
-
-
-    $("customerCurrency")
-      .textContent =
-      `Currency: ${
-        customer.currency ||
-        "—"
-      }`;
-
-
-    $("customerBalance")
-      .textContent =
-      `Available Balance: ${
-        customer.available_balance ??
-        customer.balance ??
-        "—"
-      }`;
-
-
-    $("customerStatus")
-      .textContent =
-      customer.status ||
-      "Verified";
-
-
-    showSuccess(
-      "Customer found."
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "Customer search failed:",
-      error
-    );
-
-    $("customerResult")
-      .classList.remove("show");
-
-
-    showError(
-      error.message ||
-      "Unable to search for the customer."
-    );
-
-  } finally {
-
-    button.disabled = false;
-    button.textContent =
-      "Search";
-  }
-}
-
-
-$("searchCustomerButton")
-  .addEventListener(
-    "click",
-    searchCustomer
-  );
-
-
-$("customerSearch")
-  .addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key === "Enter"
-      ) {
-
-        event.preventDefault();
-
-        searchCustomer();
-      }
-
-    }
-  );
-
-
-/* -----------------------------
-   SUBMIT TRANSACTION
------------------------------ */
-
-async function submitTransaction(
-  event
-) {
-
-  event.preventDefault();
-
-  clearAlerts();
-
-
-  if (!state.customer) {
-
-    showError(
-      "Search for and select a customer before submitting a transaction."
-    );
-
-    return;
-  }
-
-
-  const type =
-    $("transactionType").value;
-
-  const currency =
-    $("transactionCurrency").value;
-
-  const amount =
-    Number(
-      $("transactionAmount").value
-    );
-
-  const reference =
-    $("reference").value.trim();
-
-  const note =
-    $("transactionNote").value.trim();
-
-
-  if (!type) {
-
-    showError(
-      "Select a transaction type."
-    );
-
-    return;
-  }
-
-
-  if (
-    !Number.isFinite(amount) ||
-    amount <= 0
-  ) {
-
-    showError(
-      "Enter a valid transaction amount."
-    );
-
-    return;
-  }
-
-
-  const accountId =
-    state.customer.account_id ||
-    state.customer.accountId ||
-    state.customer.account_number ||
-    state.customer.accountNumber;
-
-
-  const button =
-    $("submitTransactionButton");
-
-  button.disabled = true;
-
-  button.textContent =
-    "Submitting...";
-
-
-  try {
-
-    const payload = {
-
-      type,
-
-      amount,
-
-      currency,
-
-      reference:
-        reference || null,
-
-      note:
-        note || null,
-
-      account_id:
-        accountId
+        drawer: {
+            opening: 250000,
+            received: 735000,
+            paid: 420000
+        },
+
+        transactions: [
+
+            {
+                type: "Deposit",
+                account: "GTF-104823",
+                customer: "Customer Account",
+                amount: 150000,
+                status: "Completed"
+            },
+
+            {
+                type: "Withdrawal",
+                account: "GTF-203911",
+                customer: "Customer Account",
+                amount: 50000,
+                status: "Completed"
+            },
+
+            {
+                type: "Deposit",
+                account: "GTF-301724",
+                customer: "Customer Account",
+                amount: 275000,
+                status: "Pending"
+            },
+
+            {
+                type: "Withdrawal",
+                account: "GTF-442018",
+                customer: "Customer Account",
+                amount: 120000,
+                status: "Completed"
+            }
+
+        ]
 
     };
 
 
-    const data =
-      await apiRequest(
-        "/api/transactions",
-        {
-          method: "POST",
-
-          body:
-            JSON.stringify(payload)
-        }
-      );
-
-
-    $("transactionForm")
-      .reset();
-
-
-    state.customer =
-      null;
-
-
-    $("customerResult")
-      .classList.remove("show");
-
-
-    showSuccess(
-      data?.message ||
-      "Transaction submitted successfully."
-    );
-
-
-    await loadDashboard();
-
-
-  } catch (error) {
-
-    console.error(
-      "Transaction submission failed:",
-      error
-    );
-
-
-    showError(
-      error.message ||
-      "The transaction could not be submitted."
-    );
-
-  } finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "Submit Transaction";
-  }
-}
-
-
-$("transactionForm")
-  .addEventListener(
-    "submit",
-    submitTransaction
-  );
-
-
-/* -----------------------------
-   DASHBOARD DATA
------------------------------ */
-
-async function loadDashboard() {
-
-  try {
-
-    const data =
-      await apiRequest(
-        "/api/transactions?scope=cashier&limit=25"
-      );
-
-
-    const transactions =
-      data?.transactions ||
-      data?.data ||
-      [];
-
-
-    state.transactions =
-      Array.isArray(transactions)
-        ? transactions
-        : [];
-
-
-    renderTransactions();
-
-    calculateSummary();
-
-
-  } catch (error) {
-
-    console.warn(
-      "Dashboard transaction data unavailable:",
-      error
-    );
-
-
-    $("transactionsBody")
-      .innerHTML = `
-        <tr>
-          <td colspan="6">
-            Transaction data is currently unavailable.
-          </td>
-        </tr>
-      `;
-  }
-
-
-  $("lastRefresh")
-    .textContent =
-    new Date()
-      .toLocaleTimeString();
-}
-
-
-/* -----------------------------
-   SUMMARY
------------------------------ */
-
-function calculateSummary() {
-
-  let deposits = 0;
-  let withdrawals = 0;
-  let count = 0;
-
-
-  state.transactions
-    .forEach(transaction => {
-
-      const status =
-        String(
-          transaction.status || ""
-        )
-        .toLowerCase();
-
-
-      if (
-        status &&
-        ![
-          "completed",
-          "complete",
-          "success",
-          "successful"
-        ].includes(status)
-      ) {
-
-        return;
-      }
-
-
-      const amount =
-        Number(
-          transaction.amount || 0
+    const operationModal =
+        document.getElementById(
+            "operationModal"
         );
 
 
-      if (
-        transaction.type ===
-        "deposit"
-      ) {
-
-        deposits += amount;
-      }
-
-
-      if (
-        transaction.type ===
-        "withdrawal"
-      ) {
-
-        withdrawals += amount;
-      }
-
-
-      count++;
-    });
-
-
-  $("depositTotal")
-    .textContent =
-    formatAmount(
-      deposits
-    );
-
-
-  $("withdrawalTotal")
-    .textContent =
-    formatAmount(
-      withdrawals
-    );
-
-
-  $("transactionCount")
-    .textContent =
-    String(count);
-}
-
-
-function formatAmount(amount) {
-
-  return new Intl.NumberFormat(
-    undefined,
-    {
-      maximumFractionDigits: 2
-    }
-  ).format(amount);
-}
-
-
-/* -----------------------------
-   TRANSACTION TABLE
------------------------------ */
-
-function renderTransactions() {
-
-  const body =
-    $("transactionsBody");
-
-
-  if (
-    !state.transactions.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="6">
-          No recent cashier transactions.
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-
-  body.innerHTML =
-    state.transactions
-      .map(transaction => {
-
-        const status =
-          String(
-            transaction.status ||
-            "pending"
-          )
-          .toLowerCase();
-
-
-        const statusClass =
-          status === "completed" ||
-          status === "complete" ||
-          status === "success" ||
-          status === "successful"
-            ? "completed"
-            : status === "failed" ||
-              status === "rejected"
-              ? "failed"
-              : "pending";
-
-
-        const date =
-          transaction.created_at ||
-          transaction.createdAt;
-
-
-        return `
-          <tr>
-
-            <td>
-              ${
-                escapeHtml(
-                  transaction.reference ||
-                  transaction.id ||
-                  "—"
-                )
-              }
-            </td>
-
-            <td>
-              ${
-                escapeHtml(
-                  transaction.type ||
-                  "—"
-                )
-              }
-            </td>
-
-            <td>
-              ${
-                escapeHtml(
-                  String(
-                    transaction.amount ??
-                    "—"
-                  )
-                )
-              }
-              ${
-                escapeHtml(
-                  transaction.currency ||
-                  ""
-                )
-              }
-            </td>
-
-            <td>
-              ${
-                escapeHtml(
-                  transaction.account_number ||
-                  transaction.accountNumber ||
-                  "—"
-                )
-              }
-            </td>
-
-            <td>
-              <span class="transaction-status ${statusClass}">
-                ${
-                  escapeHtml(
-                    transaction.status ||
-                    "Pending"
-                  )
-                }
-              </span>
-            </td>
-
-            <td>
-              ${
-                date
-                  ? escapeHtml(
-                      new Date(date)
-                        .toLocaleTimeString()
-                    )
-                  : "—"
-              }
-            </td>
-
-          </tr>
-        `;
-      })
-      .join("");
-}
-
-
-/* -----------------------------
-   SESSION
------------------------------ */
-
-async function loadSession() {
-
-  try {
-
-    const data =
-      await apiRequest(
-        "/api/auth/me"
-      );
-
-
-    const user =
-      data?.user ||
-      data?.data ||
-      data;
-
-
-    $("cashierName")
-      .textContent =
-      user?.full_name ||
-      user?.fullName ||
-      user?.name ||
-      "Authenticated user";
-
-
-    $("cashierRole")
-      .textContent =
-      user?.role ||
-      user?.user_role ||
-      "Cashier";
-
-
-    $("branchName")
-      .textContent =
-      user?.branch_name ||
-      user?.branch ||
-      "Assigned branch";
-
-
-    $("sessionId")
-      .textContent =
-      user?.session_id ||
-      user?.sessionId ||
-      "Active";
-
-
-    $("serviceSession")
-      .textContent =
-      "Authenticated";
-
-
-  } catch (error) {
-
-    console.warn(
-      "Session information unavailable:",
-      error
-    );
-
-
-    $("cashierName")
-      .textContent =
-      "Not verified";
-
-    $("cashierRole")
-      .textContent =
-      "Not verified";
-
-    $("branchName")
-      .textContent =
-      "Not verified";
-
-    $("sessionId")
-      .textContent =
-      "Not verified";
-
-    $("serviceSession")
-      .textContent =
-      "Unavailable";
-  }
-}
-
-
-/* -----------------------------
-   HEALTH
------------------------------ */
-
-async function checkHealth() {
-
-  try {
-
-    const response =
-      await fetch(
-        "/api/health",
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Accept":
-              "application/json"
-          }
-        }
-      );
-
-
-    $("apiStatus")
-      .textContent =
-      response.ok
-        ? "Operational"
-        : "Unavailable";
-
-
-  } catch {
-
-    $("apiStatus")
-      .textContent =
-      "Unavailable";
-  }
-}
-
-
-/* -----------------------------
-   ESCAPE HTML
------------------------------ */
-
-function escapeHtml(value) {
-
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
-/* -----------------------------
-   REFRESH
------------------------------ */
-
-$("refreshButton")
-  .addEventListener(
-    "click",
-    async () => {
-
-      clearAlerts();
-
-      await loadSession();
-
-      await loadDashboard();
-
-      await checkHealth();
-
-      showSuccess(
-        "Cashier dashboard refreshed."
-      );
-    }
-  );
-
-
-/* -----------------------------
-   LOGOUT
------------------------------ */
-
-$("logoutButton")
-  .addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        await fetch(
-          "/api/auth/logout",
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Accept":
-                "application/json"
+    function formatCurrency(amount) {
+
+        return new Intl.NumberFormat(
+            "en-NG",
+            {
+                style: "currency",
+                currency: "NGN",
+                minimumFractionDigits: 2
             }
-          }
+        ).format(
+            Number(amount) || 0
         );
 
-      } catch (error) {
-
-        console.warn(
-          "Logout request failed:",
-          error
-        );
-
-      } finally {
-
-        window.location.href =
-          "login.html";
-      }
     }
-  );
 
 
-/* -----------------------------
-   INITIALIZE
------------------------------ */
+    function updateStatistics(data) {
 
-document.addEventListener(
-  "DOMContentLoaded",
-  async () => {
+        const statistics =
+            data.statistics ||
+            demoData.statistics;
 
-    await Promise.all([
-      loadSession(),
-      loadDashboard(),
-      checkHealth()
-    ]);
 
-  }
-);
+        document.getElementById(
+            "todayTransactions"
+        ).textContent =
+            statistics.transactions ?? 0;
+
+
+        document.getElementById(
+            "todayDeposits"
+        ).textContent =
+            statistics.deposits ?? 0;
+
+
+        document.getElementById(
+            "todayWithdrawals"
+        ).textContent =
+            statistics.withdrawals ?? 0;
+
+
+        document.getElementById(
+            "pendingTransactions"
+        ).textContent =
+            statistics.pending ?? 0;
+
+    }
+
+
+    function updateDrawer(data) {
+
+        const drawer =
+            data.drawer ||
+            demoData.drawer;
+
+
+        const expected =
+            Number(drawer.opening || 0) +
+            Number(drawer.received || 0) -
+            Number(drawer.paid || 0);
+
+
+        document.getElementById(
+            "openingBalance"
+        ).textContent =
+            formatCurrency(
+                drawer.opening
+            );
+
+
+        document.getElementById(
+            "cashReceived"
+        ).textContent =
+            formatCurrency(
+                drawer.received
+            );
+
+
+        document.getElementById(
+            "cashPaid"
+        ).textContent =
+            formatCurrency(
+                drawer.paid
+            );
+
+
+        document.getElementById(
+            "expectedBalance"
+        ).textContent =
+            formatCurrency(
+                expected
+            );
+
+
+        document.getElementById(
+            "drawerBalance"
+        ).textContent =
+            formatCurrency(
+                expected
+            );
+
+    }
+
+
+    function renderTransactions(
+        transactions
+    ) {
+
+        const table =
+            document.getElementById(
+                "transactionTable"
+            );
+
+
+        table.innerHTML = "";
+
+
+        if (!transactions.length) {
+
+            table.innerHTML = `
+                <tr>
+                    <td
+                        colspan="4"
+                        style="
+                            text-align:center;
+                            padding:30px;
+                            color:#71808d;
+                        "
+                    >
+                        No transactions found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        transactions.forEach(
+            transaction => {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                const type =
+                    String(
+                        transaction.type ||
+                        "Transaction"
+                    );
+
+
+                const status =
+                    String(
+                        transaction.status ||
+                        "Pending"
+                    ).toLowerCase();
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <div class="transaction">
+
+                            <div class="transaction-icon">
+                                ${
+                                    type
+                                        .toLowerCase()
+                                        .includes(
+                                            "deposit"
+                                        )
+                                        ? "↓"
+                                        : "↑"
+                                }
+                            </div>
+
+                            <div class="transaction-info">
+
+                                <strong>
+                                    ${escapeHtml(type)}
+                                </strong>
+
+                                <span>
+                                    ${escapeHtml(
+                                        transaction.customer ||
+                                        "Customer Account"
+                                    )}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHtml(
+                            transaction.account ||
+                            "—"
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${formatCurrency(
+                            transaction.amount
+                        )}
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="status ${
+                                status === "completed"
+                                    ? "completed"
+                                    : status === "failed"
+                                        ? "failed"
+                                        : "pending"
+                            }"
+                        >
+                            ${escapeHtml(status)}
+                        </span>
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            }
+        );
+
+    }
+
+
+    function escapeHtml(value) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+    }
+
+
+    async function loadDashboard() {
+
+        /*
+         * First render safe local data.
+         */
+
+        updateStatistics(
+            demoData
+        );
+
+        updateDrawer(
+            demoData
+        );
+
+        renderTransactions(
+            demoData.transactions
+        );
+
+
+        /*
+         * Then attempt the real backend.
+         */
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/dashboard/summary`,
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                throw new Error(
+                    `Dashboard API returned ${response.status}`
+                );
+            }
+
+
+            const data =
+                await response.json();
+
+
+            updateStatistics(
+                data
+            );
+
+
+            if (data.drawer) {
+                updateDrawer(data);
+            }
+
+
+        } catch (error) {
+
+            console.warn(
+                "Dashboard API unavailable. Demo data retained.",
+                error
+            );
+
+        }
+
+
+        /*
+         * Attempt to load transactions.
+         */
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/transactions`,
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                throw new Error(
+                    `Transactions API returned ${response.status}`
+                );
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const transactions =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(data.transactions)
+                        ? data.transactions
+                        : Array.isArray(data.data)
+                            ? data.data
+                            : [];
+
+
+            if (transactions.length) {
+
+                renderTransactions(
+                    transactions.slice(
+                        0,
+                        10
+                    )
+                );
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Transactions API unavailable.",
+                error
+            );
+
+        }
+
+    }
+
+
+    function openOperation(
+        operation
+    ) {
+
+        operationModal.classList.add(
+            "open"
+        );
+
+
+        const operationType =
+            document.getElementById(
+                "operationType"
+            );
+
+
+        if (
+            operation ===
+            "customer"
+        ) {
+
+            operationModal.classList.remove(
+                "open"
+            );
+
+
+            document
+                .getElementById(
+                    "customerSearch"
+                )
+                .focus();
+
+            return;
+
+        }
+
+
+        operationType.value =
+            operation;
+
+
+        document.getElementById(
+            "operationTitle"
+        ).textContent =
+            operation === "deposit"
+                ? "Cash Deposit"
+                : operation === "withdrawal"
+                    ? "Cash Withdrawal"
+                    : "Account Transfer";
+
+
+        document.getElementById(
+            "accountNumber"
+        ).focus();
+
+    }
+
+
+    function closeOperation() {
+
+        operationModal.classList.remove(
+            "open"
+        );
+
+    }
+
+
+    document
+        .querySelectorAll(
+            "[data-operation]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        openOperation(
+                            button.dataset
+                                .operation
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "closeModal"
+        )
+        .addEventListener(
+            "click",
+            closeOperation
+        );
+
+
+    document
+        .getElementById(
+            "cancelOperation"
+        )
+        .addEventListener(
+            "click",
+            closeOperation
+        );
+
+
+    operationModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                operationModal
+            ) {
+                closeOperation();
+            }
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "operationForm"
+        )
+        .addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const account =
+                    document
+                        .getElementById(
+                            "accountNumber"
+                        )
+                        .value
+                        .trim();
+
+
+                const amount =
+                    Number(
+                        document
+                            .getElementById(
+                                "amount"
+                            )
+                            .value
+                    );
+
+
+                const operation =
+                    document
+                        .getElementById(
+                            "operationType"
+                        )
+                        .value;
+
+
+                if (
+                    !account ||
+                    !amount ||
+                    amount <= 0
+                ) {
+
+                    alert(
+                        "Please enter a valid account number and amount."
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * This is the point where the transaction
+                 * should be sent to the backend.
+                 *
+                 * POST /api/transactions
+                 */
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_BASE}/transactions`,
+                            {
+                                method: "POST",
+
+                                credentials:
+                                    "include",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+                                    "Accept":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        account_number:
+                                            account,
+                                        amount,
+                                        type:
+                                            operation
+                                    })
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            `Transaction request failed: ${response.status}`
+                        );
+
+                    }
+
+
+                    alert(
+                        "Transaction submitted successfully."
+                    );
+
+
+                } catch (error) {
+
+                    console.warn(
+                        "Transaction API unavailable.",
+                        error
+                    );
+
+
+                    alert(
+                        "Transaction form is ready. Connect the cashier transaction endpoint to process this operation."
+                    );
+
+                }
+
+
+                closeOperation();
+
+
+                document
+                    .getElementById(
+                        "operationForm"
+                    )
+                    .reset();
+
+            }
+        );
+
+
+    async function searchCustomer() {
+
+        const input =
+            document
+                .getElementById(
+                    "customerSearch"
+                )
+                .value
+                .trim();
+
+
+        const result =
+            document.getElementById(
+                "searchResult"
+            );
+
+
+        if (!input) {
+
+            result.classList.remove(
+                "visible"
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/users?search=${encodeURIComponent(input)}`,
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                throw new Error(
+                    `Customer search returned ${response.status}`
+                );
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const customer =
+                Array.isArray(data)
+                    ? data[0]
+                    : Array.isArray(data.users)
+                        ? data.users[0]
+                        : Array.isArray(data.data)
+                            ? data.data[0]
+                            : data.user ||
+                              data.customer ||
+                              null;
+
+
+            if (!customer) {
+                throw new Error(
+                    "Customer not found"
+                );
+            }
+
+
+            document.getElementById(
+                "customerName"
+            ).textContent =
+                customer.full_name ||
+                customer.name ||
+                "Customer";
+
+
+            document.getElementById(
+                "customerMeta"
+            ).textContent =
+                `Account: ${
+                    customer.account_number ||
+                    "Not available"
+                } · Customer ID: ${
+                    customer.id ||
+                    "Not available"
+                }`;
+
+
+        } catch (error) {
+
+            /*
+             * Safe demo response for frontend development.
+             */
+
+            document.getElementById(
+                "customerName"
+            ).textContent =
+                "Demo Customer Record";
+
+
+            document.getElementById(
+                "customerMeta"
+            ).textContent =
+                `Search reference: ${input} · Connect /api/users for live customer lookup.`;
+
+        }
+
+
+        result.classList.add(
+            "visible"
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "searchButton"
+        )
+        .addEventListener(
+            "click",
+            searchCustomer
+        );
+
+
+    document
+        .getElementById(
+            "customerSearch"
+        )
+        .addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key ===
+                    "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    searchCustomer();
+
+                }
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "openDrawerButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                alert(
+                    "Cash drawer opening/start-shift workflow is ready for backend integration."
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "reconcileButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                alert(
+                    "Drawer reconciliation workflow is ready for backend integration."
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "logoutButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                /*
+                 * Clear local frontend session information.
+                 */
+
+                [
+                    "gtf_user",
+                    "gtf_session",
+                    "gtf_access_token",
+                    "gtf_refresh_token",
+                    "access_token",
+                    "refresh_token"
+                ].forEach(
+                    key => {
+
+                        try {
+                            localStorage.removeItem(
+                                key
+                            );
+                        } catch (error) {}
+
+                    }
+                );
+
+
+                try {
+                    sessionStorage.clear();
+                } catch (error) {}
+
+
+                /*
+                 * Backend sign-out.
+                 */
+
+                fetch(
+                    `${API_BASE}/auth/signout`,
+                    {
+                        method: "POST",
+                        credentials: "include",
+                        headers: {
+                            "Accept":
+                                "application/json",
+                            "Content-Type":
+                                "application/json"
+                        },
+                        body:
+                            JSON.stringify({
+                                role: "cashier"
+                            })
+                    }
+                )
+                .catch(
+                    () => {}
+                )
+                .finally(
+                    () => {
+
+                        window.location.replace(
+                            "./login.html"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+                closeOperation();
+            }
+
+        }
+    );
+
+
+    /*
+     * Initialize dashboard.
+     */
+
+    loadDashboard();
+
 </script>
 
 </body>
