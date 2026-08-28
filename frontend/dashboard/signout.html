@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -11,7 +12,7 @@
 
     <meta
         name="description"
-        content="Sign out of your Global TrustFund banking account."
+        content="Sign out of Global TrustFund Banking."
     >
 
     <meta
@@ -19,7 +20,9 @@
         content="#0b3d2e"
     >
 
-    <title>Sign Out | Global TrustFund</title>
+    <title>
+        Sign Out | Global TrustFund
+    </title>
 
     <link
         rel="stylesheet"
@@ -36,6 +39,7 @@
             --gtf-border: #dfe8e3;
             --gtf-text: #18372c;
             --gtf-muted: #7c8983;
+            --gtf-danger: #8b4444;
         }
 
         * {
@@ -60,22 +64,33 @@
 
         .signout-page {
             min-height: 100vh;
+
             display: flex;
             flex-direction: column;
         }
 
-        /* HEADER */
+        /* =====================================================
+           HEADER
+           ===================================================== */
 
         .signout-header {
-            padding: 18px 30px;
+            width: 100%;
+
             background: #ffffff;
-            border-bottom: 1px solid var(--gtf-border);
+
+            border-bottom:
+                1px solid
+                var(--gtf-border);
         }
 
         .signout-header-inner {
             width: 100%;
             max-width: 1180px;
+
+            min-height: 74px;
+
             margin: 0 auto;
+            padding: 12px 20px;
 
             display: flex;
             align-items: center;
@@ -88,13 +103,16 @@
             gap: 10px;
 
             color: var(--gtf-green);
+
             text-decoration: none;
         }
 
         .brand-logo {
             width: 45px;
             height: 45px;
+
             display: block;
+
             object-fit: contain;
         }
 
@@ -105,30 +123,24 @@
 
         .brand-text strong {
             color: var(--gtf-green);
+
             font-size: 14px;
             line-height: 1.2;
+
             font-weight: 800;
         }
 
         .brand-text small {
             margin-top: 3px;
+
             color: var(--gtf-muted);
+
             font-size: 9px;
-            line-height: 1;
         }
 
-        .home-link {
-            color: var(--gtf-green);
-            font-size: 9px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .home-link:hover {
-            text-decoration: underline;
-        }
-
-        /* MAIN */
+        /* =====================================================
+           MAIN
+           ===================================================== */
 
         .signout-main {
             flex: 1;
@@ -137,17 +149,21 @@
             align-items: center;
             justify-content: center;
 
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
 
         .signout-card {
             width: 100%;
-            max-width: 480px;
+            max-width: 460px;
 
-            padding: 38px 30px;
+            padding: 35px 30px;
 
             background: #ffffff;
-            border: 1px solid var(--gtf-border);
+
+            border:
+                1px solid
+                var(--gtf-border);
+
             border-radius: 16px;
 
             text-align: center;
@@ -156,6 +172,10 @@
                 0 18px 45px
                 rgba(11, 61, 46, .08);
         }
+
+        /* =====================================================
+           ICON
+           ===================================================== */
 
         .signout-icon {
             width: 70px;
@@ -170,9 +190,10 @@
             border-radius: 50%;
 
             background: #eaf3ee;
+
             color: var(--gtf-green);
 
-            font-size: 27px;
+            font-size: 25px;
             font-weight: 800;
         }
 
@@ -181,14 +202,14 @@
 
             color: var(--gtf-green);
 
-            font-size: 27px;
+            font-size: 25px;
             line-height: 1.2;
         }
 
         .signout-card p {
             margin: 12px auto 0;
 
-            max-width: 350px;
+            max-width: 340px;
 
             color: var(--gtf-muted);
 
@@ -196,33 +217,44 @@
             line-height: 1.7;
         }
 
-        .signout-status {
-            min-height: 18px;
-            margin: 20px 0 15px;
+        /* =====================================================
+           STATUS
+           ===================================================== */
 
-            color: var(--gtf-muted);
+        .status {
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 11px 12px;
+
+            border-radius: 8px;
 
             font-size: 8px;
             line-height: 1.5;
         }
 
-        .signout-status.success {
-            color: var(--gtf-green);
+        .status.error {
+            display: block;
+
+            background: #f9eded;
+            color: var(--gtf-danger);
         }
 
-        .signout-status.error {
-            color: #8b4444;
-        }
+        /* =====================================================
+           ACTIONS
+           ===================================================== */
 
         .signout-actions {
+            margin-top: 25px;
+
             display: grid;
             gap: 10px;
-            margin-top: 20px;
         }
 
-        .signout-button,
-        .signin-button {
+        .button {
             width: 100%;
+
             min-height: 45px;
 
             display: inline-flex;
@@ -232,114 +264,138 @@
             border-radius: 7px;
 
             font-family: inherit;
+
             font-size: 9px;
             font-weight: 700;
 
             text-decoration: none;
 
             cursor: pointer;
+
+            transition:
+                background .2s ease,
+                border-color .2s ease,
+                transform .1s ease;
         }
 
-        .signout-button {
-            border: 1px solid var(--gtf-green);
-            background: var(--gtf-green);
+        .button-primary {
+            border:
+                1px solid
+                var(--gtf-green);
+
+            background:
+                var(--gtf-green);
+
             color: #ffffff;
         }
 
-        .signout-button:hover {
-            background: var(--gtf-dark);
+        .button-primary:hover {
+            background:
+                var(--gtf-dark);
         }
 
-        .signin-button {
-            border: 1px solid var(--gtf-border);
-            background: #ffffff;
-            color: var(--gtf-green);
+        .button-secondary {
+            border:
+                1px solid
+                var(--gtf-border);
+
+            background:
+                #ffffff;
+
+            color:
+                var(--gtf-green);
         }
 
-        .signin-button:hover {
-            background: #f4f8f6;
+        .button-secondary:hover {
+            background:
+                #eaf3ee;
         }
+
+        .button:active {
+            transform:
+                translateY(1px);
+        }
+
+        /* =====================================================
+           SECURITY NOTE
+           ===================================================== */
 
         .security-note {
-            margin-top: 24px;
-            padding-top: 18px;
+            margin-top: 23px;
+            padding-top: 17px;
 
-            border-top: 1px solid var(--gtf-border);
+            border-top:
+                1px solid
+                var(--gtf-border);
 
-            color: var(--gtf-muted);
+            color:
+                var(--gtf-muted);
+
             font-size: 7px;
             line-height: 1.6;
         }
 
-        /* FOOTER */
+        /* =====================================================
+           FOOTER
+           ===================================================== */
 
         .signout-footer {
-            padding: 18px 25px;
+            padding: 18px 20px;
 
-            background: #ffffff;
-            border-top: 1px solid var(--gtf-border);
+            background:
+                #ffffff;
+
+            border-top:
+                1px solid
+                var(--gtf-border);
         }
 
         .signout-footer-inner {
             width: 100%;
             max-width: 1180px;
+
             margin: 0 auto;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            gap: 15px;
+            color:
+                var(--gtf-muted);
 
-            color: var(--gtf-muted);
-            font-size: 8px;
+            font-size: 7px;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .footer-links a {
-            color: var(--gtf-muted);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: var(--gtf-green);
-        }
-
-        /* MOBILE */
+        /* =====================================================
+           MOBILE
+           ===================================================== */
 
         @media (max-width: 600px) {
 
-            .signout-header {
-                padding: 15px;
-            }
-
-            .home-link {
-                font-size: 8px;
+            .signout-header-inner {
+                padding:
+                    12px 14px;
             }
 
             .signout-main {
-                padding: 30px 13px;
+                padding:
+                    25px 14px;
             }
 
             .signout-card {
-                padding: 30px 20px;
-                border-radius: 13px;
+                padding:
+                    28px 20px;
             }
 
             .signout-card h1 {
-                font-size: 24px;
-            }
-
-            .signout-footer {
-                padding: 15px;
+                font-size: 22px;
             }
 
             .signout-footer-inner {
                 flex-direction: column;
+
+                gap: 8px;
+
                 text-align: center;
             }
 
@@ -363,6 +419,7 @@
 
         <div class="signout-header-inner">
 
+
             <a
                 href="../index.html"
                 class="brand"
@@ -374,6 +431,7 @@
                     alt="Global TrustFund logo"
                     class="brand-logo"
                 >
+
 
                 <span class="brand-text">
 
@@ -390,13 +448,6 @@
             </a>
 
 
-            <a
-                href="../index.html"
-                class="home-link"
-            >
-                Back to Home
-            </a>
-
         </div>
 
     </header>
@@ -408,10 +459,12 @@
 
     <main class="signout-main">
 
+
         <section
             class="signout-card"
             aria-labelledby="signoutTitle"
         >
+
 
             <div
                 class="signout-icon"
@@ -422,24 +475,22 @@
 
 
             <h1 id="signoutTitle">
-                Sign out
+                Sign out of your account?
             </h1>
 
 
             <p>
-                You can securely end your Global TrustFund
-                banking session below.
+                You can safely end your current
+                Global TrustFund banking session.
             </p>
 
 
             <div
-                id="signoutStatus"
-                class="signout-status"
-                role="status"
+                id="statusMessage"
+                class="status"
+                role="alert"
                 aria-live="polite"
-            >
-                Checking your session...
-            </div>
+            ></div>
 
 
             <div class="signout-actions">
@@ -448,32 +499,30 @@
                 <button
                     id="signoutButton"
                     type="button"
-                    class="signout-button"
+                    class="button button-primary"
                 >
-                    Sign Out Securely
+                    Sign Out
                 </button>
 
 
-                <!--
-                    THIS IS THE WORKING SIGN-IN BUTTON.
-                    It returns directly to the existing login page.
-                -->
-
                 <a
-                    href="../login.html"
-                    id="signinButton"
-                    class="signin-button"
+                    href="./index.html"
+                    class="button button-secondary"
                 >
-                    Sign In
+                    Return to Dashboard
                 </a>
+
 
             </div>
 
 
             <div class="security-note">
-                For your security, always sign out when using
-                a shared or public device.
+
+                For your security, always sign out when
+                using a shared or public device.
+
             </div>
+
 
         </section>
 
@@ -495,29 +544,21 @@
                 All rights reserved.
             </span>
 
-
-            <div class="footer-links">
-
-                <a href="../privacy.html">
-                    Privacy
-                </a>
-
-                <a href="../support.html">
-                    Support
-                </a>
-
-            </div>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
     </footer>
 
+
 </div>
 
 
-<!-- =====================================================
-     EXISTING APPLICATION SCRIPTS
-     ===================================================== -->
+<!-- =========================================================
+     EXISTING JAVASCRIPT
+     ========================================================= -->
 
 <script src="../js/app.js"></script>
 <script src="../js/supabase.js"></script>
@@ -530,15 +571,10 @@
         "DOMContentLoaded",
         function () {
 
-            const year =
-                document.getElementById(
-                    "currentYear"
-                );
-
-            if (year) {
-                year.textContent =
-                    new Date().getFullYear();
-            }
+            document.getElementById(
+                "currentYear"
+            ).textContent =
+                new Date().getFullYear();
 
 
             const signoutButton =
@@ -547,174 +583,282 @@
                 );
 
 
-            const status =
-                document.getElementById(
-                    "signoutStatus"
-                );
-
-
-            /*
-             * Check whether the existing auth.js
-             * exposes a sign-out function.
-             */
-
-            if (
-                typeof window.signOut ===
-                "function"
-            ) {
-
-                status.textContent =
-                    "Your session is ready to be signed out.";
-
-            } else if (
-                typeof window.logout ===
-                "function"
-            ) {
-
-                status.textContent =
-                    "Your session is ready to be signed out.";
-
-            } else {
-
-                status.textContent =
-                    "Use the button below to end your session.";
-
-            }
-
-
             signoutButton.addEventListener(
                 "click",
-                async function () {
-
-                    signoutButton.disabled =
-                        true;
-
-                    signoutButton.textContent =
-                        "Signing Out...";
-
-                    status.className =
-                        "signout-status";
-
-                    status.textContent =
-                        "Ending your secure session...";
-
-
-                    try {
-
-                        /*
-                         * Prefer the project's existing
-                         * auth.js sign-out function.
-                         */
-
-                        if (
-                            typeof window.signOut ===
-                            "function"
-                        ) {
-
-                            await window.signOut();
-
-                        }
-
-                        else if (
-                            typeof window.logout ===
-                            "function"
-                        ) {
-
-                            await window.logout();
-
-                        }
-
-                        /*
-                         * Fallback to Supabase directly
-                         * if the existing auth helper does
-                         * not expose a logout function.
-                         */
-
-                        else if (
-                            window.supabaseClient &&
-                            window.supabaseClient.auth
-                        ) {
-
-                            const result =
-                                await window.supabaseClient
-                                    .auth
-                                    .signOut();
-
-
-                            if (
-                                result &&
-                                result.error
-                            ) {
-
-                                throw result.error;
-
-                            }
-
-                        }
-
-                        else {
-
-                            throw new Error(
-                                "Authentication service is not connected."
-                            );
-
-                        }
-
-
-                        status.className =
-                            "signout-status success";
-
-                        status.textContent =
-                            "You have been signed out successfully. You can sign in again whenever you are ready.";
-
-
-                        signoutButton.textContent =
-                            "Signed Out";
-
-
-                        /*
-                         * Keep the Sign In button active.
-                         * Clicking it goes to:
-                         *
-                         * frontend/login.html
-                         */
-
-                        document
-                            .getElementById(
-                                "signinButton"
-                            )
-                            .focus();
-
-
-                    } catch (error) {
-
-                        console.error(
-                            "Sign-out error:",
-                            error
-                        );
-
-
-                        status.className =
-                            "signout-status error";
-
-                        status.textContent =
-                            error.message ||
-                            "We could not complete the sign-out request.";
-
-
-                        signoutButton.disabled =
-                            false;
-
-                        signoutButton.textContent =
-                            "Try Sign Out Again";
-
-                    }
-
-                }
+                handleSignOut
             );
 
         }
     );
+
+
+    /* =====================================================
+       SIGN OUT
+       ===================================================== */
+
+    async function handleSignOut() {
+
+        const button =
+            document.getElementById(
+                "signoutButton"
+            );
+
+
+        const originalText =
+            button.textContent;
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Signing Out...";
+
+
+        clearStatus();
+
+
+        try {
+
+            /*
+             * Prefer the existing auth.js
+             * sign-out function when available.
+             */
+
+            if (
+                typeof window.signOutUser ===
+                "function"
+            ) {
+
+                await window.signOutUser();
+
+
+                redirectToLogin();
+
+                return;
+
+            }
+
+
+            if (
+                typeof window.logoutUser ===
+                "function"
+            ) {
+
+                await window.logoutUser();
+
+
+                redirectToLogin();
+
+                return;
+
+            }
+
+
+            /*
+             * Direct Supabase fallback.
+             */
+
+            if (
+                window.supabaseClient &&
+                typeof window.supabaseClient.auth?.signOut ===
+                "function"
+            ) {
+
+                const {
+                    error
+                } =
+                    await window.supabaseClient
+                        .auth
+                        .signOut();
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                redirectToLogin();
+
+                return;
+
+            }
+
+
+            /*
+             * Support alternative variable names
+             * if the existing supabase.js uses them.
+             */
+
+            if (
+                window.supabase &&
+                typeof window.supabase.auth?.signOut ===
+                "function"
+            ) {
+
+                const {
+                    error
+                } =
+                    await window.supabase
+                        .auth
+                        .signOut();
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                redirectToLogin();
+
+                return;
+
+            }
+
+
+            /*
+             * Backend session fallback.
+             */
+
+            const response =
+                await fetch(
+                    "../api/auth/logout",
+                    {
+                        method: "POST",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            /*
+             * A 404 means the backend route
+             * does not exist yet.
+             */
+
+            if (
+                response.status === 404
+            ) {
+
+                throw new Error(
+                    "No supported sign-out method was found."
+                );
+
+            }
+
+
+            if (!response.ok) {
+
+                let result = null;
+
+
+                try {
+
+                    result =
+                        await response.json();
+
+                } catch (_) {}
+
+
+                throw new Error(
+                    result?.error ||
+                    result?.message ||
+                    "Unable to sign out."
+                );
+
+            }
+
+
+            redirectToLogin();
+
+
+        } catch (error) {
+
+            console.error(
+                "Sign-out error:",
+                error
+            );
+
+
+            showStatus(
+                error?.message ||
+                "We could not complete sign out. Please try again."
+            );
+
+
+            button.disabled = false;
+
+            button.textContent =
+                originalText;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       REDIRECT
+       ===================================================== */
+
+    function redirectToLogin() {
+
+        /*
+         * Replace the current page so the user
+         * cannot simply use the browser Back button
+         * to return to this sign-out screen.
+         */
+
+        window.location.replace(
+            "../login.html"
+        );
+
+    }
+
+
+    /* =====================================================
+       STATUS
+       ===================================================== */
+
+    function showStatus(
+        message
+    ) {
+
+        const status =
+            document.getElementById(
+                "statusMessage"
+            );
+
+
+        status.className =
+            "status error";
+
+
+        status.textContent =
+            message;
+
+    }
+
+
+    function clearStatus() {
+
+        const status =
+            document.getElementById(
+                "statusMessage"
+            );
+
+
+        status.className =
+            "status";
+
+
+        status.textContent =
+            "";
+
+    }
 
 </script>
 
