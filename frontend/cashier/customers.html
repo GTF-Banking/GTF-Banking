@@ -1,0 +1,3319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Global TrustFund Banking cashier customer management portal."
+    >
+
+    <title>Customers | Cashier | GTF Banking</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <style>
+        :root {
+            --gtf-green: #0b5d3b;
+            --gtf-dark: #073d28;
+            --gtf-light: #16865a;
+            --gtf-gold: #c9962b;
+
+            --background: #f4f8f6;
+            --surface: #ffffff;
+            --surface-soft: #f8fbf9;
+
+            --border: #dce7e1;
+
+            --text: #18352a;
+            --muted: #718078;
+
+            --success: #19734b;
+            --success-bg: #eaf7ef;
+
+            --warning: #946b17;
+            --warning-bg: #fff7df;
+
+            --danger: #a33f3f;
+            --danger-bg: #fff0f0;
+
+            --info: #27678e;
+            --info-bg: #edf6fb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* ========================================
+           APPLICATION LAYOUT
+        ======================================== */
+
+        .app {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                245px
+                minmax(0, 1fr);
+        }
+
+        /* ========================================
+           SIDEBAR
+        ======================================== */
+
+        .sidebar {
+            position: sticky;
+
+            top: 0;
+
+            height: 100vh;
+
+            overflow-y: auto;
+
+            padding: 22px 16px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--gtf-dark),
+                    #052e1f
+                );
+
+            color: #ffffff;
+        }
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                5px
+                8px
+                22px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.12);
+
+            color: #ffffff;
+
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+
+            object-fit: contain;
+        }
+
+        .brand-text strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+        .brand-text span {
+            display: block;
+
+            margin-top: 4px;
+
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 7px;
+        }
+
+        .nav-title {
+            margin:
+                23px
+                9px
+                9px;
+
+            color:
+                rgba(255,255,255,.42);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: grid;
+
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            min-height: 38px;
+
+            padding:
+                0
+                11px;
+
+            border-radius: 7px;
+
+            color:
+                rgba(255,255,255,.72);
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background:
+                rgba(255,255,255,.10);
+
+            color: #ffffff;
+        }
+
+        .nav-icon {
+            width: 18px;
+
+            text-align: center;
+
+            font-size: 11px;
+        }
+
+        .profile {
+            margin-top: 30px;
+
+            padding: 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.05);
+        }
+
+        .profile strong {
+            display: block;
+
+            font-size: 9px;
+        }
+
+        .profile span {
+            display: block;
+
+            margin-top: 4px;
+
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 7px;
+        }
+
+        .logout {
+            width: 100%;
+
+            min-height: 30px;
+
+            margin-top: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            border-radius: 6px;
+
+            background: transparent;
+
+            color:
+                rgba(255,255,255,.75);
+
+            font-size: 8px;
+        }
+
+        .logout:hover {
+            background:
+                rgba(255,255,255,.08);
+        }
+
+        /* ========================================
+           MAIN
+        ======================================== */
+
+        .main {
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 68px;
+
+            padding:
+                14px
+                28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .topbar h1 {
+            margin: 0;
+
+            color: var(--gtf-dark);
+
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin:
+                5px
+                0
+                0;
+
+            color: var(--muted);
+
+            font-size: 8px;
+        }
+
+        .session {
+            padding:
+                7px
+                10px;
+
+            border-radius: 20px;
+
+            background:
+                var(--success-bg);
+
+            color: var(--success);
+
+            font-size: 7px;
+
+            font-weight: 800;
+        }
+
+        .content {
+            padding: 27px;
+        }
+
+        /* ========================================
+           STATISTICS
+        ======================================== */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 17px;
+
+            background:
+                var(--surface);
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            letter-spacing: .5px;
+
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            margin-top: 7px;
+
+            color: var(--gtf-dark);
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+        .stat-note {
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        /* ========================================
+           CARD
+        ======================================== */
+
+        .card {
+            overflow: hidden;
+
+            margin-bottom: 20px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 11px;
+        }
+
+        .card-header {
+            padding:
+                17px
+                18px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .card-header-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .card-header h2 {
+            margin: 0;
+
+            color: var(--gtf-dark);
+
+            font-size: 13px;
+        }
+
+        .card-header p {
+            margin:
+                5px
+                0
+                0;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        /* ========================================
+           SEARCH
+        ======================================== */
+
+        .search-panel {
+            padding: 16px 18px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(250px, 1.5fr)
+                minmax(150px, .7fr)
+                minmax(150px, .7fr)
+                auto;
+
+            gap: 9px;
+
+            background:
+                var(--surface-soft);
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .input,
+        .select {
+            width: 100%;
+
+            min-height: 38px;
+
+            padding:
+                0
+                10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: var(--text);
+
+            font-size: 8px;
+        }
+
+        .input:focus,
+        .select:focus {
+            border-color:
+                var(--gtf-light);
+
+            box-shadow:
+                0
+                0
+                0
+                3px
+                rgba(22,134,90,.08);
+        }
+
+        .button {
+            min-height: 38px;
+
+            padding:
+                0
+                15px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background:
+                var(--gtf-green);
+
+            color: #ffffff;
+
+            font-size: 8px;
+
+            font-weight: 800;
+        }
+
+        .button:hover {
+            background:
+                var(--gtf-light);
+        }
+
+        .button.secondary {
+            background:
+                #edf3f0;
+
+            color:
+                var(--gtf-dark);
+        }
+
+        .button.secondary:hover {
+            background:
+                #e1ebe6;
+        }
+
+        /* ========================================
+           CUSTOMER TABLE
+        ======================================== */
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 900px;
+
+            border-collapse: collapse;
+        }
+
+        th {
+            padding:
+                12px
+                14px;
+
+            background:
+                #f8faf9;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            color: var(--muted);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            text-align: left;
+
+            text-transform: uppercase;
+        }
+
+        td {
+            padding:
+                13px
+                14px;
+
+            border-bottom:
+                1px solid
+                #edf1ef;
+
+            font-size: 8px;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background:
+                #fbfdfc;
+        }
+
+        .customer {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+        .avatar {
+            width: 31px;
+
+            height: 31px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 50%;
+
+            background:
+                #e8f2ed;
+
+            color:
+                var(--gtf-green);
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+        .customer-info strong {
+            display: block;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 8px;
+        }
+
+        .customer-info span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        .account-number {
+            color:
+                var(--gtf-dark);
+
+            font-weight: 800;
+        }
+
+        .balance {
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding:
+                5px
+                8px;
+
+            border-radius: 20px;
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            white-space: nowrap;
+        }
+
+        .badge.active {
+            background:
+                var(--success-bg);
+
+            color:
+                var(--success);
+        }
+
+        .badge.pending {
+            background:
+                var(--warning-bg);
+
+            color:
+                var(--warning);
+        }
+
+        .badge.suspended {
+            background:
+                var(--danger-bg);
+
+            color:
+                var(--danger);
+        }
+
+        .badge.review {
+            background:
+                var(--info-bg);
+
+            color:
+                var(--info);
+        }
+
+        .view-button {
+            min-height: 29px;
+
+            padding:
+                0
+                10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 7px;
+
+            font-weight: 700;
+        }
+
+        .view-button:hover {
+            border-color:
+                var(--gtf-light);
+
+            background:
+                #f3f8f5;
+        }
+
+        /* ========================================
+           EMPTY
+        ======================================== */
+
+        .empty {
+            padding: 45px 20px;
+
+            color: var(--muted);
+
+            text-align: center;
+
+            font-size: 8px;
+        }
+
+        /* ========================================
+           PAGINATION
+        ======================================== */
+
+        .pagination {
+            padding:
+                13px
+                17px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            background:
+                var(--surface-soft);
+        }
+
+        .pagination-info {
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        .pagination-buttons {
+            display: flex;
+
+            gap: 6px;
+        }
+
+        .page-button {
+            min-width: 31px;
+
+            min-height: 29px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 7px;
+
+            font-weight: 700;
+        }
+
+        .page-button:hover:not(:disabled),
+        .page-button.active {
+            border-color:
+                var(--gtf-green);
+
+            background:
+                var(--gtf-green);
+
+            color: #ffffff;
+        }
+
+        .page-button:disabled {
+            cursor: not-allowed;
+
+            opacity: .45;
+        }
+
+        /* ========================================
+           MODAL
+        ======================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(7,35,23,.58);
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-card {
+            width:
+                min(
+                    680px,
+                    100%
+                );
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #ffffff;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0
+                25px
+                70px
+                rgba(0,0,0,.22);
+        }
+
+        .modal-header {
+            padding:
+                18px
+                20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 15px;
+        }
+
+        .close {
+            width: 31px;
+
+            height: 31px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background:
+                #edf3f0;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 17px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .customer-profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 18px;
+
+            padding: 15px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 9px;
+
+            background:
+                var(--surface-soft);
+        }
+
+        .large-avatar {
+            width: 52px;
+
+            height: 52px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 50%;
+
+            background:
+                #e4f0e9;
+
+            color:
+                var(--gtf-green);
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+        .customer-profile strong {
+            display: block;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 12px;
+        }
+
+        .customer-profile span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        .details {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 12px;
+        }
+
+        .detail {
+            padding: 12px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 7px;
+
+            background:
+                #fbfdfc;
+        }
+
+        .detail.full {
+            grid-column:
+                1 / -1;
+        }
+
+        .detail-label {
+            color: var(--muted);
+
+            font-size: 7px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            margin-top: 5px;
+
+            color: var(--text);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            word-break: break-word;
+        }
+
+        .modal-footer {
+            padding:
+                15px
+                20px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            background:
+                var(--surface-soft);
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 1150px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .search-panel {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .app {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .sidebar {
+                position: static;
+
+                height: auto;
+            }
+
+            .profile {
+                display: none;
+            }
+
+            .nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content {
+                padding: 17px;
+            }
+
+        }
+
+        @media (max-width: 560px) {
+
+            .stats {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .search-panel {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .topbar {
+                padding:
+                    13px
+                    17px;
+            }
+
+            .session {
+                display: none;
+            }
+
+            .details {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .detail.full {
+                grid-column: auto;
+            }
+
+            .pagination {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ========================================
+         SIDEBAR
+    ========================================= -->
+
+    <aside class="sidebar">
+
+        <a
+            href="./index.html"
+            class="brand"
+        >
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    Global TrustFund
+                </strong>
+
+                <span>
+                    Cashier Operations Portal
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="nav-title">
+            Cashier Operations
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="./index.html">
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="./transactions.html">
+
+                <span class="nav-icon">
+                    ⇄
+                </span>
+
+                Transactions
+
+            </a>
+
+
+            <a
+                href="./customers.html"
+                class="active"
+            >
+
+                <span class="nav-icon">
+                    ♙
+                </span>
+
+                Customers
+
+            </a>
+
+
+            <a href="./deposits.html">
+
+                <span class="nav-icon">
+                    ↓
+                </span>
+
+                Deposits
+
+            </a>
+
+
+            <a href="./withdrawals.html">
+
+                <span class="nav-icon">
+                    ↑
+                </span>
+
+                Withdrawals
+
+            </a>
+
+
+            <a href="./transfers.html">
+
+                <span class="nav-icon">
+                    ↔
+                </span>
+
+                Transfers
+
+            </a>
+
+
+            <a href="./drawer.html">
+
+                <span class="nav-icon">
+                    ▣
+                </span>
+
+                Cash Drawer
+
+            </a>
+
+
+            <a href="./support.html">
+
+                <span class="nav-icon">
+                    ?
+                </span>
+
+                Support
+
+            </a>
+
+        </nav>
+
+
+        <div class="profile">
+
+            <strong id="cashierName">
+                Cashier
+            </strong>
+
+            <span>
+                Cashier Operations
+            </span>
+
+            <button
+                class="logout"
+                id="logoutButton"
+                type="button"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ========================================
+         MAIN
+    ========================================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Customers
+                </h1>
+
+                <p>
+                    Search and review customer account information.
+                </p>
+
+            </div>
+
+
+            <span class="session">
+                ● Cashier Session Active
+            </span>
+
+        </header>
+
+
+        <section class="content">
+
+
+            <!-- ====================================
+                 STATISTICS
+            ===================================== -->
+
+            <section class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Total Customers
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalCustomers"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Customer records
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Active
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="activeCustomers"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Active customer accounts
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="pendingCustomers"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Awaiting approval
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Review
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="reviewCustomers"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Requiring attention
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ====================================
+                 CUSTOMER LIST
+            ===================================== -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <div class="card-header-row">
+
+                        <div>
+
+                            <h2>
+                                Customer Directory
+                            </h2>
+
+                            <p>
+                                Search by name, account number, email or phone number.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="button"
+                            id="refreshButton"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-panel">
+
+                    <input
+                        id="searchInput"
+                        class="input"
+                        type="search"
+                        placeholder="Search customer, account, email or phone..."
+                    >
+
+
+                    <select
+                        id="statusFilter"
+                        class="select"
+                    >
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="suspended">
+                            Suspended
+                        </option>
+
+                        <option value="review">
+                            Review
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="accountFilter"
+                        class="select"
+                    >
+
+                        <option value="">
+                            All Account Types
+                        </option>
+
+                        <option value="checking">
+                            Checking
+                        </option>
+
+                        <option value="savings">
+                            Savings
+                        </option>
+
+                        <option value="business">
+                            Business
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        class="button secondary"
+                        id="clearFilters"
+                    >
+                        Clear
+                    </button>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="table-wrap">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Account
+                                </th>
+
+                                <th>
+                                    Account Type
+                                </th>
+
+                                <th>
+                                    Balance
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="customerBody"
+                        >
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="empty"
+                                >
+                                    Loading customers...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- PAGINATION -->
+
+                <div class="pagination">
+
+                    <div
+                        id="paginationInfo"
+                        class="pagination-info"
+                    >
+                        Showing 0 customers
+                    </div>
+
+
+                    <div class="pagination-buttons">
+
+                        <button
+                            type="button"
+                            class="page-button"
+                            id="previousPage"
+                        >
+                            ‹
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button active"
+                            id="currentPage"
+                        >
+                            1
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button"
+                            id="nextPage"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ========================================
+     CUSTOMER DETAILS MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="customerModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="customerModalTitle"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2 id="customerModalTitle">
+                Customer Details
+            </h2>
+
+
+            <button
+                type="button"
+                class="close"
+                id="closeModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="customer-profile">
+
+                <div
+                    class="large-avatar"
+                    id="detailAvatar"
+                >
+                    CU
+                </div>
+
+
+                <div>
+
+                    <strong id="detailName">
+                        Customer
+                    </strong>
+
+                    <span id="detailEmail">
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Customer ID
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailId"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Account Number
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailAccount"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Account Type
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailAccountType"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Account Status
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailStatus"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Phone
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailPhone"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Balance
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailBalance"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Date Registered
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailRegistered"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Last Activity
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailActivity"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="detail full">
+
+                    <div class="detail-label">
+                        Address
+                    </div>
+
+                    <div
+                        class="detail-value"
+                        id="detailAddress"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="button secondary"
+                id="closeDetails"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+     * ======================================================
+     * GTF BANKING — CASHIER CUSTOMER DIRECTORY
+     * ======================================================
+     *
+     * API:
+     *
+     * GET /api/users
+     *
+     * The server must enforce cashier authorization.
+     *
+     * This frontend does NOT grant permissions.
+     */
+
+
+    const API_BASE = "/api";
+
+
+    const PAGE_SIZE = 10;
+
+
+    let allCustomers = [];
+
+    let filteredCustomers = [];
+
+    let currentPage = 1;
+
+
+    /*
+     * ------------------------------------------------------
+     * DEVELOPMENT FALLBACK DATA
+     * ------------------------------------------------------
+     *
+     * Used only if the API is not available.
+     */
+
+    const demoCustomers = [
+
+        {
+            id: "CUS-10001",
+
+            name: "Customer Account",
+
+            email: "customer@example.com",
+
+            phone: "+234 800 000 0000",
+
+            accountNumber: "GTF-104823",
+
+            accountType: "Checking",
+
+            balance: 425000,
+
+            status: "Active",
+
+            registered:
+                "2026-08-01T09:15:00",
+
+            activity:
+                "2026-08-28T10:20:00",
+
+            address:
+                "Customer address"
+        },
+
+
+        {
+            id: "CUS-10002",
+
+            name: "Customer Account",
+
+            email: "customer2@example.com",
+
+            phone: "+234 800 000 0001",
+
+            accountNumber: "GTF-203911",
+
+            accountType: "Savings",
+
+            balance: 870000,
+
+            status: "Active",
+
+            registered:
+                "2026-07-18T11:10:00",
+
+            activity:
+                "2026-08-28T09:43:00",
+
+            address:
+                "Customer address"
+        },
+
+
+        {
+            id: "CUS-10003",
+
+            name: "Customer Account",
+
+            email: "customer3@example.com",
+
+            phone: "+234 800 000 0002",
+
+            accountNumber: "GTF-301724",
+
+            accountType: "Savings",
+
+            balance: 275000,
+
+            status: "Pending",
+
+            registered:
+                "2026-08-28T08:30:00",
+
+            activity:
+                null,
+
+            address:
+                "Customer address"
+        },
+
+
+        {
+            id: "CUS-10004",
+
+            name: "Customer Account",
+
+            email: "customer4@example.com",
+
+            phone: "+234 800 000 0003",
+
+            accountNumber: "GTF-442018",
+
+            accountType: "Checking",
+
+            balance: 1250000,
+
+            status: "Review",
+
+            registered:
+                "2026-06-11T12:15:00",
+
+            activity:
+                "2026-08-28T10:44:00",
+
+            address:
+                "Customer address"
+        },
+
+
+        {
+            id: "CUS-10005",
+
+            name: "Customer Account",
+
+            email: "customer5@example.com",
+
+            phone: "+234 800 000 0004",
+
+            accountNumber: "GTF-554921",
+
+            accountType: "Business",
+
+            balance: 2450000,
+
+            status: "Suspended",
+
+            registered:
+                "2026-05-23T15:20:00",
+
+            activity:
+                "2026-08-25T13:12:00",
+
+            address:
+                "Business customer address"
+        }
+
+    ];
+
+
+    /*
+     * ------------------------------------------------------
+     * HTML ESCAPING
+     * ------------------------------------------------------
+     */
+
+    function escapeHtml(value) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * CURRENCY
+     * ------------------------------------------------------
+     */
+
+    function formatCurrency(
+        amount
+    ) {
+
+        return new Intl.NumberFormat(
+            "en-NG",
+            {
+                style: "currency",
+
+                currency: "NGN",
+
+                minimumFractionDigits: 2
+            }
+        ).format(
+            Number(amount) || 0
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * DATE
+     * ------------------------------------------------------
+     */
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+            return "—";
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(value);
+
+        }
+
+
+        return new Intl.DateTimeFormat(
+            "en-NG",
+            {
+                dateStyle: "medium",
+
+                timeStyle: "short"
+            }
+        ).format(
+            date
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * INITIALS
+     * ------------------------------------------------------
+     */
+
+    function getInitials(
+        name
+    ) {
+
+        const words =
+            String(name || "Customer")
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+
+        if (!words.length) {
+            return "CU";
+        }
+
+
+        return words
+            .slice(0, 2)
+            .map(
+                word =>
+                    word
+                        .charAt(0)
+                        .toUpperCase()
+            )
+            .join("");
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * NORMALIZE API CUSTOMER
+     * ------------------------------------------------------
+     */
+
+    function normalizeCustomer(
+        customer
+    ) {
+
+        return {
+
+            id:
+                customer.id ||
+                customer.customer_id ||
+                customer.user_id ||
+                "—",
+
+            name:
+                customer.full_name ||
+                customer.name ||
+                customer.customer_name ||
+                "Customer",
+
+            email:
+                customer.email ||
+                "—",
+
+            phone:
+                customer.phone ||
+                customer.phone_number ||
+                "—",
+
+            accountNumber:
+                customer.account_number ||
+                customer.accountNumber ||
+                customer.account ||
+                "—",
+
+            accountType:
+                customer.account_type ||
+                customer.accountType ||
+                "Checking",
+
+            balance:
+                Number(
+                    customer.balance ||
+                    customer.available_balance ||
+                    0
+                ),
+
+            status:
+                customer.status ||
+                "Active",
+
+            registered:
+                customer.created_at ||
+                customer.createdAt ||
+                customer.registered_at ||
+                null,
+
+            activity:
+                customer.last_activity ||
+                customer.last_activity_at ||
+                customer.updated_at ||
+                null,
+
+            address:
+                customer.address ||
+                customer.full_address ||
+                "—"
+
+        };
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * STATISTICS
+     * ------------------------------------------------------
+     */
+
+    function renderStatistics() {
+
+        const total =
+            allCustomers.length;
+
+
+        const active =
+            allCustomers.filter(
+                customer =>
+                    customer.status
+                        .toLowerCase() ===
+                    "active"
+            ).length;
+
+
+        const pending =
+            allCustomers.filter(
+                customer =>
+                    customer.status
+                        .toLowerCase() ===
+                    "pending"
+            ).length;
+
+
+        const review =
+            allCustomers.filter(
+                customer =>
+                    customer.status
+                        .toLowerCase() ===
+                    "review"
+            ).length;
+
+
+        document.getElementById(
+            "totalCustomers"
+        ).textContent =
+            total;
+
+
+        document.getElementById(
+            "activeCustomers"
+        ).textContent =
+            active;
+
+
+        document.getElementById(
+            "pendingCustomers"
+        ).textContent =
+            pending;
+
+
+        document.getElementById(
+            "reviewCustomers"
+        ).textContent =
+            review;
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * FILTER
+     * ------------------------------------------------------
+     */
+
+    function getFilteredCustomers() {
+
+        const search =
+            document.getElementById(
+                "searchInput"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const status =
+            document.getElementById(
+                "statusFilter"
+            )
+            .value
+            .toLowerCase();
+
+
+        const accountType =
+            document.getElementById(
+                "accountFilter"
+            )
+            .value
+            .toLowerCase();
+
+
+        return allCustomers.filter(
+            customer => {
+
+                const searchable = [
+
+                    customer.id,
+
+                    customer.name,
+
+                    customer.email,
+
+                    customer.phone,
+
+                    customer.accountNumber
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+                const matchesSearch =
+                    !search ||
+                    searchable.includes(
+                        search
+                    );
+
+
+                const matchesStatus =
+                    !status ||
+                    customer.status
+                        .toLowerCase() ===
+                    status;
+
+
+                const matchesAccountType =
+                    !accountType ||
+                    customer.accountType
+                        .toLowerCase() ===
+                    accountType;
+
+
+                return (
+                    matchesSearch &&
+                    matchesStatus &&
+                    matchesAccountType
+                );
+
+            }
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * RENDER TABLE
+     * ------------------------------------------------------
+     */
+
+    function renderTable() {
+
+        filteredCustomers =
+            getFilteredCustomers();
+
+
+        const totalPages =
+            Math.max(
+                1,
+                Math.ceil(
+                    filteredCustomers.length /
+                    PAGE_SIZE
+                )
+            );
+
+
+        if (
+            currentPage >
+            totalPages
+        ) {
+
+            currentPage =
+                totalPages;
+
+        }
+
+
+        const start =
+            (
+                currentPage - 1
+            ) *
+            PAGE_SIZE;
+
+
+        const pageItems =
+            filteredCustomers.slice(
+                start,
+                start + PAGE_SIZE
+            );
+
+
+        const body =
+            document.getElementById(
+                "customerBody"
+            );
+
+
+        body.innerHTML = "";
+
+
+        if (!pageItems.length) {
+
+            body.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="empty"
+                    >
+                        No customers match your search or filters.
+                    </td>
+
+                </tr>
+
+            `;
+
+        } else {
+
+            pageItems.forEach(
+                customer => {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    const statusClass =
+                        customer.status
+                            .toLowerCase()
+                            .replace(
+                                /\s+/g,
+                                "-"
+                            );
+
+
+                    row.innerHTML = `
+
+                        <td>
+
+                            <div class="customer">
+
+                                <div class="avatar">
+
+                                    ${escapeHtml(
+                                        getInitials(
+                                            customer.name
+                                        )
+                                    )}
+
+                                </div>
+
+
+                                <div class="customer-info">
+
+                                    <strong>
+                                        ${escapeHtml(
+                                            customer.name
+                                        )}
+                                    </strong>
+
+                                    <span>
+                                        ${escapeHtml(
+                                            customer.email
+                                        )}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="account-number">
+
+                                ${escapeHtml(
+                                    customer.accountNumber
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHtml(
+                                customer.accountType
+                            )}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="balance">
+
+                                ${formatCurrency(
+                                    customer.balance
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="badge ${statusClass}"
+                            >
+                                ${escapeHtml(
+                                    customer.status
+                                )}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                type="button"
+                                class="view-button"
+                                data-id="${escapeHtml(
+                                    customer.id
+                                )}"
+                            >
+                                View
+                            </button>
+
+                        </td>
+
+                    `;
+
+
+                    body.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+        }
+
+
+        document.getElementById(
+            "paginationInfo"
+        ).textContent =
+
+            filteredCustomers.length
+
+                ? `Showing ${
+                    start + 1
+                }–${
+                    Math.min(
+                        start + PAGE_SIZE,
+                        filteredCustomers.length
+                    )
+                } of ${
+                    filteredCustomers.length
+                }`
+
+                : "Showing 0 customers";
+
+
+        document.getElementById(
+            "currentPage"
+        ).textContent =
+            currentPage;
+
+
+        document.getElementById(
+            "previousPage"
+        ).disabled =
+            currentPage <= 1;
+
+
+        document.getElementById(
+            "nextPage"
+        ).disabled =
+            currentPage >= totalPages;
+
+
+        body
+            .querySelectorAll(
+                ".view-button"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            const customer =
+                                allCustomers.find(
+                                    item =>
+                                        String(
+                                            item.id
+                                        ) ===
+                                        button.dataset.id
+                                );
+
+
+                            if (customer) {
+
+                                showCustomerDetails(
+                                    customer
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * LOAD CUSTOMERS
+     * ------------------------------------------------------
+     */
+
+    async function loadCustomers() {
+
+        /*
+         * Development fallback.
+         */
+
+        allCustomers =
+            demoCustomers.map(
+                normalizeCustomer
+            );
+
+
+        renderStatistics();
+
+        renderTable();
+
+
+        /*
+         * Live API.
+         */
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/users`,
+                    {
+                        method: "GET",
+
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `API returned ${response.status}`
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const customers =
+
+                Array.isArray(data)
+
+                    ? data
+
+                    : Array.isArray(
+                        data.users
+                    )
+
+                        ? data.users
+
+                        : Array.isArray(
+                            data.customers
+                        )
+
+                            ? data.customers
+
+                            : Array.isArray(
+                                data.data
+                            )
+
+                                ? data.data
+
+                                : [];
+
+
+            if (
+                Array.isArray(
+                    customers
+                )
+            ) {
+
+                allCustomers =
+                    customers.map(
+                        normalizeCustomer
+                    );
+
+
+                renderStatistics();
+
+                renderTable();
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Customer API unavailable. Development data retained.",
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * APPLY FILTERS
+     * ------------------------------------------------------
+     */
+
+    function applyFilters() {
+
+        currentPage = 1;
+
+        renderTable();
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * CUSTOMER DETAILS
+     * ------------------------------------------------------
+     */
+
+    function showCustomerDetails(
+        customer
+    ) {
+
+        document.getElementById(
+            "detailAvatar"
+        ).textContent =
+            getInitials(
+                customer.name
+            );
+
+
+        document.getElementById(
+            "detailName"
+        ).textContent =
+            customer.name;
+
+
+        document.getElementById(
+            "detailEmail"
+        ).textContent =
+            customer.email;
+
+
+        document.getElementById(
+            "detailId"
+        ).textContent =
+            customer.id;
+
+
+        document.getElementById(
+            "detailAccount"
+        ).textContent =
+            customer.accountNumber;
+
+
+        document.getElementById(
+            "detailAccountType"
+        ).textContent =
+            customer.accountType;
+
+
+        document.getElementById(
+            "detailStatus"
+        ).textContent =
+            customer.status;
+
+
+        document.getElementById(
+            "detailPhone"
+        ).textContent =
+            customer.phone;
+
+
+        document.getElementById(
+            "detailBalance"
+        ).textContent =
+            formatCurrency(
+                customer.balance
+            );
+
+
+        document.getElementById(
+            "detailRegistered"
+        ).textContent =
+            formatDate(
+                customer.registered
+            );
+
+
+        document.getElementById(
+            "detailActivity"
+        ).textContent =
+            formatDate(
+                customer.activity
+            );
+
+
+        document.getElementById(
+            "detailAddress"
+        ).textContent =
+            customer.address;
+
+
+        document.getElementById(
+            "customerModal"
+        ).classList.add(
+            "open"
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * CLOSE MODAL
+     * ------------------------------------------------------
+     */
+
+    function closeModal() {
+
+        document.getElementById(
+            "customerModal"
+        ).classList.remove(
+            "open"
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * EVENT LISTENERS
+     * ------------------------------------------------------
+     */
+
+    document.getElementById(
+        "searchInput"
+    ).addEventListener(
+        "input",
+        applyFilters
+    );
+
+
+    document.getElementById(
+        "statusFilter"
+    ).addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    document.getElementById(
+        "accountFilter"
+    ).addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    document.getElementById(
+        "clearFilters"
+    ).addEventListener(
+        "click",
+        () => {
+
+            document.getElementById(
+                "searchInput"
+            ).value = "";
+
+
+            document.getElementById(
+                "statusFilter"
+            ).value = "";
+
+
+            document.getElementById(
+                "accountFilter"
+            ).value = "";
+
+
+            applyFilters();
+
+        }
+    );
+
+
+    document.getElementById(
+        "refreshButton"
+    ).addEventListener(
+        "click",
+        loadCustomers
+    );
+
+
+    document.getElementById(
+        "previousPage"
+    ).addEventListener(
+        "click",
+        () => {
+
+            if (
+                currentPage > 1
+            ) {
+
+                currentPage--;
+
+                renderTable();
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "nextPage"
+    ).addEventListener(
+        "click",
+        () => {
+
+            const totalPages =
+                Math.max(
+                    1,
+                    Math.ceil(
+                        filteredCustomers.length /
+                        PAGE_SIZE
+                    )
+                );
+
+
+            if (
+                currentPage <
+                totalPages
+            ) {
+
+                currentPage++;
+
+                renderTable();
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "closeModal"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "closeDetails"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "customerModal"
+    ).addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target.id ===
+                "customerModal"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * ------------------------------------------------------
+     * CASHIER NAME
+     * ------------------------------------------------------
+     */
+
+    try {
+
+        const savedUser =
+            localStorage.getItem(
+                "gtf_user"
+            );
+
+
+        if (savedUser) {
+
+            const user =
+                JSON.parse(
+                    savedUser
+                );
+
+
+            document.getElementById(
+                "cashierName"
+            ).textContent =
+
+                user.full_name ||
+
+                user.name ||
+
+                user.email ||
+
+                "Cashier";
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Unable to load cashier profile.",
+            error
+        );
+
+    }
+
+
+    /*
+     * ------------------------------------------------------
+     * LOGOUT
+     * ------------------------------------------------------
+     */
+
+    function clearSession() {
+
+        const keys = [
+
+            "gtf_user",
+
+            "gtf_cashier",
+
+            "gtf_session",
+
+            "gtf_access_token",
+
+            "gtf_refresh_token",
+
+            "access_token",
+
+            "refresh_token"
+
+        ];
+
+
+        keys.forEach(
+            key => {
+
+                try {
+
+                    localStorage.removeItem(
+                        key
+                    );
+
+                } catch (error) {}
+
+            }
+        );
+
+
+        try {
+
+            sessionStorage.clear();
+
+        } catch (error) {}
+
+    }
+
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        () => {
+
+            clearSession();
+
+
+            fetch(
+                `${API_BASE}/auth/signout`,
+                {
+                    method: "POST",
+
+                    credentials:
+                        "include",
+
+                    headers: {
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            role: "cashier"
+                        })
+                }
+            )
+            .catch(
+                () => {}
+            )
+            .finally(
+                () => {
+
+                    window.location.replace(
+                        "./login.html"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+     * ------------------------------------------------------
+     * INITIALIZE
+     * ------------------------------------------------------
+     */
+
+    loadCustomers();
+
+</script>
+
+</body>
+</html>
