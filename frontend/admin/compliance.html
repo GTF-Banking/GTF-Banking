@@ -1,1963 +1,3205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GTF Banking compliance administration portal.">
-  <meta name="theme-color" content="#0b2a4a">
-  <title>Compliance | GTF Banking Administration</title>
-
-  <link rel="stylesheet" href="../css/styles.css">
-
-  <style>
-    :root {
-      --navy: #0b2a4a;
-      --blue: #145da0;
-      --blue-light: #eaf3fb;
-      --background: #f4f7fa;
-      --white: #ffffff;
-      --text: #172b3a;
-      --muted: #66788a;
-      --border: #d8e1e9;
-      --success: #16794c;
-      --danger: #b42318;
-      --warning: #9a6700;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.5;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .admin-header {
-      background: var(--navy);
-      color: white;
-    }
-
-    .header-inner {
-      max-width: 1450px;
-      margin: auto;
-      padding: 15px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-    }
-
-    .brand-name {
-      display: block;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    .brand-subtitle {
-      display: block;
-      color: #c8d7e4;
-      font-size: 0.72rem;
-    }
-
-    .header-title {
-      color: #d9e5ef;
-      font-size: 0.9rem;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .header-button {
-      border: 1px solid rgba(255,255,255,.3);
-      background: transparent;
-      color: white;
-      border-radius: 6px;
-      padding: 9px 13px;
-    }
-
-    .header-button:hover {
-      background: rgba(255,255,255,.1);
-    }
-
-    .layout {
-      max-width: 1450px;
-      margin: auto;
-      min-height: calc(100vh - 72px);
-      display: grid;
-      grid-template-columns: 230px 1fr;
-    }
-
-    .sidebar {
-      background: white;
-      border-right: 1px solid var(--border);
-      padding: 22px 14px;
-    }
-
-    .sidebar-title {
-      margin: 0 10px 12px;
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .sidebar-nav a {
-      padding: 11px 12px;
-      border-radius: 6px;
-      color: var(--text);
-      text-decoration: none;
-      font-size: .9rem;
-      font-weight: 600;
-    }
-
-    .sidebar-nav a:hover,
-    .sidebar-nav a.active {
-      background: var(--blue-light);
-      color: var(--blue);
-    }
-
-    main {
-      min-width: 0;
-      padding: 28px;
-    }
-
-    .page-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-
-    .page-header h1 {
-      margin: 0 0 5px;
-      color: var(--navy);
-      font-size: 1.8rem;
-    }
-
-    .page-header p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .refresh-btn {
-      border: 1px solid var(--blue);
-      background: white;
-      color: var(--blue);
-      border-radius: 6px;
-      padding: 10px 15px;
-      font-weight: 700;
-    }
-
-    .refresh-btn:hover {
-      background: var(--blue-light);
-    }
-
-    .notice {
-      display: none;
-      padding: 13px 15px;
-      border-radius: 7px;
-      margin-bottom: 20px;
-    }
-
-    .notice.visible {
-      display: block;
-    }
-
-    .notice.error {
-      background: #fff0ee;
-      border: 1px solid #f0c4bf;
-      color: var(--danger);
-    }
-
-    .notice.success {
-      background: #eaf8f0;
-      border: 1px solid #b9dec9;
-      color: var(--success);
-    }
-
-    .notice.warning {
-      background: #fff7df;
-      border: 1px solid #ecd58b;
-      color: var(--warning);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 22px;
-    }
-
-    .stat {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 20px;
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: .78rem;
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .stat-value {
-      color: var(--navy);
-      font-size: 1.65rem;
-      font-weight: 700;
-    }
-
-    .panel {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-
-    .panel-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .panel-header h2 {
-      margin: 0 0 4px;
-      color: var(--navy);
-      font-size: 1.1rem;
-    }
-
-    .panel-header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .82rem;
-    }
-
-    .filters {
-      padding: 18px 20px;
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
-      gap: 12px;
-      align-items: end;
-    }
-
-    .field label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: .78rem;
-      font-weight: 700;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px;
-      background: white;
-      color: var(--text);
-      outline: none;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(20,93,160,.1);
-    }
-
-    .primary-btn {
-      border: 0;
-      background: var(--blue);
-      color: white;
-      border-radius: 6px;
-      padding: 10px 15px;
-      font-weight: 700;
-    }
-
-    .primary-btn:hover {
-      background: var(--navy);
-    }
-
-    .secondary-btn {
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--text);
-      border-radius: 6px;
-      padding: 9px 13px;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      min-width: 950px;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      padding: 13px 15px;
-      text-align: left;
-      border-bottom: 1px solid #edf1f4;
-      vertical-align: top;
-    }
-
-    th {
-      background: #f8fafc;
-      color: var(--muted);
-      font-size: .73rem;
-      text-transform: uppercase;
-      letter-spacing: .03em;
-    }
-
-    td {
-      font-size: .84rem;
-    }
-
-    tbody tr:hover {
-      background: #fafcfe;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 4px 9px;
-      border-radius: 999px;
-      font-size: .7rem;
-      font-weight: 700;
-    }
-
-    .badge.pending {
-      background: #fff7df;
-      color: var(--warning);
-    }
-
-    .badge.approved,
-    .badge.completed {
-      background: #eaf8f0;
-      color: var(--success);
-    }
-
-    .badge.rejected,
-    .badge.blocked {
-      background: #fff0ee;
-      color: var(--danger);
-    }
-
-    .badge.review {
-      background: var(--blue-light);
-      color: var(--blue);
-    }
-
-    .action-btn {
-      border: 1px solid var(--border);
-      background: white;
-      color: var(--blue);
-      border-radius: 5px;
-      padding: 6px 9px;
-      font-size: .75rem;
-      font-weight: 700;
-    }
-
-    .action-btn:hover {
-      background: var(--blue-light);
-    }
-
-    .empty {
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--muted);
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,.48);
-      padding: 20px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal.visible {
-      display: flex;
-    }
-
-    .modal-card {
-      width: min(720px, 100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      background: white;
-      border-radius: 10px;
-    }
-
-    .modal-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .modal-header h2 {
-      margin: 0;
-      color: var(--navy);
-      font-size: 1.1rem;
-    }
-
-    .close {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font-size: 1.5rem;
-    }
-
-    .modal-body {
-      padding: 20px;
-    }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    .detail.full {
-      grid-column: 1 / -1;
-    }
-
-    .detail-label {
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .detail-value {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 22px;
-      padding-top: 15px;
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 1100px) {
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .filters {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 800px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .sidebar-nav {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      main {
-        padding: 20px 14px;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .header-title {
-        display: none;
-      }
-
-      .stats,
-      .filters,
-      .sidebar-nav,
-      .detail-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .detail.full {
-        grid-column: auto;
-      }
-
-      .page-header {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund Admin Compliance Dashboard"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>Compliance | Global TrustFund Admin</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <style>
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-green-dark: #092f24;
+            --gtf-green-light: #176b48;
+            --gtf-gold: #c9962b;
+            --gtf-background: #f4f8f6;
+            --gtf-card: #ffffff;
+            --gtf-border: #dfe8e3;
+            --gtf-text: #18372c;
+            --gtf-muted: #74827c;
+
+            --warning-bg: #fff7e6;
+            --warning-text: #9a6812;
+
+            --danger-bg: #fbecec;
+            --danger-text: #984545;
+
+            --success-bg: #eaf5ee;
+            --success-text: #176b48;
+
+            --info-bg: #edf4fa;
+            --info-text: #245c86;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            background: var(--gtf-background);
+            color: var(--gtf-text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* =====================================================
+           APP
+           ===================================================== */
+
+        .admin-app {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
+
+        .admin-sidebar {
+            width: 245px;
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            background: var(--gtf-green);
+            color: #ffffff;
+
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            padding: 22px 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            border-bottom: 1px solid
+                rgba(255,255,255,.12);
+
+            text-decoration: none;
+        }
+
+        .sidebar-brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .sidebar-brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand-text strong {
+            font-size: 13px;
+            line-height: 1.2;
+        }
+
+        .sidebar-brand-text span {
+            margin-top: 3px;
+            color: rgba(255,255,255,.65);
+            font-size: 8px;
+        }
+
+        .sidebar-label {
+            padding: 20px 20px 8px;
+
+            color: rgba(255,255,255,.42);
+
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            padding: 0 10px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 11px 12px;
+
+            border-radius: 7px;
+
+            color: rgba(255,255,255,.72);
+
+            font-size: 8px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(255,255,255,.08);
+            color: #ffffff;
+        }
+
+        .sidebar-nav a.active {
+            background: rgba(255,255,255,.14);
+            color: #ffffff;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 5px;
+
+            background: rgba(255,255,255,.08);
+
+            font-size: 9px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 15px;
+
+            border-top: 1px solid
+                rgba(255,255,255,.10);
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 12px;
+        }
+
+        .admin-avatar {
+            width: 31px;
+            height: 31px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+            color: var(--gtf-green);
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .admin-user strong {
+            display: block;
+            font-size: 8px;
+        }
+
+        .admin-user span {
+            display: block;
+            margin-top: 2px;
+
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .sidebar-logout {
+            width: 100%;
+            padding: 9px;
+
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 6px;
+
+            background: transparent;
+            color: rgba(255,255,255,.75);
+
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .sidebar-logout:hover {
+            background: rgba(255,255,255,.08);
+            color: #ffffff;
+        }
+
+        /* =====================================================
+           MAIN AREA
+           ===================================================== */
+
+        .admin-main {
+            width: calc(100% - 245px);
+            margin-left: 245px;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+           TOPBAR
+           ===================================================== */
+
+        .admin-topbar {
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 28px;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid var(--gtf-border);
+
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .topbar-title h1 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 18px;
+        }
+
+        .topbar-title p {
+            margin: 4px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .topbar-button {
+            min-width: 31px;
+            height: 31px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 7px;
+
+            background: #ffffff;
+            color: var(--gtf-green);
+
+            font-size: 10px;
+        }
+
+        .topbar-button:hover {
+            background: var(--gtf-background);
+        }
+
+        /* =====================================================
+           CONTENT
+           ===================================================== */
+
+        .admin-content {
+            padding: 27px;
+        }
+
+        .page-heading {
+            margin-bottom: 22px;
+        }
+
+        .page-heading h2 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 22px;
+        }
+
+        .page-heading p {
+            max-width: 720px;
+
+            margin: 6px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           STAT CARDS
+           ===================================================== */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 13px;
+
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            padding: 17px;
+
+            background: var(--gtf-card);
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 10px;
+
+            box-shadow:
+                0 8px 25px rgba(11,61,46,.04);
+        }
+
+        .stat-label {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+
+        .stat-value {
+            margin-top: 8px;
+
+            color: var(--gtf-green);
+
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .stat-note {
+            margin-top: 5px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .stat-note.warning {
+            color: var(--warning-text);
+        }
+
+        .stat-note.danger {
+            color: var(--danger-text);
+        }
+
+        .stat-note.success {
+            color: var(--success-text);
+        }
+
+        /* =====================================================
+           SECTION CARD
+           ===================================================== */
+
+        .content-card {
+            margin-bottom: 20px;
+
+            background: #ffffff;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 11px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 8px 28px rgba(11,61,46,.04);
+        }
+
+        .card-header {
+            min-height: 57px;
+
+            padding: 13px 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .card-header h3 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 11px;
+        }
+
+        .card-header p {
+            margin: 4px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .card-body {
+            padding: 17px;
+        }
+
+        /* =====================================================
+           FILTERS
+           ===================================================== */
+
+        .filters {
+            display: grid;
+
+            grid-template-columns:
+                minmax(180px, 1.7fr)
+                minmax(130px, 1fr)
+                minmax(130px, 1fr)
+                auto;
+
+            gap: 9px;
+
+            margin-bottom: 15px;
+        }
+
+        .filter-input,
+        .filter-select {
+            width: 100%;
+            height: 34px;
+
+            padding: 0 10px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #ffffff;
+            color: var(--gtf-text);
+
+            font-size: 8px;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            border-color: var(--gtf-green-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.08);
+        }
+
+        .filter-button {
+            height: 34px;
+
+            padding: 0 14px;
+
+            border: 1px solid var(--gtf-green);
+            border-radius: 6px;
+
+            background: var(--gtf-green);
+            color: #ffffff;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .filter-button:hover {
+            background: var(--gtf-green-dark);
+        }
+
+        /* =====================================================
+           TABLE
+           ===================================================== */
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .compliance-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 850px;
+        }
+
+        .compliance-table th {
+            padding: 10px;
+
+            background: #f7faf8;
+
+            color: var(--gtf-muted);
+
+            border-bottom: 1px solid var(--gtf-border);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        .compliance-table td {
+            padding: 11px 10px;
+
+            border-bottom: 1px solid #edf2ef;
+
+            color: var(--gtf-text);
+
+            font-size: 8px;
+            vertical-align: middle;
+        }
+
+        .compliance-table tbody tr:hover {
+            background: #fbfdfc;
+        }
+
+        .customer-name {
+            font-weight: 700;
+        }
+
+        .customer-id {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+        }
+
+        /* =====================================================
+           STATUS BADGES
+           ===================================================== */
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            font-size: 6px;
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .status.pending {
+            background: var(--warning-bg);
+            color: var(--warning-text);
+        }
+
+        .status.review {
+            background: var(--info-bg);
+            color: var(--info-text);
+        }
+
+        .status.approved {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .status.alert {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+
+        .status.low {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .status.medium {
+            background: var(--warning-bg);
+            color: var(--warning-text);
+        }
+
+        .status.high {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+
+        /* =====================================================
+           ACTION BUTTONS
+           ===================================================== */
+
+        .row-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-button {
+            padding: 6px 8px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 5px;
+
+            background: #ffffff;
+            color: var(--gtf-green);
+
+            font-size: 6px;
+            font-weight: 700;
+        }
+
+        .action-button:hover {
+            background: var(--gtf-background);
+        }
+
+        .action-button.primary {
+            border-color: var(--gtf-green);
+
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        .action-button.primary:hover {
+            background: var(--gtf-green-dark);
+        }
+
+        .action-button.warning {
+            border-color: #e7d29d;
+
+            color: var(--warning-text);
+        }
+
+        .action-button.danger {
+            border-color: #e7c4c4;
+
+            color: var(--danger-text);
+        }
+
+        /* =====================================================
+           TWO COLUMN SECTION
+           ===================================================== */
+
+        .bottom-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.35fr)
+                minmax(280px, .65fr);
+
+            gap: 20px;
+        }
+
+        /* =====================================================
+           CHECKLIST
+           ===================================================== */
+
+        .checklist {
+            display: grid;
+            gap: 10px;
+        }
+
+        .check-item {
+            padding: 11px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 7px;
+
+            background: #fbfdfc;
+        }
+
+        .check-info {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .check-icon {
+            width: 27px;
+            height: 27px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 6px;
+
+            background: var(--gtf-soft, #eaf3ee);
+            color: var(--gtf-green);
+
+            font-size: 9px;
+        }
+
+        .check-info strong {
+            display: block;
+
+            color: var(--gtf-text);
+
+            font-size: 8px;
+        }
+
+        .check-info span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+        }
+
+        /* =====================================================
+           RISK SUMMARY
+           ===================================================== */
+
+        .risk-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .risk-row {
+            display: grid;
+
+            grid-template-columns: 65px 1fr 40px;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+        .risk-label {
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .risk-bar {
+            height: 7px;
+
+            overflow: hidden;
+
+            border-radius: 8px;
+
+            background: #edf1ef;
+        }
+
+        .risk-fill {
+            height: 100%;
+
+            border-radius: inherit;
+        }
+
+        .risk-fill.low {
+            width: 74%;
+            background: var(--gtf-green-light);
+        }
+
+        .risk-fill.medium {
+            width: 39%;
+            background: var(--gtf-gold);
+        }
+
+        .risk-fill.high {
+            width: 12%;
+            background: #a04b4b;
+        }
+
+        .risk-count {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+
+            text-align: right;
+        }
+
+        /* =====================================================
+           ALERT BOX
+           ===================================================== */
+
+        .alert-box {
+            margin-top: 15px;
+
+            padding: 12px;
+
+            display: flex;
+            gap: 9px;
+
+            border: 1px solid #eed9a8;
+            border-radius: 7px;
+
+            background: var(--warning-bg);
+        }
+
+        .alert-box-icon {
+            font-size: 10px;
+        }
+
+        .alert-box strong {
+            display: block;
+
+            color: var(--warning-text);
+
+            font-size: 8px;
+        }
+
+        .alert-box span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #80642d;
+
+            font-size: 7px;
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           PAGINATION
+           ===================================================== */
+
+        .table-footer {
+            padding-top: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .table-count {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 4px;
+        }
+
+        .page-button {
+            width: 27px;
+            height: 27px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 5px;
+
+            background: #ffffff;
+            color: var(--gtf-text);
+
+            font-size: 7px;
+        }
+
+        .page-button:hover,
+        .page-button.active {
+            border-color: var(--gtf-green);
+
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        /* =====================================================
+           MODAL
+           ===================================================== */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(9,47,36,.45);
+
+            z-index: 500;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-card {
+            width: 100%;
+            max-width: 510px;
+
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.20);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 15px;
+        }
+
+        .modal-header p {
+            margin: 5px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .modal-close {
+            width: 27px;
+            height: 27px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+
+            background: #ffffff;
+            color: var(--gtf-muted);
+        }
+
+        .modal-close:hover {
+            color: var(--danger-text);
+        }
+
+        .detail-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .detail-item {
+            padding: 10px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+
+            background: #fbfdfc;
+        }
+
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            color: var(--gtf-text);
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .modal-actions {
+            margin-top: 18px;
+
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 7px;
+        }
+
+        /* =====================================================
+           MOBILE MENU
+           ===================================================== */
+
+        .mobile-menu-button {
+            display: none;
+
+            width: 32px;
+            height: 32px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+
+            background: #ffffff;
+            color: var(--gtf-green);
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .bottom-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .filter-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .admin-sidebar {
+                width: 0;
+                overflow: hidden;
+
+                transition: width .2s ease;
+            }
+
+            .admin-sidebar.open {
+                width: 245px;
+            }
+
+            .admin-main {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .mobile-menu-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .admin-topbar {
+                padding: 0 15px;
+            }
+
+            .admin-content {
+                padding: 18px 13px;
+            }
+
+            .topbar-title h1 {
+                font-size: 15px;
+            }
+
+            .topbar-title p {
+                display: none;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .card-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full {
+                grid-column: auto;
+            }
+
+            .table-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .page-heading h2 {
+                font-size: 19px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="admin-header">
-  <div class="header-inner">
+<div class="admin-app">
 
-    <a class="brand" href="index.html">
-      <img
-        src="../assets/gtf-logo.svg"
-        alt="GTF Banking"
-        onerror="this.style.display='none'"
-      >
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
 
-      <span>
-        <span class="brand-name">GTF Banking</span>
-        <span class="brand-subtitle">Administration</span>
-      </span>
-    </a>
+    <aside
+        class="admin-sidebar"
+        id="adminSidebar"
+    >
 
-    <span class="header-title">
-      Compliance Management
-    </span>
-
-    <div class="header-actions">
-      <button
-        id="dashboardButton"
-        class="header-button"
-        type="button"
-      >
-        Dashboard
-      </button>
-
-      <button
-        id="logoutButton"
-        class="header-button"
-        type="button"
-      >
-        Sign Out
-      </button>
-    </div>
-
-  </div>
-</header>
-
-
-<div class="layout">
-
-  <aside class="sidebar">
-
-    <p class="sidebar-title">
-      Administration
-    </p>
-
-    <nav class="sidebar-nav">
-
-      <a href="index.html">
-        Dashboard
-      </a>
-
-      <a href="users.html">
-        Users
-      </a>
-
-      <a href="accounts.html">
-        Accounts
-      </a>
-
-      <a href="transactions.html">
-        Transactions
-      </a>
-
-      <a href="audit.html">
-        Audit Log
-      </a>
-
-      <a
-        href="compliance.html"
-        class="active"
-        aria-current="page"
-      >
-        Compliance
-      </a>
-
-      <a href="reports.html">
-        Reports
-      </a>
-
-      <a href="settings.html">
-        Settings
-      </a>
-
-    </nav>
-
-  </aside>
-
-
-  <main>
-
-    <div class="page-header">
-
-      <div>
-        <h1>Compliance</h1>
-
-        <p>
-          Review customer compliance cases and
-          manage administrative review decisions.
-        </p>
-      </div>
-
-      <button
-        id="refreshButton"
-        class="refresh-btn"
-        type="button"
-      >
-        Refresh
-      </button>
-
-    </div>
-
-
-    <div
-      id="errorNotice"
-      class="notice error"
-      role="alert"
-    ></div>
-
-    <div
-      id="successNotice"
-      class="notice success"
-      role="status"
-    ></div>
-
-
-    <section class="stats">
-
-      <article class="stat">
-        <div class="stat-label">
-          Pending Review
-        </div>
-
-        <div
-          id="pendingCount"
-          class="stat-value"
+        <a
+            href="./index.html"
+            class="sidebar-brand"
         >
-          —
-        </div>
-      </article>
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund"
+            >
+
+            <span class="sidebar-brand-text">
+
+                <strong>
+                    Global TrustFund
+                </strong>
+
+                <span>
+                    Administration
+                </span>
+
+            </span>
+
+        </a>
 
 
-      <article class="stat">
-        <div class="stat-label">
-          Under Review
-        </div>
-
-        <div
-          id="reviewCount"
-          class="stat-value"
-        >
-          —
-        </div>
-      </article>
-
-
-      <article class="stat">
-        <div class="stat-label">
-          Approved
-        </div>
-
-        <div
-          id="approvedCount"
-          class="stat-value"
-        >
-          —
-        </div>
-      </article>
-
-
-      <article class="stat">
-        <div class="stat-label">
-          Requires Action
-        </div>
-
-        <div
-          id="actionCount"
-          class="stat-value"
-        >
-          —
-        </div>
-      </article>
-
-    </section>
-
-
-    <section class="panel">
-
-      <div class="panel-header">
-
-        <h2>
-          Compliance Cases
-        </h2>
-
-        <p>
-          Search and filter cases requiring
-          compliance review.
-        </p>
-
-      </div>
-
-
-      <form
-        id="filterForm"
-        class="filters"
-      >
-
-        <div class="field">
-
-          <label for="search">
-            Search
-          </label>
-
-          <input
-            id="search"
-            type="search"
-            placeholder="Name, case ID, account..."
-            autocomplete="off"
-          >
-
+        <div class="sidebar-label">
+            Main
         </div>
 
 
-        <div class="field">
+        <nav class="sidebar-nav">
 
-          <label for="caseType">
-            Case Type
-          </label>
+            <a href="./index.html">
 
-          <select id="caseType">
+                <span class="nav-icon">
+                    ⌂
+                </span>
 
-            <option value="">
-              All types
-            </option>
+                Dashboard
 
-            <option value="kyc">
-              KYC
-            </option>
+            </a>
 
-            <option value="identity">
-              Identity
-            </option>
 
-            <option value="account_review">
-              Account Review
-            </option>
+            <a href="./customers.html">
 
-            <option value="transaction_review">
-              Transaction Review
-            </option>
+                <span class="nav-icon">
+                    ♙
+                </span>
 
-            <option value="risk">
-              Risk Review
-            </option>
+                Customers
 
-          </select>
+            </a>
 
+
+            <a href="./accounts.html">
+
+                <span class="nav-icon">
+                    ▣
+                </span>
+
+                Accounts
+
+            </a>
+
+
+            <a href="./transactions.html">
+
+                <span class="nav-icon">
+                    ⇄
+                </span>
+
+                Transactions
+
+            </a>
+
+
+            <a
+                href="./compliance.html"
+                class="active"
+                aria-current="page"
+            >
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+
+                Compliance
+
+            </a>
+
+
+            <a href="./reports.html">
+
+                <span class="nav-icon">
+                    ▤
+                </span>
+
+                Reports
+
+            </a>
+
+
+            <a href="./audit.html">
+
+                <span class="nav-icon">
+                    ◌
+                </span>
+
+                Audit Log
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-label">
+            System
         </div>
 
 
-        <div class="field">
+        <nav class="sidebar-nav">
 
-          <label for="caseStatus">
-            Status
-          </label>
+            <a href="./settings.html">
 
-          <select id="caseStatus">
+                <span class="nav-icon">
+                    ⚙
+                </span>
 
-            <option value="">
-              All statuses
-            </option>
+                Settings
 
-            <option value="pending">
-              Pending
-            </option>
+            </a>
 
-            <option value="review">
-              Under Review
-            </option>
-
-            <option value="approved">
-              Approved
-            </option>
-
-            <option value="rejected">
-              Rejected
-            </option>
-
-            <option value="blocked">
-              Requires Action
-            </option>
-
-          </select>
-
-        </div>
+        </nav>
 
 
-        <div class="field">
+        <div class="sidebar-bottom">
 
-          <label for="riskLevel">
-            Risk Level
-          </label>
+            <div class="admin-user">
 
-          <select id="riskLevel">
+                <div class="admin-avatar">
+                    AD
+                </div>
 
-            <option value="">
-              All levels
-            </option>
+                <div>
 
-            <option value="low">
-              Low
-            </option>
+                    <strong>
+                        Administrator
+                    </strong>
 
-            <option value="medium">
-              Medium
-            </option>
+                    <span>
+                        Compliance Access
+                    </span>
 
-            <option value="high">
-              High
-            </option>
+                </div>
 
-          </select>
+            </div>
+
+
+            <button
+                type="button"
+                class="sidebar-logout"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
 
         </div>
 
-
-        <button
-          class="primary-btn"
-          type="submit"
-        >
-          Filter
-        </button>
-
-      </form>
-
-    </section>
+    </aside>
 
 
-    <section class="panel">
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
-      <div class="table-wrap">
+    <main class="admin-main">
 
-        <table>
 
-          <thead>
+        <!-- TOPBAR -->
 
-            <tr>
-              <th>Case ID</th>
-              <th>Customer</th>
-              <th>Case Type</th>
-              <th>Risk</th>
-              <th>Status</th>
-              <th>Updated</th>
-              <th>Action</th>
-            </tr>
+        <header class="admin-topbar">
 
-          </thead>
+            <div
+                class="topbar-actions"
+                style="order:0;"
+            >
 
-          <tbody id="casesBody">
+                <button
+                    type="button"
+                    class="mobile-menu-button"
+                    id="menuButton"
+                    aria-label="Open navigation"
+                >
+                    ☰
+                </button>
 
-            <tr>
-              <td
-                colspan="7"
-                class="empty"
-              >
-                Loading compliance cases...
-              </td>
-            </tr>
+            </div>
 
-          </tbody>
 
-        </table>
+            <div
+                class="topbar-title"
+                style="margin-right:auto; margin-left:12px;"
+            >
 
-      </div>
+                <h1>
+                    Compliance
+                </h1>
 
-    </section>
+                <p>
+                    Customer verification and regulatory review
+                </p>
 
-  </main>
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    type="button"
+                    class="topbar-button"
+                    title="Notifications"
+                    aria-label="Notifications"
+                >
+                    ♢
+                </button>
+
+                <button
+                    type="button"
+                    class="topbar-button"
+                    title="Refresh"
+                    aria-label="Refresh"
+                    id="refreshButton"
+                >
+                    ↻
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <section class="admin-content">
+
+
+            <div class="page-heading">
+
+                <h2>
+                    Compliance & Verification
+                </h2>
+
+                <p>
+                    Monitor customer verification, review compliance
+                    cases, identify risk indicators, and maintain an
+                    auditable workflow for account applications.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATISTICS
+                 ================================================= -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Pending Reviews
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="pendingCount"
+                    >
+                        18
+                    </div>
+
+                    <div class="stat-note warning">
+                        Requires attention
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        In Review
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="reviewCount"
+                    >
+                        11
+                    </div>
+
+                    <div class="stat-note">
+                        Currently being assessed
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Cleared
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="clearedCount"
+                    >
+                        246
+                    </div>
+
+                    <div class="stat-note success">
+                        Verification complete
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-label">
+                        Risk Alerts
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="riskCount"
+                    >
+                        7
+                    </div>
+
+                    <div class="stat-note danger">
+                        Requires investigation
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 COMPLIANCE CASES
+                 ================================================= -->
+
+            <section class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Compliance Cases
+                        </h3>
+
+                        <p>
+                            Review customer verification and risk
+                            assessment records.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="action-button primary"
+                        id="exportButton"
+                    >
+                        Export Report
+                    </button>
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="filters">
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            class="filter-input"
+                            placeholder="Search customer, account or case ID..."
+                            aria-label="Search compliance cases"
+                        >
+
+
+                        <select
+                            id="statusFilter"
+                            class="filter-select"
+                            aria-label="Filter by status"
+                        >
+
+                            <option value="all">
+                                All Statuses
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="review">
+                                In Review
+                            </option>
+
+                            <option value="approved">
+                                Cleared
+                            </option>
+
+                            <option value="alert">
+                                Alert
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="riskFilter"
+                            class="filter-select"
+                            aria-label="Filter by risk"
+                        >
+
+                            <option value="all">
+                                All Risk Levels
+                            </option>
+
+                            <option value="low">
+                                Low Risk
+                            </option>
+
+                            <option value="medium">
+                                Medium Risk
+                            </option>
+
+                            <option value="high">
+                                High Risk
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="button"
+                            class="filter-button"
+                            id="filterButton"
+                        >
+                            Apply
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table class="compliance-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Customer
+                                    </th>
+
+                                    <th>
+                                        Case
+                                    </th>
+
+                                    <th>
+                                        Verification
+                                    </th>
+
+                                    <th>
+                                        Risk
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Updated
+                                    </th>
+
+                                    <th>
+                                        Action
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="complianceTableBody">
+
+                                <tr
+                                    data-status="pending"
+                                    data-risk="medium"
+                                >
+
+                                    <td>
+
+                                        <span class="customer-name">
+                                            Amara Johnson
+                                        </span>
+
+                                        <span class="customer-id">
+                                            Customer #GTF-10021
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        CMP-004821
+                                    </td>
+
+                                    <td>
+                                        Identity Review
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status medium">
+                                            Medium
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status pending">
+                                            Pending
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Today, 10:42
+                                    </td>
+
+                                    <td>
+
+                                        <div class="row-actions">
+
+                                            <button
+                                                type="button"
+                                                class="action-button primary review-button"
+                                                data-customer="Amara Johnson"
+                                                data-case="CMP-004821"
+                                                data-verification="Identity Review"
+                                                data-risk="Medium"
+                                                data-status="Pending"
+                                            >
+                                                Review
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr
+                                    data-status="review"
+                                    data-risk="low"
+                                >
+
+                                    <td>
+
+                                        <span class="customer-name">
+                                            Daniel Okafor
+                                        </span>
+
+                                        <span class="customer-id">
+                                            Customer #GTF-10035
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        CMP-004819
+                                    </td>
+
+                                    <td>
+                                        Address Verification
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status low">
+                                            Low
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status review">
+                                            In Review
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Today, 09:18
+                                    </td>
+
+                                    <td>
+
+                                        <div class="row-actions">
+
+                                            <button
+                                                type="button"
+                                                class="action-button primary review-button"
+                                                data-customer="Daniel Okafor"
+                                                data-case="CMP-004819"
+                                                data-verification="Address Verification"
+                                                data-risk="Low"
+                                                data-status="In Review"
+                                            >
+                                                Review
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr
+                                    data-status="alert"
+                                    data-risk="high"
+                                >
+
+                                    <td>
+
+                                        <span class="customer-name">
+                                            Michael Carter
+                                        </span>
+
+                                        <span class="customer-id">
+                                            Customer #GTF-10044
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        CMP-004817
+                                    </td>
+
+                                    <td>
+                                        Enhanced Review
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status high">
+                                            High
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status alert">
+                                            Alert
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Yesterday, 16:32
+                                    </td>
+
+                                    <td>
+
+                                        <div class="row-actions">
+
+                                            <button
+                                                type="button"
+                                                class="action-button danger review-button"
+                                                data-customer="Michael Carter"
+                                                data-case="CMP-004817"
+                                                data-verification="Enhanced Review"
+                                                data-risk="High"
+                                                data-status="Alert"
+                                            >
+                                                Investigate
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr
+                                    data-status="approved"
+                                    data-risk="low"
+                                >
+
+                                    <td>
+
+                                        <span class="customer-name">
+                                            Sofia Williams
+                                        </span>
+
+                                        <span class="customer-id">
+                                            Customer #GTF-10051
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        CMP-004811
+                                    </td>
+
+                                    <td>
+                                        Identity Review
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status low">
+                                            Low
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status approved">
+                                            Cleared
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Yesterday, 14:05
+                                    </td>
+
+                                    <td>
+
+                                        <div class="row-actions">
+
+                                            <button
+                                                type="button"
+                                                class="action-button review-button"
+                                                data-customer="Sofia Williams"
+                                                data-case="CMP-004811"
+                                                data-verification="Identity Review"
+                                                data-risk="Low"
+                                                data-status="Cleared"
+                                            >
+                                                View
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr
+                                    data-status="pending"
+                                    data-risk="low"
+                                >
+
+                                    <td>
+
+                                        <span class="customer-name">
+                                            David Mensah
+                                        </span>
+
+                                        <span class="customer-id">
+                                            Customer #GTF-10063
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        CMP-004806
+                                    </td>
+
+                                    <td>
+                                        Customer Verification
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status low">
+                                            Low
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status pending">
+                                            Pending
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Aug 26, 12:47
+                                    </td>
+
+                                    <td>
+
+                                        <div class="row-actions">
+
+                                            <button
+                                                type="button"
+                                                class="action-button primary review-button"
+                                                data-customer="David Mensah"
+                                                data-case="CMP-004806"
+                                                data-verification="Customer Verification"
+                                                data-risk="Low"
+                                                data-status="Pending"
+                                            >
+                                                Review
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr
+                                    data-status="review"
+                                    data-risk="medium"
+                                >
+
+                                    <td>
+
+                                        <span class="customer-name">
+                                            Grace Thompson
+                                        </span>
+
+                                        <span class="customer-id">
+                                            Customer #GTF-10072
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        CMP-004798
+                                    </td>
+
+                                    <td>
+                                        Source Review
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status medium">
+                                            Medium
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="status review">
+                                            In Review
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        Aug 26, 11:22
+                                    </td>
+
+                                    <td>
+
+                                        <div class="row-actions">
+
+                                            <button
+                                                type="button"
+                                                class="action-button primary review-button"
+                                                data-customer="Grace Thompson"
+                                                data-case="CMP-004798"
+                                                data-verification="Source Review"
+                                                data-risk="Medium"
+                                                data-status="In Review"
+                                            >
+                                                Review
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="table-footer">
+
+                        <span class="table-count">
+                            Showing compliance cases
+                        </span>
+
+
+                        <div class="pagination">
+
+                            <button
+                                type="button"
+                                class="page-button active"
+                            >
+                                1
+                            </button>
+
+                            <button
+                                type="button"
+                                class="page-button"
+                            >
+                                2
+                            </button>
+
+                            <button
+                                type="button"
+                                class="page-button"
+                            >
+                                3
+                            </button>
+
+                            <button
+                                type="button"
+                                class="page-button"
+                            >
+                                →
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 BOTTOM GRID
+                 ================================================= -->
+
+            <div class="bottom-grid">
+
+
+                <!-- COMPLIANCE CHECKLIST -->
+
+                <section class="content-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Compliance Checklist
+                            </h3>
+
+                            <p>
+                                Current operational controls and review
+                                requirements.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="checklist">
+
+
+                            <div class="check-item">
+
+                                <div class="check-info">
+
+                                    <div class="check-icon">
+                                        ✓
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Identity verification
+                                        </strong>
+
+                                        <span>
+                                            Confirm required customer
+                                            identity information.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="status approved">
+                                    Active
+                                </span>
+
+                            </div>
+
+
+                            <div class="check-item">
+
+                                <div class="check-info">
+
+                                    <div class="check-icon">
+                                        ✓
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Account review
+                                        </strong>
+
+                                        <span>
+                                            Review account applications
+                                            before approval.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="status approved">
+                                    Active
+                                </span>
+
+                            </div>
+
+
+                            <div class="check-item">
+
+                                <div class="check-info">
+
+                                    <div class="check-icon">
+                                        !
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Risk monitoring
+                                        </strong>
+
+                                        <span>
+                                            Investigate cases flagged
+                                            for additional review.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="status pending">
+                                    7 Alerts
+                                </span>
+
+                            </div>
+
+
+                            <div class="check-item">
+
+                                <div class="check-info">
+
+                                    <div class="check-icon">
+                                        ◌
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Periodic review
+                                        </strong>
+
+                                        <span>
+                                            Review existing customer
+                                            records on schedule.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="status review">
+                                    Scheduled
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="alert-box">
+
+                            <div class="alert-box-icon">
+                                ⚠
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Compliance attention required
+                                </strong>
+
+                                <span>
+                                    Seven risk alerts currently require
+                                    review. Ensure authorized staff
+                                    investigate and document applicable
+                                    cases according to your organization's
+                                    procedures.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- RISK SUMMARY -->
+
+                <section class="content-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Risk Overview
+                            </h3>
+
+                            <p>
+                                Current case distribution.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <div class="risk-list">
+
+
+                            <div class="risk-row">
+
+                                <span class="risk-label">
+                                    Low
+                                </span>
+
+                                <div class="risk-bar">
+
+                                    <div class="risk-fill low"></div>
+
+                                </div>
+
+                                <span class="risk-count">
+                                    182
+                                </span>
+
+                            </div>
+
+
+                            <div class="risk-row">
+
+                                <span class="risk-label">
+                                    Medium
+                                </span>
+
+                                <div class="risk-bar">
+
+                                    <div class="risk-fill medium"></div>
+
+                                </div>
+
+                                <span class="risk-count">
+                                    61
+                                </span>
+
+                            </div>
+
+
+                            <div class="risk-row">
+
+                                <span class="risk-label">
+                                    High
+                                </span>
+
+                                <div class="risk-bar">
+
+                                    <div class="risk-fill high"></div>
+
+                                </div>
+
+                                <span class="risk-count">
+                                    7
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            style="
+                                margin-top:20px;
+                                padding-top:15px;
+                                border-top:1px solid var(--gtf-border);
+                            "
+                        >
+
+                            <div
+                                style="
+                                    color:var(--gtf-muted);
+                                    font-size:7px;
+                                    margin-bottom:5px;
+                                "
+                            >
+                                TOTAL ACTIVE CASES
+                            </div>
+
+                            <div
+                                style="
+                                    color:var(--gtf-green);
+                                    font-size:22px;
+                                    font-weight:800;
+                                "
+                            >
+                                250
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 
-<!-- =====================================================
-     CASE DETAILS MODAL
-     ====================================================== -->
+<!-- =========================================================
+     REVIEW MODAL
+     ========================================================= -->
 
 <div
-  id="caseModal"
-  class="modal"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="caseModalTitle"
+    class="modal"
+    id="reviewModal"
+    aria-hidden="true"
 >
 
-  <div class="modal-card">
+    <div
+        class="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+    >
 
-    <div class="modal-header">
+        <div class="modal-header">
 
-      <h2 id="caseModalTitle">
-        Compliance Case
-      </h2>
+            <div>
 
-      <button
-        id="closeModal"
-        class="close"
-        type="button"
-        aria-label="Close"
-      >
-        ×
-      </button>
+                <h3 id="modalTitle">
+                    Compliance Case
+                </h3>
+
+                <p>
+                    Review the case information below.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="modalClose"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Customer
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalCustomer"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Case ID
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalCase"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Verification
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalVerification"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <span class="detail-label">
+                    Risk Level
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalRisk"
+                >
+                    —
+                </span>
+
+            </div>
+
+
+            <div class="detail-item full">
+
+                <span class="detail-label">
+                    Current Status
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="modalStatus"
+                >
+                    —
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="action-button"
+                id="modalCancel"
+            >
+                Close
+            </button>
+
+            <button
+                type="button"
+                class="action-button primary"
+                id="modalConfirm"
+            >
+                Mark Reviewed
+            </button>
+
+        </div>
 
     </div>
 
-
-    <div
-      id="modalBody"
-      class="modal-body"
-    ></div>
-
-  </div>
-
 </div>
-
-
-<script src="../js/app.js" defer></script>
 
 
 <script>
-"use strict";
+(function () {
 
+    "use strict";
 
-/* =====================================================
-   STATE
-   ===================================================== */
 
-const state = {
-  cases: [],
-  filters: {
-    search: "",
-    caseType: "",
-    caseStatus: "",
-    riskLevel: ""
-  }
-};
+    /* =====================================================
+       MOBILE SIDEBAR
+       ===================================================== */
 
+    const menuButton =
+        document.getElementById("menuButton");
 
-/* =====================================================
-   ELEMENTS
-   ===================================================== */
+    const adminSidebar =
+        document.getElementById("adminSidebar");
 
-const casesBody =
-  document.getElementById("casesBody");
 
-const caseModal =
-  document.getElementById("caseModal");
+    if (menuButton && adminSidebar) {
 
-const modalBody =
-  document.getElementById("modalBody");
+        menuButton.addEventListener(
+            "click",
+            function () {
 
-const closeModal =
-  document.getElementById("closeModal");
+                adminSidebar.classList.toggle("open");
 
-const filterForm =
-  document.getElementById("filterForm");
-
-const errorNotice =
-  document.getElementById("errorNotice");
-
-const successNotice =
-  document.getElementById("successNotice");
-
-
-/* =====================================================
-   SAFE HTML
-   ===================================================== */
-
-function escapeHtml(value) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-    return "";
-  }
-
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
-/* =====================================================
-   NOTICES
-   ===================================================== */
-
-function showError(message) {
-
-  successNotice.classList.remove("visible");
-
-  errorNotice.textContent =
-    message || "An error occurred.";
-
-  errorNotice.classList.add("visible");
-}
-
-
-function showSuccess(message) {
-
-  errorNotice.classList.remove("visible");
-
-  successNotice.textContent =
-    message || "Operation completed.";
-
-  successNotice.classList.add("visible");
-
-  setTimeout(() => {
-    successNotice.classList.remove("visible");
-  }, 4000);
-}
-
-
-/* =====================================================
-   BADGES
-   ===================================================== */
-
-function statusBadge(status) {
-
-  const value =
-    String(status || "pending")
-      .toLowerCase();
-
-  let className = "pending";
-
-  if (
-    value === "approved" ||
-    value === "completed"
-  ) {
-    className = "approved";
-  }
-
-  if (
-    value === "rejected" ||
-    value === "blocked"
-  ) {
-    className = "rejected";
-  }
-
-  if (
-    value === "review" ||
-    value === "under_review"
-  ) {
-    className = "review";
-  }
-
-  const label =
-    value
-      .replaceAll("_", " ")
-      .replace(/\b\w/g, c => c.toUpperCase());
-
-  return `
-    <span class="badge ${className}">
-      ${escapeHtml(label)}
-    </span>
-  `;
-}
-
-
-function riskBadge(risk) {
-
-  const value =
-    String(risk || "low")
-      .toLowerCase();
-
-  let className = "approved";
-
-  if (value === "medium") {
-    className = "pending";
-  }
-
-  if (value === "high") {
-    className = "rejected";
-  }
-
-  return `
-    <span class="badge ${className}">
-      ${escapeHtml(
-        value.charAt(0).toUpperCase() +
-        value.slice(1)
-      )}
-    </span>
-  `;
-}
-
-
-/* =====================================================
-   DATE
-   ===================================================== */
-
-function formatDate(value) {
-
-  if (!value) {
-    return "—";
-  }
-
-  const date = new Date(value);
-
-  if (Number.isNaN(date.getTime())) {
-    return escapeHtml(value);
-  }
-
-  return date.toLocaleString();
-}
-
-
-/* =====================================================
-   LOAD CASES
-   ===================================================== */
-
-async function loadComplianceCases() {
-
-  casesBody.innerHTML = `
-    <tr>
-      <td colspan="7" class="empty">
-        Loading compliance cases...
-      </td>
-    </tr>
-  `;
-
-
-  try {
-
-    /*
-     * Your backend should expose this function
-     * through app.js or another frontend module.
-     *
-     * The backend must perform authentication
-     * and authorization before returning cases.
-     */
-
-    if (
-      typeof window.gtfAdminGetComplianceCases !==
-      "function"
-    ) {
-
-      throw new Error(
-        "Compliance API is not connected."
-      );
-    }
-
-
-    const result =
-      await window.gtfAdminGetComplianceCases(
-        state.filters
-      );
-
-
-    if (
-      result?.forbidden
-    ) {
-
-      showError(
-        "You do not have permission to view compliance cases."
-      );
-
-      renderCases([]);
-
-      return;
-    }
-
-
-    if (
-      !result ||
-      result.success === false
-    ) {
-
-      throw new Error(
-        result?.message ||
-        "Unable to load compliance cases."
-      );
-    }
-
-
-    state.cases =
-      Array.isArray(result.cases)
-        ? result.cases
-        : Array.isArray(result.data)
-          ? result.data
-          : [];
-
-
-    renderCases(
-      state.cases
-    );
-
-    updateStatistics(
-      state.cases
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "Compliance loading error:",
-      error
-    );
-
-    showError(
-      error.message ||
-      "Unable to load compliance cases."
-    );
-
-
-    casesBody.innerHTML = `
-      <tr>
-        <td
-          colspan="7"
-          class="empty"
-        >
-          Compliance cases could not be loaded.
-        </td>
-      </tr>
-    `;
-
-  }
-}
-
-
-/* =====================================================
-   RENDER CASES
-   ===================================================== */
-
-function renderCases(cases) {
-
-  casesBody.innerHTML = "";
-
-
-  if (
-    !cases ||
-    cases.length === 0
-  ) {
-
-    casesBody.innerHTML = `
-      <tr>
-        <td
-          colspan="7"
-          class="empty"
-        >
-          No compliance cases found.
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-
-  cases.forEach(
-    function (item) {
-
-      const id =
-        item.id ||
-        item.case_id ||
-        "—";
-
-
-      const customer =
-        item.customer_name ||
-        item.full_name ||
-        item.email ||
-        item.user_id ||
-        "Unknown";
-
-
-      const type =
-        item.case_type ||
-        item.type ||
-        "—";
-
-
-      const risk =
-        item.risk_level ||
-        item.risk ||
-        "low";
-
-
-      const status =
-        item.status ||
-        "pending";
-
-
-      const updated =
-        item.updated_at ||
-        item.created_at;
-
-
-      const row =
-        document.createElement("tr");
-
-
-      row.innerHTML = `
-
-        <td>
-          <strong>
-            ${escapeHtml(id)}
-          </strong>
-        </td>
-
-        <td>
-          ${escapeHtml(customer)}
-        </td>
-
-        <td>
-          ${escapeHtml(
-            String(type)
-              .replaceAll("_", " ")
-          )}
-        </td>
-
-        <td>
-          ${riskBadge(risk)}
-        </td>
-
-        <td>
-          ${statusBadge(status)}
-        </td>
-
-        <td>
-          ${formatDate(updated)}
-        </td>
-
-        <td>
-
-          <button
-            class="action-btn"
-            type="button"
-            data-case-id="${escapeHtml(id)}"
-          >
-            Review
-          </button>
-
-        </td>
-
-      `;
-
-
-      casesBody.appendChild(row);
-
-    }
-  );
-
-
-  document
-    .querySelectorAll(".action-btn")
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          openCase(
-            button.dataset.caseId
-          );
-
-        }
-      );
-
-    });
-}
-
-
-/* =====================================================
-   STATISTICS
-   ===================================================== */
-
-function updateStatistics(cases) {
-
-  const pending =
-    cases.filter(
-      item =>
-        String(item.status || "")
-          .toLowerCase() === "pending"
-    ).length;
-
-
-  const review =
-    cases.filter(
-      item =>
-        ["review", "under_review"]
-          .includes(
-            String(item.status || "")
-              .toLowerCase()
-          )
-    ).length;
-
-
-  const approved =
-    cases.filter(
-      item =>
-        String(item.status || "")
-          .toLowerCase() === "approved"
-    ).length;
-
-
-  const action =
-    cases.filter(
-      item =>
-        ["blocked", "rejected"]
-          .includes(
-            String(item.status || "")
-              .toLowerCase()
-          )
-    ).length;
-
-
-  document.getElementById(
-    "pendingCount"
-  ).textContent = pending;
-
-
-  document.getElementById(
-    "reviewCount"
-  ).textContent = review;
-
-
-  document.getElementById(
-    "approvedCount"
-  ).textContent = approved;
-
-
-  document.getElementById(
-    "actionCount"
-  ).textContent = action;
-}
-
-
-/* =====================================================
-   OPEN CASE
-   ===================================================== */
-
-function openCase(caseId) {
-
-  const item =
-    state.cases.find(
-      caseItem =>
-        String(
-          caseItem.id ||
-          caseItem.case_id
-        ) === String(caseId)
-    );
-
-
-  if (!item) {
-    return;
-  }
-
-
-  const id =
-    item.id ||
-    item.case_id ||
-    "—";
-
-
-  modalBody.innerHTML = `
-
-    <div class="detail-grid">
-
-      <div class="detail">
-        <div class="detail-label">
-          Case ID
-        </div>
-
-        <div class="detail-value">
-          ${escapeHtml(id)}
-        </div>
-      </div>
-
-
-      <div class="detail">
-        <div class="detail-label">
-          Customer
-        </div>
-
-        <div class="detail-value">
-          ${escapeHtml(
-            item.customer_name ||
-            item.full_name ||
-            item.email ||
-            item.user_id ||
-            "Unknown"
-          )}
-        </div>
-      </div>
-
-
-      <div class="detail">
-        <div class="detail-label">
-          Case Type
-        </div>
-
-        <div class="detail-value">
-          ${escapeHtml(
-            item.case_type ||
-            item.type ||
-            "—"
-          )}
-        </div>
-      </div>
-
-
-      <div class="detail">
-        <div class="detail-label">
-          Risk Level
-        </div>
-
-        <div class="detail-value">
-          ${riskBadge(
-            item.risk_level ||
-            item.risk
-          )}
-        </div>
-      </div>
-
-
-      <div class="detail">
-        <div class="detail-label">
-          Status
-        </div>
-
-        <div class="detail-value">
-          ${statusBadge(
-            item.status
-          )}
-        </div>
-      </div>
-
-
-      <div class="detail">
-        <div class="detail-label">
-          Created
-        </div>
-
-        <div class="detail-value">
-          ${formatDate(
-            item.created_at
-          )}
-        </div>
-      </div>
-
-
-      <div class="detail full">
-
-        <div class="detail-label">
-          Description
-        </div>
-
-        <div class="detail-value">
-          ${escapeHtml(
-            item.description ||
-            item.notes ||
-            "No description provided."
-          )}
-        </div>
-
-      </div>
-
-
-      <div class="detail full">
-
-        <div class="detail-label">
-          Review Notes
-        </div>
-
-        <div class="field">
-
-          <textarea
-            id="reviewNotes"
-            rows="5"
-            placeholder="Enter compliance review notes..."
-          ></textarea>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <button
-        id="closeCaseButton"
-        class="secondary-btn"
-        type="button"
-      >
-        Close
-      </button>
-
-
-      <button
-        id="reviewCaseButton"
-        class="primary-btn"
-        type="button"
-      >
-        Mark Under Review
-      </button>
-
-    </div>
-
-  `;
-
-
-  caseModal.classList.add(
-    "visible"
-  );
-
-
-  document
-    .getElementById(
-      "closeCaseButton"
-    )
-    .addEventListener(
-      "click",
-      closeCase
-    );
-
-
-  document
-    .getElementById(
-      "reviewCaseButton"
-    )
-    .addEventListener(
-      "click",
-      () =>
-        updateCaseStatus(
-          id,
-          "review"
-        )
-    );
-
-
-  closeModal.focus();
-}
-
-
-/* =====================================================
-   UPDATE CASE
-   ===================================================== */
-
-async function updateCaseStatus(
-  caseId,
-  status
-) {
-
-  const notes =
-    document.getElementById(
-      "reviewNotes"
-    )?.value.trim() || "";
-
-
-  try {
-
-    if (
-      typeof window.gtfAdminUpdateComplianceCase !==
-      "function"
-    ) {
-
-      throw new Error(
-        "Compliance update API is not connected."
-      );
-    }
-
-
-    const result =
-      await window.gtfAdminUpdateComplianceCase(
-        caseId,
-        {
-          status,
-          notes
-        }
-      );
-
-
-    if (
-      !result ||
-      result.success === false
-    ) {
-
-      throw new Error(
-        result?.message ||
-        "Unable to update compliance case."
-      );
-    }
-
-
-    closeCase();
-
-    showSuccess(
-      "Compliance case updated successfully."
-    );
-
-
-    await loadComplianceCases();
-
-
-  } catch (error) {
-
-    console.error(
-      "Compliance update error:",
-      error
-    );
-
-
-    showError(
-      error.message ||
-      "Unable to update compliance case."
-    );
-
-  }
-}
-
-
-/* =====================================================
-   CLOSE CASE
-   ===================================================== */
-
-function closeCase() {
-
-  caseModal.classList.remove(
-    "visible"
-  );
-
-}
-
-
-closeModal.addEventListener(
-  "click",
-  closeCase
-);
-
-
-caseModal.addEventListener(
-  "click",
-  event => {
-
-    if (
-      event.target === caseModal
-    ) {
-
-      closeCase();
-
-    }
-
-  }
-);
-
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "Escape"
-    ) {
-
-      closeCase();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   FILTER FORM
-   ===================================================== */
-
-filterForm.addEventListener(
-  "submit",
-  event => {
-
-    event.preventDefault();
-
-
-    state.filters = {
-
-      search:
-        document.getElementById(
-          "search"
-        ).value.trim(),
-
-      caseType:
-        document.getElementById(
-          "caseType"
-        ).value,
-
-      caseStatus:
-        document.getElementById(
-          "caseStatus"
-        ).value,
-
-      riskLevel:
-        document.getElementById(
-          "riskLevel"
-        ).value
-
-    };
-
-
-    loadComplianceCases();
-
-  }
-);
-
-
-/* =====================================================
-   REFRESH
-   ===================================================== */
-
-document
-  .getElementById(
-    "refreshButton"
-  )
-  .addEventListener(
-    "click",
-    loadComplianceCases
-  );
-
-
-/* =====================================================
-   DASHBOARD
-   ===================================================== */
-
-document
-  .getElementById(
-    "dashboardButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "index.html";
-
-    }
-  );
-
-
-/* =====================================================
-   LOGOUT
-   ===================================================== */
-
-document
-  .getElementById(
-    "logoutButton"
-  )
-  .addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        if (
-          typeof window.gtfLogout ===
-          "function"
-        ) {
-
-          await window.gtfLogout();
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Logout error:",
-          error
+            }
         );
 
-      }
+    }
 
 
-      window.location.href =
-        "../login.html";
+    /* =====================================================
+       REVIEW MODAL
+       ===================================================== */
+
+    const modal =
+        document.getElementById("reviewModal");
+
+    const modalClose =
+        document.getElementById("modalClose");
+
+    const modalCancel =
+        document.getElementById("modalCancel");
+
+    const modalConfirm =
+        document.getElementById("modalConfirm");
+
+
+    const modalCustomer =
+        document.getElementById("modalCustomer");
+
+    const modalCase =
+        document.getElementById("modalCase");
+
+    const modalVerification =
+        document.getElementById("modalVerification");
+
+    const modalRisk =
+        document.getElementById("modalRisk");
+
+    const modalStatus =
+        document.getElementById("modalStatus");
+
+
+    let activeButton = null;
+
+
+    function openModal(button) {
+
+        activeButton = button;
+
+        modalCustomer.textContent =
+            button.dataset.customer || "—";
+
+        modalCase.textContent =
+            button.dataset.case || "—";
+
+        modalVerification.textContent =
+            button.dataset.verification || "—";
+
+        modalRisk.textContent =
+            button.dataset.risk || "—";
+
+        modalStatus.textContent =
+            button.dataset.status || "—";
+
+        modal.classList.add("show");
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
+        );
 
     }
-  );
 
 
-/* =====================================================
-   INITIALIZE
-   ===================================================== */
+    function closeModal() {
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+        modal.classList.remove("show");
 
-    loadComplianceCases();
+        modal.setAttribute(
+            "aria-hidden",
+            "true"
+        );
 
-  }
-);
+        activeButton = null;
 
+    }
+
+
+    document
+        .querySelectorAll(".review-button")
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    openModal(button);
+
+                }
+            );
+
+        });
+
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modalCancel.addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modal.addEventListener(
+        "click",
+        function (event) {
+
+            if (event.target === modal) {
+                closeModal();
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+                closeModal();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       MARK REVIEWED
+       ===================================================== */
+
+    modalConfirm.addEventListener(
+        "click",
+        function () {
+
+            if (!activeButton) {
+                closeModal();
+                return;
+            }
+
+
+            const row =
+                activeButton.closest("tr");
+
+
+            if (row) {
+
+                row.dataset.status = "approved";
+
+
+                const statusCell =
+                    row.children[4];
+
+
+                statusCell.innerHTML =
+                    '<span class="status approved">Cleared</span>';
+
+
+                activeButton.textContent =
+                    "View";
+
+
+                activeButton.classList.remove(
+                    "primary",
+                    "danger"
+                );
+
+
+                activeButton.dataset.status =
+                    "Cleared";
+
+            }
+
+
+            closeModal();
+
+        }
+    );
+
+
+    /* =====================================================
+       FILTERING
+       ===================================================== */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    const riskFilter =
+        document.getElementById("riskFilter");
+
+    const filterButton =
+        document.getElementById("filterButton");
+
+    const tableBody =
+        document.getElementById(
+            "complianceTableBody"
+        );
+
+
+    function applyFilters() {
+
+        const search =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+        const selectedStatus =
+            statusFilter.value;
+
+        const selectedRisk =
+            riskFilter.value;
+
+
+        const rows =
+            tableBody.querySelectorAll("tr");
+
+
+        let visible = 0;
+
+
+        rows.forEach(function (row) {
+
+            const rowText =
+                row.textContent.toLowerCase();
+
+            const rowStatus =
+                row.dataset.status;
+
+            const rowRisk =
+                row.dataset.risk;
+
+
+            const matchesSearch =
+                !search ||
+                rowText.includes(search);
+
+
+            const matchesStatus =
+                selectedStatus === "all" ||
+                rowStatus === selectedStatus;
+
+
+            const matchesRisk =
+                selectedRisk === "all" ||
+                rowRisk === selectedRisk;
+
+
+            const show =
+                matchesSearch &&
+                matchesStatus &&
+                matchesRisk;
+
+
+            row.style.display =
+                show ? "" : "none";
+
+
+            if (show) {
+                visible++;
+            }
+
+        });
+
+
+        const tableCount =
+            document.querySelector(
+                ".table-count"
+            );
+
+
+        if (tableCount) {
+
+            tableCount.textContent =
+                "Showing " +
+                visible +
+                " compliance case" +
+                (visible === 1 ? "" : "s");
+
+        }
+
+    }
+
+
+    filterButton.addEventListener(
+        "click",
+        applyFilters
+    );
+
+
+    searchInput.addEventListener(
+        "input",
+        applyFilters
+    );
+
+
+    statusFilter.addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    riskFilter.addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    /* =====================================================
+       REFRESH
+       ===================================================== */
+
+    const refreshButton =
+        document.getElementById(
+            "refreshButton"
+        );
+
+
+    if (refreshButton) {
+
+        refreshButton.addEventListener(
+            "click",
+            function () {
+
+                refreshButton.textContent = "…";
+
+                setTimeout(
+                    function () {
+
+                        refreshButton.textContent =
+                            "↻";
+
+                    },
+                    500
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       EXPORT
+       ===================================================== */
+
+    const exportButton =
+        document.getElementById(
+            "exportButton"
+        );
+
+
+    if (exportButton) {
+
+        exportButton.addEventListener(
+            "click",
+            function () {
+
+                const rows =
+                    Array.from(
+                        document.querySelectorAll(
+                            "#complianceTableBody tr"
+                        )
+                    )
+                    .filter(function (row) {
+
+                        return row.style.display !== "none";
+
+                    });
+
+
+                let csv =
+                    "Customer,Case ID,Verification,Risk,Status,Updated\n";
+
+
+                rows.forEach(function (row) {
+
+                    const cells =
+                        row.querySelectorAll("td");
+
+
+                    if (cells.length < 6) {
+                        return;
+                    }
+
+
+                    const customer =
+                        cells[0]
+                            .innerText
+                            .replace(/\n/g, " ")
+                            .trim();
+
+                    const caseId =
+                        cells[1]
+                            .innerText
+                            .trim();
+
+                    const verification =
+                        cells[2]
+                            .innerText
+                            .trim();
+
+                    const risk =
+                        cells[3]
+                            .innerText
+                            .trim();
+
+                    const status =
+                        cells[4]
+                            .innerText
+                            .trim();
+
+                    const updated =
+                        cells[5]
+                            .innerText
+                            .trim();
+
+
+                    csv += [
+                        customer,
+                        caseId,
+                        verification,
+                        risk,
+                        status,
+                        updated
+                    ]
+                    .map(function (value) {
+
+                        return '"' +
+                            value.replace(
+                                /"/g,
+                                '""'
+                            ) +
+                            '"';
+
+                    })
+                    .join(",") + "\n";
+
+                });
+
+
+                const blob =
+                    new Blob(
+                        [csv],
+                        {
+                            type:
+                                "text/csv;charset=utf-8;"
+                        }
+                    );
+
+
+                const url =
+                    URL.createObjectURL(blob);
+
+
+                const link =
+                    document.createElement("a");
+
+
+                link.href = url;
+
+                link.download =
+                    "gtf-compliance-report.csv";
+
+
+                document.body.appendChild(link);
+
+                link.click();
+
+                link.remove();
+
+                URL.revokeObjectURL(url);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    const logoutButton =
+        document.getElementById(
+            "logoutButton"
+        );
+
+
+    if (logoutButton) {
+
+        logoutButton.addEventListener(
+            "click",
+            function () {
+
+                /*
+                 * Frontend-only placeholder.
+                 * Connect this action to your existing
+                 * authentication system when backend
+                 * authentication is enabled.
+                 */
+
+                window.location.href =
+                    "../login.html";
+
+            }
+        );
+
+    }
+
+
+})();
 </script>
 
 </body>
 </html>
-
-Path: "GTF-Banking/frontend/admin/compliance.html"
-
-The page deliberately does not contain a Supabase service-role key or allow compliance decisions to be made directly from the browser. Your backend should enforce the administrator/manager role and write every compliance change to the audit log.
