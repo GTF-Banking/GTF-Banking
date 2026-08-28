@@ -1,2824 +1,1031 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="Explore GTF Banking loan options, borrowing information, repayment guidance and loan support."
-  >
+    <meta charset="UTF-8">
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <title>Loans | GTF Banking</title>
+    <meta
+        name="description"
+        content="Explore Global TrustFund lending and financing options."
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <title>
+        Loans | Global TrustFund
+    </title>
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-white: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #dce4eb;
-      --gtf-success: #16794c;
-      --gtf-danger: #b42318;
-      --gtf-shadow: 0 8px 25px rgba(11, 42, 74, .08);
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    .loan-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-      box-shadow: 0 2px 10px rgba(11, 42, 74, .04);
-    }
-
-    .loan-nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .loan-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .loan-brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .loan-brand-text strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .loan-brand-text span {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .loan-main-nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .loan-main-nav a {
-      position: relative;
-      padding: 26px 0;
-
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .loan-main-nav a:hover,
-    .loan-main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .loan-main-nav a.active::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .loan-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .loan-action {
-      min-height: 35px;
-      padding: 7px 13px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .loan-login {
-      border: 1px solid var(--gtf-blue);
-      color: var(--gtf-blue);
-      background: #fff;
-    }
-
-    .loan-signup {
-      border: 1px solid var(--gtf-blue);
-      color: #fff;
-      background: var(--gtf-blue);
-    }
-
-    .loan-signup:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .loan-mobile-toggle {
-      display: none;
-
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      cursor: pointer;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .loan-hero {
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-    }
-
-    .loan-hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 400px;
-      margin: 0 auto;
-      padding: 65px 0;
-
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      align-items: center;
-      gap: 50px;
-    }
-
-    .loan-eyebrow {
-      margin: 0 0 10px;
-
-      color: #d9b866;
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .loan-hero h1 {
-      max-width: 700px;
-      margin: 0;
-
-      font-size: clamp(2rem, 4vw, 3.05rem);
-      line-height: 1.1;
-    }
-
-    .loan-hero-copy {
-      max-width: 650px;
-      margin: 17px 0 0;
-
-      color: #dbe7f1;
-      font-size: .76rem;
-    }
-
-    .loan-hero-actions {
-      margin-top: 24px;
-
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .loan-hero-button {
-      min-height: 42px;
-      padding: 10px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid transparent;
-      border-radius: 5px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .loan-hero-button.secondary {
-      border-color: rgba(255,255,255,.45);
-      background: transparent;
-      color: #fff;
-    }
-
-    .loan-hero-button:hover {
-      transform: translateY(-1px);
-    }
-
-    .loan-hero-card {
-      padding: 27px;
-
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 10px;
-
-      background: rgba(255,255,255,.1);
-      backdrop-filter: blur(4px);
-    }
-
-    .loan-hero-card h2 {
-      margin: 0;
-
-      color: #fff;
-      font-size: .82rem;
-    }
-
-    .loan-hero-card p {
-      margin: 7px 0 19px;
-
-      color: #d6e3ed;
-      font-size: .57rem;
-    }
-
-    .loan-quick-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .loan-quick-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      color: #eef5f9;
-      font-size: .58rem;
-    }
-
-    .loan-quick-icon {
-      width: 27px;
-      height: 27px;
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: rgba(255,255,255,.14);
-      color: #fff;
-
-      font-size: .6rem;
-      font-weight: 700;
-    }
-
-    /* =========================
-       SECTIONS
-    ========================== */
-
-    .loan-section {
-      padding: 65px 0;
-    }
-
-    .loan-section-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .loan-heading {
-      max-width: 700px;
-      margin: 0 auto 38px;
-
-      text-align: center;
-    }
-
-    .loan-heading .eyebrow {
-      margin: 0 0 9px;
-
-      color: var(--gtf-blue);
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .loan-heading h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.55rem;
-      line-height: 1.25;
-    }
-
-    .loan-heading p {
-      margin: 11px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .66rem;
-    }
-
-    /* =========================
-       LOAN PRODUCTS
-    ========================== */
-
-    .loan-products {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .loan-product {
-      padding: 26px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .loan-product.featured {
-      border-top: 3px solid var(--gtf-gold);
-    }
-
-    .loan-product-icon {
-      width: 47px;
-      height: 47px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: .85rem;
-      font-weight: 700;
-    }
-
-    .loan-product h3 {
-      margin: 15px 0 7px;
-
-      color: var(--gtf-navy);
-      font-size: .75rem;
-    }
-
-    .loan-product p {
-      min-height: 63px;
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .loan-product ul {
-      margin: 17px 0;
-      padding: 0;
-
-      list-style: none;
-    }
-
-    .loan-product li {
-      position: relative;
-
-      margin-bottom: 8px;
-      padding-left: 17px;
-
-      color: #506578;
-      font-size: .55rem;
-    }
-
-    .loan-product li::before {
-      content: "✓";
-
-      position: absolute;
-      left: 0;
-
-      color: var(--gtf-success);
-      font-weight: 700;
-    }
-
-    .loan-product-link {
-      display: inline-flex;
-
-      color: var(--gtf-blue);
-
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .loan-product-link:hover {
-      color: var(--gtf-blue-dark);
-    }
-
-    /* =========================
-       BORROWING PROCESS
-    ========================== */
-
-    .loan-process-section {
-      background: #fff;
-    }
-
-    .loan-process {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .loan-process-step {
-      position: relative;
-
-      padding: 24px 20px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fff;
-    }
-
-    .loan-step-number {
-      width: 32px;
-      height: 32px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .loan-process-step h3 {
-      margin: 14px 0 6px;
-
-      color: var(--gtf-navy);
-      font-size: .68rem;
-    }
-
-    .loan-process-step p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .55rem;
-    }
-
-    /* =========================
-       CALCULATOR
-    ========================== */
-
-    .loan-calculator-section {
-      background: var(--gtf-bg);
-    }
-
-    .loan-calculator {
-      max-width: 950px;
-      margin: 0 auto;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-
-      overflow: hidden;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .calculator-form {
-      padding: 31px;
-    }
-
-    .calculator-form h3 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: .82rem;
-    }
-
-    .calculator-form > p {
-      margin: 7px 0 22px;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-    }
-
-    .calculator-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-
-      margin-bottom: 16px;
-    }
-
-    .calculator-group label {
-      color: var(--gtf-navy);
-      font-size: .57rem;
-      font-weight: 700;
-    }
-
-    .calculator-input {
-      width: 100%;
-      min-height: 41px;
-
-      padding: 9px 11px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 5px;
-
-      outline: none;
-
-      background: #fff;
-      color: var(--gtf-text);
-
-      font-size: .59rem;
-    }
-
-    .calculator-input:focus {
-      border-color: var(--gtf-blue);
-
-      box-shadow:
-        0 0 0 2px rgba(20,93,160,.1);
-    }
-
-    .calculator-button {
-      width: 100%;
-      min-height: 41px;
-
-      border: 0;
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .6rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .calculator-button:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .calculator-result {
-      padding: 31px;
-
-      background:
-        linear-gradient(
-          145deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-    }
-
-    .calculator-result h3 {
-      margin: 0;
-
-      color: #fff;
-      font-size: .8rem;
-    }
-
-    .calculator-result p {
-      margin: 7px 0 23px;
-
-      color: #dbe7f1;
-      font-size: .55rem;
-    }
-
-    .result-main {
-      padding: 20px;
-
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 8px;
-
-      background: rgba(255,255,255,.08);
-    }
-
-    .result-label {
-      color: #c8d8e4;
-      font-size: .53rem;
-    }
-
-    .result-value {
-      margin-top: 3px;
-
-      color: #fff;
-      font-size: 1.65rem;
-      font-weight: 700;
-    }
-
-    .result-details {
-      margin-top: 20px;
-
-      display: grid;
-      gap: 10px;
-    }
-
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      padding-bottom: 8px;
-
-      border-bottom: 1px solid rgba(255,255,255,.1);
-
-      color: #c8d8e4;
-      font-size: .54rem;
-    }
-
-    .result-row strong {
-      color: #fff;
-    }
-
-    .calculator-disclaimer {
-      margin-top: 17px;
-
-      color: #b9cbd7;
-      font-size: .48rem;
-    }
-
-    /* =========================
-       ELIGIBILITY
-    ========================== */
-
-    .eligibility-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      align-items: center;
-    }
-
-    .eligibility-content h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.45rem;
-      line-height: 1.25;
-    }
-
-    .eligibility-content > p {
-      margin: 11px 0 22px;
-
-      color: var(--gtf-muted);
-      font-size: .62rem;
-    }
-
-    .eligibility-list {
-      display: grid;
-      gap: 11px;
-    }
-
-    .eligibility-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .eligibility-check {
-      width: 25px;
-      height: 25px;
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #eaf7f0;
-      color: var(--gtf-success);
-
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .eligibility-item strong {
-      display: block;
-
-      color: var(--gtf-navy);
-      font-size: .59rem;
-    }
-
-    .eligibility-item span {
-      display: block;
-
-      color: var(--gtf-muted);
-      font-size: .53rem;
-    }
-
-    .eligibility-note {
-      padding: 27px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .eligibility-note h3 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: .76rem;
-    }
-
-    .eligibility-note p {
-      margin: 9px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-    }
-
-    .eligibility-note a {
-      display: inline-flex;
-      margin-top: 17px;
-
-      color: var(--gtf-blue);
-
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    /* =========================
-       FAQ
-    ========================== */
-
-    .loan-faq-section {
-      background: #fff;
-    }
-
-    .loan-faq-list {
-      max-width: 850px;
-      margin: 0 auto;
-
-      display: grid;
-      gap: 10px;
-    }
-
-    .loan-faq-item {
-      overflow: hidden;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .loan-faq-question {
-      width: 100%;
-      padding: 16px 18px;
-
-      border: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      text-align: left;
-
-      font-size: .62rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .loan-faq-question:hover {
-      background: #f8fafc;
-    }
-
-    .loan-faq-symbol {
-      color: var(--gtf-blue);
-      font-size: .9rem;
-      transition: transform .2s ease;
-    }
-
-    .loan-faq-answer {
-      display: none;
-
-      padding: 0 18px 17px;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-    }
-
-    .loan-faq-item.open .loan-faq-answer {
-      display: block;
-    }
-
-    .loan-faq-item.open .loan-faq-symbol {
-      transform: rotate(45deg);
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .loan-cta {
-      padding: 55px 0;
-      background: #fff;
-    }
-
-    .loan-cta-inner {
-      width: min(950px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 35px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      text-align: center;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .loan-cta h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-    }
-
-    .loan-cta p {
-      max-width: 650px;
-      margin: 10px auto 20px;
-
-      color: var(--gtf-muted);
-      font-size: .64rem;
-    }
-
-    .loan-cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .loan-cta-button {
-      min-height: 39px;
-      padding: 9px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid var(--gtf-blue);
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .loan-cta-button.secondary {
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .loan-cta-button:hover {
-      background: var(--gtf-blue-dark);
-      color: #fff;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    .loan-footer {
-      padding: 40px 0 22px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .loan-footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .loan-footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 35px;
-
-      padding-bottom: 30px;
-    }
-
-    .loan-footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .loan-footer-brand img {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    .loan-footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .loan-footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .loan-footer-description {
-      max-width: 290px;
-      margin: 14px 0 0;
-
-      color: #aebfcd;
-      font-size: .57rem;
-    }
-
-    .loan-footer-column h3 {
-      margin: 0 0 11px;
-      font-size: .61rem;
-    }
-
-    .loan-footer-column a {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .loan-footer-column a:hover {
-      color: #fff;
-    }
-
-    .loan-footer-bottom {
-      padding-top: 18px;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .52rem;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1050px) {
-
-      .loan-main-nav,
-      .loan-actions {
-        display: none;
-      }
-
-      .loan-mobile-toggle {
-        display: block;
-      }
-
-      .loan-nav.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .loan-nav.mobile-open .loan-main-nav {
-        display: flex;
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-        padding: 7px 0 15px;
-      }
-
-      .loan-nav.mobile-open .loan-main-nav a {
-        padding: 9px 0;
-      }
-
-      .loan-nav.mobile-open
-      .loan-main-nav
-      a.active::after {
-        display: none;
-      }
-    }
-
-    @media (max-width: 900px) {
-
-      .loan-hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .loan-hero-card {
-        max-width: 600px;
-      }
-
-      .loan-products {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .loan-process {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .eligibility-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 700px) {
-
-      .loan-products,
-      .loan-process {
-        grid-template-columns: 1fr;
-      }
-
-      .loan-calculator {
-        grid-template-columns: 1fr;
-      }
-
-      .loan-section {
-        padding: 50px 0;
-      }
-
-      .loan-footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-
-      .loan-hero-inner {
-        padding: 50px 0;
-      }
-
-      .loan-footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .loan-footer-bottom {
-        flex-direction: column;
-      }
-
-      .loan-cta-inner {
-        padding: 25px 18px;
-      }
-
-      .calculator-form,
-      .calculator-result {
-        padding: 23px;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-  <!-- =================================
-       HEADER
-  ================================== -->
 
-  <header class="loan-header">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <div
-      id="loanNav"
-      class="loan-nav"
-    >
+    <header class="site-header">
 
-      <a
-        href="../index.html"
-        class="loan-brand"
-        aria-label="GTF Banking home"
-      >
-
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
-
-        <span class="loan-brand-text">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="loan-main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="personal.html">
-          Personal
-        </a>
-
-        <a href="business.html">
-          Business
-        </a>
-
-        <a href="cards.html">
-          Cards
-        </a>
-
-        <a href="checking.html">
-          Checking
-        </a>
-
-        <a href="savings.html">
-          Savings
-        </a>
-
-        <a
-          href="loans.html"
-          class="active"
-          aria-current="page"
-        >
-          Loans
-        </a>
-
-        <a href="contact.html">
-          Contact
-        </a>
-
-      </nav>
-
-
-      <div class="loan-actions">
-
-        <a
-          href="../login.html"
-          class="loan-action loan-login"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="loan-action loan-signup"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="loanMobileToggle"
-        class="loan-mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =================================
-       MAIN
-  ================================== -->
-
-  <main>
-
-    <!-- HERO -->
-
-    <section class="loan-hero">
-
-      <div class="loan-hero-inner">
-
-        <div>
-
-          <p class="loan-eyebrow">
-            GTF Banking Lending
-          </p>
-
-          <h1>
-            Financing for the plans that matter.
-          </h1>
-
-          <p class="loan-hero-copy">
-            Explore borrowing options designed to help
-            you manage planned expenses, major purchases
-            and other financial needs.
-          </p>
-
-
-          <div class="loan-hero-actions">
+        <div class="container nav-container">
 
             <a
-              href="#loan-options"
-              class="loan-hero-button"
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
-              Explore Loan Options
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Banking
+                    </small>
+
+                </span>
+
             </a>
-
-            <a
-              href="#calculator"
-              class="loan-hero-button secondary"
-            >
-              Estimate a Payment
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <aside class="loan-hero-card">
-
-          <h2>
-            Before applying
-          </h2>
-
-          <p>
-            Loan availability, eligibility, pricing,
-            terms and approval requirements may vary.
-          </p>
-
-
-          <div class="loan-quick-list">
-
-            <div class="loan-quick-item">
-
-              <span class="loan-quick-icon">
-                1
-              </span>
-
-              <span>
-                Review the available loan type.
-              </span>
-
-            </div>
-
-
-            <div class="loan-quick-item">
-
-              <span class="loan-quick-icon">
-                2
-              </span>
-
-              <span>
-                Review repayment requirements.
-              </span>
-
-            </div>
-
-
-            <div class="loan-quick-item">
-
-              <span class="loan-quick-icon">
-                3
-              </span>
-
-              <span>
-                Submit an application when ready.
-              </span>
-
-            </div>
-
-
-            <div class="loan-quick-item">
-
-              <span class="loan-quick-icon">
-                4
-              </span>
-
-              <span>
-                Review the final terms before accepting.
-              </span>
-
-            </div>
-
-          </div>
-
-        </aside>
-
-      </div>
-
-    </section>
-
-
-    <!-- LOAN OPTIONS -->
-
-    <section
-      id="loan-options"
-      class="loan-section"
-    >
-
-      <div class="loan-section-inner">
-
-        <div class="loan-heading">
-
-          <p class="eyebrow">
-            Lending options
-          </p>
-
-          <h2>
-            Find the borrowing option that fits your needs
-          </h2>
-
-          <p>
-            Explore different lending categories and
-            review their requirements before applying.
-          </p>
-
-        </div>
-
-
-        <div class="loan-products">
-
-
-          <article class="loan-product featured">
-
-            <div class="loan-product-icon">
-              P
-            </div>
-
-            <h3>
-              Personal Loans
-            </h3>
-
-            <p>
-              Flexible borrowing for eligible personal
-              expenses and planned financial needs.
-            </p>
-
-            <ul>
-
-              <li>
-                Personal borrowing needs
-              </li>
-
-              <li>
-                Structured repayment
-              </li>
-
-              <li>
-                Reviewable loan terms
-              </li>
-
-            </ul>
-
-            <a
-              href="#apply"
-              class="loan-product-link"
-            >
-              Learn about personal loans →
-            </a>
-
-          </article>
-
-
-          <article class="loan-product">
-
-            <div class="loan-product-icon">
-              H
-            </div>
-
-            <h3>
-              Home Financing
-            </h3>
-
-            <p>
-              Financing options for eligible customers
-              considering a home purchase or related need.
-            </p>
-
-            <ul>
-
-              <li>
-                Home purchase financing
-              </li>
-
-              <li>
-                Longer-term repayment options
-              </li>
-
-              <li>
-                Eligibility assessment
-              </li>
-
-            </ul>
-
-            <a
-              href="#apply"
-              class="loan-product-link"
-            >
-              Explore home financing →
-            </a>
-
-          </article>
-
-
-          <article class="loan-product">
-
-            <div class="loan-product-icon">
-              B
-            </div>
-
-            <h3>
-              Business Loans
-            </h3>
-
-            <p>
-              Financing solutions for eligible business
-              expenses and growth requirements.
-            </p>
-
-            <ul>
-
-              <li>
-                Business financing
-              </li>
-
-              <li>
-                Business eligibility review
-              </li>
-
-              <li>
-                Structured repayment
-              </li>
-
-            </ul>
-
-            <a
-              href="business.html"
-              class="loan-product-link"
-            >
-              Explore business banking →
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- PROCESS -->
-
-    <section class="loan-section loan-process-section">
-
-      <div class="loan-section-inner">
-
-        <div class="loan-heading">
-
-          <p class="eyebrow">
-            How it works
-          </p>
-
-          <h2>
-            A straightforward lending process
-          </h2>
-
-          <p>
-            The exact process can vary by product,
-            eligibility and applicable requirements.
-          </p>
-
-        </div>
-
-
-        <div class="loan-process">
-
-
-          <article class="loan-process-step">
-
-            <div class="loan-step-number">
-              01
-            </div>
-
-            <h3>
-              Explore
-            </h3>
-
-            <p>
-              Review available loan categories
-              and determine which may suit your
-              financial need.
-            </p>
-
-          </article>
-
-
-          <article class="loan-process-step">
-
-            <div class="loan-step-number">
-              02
-            </div>
-
-            <h3>
-              Apply
-            </h3>
-
-            <p>
-              Provide the information required
-              for the applicable application.
-            </p>
-
-          </article>
-
-
-          <article class="loan-process-step">
-
-            <div class="loan-step-number">
-              03
-            </div>
-
-            <h3>
-              Review
-            </h3>
-
-            <p>
-              Review applicable terms, pricing,
-              repayment obligations and conditions.
-            </p>
-
-          </article>
-
-
-          <article class="loan-process-step">
-
-            <div class="loan-step-number">
-              04
-            </div>
-
-            <h3>
-              Repay
-            </h3>
-
-            <p>
-              Make payments according to the
-              agreed repayment schedule.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CALCULATOR -->
-
-    <section
-      id="calculator"
-      class="loan-section loan-calculator-section"
-    >
-
-      <div class="loan-section-inner">
-
-        <div class="loan-heading">
-
-          <p class="eyebrow">
-            Payment estimator
-          </p>
-
-          <h2>
-            Estimate a monthly loan payment
-          </h2>
-
-          <p>
-            Use this calculator for an illustrative
-            estimate only. It is not a loan offer
-            or approval decision.
-          </p>
-
-        </div>
-
-
-        <div class="loan-calculator">
-
-
-          <div class="calculator-form">
-
-            <h3>
-              Enter your loan details
-            </h3>
-
-            <p>
-              Change the values to see an illustrative
-              payment estimate.
-            </p>
-
-
-            <div class="calculator-group">
-
-              <label for="loanAmount">
-                Loan amount
-              </label>
-
-              <input
-                id="loanAmount"
-                class="calculator-input"
-                type="number"
-                min="1"
-                step="100"
-                value="10000"
-                inputmode="decimal"
-              >
-
-            </div>
-
-
-            <div class="calculator-group">
-
-              <label for="loanRate">
-                Estimated annual interest rate (%)
-              </label>
-
-              <input
-                id="loanRate"
-                class="calculator-input"
-                type="number"
-                min="0"
-                max="100"
-                step="0.01"
-                value="8"
-                inputmode="decimal"
-              >
-
-            </div>
-
-
-            <div class="calculator-group">
-
-              <label for="loanTerm">
-                Repayment term (months)
-              </label>
-
-              <select
-                id="loanTerm"
-                class="calculator-input"
-              >
-
-                <option value="12">
-                  12 months
-                </option>
-
-                <option value="24">
-                  24 months
-                </option>
-
-                <option value="36" selected>
-                  36 months
-                </option>
-
-                <option value="48">
-                  48 months
-                </option>
-
-                <option value="60">
-                  60 months
-                </option>
-
-                <option value="72">
-                  72 months
-                </option>
-
-                <option value="84">
-                  84 months
-                </option>
-
-              </select>
-
-            </div>
 
 
             <button
-              id="calculateLoan"
-              class="calculator-button"
-              type="button"
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
             >
-              Calculate Estimate
+
+                <span></span>
+                <span></span>
+                <span></span>
+
             </button>
 
-          </div>
+
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
+            >
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a
+                    href="./loans.html"
+                    class="active"
+                >
+                    Loans
+                </a>
+
+                <a href="./security.html">
+                    Security
+                </a>
 
 
-          <div class="calculator-result">
+                <div class="nav-actions">
 
-            <h3>
-              Estimated payment
-            </h3>
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
 
-            <p>
-              Illustrative monthly principal and
-              interest payment.
-            </p>
-
-
-            <div class="result-main">
-
-              <div class="result-label">
-                Estimated monthly payment
-              </div>
-
-              <div
-                id="monthlyPayment"
-                class="result-value"
-              >
-                $0.00
-              </div>
-
-
-              <div class="result-details">
-
-                <div class="result-row">
-
-                  <span>
-                    Loan amount
-                  </span>
-
-                  <strong id="resultAmount">
-                    $0.00
-                  </strong>
-
-                </div>
-
-
-                <div class="result-row">
-
-                  <span>
-                    Estimated rate
-                  </span>
-
-                  <strong id="resultRate">
-                    0.00%
-                  </strong>
-
-                </div>
-
-
-                <div class="result-row">
-
-                  <span>
-                    Term
-                  </span>
-
-                  <strong id="resultTerm">
-                    0 months
-                  </strong>
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
 
                 </div>
 
-
-                <div class="result-row">
-
-                  <span>
-                    Estimated total payments
-                  </span>
-
-                  <strong id="resultTotal">
-                    $0.00
-                  </strong>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <p class="calculator-disclaimer">
-              This calculator provides an illustrative
-              estimate only. Actual rates, fees, payments,
-              eligibility and loan terms may differ.
-            </p>
-
-          </div>
+            </nav>
 
         </div>
 
-      </div>
-
-    </section>
+    </header>
 
 
-    <!-- ELIGIBILITY -->
 
-    <section
-      id="apply"
-      class="loan-section"
-    >
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
-      <div class="loan-section-inner">
-
-        <div class="eligibility-grid">
+    <main>
 
 
-          <div class="eligibility-content">
+        <!-- =================================================
+             HERO
+             ================================================= -->
 
-            <p
-              class="loan-eyebrow"
-              style="color: var(--gtf-blue);"
-            >
-              Before you apply
-            </p>
+        <section class="hero">
 
-            <h2>
-              Prepare for your loan application
-            </h2>
-
-            <p>
-              Requirements vary by product and
-              applicant. Make sure you understand
-              the applicable terms before submitting
-              an application.
-            </p>
+            <div class="container hero-grid">
 
 
-            <div class="eligibility-list">
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        LENDING & FINANCING
+                    </span>
 
 
-              <div class="eligibility-item">
+                    <h1>
 
-                <div class="eligibility-check">
-                  ✓
-                </div>
+                        Financing options
+                        <span>for your next step.</span>
 
-                <div>
-
-                  <strong>
-                    Understand your borrowing need
-                  </strong>
-
-                  <span>
-                    Determine the amount and purpose
-                    of the financing you are considering.
-                  </span>
-
-                </div>
-
-              </div>
+                    </h1>
 
 
-              <div class="eligibility-item">
+                    <p>
 
-                <div class="eligibility-check">
-                  ✓
-                </div>
+                        Explore Global TrustFund lending options
+                        designed to support eligible customers
+                        with planned purchases, projects and
+                        financial goals.
 
-                <div>
-
-                  <strong>
-                    Review repayment ability
-                  </strong>
-
-                  <span>
-                    Consider the payment obligation
-                    alongside your existing commitments.
-                  </span>
-
-                </div>
-
-              </div>
+                    </p>
 
 
-              <div class="eligibility-item">
+                    <div class="hero-actions">
 
-                <div class="eligibility-check">
-                  ✓
-                </div>
-
-                <div>
-
-                  <strong>
-                    Review applicable requirements
-                  </strong>
-
-                  <span>
-                    Additional documentation or
-                    eligibility checks may be required.
-                  </span>
-
-                </div>
-
-              </div>
+                        <a
+                            href="../signup.html"
+                            class="button button-primary button-large"
+                        >
+                            Get Started
+                        </a>
 
 
-              <div class="eligibility-item">
+                        <a
+                            href="./contact.html"
+                            class="button button-light button-large"
+                        >
+                            Contact Us
+                        </a>
 
-                <div class="eligibility-check">
-                  ✓
-                </div>
+                    </div>
 
-                <div>
 
-                  <strong>
-                    Read the final terms
-                  </strong>
+                    <div class="hero-trust">
 
-                  <span>
-                    Carefully review the final agreement
-                    before accepting a loan.
-                  </span>
+                        <div class="trust-item">
+
+                            <strong>
+                                Flexible
+                            </strong>
+
+                            <span>
+                                Explore eligible options
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Digital
+                            </strong>
+
+                            <span>
+                                Convenient access
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Secure
+                            </strong>
+
+                            <span>
+                                Protected information
+                            </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-              </div>
+
+
+                <!-- =================================================
+                     LOAN VISUAL
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+
+                    <div class="bank-card-preview">
+
+                        <div class="card-top">
+
+                            <span class="card-chip"></span>
+
+                            <span class="card-brand">
+                                GTF
+                            </span>
+
+                        </div>
+
+
+                        <div class="card-balance">
+
+                            <small>
+                                GLOBAL TRUSTFUND
+                            </small>
+
+                            <strong>
+                                FINANCING
+                            </strong>
+
+                        </div>
+
+
+                        <div class="card-bottom">
+
+                            <span>
+                                GLOBAL TRUSTFUND
+                            </span>
+
+                            <span>
+                                LENDING
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            #
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Plan Ahead
+                            </strong>
+
+                            <small>
+                                Review your options
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Process
+                            </strong>
+
+                            <small>
+                                Protected information
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
-          </div>
+        </section>
 
 
-          <aside class="eligibility-note">
 
-            <h3>
-              Ready to continue?
-            </h3>
+        <!-- =================================================
+             LOAN OPTIONS
+             ================================================= -->
 
-            <p>
-              Sign in to your GTF Banking account
-              or create an account to access the
-              applicable banking services.
-            </p>
+        <section class="section">
 
-            <a href="../login.html">
-              Sign in to continue →
-            </a>
+            <div class="container">
 
-            <br>
 
-            <a href="../signup.html">
-              Open an account →
-            </a>
+                <div class="section-heading">
 
-          </aside>
+                    <span class="eyebrow">
+                        FINANCING OPTIONS
+                    </span>
+
+
+                    <h2>
+                        Explore lending categories
+                    </h2>
+
+
+                    <p>
+
+                        Available products, rates, terms and
+                        eligibility requirements depend on the
+                        applicable offering and customer profile.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <!-- PERSONAL FINANCING -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+
+                        <h3>
+                            Personal Financing
+                        </h3>
+
+
+                        <p>
+
+                            Explore financing possibilities for
+                            eligible personal financial needs.
+
+                        </p>
+
+
+                        <a
+                            href="./personal.html"
+                            class="service-link"
+                        >
+                            Personal banking →
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- BUSINESS FINANCING -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            Business Financing
+                        </h3>
+
+
+                        <p>
+
+                            Explore financing categories for
+                            eligible business customers.
+
+                        </p>
+
+
+                        <a
+                            href="./business.html"
+                            class="service-link"
+                        >
+                            Business banking →
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- APPLICATION -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            →
+                        </span>
+
+
+                        <h3>
+                            Application Process
+                        </h3>
+
+
+                        <p>
+
+                            Begin by creating a profile and
+                            providing the information required
+                            for the applicable review process.
+
+                        </p>
+
+
+                        <a
+                            href="../signup.html"
+                            class="service-link"
+                        >
+                            Get started →
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- SUPPORT -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ?
+                        </span>
+
+
+                        <h3>
+                            Need Assistance?
+                        </h3>
+
+
+                        <p>
+
+                            Contact the Global TrustFund support
+                            team for questions about available
+                            banking services.
+
+                        </p>
+
+
+                        <a
+                            href="./contact.html"
+                            class="service-link"
+                        >
+                            Contact us →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             APPLICATION PROCESS
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container split-section">
+
+
+                <div class="split-content">
+
+                    <span class="eyebrow">
+                        THE PROCESS
+                    </span>
+
+
+                    <h2>
+                        Understand the lending journey
+                    </h2>
+
+
+                    <p>
+
+                        A financing application generally
+                        involves providing information, reviewing
+                        eligibility and completing the applicable
+                        approval process.
+
+                    </p>
+
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                1
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Create your profile
+                                </h3>
+
+                                <p>
+
+                                    Register your Global TrustFund
+                                    profile and provide the
+                                    requested information.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                2
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Submit information
+                                </h3>
+
+                                <p>
+
+                                    Provide the information needed
+                                    for the applicable financing
+                                    review.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                3
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Review and decision
+                                </h3>
+
+                                <p>
+
+                                    Applications are subject to
+                                    applicable eligibility and
+                                    approval requirements.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="security-panel">
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Protect your information
+                        </h3>
+
+
+                        <p>
+
+                            Only provide sensitive financial
+                            information through authorized
+                            Global TrustFund channels.
+
+                        </p>
+
+
+                        <a
+                            href="./security.html"
+                            class="text-link"
+                        >
+                            Security center →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RESPONSIBLE FINANCING
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        BEFORE YOU APPLY
+                    </span>
+
+
+                    <h2>
+                        Make an informed decision
+                    </h2>
+
+
+                    <p>
+
+                        Financing is a financial commitment.
+                        Review applicable terms, costs and
+                        repayment requirements before accepting
+                        any offer.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Review the terms
+                        </h3>
+
+
+                        <p>
+
+                            Understand the applicable rate,
+                            repayment schedule, fees and other
+                            conditions before proceeding.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+
+                        <h3>
+                            Consider affordability
+                        </h3>
+
+
+                        <p>
+
+                            Consider whether the expected
+                            repayments fit within your financial
+                            plans and obligations.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            Check eligibility
+                        </h3>
+
+
+                        <p>
+
+                            Eligibility requirements may vary
+                            by product, customer and applicable
+                            lending criteria.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+
+                <span class="eyebrow">
+                    GET STARTED
+                </span>
+
+
+                <h2>
+                    Explore your banking options
+                </h2>
+
+
+                <p>
+
+                    Create your Global TrustFund profile or
+                    contact us to learn more about available
+                    services.
+
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../signup.html"
+                        class="button button-light button-large"
+                    >
+                        Open an Account
+                    </a>
+
+
+                    <a
+                        href="./contact.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Contact Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Secure, convenient digital banking for your
+                    financial journey.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Banking
+                </h3>
+
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+
+                <a href="./about.html">
+                    About
+                </a>
+
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
 
         </div>
 
-      </div>
 
-    </section>
 
-
-    <!-- FAQ -->
-
-    <section class="loan-section loan-faq-section">
-
-      <div class="loan-section-inner">
-
-        <div class="loan-heading">
-
-          <p class="eyebrow">
-            Loan questions
-          </p>
-
-          <h2>
-            Frequently asked questions
-          </h2>
-
-          <p>
-            General information about borrowing and
-            the loan application process.
-          </p>
-
-        </div>
-
-
-        <div class="loan-faq-list">
-
-
-          <div class="loan-faq-item">
-
-            <button
-              class="loan-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                What types of loans are available?
-              </span>
-
-              <span class="loan-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="loan-faq-answer">
-              Available products may include personal,
-              home-related and business financing.
-              Eligibility and product availability
-              depend on the applicable offering.
-            </div>
-
-          </div>
-
-
-          <div class="loan-faq-item">
-
-            <button
-              class="loan-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Does using the payment calculator guarantee a loan?
-              </span>
-
-              <span class="loan-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="loan-faq-answer">
-              No. The calculator is only an educational
-              estimator. It does not determine eligibility,
-              approval, pricing or final loan terms.
-            </div>
-
-          </div>
-
-
-          <div class="loan-faq-item">
-
-            <button
-              class="loan-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Can the interest rate differ from the estimate?
-              </span>
-
-              <span class="loan-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="loan-faq-answer">
-              Yes. The rate used in the calculator is
-              only an illustrative value. Actual pricing
-              depends on the applicable product, eligibility,
-              underwriting and final terms.
-            </div>
-
-          </div>
-
-
-          <div class="loan-faq-item">
-
-            <button
-              class="loan-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                What happens after I submit an application?
-              </span>
-
-              <span class="loan-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="loan-faq-answer">
-              An application may be reviewed against the
-              applicable eligibility and documentation
-              requirements. Final terms are provided
-              separately when an application is approved.
-            </div>
-
-          </div>
-
-
-          <div class="loan-faq-item">
-
-            <button
-              class="loan-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Should I borrow more than I need?
-              </span>
-
-              <span class="loan-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="loan-faq-answer">
-              Borrowing should be considered carefully.
-              Review the amount you need, the repayment
-              obligation and the complete cost of the
-              financing before accepting an offer.
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CTA -->
-
-    <section class="loan-cta">
-
-      <div class="loan-cta-inner">
-
-        <h2>
-          Explore your GTF Banking options
-        </h2>
-
-        <p>
-          Review loan information, access your account
-          or contact GTF Banking for assistance.
-        </p>
-
-
-        <div class="loan-cta-buttons">
-
-          <a
-            href="../login.html"
-            class="loan-cta-button"
-          >
-            Sign In
-          </a>
-
-          <a
-            href="../signup.html"
-            class="loan-cta-button secondary"
-          >
-            Open an Account
-          </a>
-
-          <a
-            href="contact.html"
-            class="loan-cta-button secondary"
-          >
-            Contact Us
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =================================
-       FOOTER
-  ================================== -->
-
-  <footer class="loan-footer">
-
-    <div class="loan-footer-inner">
-
-      <div class="loan-footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="loan-footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking logo"
-              width="40"
-              height="40"
-            >
+        <div class="container footer-bottom">
 
             <span>
 
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
 
             </span>
 
-          </a>
 
-
-          <p class="loan-footer-description">
-            A modern banking experience for personal
-            and business financial needs.
-          </p>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
+    </footer>
 
-        <div class="loan-footer-column">
 
-          <h3>
-            Banking
-          </h3>
 
-          <a href="checking.html">
-            Checking
-          </a>
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
-          <a href="savings.html">
-            Savings
-          </a>
-
-          <a href="cards.html">
-            Cards
-          </a>
-
-          <a href="loans.html">
-            Loans
-          </a>
-
-        </div>
-
-
-        <div class="loan-footer-column">
-
-          <h3>
-            Company
-          </h3>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="personal.html">
-            Personal
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="loan-footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a href="security.html">
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="loan-footer-bottom">
-
-        <span>
-          ©
-          <span id="loanFooterYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure banking access
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
-
-  <script>
-    "use strict";
-
-
-    /*
-     * Mobile navigation
-     */
-
-    const loanNav =
-      document.getElementById(
-        "loanNav"
-      );
-
-    const loanMobileToggle =
-      document.getElementById(
-        "loanMobileToggle"
-      );
-
-
-    loanMobileToggle.addEventListener(
-      "click",
-      function () {
-
-        const open =
-          loanNav.classList.toggle(
-            "mobile-open"
-          );
-
-        loanMobileToggle.setAttribute(
-          "aria-expanded",
-          String(open)
-        );
-
-        loanMobileToggle.setAttribute(
-          "aria-label",
-          open
-            ? "Close navigation"
-            : "Open navigation"
-        );
-
-        loanMobileToggle.textContent =
-          open ? "×" : "☰";
-
-      }
-    );
-
-
-    /*
-     * Close navigation after link selection.
-     */
-
-    document
-      .querySelectorAll(".loan-main-nav a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            loanNav.classList.remove(
-              "mobile-open"
-            );
-
-            loanMobileToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            loanMobileToggle.setAttribute(
-              "aria-label",
-              "Open navigation"
-            );
-
-            loanMobileToggle.textContent =
-              "☰";
-
-          }
-        );
-
-      });
-
-
-    /*
-     * Loan calculator
-     *
-     * Formula:
-     *
-     * M = P * [r(1+r)^n] /
-     *     [(1+r)^n - 1]
-     *
-     * This calculates principal + interest
-     * using a standard amortizing-loan formula.
-     */
-
-    const loanAmount =
-      document.getElementById(
-        "loanAmount"
-      );
-
-    const loanRate =
-      document.getElementById(
-        "loanRate"
-      );
-
-    const loanTerm =
-      document.getElementById(
-        "loanTerm"
-      );
-
-    const calculateLoan =
-      document.getElementById(
-        "calculateLoan"
-      );
-
-    const monthlyPayment =
-      document.getElementById(
-        "monthlyPayment"
-      );
-
-    const resultAmount =
-      document.getElementById(
-        "resultAmount"
-      );
-
-    const resultRate =
-      document.getElementById(
-        "resultRate"
-      );
-
-    const resultTerm =
-      document.getElementById(
-        "resultTerm"
-      );
-
-    const resultTotal =
-      document.getElementById(
-        "resultTotal"
-      );
-
-
-    function formatCurrency(
-      value
-    ) {
-
-      return new Intl.NumberFormat(
-        "en-US",
-        {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }
-      ).format(value);
-
-    }
-
-
-    function calculatePayment() {
-
-      const principal =
-        Number(loanAmount.value);
-
-      const annualRate =
-        Number(loanRate.value);
-
-      const months =
-        Number(loanTerm.value);
-
-
-      if (
-        !Number.isFinite(principal) ||
-        principal <= 0 ||
-        !Number.isFinite(annualRate) ||
-        annualRate < 0 ||
-        !Number.isFinite(months) ||
-        months <= 0
-      ) {
-
-        monthlyPayment.textContent =
-          "$0.00";
-
-        resultAmount.textContent =
-          "$0.00";
-
-        resultRate.textContent =
-          "0.00%";
-
-        resultTerm.textContent =
-          "0 months";
-
-        resultTotal.textContent =
-          "$0.00";
-
-        return;
-
-      }
-
-
-      const monthlyRate =
-        annualRate / 100 / 12;
-
-
-      let payment;
-
-
-      if (monthlyRate === 0) {
-
-        payment =
-          principal / months;
-
-      } else {
-
-        const factor =
-          Math.pow(
-            1 + monthlyRate,
-            months
-          );
-
-        payment =
-          principal *
-          (
-            monthlyRate * factor
-          ) /
-          (
-            factor - 1
-          );
-
-      }
-
-
-      const total =
-        payment * months;
-
-
-      monthlyPayment.textContent =
-        formatCurrency(payment);
-
-      resultAmount.textContent =
-        formatCurrency(principal);
-
-      resultRate.textContent =
-        annualRate.toFixed(2) + "%";
-
-      resultTerm.textContent =
-        months + " months";
-
-      resultTotal.textContent =
-        formatCurrency(total);
-
-    }
-
-
-    calculateLoan.addEventListener(
-      "click",
-      calculatePayment
-    );
-
-
-    /*
-     * Update the estimate when the user
-     * changes an input.
-     */
-
-    [
-      loanAmount,
-      loanRate,
-      loanTerm
-    ].forEach(function (field) {
-
-      field.addEventListener(
-        "change",
-        calculatePayment
-      );
-
-      field.addEventListener(
-        "input",
-        calculatePayment
-      );
-
-    });
-
-
-    /*
-     * FAQ accordion
-     */
-
-    document
-      .querySelectorAll(
-        ".loan-faq-question"
-      )
-      .forEach(function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              button.closest(
-                ".loan-faq-item"
-              );
-
-            const isOpen =
-              item.classList.contains(
-                "open"
-              );
-
-
-            document
-              .querySelectorAll(
-                ".loan-faq-item"
-              )
-              .forEach(function (
-                otherItem
-              ) {
-
-                otherItem.classList.remove(
-                  "open"
-                );
-
-                const otherButton =
-                  otherItem.querySelector(
-                    ".loan-faq-question"
-                  );
-
-                if (otherButton) {
-
-                  otherButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
-
-                }
-
-              });
-
-
-            if (!isOpen) {
-
-              item.classList.add(
-                "open"
-              );
-
-              button.setAttribute(
-                "aria-expanded",
-                "true"
-              );
-
-            }
-
-          }
-        );
-
-      });
-
-
-    /*
-     * Initial calculator calculation.
-     */
-
-    calculatePayment();
-
-
-    /*
-     * Footer year.
-     */
-
-    const loanFooterYear =
-      document.getElementById(
-        "loanFooterYear"
-      );
-
-    if (loanFooterYear) {
-
-      loanFooterYear.textContent =
-        new Date().getFullYear();
-
-    }
-
-  </script>
+    <script src="../js/app.js"></script>
 
 </body>
+
 </html>
