@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Secure customer login for Global TrustFund Banking."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>Customer Login | Global TrustFund</title>
+
+    <!-- Global Styles -->
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <!-- Global Application Scripts -->
+    <script
+        src="../js/app.js"
+        defer
+    ></script>
+
+    <script
+        src="../js/auth.js"
+        defer
+    ></script>
+</head>
+
+<body class="auth-page">
+
+    <!-- =====================================================
+         AUTH HEADER
+         ===================================================== -->
+
+    <header class="site-header">
+
+        <div class="container nav-container">
+
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
+            >
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        GLOBAL TRUSTFUND
+                    </strong>
+
+                    <small>
+                        SECURE BANKING
+                    </small>
+
+                </span>
+
+            </a>
+
+            <a
+                href="../index.html"
+                class="button button-outline button-small"
+            >
+                Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         LOGIN MAIN
+         ===================================================== -->
+
+    <main class="auth-main">
+
+        <section
+            class="auth-card"
+            aria-labelledby="loginTitle"
+        >
+
+            <!-- Header -->
+
+            <div class="auth-header">
+
+                <a
+                    href="../index.html"
+                    class="brand"
+                    aria-label="Global TrustFund"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+                    <span class="brand-text">
+
+                        <strong>
+                            GLOBAL TRUSTFUND
+                        </strong>
+
+                        <small>
+                            CUSTOMER BANKING
+                        </small>
+
+                    </span>
+
+                </a>
+
+                <h1 id="loginTitle">
+                    Welcome Back
+                </h1>
+
+                <p>
+                    Sign in to securely access your Global TrustFund
+                    customer account.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN ALERT
+                 ================================================= -->
+
+            <div
+                id="loginAlert"
+                class="alert alert-danger"
+                role="alert"
+                aria-live="polite"
+                hidden
+            >
+                <span id="loginAlertMessage">
+                    Unable to sign in. Please check your credentials.
+                </span>
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN FORM
+                 ================================================= -->
+
+            <form
+                id="customerLoginForm"
+                class="form"
+                method="post"
+                action="/api/auth/login"
+                autocomplete="on"
+                novalidate
+                aria-label="Customer login form"
+            >
+
+                <!-- Username / Email -->
+
+                <div class="form-group">
+
+                    <label for="loginIdentifier">
+                        Email Address or Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="loginIdentifier"
+                        name="identifier"
+                        class="form-control"
+                        placeholder="Enter your email or username"
+                        autocomplete="username"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        required
+                        aria-describedby="identifierHelp"
+                    >
+
+                    <span
+                        id="identifierHelp"
+                        class="form-help"
+                    >
+                        Use the email address or username registered
+                        with your Global TrustFund account.
+                    </span>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                        minlength="1"
+                        aria-describedby="passwordHelp"
+                    >
+
+                    <span
+                        id="passwordHelp"
+                        class="form-help"
+                    >
+                        Keep your password private and never share it
+                        with anyone.
+                    </span>
+
+                </div>
+
+
+                <!-- Remember / Forgot -->
+
+                <div
+                    class="d-flex align-center justify-between"
+                    style="gap:12px;"
+                >
+
+                    <label
+                        for="rememberMe"
+                        style="
+                            display:flex;
+                            align-items:center;
+                            gap:7px;
+                            font-size:8px;
+                            color:var(--gtf-muted);
+                            cursor:pointer;
+                        "
+                    >
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                            name="remember"
+                            value="true"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <a
+                        href="../support.html"
+                        class="text-link"
+                        style="
+                            color:var(--gtf-green-light);
+                        "
+                    >
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="button button-primary button-large button-block"
+                >
+                    <span id="loginButtonText">
+                        Sign In
+                    </span>
+
+                    <span
+                        id="loginSpinner"
+                        class="loading-spinner"
+                        aria-hidden="true"
+                        hidden
+                    ></span>
+
+                </button>
+
+            </form>
+
+
+            <!-- =================================================
+                 SECURITY NOTICE
+                 ================================================= -->
+
+            <div
+                class="alert alert-info mt-2"
+            >
+
+                <strong>
+                    Secure Login:
+                </strong>
+
+                Your login session should only be used on a trusted
+                device. Always sign out when finished.
+
+            </div>
+
+
+            <!-- =================================================
+                 REGISTRATION
+                 ================================================= -->
+
+            <div class="auth-footer">
+
+                <p style="margin-bottom:8px;">
+                    Don't have a Global TrustFund account?
+                </p>
+
+                <a
+                    href="register.html"
+                >
+                    Create a Customer Account
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer
+        class="site-footer"
+        style="margin-top:auto;"
+    >
+
+        <div class="container">
+
+            <div
+                class="footer-bottom"
+                style="border-top:0;"
+            >
+
+                <span>
+                    © 2026 Global TrustFund. All rights reserved.
+                </span>
+
+                <span>
+                    Secure Customer Banking Portal
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         LOGIN PAGE SCRIPT
+         ===================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const form =
+                document.getElementById("customerLoginForm");
+
+            const identifier =
+                document.getElementById("loginIdentifier");
+
+            const password =
+                document.getElementById("loginPassword");
+
+            const loginButton =
+                document.getElementById("loginButton");
+
+            const buttonText =
+                document.getElementById("loginButtonText");
+
+            const spinner =
+                document.getElementById("loginSpinner");
+
+            const alertBox =
+                document.getElementById("loginAlert");
+
+            const alertMessage =
+                document.getElementById("loginAlertMessage");
+
+
+            /*
+             * Display an authentication message.
+             */
+
+            function showAlert(message) {
+
+                if (!alertBox) {
+                    return;
+                }
+
+                alertMessage.textContent =
+                    message ||
+                    "Unable to sign in. Please try again.";
+
+                alertBox.hidden = false;
+
+            }
+
+
+            /*
+             * Hide authentication message.
+             */
+
+            function hideAlert() {
+
+                if (alertBox) {
+                    alertBox.hidden = true;
+                }
+
+            }
+
+
+            /*
+             * Loading state.
+             */
+
+            function setLoading(isLoading) {
+
+                if (!loginButton) {
+                    return;
+                }
+
+                loginButton.disabled =
+                    isLoading;
+
+                if (buttonText) {
+
+                    buttonText.textContent =
+                        isLoading
+                            ? "Signing In..."
+                            : "Sign In";
+
+                }
+
+                if (spinner) {
+                    spinner.hidden =
+                        !isLoading;
+                }
+
+            }
+
+
+            /*
+             * Client-side validation.
+             */
+
+            function validateForm() {
+
+                hideAlert();
+
+                if (!identifier.value.trim()) {
+
+                    showAlert(
+                        "Please enter your email address or username."
+                    );
+
+                    identifier.focus();
+
+                    return false;
+
+                }
+
+
+                if (!password.value) {
+
+                    showAlert(
+                        "Please enter your password."
+                    );
+
+                    password.focus();
+
+                    return false;
+
+                }
+
+                return true;
+
+            }
+
+
+            /*
+             * Login submission.
+             *
+             * The existing auth.js should handle the actual
+             * authentication/API integration when available.
+             */
+
+            form.addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+                    if (!validateForm()) {
+                        return;
+                    }
+
+                    setLoading(true);
+
+                    try {
+
+                        /*
+                         * If auth.js exposes a login function,
+                         * use it.
+                         */
+
+                        if (
+                            typeof window.customerLogin ===
+                            "function"
+                        ) {
+
+                            await window.customerLogin({
+
+                                identifier:
+                                    identifier.value.trim(),
+
+                                password:
+                                    password.value,
+
+                                remember:
+                                    document.getElementById(
+                                        "rememberMe"
+                                    )?.checked === true
+
+                            });
+
+                            return;
+                        }
+
+
+                        /*
+                         * If auth.js exposes a generic
+                         * login function, use that instead.
+                         */
+
+                        if (
+                            typeof window.login ===
+                            "function"
+                        ) {
+
+                            await window.login({
+
+                                identifier:
+                                    identifier.value.trim(),
+
+                                password:
+                                    password.value,
+
+                                remember:
+                                    document.getElementById(
+                                        "rememberMe"
+                                    )?.checked === true
+
+                            });
+
+                            return;
+                        }
+
+
+                        /*
+                         * No authentication function is currently
+                         * connected.
+                         */
+
+                        showAlert(
+                            "The authentication service is not currently connected. Please configure the customer authentication API."
+                        );
+
+                    } catch (error) {
+
+                        console.error(
+                            "Customer login error:",
+                            error
+                        );
+
+                        showAlert(
+                            error?.message ||
+                            "Unable to sign in. Please check your credentials and try again."
+                        );
+
+                    } finally {
+
+                        setLoading(false);
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * Clear error when user starts correcting
+             * the form.
+             */
+
+            identifier.addEventListener(
+                "input",
+                hideAlert
+            );
+
+            password.addEventListener(
+                "input",
+                hideAlert
+            );
+
+
+            /*
+             * Prevent accidental whitespace around
+             * the identifier.
+             */
+
+            identifier.addEventListener(
+                "blur",
+                function () {
+
+                    identifier.value =
+                        identifier.value.trim();
+
+                }
+            );
+
+        });
+
+    </script>
+
+</body>
+</html>
