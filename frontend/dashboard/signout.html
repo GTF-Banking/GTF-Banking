@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sign out of your Global TrustFund banking account."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>Sign Out | Global TrustFund</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <style>
+
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-dark: #092f24;
+            --gtf-light: #176b48;
+            --gtf-bg: #f4f8f6;
+            --gtf-border: #dfe8e3;
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        .signout-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+
+        .signout-header {
+            padding: 18px 30px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .signout-header-inner {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--gtf-green);
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 45px;
+            height: 45px;
+            display: block;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text strong {
+            color: var(--gtf-green);
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .brand-text small {
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 9px;
+            line-height: 1;
+        }
+
+        .home-link {
+            color: var(--gtf-green);
+            font-size: 9px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+
+        .signout-main {
+            flex: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 50px 20px;
+        }
+
+        .signout-card {
+            width: 100%;
+            max-width: 480px;
+
+            padding: 38px 30px;
+
+            background: #ffffff;
+            border: 1px solid var(--gtf-border);
+            border-radius: 16px;
+
+            text-align: center;
+
+            box-shadow:
+                0 18px 45px
+                rgba(11, 61, 46, .08);
+        }
+
+        .signout-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #eaf3ee;
+            color: var(--gtf-green);
+
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .signout-card h1 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 27px;
+            line-height: 1.2;
+        }
+
+        .signout-card p {
+            margin: 12px auto 0;
+
+            max-width: 350px;
+
+            color: var(--gtf-muted);
+
+            font-size: 9px;
+            line-height: 1.7;
+        }
+
+        .signout-status {
+            min-height: 18px;
+            margin: 20px 0 15px;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+            line-height: 1.5;
+        }
+
+        .signout-status.success {
+            color: var(--gtf-green);
+        }
+
+        .signout-status.error {
+            color: #8b4444;
+        }
+
+        .signout-actions {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .signout-button,
+        .signin-button {
+            width: 100%;
+            min-height: 45px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 700;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+        .signout-button {
+            border: 1px solid var(--gtf-green);
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        .signout-button:hover {
+            background: var(--gtf-dark);
+        }
+
+        .signin-button {
+            border: 1px solid var(--gtf-border);
+            background: #ffffff;
+            color: var(--gtf-green);
+        }
+
+        .signin-button:hover {
+            background: #f4f8f6;
+        }
+
+        .security-note {
+            margin-top: 24px;
+            padding-top: 18px;
+
+            border-top: 1px solid var(--gtf-border);
+
+            color: var(--gtf-muted);
+            font-size: 7px;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        .signout-footer {
+            padding: 18px 25px;
+
+            background: #ffffff;
+            border-top: 1px solid var(--gtf-border);
+        }
+
+        .signout-footer-inner {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--gtf-muted);
+            font-size: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: var(--gtf-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--gtf-green);
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .signout-header {
+                padding: 15px;
+            }
+
+            .home-link {
+                font-size: 8px;
+            }
+
+            .signout-main {
+                padding: 30px 13px;
+            }
+
+            .signout-card {
+                padding: 30px 20px;
+                border-radius: 13px;
+            }
+
+            .signout-card h1 {
+                font-size: 24px;
+            }
+
+            .signout-footer {
+                padding: 15px;
+            }
+
+            .signout-footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="signout-page">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="signout-header">
+
+        <div class="signout-header-inner">
+
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
+            >
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Banking
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="home-link"
+            >
+                Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="signout-main">
+
+        <section
+            class="signout-card"
+            aria-labelledby="signoutTitle"
+        >
+
+            <div
+                class="signout-icon"
+                aria-hidden="true"
+            >
+                ✓
+            </div>
+
+
+            <h1 id="signoutTitle">
+                Sign out
+            </h1>
+
+
+            <p>
+                You can securely end your Global TrustFund
+                banking session below.
+            </p>
+
+
+            <div
+                id="signoutStatus"
+                class="signout-status"
+                role="status"
+                aria-live="polite"
+            >
+                Checking your session...
+            </div>
+
+
+            <div class="signout-actions">
+
+
+                <button
+                    id="signoutButton"
+                    type="button"
+                    class="signout-button"
+                >
+                    Sign Out Securely
+                </button>
+
+
+                <!--
+                    THIS IS THE WORKING SIGN-IN BUTTON.
+                    It returns directly to the existing login page.
+                -->
+
+                <a
+                    href="../login.html"
+                    id="signinButton"
+                    class="signin-button"
+                >
+                    Sign In
+                </a>
+
+            </div>
+
+
+            <div class="security-note">
+                For your security, always sign out when using
+                a shared or public device.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="signout-footer">
+
+        <div class="signout-footer-inner">
+
+            <span>
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
+            </span>
+
+
+            <div class="footer-links">
+
+                <a href="../privacy.html">
+                    Privacy
+                </a>
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<!-- =====================================================
+     EXISTING APPLICATION SCRIPTS
+     ===================================================== -->
+
+<script src="../js/app.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/auth.js"></script>
+
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const year =
+                document.getElementById(
+                    "currentYear"
+                );
+
+            if (year) {
+                year.textContent =
+                    new Date().getFullYear();
+            }
+
+
+            const signoutButton =
+                document.getElementById(
+                    "signoutButton"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "signoutStatus"
+                );
+
+
+            /*
+             * Check whether the existing auth.js
+             * exposes a sign-out function.
+             */
+
+            if (
+                typeof window.signOut ===
+                "function"
+            ) {
+
+                status.textContent =
+                    "Your session is ready to be signed out.";
+
+            } else if (
+                typeof window.logout ===
+                "function"
+            ) {
+
+                status.textContent =
+                    "Your session is ready to be signed out.";
+
+            } else {
+
+                status.textContent =
+                    "Use the button below to end your session.";
+
+            }
+
+
+            signoutButton.addEventListener(
+                "click",
+                async function () {
+
+                    signoutButton.disabled =
+                        true;
+
+                    signoutButton.textContent =
+                        "Signing Out...";
+
+                    status.className =
+                        "signout-status";
+
+                    status.textContent =
+                        "Ending your secure session...";
+
+
+                    try {
+
+                        /*
+                         * Prefer the project's existing
+                         * auth.js sign-out function.
+                         */
+
+                        if (
+                            typeof window.signOut ===
+                            "function"
+                        ) {
+
+                            await window.signOut();
+
+                        }
+
+                        else if (
+                            typeof window.logout ===
+                            "function"
+                        ) {
+
+                            await window.logout();
+
+                        }
+
+                        /*
+                         * Fallback to Supabase directly
+                         * if the existing auth helper does
+                         * not expose a logout function.
+                         */
+
+                        else if (
+                            window.supabaseClient &&
+                            window.supabaseClient.auth
+                        ) {
+
+                            const result =
+                                await window.supabaseClient
+                                    .auth
+                                    .signOut();
+
+
+                            if (
+                                result &&
+                                result.error
+                            ) {
+
+                                throw result.error;
+
+                            }
+
+                        }
+
+                        else {
+
+                            throw new Error(
+                                "Authentication service is not connected."
+                            );
+
+                        }
+
+
+                        status.className =
+                            "signout-status success";
+
+                        status.textContent =
+                            "You have been signed out successfully. You can sign in again whenever you are ready.";
+
+
+                        signoutButton.textContent =
+                            "Signed Out";
+
+
+                        /*
+                         * Keep the Sign In button active.
+                         * Clicking it goes to:
+                         *
+                         * frontend/login.html
+                         */
+
+                        document
+                            .getElementById(
+                                "signinButton"
+                            )
+                            .focus();
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Sign-out error:",
+                            error
+                        );
+
+
+                        status.className =
+                            "signout-status error";
+
+                        status.textContent =
+                            error.message ||
+                            "We could not complete the sign-out request.";
+
+
+                        signoutButton.disabled =
+                            false;
+
+                        signoutButton.textContent =
+                            "Try Sign Out Again";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
