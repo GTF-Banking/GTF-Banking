@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund customer transaction history"
+    >
+
+    <title>Transactions | Global TrustFund</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <style>
+        .transaction-page {
+            padding: 30px;
+        }
+
+        .page-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .page-toolbar h2 {
+            margin: 0 0 4px;
+            color: var(--gtf-green);
+            font-size: 22px;
+        }
+
+        .page-toolbar p {
+            margin: 0;
+            color: var(--gtf-muted);
+            font-size: 9px;
+        }
+
+        .transaction-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            padding: 20px;
+            background: var(--gtf-white);
+            border: 1px solid var(--gtf-border);
+            border-radius: var(--gtf-radius-lg);
+            box-shadow: var(--gtf-shadow-sm);
+        }
+
+        .summary-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .summary-value {
+            display: block;
+            color: var(--gtf-green);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .summary-meta {
+            display: block;
+            margin-top: 5px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .transaction-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--gtf-white);
+            border: 1px solid var(--gtf-border);
+            border-radius: var(--gtf-radius-lg);
+        }
+
+        .transaction-toolbar .search-input {
+            flex: 1 1 240px;
+        }
+
+        .transaction-table-card {
+            overflow: hidden;
+            background: var(--gtf-white);
+            border: 1px solid var(--gtf-border);
+            border-radius: var(--gtf-radius-lg);
+            box-shadow: var(--gtf-shadow-sm);
+        }
+
+        .transaction-table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .transaction-table-header h3 {
+            margin: 0;
+            color: var(--gtf-green);
+            font-size: 12px;
+        }
+
+        .transaction-table-header span {
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .transaction-reference {
+            color: var(--gtf-green-light);
+            font-weight: 700;
+        }
+
+        .amount-credit {
+            color: var(--gtf-success);
+            font-weight: 800;
+        }
+
+        .amount-debit {
+            color: var(--gtf-danger);
+            font-weight: 800;
+        }
+
+        .transaction-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .type-dot {
+            width: 7px;
+            height: 7px;
+            display: inline-block;
+            border-radius: 50%;
+            background: var(--gtf-green);
+        }
+
+        .type-dot.debit {
+            background: var(--gtf-danger);
+        }
+
+        .type-dot.credit {
+            background: var(--gtf-success);
+        }
+
+        .transaction-details {
+            color: var(--gtf-text);
+        }
+
+        .transaction-details strong {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 8px;
+        }
+
+        .transaction-details small {
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .transaction-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 15px 20px;
+            border-top: 1px solid var(--gtf-border);
+        }
+
+        .transaction-footer-text {
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .transaction-mobile-card {
+            display: none;
+        }
+
+        @media (max-width: 850px) {
+            .transaction-page {
+                padding: 25px 20px;
+            }
+
+            .transaction-summary {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .transaction-page {
+                padding: 20px 13px;
+            }
+
+            .page-toolbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .transaction-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .transaction-table-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .table-wrapper {
+                border: 0;
+                border-radius: 0;
+            }
+
+            .data-table {
+                min-width: 720px;
+            }
+
+            .transaction-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-page">
+
+    <div class="dashboard-layout">
+
+        <!-- =====================================================
+             SIDEBAR
+             ===================================================== -->
+
+        <aside
+            class="dashboard-sidebar"
+            id="dashboardSidebar"
+            aria-label="Customer navigation"
+        >
+
+            <a
+                href="dashboard.html"
+                class="brand"
+                aria-label="Global TrustFund customer dashboard"
+            >
+                <img
+                    src="../assets/gtf-logo.svg"
+                    class="brand-logo"
+                    alt="Global TrustFund logo"
+                >
+
+                <span class="brand-text">
+                    <strong>GLOBAL TRUSTFUND</strong>
+                    <small>SECURE BANKING</small>
+                </span>
+            </a>
+
+            <nav class="sidebar-navigation">
+
+                <div class="sidebar-section-title">
+                    Banking
+                </div>
+
+                <a
+                    href="dashboard.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">⌂</span>
+                    Dashboard
+                </a>
+
+                <a
+                    href="accounts.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">▣</span>
+                    My Accounts
+                </a>
+
+                <a
+                    href="transactions.html"
+                    class="sidebar-link active"
+                    aria-current="page"
+                >
+                    <span class="sidebar-icon">↔</span>
+                    Transactions
+                </a>
+
+                <a
+                    href="transfers.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">⇄</span>
+                    Transfers
+                </a>
+
+                <a
+                    href="payments.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">₦</span>
+                    Payments
+                </a>
+
+                <div class="sidebar-section-title">
+                    Account
+                </div>
+
+                <a
+                    href="profile.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">◉</span>
+                    My Profile
+                </a>
+
+                <a
+                    href="support.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">?</span>
+                    Support
+                </a>
+
+                <div class="sidebar-footer">
+
+                    <a
+                        href="logout.html"
+                        class="sidebar-link"
+                    >
+                        <span class="sidebar-icon">↪</span>
+                        Sign Out
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- =====================================================
+             MAIN
+             ===================================================== -->
+
+        <main class="dashboard-main">
+
+            <!-- Header -->
+
+            <header class="dashboard-header">
+
+                <div class="dashboard-header-title">
+
+                    <h1>
+                        Transactions
+                    </h1>
+
+                    <p>
+                        Review and manage your recent account activity.
+                    </p>
+
+                </div>
+
+                <div class="dashboard-header-actions">
+
+                    <button
+                        type="button"
+                        class="button button-outline button-small"
+                        id="mobileMenuButton"
+                        aria-label="Open navigation menu"
+                    >
+                        ☰
+                    </button>
+
+                    <div class="dashboard-user">
+
+                        <div
+                            class="user-avatar"
+                            aria-hidden="true"
+                        >
+                            JD
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong id="customerName">
+                                John Doe
+                            </strong>
+
+                            <small>
+                                Customer
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- Content -->
+
+            <section class="transaction-page">
+
+                <!-- Page toolbar -->
+
+                <div class="page-toolbar">
+
+                    <div>
+                        <h2>
+                            Transaction History
+                        </h2>
+
+                        <p>
+                            View deposits, withdrawals, transfers and payments.
+                        </p>
+                    </div>
+
+                    <a
+                        href="transfers.html"
+                        class="button button-primary"
+                    >
+                        Make a Transfer
+                    </a>
+
+                </div>
+
+
+                <!-- Summary -->
+
+                <section
+                    class="transaction-summary"
+                    aria-label="Transaction summary"
+                >
+
+                    <article class="summary-card">
+
+                        <span class="summary-label">
+                            Total Credits
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="totalCredits"
+                        >
+                            ₦0.00
+                        </strong>
+
+                        <span class="summary-meta">
+                            Money received
+                        </span>
+
+                    </article>
+
+
+                    <article class="summary-card">
+
+                        <span class="summary-label">
+                            Total Debits
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="totalDebits"
+                        >
+                            ₦0.00
+                        </strong>
+
+                        <span class="summary-meta">
+                            Money spent or sent
+                        </span>
+
+                    </article>
+
+
+                    <article class="summary-card">
+
+                        <span class="summary-label">
+                            Transactions
+                        </span>
+
+                        <strong
+                            class="summary-value"
+                            id="transactionCount"
+                        >
+                            0
+                        </strong>
+
+                        <span class="summary-meta">
+                            Recent account activity
+                        </span>
+
+                    </article>
+
+                </section>
+
+
+                <!-- Filters -->
+
+                <section
+                    class="transaction-toolbar"
+                    aria-label="Transaction filters"
+                >
+
+                    <label
+                        class="sr-only"
+                        for="transactionSearch"
+                    >
+                        Search transactions
+                    </label>
+
+                    <input
+                        type="search"
+                        id="transactionSearch"
+                        class="search-input"
+                        placeholder="Search transactions..."
+                        autocomplete="off"
+                    >
+
+
+                    <label
+                        class="sr-only"
+                        for="transactionType"
+                    >
+                        Transaction type
+                    </label>
+
+                    <select
+                        id="transactionType"
+                        class="filter-select"
+                    >
+                        <option value="all">
+                            All Types
+                        </option>
+
+                        <option value="credit">
+                            Credits
+                        </option>
+
+                        <option value="debit">
+                            Debits
+                        </option>
+
+                        <option value="transfer">
+                            Transfers
+                        </option>
+
+                        <option value="payment">
+                            Payments
+                        </option>
+                    </select>
+
+
+                    <label
+                        class="sr-only"
+                        for="transactionStatus"
+                    >
+                        Transaction status
+                    </label>
+
+                    <select
+                        id="transactionStatus"
+                        class="filter-select"
+                    >
+                        <option value="all">
+                            All Statuses
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="failed">
+                            Failed
+                        </option>
+                    </select>
+
+
+                    <label
+                        class="sr-only"
+                        for="transactionPeriod"
+                    >
+                        Transaction period
+                    </label>
+
+                    <select
+                        id="transactionPeriod"
+                        class="filter-select"
+                    >
+                        <option value="all">
+                            All Time
+                        </option>
+
+                        <option value="30">
+                            Last 30 Days
+                        </option>
+
+                        <option value="90">
+                            Last 90 Days
+                        </option>
+
+                        <option value="365">
+                            Last Year
+                        </option>
+                    </select>
+
+
+                    <button
+                        type="button"
+                        class="button button-outline button-small"
+                        id="clearFilters"
+                    >
+                        Clear
+                    </button>
+
+                </section>
+
+
+                <!-- Transactions -->
+
+                <section class="transaction-table-card">
+
+                    <div class="transaction-table-header">
+
+                        <h3>
+                            Recent Transactions
+                        </h3>
+
+                        <span id="transactionStatusText">
+                            Showing recent activity
+                        </span>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table
+                            class="data-table"
+                            id="transactionsTable"
+                        >
+
+                            <caption class="sr-only">
+                                Customer transaction history including date,
+                                description, type, reference, amount and status.
+                            </caption>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th scope="col">
+                                        Date
+                                    </th>
+
+                                    <th scope="col">
+                                        Description
+                                    </th>
+
+                                    <th scope="col">
+                                        Type
+                                    </th>
+
+                                    <th scope="col">
+                                        Reference
+                                    </th>
+
+                                    <th scope="col">
+                                        Amount
+                                    </th>
+
+                                    <th scope="col">
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="transactionsBody">
+
+                                <tr>
+
+                                    <td>
+                                        <time datetime="2026-08-27">
+                                            Aug 27, 2026
+                                        </time>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="transaction-details">
+
+                                            <strong>
+                                                Account funding
+                                            </strong>
+
+                                            <small>
+                                                Deposit
+                                            </small>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="transaction-type">
+
+                                            <span
+                                                class="type-dot credit"
+                                                aria-hidden="true"
+                                            ></span>
+
+                                            Credit
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-reference">
+                                            GTF-DEP-001
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="amount-credit">
+                                            +₦150,000.00
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge badge-success">
+                                            Completed
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <time datetime="2026-08-26">
+                                            Aug 26, 2026
+                                        </time>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="transaction-details">
+
+                                            <strong>
+                                                Internal transfer
+                                            </strong>
+
+                                            <small>
+                                                Transfer to savings
+                                            </small>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="transaction-type">
+
+                                            <span
+                                                class="type-dot debit"
+                                                aria-hidden="true"
+                                            ></span>
+
+                                            Debit
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-reference">
+                                            GTF-TRF-002
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="amount-debit">
+                                            -₦50,000.00
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge badge-success">
+                                            Completed
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <time datetime="2026-08-24">
+                                            Aug 24, 2026
+                                        </time>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="transaction-details">
+
+                                            <strong>
+                                                Utility payment
+                                            </strong>
+
+                                            <small>
+                                                Bill payment
+                                            </small>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="transaction-type">
+
+                                            <span
+                                                class="type-dot debit"
+                                                aria-hidden="true"
+                                            ></span>
+
+                                            Debit
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-reference">
+                                            GTF-PAY-003
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="amount-debit">
+                                            -₦18,500.00
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge badge-success">
+                                            Completed
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <time datetime="2026-08-22">
+                                            Aug 22, 2026
+                                        </time>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="transaction-details">
+
+                                            <strong>
+                                                Salary credit
+                                            </strong>
+
+                                            <small>
+                                                Direct deposit
+                                            </small>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="transaction-type">
+
+                                            <span
+                                                class="type-dot credit"
+                                                aria-hidden="true"
+                                            ></span>
+
+                                            Credit
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-reference">
+                                            GTF-DEP-004
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="amount-credit">
+                                            +₦420,000.00
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge badge-success">
+                                            Completed
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>
+                                        <time datetime="2026-08-20">
+                                            Aug 20, 2026
+                                        </time>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="transaction-details">
+
+                                            <strong>
+                                                Funds transfer
+                                            </strong>
+
+                                            <small>
+                                                External transfer
+                                            </small>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="transaction-type">
+
+                                            <span
+                                                class="type-dot debit"
+                                                aria-hidden="true"
+                                            ></span>
+
+                                            Debit
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-reference">
+                                            GTF-TRF-005
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="amount-debit">
+                                            -₦75,000.00
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge badge-pending">
+                                            Pending
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <!-- Footer -->
+
+                    <div class="transaction-footer">
+
+                        <span
+                            class="transaction-footer-text"
+                            id="transactionCountText"
+                        >
+                            Showing transactions
+                        </span>
+
+                        <div class="pagination">
+
+                            <button
+                                type="button"
+                                aria-label="Previous page"
+                                disabled
+                            >
+                                ‹
+                            </button>
+
+                            <button
+                                type="button"
+                                class="active"
+                                aria-current="page"
+                            >
+                                1
+                            </button>
+
+                            <button
+                                type="button"
+                                aria-label="Next page"
+                            >
+                                ›
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const sidebar =
+                document.getElementById("dashboardSidebar");
+
+            const mobileMenuButton =
+                document.getElementById("mobileMenuButton");
+
+            const searchInput =
+                document.getElementById("transactionSearch");
+
+            const typeFilter =
+                document.getElementById("transactionType");
+
+            const statusFilter =
+                document.getElementById("transactionStatus");
+
+            const periodFilter =
+                document.getElementById("transactionPeriod");
+
+            const clearFilters =
+                document.getElementById("clearFilters");
+
+            const tableBody =
+                document.getElementById("transactionsBody");
+
+            const rows =
+                Array.from(tableBody.querySelectorAll("tr"));
+
+
+            /*
+             * Mobile sidebar
+             */
+
+            if (mobileMenuButton) {
+
+                mobileMenuButton.addEventListener(
+                    "click",
+                    function () {
+
+                        sidebar.classList.toggle("open");
+
+                    }
+                );
+
+            }
+
+
+            /*
+             * Transaction filtering
+             */
+
+            function filterTransactions() {
+
+                const search =
+                    searchInput.value
+                        .trim()
+                        .toLowerCase();
+
+                const type =
+                    typeFilter.value.toLowerCase();
+
+                const status =
+                    statusFilter.value.toLowerCase();
+
+                let visibleCount = 0;
+
+
+                rows.forEach(function (row) {
+
+                    const text =
+                        row.textContent.toLowerCase();
+
+                    const typeText =
+                        row.cells[2]
+                            ? row.cells[2]
+                                .textContent
+                                .trim()
+                                .toLowerCase()
+                            : "";
+
+                    const statusText =
+                        row.cells[5]
+                            ? row.cells[5]
+                                .textContent
+                                .trim()
+                                .toLowerCase()
+                            : "";
+
+
+                    const matchesSearch =
+                        !search ||
+                        text.includes(search);
+
+
+                    const matchesType =
+                        type === "all" ||
+                        typeText.includes(type);
+
+
+                    const matchesStatus =
+                        status === "all" ||
+                        statusText.includes(status);
+
+
+                    const visible =
+                        matchesSearch &&
+                        matchesType &&
+                        matchesStatus;
+
+
+                    row.style.display =
+                        visible ? "" : "none";
+
+
+                    if (visible) {
+                        visibleCount++;
+                    }
+
+                });
+
+
+                document.getElementById(
+                    "transactionStatusText"
+                ).textContent =
+                    "Showing " +
+                    visibleCount +
+                    " transaction" +
+                    (visibleCount === 1 ? "" : "s");
+
+
+                document.getElementById(
+                    "transactionCountText"
+                ).textContent =
+                    visibleCount +
+                    " transaction" +
+                    (visibleCount === 1 ? "" : "s") +
+                    " displayed";
+
+            }
+
+
+            /*
+             * Clear filters
+             */
+
+            clearFilters.addEventListener(
+                "click",
+                function () {
+
+                    searchInput.value = "";
+
+                    typeFilter.value = "all";
+
+                    statusFilter.value = "all";
+
+                    periodFilter.value = "all";
+
+                    filterTransactions();
+
+                }
+            );
+
+
+            searchInput.addEventListener(
+                "input",
+                filterTransactions
+            );
+
+
+            typeFilter.addEventListener(
+                "change",
+                filterTransactions
+            );
+
+
+            statusFilter.addEventListener(
+                "change",
+                filterTransactions
+            );
+
+
+            periodFilter.addEventListener(
+                "change",
+                filterTransactions
+            );
+
+
+            /*
+             * Calculate summary from visible/static data.
+             * Replace with API data when backend integration is enabled.
+             */
+
+            let credits = 0;
+            let debits = 0;
+            let count = rows.length;
+
+
+            rows.forEach(function (row) {
+
+                const amountCell =
+                    row.cells[4];
+
+                if (!amountCell) {
+                    return;
+                }
+
+                const amountText =
+                    amountCell.textContent
+                        .replace(/[₦,+]/g, "")
+                        .trim();
+
+                const amount =
+                    Number(amountText);
+
+                if (
+                    amountCell.textContent
+                        .includes("+")
+                ) {
+                    credits += amount;
+                } else {
+                    debits += amount;
+                }
+
+            });
+
+
+            document.getElementById(
+                "totalCredits"
+            ).textContent =
+                "₦" +
+                credits.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+
+            document.getElementById(
+                "totalDebits"
+            ).textContent =
+                "₦" +
+                debits.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+
+
+            document.getElementById(
+                "transactionCount"
+            ).textContent =
+                count;
+
+
+            /*
+             * API integration placeholder
+             *
+             * This page can later load real transactions from:
+             *
+             * GET /api/transactions
+             *
+             * using the authentication token managed by auth.js.
+             */
+
+            async function loadTransactions() {
+
+                /*
+                 * Example integration:
+                 *
+                 * const token =
+                 *     localStorage.getItem("gtf_access_token");
+                 *
+                 * const response = await fetch(
+                 *     "/api/transactions",
+                 *     {
+                 *         headers: {
+                 *             "Authorization":
+                 *                 "Bearer " + token
+                 *         }
+                 *     }
+                 * );
+                 *
+                 * const data = await response.json();
+                 *
+                 * // Render data into tableBody.
+                 */
+
+            }
+
+
+            loadTransactions();
+
+        });
+    </script>
+
+</body>
+</html>
