@@ -1,1921 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="GTF Banking business banking solutions for businesses, organizations and growing enterprises."
-  >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="description"
+        content="Global TrustFund business banking solutions for businesses, organizations and growing enterprises."
+    >
 
-  <title>Business Banking | GTF Banking</title>
+    <meta name="theme-color" content="#0b3d2e">
 
-  <link
-    rel="icon"
-    href="../assets/gtf-logo.svg"
-    type="image/svg+xml"
-  >
+    <title>Business Banking | Global TrustFund</title>
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
-
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --page-bg: #f4f7fa;
-      --surface: #ffffff;
-      --surface-soft: #f8fafc;
-      --text: #172b3a;
-      --muted: #66788a;
-      --border: #dce4eb;
-      --success: #16794c;
-      --shadow: 0 8px 25px rgba(11, 42, 74, .08);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--page-bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-      cursor: pointer;
-    }
-
-    /* =====================================
-       HEADER
-    ====================================== */
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 10px rgba(11, 42, 74, .04);
-    }
-
-    .nav-container {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .brand-name strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .brand-name span {
-      display: block;
-      color: var(--muted);
-      font-size: .52rem;
-      letter-spacing: .04em;
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .main-nav a {
-      position: relative;
-      padding: 26px 0;
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .main-nav a.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header-button {
-      min-height: 35px;
-      padding: 7px 13px;
-      border-radius: 5px;
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .login-button {
-      border: 1px solid var(--gtf-blue);
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .signup-button {
-      border: 1px solid var(--gtf-blue);
-      background: var(--gtf-blue);
-      color: #fff;
-    }
-
-    .signup-button:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .mobile-toggle {
-      display: none;
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--gtf-navy);
-    }
-
-    /* =====================================
-       HERO
-    ====================================== */
-
-    .hero {
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-      color: #fff;
-    }
-
-    .hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 410px;
-      margin: 0 auto;
-      padding: 70px 0;
-
-      display: grid;
-      grid-template-columns:
-        minmax(0, 1.15fr)
-        minmax(300px, .85fr);
-
-      align-items: center;
-      gap: 55px;
-    }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      font-size: .6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-    }
-
-    .hero .eyebrow {
-      color: #d9b866;
-    }
-
-    .hero h1 {
-      max-width: 680px;
-      margin: 0;
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      line-height: 1.12;
-    }
-
-    .hero p {
-      max-width: 620px;
-      margin: 18px 0 0;
-      color: #dbe7f1;
-      font-size: .77rem;
-    }
-
-    .hero-actions {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .hero-button {
-      min-height: 39px;
-      padding: 9px 17px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .hero-primary {
-      background: #fff;
-      color: var(--gtf-navy);
-    }
-
-    .hero-secondary {
-      border: 1px solid rgba(255,255,255,.45);
-      background: rgba(255,255,255,.06);
-      color: #fff;
-    }
-
-    .business-summary {
-      padding: 25px;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 10px;
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(4px);
-    }
-
-    .summary-title {
-      margin-bottom: 15px;
-      font-size: .72rem;
-      font-weight: 700;
-    }
-
-    .summary-item {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,.12);
-
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .summary-item:last-child {
-      border-bottom: 0;
-    }
-
-    .summary-number {
-      width: 31px;
-      height: 31px;
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-
-      color: #fff;
-      font-size: .6rem;
-      font-weight: 700;
-    }
-
-    .summary-item strong {
-      display: block;
-      font-size: .6rem;
-    }
-
-    .summary-item span {
-      display: block;
-      margin-top: 2px;
-      color: #b9cfdf;
-      font-size: .52rem;
-    }
-
-    /* =====================================
-       SECTION
-    ====================================== */
-
-    .section {
-      padding: 70px 0;
-    }
-
-    .section-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .section-heading {
-      max-width: 680px;
-      margin: 0 auto 38px;
-      text-align: center;
-    }
-
-    .section-heading .eyebrow {
-      color: var(--gtf-blue);
-    }
-
-    .section-heading h2 {
-      margin: 0;
-      color: var(--gtf-navy);
-      font-size: 1.55rem;
-      line-height: 1.25;
-    }
-
-    .section-heading p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: .67rem;
-    }
-
-    /* =====================================
-       BUSINESS SERVICES
-    ====================================== */
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 17px;
-    }
-
-    .service-card {
-      padding: 25px;
-
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .service-icon {
-      width: 42px;
-      height: 42px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 7px;
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: .9rem;
-      font-weight: 700;
-    }
-
-    .service-card h3 {
-      margin: 15px 0 7px;
-      color: var(--gtf-navy);
-      font-size: .76rem;
-    }
-
-    .service-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: .61rem;
-    }
-
-    .service-link {
-      display: inline-block;
-      margin-top: 14px;
-      color: var(--gtf-blue);
-      font-size: .57rem;
-      font-weight: 700;
-    }
-
-    /* =====================================
-       BUSINESS NEEDS
-    ====================================== */
-
-    .needs-section {
-      background: #fff;
-    }
-
-    .needs-grid {
-      display: grid;
-      grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
-
-      gap: 42px;
-      align-items: center;
-    }
-
-    .needs-content h2 {
-      margin: 0 0 13px;
-      color: var(--gtf-navy);
-      font-size: 1.4rem;
-    }
-
-    .needs-content p {
-      margin: 0 0 13px;
-      color: var(--muted);
-      font-size: .68rem;
-    }
-
-    .needs-list {
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .needs-list li {
-      position: relative;
-      padding: 10px 0 10px 24px;
-      border-bottom: 1px solid #edf1f4;
-      color: var(--text);
-      font-size: .62rem;
-    }
-
-    .needs-list li:last-child {
-      border-bottom: 0;
-    }
-
-    .needs-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--success);
-      font-weight: 700;
-    }
-
-    .business-card {
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--surface-soft);
-    }
-
-    .business-card h3 {
-      margin: 0;
-      color: var(--gtf-navy);
-      font-size: .8rem;
-    }
-
-    .business-card p {
-      margin: 9px 0 20px;
-      color: var(--muted);
-      font-size: .61rem;
-    }
-
-    .account-options {
-      display: grid;
-      gap: 10px;
-    }
-
-    .account-option {
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      background: #fff;
-    }
-
-    .account-option strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .62rem;
-    }
-
-    .account-option span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: .54rem;
-    }
-
-    /* =====================================
-       FEATURES
-    ====================================== */
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .feature-card {
-      padding: 21px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #fff;
-    }
-
-    .feature-card strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .67rem;
-    }
-
-    .feature-card p {
-      margin: 7px 0 0;
-      color: var(--muted);
-      font-size: .57rem;
-    }
-
-    /* =====================================
-       SECURITY
-    ====================================== */
-
-    .security-section {
-      background:
-        linear-gradient(
-          180deg,
-          #f8fafc,
-          #eef4f8
-        );
-    }
-
-    .security-panel {
-      padding: 35px;
-
-      display: grid;
-      grid-template-columns:
-        minmax(0, .8fr)
-        minmax(0, 1.2fr);
-
-      gap: 40px;
-
-      border-radius: 10px;
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .security-panel h2 {
-      margin: 0;
-      font-size: 1.35rem;
-    }
-
-    .security-panel p {
-      margin: 11px 0 0;
-      color: #c5d6e4;
-      font-size: .64rem;
-    }
-
-    .security-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .security-item {
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 7px;
-      background: rgba(255,255,255,.05);
-    }
-
-    .security-item strong {
-      display: block;
-      font-size: .62rem;
-    }
-
-    .security-item span {
-      display: block;
-      margin-top: 4px;
-      color: #b7cad9;
-      font-size: .53rem;
-    }
-
-    /* =====================================
-       CTA
-    ====================================== */
-
-    .cta {
-      padding: 55px 0;
-      background: #fff;
-    }
-
-    .cta-inner {
-      width: min(950px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 35px;
-
-      border: 1px solid var(--border);
-      border-radius: 10px;
-
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .cta-inner h2 {
-      margin: 0;
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-    }
-
-    .cta-inner p {
-      max-width: 620px;
-      margin: 10px auto 20px;
-      color: var(--muted);
-      font-size: .65rem;
-    }
-
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .cta-button {
-      min-height: 39px;
-      padding: 9px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .cta-button.secondary {
-      border: 1px solid var(--gtf-blue);
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .cta-button:hover {
-      background: var(--gtf-blue-dark);
-      color: #fff;
-    }
-
-    .cta-button.secondary:hover {
-      background: var(--gtf-blue);
-    }
-
-    /* =====================================
-       FOOTER
-    ====================================== */
-
-    .site-footer {
-      padding: 40px 0 22px;
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 35px;
-      padding-bottom: 30px;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-brand img {
-      width: 40px;
-      height: 40px;
-    }
-
-    .footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .footer-description {
-      max-width: 290px;
-      margin: 14px 0 0;
-      color: #aebfcd;
-      font-size: .57rem;
-    }
-
-    .footer-column h3 {
-      margin: 0 0 11px;
-      color: #fff;
-      font-size: .61rem;
-    }
-
-    .footer-column a {
-      display: block;
-      margin-bottom: 7px;
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .footer-column a:hover {
-      color: #fff;
-    }
-
-    .footer-bottom {
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.10);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .52rem;
-    }
-
-    /* =====================================
-       RESPONSIVE
-    ====================================== */
-
-    @media (max-width: 950px) {
-
-      .main-nav,
-      .header-actions {
-        display: none;
-      }
-
-      .mobile-toggle {
-        display: block;
-      }
-
-      .nav-container.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .nav-container.mobile-open .main-nav {
-        display: flex;
-        width: 100%;
-        padding: 8px 0 15px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-      }
-
-      .nav-container.mobile-open .main-nav a {
-        padding: 9px 0;
-      }
-
-      .nav-container.mobile-open .main-nav a.active::after {
-        display: none;
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .security-panel {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .needs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .hero-inner {
-        padding: 55px 0;
-      }
-
-      .section {
-        padding: 50px 0;
-      }
-
-      .security-panel {
-        padding: 25px;
-      }
-
-      .security-list {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-inner {
-        padding: 25px 18px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
 
-  <!-- =====================================
-       HEADER
-  ====================================== -->
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-  <header class="site-header">
+    <header class="site-header">
 
-    <div
-      id="navContainer"
-      class="nav-container"
-    >
+        <div class="container nav-container">
 
-      <a
-        href="../index.html"
-        class="brand"
-        aria-label="GTF Banking home"
-      >
-
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
-
-        <span class="brand-name">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="personal.html">
-          Personal
-        </a>
-
-        <a
-          href="business.html"
-          class="active"
-          aria-current="page"
-        >
-          Business
-        </a>
-
-        <a href="cards.html">
-          Cards
-        </a>
-
-        <a href="loans.html">
-          Loans
-        </a>
-
-        <a href="../support.html">
-          Support
-        </a>
-
-      </nav>
-
-
-      <div class="header-actions">
-
-        <a
-          href="../login.html"
-          class="header-button login-button"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="header-button signup-button"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="mobileToggle"
-        class="mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================
-       HERO
-  ====================================== -->
-
-  <section class="hero">
-
-    <div class="hero-inner">
-
-      <div>
-
-        <p class="eyebrow">
-          Business Banking
-        </p>
-
-        <h1>
-          Banking solutions designed
-          for your business.
-        </h1>
-
-        <p>
-          Manage your business finances with
-          banking services designed for everyday
-          operations, payments, cash management
-          and growth.
-        </p>
-
-        <div class="hero-actions">
-
-          <a
-            href="../signup.html"
-            class="hero-button hero-primary"
-          >
-            Get Started
-          </a>
-
-          <a
-            href="#business-services"
-            class="hero-button hero-secondary"
-          >
-            Explore Services
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="business-summary">
-
-        <div class="summary-title">
-          Business banking at a glance
-        </div>
-
-
-        <div class="summary-item">
-
-          <div class="summary-number">
-            01
-          </div>
-
-          <div>
-
-            <strong>
-              Business accounts
-            </strong>
-
-            <span>
-              Manage business funds and
-              day-to-day banking.
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="summary-item">
-
-          <div class="summary-number">
-            02
-          </div>
-
-          <div>
-
-            <strong>
-              Payments
-            </strong>
-
-            <span>
-              Support business payment and
-              transaction workflows.
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="summary-item">
-
-          <div class="summary-number">
-            03
-          </div>
-
-          <div>
-
-            <strong>
-              Digital access
-            </strong>
-
-            <span>
-              Access eligible banking services
-              through digital channels.
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="summary-item">
-
-          <div class="summary-number">
-            04
-          </div>
-
-          <div>
-
-            <strong>
-              Support
-            </strong>
-
-            <span>
-              Get assistance with your
-              business banking needs.
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       SERVICES
-  ====================================== -->
-
-  <section
-    id="business-services"
-    class="section"
-  >
-
-    <div class="section-inner">
-
-      <div class="section-heading">
-
-        <p class="eyebrow">
-          Business services
-        </p>
-
-        <h2>
-          Tools for managing your business finances
-        </h2>
-
-        <p>
-          GTF Banking brings essential business
-          banking functions together in one
-          straightforward experience.
-        </p>
-
-      </div>
-
-
-      <div class="services-grid">
-
-
-        <article class="service-card">
-
-          <div class="service-icon">
-            $
-          </div>
-
-          <h3>
-            Business Checking
-          </h3>
-
-          <p>
-            A practical account experience for
-            managing everyday business transactions
-            and operating funds.
-          </p>
-
-          <a
-            href="checking.html"
-            class="service-link"
-          >
-            Explore checking →
-          </a>
-
-        </article>
-
-
-        <article class="service-card">
-
-          <div class="service-icon">
-            +
-          </div>
-
-          <h3>
-            Business Savings
-          </h3>
-
-          <p>
-            Organize business reserves and savings
-            toward future operating needs and goals.
-          </p>
-
-          <a
-            href="savings.html"
-            class="service-link"
-          >
-            Explore savings →
-          </a>
-
-        </article>
-
-
-        <article class="service-card">
-
-          <div class="service-icon">
-            ⇄
-          </div>
-
-          <h3>
-            Business Payments
-          </h3>
-
-          <p>
-            Manage eligible payment and transfer
-            activities through available banking
-            channels.
-          </p>
-
-          <a
-            href="../support.html"
-            class="service-link"
-          >
-            Learn about payments →
-          </a>
-
-        </article>
-
-
-        <article class="service-card">
-
-          <div class="service-icon">
-            ▣
-          </div>
-
-          <h3>
-            Business Cards
-          </h3>
-
-          <p>
-            Card services can provide convenient
-            access for eligible business spending
-            requirements.
-          </p>
-
-          <a
-            href="cards.html"
-            class="service-link"
-          >
-            Explore cards →
-          </a>
-
-        </article>
-
-
-        <article class="service-card">
-
-          <div class="service-icon">
-            ↗
-          </div>
-
-          <h3>
-            Financing
-          </h3>
-
-          <p>
-            Explore financing options that may
-            support eligible business objectives
-            and cash-flow needs.
-          </p>
-
-          <a
-            href="loans.html"
-            class="service-link"
-          >
-            Explore loans →
-          </a>
-
-        </article>
-
-
-        <article class="service-card">
-
-          <div class="service-icon">
-            ◈
-          </div>
-
-          <h3>
-            Business Support
-          </h3>
-
-          <p>
-            Get assistance with account access,
-            services, transactions and general
-            banking questions.
-          </p>
-
-          <a
-            href="../support.html"
-            class="service-link"
-          >
-            Contact support →
-          </a>
-
-        </article>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       BUSINESS NEEDS
-  ====================================== -->
-
-  <section class="section needs-section">
-
-    <div class="section-inner">
-
-      <div class="needs-grid">
-
-
-        <div class="needs-content">
-
-          <p
-            class="eyebrow"
-            style="color: var(--gtf-blue);"
-          >
-            Built for business
-          </p>
-
-          <h2>
-            Keep your business finances organized.
-          </h2>
-
-          <p>
-            Business banking should make it easier
-            to understand where your business funds
-            are going and how your banking activity
-            supports daily operations.
-          </p>
-
-          <p>
-            GTF Banking provides a structured
-            experience for eligible business
-            customers, with account and service
-            options designed around common
-            business banking needs.
-          </p>
-
-
-          <ul class="needs-list">
-
-            <li>
-              Separate business banking activity
-              from personal finances.
-            </li>
-
-            <li>
-              Manage everyday business transactions.
-            </li>
-
-            <li>
-              Organize funds for operating needs.
-            </li>
-
-            <li>
-              Access eligible digital banking tools.
-            </li>
-
-            <li>
-              Review available banking services
-              through one platform.
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <div class="business-card">
-
-          <h3>
-            Find the right business account
-          </h3>
-
-          <p>
-            Account availability, features,
-            requirements and eligibility may vary.
-          </p>
-
-
-          <div class="account-options">
-
-            <div class="account-option">
-
-              <strong>
-                Small Business Banking
-              </strong>
-
-              <span>
-                Designed for everyday business
-                account management.
-              </span>
-
-            </div>
-
-
-            <div class="account-option">
-
-              <strong>
-                Business Savings
-              </strong>
-
-              <span>
-                A place to organize eligible
-                business reserves.
-              </span>
-
-            </div>
-
-
-            <div class="account-option">
-
-              <strong>
-                Business Financing
-              </strong>
-
-              <span>
-                Financing options may be available
-                for qualifying customers.
-              </span>
-
-            </div>
-
-
-            <div class="account-option">
-
-              <strong>
-                Business Cards
-              </strong>
-
-              <span>
-                Card options for eligible
-                business customers.
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       DIGITAL FEATURES
-  ====================================== -->
-
-  <section class="section">
-
-    <div class="section-inner">
-
-      <div class="section-heading">
-
-        <p class="eyebrow">
-          Digital banking
-        </p>
-
-        <h2>
-          Business banking when you need it
-        </h2>
-
-        <p>
-          Use the GTF Banking experience to keep
-          track of your eligible accounts and
-          banking activity.
-        </p>
-
-      </div>
-
-
-      <div class="feature-grid">
-
-
-        <article class="feature-card">
-
-          <strong>
-            Account Overview
-          </strong>
-
-          <p>
-            Review available business account
-            information in one place.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <strong>
-            Transaction Management
-          </strong>
-
-          <p>
-            Keep track of eligible transactions
-            and account activity.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <strong>
-            Digital Access
-          </strong>
-
-          <p>
-            Access supported banking functionality
-            through the online platform.
-          </p>
-
-        </article>
-
-
-        <article class="feature-card">
-
-          <strong>
-            Customer Support
-          </strong>
-
-          <p>
-            Find assistance when you need help
-            with your banking experience.
-          </p>
-
-        </article>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       SECURITY
-  ====================================== -->
-
-  <section class="section security-section">
-
-    <div class="section-inner">
-
-      <div class="security-panel">
-
-
-        <div>
-
-          <h2>
-            Protecting your business banking
-            access matters.
-          </h2>
-
-          <p>
-            Business accounts can contain
-            important financial information.
-            Always protect your login credentials
-            and use official GTF Banking channels
-            when accessing your account.
-          </p>
-
-        </div>
-
-
-        <div class="security-list">
-
-
-          <div class="security-item">
-
-            <strong>
-              Secure Authentication
-            </strong>
-
-            <span>
-              Account access should be protected
-              by appropriate authentication controls.
-            </span>
-
-          </div>
-
-
-          <div class="security-item">
-
-            <strong>
-              Transaction Awareness
-            </strong>
-
-            <span>
-              Review transactions and report
-              unfamiliar activity promptly.
-            </span>
-
-          </div>
-
-
-          <div class="security-item">
-
-            <strong>
-              Credential Protection
-            </strong>
-
-            <span>
-              Never share passwords, authentication
-              codes or other sensitive credentials.
-            </span>
-
-          </div>
-
-
-          <div class="security-item">
-
-            <strong>
-              Support
-            </strong>
-
-            <span>
-              Contact the appropriate support channel
-              if you need help securing your account.
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       CTA
-  ====================================== -->
-
-  <section class="cta">
-
-    <div class="cta-inner">
-
-      <h2>
-        Take the next step for your business
-      </h2>
-
-      <p>
-        Explore GTF Banking services or sign in
-        to access your existing account.
-      </p>
-
-      <div class="cta-buttons">
-
-        <a
-          href="../signup.html"
-          class="cta-button"
-        >
-          Get Started
-        </a>
-
-        <a
-          href="../login.html"
-          class="cta-button secondary"
-        >
-          Sign In
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       FOOTER
-  ====================================== -->
-
-  <footer class="site-footer">
-
-    <div class="footer-inner">
-
-      <div class="footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking"
-              width="40"
-              height="40"
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
 
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+                    <strong>Global TrustFund</strong>
+                    <small>Banking</small>
+                </span>
+
+            </a>
+
+
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
+            >
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+                <a href="./business.html" class="active">
+                    Business
+                </a>
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
+
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="hero">
+
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        BUSINESS BANKING
+                    </span>
+
+                    <h1>
+                        Banking built for
+                        <span>your business.</span>
+                    </h1>
+
+                    <p>
+                        Global TrustFund provides digital banking
+                        tools designed to help businesses manage
+                        everyday financial activity and support
+                        continued growth.
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="../signup.html"
+                            class="button button-primary button-large"
+                        >
+                            Get Started
+                        </a>
+
+                        <a
+                            href="./contact.html"
+                            class="button button-light button-large"
+                        >
+                            Contact Us
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-trust">
+
+                        <div class="trust-item">
+                            <strong>Business</strong>
+                            <span>Banking solutions</span>
+                        </div>
+
+                        <div class="trust-item">
+                            <strong>Flexible</strong>
+                            <span>Digital access</span>
+                        </div>
+
+                        <div class="trust-item">
+                            <strong>Secure</strong>
+                            <span>Account protection</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BUSINESS CARD
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+                    <div class="bank-card-preview">
+
+                        <div class="card-top">
+
+                            <span class="card-chip"></span>
+
+                            <span class="card-brand">
+                                GTF
+                            </span>
+
+                        </div>
+
+
+                        <div class="card-balance">
+
+                            <small>
+                                BUSINESS BANKING
+                            </small>
+
+                            <strong>
+                                GROW WITH CONFIDENCE
+                            </strong>
+
+                        </div>
+
+
+                        <div class="card-bottom">
+
+                            <span>
+                                GLOBAL TRUSTFUND
+                            </span>
+
+                            <span>
+                                BUSINESS
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Banking
+                            </strong>
+
+                            <small>
+                                Protected access
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            $
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Business Tools
+                            </strong>
+
+                            <small>
+                                Manage finances
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BUSINESS SERVICES
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        BUSINESS SERVICES
+                    </span>
+
+                    <h2>
+                        Tools for managing your business
+                    </h2>
+
+                    <p>
+                        Explore banking services designed to support
+                        business finances, payments and everyday
+                        financial management.
+                    </p>
+
+                </div>
+
+
+                <div class="service-grid">
+
+
+                    <a
+                        href="./checking.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+                        <h3>
+                            Business Checking
+                        </h3>
+
+                        <p>
+                            Manage business transactions and
+                            everyday operating activity through
+                            a dedicated banking account.
+                        </p>
+
+                        <span class="service-link">
+                            Explore checking →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./savings.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            ↑
+                        </span>
+
+                        <h3>
+                            Business Savings
+                        </h3>
+
+                        <p>
+                            Organize business reserves and plan
+                            toward future financial objectives.
+                        </p>
+
+                        <span class="service-link">
+                            Explore savings →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./cards.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            ▣
+                        </span>
+
+                        <h3>
+                            Business Cards
+                        </h3>
+
+                        <p>
+                            Explore card solutions for eligible
+                            business spending and financial activity.
+                        </p>
+
+                        <span class="service-link">
+                            Explore cards →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./loans.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+                        <h3>
+                            Business Financing
+                        </h3>
+
+                        <p>
+                            Explore financing options that may
+                            support business projects and goals.
+                        </p>
+
+                        <span class="service-link">
+                            Explore financing →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BUSINESS FEATURES
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container split-section">
+
+
+                <div class="split-content">
+
+                    <span class="eyebrow">
+                        BUSINESS BANKING EXPERIENCE
+                    </span>
+
+                    <h2>
+                        Stay focused on your business
+                    </h2>
+
+                    <p>
+                        A clear digital banking experience can help
+                        business owners organize financial activity
+                        and keep important banking information
+                        accessible.
+                    </p>
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Centralized access
+                                </h3>
+
+                                <p>
+                                    Keep important business banking
+                                    information organized within
+                                    your digital account.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Convenient management
+                                </h3>
+
+                                <p>
+                                    Access account information and
+                                    manage eligible banking activity
+                                    through the platform.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Security focused
+                                </h3>
+
+                                <p>
+                                    Authentication and authorization
+                                    controls are designed to protect
+                                    account access.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="security-panel">
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            ✓
+                        </span>
+
+                        <h3>
+                            Protect your business account
+                        </h3>
+
+                        <p>
+                            Learn about the security principles
+                            used throughout the Global TrustFund
+                            digital banking platform.
+                        </p>
+
+                        <a
+                            href="./security.html"
+                            class="text-link"
+                        >
+                            Learn about security →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BUSINESS START
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        GET STARTED
+                    </span>
+
+                    <h2>
+                        Build your business banking relationship
+                    </h2>
+
+                    <p>
+                        Explore available services or create a
+                        Global TrustFund profile to begin.
+                    </p>
+
+                </div>
+
+
+                <div class="service-grid">
+
+
+                    <a
+                        href="./checking.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            01
+                        </span>
+
+                        <h3>
+                            Business Checking
+                        </h3>
+
+                        <p>
+                            Explore checking services for
+                            everyday business activity.
+                        </p>
+
+                        <span class="service-link">
+                            Learn more →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./cards.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            02
+                        </span>
+
+                        <h3>
+                            Business Cards
+                        </h3>
+
+                        <p>
+                            Review available card and payment
+                            options.
+                        </p>
+
+                        <span class="service-link">
+                            Explore cards →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="../signup.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            03
+                        </span>
+
+                        <h3>
+                            Create a Profile
+                        </h3>
+
+                        <p>
+                            Start the Global TrustFund registration
+                            process.
+                        </p>
+
+                        <span class="service-link">
+                            Get started →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+                <span class="eyebrow">
+                    GLOBAL TRUSTFUND BUSINESS
+                </span>
+
+                <h2>
+                    Move your business forward
+                </h2>
+
+                <p>
+                    Explore Global TrustFund business banking
+                    services and discover the tools available
+                    for your organization.
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../signup.html"
+                        class="button button-light button-large"
+                    >
+                        Get Started
+                    </a>
+
+                    <a
+                        href="./contact.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Contact Us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Secure, convenient digital banking for your
+                    financial journey.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Banking
+                </h3>
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+                <a href="./about.html">
+                    About
+                </a>
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="container footer-bottom">
+
             <span>
-
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
-
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
             </span>
 
-          </a>
-
-
-          <p class="footer-description">
-            A modern banking experience for
-            personal and business financial needs.
-          </p>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
-
-        <div class="footer-column">
-
-          <h3>
-            Banking
-          </h3>
-
-          <a href="checking.html">
-            Checking
-          </a>
-
-          <a href="savings.html">
-            Savings
-          </a>
-
-          <a href="cards.html">
-            Cards
-          </a>
-
-          <a href="loans.html">
-            Loans
-          </a>
-
-        </div>
+    </footer>
 
 
-        <div class="footer-column">
+    <!-- =====================================================
+         SHARED JAVASCRIPT
+         ===================================================== -->
 
-          <h3>
-            Company
-          </h3>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a href="security.html">
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          ©
-          <span id="footerYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure banking access
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =====================================
-       JAVASCRIPT
-  ====================================== -->
-
-  <script>
-    "use strict";
-
-    const navContainer =
-      document.getElementById("navContainer");
-
-    const mobileToggle =
-      document.getElementById("mobileToggle");
-
-
-    mobileToggle.addEventListener(
-      "click",
-      function () {
-
-        const isOpen =
-          navContainer.classList.toggle(
-            "mobile-open"
-          );
-
-        mobileToggle.setAttribute(
-          "aria-expanded",
-          String(isOpen)
-        );
-
-        mobileToggle.setAttribute(
-          "aria-label",
-          isOpen
-            ? "Close navigation"
-            : "Open navigation"
-        );
-
-        mobileToggle.textContent =
-          isOpen ? "×" : "☰";
-      }
-    );
-
-
-    document
-      .querySelectorAll(".main-nav a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            navContainer.classList.remove(
-              "mobile-open"
-            );
-
-            mobileToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            mobileToggle.setAttribute(
-              "aria-label",
-              "Open navigation"
-            );
-
-            mobileToggle.textContent = "☰";
-          }
-        );
-
-      });
-
-
-    document.getElementById(
-      "footerYear"
-    ).textContent =
-      new Date().getFullYear();
-
-  </script>
+    <script src="../js/app.js"></script>
 
 </body>
+
 </html>
