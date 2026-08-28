@@ -1,0 +1,2569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Manager Portal | Global TrustFund</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #0b5d3b;
+            --dark: #073d28;
+            --gold: #c9962b;
+            --bg: #f4f8f6;
+            --surface: #ffffff;
+            --border: #dce7e1;
+            --text: #18352a;
+            --muted: #718078;
+            --success: #19734b;
+            --warning: #946b17;
+            --danger: #a33f3f;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 22px 16px;
+            background: linear-gradient(
+                180deg,
+                var(--dark),
+                #052e1f
+            );
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 8px 22px;
+            border-bottom: 1px solid rgba(255,255,255,.12);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .brand strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .brand span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .nav-title {
+            margin: 23px 9px 9px;
+            color: rgba(255,255,255,.42);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: grid;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-height: 38px;
+            padding: 0 11px;
+            border-radius: 7px;
+            color: rgba(255,255,255,.72);
+            font-size: 9px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.10);
+            color: #fff;
+        }
+
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .profile {
+            margin-top: 30px;
+            padding: 13px;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 9px;
+            background: rgba(255,255,255,.05);
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 9px;
+        }
+
+        .profile span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .logout {
+            width: 100%;
+            min-height: 30px;
+            margin-top: 10px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 6px;
+            background: transparent;
+            color: rgba(255,255,255,.75);
+            font-size: 8px;
+        }
+
+        /* MAIN */
+
+        .main {
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 68px;
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 8px;
+        }
+
+        .session {
+            padding: 7px 10px;
+            border-radius: 20px;
+            background: #eaf7ef;
+            color: var(--success);
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        .content {
+            padding: 27px;
+            max-width: 1200px;
+        }
+
+        .page-title {
+            margin-bottom: 20px;
+        }
+
+        .page-title h2 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .page-title p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 8px;
+        }
+
+        /* SETTINGS LAYOUT */
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 210px minmax(0, 1fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .settings-nav {
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .settings-nav button {
+            width: 100%;
+            min-height: 38px;
+            padding: 0 11px;
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            color: var(--muted);
+            font-size: 8px;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .settings-nav button:hover,
+        .settings-nav button.active {
+            background: #edf7f2;
+            color: var(--green);
+        }
+
+        .settings-panel {
+            display: none;
+        }
+
+        .settings-panel.active {
+            display: block;
+        }
+
+        /* CARD */
+
+        .card {
+            margin-bottom: 18px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 16px 17px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-header h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 12px;
+        }
+
+        .card-header p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 7px;
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        /* FORMS */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--dark);
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: #fff;
+            color: var(--text);
+            outline: none;
+            font-size: 8px;
+        }
+
+        input,
+        select {
+            height: 39px;
+            padding: 0 10px;
+        }
+
+        textarea {
+            min-height: 90px;
+            padding: 10px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--green);
+        }
+
+        input[readonly] {
+            background: #f6f8f7;
+            color: var(--muted);
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .button {
+            min-height: 36px;
+            padding: 0 14px;
+            border-radius: 7px;
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .primary {
+            border: 0;
+            background: var(--green);
+            color: #fff;
+        }
+
+        .secondary {
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--green);
+        }
+
+        .danger {
+            border: 1px solid #efd2d2;
+            background: #fff;
+            color: var(--danger);
+        }
+
+        /* TOGGLES */
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            min-height: 62px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-row:last-child {
+            border-bottom: 0;
+        }
+
+        .setting-copy strong {
+            display: block;
+            color: var(--dark);
+            font-size: 8px;
+        }
+
+        .setting-copy span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 7px;
+            line-height: 1.4;
+        }
+
+        .switch {
+            position: relative;
+            width: 42px;
+            height: 23px;
+            flex: 0 0 42px;
+        }
+
+        .switch input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            background: #ccd5d0;
+            transition: .2s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            width: 17px;
+            height: 17px;
+            left: 3px;
+            top: 3px;
+            border-radius: 50%;
+            background: #fff;
+            transition: .2s;
+        }
+
+        .switch input:checked + .slider {
+            background: var(--green);
+        }
+
+        .switch input:checked + .slider::before {
+            transform: translateX(19px);
+        }
+
+        /* SECURITY */
+
+        .security-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .security-item:last-child {
+            border-bottom: 0;
+        }
+
+        .security-item strong {
+            display: block;
+            color: var(--dark);
+            font-size: 8px;
+        }
+
+        .security-item span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 7px;
+        }
+
+        .status {
+            padding: 5px 8px;
+            border-radius: 20px;
+            background: #eaf7ef;
+            color: var(--success);
+            font-size: 6px;
+            font-weight: 800;
+        }
+
+        .notice {
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border: 1px solid #dbe9e1;
+            border-radius: 9px;
+            background: #f1f8f4;
+            color: var(--green);
+            font-size: 7px;
+            line-height: 1.5;
+        }
+
+        .danger-zone {
+            border-color: #edd4d4;
+        }
+
+        .danger-zone .card-header {
+            background: #fff8f8;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 200;
+            display: none;
+            max-width: 320px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            background: var(--dark);
+            color: #fff;
+            font-size: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.18);
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+
+            .profile {
+                display: none;
+            }
+
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-nav {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 4px;
+            }
+
+            .settings-nav button {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .content {
+                padding: 17px;
+            }
+
+            .topbar {
+                padding: 14px 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .settings-nav {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .setting-row,
+            .security-item {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a href="./index.html" class="brand">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund"
+            >
+
+            <div>
+                <strong>Global TrustFund</strong>
+                <span>Manager Operations Portal</span>
+            </div>
+
+        </a>
+
+        <div class="nav-title">
+            Manager Operations
+        </div>
+
+        <nav class="nav">
+
+            <a href="./index.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="./customers.html">
+                <span class="nav-icon">♙</span>
+                Customers
+            </a>
+
+            <a href="./accounts.html">
+                <span class="nav-icon">▣</span>
+                Accounts
+            </a>
+
+            <a href="./transactions.html">
+                <span class="nav-icon">⇄</span>
+                Transactions
+            </a>
+
+            <a href="./approvals.html">
+                <span class="nav-icon">✓</span>
+                Approvals
+            </a>
+
+            <a href="./staff.html">
+                <span class="nav-icon">♟</span>
+                Staff
+            </a>
+
+            <a href="./compliance.html">
+                <span class="nav-icon">!</span>
+                Compliance
+            </a>
+
+            <a href="./reports.html">
+                <span class="nav-icon">▤</span>
+                Reports
+            </a>
+
+            <a href="./support.html">
+                <span class="nav-icon">?</span>
+                Support
+            </a>
+
+            <a href="./settings.html" class="active">
+                <span class="nav-icon">⚙</span>
+                Settings
+            </a>
+
+        </nav>
+
+        <div class="profile">
+
+            <strong id="managerName">
+                Manager
+            </strong>
+
+            <span>
+                Branch / Operations Manager
+            </span>
+
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Settings
+                </h1>
+
+                <p>
+                    Manage your manager profile and operational preferences.
+                </p>
+
+            </div>
+
+            <span class="session">
+                ● Manager Session Active
+            </span>
+
+        </header>
+
+
+        <section class="content">
+
+            <div class="page-title">
+
+                <h2>
+                    Manager Settings
+                </h2>
+
+                <p>
+                    Changes to permissions, security controls, and sensitive banking operations
+                    should follow your organization's approval procedures.
+                </p>
+
+            </div>
+
+
+            <div class="settings-layout">
+
+                <!-- SETTINGS NAVIGATION -->
+
+                <aside class="settings-nav">
+
+                    <button
+                        type="button"
+                        class="active"
+                        data-panel="profilePanel"
+                    >
+                        Profile
+                    </button>
+
+                    <button
+                        type="button"
+                        data-panel="branchPanel"
+                    >
+                        Branch
+                    </button>
+
+                    <button
+                        type="button"
+                        data-panel="notificationsPanel"
+                    >
+                        Notifications
+                    </button>
+
+                    <button
+                        type="button"
+                        data-panel="securityPanel"
+                    >
+                        Security
+                    </button>
+
+                    <button
+                        type="button"
+                        data-panel="preferencesPanel"
+                    >
+                        Preferences
+                    </button>
+
+                </aside>
+
+
+                <!-- PANELS -->
+
+                <div>
+
+                    <!-- PROFILE -->
+
+                    <section
+                        id="profilePanel"
+                        class="settings-panel active"
+                    >
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Manager Profile
+                                </h3>
+
+                                <p>
+                                    Update your contact information.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <form id="profileForm">
+
+                                    <div class="form-grid">
+
+                                        <div class="form-group">
+
+                                            <label for="fullName">
+                                                Full Name
+                                            </label>
+
+                                            <input
+                                                id="fullName"
+                                                maxlength="100"
+                                                required
+                                            >
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="email">
+                                                Email Address
+                                            </label>
+
+                                            <input
+                                                id="email"
+                                                type="email"
+                                                maxlength="150"
+                                                required
+                                            >
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="phone">
+                                                Phone Number
+                                            </label>
+
+                                            <input
+                                                id="phone"
+                                                maxlength="30"
+                                            >
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="staffId">
+                                                Staff ID
+                                            </label>
+
+                                            <input
+                                                id="staffId"
+                                                readonly
+                                            >
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="role">
+                                                Role
+                                            </label>
+
+                                            <input
+                                                id="role"
+                                                readonly
+                                                value="Manager"
+                                            >
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="accountStatus">
+                                                Account Status
+                                            </label>
+
+                                            <input
+                                                id="accountStatus"
+                                                readonly
+                                                value="Active"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="actions">
+
+                                        <button
+                                            type="reset"
+                                            class="button secondary"
+                                        >
+                                            Reset
+                                        </button>
+
+                                        <button
+                                            type="submit"
+                                            class="button primary"
+                                        >
+                                            Save Profile
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- BRANCH -->
+
+                    <section
+                        id="branchPanel"
+                        class="settings-panel"
+                    >
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Branch Configuration
+                                </h3>
+
+                                <p>
+                                    View your assigned operational branch.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="notice">
+                                    Branch assignment and manager authorization are controlled
+                                    by authorized administrators.
+                                </div>
+
+                                <div class="form-grid">
+
+                                    <div class="form-group">
+
+                                        <label for="branchName">
+                                            Branch
+                                        </label>
+
+                                        <input
+                                            id="branchName"
+                                            readonly
+                                            placeholder="Loading..."
+                                        >
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="branchCode">
+                                            Branch Code
+                                        </label>
+
+                                        <input
+                                            id="branchCode"
+                                            readonly
+                                            placeholder="Loading..."
+                                        >
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="branchRegion">
+                                            Region
+                                        </label>
+
+                                        <input
+                                            id="branchRegion"
+                                            readonly
+                                            placeholder="Loading..."
+                                        >
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="branchStatus">
+                                            Branch Status
+                                        </label>
+
+                                        <input
+                                            id="branchStatus"
+                                            readonly
+                                            value="Active"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Operational Scope
+                                </h3>
+
+                                <p>
+                                    Your assigned manager-level operational access.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Customer Operations
+                                        </strong>
+
+                                        <span>
+                                            View and manage customer records within authorized scope.
+                                        </span>
+
+                                    </div>
+
+                                    <span class="status">
+                                        Authorized
+                                    </span>
+
+                                </div>
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Account Operations
+                                        </strong>
+
+                                        <span>
+                                            Review account records and operational requests.
+                                        </span>
+
+                                    </div>
+
+                                    <span class="status">
+                                        Authorized
+                                    </span>
+
+                                </div>
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Transaction Review
+                                        </strong>
+
+                                        <span>
+                                            Review transactions according to assigned permissions.
+                                        </span>
+
+                                    </div>
+
+                                    <span class="status">
+                                        Authorized
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <section
+                        id="notificationsPanel"
+                        class="settings-panel"
+                    >
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Notification Preferences
+                                </h3>
+
+                                <p>
+                                    Choose which operational notifications you receive.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Approval Requests
+                                        </strong>
+
+                                        <span>
+                                            Notify me when an item requires manager review.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="approvalNotifications"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Compliance Alerts
+                                        </strong>
+
+                                        <span>
+                                            Receive notifications about compliance items assigned to you.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="complianceNotifications"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Transaction Alerts
+                                        </strong>
+
+                                        <span>
+                                            Receive operational transaction notifications.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="transactionNotifications"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Staff Alerts
+                                        </strong>
+
+                                        <span>
+                                            Notify me about staff status or operational events.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="staffNotifications"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Support Requests
+                                        </strong>
+
+                                        <span>
+                                            Receive notifications when customer support issues are escalated.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="supportNotifications"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button primary"
+                                        id="saveNotifications"
+                                    >
+                                        Save Notifications
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- SECURITY -->
+
+                    <section
+                        id="securityPanel"
+                        class="settings-panel"
+                    >
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Security
+                                </h3>
+
+                                <p>
+                                    Review your account security settings.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="security-item">
+
+                                    <div>
+
+                                        <strong>
+                                            Password
+                                        </strong>
+
+                                        <span>
+                                            Change your manager account password.
+                                        </span>
+
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="changePassword"
+                                    >
+                                        Change
+                                    </button>
+
+                                </div>
+
+
+                                <div class="security-item">
+
+                                    <div>
+
+                                        <strong>
+                                            Two-Factor Authentication
+                                        </strong>
+
+                                        <span>
+                                            Additional verification for account sign-in.
+                                        </span>
+
+                                    </div>
+
+                                    <span
+                                        class="status"
+                                        id="twoFactorStatus"
+                                    >
+                                        Not configured
+                                    </span>
+
+                                </div>
+
+
+                                <div class="security-item">
+
+                                    <div>
+
+                                        <strong>
+                                            Active Sessions
+                                        </strong>
+
+                                        <span>
+                                            Review and sign out of other sessions.
+                                        </span>
+
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="sessionsButton"
+                                    >
+                                        Review
+                                    </button>
+
+                                </div>
+
+
+                                <div class="security-item">
+
+                                    <div>
+
+                                        <strong>
+                                            Recent Security Activity
+                                        </strong>
+
+                                        <span>
+                                            Review recent authentication events.
+                                        </span>
+
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="securityActivity"
+                                    >
+                                        View
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card danger-zone">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Sign Out Everywhere
+                                </h3>
+
+                                <p>
+                                    End active sessions associated with this account.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <p style="
+                                    margin:0;
+                                    color:var(--muted);
+                                    font-size:7px;
+                                    line-height:1.5;
+                                ">
+                                    Use this option if you believe another device may
+                                    have access to your account.
+                                </p>
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button danger"
+                                        id="signOutAll"
+                                    >
+                                        Sign Out All Sessions
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- PREFERENCES -->
+
+                    <section
+                        id="preferencesPanel"
+                        class="settings-panel"
+                    >
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <h3>
+                                    Application Preferences
+                                </h3>
+
+                                <p>
+                                    Customize your manager portal experience.
+                                </p>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <div class="form-grid">
+
+                                    <div class="form-group">
+
+                                        <label for="language">
+                                            Language
+                                        </label>
+
+                                        <select id="language">
+
+                                            <option value="en">
+                                                English
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="timezone">
+                                            Time Zone
+                                        </label>
+
+                                        <select id="timezone">
+
+                                            <option value="Africa/Lagos">
+                                                Africa/Lagos
+                                            </option>
+
+                                            <option value="UTC">
+                                                UTC
+                                            </option>
+
+                                            <option value="America/New_York">
+                                                America/New_York
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="dateFormat">
+                                            Date Format
+                                        </label>
+
+                                        <select id="dateFormat">
+
+                                            <option value="DD-MMM-YYYY">
+                                                DD-MMM-YYYY
+                                            </option>
+
+                                            <option value="MM/DD/YYYY">
+                                                MM/DD/YYYY
+                                            </option>
+
+                                            <option value="YYYY-MM-DD">
+                                                YYYY-MM-DD
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="rowsPerPage">
+                                            Rows Per Page
+                                        </label>
+
+                                        <select id="rowsPerPage">
+
+                                            <option value="10">
+                                                10
+                                            </option>
+
+                                            <option value="25">
+                                                25
+                                            </option>
+
+                                            <option value="50">
+                                                50
+                                            </option>
+
+                                            <option value="100">
+                                                100
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Compact Tables
+                                        </strong>
+
+                                        <span>
+                                            Display more records within operational tables.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="compactTables"
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-copy">
+
+                                        <strong>
+                                            Confirm Sensitive Actions
+                                        </strong>
+
+                                        <span>
+                                            Ask for confirmation before sensitive operational actions.
+                                        </span>
+
+                                    </div>
+
+                                    <label class="switch">
+
+                                        <input
+                                            type="checkbox"
+                                            id="confirmActions"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="resetPreferences"
+                                    >
+                                        Reset
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="button primary"
+                                        id="savePreferences"
+                                    >
+                                        Save Preferences
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+    const API_BASE = "/api";
+
+
+    async function apiRequest(
+        endpoint,
+        options = {}
+    ) {
+
+        const response =
+            await fetch(
+                `${API_BASE}${endpoint}`,
+                {
+                    method:
+                        options.method || "GET",
+
+                    credentials:
+                        "include",
+
+                    headers: {
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json",
+
+                        ...(options.headers || {})
+                    },
+
+                    body:
+                        options.body
+                            ? JSON.stringify(
+                                options.body
+                            )
+                            : undefined
+                }
+            );
+
+
+        const data =
+            await response
+                .json()
+                .catch(
+                    () => ({})
+                );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                data.message ||
+                `Request failed (${response.status})`
+            );
+
+        }
+
+
+        return data;
+
+    }
+
+
+    function showToast(
+        message
+    ) {
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        setTimeout(
+            () => {
+                toast.classList.remove(
+                    "show"
+                );
+            },
+            3000
+        );
+
+    }
+
+
+    function setValue(
+        id,
+        value
+    ) {
+
+        const element =
+            document.getElementById(
+                id
+            );
+
+
+        if (element) {
+            element.value =
+                value ?? "";
+        }
+
+    }
+
+
+    function setChecked(
+        id,
+        value
+    ) {
+
+        const element =
+            document.getElementById(
+                id
+            );
+
+
+        if (element) {
+            element.checked =
+                Boolean(value);
+        }
+
+    }
+
+
+    /* TABS */
+
+    document
+        .querySelectorAll(
+            ".settings-nav button"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        document
+                            .querySelectorAll(
+                                ".settings-nav button"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        document
+                            .querySelectorAll(
+                                ".settings-panel"
+                            )
+                            .forEach(
+                                panel =>
+                                    panel.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+
+                        const panel =
+                            document.getElementById(
+                                button.dataset.panel
+                            );
+
+
+                        if (panel) {
+
+                            panel.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* LOAD PROFILE */
+
+    async function loadProfile() {
+
+        try {
+
+            const data =
+                await apiRequest(
+                    "/users/me"
+                );
+
+
+            const user =
+                data.user ||
+                data.data ||
+                data;
+
+
+            setValue(
+                "fullName",
+                user.full_name ||
+                user.name
+            );
+
+
+            setValue(
+                "email",
+                user.email
+            );
+
+
+            setValue(
+                "phone",
+                user.phone ||
+                user.phone_number
+            );
+
+
+            setValue(
+                "staffId",
+                user.staff_id ||
+                user.id
+            );
+
+
+            setValue(
+                "role",
+                user.role ||
+                "Manager"
+            );
+
+
+            setValue(
+                "accountStatus",
+                user.status ||
+                "Active"
+            );
+
+
+            setValue(
+                "branchName",
+                user.branch_name ||
+                user.branch
+            );
+
+
+            setValue(
+                "branchCode",
+                user.branch_code
+            );
+
+
+            setValue(
+                "branchRegion",
+                user.region ||
+                user.branch_region
+            );
+
+
+            document.getElementById(
+                "managerName"
+            ).textContent =
+                user.full_name ||
+                user.name ||
+                user.email ||
+                "Manager";
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Unable to load profile:",
+                error
+            );
+
+
+            try {
+
+                const raw =
+                    localStorage.getItem(
+                        "gtf_user"
+                    );
+
+
+                if (raw) {
+
+                    const user =
+                        JSON.parse(
+                            raw
+                        );
+
+
+                    setValue(
+                        "fullName",
+                        user.full_name ||
+                        user.name
+                    );
+
+
+                    setValue(
+                        "email",
+                        user.email
+                    );
+
+
+                    setValue(
+                        "staffId",
+                        user.staff_id ||
+                        user.id
+                    );
+
+
+                    document.getElementById(
+                        "managerName"
+                    ).textContent =
+                        user.full_name ||
+                        user.name ||
+                        user.email ||
+                        "Manager";
+
+                }
+
+            }
+
+            catch {
+                /* Ignore invalid local profile data. */
+            }
+
+        }
+
+    }
+
+
+    /* PROFILE UPDATE */
+
+    document.getElementById(
+        "profileForm"
+    ).addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const body = {
+
+                full_name:
+                    document.getElementById(
+                        "fullName"
+                    ).value.trim(),
+
+                email:
+                    document.getElementById(
+                        "email"
+                    ).value.trim(),
+
+                phone:
+                    document.getElementById(
+                        "phone"
+                    ).value.trim()
+
+            };
+
+
+            try {
+
+                await apiRequest(
+                    "/users/me",
+                    {
+                        method: "PATCH",
+                        body
+                    }
+                );
+
+
+                showToast(
+                    "Profile updated successfully."
+                );
+
+
+                localStorage.setItem(
+                    "gtf_user",
+                    JSON.stringify(
+                        {
+                            ...JSON.parse(
+                                localStorage.getItem(
+                                    "gtf_user"
+                                ) || "{}"
+                            ),
+                            ...body
+                        }
+                    )
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+
+                showToast(
+                    error.message ||
+                    "Unable to update profile."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* NOTIFICATIONS */
+
+    document.getElementById(
+        "saveNotifications"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            const preferences = {
+
+                approval_requests:
+                    document.getElementById(
+                        "approvalNotifications"
+                    ).checked,
+
+                compliance_alerts:
+                    document.getElementById(
+                        "complianceNotifications"
+                    ).checked,
+
+                transaction_alerts:
+                    document.getElementById(
+                        "transactionNotifications"
+                    ).checked,
+
+                staff_alerts:
+                    document.getElementById(
+                        "staffNotifications"
+                    ).checked,
+
+                support_requests:
+                    document.getElementById(
+                        "supportNotifications"
+                    ).checked
+
+            };
+
+
+            try {
+
+                await apiRequest(
+                    "/users/me/preferences",
+                    {
+                        method: "PATCH",
+
+                        body: {
+                            notifications:
+                                preferences
+                        }
+                    }
+                );
+
+
+                showToast(
+                    "Notification preferences saved."
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    error
+                );
+
+
+                localStorage.setItem(
+                    "gtf_notification_preferences",
+                    JSON.stringify(
+                        preferences
+                    )
+                );
+
+
+                showToast(
+                    "Notification preferences saved locally."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* PREFERENCES */
+
+    document.getElementById(
+        "savePreferences"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            const preferences = {
+
+                language:
+                    document.getElementById(
+                        "language"
+                    ).value,
+
+                timezone:
+                    document.getElementById(
+                        "timezone"
+                    ).value,
+
+                date_format:
+                    document.getElementById(
+                        "dateFormat"
+                    ).value,
+
+                rows_per_page:
+                    Number(
+                        document.getElementById(
+                            "rowsPerPage"
+                        ).value
+                    ),
+
+                compact_tables:
+                    document.getElementById(
+                        "compactTables"
+                    ).checked,
+
+                confirm_sensitive_actions:
+                    document.getElementById(
+                        "confirmActions"
+                    ).checked
+
+            };
+
+
+            try {
+
+                await apiRequest(
+                    "/users/me/preferences",
+                    {
+                        method: "PATCH",
+                        body: {
+                            preferences
+                        }
+                    }
+                );
+
+
+                showToast(
+                    "Application preferences saved."
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    error
+                );
+
+
+                localStorage.setItem(
+                    "gtf_preferences",
+                    JSON.stringify(
+                        preferences
+                    )
+                );
+
+
+                showToast(
+                    "Preferences saved locally."
+                );
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "resetPreferences"
+    ).addEventListener(
+        "click",
+        () => {
+
+            document.getElementById(
+                "language"
+            ).value = "en";
+
+            document.getElementById(
+                "timezone"
+            ).value = "Africa/Lagos";
+
+            document.getElementById(
+                "dateFormat"
+            ).value = "DD-MMM-YYYY";
+
+            document.getElementById(
+                "rowsPerPage"
+            ).value = "25";
+
+            document.getElementById(
+                "compactTables"
+            ).checked = false;
+
+            document.getElementById(
+                "confirmActions"
+            ).checked = true;
+
+
+            showToast(
+                "Preferences reset."
+            );
+
+        }
+    );
+
+
+    /* SECURITY ACTIONS */
+
+    document.getElementById(
+        "changePassword"
+    ).addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "../dashboard/security.html";
+
+        }
+    );
+
+
+    document.getElementById(
+        "sessionsButton"
+    ).addEventListener(
+        "click",
+        () => {
+
+            showToast(
+                "Session management will use your authenticated security endpoint."
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "securityActivity"
+    ).addEventListener(
+        "click",
+        () => {
+
+            window.location.href =
+                "./audit.html";
+
+        }
+    );
+
+
+    document.getElementById(
+        "signOutAll"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            if (
+                !window.confirm(
+                    "Sign out of all active sessions?"
+                )
+            ) {
+                return;
+            }
+
+
+            try {
+
+                await apiRequest(
+                    "/auth/signout-all",
+                    {
+                        method: "POST"
+                    }
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Sign out all request:",
+                    error
+                );
+
+            }
+
+
+            localStorage.clear();
+            sessionStorage.clear();
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+        }
+    );
+
+
+    /* LOGOUT */
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await apiRequest(
+                    "/auth/signout",
+                    {
+                        method: "POST"
+                    }
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Signout request failed:",
+                    error
+                );
+
+            }
+
+
+            [
+                "gtf_user",
+                "gtf_manager",
+                "gtf_session",
+                "gtf_access_token",
+                "gtf_refresh_token",
+                "access_token",
+                "refresh_token"
+            ].forEach(
+                key =>
+                    localStorage.removeItem(
+                        key
+                    )
+            );
+
+
+            sessionStorage.clear();
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+        }
+    );
+
+
+    /* LOAD LOCAL PREFERENCES */
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                "gtf_preferences"
+            );
+
+
+        if (raw) {
+
+            const preferences =
+                JSON.parse(
+                    raw
+                );
+
+
+            if (preferences.language) {
+
+                document.getElementById(
+                    "language"
+                ).value =
+                    preferences.language;
+
+            }
+
+
+            if (preferences.timezone) {
+
+                document.getElementById(
+                    "timezone"
+                ).value =
+                    preferences.timezone;
+
+            }
+
+
+            if (preferences.date_format) {
+
+                document.getElementById(
+                    "dateFormat"
+                ).value =
+                    preferences.date_format;
+
+            }
+
+
+            if (preferences.rows_per_page) {
+
+                document.getElementById(
+                    "rowsPerPage"
+                ).value =
+                    preferences.rows_per_page;
+
+            }
+
+
+            setChecked(
+                "compactTables",
+                preferences.compact_tables
+            );
+
+
+            setChecked(
+                "confirmActions",
+                preferences.confirm_sensitive_actions !== false
+            );
+
+        }
+
+    }
+
+    catch {
+        /* Ignore invalid local settings. */
+    }
+
+
+    /* INITIALIZATION */
+
+    loadProfile();
+
+</script>
+
+</body>
+</html>
