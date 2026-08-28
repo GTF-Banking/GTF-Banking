@@ -10,7 +10,7 @@
 
     <meta
         name="description"
-        content="Global TrustFund customer accounts — view and manage your banking accounts."
+        content="Global TrustFund customer accounts"
     >
 
     <meta
@@ -20,1142 +20,1624 @@
 
     <title>My Accounts | Global TrustFund</title>
 
+    <!-- Global stylesheet -->
     <link
         rel="stylesheet"
         href="../css/styles.css"
+    >
+
+    <!-- Optional favicon -->
+    <link
+        rel="icon"
+        href="../assets/gtf-logo.svg"
+        type="image/svg+xml"
     >
 </head>
 
 <body class="dashboard-page">
 
-<div class="dashboard-layout">
-
     <!-- =====================================================
-         SIDEBAR
+         CUSTOMER DASHBOARD LAYOUT
          ===================================================== -->
 
-    <aside class="dashboard-sidebar">
+    <div class="dashboard-layout">
 
-        <a
-            href="dashboard.html"
-            class="brand"
-            aria-label="Global TrustFund Dashboard"
-        >
-            <img
-                src="../assets/gtf-logo.svg"
-                alt="Global TrustFund"
-                class="brand-logo"
-            >
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
 
-            <span class="brand-text">
-                <strong>GLOBAL TRUSTFUND</strong>
-                <small>SECURE DIGITAL BANKING</small>
-            </span>
-        </a>
-
-        <nav
-            class="sidebar-navigation"
+        <aside
+            class="dashboard-sidebar"
+            id="dashboardSidebar"
             aria-label="Customer navigation"
         >
 
-            <div class="sidebar-section-title">
-                Banking
-            </div>
+            <!-- Brand -->
 
             <a
                 href="dashboard.html"
-                class="sidebar-link"
+                class="brand"
+                aria-label="Global TrustFund Customer Dashboard"
             >
-                <span class="sidebar-icon">⌂</span>
-                <span>Dashboard</span>
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+                    <strong>Global TrustFund</strong>
+                    <small>SECURE BANKING</small>
+                </span>
+
             </a>
 
-            <a
-                href="accounts.html"
-                class="sidebar-link active"
-                aria-current="page"
-            >
-                <span class="sidebar-icon">▣</span>
-                <span>My Accounts</span>
-            </a>
 
-            <a
-                href="transactions.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">↔</span>
-                <span>Transactions</span>
-            </a>
+            <!-- Navigation -->
 
-            <a
-                href="transfers.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">⇄</span>
-                <span>Transfers</span>
-            </a>
+            <nav class="sidebar-navigation">
 
-            <div class="sidebar-section-title">
-                Services
-            </div>
-
-            <a
-                href="cards.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">▭</span>
-                <span>Cards</span>
-            </a>
-
-            <a
-                href="payments.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">₦</span>
-                <span>Payments</span>
-            </a>
-
-            <a
-                href="savings.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">◈</span>
-                <span>Savings</span>
-            </a>
-
-            <a
-                href="loans.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">◆</span>
-                <span>Loans</span>
-            </a>
-
-            <div class="sidebar-section-title">
-                Account
-            </div>
-
-            <a
-                href="profile.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">●</span>
-                <span>Profile</span>
-            </a>
-
-            <a
-                href="support.html"
-                class="sidebar-link"
-            >
-                <span class="sidebar-icon">?</span>
-                <span>Support</span>
-            </a>
-
-            <div class="sidebar-footer">
+                <div class="sidebar-section-title">
+                    Banking
+                </div>
 
                 <a
-                    href="logout.html"
+                    href="dashboard.html"
                     class="sidebar-link"
                 >
-                    <span class="sidebar-icon">↪</span>
-                    <span>Sign Out</span>
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >⌂</span>
+
+                    <span>Dashboard</span>
                 </a>
 
-            </div>
 
-        </nav>
-
-    </aside>
-
-
-    <!-- =====================================================
-         MAIN
-         ===================================================== -->
-
-    <main class="dashboard-main">
-
-        <!-- HEADER -->
-
-        <header class="dashboard-header">
-
-            <div class="dashboard-header-title">
-
-                <h1>My Accounts</h1>
-
-                <p>
-                    View your Global TrustFund accounts and balances.
-                </p>
-
-            </div>
-
-            <div class="dashboard-header-actions">
-
-                <button
-                    type="button"
-                    class="button button-outline button-small"
-                    id="sidebarToggle"
-                    aria-label="Open navigation menu"
+                <a
+                    href="accounts.html"
+                    class="sidebar-link active"
+                    aria-current="page"
                 >
-                    ☰ Menu
-                </button>
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >▣</span>
+
+                    <span>My Accounts</span>
+                </a>
+
+
+                <a
+                    href="transactions.html"
+                    class="sidebar-link"
+                >
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >↔</span>
+
+                    <span>Transactions</span>
+                </a>
+
+
+                <a
+                    href="transfers.html"
+                    class="sidebar-link"
+                >
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >⇄</span>
+
+                    <span>Transfers</span>
+                </a>
+
+
+                <div class="sidebar-section-title">
+                    Services
+                </div>
+
+
+                <a
+                    href="profile.html"
+                    class="sidebar-link"
+                >
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >◉</span>
+
+                    <span>My Profile</span>
+                </a>
+
 
                 <a
                     href="support.html"
-                    class="button button-outline button-small"
+                    class="sidebar-link"
                 >
-                    Support
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >?</span>
+
+                    <span>Support</span>
                 </a>
 
-                <div class="dashboard-user">
 
-                    <div
-                        class="user-avatar"
-                        id="userAvatar"
-                    >
-                        C
-                    </div>
-
-                    <div class="user-info">
-
-                        <strong id="userName">
-                            Customer
-                        </strong>
-
-                        <small>
-                            Personal Banking
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </header>
-
-
-        <!-- CONTENT -->
-
-        <section class="dashboard-content">
-
-            <div class="dashboard-welcome">
-
-                <h2>
-                    Your Accounts
-                </h2>
-
-                <p>
-                    Manage your accounts, review balances and access
-                    your banking details.
-                </p>
-
-            </div>
-
-
-            <!-- =================================================
-                 ACCOUNT SUMMARY
-                 ================================================= -->
-
-            <div class="stats-grid">
-
-                <div class="stat-card">
-
-                    <span class="stat-card-label">
-                        Total Balance
-                    </span>
-
-                    <strong
-                        class="stat-card-value"
-                        id="totalBalance"
-                    >
-                        ₦0.00
-                    </strong>
-
-                    <span class="stat-card-meta">
-                        Across all accounts
-                    </span>
-
+                <div class="sidebar-section-title">
+                    Account
                 </div>
 
 
-                <div class="stat-card">
+                <a
+                    href="settings.html"
+                    class="sidebar-link"
+                >
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >⚙</span>
 
-                    <span class="stat-card-label">
-                        Available Balance
-                    </span>
-
-                    <strong
-                        class="stat-card-value"
-                        id="availableBalance"
-                    >
-                        ₦0.00
-                    </strong>
-
-                    <span class="stat-card-meta">
-                        Available for transactions
-                    </span>
-
-                </div>
+                    <span>Settings</span>
+                </a>
 
 
-                <div class="stat-card">
+                <a
+                    href="signout.html"
+                    class="sidebar-link"
+                >
+                    <span
+                        class="sidebar-icon"
+                        aria-hidden="true"
+                    >↪</span>
 
-                    <span class="stat-card-label">
-                        Active Accounts
-                    </span>
+                    <span>Sign Out</span>
+                </a>
 
-                    <strong
-                        class="stat-card-value"
-                        id="activeAccounts"
-                    >
-                        0
-                    </strong>
-
-                    <span class="stat-card-meta">
-                        Currently active
-                    </span>
-
-                </div>
+            </nav>
 
 
-                <div class="stat-card">
+            <!-- Sidebar footer -->
 
-                    <span class="stat-card-label">
-                        Account Status
-                    </span>
-
-                    <strong
-                        class="stat-card-value"
-                        id="accountStatus"
-                    >
-                        Active
-                    </strong>
-
-                    <span class="stat-card-meta">
-                        Banking access status
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- =================================================
-                 PRIMARY ACCOUNT
-                 ================================================= -->
-
-            <div class="card mb-3">
+            <div class="sidebar-footer">
 
                 <div
+                    class="alert alert-info"
                     style="
-                        display:flex;
-                        align-items:center;
-                        justify-content:space-between;
-                        gap:15px;
-                        flex-wrap:wrap;
-                        margin-bottom:20px;
+                        background: rgba(255,255,255,.08);
+                        color: rgba(255,255,255,.75);
                     "
                 >
+                    <strong>Security reminder</strong><br>
 
-                    <div>
+                    Never share your password,
+                    PIN, or verification code.
+                </div>
 
-                        <h2
-                            style="
-                                margin-bottom:5px;
-                                font-size:16px;
-                            "
-                        >
-                            Primary Account
-                        </h2>
+            </div>
 
-                        <p
-                            style="margin:0;"
-                        >
-                            Your main Global TrustFund banking account.
-                        </p>
+        </aside>
 
-                    </div>
 
-                    <span class="badge badge-success">
-                        ACTIVE
-                    </span>
+        <!-- =================================================
+             MAIN AREA
+             ================================================= -->
+
+        <main class="dashboard-main">
+
+            <!-- =============================================
+                 HEADER
+                 ============================================= -->
+
+            <header class="dashboard-header">
+
+                <div class="dashboard-header-title">
+
+                    <h1>
+                        My Accounts
+                    </h1>
+
+                    <p>
+                        View and manage your Global TrustFund accounts.
+                    </p>
 
                 </div>
 
 
-                <div class="account-grid">
+                <div class="dashboard-header-actions">
 
-                    <article class="account-card">
+                    <!-- Mobile sidebar button -->
 
-                        <span class="account-card-type">
-                            TrustWallet Account
-                        </span>
+                    <button
+                        type="button"
+                        class="mobile-menu-button"
+                        id="sidebarToggle"
+                        aria-label="Open navigation menu"
+                        aria-controls="dashboardSidebar"
+                        aria-expanded="false"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
 
-                        <div class="account-card-name">
-                            Global TrustFund Wallet
-                        </div>
+
+                    <!-- User -->
+
+                    <div class="dashboard-user">
 
                         <div
-                            class="account-card-balance"
-                            id="primaryBalance"
+                            class="user-avatar"
+                            id="userAvatar"
+                            aria-hidden="true"
                         >
-                            ₦0.00
+                            C
                         </div>
 
-                        <div class="account-card-number">
-                            Account No:
-                            <span id="primaryAccountNumber">
-                                ••••••••••
+                        <div class="user-info">
+
+                            <strong id="userName">
+                                Customer
+                            </strong>
+
+                            <small id="userRole">
+                                Personal Banking
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =============================================
+                 CONTENT
+                 ============================================= -->
+
+            <div class="dashboard-content">
+
+
+                <!-- Page introduction -->
+
+                <section class="dashboard-welcome">
+
+                    <div
+                        style="
+                            display:flex;
+                            align-items:flex-start;
+                            justify-content:space-between;
+                            gap:20px;
+                            flex-wrap:wrap;
+                        "
+                    >
+
+                        <div>
+
+                            <span class="eyebrow">
+                                ACCOUNT OVERVIEW
                             </span>
+
+                            <h2>
+                                Your Accounts
+                            </h2>
+
+                            <p>
+                                Review balances, account details,
+                                and available banking actions.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <button
+                                type="button"
+                                class="button button-primary"
+                                id="refreshAccountsButton"
+                            >
+                                ↻ Refresh Accounts
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================================
+                     SUMMARY STATISTICS
+                     ========================================= -->
+
+                <section
+                    class="stats-grid"
+                    aria-label="Account summary"
+                >
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Total Accounts
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="totalAccounts"
+                        >
+                            2
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Active banking accounts
+                        </span>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Total Balance
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="totalBalance"
+                        >
+                            ₦0.00
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Across your accounts
+                        </span>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Available Balance
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="availableBalance"
+                        >
+                            ₦0.00
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Currently available
+                        </span>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Account Status
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            style="font-size:15px;"
+                            id="overallStatus"
+                        >
+                            Active
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Banking access status
+                        </span>
+
+                    </article>
+
+                </section>
+
+
+                <!-- =========================================
+                     ACCOUNT ACTIONS
+                     ========================================= -->
+
+                <section
+                    class="card"
+                    style="margin-bottom:20px;"
+                >
+
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            gap:15px;
+                            flex-wrap:wrap;
+                        "
+                    >
+
+                        <div>
+
+                            <h3 style="margin-bottom:5px;">
+                                Account Services
+                            </h3>
+
+                            <p style="margin:0;">
+                                Choose an action for your banking needs.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            style="
+                                display:flex;
+                                flex-wrap:wrap;
+                                gap:8px;
+                            "
+                        >
+
+                            <a
+                                href="transfers.html"
+                                class="button button-primary button-small"
+                            >
+                                Transfer Money
+                            </a>
+
+                            <a
+                                href="transactions.html"
+                                class="button button-outline button-small"
+                            >
+                                View Transactions
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================================
+                     ACCOUNT FILTER
+                     ========================================= -->
+
+                <section
+                    class="filter-bar"
+                    aria-label="Account filters"
+                >
+
+                    <input
+                        type="search"
+                        id="accountSearch"
+                        class="search-input"
+                        placeholder="Search accounts..."
+                        aria-label="Search accounts"
+                    >
+
+
+                    <select
+                        id="accountTypeFilter"
+                        class="filter-select"
+                        aria-label="Filter by account type"
+                    >
+
+                        <option value="">
+                            All account types
+                        </option>
+
+                        <option value="checking">
+                            Checking
+                        </option>
+
+                        <option value="savings">
+                            Savings
+                        </option>
+
+                        <option value="business">
+                            Business
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="accountStatusFilter"
+                        class="filter-select"
+                        aria-label="Filter by account status"
+                    >
+
+                        <option value="">
+                            All statuses
+                        </option>
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="suspended">
+                            Suspended
+                        </option>
+
+                    </select>
+
+                </section>
+
+
+                <!-- =========================================
+                     ACCOUNT CARDS
+                     ========================================= -->
+
+                <section aria-labelledby="accountsHeading">
+
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            gap:15px;
+                            margin-bottom:15px;
+                        "
+                    >
+
+                        <div>
+
+                            <h2
+                                id="accountsHeading"
+                                style="
+                                    margin:0;
+                                    color:var(--gtf-green);
+                                    font-size:16px;
+                                "
+                            >
+                                Your Accounts
+                            </h2>
+
+                        </div>
+
+                        <span
+                            class="badge badge-success"
+                            id="accountCountBadge"
+                        >
+                            2 Accounts
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="account-grid"
+                        id="accountsList"
+                    >
+
+                        <!-- =================================
+                             CHECKING ACCOUNT
+                             ================================= -->
+
+                        <article
+                            class="account-card"
+                            data-account-type="checking"
+                            data-account-status="active"
+                            data-account-name="Everyday Checking"
+                        >
+
+                            <div class="account-card-type">
+                                Checking Account
+                            </div>
+
+
+                            <div class="account-card-name">
+                                Everyday Checking
+                            </div>
+
+
+                            <div
+                                class="account-card-balance"
+                                data-balance="2450000"
+                            >
+                                ₦2,450,000.00
+                            </div>
+
+
+                            <div class="account-card-number">
+                                Account •••• 4821
+                            </div>
+
+
+                            <div
+                                style="
+                                    position:relative;
+                                    z-index:2;
+                                    display:flex;
+                                    align-items:center;
+                                    justify-content:space-between;
+                                    gap:10px;
+                                    margin-top:15px;
+                                    padding-top:12px;
+                                    border-top:1px solid rgba(255,255,255,.15);
+                                "
+                            >
+
+                                <span
+                                    style="
+                                        color:rgba(255,255,255,.7);
+                                        font-size:7px;
+                                    "
+                                >
+                                    Available
+                                </span>
+
+                                <strong
+                                    style="
+                                        font-size:9px;
+                                    "
+                                >
+                                    ₦2,450,000.00
+                                </strong>
+
+                            </div>
+
+
+                            <div
+                                style="
+                                    position:relative;
+                                    z-index:2;
+                                    display:flex;
+                                    gap:7px;
+                                    margin-top:15px;
+                                    flex-wrap:wrap;
+                                "
+                            >
+
+                                <a
+                                    href="transactions.html?account=checking"
+                                    class="button button-light button-small"
+                                >
+                                    Activity
+                                </a>
+
+                                <a
+                                    href="transfers.html?from=checking"
+                                    class="button button-ghost-light button-small"
+                                >
+                                    Transfer
+                                </a>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- =================================
+                             SAVINGS ACCOUNT
+                             ================================= -->
+
+                        <article
+                            class="account-card"
+                            data-account-type="savings"
+                            data-account-status="active"
+                            data-account-name="Growth Savings"
+                        >
+
+                            <div class="account-card-type">
+                                Savings Account
+                            </div>
+
+
+                            <div class="account-card-name">
+                                Growth Savings
+                            </div>
+
+
+                            <div
+                                class="account-card-balance"
+                                data-balance="5875000"
+                            >
+                                ₦5,875,000.00
+                            </div>
+
+
+                            <div class="account-card-number">
+                                Account •••• 9137
+                            </div>
+
+
+                            <div
+                                style="
+                                    position:relative;
+                                    z-index:2;
+                                    display:flex;
+                                    align-items:center;
+                                    justify-content:space-between;
+                                    gap:10px;
+                                    margin-top:15px;
+                                    padding-top:12px;
+                                    border-top:1px solid rgba(255,255,255,.15);
+                                "
+                            >
+
+                                <span
+                                    style="
+                                        color:rgba(255,255,255,.7);
+                                        font-size:7px;
+                                    "
+                                >
+                                    Available
+                                </span>
+
+                                <strong
+                                    style="
+                                        font-size:9px;
+                                    "
+                                >
+                                    ₦5,875,000.00
+                                </strong>
+
+                            </div>
+
+
+                            <div
+                                style="
+                                    position:relative;
+                                    z-index:2;
+                                    display:flex;
+                                    gap:7px;
+                                    margin-top:15px;
+                                    flex-wrap:wrap;
+                                "
+                            >
+
+                                <a
+                                    href="transactions.html?account=savings"
+                                    class="button button-light button-small"
+                                >
+                                    Activity
+                                </a>
+
+                                <a
+                                    href="transfers.html?from=savings"
+                                    class="button button-ghost-light button-small"
+                                >
+                                    Transfer
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <!-- Empty state -->
+
+                    <div
+                        id="accountsEmptyState"
+                        class="empty-state card"
+                        style="display:none; margin-top:15px;"
+                    >
+
+                        <div class="empty-state-icon">
+                            ▣
+                        </div>
+
+                        <h3>
+                            No accounts found
+                        </h3>
+
+                        <p>
+                            No accounts match your current
+                            search or filter criteria.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="button button-outline button-small"
+                            id="clearAccountFilters"
+                            style="margin-top:15px;"
+                        >
+                            Clear Filters
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================================
+                     ACCOUNT INFORMATION
+                     ========================================= -->
+
+                <section
+                    class="dashboard-grid"
+                    style="margin-top:25px;"
+                >
+
+                    <!-- Account details -->
+
+                    <article class="card">
+
+                        <div
+                            style="
+                                display:flex;
+                                justify-content:space-between;
+                                align-items:center;
+                                gap:10px;
+                                margin-bottom:15px;
+                            "
+                        >
+
+                            <div>
+
+                                <h3 style="margin-bottom:5px;">
+                                    Account Information
+                                </h3>
+
+                                <p style="margin:0;">
+                                    General information about your accounts.
+                                </p>
+
+                            </div>
+
+                            <span class="badge badge-info">
+                                Secure
+                            </span>
+
+                        </div>
+
+
+                        <div class="transaction-list">
+
+                            <div class="transaction-item">
+
+                                <div class="transaction-left">
+
+                                    <div class="transaction-icon">
+                                        #
+                                    </div>
+
+                                    <div class="transaction-details">
+
+                                        <strong>
+                                            Primary Account
+                                        </strong>
+
+                                        <span>
+                                            Everyday Checking
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <strong>
+                                    •••• 4821
+                                </strong>
+
+                            </div>
+
+
+                            <div class="transaction-item">
+
+                                <div class="transaction-left">
+
+                                    <div class="transaction-icon">
+                                        $
+                                    </div>
+
+                                    <div class="transaction-details">
+
+                                        <strong>
+                                            Primary Currency
+                                        </strong>
+
+                                        <span>
+                                            Nigerian Naira
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <strong>
+                                    NGN
+                                </strong>
+
+                            </div>
+
+
+                            <div class="transaction-item">
+
+                                <div class="transaction-left">
+
+                                    <div class="transaction-icon">
+                                        ✓
+                                    </div>
+
+                                    <div class="transaction-details">
+
+                                        <strong>
+                                            Account Status
+                                        </strong>
+
+                                        <span>
+                                            Banking access
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                                <span class="badge badge-success">
+                                    Active
+                                </span>
+
+                            </div>
+
                         </div>
 
                     </article>
 
-                </div>
 
-            </div>
+                    <!-- Security -->
+
+                    <article class="card">
+
+                        <h3 style="margin-bottom:7px;">
+                            Banking Security
+                        </h3>
+
+                        <p>
+                            Keep your banking information secure.
+                        </p>
 
 
-            <!-- =================================================
-                 ALL ACCOUNTS
-                 ================================================= -->
+                        <div class="alert alert-success">
+                            Your account information is protected
+                            by Global TrustFund security controls.
+                        </div>
 
-            <div class="card">
 
-                <div
+                        <div
+                            style="
+                                display:grid;
+                                gap:10px;
+                                margin-top:15px;
+                            "
+                        >
+
+                            <a
+                                href="profile.html"
+                                class="button button-outline button-small button-block"
+                            >
+                                Review Profile
+                            </a>
+
+                            <a
+                                href="settings.html"
+                                class="button button-outline button-small button-block"
+                            >
+                                Security Settings
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </section>
+
+
+                <!-- =========================================
+                     HELP / SUPPORT
+                     ========================================= -->
+
+                <section
+                    class="card"
                     style="
-                        display:flex;
-                        align-items:center;
-                        justify-content:space-between;
-                        gap:15px;
-                        flex-wrap:wrap;
-                        margin-bottom:20px;
+                        margin-top:20px;
+                        background:var(--gtf-green);
+                        color:white;
                     "
                 >
 
-                    <div>
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            gap:20px;
+                            flex-wrap:wrap;
+                        "
+                    >
 
-                        <h2
-                            style="
-                                margin-bottom:5px;
-                                font-size:16px;
-                            "
-                        >
-                            All Accounts
-                        </h2>
+                        <div>
 
-                        <p
-                            style="margin:0;"
+                            <span
+                                class="eyebrow"
+                                style="color:rgba(255,255,255,.7);"
+                            >
+                                NEED HELP?
+                            </span>
+
+                            <h3
+                                style="
+                                    color:white;
+                                    margin-bottom:6px;
+                                "
+                            >
+                                Questions about your accounts?
+                            </h3>
+
+                            <p
+                                style="
+                                    color:rgba(255,255,255,.72);
+                                    margin:0;
+                                "
+                            >
+                                Contact Global TrustFund customer support
+                                for assistance.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="support.html"
+                            class="button button-light"
                         >
-                            Your available Global TrustFund accounts.
-                        </p>
+                            Contact Support
+                        </a>
 
                     </div>
 
-                    <button
-                        type="button"
-                        class="button button-primary button-small"
-                        id="refreshAccounts"
-                    >
-                        Refresh
-                    </button>
+                </section>
 
-                </div>
-
-
-                <div class="table-wrapper">
-
-                    <table class="data-table">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Account
-                                </th>
-
-                                <th>
-                                    Account Number
-                                </th>
-
-                                <th>
-                                    Type
-                                </th>
-
-                                <th>
-                                    Balance
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                                <th>
-                                    Action
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody id="accountsTableBody">
-
-                            <tr>
-
-                                <td>
-                                    <strong>
-                                        TrustWallet Account
-                                    </strong>
-                                </td>
-
-                                <td>
-                                    ••••••••••
-                                </td>
-
-                                <td>
-                                    Wallet
-                                </td>
-
-                                <td>
-                                    ₦0.00
-                                </td>
-
-                                <td>
-                                    <span class="badge badge-success">
-                                        Active
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <a
-                                        href="transactions.html"
-                                        class="button button-outline button-small"
-                                    >
-                                        View
-                                    </a>
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
 
             </div>
 
+        </main>
 
-            <!-- =================================================
-                 QUICK ACTIONS
-                 ================================================= -->
-
-            <div class="card mt-3">
-
-                <h2
-                    style="
-                        font-size:16px;
-                        margin-bottom:18px;
-                    "
-                >
-                    Quick Actions
-                </h2>
-
-                <div
-                    style="
-                        display:grid;
-                        grid-template-columns:
-                            repeat(4, minmax(0,1fr));
-                        gap:12px;
-                    "
-                >
-
-                    <a
-                        href="transfers.html"
-                        class="button button-primary"
-                    >
-                        Transfer Money
-                    </a>
-
-                    <a
-                        href="transactions.html"
-                        class="button button-outline"
-                    >
-                        View Transactions
-                    </a>
-
-                    <a
-                        href="cards.html"
-                        class="button button-outline"
-                    >
-                        Manage Cards
-                    </a>
-
-                    <a
-                        href="support.html"
-                        class="button button-outline"
-                    >
-                        Contact Support
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
+    </div>
 
 
-<!-- =========================================================
-     PAGE SCRIPT
-     ========================================================= -->
+    <!-- =====================================================
+         PAGE SCRIPT
+         ===================================================== -->
 
-<script>
-(function () {
-
-    "use strict";
-
-    const API_BASE = "/api";
-
-    const sidebar =
-        document.querySelector(".dashboard-sidebar");
-
-    const sidebarToggle =
-        document.getElementById("sidebarToggle");
-
-    const refreshButton =
-        document.getElementById("refreshAccounts");
+    <script src="../js/app.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/role-guard.js"></script>
 
 
-    /* =====================================================
-       SIDEBAR
-       ===================================================== */
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
-    if (sidebarToggle) {
-
-        sidebarToggle.addEventListener(
-            "click",
-            function () {
-
-                sidebar.classList.toggle("open");
-
-            }
-        );
-
-    }
+            /*
+             * -------------------------------------------------
+             * CUSTOMER ACCOUNTS PAGE
+             * -------------------------------------------------
+             *
+             * This page is intentionally compatible with the
+             * existing Global TrustFund frontend.
+             *
+             * Backend/API data can replace the demo values
+             * below when the customer API is connected.
+             */
 
 
-    /* =====================================================
-       CURRENCY
-       ===================================================== */
+            /* ================================================
+               MOBILE SIDEBAR
+               ================================================ */
 
-    function formatCurrency(amount) {
+            const sidebar =
+                document.getElementById("dashboardSidebar");
 
-        const value =
-            Number(amount || 0);
-
-        return new Intl.NumberFormat(
-            "en-NG",
-            {
-                style: "currency",
-                currency: "NGN",
-                minimumFractionDigits: 2
-            }
-        ).format(value);
-
-    }
+            const sidebarToggle =
+                document.getElementById("sidebarToggle");
 
 
-    /* =====================================================
-       USER
-       ===================================================== */
+            if (sidebar && sidebarToggle) {
 
-    async function loadUser() {
+                sidebarToggle.addEventListener(
+                    "click",
+                    function () {
 
-        try {
+                        const isOpen =
+                            sidebar.classList.toggle("open");
 
-            const response =
-                await fetch(
-                    API_BASE + "/users/me",
-                    {
-                        method: "GET",
-                        credentials: "include",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
+                        sidebarToggle.setAttribute(
+                            "aria-expanded",
+                            String(isOpen)
+                        );
+
                     }
                 );
 
-            if (!response.ok) {
-                return;
-            }
-
-            const result =
-                await response.json();
-
-            const user =
-                result.user ||
-                result.data ||
-                result;
-
-
-            const name =
-                user.full_name ||
-                user.fullName ||
-                user.name ||
-                user.first_name ||
-                "Customer";
-
-
-            const userName =
-                document.getElementById("userName");
-
-            const avatar =
-                document.getElementById("userAvatar");
-
-
-            if (userName) {
-                userName.textContent = name;
             }
 
 
-            if (avatar) {
+            /* ================================================
+               ACCOUNT ELEMENTS
+               ================================================ */
 
-                avatar.textContent =
-                    name
+            const accountCards =
+                Array.from(
+                    document.querySelectorAll(
+                        "#accountsList .account-card"
+                    )
+                );
+
+
+            const searchInput =
+                document.getElementById("accountSearch");
+
+
+            const typeFilter =
+                document.getElementById("accountTypeFilter");
+
+
+            const statusFilter =
+                document.getElementById("accountStatusFilter");
+
+
+            const emptyState =
+                document.getElementById("accountsEmptyState");
+
+
+            const countBadge =
+                document.getElementById("accountCountBadge");
+
+
+            /* ================================================
+               ACCOUNT FILTERING
+               ================================================ */
+
+            function filterAccounts() {
+
+                const search =
+                    (searchInput?.value || "")
                         .trim()
-                        .charAt(0)
-                        .toUpperCase();
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Unable to load customer profile.",
-                error
-            );
-
-        }
-
-    }
+                        .toLowerCase();
 
 
-    /* =====================================================
-       ACCOUNTS
-       ===================================================== */
-
-    async function loadAccounts() {
-
-        try {
-
-            const response =
-                await fetch(
-                    API_BASE + "/accounts",
-                    {
-                        method: "GET",
-                        credentials: "include",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                console.warn(
-                    "Accounts endpoint unavailable."
-                );
-
-                return;
-
-            }
-
-
-            const result =
-                await response.json();
-
-
-            const accounts =
-                Array.isArray(result)
-                    ? result
-                    : (
-                        result.accounts ||
-                        result.data ||
-                        []
-                    );
-
-
-            renderAccounts(accounts);
-
-        } catch (error) {
-
-            console.warn(
-                "Unable to load accounts.",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       RENDER ACCOUNTS
-       ===================================================== */
-
-    function renderAccounts(accounts) {
-
-        const tbody =
-            document.getElementById(
-                "accountsTableBody"
-            );
-
-
-        let totalBalance = 0;
-        let availableBalance = 0;
-        let activeCount = 0;
-
-
-        if (
-            !Array.isArray(accounts) ||
-            accounts.length === 0
-        ) {
-
-            if (tbody) {
-
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="6">
-                            <div class="empty-state">
-                                <div class="empty-state-icon">
-                                    ▣
-                                </div>
-
-                                <h3>
-                                    No accounts found
-                                </h3>
-
-                                <p>
-                                    Your account information
-                                    will appear here once
-                                    your banking profile is active.
-                                </p>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-
-            }
-
-            updateSummary(
-                0,
-                0,
-                0
-            );
-
-            return;
-
-        }
-
-
-        if (tbody) {
-
-            tbody.innerHTML = "";
-
-        }
-
-
-        accounts.forEach(
-            function (account, index) {
-
-                const balance =
-                    Number(
-                        account.balance ||
-                        account.current_balance ||
-                        account.amount ||
-                        0
-                    );
-
-
-                const available =
-                    Number(
-                        account.available_balance ??
-                        account.availableBalance ??
-                        balance
-                    );
+                const type =
+                    (typeFilter?.value || "")
+                        .toLowerCase();
 
 
                 const status =
-                    String(
-                        account.status ||
-                        "active"
-                    ).toLowerCase();
+                    (statusFilter?.value || "")
+                        .toLowerCase();
 
 
-                const isActive =
-                    status === "active";
+                let visibleCount = 0;
 
 
-                totalBalance += balance;
+                accountCards.forEach(function (card) {
 
-                availableBalance += available;
+                    const name =
+                        (
+                            card.dataset.accountName || ""
+                        ).toLowerCase();
 
 
-                if (isActive) {
-                    activeCount++;
+                    const cardType =
+                        (
+                            card.dataset.accountType || ""
+                        ).toLowerCase();
+
+
+                    const cardStatus =
+                        (
+                            card.dataset.accountStatus || ""
+                        ).toLowerCase();
+
+
+                    const matchesSearch =
+                        !search ||
+                        name.includes(search) ||
+                        cardType.includes(search);
+
+
+                    const matchesType =
+                        !type ||
+                        cardType === type;
+
+
+                    const matchesStatus =
+                        !status ||
+                        cardStatus === status;
+
+
+                    const visible =
+                        matchesSearch &&
+                        matchesType &&
+                        matchesStatus;
+
+
+                    card.style.display =
+                        visible ? "" : "block";
+
+
+                    if (visible) {
+                        visibleCount++;
+                    }
+
+                });
+
+
+                if (emptyState) {
+
+                    emptyState.style.display =
+                        visibleCount === 0
+                            ? "block"
+                            : "none";
+
                 }
 
 
-                if (tbody) {
+                if (countBadge) {
 
-                    const row =
-                        document.createElement("tr");
+                    countBadge.textContent =
+                        visibleCount +
+                        (
+                            visibleCount === 1
+                                ? " Account"
+                                : " Accounts"
+                        );
 
+                }
 
-                    const accountName =
-                        account.name ||
-                        account.account_name ||
-                        "TrustWallet Account";
-
-
-                    const accountNumber =
-                        account.account_number ||
-                        account.accountNumber ||
-                        "••••••••••";
+            }
 
 
-                    const accountType =
-                        account.type ||
-                        account.account_type ||
-                        "Wallet";
+            if (searchInput) {
+
+                searchInput.addEventListener(
+                    "input",
+                    filterAccounts
+                );
+
+            }
 
 
-                    row.innerHTML = `
-                        <td>
-                            <strong>
-                                ${escapeHtml(accountName)}
-                            </strong>
-                        </td>
+            if (typeFilter) {
 
-                        <td>
-                            ${escapeHtml(accountNumber)}
-                        </td>
+                typeFilter.addEventListener(
+                    "change",
+                    filterAccounts
+                );
 
-                        <td>
-                            ${escapeHtml(accountType)}
-                        </td>
+            }
 
-                        <td>
-                            ${formatCurrency(balance)}
-                        </td>
 
-                        <td>
-                            <span class="
-                                badge
-                                ${
-                                    isActive
-                                        ? "badge-success"
-                                        : "badge-warning"
+            if (statusFilter) {
+
+                statusFilter.addEventListener(
+                    "change",
+                    filterAccounts
+                );
+
+            }
+
+
+            /* ================================================
+               CLEAR FILTERS
+               ================================================ */
+
+            const clearFilters =
+                document.getElementById(
+                    "clearAccountFilters"
+                );
+
+
+            if (clearFilters) {
+
+                clearFilters.addEventListener(
+                    "click",
+                    function () {
+
+                        if (searchInput) {
+                            searchInput.value = "";
+                        }
+
+                        if (typeFilter) {
+                            typeFilter.value = "";
+                        }
+
+                        if (statusFilter) {
+                            statusFilter.value = "";
+                        }
+
+                        filterAccounts();
+
+                    }
+                );
+
+            }
+
+
+            /* ================================================
+               CALCULATE DEMO TOTALS
+               ================================================ */
+
+            function updateAccountTotals() {
+
+                let total = 0;
+                let available = 0;
+                let activeAccounts = 0;
+
+
+                accountCards.forEach(function (card) {
+
+                    const balance =
+                        Number(
+                            card.dataset.balance || 0
+                        );
+
+
+                    const status =
+                        card.dataset.accountStatus;
+
+
+                    total += balance;
+
+
+                    if (status === "active") {
+                        activeAccounts++;
+                    }
+
+                });
+
+
+                /*
+                 * In this frontend prototype, all demo account
+                 * balances are currently available.
+                 *
+                 * Replace this section with values returned by
+                 * the authenticated customer API.
+                 */
+
+                available = total;
+
+
+                const totalBalance =
+                    document.getElementById(
+                        "totalBalance"
+                    );
+
+
+                const availableBalance =
+                    document.getElementById(
+                        "availableBalance"
+                    );
+
+
+                const totalAccounts =
+                    document.getElementById(
+                        "totalAccounts"
+                    );
+
+
+                if (totalBalance) {
+
+                    totalBalance.textContent =
+                        formatCurrency(total);
+
+                }
+
+
+                if (availableBalance) {
+
+                    availableBalance.textContent =
+                        formatCurrency(available);
+
+                }
+
+
+                if (totalAccounts) {
+
+                    totalAccounts.textContent =
+                        accountCards.length;
+
+                }
+
+
+                const overallStatus =
+                    document.getElementById(
+                        "overallStatus"
+                    );
+
+
+                if (overallStatus) {
+
+                    overallStatus.textContent =
+                        activeAccounts > 0
+                            ? "Active"
+                            : "Unavailable";
+
+                }
+
+            }
+
+
+            /* ================================================
+               CURRENCY FORMATTER
+               ================================================ */
+
+            function formatCurrency(amount) {
+
+                return new Intl.NumberFormat(
+                    "en-NG",
+                    {
+                        style: "currency",
+                        currency: "NGN",
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                ).format(amount);
+
+            }
+
+
+            /* ================================================
+               REFRESH BUTTON
+               ================================================ */
+
+            const refreshButton =
+                document.getElementById(
+                    "refreshAccountsButton"
+                );
+
+
+            if (refreshButton) {
+
+                refreshButton.addEventListener(
+                    "click",
+                    async function () {
+
+                        const originalText =
+                            refreshButton.textContent;
+
+
+                        refreshButton.disabled = true;
+
+                        refreshButton.innerHTML =
+                            '<span class="loading">' +
+                            '<span class="loading-spinner"></span>' +
+                            'Refreshing...' +
+                            '</span>';
+
+
+                        try {
+
+                            /*
+                             * API integration point.
+                             *
+                             * When the backend endpoint is ready,
+                             * this can call something such as:
+                             *
+                             * GET /api/accounts
+                             *
+                             * using the authenticated customer
+                             * session/token.
+                             */
+
+                            await new Promise(
+                                function (resolve) {
+                                    setTimeout(
+                                        resolve,
+                                        600
+                                    );
                                 }
-                            ">
-                                ${escapeHtml(
-                                    capitalize(status)
-                                )}
-                            </span>
-                        </td>
-
-                        <td>
-                            <a
-                                href="transactions.html"
-                                class="button
-                                       button-outline
-                                       button-small"
-                            >
-                                View
-                            </a>
-                        </td>
-                    `;
+                            );
 
 
-                    tbody.appendChild(row);
+                            updateAccountTotals();
 
-                }
+                        } catch (error) {
 
+                            console.error(
+                                "Unable to refresh accounts:",
+                                error
+                            );
 
-                if (index === 0) {
+                        } finally {
 
-                    const primaryBalance =
-                        document.getElementById(
-                            "primaryBalance"
-                        );
+                            refreshButton.disabled = false;
 
-                    const primaryNumber =
-                        document.getElementById(
-                            "primaryAccountNumber"
-                        );
+                            refreshButton.textContent =
+                                originalText;
 
-
-                    if (primaryBalance) {
-
-                        primaryBalance.textContent =
-                            formatCurrency(balance);
+                        }
 
                     }
-
-
-                    if (primaryNumber) {
-
-                        primaryNumber.textContent =
-                            accountNumber;
-
-                    }
-
-                }
+                );
 
             }
-        );
 
 
-        updateSummary(
-            totalBalance,
-            availableBalance,
-            activeCount
-        );
+            /* ================================================
+               CUSTOMER DISPLAY
+               ================================================ */
 
-    }
+            /*
+             * These values are safe placeholders for the
+             * frontend prototype.
+             *
+             * auth.js can replace them with the authenticated
+             * customer profile returned by the backend.
+             */
 
-
-    /* =====================================================
-       SUMMARY
-       ===================================================== */
-
-    function updateSummary(
-        total,
-        available,
-        active
-    ) {
-
-        const totalElement =
-            document.getElementById(
-                "totalBalance"
-            );
-
-        const availableElement =
-            document.getElementById(
-                "availableBalance"
-            );
-
-        const activeElement =
-            document.getElementById(
-                "activeAccounts"
-            );
+            const customerName =
+                document.getElementById(
+                    "userName"
+                );
 
 
-        if (totalElement) {
-
-            totalElement.textContent =
-                formatCurrency(total);
-
-        }
+            const userAvatar =
+                document.getElementById(
+                    "userAvatar"
+                );
 
 
-        if (availableElement) {
+            if (customerName) {
 
-            availableElement.textContent =
-                formatCurrency(available);
-
-        }
-
-
-        if (activeElement) {
-
-            activeElement.textContent =
-                active;
-
-        }
-
-    }
-
-
-    /* =====================================================
-       HELPERS
-       ===================================================== */
-
-    function capitalize(value) {
-
-        if (!value) {
-            return "";
-        }
-
-        return value.charAt(0).toUpperCase() +
-            value.slice(1);
-
-    }
-
-
-    function escapeHtml(value) {
-
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-
-    /* =====================================================
-       REFRESH
-       ===================================================== */
-
-    if (refreshButton) {
-
-        refreshButton.addEventListener(
-            "click",
-            async function () {
-
-                const originalText =
-                    refreshButton.textContent;
-
-
-                refreshButton.disabled = true;
-
-                refreshButton.textContent =
-                    "Refreshing...";
-
-
-                await loadAccounts();
-
-
-                refreshButton.disabled = false;
-
-                refreshButton.textContent =
-                    originalText;
+                /*
+                 * Keep generic until authenticated customer
+                 * information is loaded.
+                 */
+                customerName.textContent =
+                    "Customer";
 
             }
-        );
-
-    }
 
 
-    /* =====================================================
-       INITIALIZE
-       ===================================================== */
+            if (userAvatar) {
 
-    loadUser();
-    loadAccounts();
+                userAvatar.textContent =
+                    "C";
 
-})();
-</script>
+            }
+
+
+            /* ================================================
+               INITIALIZE
+               ================================================ */
+
+            updateAccountTotals();
+
+            filterAccounts();
+
+
+            /*
+             * Optional API loading hook.
+             *
+             * If auth.js exposes a customer-loading function,
+             * it can be called here without changing the page
+             * structure.
+             */
+
+            if (
+                typeof window.loadCustomerProfile ===
+                "function"
+            ) {
+
+                window.loadCustomerProfile();
+
+            }
+
+        });
+    </script>
 
 </body>
 </html>
