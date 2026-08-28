@@ -11,7 +11,7 @@
 
     <meta
         name="description"
-        content="Transfer center for Global TrustFund customers."
+        content="Transfer funds through Global TrustFund."
     >
 
     <meta
@@ -37,10 +37,10 @@
             --gtf-border: #dfe8e3;
             --gtf-text: #18372c;
             --gtf-muted: #7c8983;
-            --gtf-error: #8b4444;
             --gtf-error-bg: #f9eded;
-            --gtf-success: #176b48;
+            --gtf-error-text: #8b4444;
             --gtf-success-bg: #eaf5ee;
+            --gtf-success-text: #176b48;
         }
 
         * {
@@ -49,74 +49,164 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             background: var(--gtf-bg);
             color: var(--gtf-text);
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        .transfer-page {
+        .transfers-page {
             min-height: 100vh;
         }
 
-        .transfer-main {
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .dashboard-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .dashboard-header-inner {
             width: 100%;
-            max-width: 1120px;
+            max-width: 1200px;
+            min-height: 74px;
             margin: 0 auto;
-            padding: 38px 20px 60px;
+            padding: 12px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .transfer-header {
-            margin-bottom: 28px;
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gtf-green);
+            text-decoration: none;
         }
 
-        .transfer-eyebrow {
+        .brand-logo {
+            width: 45px;
+            height: 45px;
+            display: block;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text strong {
+            color: var(--gtf-green);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .brand-text small {
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 9px;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+        }
+
+        .dashboard-nav a {
+            color: var(--gtf-muted);
+            font-size: 8px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .dashboard-nav a:hover,
+        .dashboard-nav a.active {
+            color: var(--gtf-green);
+        }
+
+        .signout-link {
+            padding: 8px 11px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+        }
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .transfers-main {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 35px 20px 55px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .eyebrow {
             color: var(--gtf-light);
             font-size: 8px;
             font-weight: 800;
             letter-spacing: 1.2px;
         }
 
-        .transfer-header h1 {
-            margin: 6px 0 8px;
+        .page-heading h1 {
+            margin: 7px 0 5px;
             color: var(--gtf-green);
-            font-size: 31px;
+            font-size: 30px;
         }
 
-        .transfer-header p {
+        .page-heading p {
             margin: 0;
-            max-width: 650px;
             color: var(--gtf-muted);
-            font-size: 10px;
-            line-height: 1.7;
+            font-size: 9px;
+            line-height: 1.6;
         }
+
+        /* =====================================================
+           LAYOUT
+           ===================================================== */
 
         .transfer-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 300px;
-            gap: 24px;
+            grid-template-columns: 1fr 300px;
+            gap: 22px;
             align-items: start;
         }
 
+        /* =====================================================
+           FORM CARD
+           ===================================================== */
+
         .transfer-card {
-            padding: 28px;
+            padding: 27px;
             background: #ffffff;
             border: 1px solid var(--gtf-border);
             border-radius: 14px;
-            box-shadow: 0 12px 35px rgba(11, 61, 46, .06);
+            box-shadow: 0 12px 30px rgba(11,61,46,.06);
         }
 
-        .transfer-card-header {
-            margin-bottom: 24px;
+        .card-header {
+            margin-bottom: 22px;
         }
 
-        .transfer-card-header h2 {
-            margin: 0 0 6px;
-            color: var(--gtf-green);
-            font-size: 20px;
-        }
-
-        .transfer-card-header p {
+        .card-header h2 {
             margin: 0;
+            color: var(--gtf-green);
+            font-size: 19px;
+        }
+
+        .card-header p {
+            margin: 6px 0 0;
             color: var(--gtf-muted);
             font-size: 8px;
             line-height: 1.6;
@@ -124,7 +214,7 @@
 
         .transfer-form {
             display: grid;
-            gap: 18px;
+            gap: 17px;
         }
 
         .form-group {
@@ -139,28 +229,35 @@
         }
 
         .required {
-            color: var(--gtf-error);
+            color: #9a4d4d;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
+
             min-height: 43px;
-            padding: 11px 12px;
+            padding: 10px 12px;
+
             border: 1px solid var(--gtf-border);
             border-radius: 7px;
+
             outline: none;
+
             background: #ffffff;
             color: var(--gtf-text);
+
             font-family: inherit;
             font-size: 9px;
-            transition: border-color .2s ease,
-                        box-shadow .2s ease;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
         }
 
         .form-group textarea {
-            min-height: 90px;
+            min-height: 80px;
             resize: vertical;
         }
 
@@ -168,7 +265,9 @@
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--gtf-light);
-            box-shadow: 0 0 0 3px rgba(23, 107, 72, .09);
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.09);
         }
 
         .field-help {
@@ -181,57 +280,63 @@
             position: relative;
         }
 
-        .amount-wrapper span {
+        .currency-symbol {
             position: absolute;
             left: 12px;
             top: 50%;
             transform: translateY(-50%);
+
             color: var(--gtf-muted);
             font-size: 9px;
             font-weight: 700;
-            pointer-events: none;
         }
 
         .amount-wrapper input {
-            padding-left: 35px;
+            padding-left: 27px;
         }
 
-        .transfer-summary {
-            display: grid;
-            gap: 11px;
-            padding: 16px;
-            background: var(--gtf-soft);
-            border-radius: 9px;
-        }
+        /* =====================================================
+           STATUS
+           ===================================================== */
 
-        .summary-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .summary-row span {
-            color: var(--gtf-muted);
+        .form-status {
+            display: none;
+            padding: 11px 12px;
+            border-radius: 7px;
             font-size: 8px;
+            line-height: 1.5;
         }
 
-        .summary-row strong {
-            color: var(--gtf-green);
-            font-size: 9px;
-            text-align: right;
+        .form-status.error {
+            display: block;
+            background: var(--gtf-error-bg);
+            color: var(--gtf-error-text);
         }
+
+        .form-status.success {
+            display: block;
+            background: var(--gtf-success-bg);
+            color: var(--gtf-success-text);
+        }
+
+        /* =====================================================
+           BUTTON
+           ===================================================== */
 
         .transfer-button {
             width: 100%;
-            min-height: 46px;
+            min-height: 45px;
+
             border: 1px solid var(--gtf-green);
             border-radius: 7px;
+
             background: var(--gtf-green);
             color: #ffffff;
+
             font-family: inherit;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
+
             cursor: pointer;
         }
 
@@ -240,170 +345,139 @@
         }
 
         .transfer-button:disabled {
-            opacity: .6;
+            opacity: .65;
             cursor: not-allowed;
         }
 
-        .status-message {
-            display: none;
-            padding: 12px;
-            border-radius: 7px;
+        /* =====================================================
+           SIDE PANEL
+           ===================================================== */
+
+        .transfer-info {
+            padding: 23px;
+            background: var(--gtf-green);
+            color: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 12px 30px rgba(11,61,46,.10);
+        }
+
+        .transfer-info h2 {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .transfer-info > p {
+            margin: 8px 0 19px;
+            color: rgba(255,255,255,.72);
             font-size: 8px;
             line-height: 1.6;
         }
 
-        .status-message.error {
-            display: block;
-            background: var(--gtf-error-bg);
-            color: var(--gtf-error);
-        }
-
-        .status-message.success {
-            display: block;
-            background: var(--gtf-success-bg);
-            color: var(--gtf-success);
-        }
-
-        /* =====================================================
-           SIDE INFORMATION
-           ===================================================== */
-
-        .transfer-side {
+        .info-list {
             display: grid;
-            gap: 18px;
+            gap: 15px;
         }
 
-        .side-card {
-            padding: 22px;
-            background: #ffffff;
-            border: 1px solid var(--gtf-border);
-            border-radius: 14px;
+        .info-item {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
         }
 
-        .side-icon {
-            width: 42px;
-            height: 42px;
+        .info-number {
+            width: 23px;
+            height: 23px;
+            flex: 0 0 23px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 14px;
-            border-radius: 10px;
-            background: var(--gtf-soft);
-            color: var(--gtf-green);
-            font-size: 15px;
-            font-weight: 800;
+
+            border: 1px solid rgba(255,255,255,.32);
+            border-radius: 50%;
+
+            font-size: 7px;
+            font-weight: 700;
         }
 
-        .side-card h2 {
-            margin: 0 0 8px;
-            color: var(--gtf-green);
-            font-size: 16px;
-        }
-
-        .side-card p {
-            margin: 0;
-            color: var(--gtf-muted);
+        .info-item strong {
+            display: block;
             font-size: 8px;
-            line-height: 1.7;
         }
 
-        .security-list {
-            display: grid;
-            gap: 12px;
-            margin: 17px 0 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .security-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            color: var(--gtf-muted);
-            font-size: 8px;
+        .info-item span {
+            display: block;
+            margin-top: 3px;
+            color: rgba(255,255,255,.63);
+            font-size: 7px;
             line-height: 1.5;
         }
 
-        .security-list li span:first-child {
-            color: var(--gtf-light);
-            font-weight: 800;
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .dashboard-footer {
+            padding: 18px 20px;
+            background: #ffffff;
+            border-top: 1px solid var(--gtf-border);
         }
 
-        .recent-link {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--gtf-light);
-            font-size: 8px;
-            font-weight: 700;
-            text-decoration: none;
-        }
+        .dashboard-footer-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
 
-        .recent-link:hover {
-            text-decoration: underline;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            color: var(--gtf-muted);
+            font-size: 7px;
         }
 
         /* =====================================================
-           NOTICE
+           MOBILE
            ===================================================== */
-
-        .transfer-notice {
-            margin-bottom: 20px;
-            padding: 14px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            background: #f7f1df;
-            border: 1px solid #eadfb9;
-            border-radius: 9px;
-            color: #806c32;
-        }
-
-        .transfer-notice-icon {
-            width: 25px;
-            height: 25px;
-            flex: 0 0 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: #806c32;
-            color: #ffffff;
-            font-size: 8px;
-            font-weight: 800;
-        }
-
-        .transfer-notice strong {
-            display: block;
-            margin-bottom: 3px;
-            font-size: 8px;
-        }
-
-        .transfer-notice p {
-            margin: 0;
-            font-size: 7px;
-            line-height: 1.6;
-        }
 
         @media (max-width: 850px) {
 
+            .dashboard-nav {
+                display: none;
+            }
+
             .transfer-layout {
                 grid-template-columns: 1fr;
+            }
+
+            .transfer-info {
+                order: -1;
             }
 
         }
 
         @media (max-width: 600px) {
 
-            .transfer-main {
-                padding: 25px 13px 45px;
+            .dashboard-header-inner {
+                padding: 12px 14px;
             }
 
-            .transfer-header h1 {
-                font-size: 27px;
+            .transfers-main {
+                padding: 25px 13px 40px;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
             }
 
             .transfer-card {
-                padding: 21px 17px;
+                padding: 20px 17px;
+            }
+
+            .dashboard-footer-inner {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
             }
 
         }
@@ -415,18 +489,16 @@
 
 <body>
 
-
-<div class="transfer-page">
+<div class="transfers-page">
 
 
     <!-- =====================================================
          HEADER
          ===================================================== -->
 
-    <header class="site-header">
+    <header class="dashboard-header">
 
-        <div class="container nav-container">
-
+        <div class="dashboard-header-inner">
 
             <a
                 href="../index.html"
@@ -455,23 +527,9 @@
             </a>
 
 
-            <button
-                id="mobileMenuButton"
-                class="mobile-menu-button"
-                type="button"
-                aria-label="Open navigation"
-                aria-expanded="false"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-
             <nav
-                id="mainNavigation"
-                class="main-navigation"
-                aria-label="Main navigation"
+                class="dashboard-nav"
+                aria-label="Dashboard navigation"
             >
 
                 <a href="./index.html">
@@ -501,17 +559,12 @@
                     Support
                 </a>
 
-
-                <div class="nav-actions">
-
-                    <a
-                        href="../signout.html"
-                        class="button button-outline"
-                    >
-                        Sign Out
-                    </a>
-
-                </div>
+                <a
+                    href="./signout.html"
+                    class="signout-link"
+                >
+                    Sign Out
+                </a>
 
             </nav>
 
@@ -520,59 +573,29 @@
     </header>
 
 
-
     <!-- =====================================================
          MAIN
          ===================================================== -->
 
-    <main class="transfer-main">
+    <main class="transfers-main">
 
 
-        <header class="transfer-header">
+        <section class="page-heading">
 
-            <span class="transfer-eyebrow">
-                CUSTOMER PORTAL
+            <span class="eyebrow">
+                MONEY MOVEMENT
             </span>
 
             <h1>
-                Transfers
+                Transfer funds
             </h1>
 
             <p>
-                Use this secure transfer form to prepare a
-                transfer request. Transactions should only be
-                processed through an authorized banking workflow.
+                Enter the transfer details below and review
+                everything carefully before submitting.
             </p>
 
-        </header>
-
-
-
-        <!-- NOTICE -->
-
-        <div class="transfer-notice">
-
-            <div class="transfer-notice-icon">
-                !
-            </div>
-
-            <div>
-
-                <strong>
-                    Transfer processing notice
-                </strong>
-
-                <p>
-                    Submitting this form creates a transfer
-                    request. It does not independently move
-                    funds unless the connected backend has been
-                    configured to authorize and process it.
-                </p>
-
-            </div>
-
-        </div>
-
+        </section>
 
 
         <div class="transfer-layout">
@@ -584,20 +607,18 @@
 
             <section class="transfer-card">
 
-
-                <div class="transfer-card-header">
+                <div class="card-header">
 
                     <h2>
-                        New transfer request
+                        New transfer
                     </h2>
 
                     <p>
-                        Enter the requested transfer details
-                        carefully before submitting.
+                        Transfers are submitted to the banking
+                        system for processing and authorization.
                     </p>
 
                 </div>
-
 
 
                 <form
@@ -607,7 +628,7 @@
                 >
 
 
-                    <!-- SOURCE -->
+                    <!-- FROM ACCOUNT -->
 
                     <div class="form-group">
 
@@ -618,7 +639,7 @@
 
                         <select
                             id="fromAccount"
-                            name="fromAccount"
+                            name="from_account"
                             required
                         >
 
@@ -631,27 +652,25 @@
                     </div>
 
 
-
-                    <!-- RECIPIENT NAME -->
+                    <!-- RECIPIENT -->
 
                     <div class="form-group">
 
-                        <label for="recipientName">
+                        <label for="recipient">
                             Recipient name
                             <span class="required">*</span>
                         </label>
 
                         <input
+                            id="recipient"
+                            name="recipient"
                             type="text"
-                            id="recipientName"
-                            name="recipientName"
-                            placeholder="Enter recipient name"
                             autocomplete="off"
+                            placeholder="Enter recipient name"
                             required
                         >
 
                     </div>
-
 
 
                     <!-- ACCOUNT NUMBER -->
@@ -664,183 +683,115 @@
                         </label>
 
                         <input
-                            type="text"
                             id="recipientAccount"
-                            name="recipientAccount"
-                            placeholder="Enter account number"
+                            name="recipient_account"
+                            type="text"
                             inputmode="numeric"
                             autocomplete="off"
-                            required
-                        >
-
-                        <span class="field-help">
-                            Verify the account details before
-                            submitting a transfer request.
-                        </span>
-
-                    </div>
-
-
-
-                    <!-- BANK -->
-
-                    <div class="form-group">
-
-                        <label for="recipientBank">
-                            Bank / institution
-                            <span class="required">*</span>
-                        </label>
-
-                        <input
-                            type="text"
-                            id="recipientBank"
-                            name="recipientBank"
-                            placeholder="Enter bank or institution"
-                            autocomplete="organization"
+                            placeholder="Enter account number"
                             required
                         >
 
                     </div>
-
 
 
                     <!-- AMOUNT -->
 
                     <div class="form-group">
 
-                        <label for="transferAmount">
+                        <label for="amount">
                             Amount
                             <span class="required">*</span>
                         </label>
 
                         <div class="amount-wrapper">
 
-                            <span>
-                                ₦
+                            <span class="currency-symbol">
+                                $
                             </span>
 
                             <input
+                                id="amount"
+                                name="amount"
                                 type="number"
-                                id="transferAmount"
-                                name="transferAmount"
-                                placeholder="0.00"
                                 min="0.01"
                                 step="0.01"
                                 inputmode="decimal"
+                                placeholder="0.00"
                                 required
                             >
 
                         </div>
 
+                        <span class="field-help">
+                            Enter the amount you want to transfer.
+                        </span>
+
                     </div>
 
 
-
-                    <!-- REFERENCE -->
+                    <!-- TRANSFER TYPE -->
 
                     <div class="form-group">
 
-                        <label for="transferReference">
-                            Transfer reference
+                        <label for="transferType">
+                            Transfer type
                         </label>
 
-                        <input
-                            type="text"
-                            id="transferReference"
-                            name="transferReference"
-                            placeholder="Optional reference"
-                            maxlength="100"
-                            autocomplete="off"
+                        <select
+                            id="transferType"
+                            name="transfer_type"
                         >
 
-                    </div>
+                            <option value="internal">
+                                Global TrustFund account
+                            </option>
 
+                            <option value="external">
+                                External bank account
+                            </option>
+
+                        </select>
+
+                    </div>
 
 
                     <!-- NOTE -->
 
                     <div class="form-group">
 
-                        <label for="transferNote">
-                            Additional note
+                        <label for="note">
+                            Transfer note
                         </label>
 
                         <textarea
-                            id="transferNote"
-                            name="transferNote"
+                            id="note"
+                            name="note"
+                            maxlength="250"
                             placeholder="Optional note"
-                            maxlength="500"
                         ></textarea>
 
                     </div>
 
 
-
-                    <!-- SUMMARY -->
-
-                    <div class="transfer-summary">
-
-                        <div class="summary-row">
-
-                            <span>
-                                Recipient
-                            </span>
-
-                            <strong id="summaryRecipient">
-                                —
-                            </strong>
-
-                        </div>
-
-
-                        <div class="summary-row">
-
-                            <span>
-                                Amount
-                            </span>
-
-                            <strong id="summaryAmount">
-                                ₦0.00
-                            </strong>
-
-                        </div>
-
-
-                        <div class="summary-row">
-
-                            <span>
-                                Request status
-                            </span>
-
-                            <strong>
-                                Requires authorization
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-
                     <!-- STATUS -->
 
                     <div
-                        id="transferStatus"
-                        class="status-message"
+                        id="formStatus"
+                        class="form-status"
                         role="status"
                         aria-live="polite"
                     ></div>
 
 
-
                     <!-- SUBMIT -->
 
                     <button
-                        type="submit"
                         id="transferButton"
+                        type="submit"
                         class="transfer-button"
                     >
-                        Submit Transfer Request
+                        Submit Transfer
                     </button>
 
                 </form>
@@ -848,111 +799,111 @@
             </section>
 
 
-
             <!-- =================================================
-                 SIDE PANEL
+                 INFORMATION
                  ================================================= -->
 
-            <aside class="transfer-side">
+            <aside class="transfer-info">
+
+                <h2>
+                    Transfer process
+                </h2>
+
+                <p>
+                    Review your information carefully before
+                    submitting a transfer request.
+                </p>
 
 
-                <div class="side-card">
+                <div class="info-list">
 
-                    <div class="side-icon">
-                        ✓
+
+                    <div class="info-item">
+
+                        <span class="info-number">
+                            1
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Select an account
+                            </strong>
+
+                            <span>
+                                Choose the account from which
+                                funds would be requested.
+                            </span>
+
+                        </div>
+
                     </div>
 
-                    <h2>
-                        Transfer security
-                    </h2>
 
-                    <p>
-                        Protect your account by reviewing
-                        every transfer detail before submitting.
-                    </p>
+                    <div class="info-item">
 
+                        <span class="info-number">
+                            2
+                        </span>
 
-                    <ul class="security-list">
+                        <div>
 
-                        <li>
-                            <span>✓</span>
+                            <strong>
+                                Enter recipient
+                            </strong>
+
                             <span>
-                                Confirm the recipient information.
+                                Provide the recipient and
+                                destination account details.
                             </span>
-                        </li>
 
-                        <li>
-                            <span>✓</span>
-                            <span>
-                                Never share your password or
-                                verification code.
-                            </span>
-                        </li>
+                        </div>
 
-                        <li>
-                            <span>✓</span>
-                            <span>
-                                Report unfamiliar activity to
-                                support.
-                            </span>
-                        </li>
-
-                    </ul>
-
-                </div>
-
-
-
-                <div class="side-card">
-
-                    <div class="side-icon">
-                        ↕
                     </div>
 
-                    <h2>
-                        Transaction history
-                    </h2>
 
-                    <p>
-                        Review previous transaction activity
-                        from your dashboard.
-                    </p>
+                    <div class="info-item">
 
+                        <span class="info-number">
+                            3
+                        </span>
 
-                    <a
-                        href="./transactions.html"
-                        class="recent-link"
-                    >
-                        View transactions →
-                    </a>
+                        <div>
 
-                </div>
+                            <strong>
+                                Review amount
+                            </strong>
 
+                            <span>
+                                Confirm the transfer amount
+                                before submitting.
+                            </span>
 
+                        </div>
 
-                <div class="side-card">
-
-                    <div class="side-icon">
-                        ?
                     </div>
 
-                    <h2>
-                        Need help?
-                    </h2>
 
-                    <p>
-                        Contact the Global TrustFund support
-                        team if you have questions about a
-                        transfer request.
-                    </p>
+                    <div class="info-item">
 
+                        <span class="info-number">
+                            4
+                        </span>
 
-                    <a
-                        href="./support.html"
-                        class="recent-link"
-                    >
-                        Contact support →
-                    </a>
+                        <div>
+
+                            <strong>
+                                Submit request
+                            </strong>
+
+                            <span>
+                                The request is sent to the
+                                configured banking API.
+                            </span>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -963,14 +914,13 @@
     </main>
 
 
-
     <!-- =====================================================
          FOOTER
          ===================================================== -->
 
-    <footer class="site-footer">
+    <footer class="dashboard-footer">
 
-        <div class="container footer-bottom">
+        <div class="dashboard-footer-inner">
 
             <span>
                 ©
@@ -987,26 +937,19 @@
 
     </footer>
 
-
 </div>
 
 
-
 <!-- =====================================================
-     SCRIPTS
+     EXISTING APPLICATION SCRIPTS
      ===================================================== -->
 
 <script src="../js/app.js"></script>
-
 <script src="../js/supabase.js"></script>
-
 <script src="../js/auth.js"></script>
 
 
 <script>
-
-    let availableAccounts = [];
-
 
     document.addEventListener(
         "DOMContentLoaded",
@@ -1017,11 +960,6 @@
             ).textContent =
                 new Date().getFullYear();
 
-
-            /*
-             * Require an authenticated session when
-             * the existing auth layer is available.
-             */
 
             try {
 
@@ -1037,61 +975,32 @@
             } catch (error) {
 
                 console.warn(
-                    "Authentication guard unavailable.",
+                    "Authentication guard:",
                     error
                 );
 
             }
 
 
-            /*
-             * Load accounts from the existing application
-             * data layer if available.
-             */
-
-            try {
-
-                if (
-                    typeof window.getUserAccounts ===
-                    "function"
-                ) {
-
-                    const result =
-                        await window.getUserAccounts();
+            await loadAccounts();
 
 
-                    if (Array.isArray(result)) {
-
-                        availableAccounts =
-                            result;
-
-                    }
-
-                }
-
-            } catch (error) {
-
-                console.warn(
-                    "Unable to load accounts.",
-                    error
-                );
-
-            }
-
-
-            populateAccounts(
-                availableAccounts
+            document.getElementById(
+                "transferForm"
+            ).addEventListener(
+                "submit",
+                submitTransfer
             );
-
-
-            setupTransferForm();
 
         }
     );
 
 
+    /* =====================================================
+       LOAD ACCOUNTS
+       ===================================================== */
 
-    function populateAccounts(accounts) {
+    async function loadAccounts() {
 
         const select =
             document.getElementById(
@@ -1099,133 +1008,131 @@
             );
 
 
-        if (!select) {
-            return;
-        }
+        try {
+
+            const response =
+                await fetch(
+                    "../api/users/accounts",
+                    {
+                        method: "GET",
+                        credentials: "include",
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
 
 
-        accounts.forEach(
-            function (account) {
+            if (!response.ok) {
 
-                const option =
-                    document.createElement(
-                        "option"
+                throw new Error(
+                    "Accounts API returned " +
+                    response.status
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            const accounts =
+                Array.isArray(result)
+                    ? result
+                    : Array.isArray(
+                        result?.accounts
+                    )
+                        ? result.accounts
+                        : Array.isArray(
+                            result?.data
+                        )
+                            ? result.data
+                            : [];
+
+
+            accounts.forEach(
+                function (account) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        account.id ||
+                        account.account_id ||
+                        account.account_number;
+
+
+                    const name =
+                        account.name ||
+                        account.account_name ||
+                        account.account_type ||
+                        "Account";
+
+
+                    const number =
+                        account.account_number ||
+                        "Pending";
+
+
+                    option.textContent =
+                        name +
+                        " • " +
+                        number;
+
+
+                    select.appendChild(
+                        option
                     );
 
-
-                const accountId =
-                    account.id ||
-                    account.account_id ||
-                    account.account_number ||
-                    "";
-
-
-                const accountName =
-                    account.account_name ||
-                    account.name ||
-                    account.account_type ||
-                    "Bank Account";
-
-
-                const accountNumber =
-                    account.account_number ||
-                    "";
-
-
-                option.value =
-                    accountId;
-
-
-                option.textContent =
-                    accountNumber
-                        ? `${accountName} • ${accountNumber}`
-                        : accountName;
-
-
-                select.appendChild(option);
-
-            }
-        );
-
-    }
-
-
-
-    function formatCurrency(value) {
-
-        return new Intl.NumberFormat(
-            "en-NG",
-            {
-                style: "currency",
-                currency: "NGN",
-                minimumFractionDigits: 2
-            }
-        ).format(
-            Number(value) || 0
-        );
-
-    }
-
-
-
-    function showStatus(
-        message,
-        type
-    ) {
-
-        const status =
-            document.getElementById(
-                "transferStatus"
+                }
             );
 
 
-        if (!status) {
-            return;
+        } catch (error) {
+
+            console.warn(
+                "Unable to load accounts:",
+                error
+            );
+
+            /*
+             * Do not create fake account balances.
+             * The account list remains empty until the
+             * backend supplies real authorized accounts.
+             */
+
         }
 
-
-        status.textContent =
-            message;
-
-
-        status.className =
-            "status-message " +
-            type;
-
     }
 
 
+    /* =====================================================
+       SUBMIT TRANSFER
+       ===================================================== */
 
-    function updateSummary() {
+    async function submitTransfer(
+        event
+    ) {
 
-        const recipient =
+        event.preventDefault();
+
+
+        const status =
             document.getElementById(
-                "recipientName"
-            ).value.trim();
+                "formStatus"
+            );
 
 
-        const amount =
+        const button =
             document.getElementById(
-                "transferAmount"
-            ).value;
+                "transferButton"
+            );
 
-
-        document.getElementById(
-            "summaryRecipient"
-        ).textContent =
-            recipient || "—";
-
-
-        document.getElementById(
-            "summaryAmount"
-        ).textContent =
-            formatCurrency(amount);
-
-    }
-
-
-
-    function setupTransferForm() {
 
         const form =
             document.getElementById(
@@ -1233,278 +1140,244 @@
             );
 
 
+        const fromAccount =
+            document.getElementById(
+                "fromAccount"
+            ).value;
+
+
         const recipient =
             document.getElementById(
-                "recipientName"
-            );
+                "recipient"
+            ).value.trim();
+
+
+        const recipientAccount =
+            document.getElementById(
+                "recipientAccount"
+            ).value.trim();
 
 
         const amount =
+            Number(
+                document.getElementById(
+                    "amount"
+                ).value
+            );
+
+
+        const transferType =
             document.getElementById(
-                "transferAmount"
+                "transferType"
+            ).value;
+
+
+        const note =
+            document.getElementById(
+                "note"
+            ).value.trim();
+
+
+        clearStatus();
+
+
+        if (!fromAccount) {
+
+            showStatus(
+                "error",
+                "Please select the account to transfer from."
             );
 
-
-        if (recipient) {
-
-            recipient.addEventListener(
-                "input",
-                updateSummary
-            );
-
-        }
-
-
-        if (amount) {
-
-            amount.addEventListener(
-                "input",
-                updateSummary
-            );
-
-        }
-
-
-        if (!form) {
             return;
+
         }
 
 
-        form.addEventListener(
-            "submit",
-            async function (event) {
+        if (!recipient) {
 
-                event.preventDefault();
+            showStatus(
+                "error",
+                "Please enter the recipient name."
+            );
 
+            return;
 
-                const button =
-                    document.getElementById(
-                        "transferButton"
-                    );
-
-
-                const formData =
-                    new FormData(form);
+        }
 
 
-                const fromAccount =
-                    String(
-                        formData.get(
-                            "fromAccount"
-                        ) || ""
-                    ).trim();
+        if (!recipientAccount) {
+
+            showStatus(
+                "error",
+                "Please enter the recipient account number."
+            );
+
+            return;
+
+        }
 
 
-                const recipientName =
-                    String(
-                        formData.get(
-                            "recipientName"
-                        ) || ""
-                    ).trim();
+        if (
+            !Number.isFinite(amount) ||
+            amount <= 0
+        ) {
+
+            showStatus(
+                "error",
+                "Please enter a valid transfer amount."
+            );
+
+            return;
+
+        }
 
 
-                const recipientAccount =
-                    String(
-                        formData.get(
-                            "recipientAccount"
-                        ) || ""
-                    ).trim();
+        button.disabled = true;
+        button.textContent =
+            "Submitting...";
 
 
-                const recipientBank =
-                    String(
-                        formData.get(
-                            "recipientBank"
-                        ) || ""
-                    ).trim();
+        try {
 
+            const response =
+                await fetch(
+                    "../api/transactions",
+                    {
+                        method: "POST",
 
-                const amount =
-                    Number(
-                        formData.get(
-                            "transferAmount"
-                        )
-                    );
+                        credentials: "include",
 
+                        headers: {
+                            "Content-Type":
+                                "application/json",
 
-                if (!fromAccount) {
+                            "Accept":
+                                "application/json"
+                        },
 
-                    showStatus(
-                        "Please select the account to transfer from.",
-                        "error"
-                    );
+                        body: JSON.stringify({
 
-                    return;
-                }
+                            from_account:
+                                fromAccount,
 
+                            recipient:
+                                recipient,
 
-                if (!recipientName) {
+                            recipient_account:
+                                recipientAccount,
 
-                    showStatus(
-                        "Please enter the recipient name.",
-                        "error"
-                    );
+                            amount:
+                                amount,
 
-                    return;
-                }
+                            transfer_type:
+                                transferType,
 
+                            note:
+                                note
 
-                if (!recipientAccount) {
-
-                    showStatus(
-                        "Please enter the recipient account number.",
-                        "error"
-                    );
-
-                    return;
-                }
-
-
-                if (!recipientBank) {
-
-                    showStatus(
-                        "Please enter the recipient bank or institution.",
-                        "error"
-                    );
-
-                    return;
-                }
-
-
-                if (
-                    !Number.isFinite(amount) ||
-                    amount <= 0
-                ) {
-
-                    showStatus(
-                        "Please enter a valid transfer amount.",
-                        "error"
-                    );
-
-                    return;
-                }
-
-
-                /*
-                 * Important:
-                 *
-                 * Do not simulate a successful money transfer
-                 * in the browser. The request is only submitted
-                 * if the existing authenticated backend exposes
-                 * a transfer-request function.
-                 */
-
-                if (
-                    typeof window.createTransferRequest !==
-                    "function"
-                ) {
-
-                    showStatus(
-                        "Transfer service is not connected yet. The form is ready, but no authorized transfer API is currently available.",
-                        "error"
-                    );
-
-                    return;
-                }
-
-
-                button.disabled = true;
-                button.textContent =
-                    "Submitting...";
-
-
-                try {
-
-                    const transferData = {
-
-                        from_account_id:
-                            fromAccount,
-
-                        recipient_name:
-                            recipientName,
-
-                        recipient_account:
-                            recipientAccount,
-
-                        recipient_bank:
-                            recipientBank,
-
-                        amount:
-                            amount,
-
-                        reference:
-                            String(
-                                formData.get(
-                                    "transferReference"
-                                ) || ""
-                            ).trim(),
-
-                        note:
-                            String(
-                                formData.get(
-                                    "transferNote"
-                                ) || ""
-                            ).trim()
-
-                    };
-
-
-                    const result =
-                        await window.createTransferRequest(
-                            transferData
-                        );
-
-
-                    if (
-                        result &&
-                        result.success === false
-                    ) {
-
-                        throw new Error(
-                            result.error ||
-                            "Transfer request could not be submitted."
-                        );
+                        })
 
                     }
+                );
 
 
-                    showStatus(
-                        "Your transfer request has been submitted for authorization.",
-                        "success"
-                    );
+            let result = null;
 
 
-                    form.reset();
+            try {
 
-                    updateSummary();
+                result =
+                    await response.json();
 
+            } catch (_) {
 
-                } catch (error) {
-
-                    console.error(
-                        "Transfer request error:",
-                        error
-                    );
-
-
-                    showStatus(
-                        error.message ||
-                        "Unable to submit the transfer request.",
-                        "error"
-                    );
-
-                } finally {
-
-                    button.disabled =
-                        false;
-
-                    button.textContent =
-                        "Submit Transfer Request";
-
-                }
+                result = null;
 
             }
-        );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result?.error ||
+                    result?.message ||
+                    "The transfer request could not be submitted."
+                );
+
+            }
+
+
+            showStatus(
+                "success",
+                result?.message ||
+                "Transfer request submitted successfully."
+            );
+
+
+            form.reset();
+
+
+        } catch (error) {
+
+            console.error(
+                "Transfer error:",
+                error
+            );
+
+
+            showStatus(
+                "error",
+                error.message ||
+                "Unable to submit the transfer request."
+            );
+
+        } finally {
+
+            button.disabled = false;
+            button.textContent =
+                "Submit Transfer";
+
+        }
+
+    }
+
+
+    function showStatus(
+        type,
+        message
+    ) {
+
+        const status =
+            document.getElementById(
+                "formStatus"
+            );
+
+
+        status.className =
+            "form-status " +
+            type;
+
+
+        status.textContent =
+            message;
+
+    }
+
+
+    function clearStatus() {
+
+        const status =
+            document.getElementById(
+                "formStatus"
+            );
+
+
+        status.className =
+            "form-status";
+
+
+        status.textContent =
+            "";
 
     }
 
