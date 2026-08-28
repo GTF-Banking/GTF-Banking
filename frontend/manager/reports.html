@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports | Manager Portal | Global TrustFund</title>
+    <title>Staff Management | Manager Portal | Global TrustFund</title>
 
     <link rel="stylesheet" href="../css/styles.css">
 
@@ -15,15 +15,14 @@
         :root {
             --green: #0b5d3b;
             --dark: #073d28;
-            --gold: #c9962b;
             --bg: #f4f8f6;
-            --surface: #ffffff;
             --border: #dce7e1;
             --text: #18352a;
             --muted: #718078;
             --success: #19734b;
             --warning: #946b17;
             --danger: #a33f3f;
+            --info: #28658f;
         }
 
         body {
@@ -242,6 +241,34 @@
             color: var(--green);
         }
 
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .stat {
+            padding: 17px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 7px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            margin-top: 8px;
+            color: var(--dark);
+            font-size: 20px;
+            font-weight: 800;
+        }
+
         .filter-card,
         .card {
             margin-bottom: 18px;
@@ -256,7 +283,7 @@
 
         .filters {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
+            grid-template-columns: 2fr 1fr 1fr auto;
             gap: 10px;
             align-items: end;
         }
@@ -287,57 +314,6 @@
             border-color: var(--green);
         }
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .report-card {
-            padding: 19px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: #fff;
-        }
-
-        .report-icon {
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 9px;
-            background: #eaf7ef;
-            color: var(--green);
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        .report-card h3 {
-            margin: 14px 0 5px;
-            color: var(--dark);
-            font-size: 11px;
-        }
-
-        .report-card p {
-            min-height: 30px;
-            margin: 0 0 15px;
-            color: var(--muted);
-            font-size: 7px;
-            line-height: 1.5;
-        }
-
-        .report-action {
-            width: 100%;
-            height: 33px;
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            background: #fff;
-            color: var(--green);
-            font-size: 7px;
-            font-weight: 800;
-        }
-
         .card {
             overflow: hidden;
         }
@@ -357,34 +333,6 @@
             margin: 4px 0 0;
             color: var(--muted);
             font-size: 7px;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            padding: 17px;
-        }
-
-        .summary {
-            padding: 14px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: #f9fbfa;
-        }
-
-        .summary-label {
-            color: var(--muted);
-            font-size: 6px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .summary-value {
-            margin-top: 7px;
-            color: var(--dark);
-            font-size: 17px;
-            font-weight: 800;
         }
 
         .table-wrap {
@@ -409,35 +357,146 @@
             padding: 12px 11px;
             border-top: 1px solid var(--border);
             font-size: 7px;
+            vertical-align: middle;
         }
 
         td strong {
+            display: block;
             color: var(--dark);
         }
 
-        .empty {
+        td small {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 6px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 8px;
+            border-radius: 20px;
+            font-size: 6px;
+            font-weight: 800;
+        }
+
+        .active {
+            background: #eaf7ef;
+            color: var(--success);
+        }
+
+        .inactive {
+            background: #f1f3f2;
+            color: var(--muted);
+        }
+
+        .suspended {
+            background: #fceeee;
+            color: var(--danger);
+        }
+
+        .manager {
+            background: #eaf3fb;
+            color: var(--info);
+        }
+
+        .cashier {
+            background: #fff6dc;
+            color: var(--warning);
+        }
+
+        .actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .action {
+            min-height: 28px;
+            padding: 0 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--green);
+            font-size: 6px;
+            font-weight: 800;
+        }
+
+        .action.danger {
+            color: var(--danger);
+        }
+
+        .empty,
+        .loading {
             padding: 35px;
             text-align: center;
             color: var(--muted);
             font-size: 8px;
         }
 
-        .status {
-            display: inline-block;
-            padding: 5px 8px;
-            border-radius: 20px;
-            background: #eaf7ef;
-            color: var(--success);
-            font-size: 6px;
-            font-weight: 800;
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0,0,0,.45);
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(560px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 22px;
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 15px;
+        }
+
+        .close {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 13px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 20px;
         }
 
         @media (max-width: 1050px) {
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .summary-grid {
+            .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -470,10 +529,14 @@
         }
 
         @media (max-width: 550px) {
-            .cards,
-            .summary-grid,
-            .filters {
+            .stats,
+            .filters,
+            .form-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
             }
 
             .page-header {
@@ -540,7 +603,7 @@
                 Approvals
             </a>
 
-            <a href="./staff.html">
+            <a href="./staff.html" class="active">
                 <span class="nav-icon">♟</span>
                 Staff
             </a>
@@ -550,7 +613,7 @@
                 Compliance
             </a>
 
-            <a href="./reports.html" class="active">
+            <a href="./reports.html">
                 <span class="nav-icon">▤</span>
                 Reports
             </a>
@@ -592,11 +655,11 @@
             <div>
 
                 <h1>
-                    Reports
+                    Staff Management
                 </h1>
 
                 <p>
-                    Operational and branch performance reporting.
+                    Manage authorized branch staff and operational access.
                 </p>
 
             </div>
@@ -615,12 +678,12 @@
                 <div>
 
                     <h2>
-                        Management Reports
+                        Branch Staff
                     </h2>
 
                     <p>
-                        Generate reports for transactions,
-                        customers, accounts and branch operations.
+                        View staff assigned to your branch and manage
+                        permitted operational actions.
                     </p>
 
                 </div>
@@ -635,9 +698,82 @@
                         ↻ Refresh
                     </button>
 
+                    <button
+                        type="button"
+                        class="button primary"
+                        id="addStaffButton"
+                    >
+                        + Add Staff
+                    </button>
+
                 </div>
 
             </div>
+
+
+            <section class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Total Staff
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="totalStaff"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Active
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="activeStaff"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Managers
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="managerStaff"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Cashiers
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="cashierStaff"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </section>
 
 
             <section class="filter-card">
@@ -646,56 +782,68 @@
 
                     <div>
 
-                        <label for="startDate">
-                            Start Date
+                        <label for="search">
+                            Search Staff
                         </label>
 
                         <input
-                            type="date"
-                            id="startDate"
+                            type="search"
+                            id="search"
+                            placeholder="Name, email or employee ID..."
                         >
 
                     </div>
 
                     <div>
 
-                        <label for="endDate">
-                            End Date
+                        <label for="roleFilter">
+                            Role
                         </label>
 
-                        <input
-                            type="date"
-                            id="endDate"
-                        >
+                        <select id="roleFilter">
+
+                            <option value="">
+                                All Roles
+                            </option>
+
+                            <option value="manager">
+                                Manager
+                            </option>
+
+                            <option value="cashier">
+                                Cashier
+                            </option>
+
+                            <option value="staff">
+                                Staff
+                            </option>
+
+                        </select>
 
                     </div>
 
                     <div>
 
-                        <label for="reportType">
-                            Report Type
+                        <label for="statusFilter">
+                            Status
                         </label>
 
-                        <select id="reportType">
+                        <select id="statusFilter">
 
-                            <option value="summary">
-                                Branch Summary
+                            <option value="">
+                                All Statuses
                             </option>
 
-                            <option value="transactions">
-                                Transactions
+                            <option value="active">
+                                Active
                             </option>
 
-                            <option value="accounts">
-                                Accounts
+                            <option value="inactive">
+                                Inactive
                             </option>
 
-                            <option value="customers">
-                                Customers
-                            </option>
-
-                            <option value="compliance">
-                                Compliance
+                            <option value="suspended">
+                                Suspended
                             </option>
 
                         </select>
@@ -704,250 +852,11 @@
 
                     <button
                         type="button"
-                        class="button primary"
-                        id="generateButton"
+                        class="button secondary"
+                        id="clearFilters"
                     >
-                        Generate Report
+                        Clear
                     </button>
-
-                </div>
-
-            </section>
-
-
-            <section class="cards">
-
-                <article class="report-card">
-
-                    <div class="report-icon">
-                        ₦
-                    </div>
-
-                    <h3>
-                        Financial Summary
-                    </h3>
-
-                    <p>
-                        Review deposits, withdrawals,
-                        transfers and branch totals.
-                    </p>
-
-                    <button
-                        class="report-action"
-                        data-report="summary"
-                    >
-                        View Report
-                    </button>
-
-                </article>
-
-
-                <article class="report-card">
-
-                    <div class="report-icon">
-                        ⇄
-                    </div>
-
-                    <h3>
-                        Transaction Report
-                    </h3>
-
-                    <p>
-                        Review transaction volumes and
-                        operational activity.
-                    </p>
-
-                    <button
-                        class="report-action"
-                        data-report="transactions"
-                    >
-                        View Report
-                    </button>
-
-                </article>
-
-
-                <article class="report-card">
-
-                    <div class="report-icon">
-                        ♙
-                    </div>
-
-                    <h3>
-                        Customer Report
-                    </h3>
-
-                    <p>
-                        Review customer registrations,
-                        activity and account relationships.
-                    </p>
-
-                    <button
-                        class="report-action"
-                        data-report="customers"
-                    >
-                        View Report
-                    </button>
-
-                </article>
-
-
-                <article class="report-card">
-
-                    <div class="report-icon">
-                        ▣
-                    </div>
-
-                    <h3>
-                        Account Report
-                    </h3>
-
-                    <p>
-                        Review account openings,
-                        statuses and balances.
-                    </p>
-
-                    <button
-                        class="report-action"
-                        data-report="accounts"
-                    >
-                        View Report
-                    </button>
-
-                </article>
-
-
-                <article class="report-card">
-
-                    <div class="report-icon">
-                        !
-                    </div>
-
-                    <h3>
-                        Compliance Report
-                    </h3>
-
-                    <p>
-                        Review compliance cases,
-                        risk levels and escalations.
-                    </p>
-
-                    <button
-                        class="report-action"
-                        data-report="compliance"
-                    >
-                        View Report
-                    </button>
-
-                </article>
-
-
-                <article class="report-card">
-
-                    <div class="report-icon">
-                        ↓
-                    </div>
-
-                    <h3>
-                        Export Data
-                    </h3>
-
-                    <p>
-                        Export the currently generated
-                        report for authorized use.
-                    </p>
-
-                    <button
-                        class="report-action"
-                        id="exportButton"
-                    >
-                        Export CSV
-                    </button>
-
-                </article>
-
-            </section>
-
-
-            <section class="card">
-
-                <div class="card-header">
-
-                    <h3>
-                        Report Summary
-                    </h3>
-
-                    <p id="reportPeriod">
-                        Select a reporting period and generate a report.
-                    </p>
-
-                </div>
-
-
-                <div class="summary-grid">
-
-                    <div class="summary">
-
-                        <div class="summary-label">
-                            Total Transactions
-                        </div>
-
-                        <div
-                            class="summary-value"
-                            id="totalTransactions"
-                        >
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary">
-
-                        <div class="summary-label">
-                            Total Deposits
-                        </div>
-
-                        <div
-                            class="summary-value"
-                            id="totalDeposits"
-                        >
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary">
-
-                        <div class="summary-label">
-                            Total Withdrawals
-                        </div>
-
-                        <div
-                            class="summary-value"
-                            id="totalWithdrawals"
-                        >
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="summary">
-
-                        <div class="summary-label">
-                            Active Accounts
-                        </div>
-
-                        <div
-                            class="summary-value"
-                            id="activeAccounts"
-                        >
-                            —
-                        </div>
-
-                    </div>
 
                 </div>
 
@@ -959,15 +868,14 @@
                 <div class="card-header">
 
                     <h3>
-                        Recent Reports
+                        Staff Directory
                     </h3>
 
                     <p>
-                        Previously generated manager reports.
+                        Authorized employees associated with this branch.
                     </p>
 
                 </div>
-
 
                 <div class="table-wrap">
 
@@ -976,20 +884,21 @@
                         <thead>
 
                             <tr>
-                                <th>Report</th>
-                                <th>Period</th>
-                                <th>Generated By</th>
+                                <th>Employee</th>
+                                <th>Role</th>
+                                <th>Branch</th>
                                 <th>Status</th>
-                                <th>Created</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
                             </tr>
 
                         </thead>
 
-                        <tbody id="reportsTable">
+                        <tbody id="staffTable">
 
                             <tr>
-                                <td colspan="5" class="empty">
-                                    Loading reports...
+                                <td colspan="6" class="loading">
+                                    Loading staff...
                                 </td>
                             </tr>
 
@@ -1008,11 +917,175 @@
 </div>
 
 
+<!-- STAFF MODAL -->
+
+<div class="modal" id="staffModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h3 id="modalTitle">
+                Add Staff
+            </h3>
+
+            <button
+                type="button"
+                class="close"
+                id="closeModal"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="staffForm">
+
+            <input
+                type="hidden"
+                id="staffId"
+            >
+
+            <div class="form-grid">
+
+                <div>
+
+                    <label for="fullName">
+                        Full Name
+                    </label>
+
+                    <input
+                        id="fullName"
+                        required
+                        autocomplete="name"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        required
+                        autocomplete="email"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label for="employeeId">
+                        Employee ID
+                    </label>
+
+                    <input
+                        id="employeeId"
+                        required
+                    >
+
+                </div>
+
+                <div>
+
+                    <label for="role">
+                        Role
+                    </label>
+
+                    <select id="role" required>
+
+                        <option value="staff">
+                            Staff
+                        </option>
+
+                        <option value="cashier">
+                            Cashier
+                        </option>
+
+                        <option value="manager">
+                            Manager
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="status">
+                        Status
+                    </label>
+
+                    <select id="status">
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="inactive">
+                            Inactive
+                        </option>
+
+                        <option value="suspended">
+                            Suspended
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div>
+
+                    <label for="branch">
+                        Branch
+                    </label>
+
+                    <input
+                        id="branch"
+                        placeholder="Branch name or ID"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="button secondary"
+                    id="cancelButton"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="button primary"
+                >
+                    Save Staff
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
 <script>
 
     const API_BASE = "/api";
 
-    let currentReport = null;
+    let staffRecords = [];
 
 
     async function apiRequest(
@@ -1042,9 +1115,7 @@
 
                     body:
                         options.body
-                            ? JSON.stringify(
-                                options.body
-                            )
+                            ? JSON.stringify(options.body)
                             : undefined
                 }
             );
@@ -1090,8 +1161,12 @@
             return data;
         }
 
-        if (Array.isArray(data?.reports)) {
-            return data.reports;
+        if (Array.isArray(data?.staff)) {
+            return data.staff;
+        }
+
+        if (Array.isArray(data?.employees)) {
+            return data.employees;
         }
 
         if (Array.isArray(data?.data)) {
@@ -1103,14 +1178,22 @@
     }
 
 
-    function formatNumber(value) {
+    function roleClass(role) {
 
-        const number =
-            Number(value || 0);
+        return String(
+            role || "staff"
+        )
+            .toLowerCase();
 
-        return number.toLocaleString(
-            "en-NG"
-        );
+    }
+
+
+    function statusClass(status) {
+
+        return String(
+            status || "active"
+        )
+            .toLowerCase();
 
     }
 
@@ -1144,339 +1227,747 @@
     }
 
 
-    async function loadReports() {
+    async function loadStaff() {
 
         const table =
             document.getElementById(
-                "reportsTable"
+                "staffTable"
             );
+
+
+        table.innerHTML = `
+
+            <tr>
+                <td colspan="6" class="loading">
+                    Loading staff...
+                </td>
+            </tr>
+
+        `;
 
 
         try {
 
             const data =
                 await apiRequest(
-                    "/reports"
+                    "/staff"
                 );
 
 
-            const reports =
+            staffRecords =
                 getArray(data);
 
 
-            if (!reports.length) {
-
-                table.innerHTML = `
-
-                    <tr>
-
-                        <td
-                            colspan="5"
-                            class="empty"
-                        >
-                            No previously generated reports found.
-                        </td>
-
-                    </tr>
-
-                `;
-
-                return;
-
-            }
+            renderStaff(
+                staffRecords
+            );
 
 
-            table.innerHTML =
-                reports
-                    .map(
-                        report => `
-
-                            <tr>
-
-                                <td>
-                                    <strong>
-                                        ${escapeHtml(
-                                            report.name ||
-                                            report.report_type ||
-                                            report.type ||
-                                            "Management Report"
-                                        )}
-                                    </strong>
-                                </td>
-
-                                <td>
-                                    ${escapeHtml(
-                                        report.period ||
-                                        `${report.start_date || ""} - ${report.end_date || ""}`
-                                    )}
-                                </td>
-
-                                <td>
-                                    ${escapeHtml(
-                                        report.generated_by ||
-                                        report.generatedBy ||
-                                        "Manager"
-                                    )}
-                                </td>
-
-                                <td>
-                                    <span class="status">
-                                        ${escapeHtml(
-                                            report.status ||
-                                            "Generated"
-                                        )}
-                                    </span>
-                                </td>
-
-                                <td>
-                                    ${escapeHtml(
-                                        formatDate(
-                                            report.created_at ||
-                                            report.createdAt
-                                        )
-                                    )}
-                                </td>
-
-                            </tr>
-
-                        `
-                    )
-                    .join("");
+            updateStats(
+                staffRecords
+            );
 
         }
 
         catch (error) {
 
             console.error(
+                "Staff request failed:",
                 error
             );
+
+
+            staffRecords = [];
+
 
             table.innerHTML = `
 
                 <tr>
 
                     <td
-                        colspan="5"
+                        colspan="6"
                         class="empty"
                     >
-                        Report history is currently unavailable.
+                        Staff data is currently unavailable.
                     </td>
 
                 </tr>
 
             `;
 
+
+            updateStats([]);
+
         }
 
     }
 
 
-    async function generateReport(
-        type
+    function renderStaff(
+        records
     ) {
 
-        const start =
+        const table =
             document.getElementById(
-                "startDate"
-            ).value;
-
-
-        const end =
-            document.getElementById(
-                "endDate"
-            ).value;
-
-
-        const reportType =
-            type ||
-            document.getElementById(
-                "reportType"
-            ).value;
-
-
-        if (
-            start &&
-            end &&
-            start > end
-        ) {
-
-            alert(
-                "Start date cannot be after the end date."
+                "staffTable"
             );
+
+
+        if (!records.length) {
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        class="empty"
+                    >
+                        No staff members found.
+                    </td>
+
+                </tr>
+
+            `;
 
             return;
 
         }
 
 
-        const params =
-            new URLSearchParams();
+        table.innerHTML =
+            records.map(
+                staff => {
+
+                    const id =
+                        staff.id ||
+                        staff.staff_id ||
+                        staff.user_id ||
+                        "";
 
 
-        if (start) {
-            params.set(
-                "start_date",
-                start
-            );
-        }
+                    const name =
+                        staff.full_name ||
+                        staff.name ||
+                        "Unnamed Staff";
 
 
-        if (end) {
-            params.set(
-                "end_date",
-                end
-            );
-        }
+                    const email =
+                        staff.email ||
+                        "";
 
 
-        params.set(
-            "type",
-            reportType
-        );
+                    const employeeId =
+                        staff.employee_id ||
+                        staff.employeeId ||
+                        "";
 
 
-        try {
-
-            const data =
-                await apiRequest(
-                    `/reports/summary?${params.toString()}`
-                );
+                    const role =
+                        staff.role ||
+                        "staff";
 
 
-            currentReport =
-                data.report ||
-                data.data ||
-                data;
+                    const status =
+                        staff.status ||
+                        "active";
 
 
-            const report =
-                currentReport || {};
+                    const branch =
+                        staff.branch_name ||
+                        staff.branch ||
+                        staff.branch_id ||
+                        "—";
 
 
-            document.getElementById(
-                "totalTransactions"
-            ).textContent =
-                formatNumber(
-                    report.total_transactions ||
-                    report.totalTransactions
-                );
+                    const lastLogin =
+                        staff.last_login ||
+                        staff.lastLogin;
 
 
-            document.getElementById(
-                "totalDeposits"
-            ).textContent =
-                formatNumber(
-                    report.total_deposits ||
-                    report.totalDeposits
-                );
+                    return `
 
+                        <tr>
 
-            document.getElementById(
-                "totalWithdrawals"
-            ).textContent =
-                formatNumber(
-                    report.total_withdrawals ||
-                    report.totalWithdrawals
-                );
+                            <td>
 
+                                <strong>
+                                    ${escapeHtml(name)}
+                                </strong>
 
-            document.getElementById(
-                "activeAccounts"
-            ).textContent =
-                formatNumber(
-                    report.active_accounts ||
-                    report.activeAccounts
-                );
+                                <small>
+                                    ${escapeHtml(email)}
+                                    ${
+                                        employeeId
+                                            ? " • " +
+                                              escapeHtml(employeeId)
+                                            : ""
+                                    }
+                                </small>
 
+                            </td>
 
-            document.getElementById(
-                "reportPeriod"
-            ).textContent =
-                start || end
-                    ? `Reporting period: ${start || "Beginning"} to ${end || "Present"}`
-                    : "Current reporting period";
+                            <td>
 
+                                <span
+                                    class="badge ${roleClass(role)}"
+                                >
+                                    ${escapeHtml(role)}
+                                </span>
 
-        }
+                            </td>
 
-        catch (error) {
+                            <td>
+                                ${escapeHtml(branch)}
+                            </td>
 
-            console.error(
-                error
-            );
+                            <td>
 
+                                <span
+                                    class="badge ${statusClass(status)}"
+                                >
+                                    ${escapeHtml(status)}
+                                </span>
 
-            alert(
-                error.message ||
-                "Unable to generate report."
-            );
+                            </td>
 
-        }
+                            <td>
+                                ${escapeHtml(
+                                    formatDate(lastLogin)
+                                )}
+                            </td>
+
+                            <td>
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="action"
+                                        data-action="edit"
+                                        data-id="${escapeHtml(id)}"
+                                    >
+                                        Edit
+                                    </button>
+
+                                    ${
+                                        String(status)
+                                            .toLowerCase() ===
+                                        "active"
+                                            ? `
+                                                <button
+                                                    type="button"
+                                                    class="action danger"
+                                                    data-action="suspend"
+                                                    data-id="${escapeHtml(id)}"
+                                                >
+                                                    Suspend
+                                                </button>
+                                              `
+                                            : `
+                                                <button
+                                                    type="button"
+                                                    class="action"
+                                                    data-action="activate"
+                                                    data-id="${escapeHtml(id)}"
+                                                >
+                                                    Activate
+                                                </button>
+                                              `
+                                    }
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            ).join("");
 
     }
 
 
-    document.querySelectorAll(
-        "[data-report]"
-    ).forEach(
-        button => {
+    function updateStats(
+        records
+    ) {
 
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const type =
-                        button.dataset.report;
+        document.getElementById(
+            "totalStaff"
+        ).textContent =
+            records.length;
 
 
-                    document.getElementById(
-                        "reportType"
-                    ).value =
-                        type;
+        document.getElementById(
+            "activeStaff"
+        ).textContent =
+            records.filter(
+                item =>
+                    String(
+                        item.status || ""
+                    ).toLowerCase() ===
+                    "active"
+            ).length;
 
 
-                    generateReport(
-                        type
+        document.getElementById(
+            "managerStaff"
+        ).textContent =
+            records.filter(
+                item =>
+                    String(
+                        item.role || ""
+                    ).toLowerCase() ===
+                    "manager"
+            ).length;
+
+
+        document.getElementById(
+            "cashierStaff"
+        ).textContent =
+            records.filter(
+                item =>
+                    String(
+                        item.role || ""
+                    ).toLowerCase() ===
+                    "cashier"
+            ).length;
+
+    }
+
+
+    function applyFilters() {
+
+        const search =
+            document.getElementById(
+                "search"
+            ).value
+             .trim()
+             .toLowerCase();
+
+
+        const role =
+            document.getElementById(
+                "roleFilter"
+            ).value
+             .toLowerCase();
+
+
+        const status =
+            document.getElementById(
+                "statusFilter"
+            ).value
+             .toLowerCase();
+
+
+        const filtered =
+            staffRecords.filter(
+                staff => {
+
+                    const name =
+                        String(
+                            staff.full_name ||
+                            staff.name ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const email =
+                        String(
+                            staff.email ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const employeeId =
+                        String(
+                            staff.employee_id ||
+                            staff.employeeId ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const itemRole =
+                        String(
+                            staff.role ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const itemStatus =
+                        String(
+                            staff.status ||
+                            ""
+                        ).toLowerCase();
+
+
+                    return (
+
+                        (
+                            !search ||
+                            name.includes(search) ||
+                            email.includes(search) ||
+                            employeeId.includes(search)
+                        )
+
+                        &&
+
+                        (
+                            !role ||
+                            itemRole === role
+                        )
+
+                        &&
+
+                        (
+                            !status ||
+                            itemStatus === status
+                        )
+
                     );
 
                 }
             );
 
-        }
-    );
+
+        renderStaff(
+            filtered
+        );
+
+    }
 
 
     document.getElementById(
-        "generateButton"
+        "search"
     ).addEventListener(
-        "click",
-        () => generateReport()
+        "input",
+        applyFilters
     );
 
 
     document.getElementById(
-        "refreshButton"
+        "roleFilter"
+    ).addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    document.getElementById(
+        "statusFilter"
+    ).addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    document.getElementById(
+        "clearFilters"
     ).addEventListener(
         "click",
         () => {
 
-            loadReports();
-            generateReport();
+            document.getElementById(
+                "search"
+            ).value = "";
+
+            document.getElementById(
+                "roleFilter"
+            ).value = "";
+
+            document.getElementById(
+                "statusFilter"
+            ).value = "";
+
+            renderStaff(
+                staffRecords
+            );
+
+        }
+    );
+
+
+    /* MODAL */
+
+    const modal =
+        document.getElementById(
+            "staffModal"
+        );
+
+
+    function openModal(
+        staff = null
+    ) {
+
+        document.getElementById(
+            "staffForm"
+        ).reset();
+
+
+        document.getElementById(
+            "staffId"
+        ).value =
+            staff?.id ||
+            staff?.staff_id ||
+            "";
+
+
+        document.getElementById(
+            "modalTitle"
+        ).textContent =
+            staff
+                ? "Edit Staff"
+                : "Add Staff";
+
+
+        if (staff) {
+
+            document.getElementById(
+                "fullName"
+            ).value =
+                staff.full_name ||
+                staff.name ||
+                "";
+
+
+            document.getElementById(
+                "email"
+            ).value =
+                staff.email ||
+                "";
+
+
+            document.getElementById(
+                "employeeId"
+            ).value =
+                staff.employee_id ||
+                staff.employeeId ||
+                "";
+
+
+            document.getElementById(
+                "role"
+            ).value =
+                staff.role ||
+                "staff";
+
+
+            document.getElementById(
+                "status"
+            ).value =
+                staff.status ||
+                "active";
+
+
+            document.getElementById(
+                "branch"
+            ).value =
+                staff.branch_name ||
+                staff.branch ||
+                staff.branch_id ||
+                "";
+
+        }
+
+
+        modal.classList.add(
+            "open"
+        );
+
+    }
+
+
+    function closeModal() {
+
+        modal.classList.remove(
+            "open"
+        );
+
+    }
+
+
+    document.getElementById(
+        "addStaffButton"
+    ).addEventListener(
+        "click",
+        () => openModal()
+    );
+
+
+    document.getElementById(
+        "closeModal"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "cancelButton"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                modal
+            ) {
+                closeModal();
+            }
 
         }
     );
 
 
     document.getElementById(
-        "exportButton"
+        "staffForm"
     ).addEventListener(
-        "click",
-        async () => {
+        "submit",
+        async event => {
 
-            if (!currentReport) {
+            event.preventDefault();
+
+
+            const id =
+                document.getElementById(
+                    "staffId"
+                ).value;
+
+
+            const body = {
+
+                full_name:
+                    document.getElementById(
+                        "fullName"
+                    ).value.trim(),
+
+                email:
+                    document.getElementById(
+                        "email"
+                    ).value.trim(),
+
+                employee_id:
+                    document.getElementById(
+                        "employeeId"
+                    ).value.trim(),
+
+                role:
+                    document.getElementById(
+                        "role"
+                    ).value,
+
+                status:
+                    document.getElementById(
+                        "status"
+                    ).value,
+
+                branch:
+                    document.getElementById(
+                        "branch"
+                    ).value.trim()
+
+            };
+
+
+            try {
+
+                await apiRequest(
+                    id
+                        ? `/staff/${encodeURIComponent(id)}`
+                        : "/staff",
+                    {
+                        method:
+                            id
+                                ? "PATCH"
+                                : "POST",
+
+                        body
+                    }
+                );
+
+
+                closeModal();
+
+                await loadStaff();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
 
                 alert(
-                    "Generate a report before exporting."
+                    error.message ||
+                    "Unable to save staff member."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* STAFF ACTIONS */
+
+    document.getElementById(
+        "staffTable"
+    ).addEventListener(
+        "click",
+        async event => {
+
+            const button =
+                event.target.closest(
+                    "button[data-action]"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            const id =
+                button.dataset.id;
+
+
+            const staff =
+                staffRecords.find(
+                    item =>
+                        String(
+                            item.id ||
+                            item.staff_id ||
+                            item.user_id
+                        ) ===
+                        String(id)
+                );
+
+
+            if (!staff) {
+                return;
+            }
+
+
+            const action =
+                button.dataset.action;
+
+
+            if (
+                action === "edit"
+            ) {
+
+                openModal(
+                    staff
                 );
 
                 return;
@@ -1484,106 +1975,76 @@
             }
 
 
-            const rows = [
-                [
-                    "Metric",
-                    "Value"
-                ],
+            if (
+                action === "suspend" ||
+                action === "activate"
+            ) {
 
-                [
-                    "Total Transactions",
-                    currentReport.total_transactions ||
-                    currentReport.totalTransactions ||
-                    0
-                ],
-
-                [
-                    "Total Deposits",
-                    currentReport.total_deposits ||
-                    currentReport.totalDeposits ||
-                    0
-                ],
-
-                [
-                    "Total Withdrawals",
-                    currentReport.total_withdrawals ||
-                    currentReport.totalWithdrawals ||
-                    0
-                ],
-
-                [
-                    "Active Accounts",
-                    currentReport.active_accounts ||
-                    currentReport.activeAccounts ||
-                    0
-                ]
-            ];
+                const nextStatus =
+                    action === "suspend"
+                        ? "suspended"
+                        : "active";
 
 
-            const csv =
-                rows
-                    .map(
-                        row =>
-                            row
-                                .map(
-                                    value =>
-                                        `"${String(value)
-                                            .replace(
-                                                /"/g,
-                                                '""'
-                                            )}"`
-                                )
-                                .join(",")
+                if (
+                    !window.confirm(
+                        `Change this staff member's status to ${nextStatus}?`
                     )
-                    .join("\n");
+                ) {
+                    return;
+                }
 
 
-            const blob =
-                new Blob(
-                    [csv],
-                    {
-                        type:
-                            "text/csv;charset=utf-8;"
-                    }
-                );
+                try {
+
+                    await apiRequest(
+                        `/staff/${encodeURIComponent(id)}`,
+                        {
+                            method: "PATCH",
+
+                            body: {
+                                status:
+                                    nextStatus
+                            }
+                        }
+                    );
 
 
-            const url =
-                URL.createObjectURL(
-                    blob
-                );
+                    await loadStaff();
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        error
+                    );
 
 
-            const link =
-                document.createElement(
-                    "a"
-                );
+                    alert(
+                        error.message ||
+                        "Unable to update staff status."
+                    );
 
+                }
 
-            link.href = url;
-
-            link.download =
-                `gtf-manager-report-${new Date()
-                    .toISOString()
-                    .slice(0,10)}.csv`;
-
-
-            document.body.appendChild(
-                link
-            );
-
-            link.click();
-
-            link.remove();
-
-
-            URL.revokeObjectURL(
-                url
-            );
+            }
 
         }
     );
 
+
+    /* REFRESH */
+
+    document.getElementById(
+        "refreshButton"
+    ).addEventListener(
+        "click",
+        loadStaff
+    );
+
+
+    /* PROFILE */
 
     try {
 
@@ -1615,6 +2076,8 @@
         /* Ignore invalid profile data. */
     }
 
+
+    /* LOGOUT */
 
     document.getElementById(
         "logoutButton"
@@ -1670,7 +2133,7 @@
     );
 
 
-    loadReports();
+    loadStaff();
 
 </script>
 
