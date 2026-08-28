@@ -1,2326 +1,1099 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Security | GTF Banking</title>
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="Learn how GTF Banking protects your account, personal information and digital banking activity."
-  >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="description"
+        content="Global TrustFund security center with information about protecting your digital banking account."
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <title>
+        Security | Global TrustFund
+    </title>
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-white: #fff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #dce4eb;
-      --gtf-success: #247a50;
-      --gtf-shadow: 0 10px 30px rgba(11, 42, 74, .08);
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    .security-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-      box-shadow: 0 2px 12px rgba(11, 42, 74, .05);
-    }
-
-    .security-nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .security-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .security-brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .security-brand-text strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .security-brand-text span {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .security-main-nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .security-main-nav a {
-      position: relative;
-      padding: 26px 0;
-
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .security-main-nav a:hover,
-    .security-main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .security-main-nav a.active::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .security-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .security-action {
-      min-height: 35px;
-      padding: 7px 13px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .security-login {
-      border: 1px solid var(--gtf-blue);
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .security-open {
-      border: 1px solid var(--gtf-blue);
-      background: var(--gtf-blue);
-      color: #fff;
-    }
-
-    .security-open:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .security-mobile-toggle {
-      display: none;
-
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      cursor: pointer;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .security-hero {
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-    }
-
-    .security-hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 410px;
-      margin: auto;
-
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 55px;
-
-      padding: 65px 0;
-    }
-
-    .security-eyebrow {
-      margin: 0 0 10px;
-
-      color: #d9b866;
-      font-size: .61rem;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .security-hero h1 {
-      max-width: 650px;
-      margin: 0;
-
-      color: #fff;
-      font-size: clamp(2.05rem, 5vw, 3.45rem);
-      line-height: 1.06;
-    }
-
-    .security-hero-copy {
-      max-width: 610px;
-      margin: 18px 0 0;
-
-      color: #dbe7f1;
-      font-size: .69rem;
-    }
-
-    .security-hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    .security-hero-button {
-      min-height: 42px;
-      padding: 10px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #fff;
-      border-radius: 5px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .security-hero-button.secondary {
-      background: transparent;
-      color: #fff;
-    }
-
-    /* =========================
-       SECURITY SHIELD
-    ========================== */
-
-    .security-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .security-shield-card {
-      width: min(360px, 100%);
-      padding: 30px;
-
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 13px;
-
-      background: rgba(255,255,255,.09);
-      box-shadow: 0 20px 45px rgba(0,0,0,.14);
-
-      backdrop-filter: blur(10px);
-      text-align: center;
-    }
-
-    .security-shield {
-      width: 90px;
-      height: 105px;
-      margin: 0 auto 18px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      clip-path: polygon(
-        50% 0,
-        92% 14%,
-        86% 64%,
-        50% 100%,
-        14% 64%,
-        8% 14%
-      );
-
-      background: rgba(255,255,255,.95);
-      color: var(--gtf-blue);
-
-      font-size: 2rem;
-      font-weight: 700;
-    }
-
-    .security-shield-card h2 {
-      margin: 0;
-
-      color: #fff;
-      font-size: 1.05rem;
-    }
-
-    .security-shield-card p {
-      margin: 8px 0 0;
-
-      color: #c8dbe8;
-      font-size: .56rem;
-    }
-
-    /* =========================
-       TRUST STRIP
-    ========================== */
-
-    .security-trust {
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-    }
-
-    .security-trust-inner {
-      width: min(1100px, calc(100% - 32px));
-      min-height: 76px;
-      margin: auto;
-
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: center;
-      gap: 20px;
-    }
-
-    .security-trust-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .security-trust-icon {
-      width: 27px;
-      height: 27px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #eaf3fa;
-      color: var(--gtf-blue);
-
-      font-size: .7rem;
-    }
-
-    /* =========================
-       SECTIONS
-    ========================== */
-
-    .security-section {
-      padding: 70px 0;
-    }
-
-    .security-container {
-      width: min(1100px, calc(100% - 32px));
-      margin: auto;
-    }
-
-    .security-section-heading {
-      max-width: 700px;
-      margin: 0 auto 35px;
-      text-align: center;
-    }
-
-    .security-section-heading span {
-      display: block;
-      margin-bottom: 7px;
-
-      color: var(--gtf-blue);
-      font-size: .58rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .security-section-heading h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      line-height: 1.2;
-    }
-
-    .security-section-heading p {
-      margin: 11px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .61rem;
-    }
-
-    /* =========================
-       SECURITY LAYERS
-    ========================== */
-
-    .security-layers {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-
-    .security-layer {
-      padding: 26px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .security-layer-icon {
-      width: 45px;
-      height: 45px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: 17px;
-
-      border-radius: 8px;
-
-      background: #eaf3fa;
-      color: var(--gtf-blue);
-
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .security-layer h3 {
-      margin: 0 0 8px;
-
-      color: var(--gtf-navy);
-      font-size: .88rem;
-    }
-
-    .security-layer p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    /* =========================
-       ACCOUNT SECURITY
-    ========================== */
-
-    .security-account-section {
-      background: #fff;
-    }
-
-    .security-account-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .security-account-copy span {
-      color: var(--gtf-blue);
-      font-size: .57rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .security-account-copy h2 {
-      margin: 8px 0 12px;
-
-      color: var(--gtf-navy);
-      font-size: 1.75rem;
-      line-height: 1.2;
-    }
-
-    .security-account-copy p {
-      margin: 0 0 15px;
-
-      color: var(--gtf-muted);
-      font-size: .6rem;
-    }
-
-    .security-check-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .security-check-list li {
-      position: relative;
-
-      margin-bottom: 10px;
-      padding-left: 21px;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .security-check-list li::before {
-      content: "✓";
-
-      position: absolute;
-      left: 0;
-
-      color: var(--gtf-success);
-      font-weight: 700;
-    }
-
-    /* =========================
-       SECURITY CHECK PANEL
-    ========================== */
-
-    .security-check-panel {
-      padding: 27px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      background: #fbfcfd;
-    }
-
-    .security-check-panel h3 {
-      margin: 0 0 20px;
-
-      color: var(--gtf-navy);
-      font-size: .82rem;
-    }
-
-    .security-status {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-
-      padding: 13px 14px;
-      margin-bottom: 9px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .security-status-dot {
-      width: 9px;
-      height: 9px;
-
-      flex: 0 0 auto;
-
-      border-radius: 50%;
-      background: var(--gtf-success);
-    }
-
-    .security-status strong {
-      display: block;
-
-      color: var(--gtf-navy);
-      font-size: .56rem;
-    }
-
-    .security-status span {
-      display: block;
-
-      color: var(--gtf-muted);
-      font-size: .48rem;
-    }
-
-    /* =========================
-       USER SAFETY
-    ========================== */
-
-    .security-tips {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .security-tip {
-      padding: 22px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fff;
-    }
-
-    .security-tip-number {
-      width: 29px;
-      height: 29px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: 12px;
-
-      border-radius: 50%;
-
-      background: var(--gtf-navy);
-      color: #fff;
-
-      font-size: .54rem;
-      font-weight: 700;
-    }
-
-    .security-tip h3 {
-      margin: 0 0 6px;
-
-      color: var(--gtf-navy);
-      font-size: .66rem;
-    }
-
-    .security-tip p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .54rem;
-    }
-
-    /* =========================
-       ALERT PANEL
-    ========================== */
-
-    .security-alert {
-      padding: 25px;
-
-      border-left: 4px solid var(--gtf-gold);
-      border-radius: 7px;
-
-      background: #fffaf0;
-    }
-
-    .security-alert h3 {
-      margin: 0 0 7px;
-
-      color: var(--gtf-navy);
-      font-size: .78rem;
-    }
-
-    .security-alert p {
-      margin: 0;
-
-      color: #637281;
-      font-size: .56rem;
-    }
-
-    /* =========================
-       FAQ
-    ========================== */
-
-    .security-faq {
-      max-width: 850px;
-      margin: auto;
-    }
-
-    .security-faq-item {
-      margin-bottom: 9px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .security-faq-question {
-      width: 100%;
-
-      padding: 16px 18px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      border: 0;
-      background: transparent;
-
-      color: var(--gtf-navy);
-
-      text-align: left;
-      font-size: .59rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .security-faq-symbol {
-      color: var(--gtf-blue);
-      font-size: .9rem;
-    }
-
-    .security-faq-answer {
-      display: none;
-
-      padding: 0 18px 16px;
-
-      color: var(--gtf-muted);
-      font-size: .55rem;
-    }
-
-    .security-faq-item.open .security-faq-answer {
-      display: block;
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .security-cta {
-      padding: 55px 0;
-
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-    }
-
-    .security-cta-inner {
-      width: min(900px, calc(100% - 32px));
-      margin: auto;
-      text-align: center;
-    }
-
-    .security-cta h2 {
-      margin: 0;
-
-      color: #fff;
-      font-size: 1.65rem;
-    }
-
-    .security-cta p {
-      max-width: 630px;
-      margin: 10px auto 20px;
-
-      color: #dbe7f1;
-      font-size: .59rem;
-    }
-
-    .security-cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .security-cta-button {
-      min-height: 40px;
-      padding: 10px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #fff;
-      border-radius: 5px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      font-size: .57rem;
-      font-weight: 700;
-    }
-
-    .security-cta-button.secondary {
-      background: transparent;
-      color: #fff;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    .security-footer {
-      padding: 40px 0 22px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .security-footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: auto;
-    }
-
-    .security-footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 35px;
-
-      padding-bottom: 28px;
-    }
-
-    .security-footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .security-footer-brand img {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    .security-footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .security-footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .security-footer-description {
-      max-width: 290px;
-      margin: 13px 0 0;
-
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .security-footer-column h3 {
-      margin: 0 0 10px;
-      font-size: .61rem;
-    }
-
-    .security-footer-column a {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #aebfcd;
-      font-size: .55rem;
-    }
-
-    .security-footer-column a:hover {
-      color: #fff;
-    }
-
-    .security-footer-bottom {
-      padding-top: 17px;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .5rem;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1100px) {
-
-      .security-main-nav,
-      .security-actions {
-        display: none;
-      }
-
-      .security-mobile-toggle {
-        display: block;
-      }
-
-      .security-nav.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .security-nav.mobile-open
-      .security-main-nav {
-        display: flex;
-
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-        padding-bottom: 15px;
-      }
-
-      .security-nav.mobile-open
-      .security-main-nav a {
-        padding: 9px 0;
-      }
-
-      .security-nav.mobile-open
-      .security-main-nav
-      a.active::after {
-        display: none;
-      }
-    }
-
-    @media (max-width: 900px) {
-
-      .security-hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .security-visual {
-        justify-content: flex-start;
-      }
-
-      .security-layers {
-        grid-template-columns: 1fr;
-      }
-
-      .security-account-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-
-      .security-trust-inner {
-        grid-template-columns: 1fr;
-        padding: 18px 0;
-      }
-
-      .security-tips {
-        grid-template-columns: 1fr;
-      }
-
-      .security-footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .security-footer-bottom {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 500px) {
-
-      .security-hero-inner {
-        padding: 50px 0;
-      }
-
-      .security-section {
-        padding: 50px 0;
-      }
-
-      .security-layer,
-      .security-check-panel {
-        padding: 21px;
-      }
-
-      .security-footer-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-  <!-- =================================
-       HEADER
-  ================================== -->
 
-  <header class="security-header">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <div
-      id="securityNav"
-      class="security-nav"
-    >
+    <header class="site-header">
 
-      <a
-        href="../index.html"
-        class="security-brand"
-        aria-label="GTF Banking home"
-      >
+        <div class="container nav-container">
 
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
-
-        <span class="security-brand-text">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="security-main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="personal.html">
-          Personal
-        </a>
-
-        <a href="business.html">
-          Business
-        </a>
-
-        <a href="cards.html">
-          Cards
-        </a>
-
-        <a href="checking.html">
-          Checking
-        </a>
-
-        <a href="savings.html">
-          Savings
-        </a>
-
-        <a
-          href="security.html"
-          class="active"
-          aria-current="page"
-        >
-          Security
-        </a>
-
-        <a href="loans.html">
-          Loans
-        </a>
-
-        <a href="contact.html">
-          Contact
-        </a>
-
-      </nav>
-
-
-      <div class="security-actions">
-
-        <a
-          href="../login.html"
-          class="security-action security-login"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="security-action security-open"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="securityMobileToggle"
-        class="security-mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =================================
-       HERO
-  ================================== -->
-
-  <section class="security-hero">
-
-    <div class="security-hero-inner">
-
-      <div>
-
-        <p class="security-eyebrow">
-          Banking Security
-        </p>
-
-        <h1>
-          Your security is part of every banking experience.
-        </h1>
-
-        <p class="security-hero-copy">
-          GTF Banking is designed with security controls
-          throughout the digital banking experience. Learn
-          how account protection works and what you can do
-          to keep your information secure.
-        </p>
-
-
-        <div class="security-hero-actions">
-
-          <a
-            href="../login.html"
-            class="security-hero-button"
-          >
-            Sign In Securely
-          </a>
-
-          <a
-            href="#security-tips"
-            class="security-hero-button secondary"
-          >
-            Security Tips
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="security-visual">
-
-        <div class="security-shield-card">
-
-          <div class="security-shield">
-            ✓
-          </div>
-
-          <h2>
-            Security First
-          </h2>
-
-          <p>
-            Protecting access to your banking account is a
-            shared responsibility between GTF Banking and
-            you.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       TRUST STRIP
-  ================================== -->
-
-  <section class="security-trust">
-
-    <div class="security-trust-inner">
-
-      <div class="security-trust-item">
-
-        <span class="security-trust-icon">
-          ✓
-        </span>
-
-        <span>
-          Account protection
-        </span>
-
-      </div>
-
-
-      <div class="security-trust-item">
-
-        <span class="security-trust-icon">
-          #
-        </span>
-
-        <span>
-          Authentication controls
-        </span>
-
-      </div>
-
-
-      <div class="security-trust-item">
-
-        <span class="security-trust-icon">
-          !
-        </span>
-
-        <span>
-          Security awareness
-        </span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       SECURITY LAYERS
-  ================================== -->
-
-  <section class="security-section">
-
-    <div class="security-container">
-
-      <div class="security-section-heading">
-
-        <span>
-          Protection layers
-        </span>
-
-        <h2>
-          Security built into digital banking
-        </h2>
-
-        <p>
-          A secure banking environment uses multiple
-          controls rather than relying on a single layer of
-          protection.
-        </p>
-
-      </div>
-
-
-      <div class="security-layers">
-
-
-        <article class="security-layer">
-
-          <div class="security-layer-icon">
-            #
-          </div>
-
-          <h3>
-            Authentication
-          </h3>
-
-          <p>
-            Account authentication helps verify that the
-            person attempting to access an account is an
-            authorized user.
-          </p>
-
-        </article>
-
-
-        <article class="security-layer">
-
-          <div class="security-layer-icon">
-            ✓
-          </div>
-
-          <h3>
-            Access Controls
-          </h3>
-
-          <p>
-            Banking systems can use authorization and
-            role-based controls to limit access to
-            appropriate resources.
-          </p>
-
-        </article>
-
-
-        <article class="security-layer">
-
-          <div class="security-layer-icon">
-            *
-          </div>
-
-          <h3>
-            Data Protection
-          </h3>
-
-          <p>
-            Sensitive information should be handled through
-            appropriate application, database and
-            infrastructure security controls.
-          </p>
-
-        </article>
-
-
-        <article class="security-layer">
-
-          <div class="security-layer-icon">
-            !
-          </div>
-
-          <h3>
-            Activity Monitoring
-          </h3>
-
-          <p>
-            Security monitoring and audit information can
-            help identify unusual activity and support
-            investigation.
-          </p>
-
-        </article>
-
-
-        <article class="security-layer">
-
-          <div class="security-layer-icon">
-            ↻
-          </div>
-
-          <h3>
-            Session Protection
-          </h3>
-
-          <p>
-            Proper session management helps reduce the risk
-            associated with unauthorized or unattended
-            account access.
-          </p>
-
-        </article>
-
-
-        <article class="security-layer">
-
-          <div class="security-layer-icon">
-            ◉
-          </div>
-
-          <h3>
-            Secure Operations
-          </h3>
-
-          <p>
-            Secure development, configuration and operational
-            practices help maintain the integrity of banking
-            services.
-          </p>
-
-        </article>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       ACCOUNT SECURITY
-  ================================== -->
-
-  <section class="security-section security-account-section">
-
-    <div class="security-container">
-
-      <div class="security-account-grid">
-
-
-        <div class="security-account-copy">
-
-          <span>
-            Protect your account
-          </span>
-
-          <h2>
-            A few simple habits can make a big difference.
-          </h2>
-
-          <p>
-            Keep your banking credentials private and pay
-            attention to unexpected requests for account
-            information.
-          </p>
-
-
-          <ul class="security-check-list">
-
-            <li>
-              Use a strong, unique password for your banking
-              account.
-            </li>
-
-            <li>
-              Never share your password, PIN or
-              authentication codes.
-            </li>
-
-            <li>
-              Review account activity regularly.
-            </li>
-
-            <li>
-              Keep your phone, computer and browser
-              up to date.
-            </li>
-
-            <li>
-              Sign out when using a shared or public device.
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <div class="security-check-panel">
-
-          <h3>
-            Account security checklist
-          </h3>
-
-
-          <div class="security-status">
-
-            <span class="security-status-dot"></span>
-
-            <div>
-
-              <strong>
-                Strong authentication
-              </strong>
-
-              <span>
-                Use available authentication protections.
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="security-status">
-
-            <span class="security-status-dot"></span>
-
-            <div>
-
-              <strong>
-                Private credentials
-              </strong>
-
-              <span>
-                Keep passwords and verification codes private.
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="security-status">
-
-            <span class="security-status-dot"></span>
-
-            <div>
-
-              <strong>
-                Device protection
-              </strong>
-
-              <span>
-                Keep your device and software updated.
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="security-status">
-
-            <span class="security-status-dot"></span>
-
-            <div>
-
-              <strong>
-                Activity awareness
-              </strong>
-
-              <span>
-                Review transactions and account activity.
-              </span>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       SECURITY TIPS
-  ================================== -->
-
-  <section
-    id="security-tips"
-    class="security-section"
-  >
-
-    <div class="security-container">
-
-      <div class="security-section-heading">
-
-        <span>
-          Stay protected
-        </span>
-
-        <h2>
-          Important security practices
-        </h2>
-
-        <p>
-          Follow these practices whenever you use digital
-          banking services.
-        </p>
-
-      </div>
-
-
-      <div class="security-tips">
-
-
-        <article class="security-tip">
-
-          <div class="security-tip-number">
-            01
-          </div>
-
-          <h3>
-            Protect your login information
-          </h3>
-
-          <p>
-            Do not give your password or authentication
-            information to another person. Legitimate
-            support personnel should not need your complete
-            password.
-          </p>
-
-        </article>
-
-
-        <article class="security-tip">
-
-          <div class="security-tip-number">
-            02
-          </div>
-
-          <h3>
-            Be careful with unexpected messages
-          </h3>
-
-          <p>
-            Treat unexpected requests for banking details,
-            passwords or verification codes with caution.
-            Verify the request through an official channel.
-          </p>
-
-        </article>
-
-
-        <article class="security-tip">
-
-          <div class="security-tip-number">
-            03
-          </div>
-
-          <h3>
-            Check website addresses
-          </h3>
-
-          <p>
-            Before entering credentials, confirm that you
-            are using the official GTF Banking website or
-            application.
-          </p>
-
-        </article>
-
-
-        <article class="security-tip">
-
-          <div class="security-tip-number">
-            04
-          </div>
-
-          <h3>
-            Monitor account activity
-          </h3>
-
-          <p>
-            Review transactions and account activity. If
-            something looks unfamiliar, contact the bank
-            through an official support channel.
-          </p>
-
-        </article>
-
-
-        <article class="security-tip">
-
-          <div class="security-tip-number">
-            05
-          </div>
-
-          <h3>
-            Secure your devices
-          </h3>
-
-          <p>
-            Use device locks and keep operating systems,
-            browsers and applications updated with available
-            security updates.
-          </p>
-
-        </article>
-
-
-        <article class="security-tip">
-
-          <div class="security-tip-number">
-            06
-          </div>
-
-          <h3>
-            Avoid sharing verification codes
-          </h3>
-
-          <p>
-            Verification codes are intended for the account
-            holder. Do not disclose them to people who ask
-            for them unexpectedly.
-          </p>
-
-        </article>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       ALERT
-  ================================== -->
-
-  <section class="security-section">
-
-    <div class="security-container">
-
-      <div class="security-alert">
-
-        <h3>
-          Suspect unauthorized account activity?
-        </h3>
-
-        <p>
-          If you believe your account or credentials may
-          have been compromised, stop using the affected
-          credentials and contact GTF Banking through an
-          official support channel as soon as possible.
-          Do not provide sensitive credentials through
-          unexpected messages or unverified contacts.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       FAQ
-  ================================== -->
-
-  <section class="security-section security-account-section">
-
-    <div class="security-container">
-
-      <div class="security-section-heading">
-
-        <span>
-          Security questions
-        </span>
-
-        <h2>
-          Security FAQs
-        </h2>
-
-      </div>
-
-
-      <div class="security-faq">
-
-
-        <div class="security-faq-item">
-
-          <button
-            class="security-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              Will GTF Banking ask for my password?
-            </span>
-
-            <span class="security-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="security-faq-answer">
-
-            Never share your complete password with someone
-            who unexpectedly contacts you. Use official GTF
-            Banking support channels when you need help with
-            your account.
-
-          </div>
-
-        </div>
-
-
-        <div class="security-faq-item">
-
-          <button
-            class="security-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              What should I do if I notice an unfamiliar transaction?
-            </span>
-
-            <span class="security-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="security-faq-answer">
-
-            Review the transaction details and contact GTF
-            Banking through an official support channel if
-            you do not recognize the activity.
-
-          </div>
-
-        </div>
-
-
-        <div class="security-faq-item">
-
-          <button
-            class="security-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              Should I share an authentication code?
-            </span>
-
-            <span class="security-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="security-faq-answer">
-
-            No. Authentication and verification codes are
-            sensitive account information and should not be
-            disclosed to an unexpected caller, message
-            sender or other person.
-
-          </div>
-
-        </div>
-
-
-        <div class="security-faq-item">
-
-          <button
-            class="security-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              How can I make my account more secure?
-            </span>
-
-            <span class="security-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="security-faq-answer">
-
-            Use a strong unique password, enable available
-            authentication protections, keep your devices
-            updated, monitor account activity and avoid
-            entering credentials through suspicious links.
-
-          </div>
-
-        </div>
-
-
-        <div class="security-faq-item">
-
-          <button
-            class="security-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              Where should I report a security concern?
-            </span>
-
-            <span class="security-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="security-faq-answer">
-
-            Use the official GTF Banking support or contact
-            channels provided on this website. Avoid
-            responding to unexpected messages containing
-            contact information that you cannot verify.
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       CTA
-  ================================== -->
-
-  <section class="security-cta">
-
-    <div class="security-cta-inner">
-
-      <h2>
-        Bank with confidence.
-      </h2>
-
-      <p>
-        Use secure account practices and stay informed
-        about how to protect your banking information.
-      </p>
-
-
-      <div class="security-cta-buttons">
-
-        <a
-          href="../login.html"
-          class="security-cta-button"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="contact.html"
-          class="security-cta-button secondary"
-        >
-          Contact Support
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       FOOTER
-  ================================== -->
-
-  <footer class="security-footer">
-
-    <div class="security-footer-inner">
-
-      <div class="security-footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="security-footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking logo"
-              width="40"
-              height="40"
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
 
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Banking
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
+            >
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+                <a
+                    href="./security.html"
+                    class="active"
+                >
+                    Security
+                </a>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
+
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             SECURITY HERO
+             ================================================= -->
+
+        <section class="hero">
+
+            <div class="container hero-grid">
+
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        GLOBAL TRUSTFUND SECURITY
+                    </span>
+
+
+                    <h1>
+
+                        Your security is
+                        <span>part of every connection.</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Protecting your account starts with strong
+                        security practices. Learn how to protect
+                        your credentials, recognize suspicious
+                        activity and use digital banking safely.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="../login.html"
+                            class="button button-primary button-large"
+                        >
+                            Sign In Securely
+                        </a>
+
+
+                        <a
+                            href="../support.html"
+                            class="button button-light button-large"
+                        >
+                            Get Support
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-trust">
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Protected
+                            </strong>
+
+                            <span>
+                                Security-focused access
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Vigilant
+                            </strong>
+
+                            <span>
+                                Monitor account activity
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Informed
+                            </strong>
+
+                            <span>
+                                Learn safe banking habits
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SECURITY VISUAL
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+
+                    <div class="security-visual">
+
+                        <div class="security-shield">
+
+                            <img
+                                src="../assets/gtf-logo.svg"
+                                alt=""
+                            >
+
+                        </div>
+
+
+                        <div class="security-visual-text">
+
+                            <small>
+                                GLOBAL TRUSTFUND
+                            </small>
+
+                            <strong>
+                                SECURE BANKING
+                            </strong>
+
+                            <span>
+                                Protect your account
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Account Protection
+                            </strong>
+
+                            <small>
+                                Keep credentials private
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            !
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Stay Alert
+                            </strong>
+
+                            <small>
+                                Watch for suspicious activity
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SECURITY PRINCIPLES
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        SECURITY PRINCIPLES
+                    </span>
+
+
+                    <h2>
+                        Simple habits can make a difference
+                    </h2>
+
+
+                    <p>
+
+                        Protecting your banking information is a
+                        shared responsibility. Follow these basic
+                        practices whenever you use digital banking.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            Use strong credentials
+                        </h3>
+
+
+                        <p>
+
+                            Use a strong, unique password for your
+                            banking account and avoid reusing it
+                            on other websites.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            !
+                        </span>
+
+
+                        <h3>
+                            Watch for suspicious messages
+                        </h3>
+
+
+                        <p>
+
+                            Be cautious with unexpected messages,
+                            links or requests for account
+                            credentials.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Protect your login
+                        </h3>
+
+
+                        <p>
+
+                            Never share your password, verification
+                            codes or other sensitive authentication
+                            information with another person.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            →
+                        </span>
+
+
+                        <h3>
+                            Use trusted access
+                        </h3>
+
+
+                        <p>
+
+                            Access your account through the
+                            official Global TrustFund website or
+                            authorized application.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACCOUNT PROTECTION
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container split-section">
+
+
+                <div class="split-content">
+
+                    <span class="eyebrow">
+                        PROTECT YOUR ACCOUNT
+                    </span>
+
+
+                    <h2>
+                        Keep your credentials private
+                    </h2>
+
+
+                    <p>
+
+                        Your login credentials are personal.
+                        Do not give your password or security
+                        codes to someone who asks for them
+                        unexpectedly.
+
+                    </p>
+
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Create a unique password
+                                </h3>
+
+                                <p>
+
+                                    Avoid using the same password
+                                    for your banking account and
+                                    unrelated services.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Keep verification codes private
+                                </h3>
+
+                                <p>
+
+                                    Authentication codes should
+                                    only be used by you for the
+                                    intended sign-in process.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Lock your device
+                                </h3>
+
+                                <p>
+
+                                    Use your device's available
+                                    screen-lock and security
+                                    features.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="security-panel">
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Security reminder
+                        </h3>
+
+
+                        <p>
+
+                            Global TrustFund will not ask you to
+                            disclose your password or authentication
+                            codes through an unexpected message.
+
+                        </p>
+
+
+                        <a
+                            href="../support.html"
+                            class="text-link"
+                        >
+                            Contact support →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PHISHING AWARENESS
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        STAY ALERT
+                    </span>
+
+
+                    <h2>
+                        Recognize suspicious activity
+                    </h2>
+
+
+                    <p>
+
+                        Fraud attempts can use convincing messages
+                        or websites. Pause and verify before taking
+                        action.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            !
+                        </span>
+
+
+                        <h3>
+                            Unexpected requests
+                        </h3>
+
+
+                        <p>
+
+                            Treat unexpected requests for passwords,
+                            verification codes or sensitive
+                            information as suspicious.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            →
+                        </span>
+
+
+                        <h3>
+                            Suspicious links
+                        </h3>
+
+
+                        <p>
+
+                            Avoid clicking unfamiliar links.
+                            Navigate directly to the official
+                            website instead.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Verify first
+                        </h3>
+
+
+                        <p>
+
+                            If something seems unusual, stop and
+                            verify the request through an official
+                            support channel.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             IF ACCOUNT IS COMPROMISED
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        IF SOMETHING LOOKS WRONG
+                    </span>
+
+
+                    <h2>
+                        Take action quickly
+                    </h2>
+
+
+                    <p>
+
+                        If you believe your account credentials
+                        may have been exposed or you notice
+                        suspicious activity, take appropriate
+                        protective action and contact support.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="feature-list security-action-list">
+
+
+                    <div class="feature-item">
+
+                        <span class="feature-check">
+                            1
+                        </span>
+
+
+                        <div>
+
+                            <h3>
+                                Stop interacting with the suspicious request
+                            </h3>
+
+                            <p>
+
+                                Do not provide additional credentials
+                                or verification information.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="feature-item">
+
+                        <span class="feature-check">
+                            2
+                        </span>
+
+
+                        <div>
+
+                            <h3>
+                                Secure your account
+                            </h3>
+
+                            <p>
+
+                                Sign in through an authorized channel
+                                and follow the available account
+                                security procedures.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="feature-item">
+
+                        <span class="feature-check">
+                            3
+                        </span>
+
+
+                        <div>
+
+                            <h3>
+                                Contact support
+                            </h3>
+
+                            <p>
+
+                                Report suspected unauthorized activity
+                                through the appropriate support channel.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SECURITY CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+
+                <span class="eyebrow">
+                    BANK SAFELY
+                </span>
+
+
+                <h2>
+                    Stay informed. Stay protected.
+                </h2>
+
+
+                <p>
+
+                    Use secure banking practices every time you
+                    access your Global TrustFund account.
+
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../login.html"
+                        class="button button-light button-large"
+                    >
+                        Sign In
+                    </a>
+
+
+                    <a
+                        href="../support.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Contact Support
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Secure, convenient digital banking for your
+                    financial journey.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Banking
+                </h3>
+
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+
+                <a href="./about.html">
+                    About
+                </a>
+
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="container footer-bottom">
+
             <span>
 
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
 
             </span>
 
-          </a>
 
-
-          <p class="security-footer-description">
-            A modern banking experience for personal and
-            business financial needs.
-          </p>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
+    </footer>
 
-        <div class="security-footer-column">
 
-          <h3>
-            Banking
-          </h3>
 
-          <a href="checking.html">
-            Checking
-          </a>
-
-          <a href="savings.html">
-            Savings
-          </a>
-
-          <a href="cards.html">
-            Cards
-          </a>
-
-          <a href="loans.html">
-            Loans
-          </a>
-
-        </div>
-
-
-        <div class="security-footer-column">
-
-          <h3>
-            Company
-          </h3>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="personal.html">
-            Personal
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="security-footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a
-            href="security.html"
-            aria-current="page"
-          >
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="security-footer-bottom">
-
-        <span>
-          ©
-          <span id="securityFooterYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure digital banking
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
-
-  <script>
-    "use strict";
-
-
-    /*
-     * Mobile navigation
-     */
-
-    const securityNav =
-      document.getElementById(
-        "securityNav"
-      );
-
-    const securityMobileToggle =
-      document.getElementById(
-        "securityMobileToggle"
-      );
-
-
-    if (
-      securityNav &&
-      securityMobileToggle
-    ) {
-
-      securityMobileToggle.addEventListener(
-        "click",
-        function () {
-
-          const open =
-            securityNav.classList.toggle(
-              "mobile-open"
-            );
-
-          securityMobileToggle.setAttribute(
-            "aria-expanded",
-            String(open)
-          );
-
-          securityMobileToggle.setAttribute(
-            "aria-label",
-            open
-              ? "Close navigation"
-              : "Open navigation"
-          );
-
-          securityMobileToggle.textContent =
-            open ? "×" : "☰";
-
-        }
-      );
-
-
-      document
-        .querySelectorAll(
-          ".security-main-nav a"
-        )
-        .forEach(function (link) {
-
-          link.addEventListener(
-            "click",
-            function () {
-
-              securityNav.classList.remove(
-                "mobile-open"
-              );
-
-              securityMobileToggle.setAttribute(
-                "aria-expanded",
-                "false"
-              );
-
-              securityMobileToggle.setAttribute(
-                "aria-label",
-                "Open navigation"
-              );
-
-              securityMobileToggle.textContent =
-                "☰";
-
-            }
-          );
-
-        });
-
-    }
-
-
-    /*
-     * FAQ accordion
-     */
-
-    const securityFaqQuestions =
-      document.querySelectorAll(
-        ".security-faq-question"
-      );
-
-
-    securityFaqQuestions.forEach(
-      function (question) {
-
-        question.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              question.closest(
-                ".security-faq-item"
-              );
-
-            const wasOpen =
-              item.classList.contains(
-                "open"
-              );
-
-
-            document
-              .querySelectorAll(
-                ".security-faq-item"
-              )
-              .forEach(function (otherItem) {
-
-                otherItem.classList.remove(
-                  "open"
-                );
-
-                const otherQuestion =
-                  otherItem.querySelector(
-                    ".security-faq-question"
-                  );
-
-                const otherSymbol =
-                  otherItem.querySelector(
-                    ".security-faq-symbol"
-                  );
-
-
-                if (otherQuestion) {
-
-                  otherQuestion.setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
-
-                }
-
-                if (otherSymbol) {
-
-                  otherSymbol.textContent =
-                    "+";
-
-                }
-
-              });
-
-
-            if (!wasOpen) {
-
-              item.classList.add(
-                "open"
-              );
-
-              question.setAttribute(
-                "aria-expanded",
-                "true"
-              );
-
-              const symbol =
-                question.querySelector(
-                  ".security-faq-symbol"
-                );
-
-              if (symbol) {
-
-                symbol.textContent =
-                  "−";
-
-              }
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-    /*
-     * Footer year
-     */
-
-    const securityFooterYear =
-      document.getElementById(
-        "securityFooterYear"
-      );
-
-
-    if (securityFooterYear) {
-
-      securityFooterYear.textContent =
-        new Date().getFullYear();
-
-    }
-
-  </script>
+    <script src="../js/app.js"></script>
 
 </body>
+
 </html>
