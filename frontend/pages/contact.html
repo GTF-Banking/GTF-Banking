@@ -1,2505 +1,1114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="Contact GTF Banking for customer support, account assistance, general enquiries and banking information."
-  >
+    <meta charset="UTF-8">
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <title>Contact Us | GTF Banking</title>
+    <meta
+        name="description"
+        content="Contact Global TrustFund support."
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <title>
+        Contact Us | Global TrustFund
+    </title>
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-white: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #dce4eb;
-      --gtf-success: #16794c;
-      --gtf-danger: #b42318;
-      --gtf-shadow: 0 8px 25px rgba(11, 42, 74, .08);
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    .contact-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-      box-shadow: 0 2px 10px rgba(11, 42, 74, .04);
-    }
-
-    .contact-nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .contact-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .contact-brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .contact-brand-text strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .contact-brand-text span {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .contact-main-nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .contact-main-nav a {
-      position: relative;
-      padding: 26px 0;
-
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .contact-main-nav a:hover,
-    .contact-main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .contact-main-nav a.active::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .contact-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .contact-action {
-      min-height: 35px;
-      padding: 7px 13px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .contact-login {
-      border: 1px solid var(--gtf-blue);
-      color: var(--gtf-blue);
-      background: #fff;
-    }
-
-    .contact-signup {
-      border: 1px solid var(--gtf-blue);
-      color: #fff;
-      background: var(--gtf-blue);
-    }
-
-    .contact-signup:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .contact-mobile-toggle {
-      display: none;
-
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      cursor: pointer;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .contact-hero {
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-    }
-
-    .contact-hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 355px;
-      margin: 0 auto;
-      padding: 65px 0;
-
-      display: flex;
-      align-items: center;
-    }
-
-    .contact-hero-content {
-      max-width: 700px;
-    }
-
-    .contact-eyebrow {
-      margin: 0 0 10px;
-
-      color: #d9b866;
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .contact-hero h1 {
-      margin: 0;
-
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.12;
-    }
-
-    .contact-hero p {
-      max-width: 650px;
-      margin: 17px 0 0;
-
-      color: #dbe7f1;
-      font-size: .76rem;
-    }
-
-    /* =========================
-       GENERAL SECTIONS
-    ========================== */
-
-    .contact-section {
-      padding: 65px 0;
-    }
-
-    .contact-section-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .contact-heading {
-      max-width: 700px;
-      margin: 0 auto 38px;
-      text-align: center;
-    }
-
-    .contact-heading .eyebrow {
-      margin: 0 0 9px;
-
-      color: var(--gtf-blue);
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .contact-heading h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.55rem;
-      line-height: 1.25;
-    }
-
-    .contact-heading p {
-      margin: 11px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .66rem;
-    }
-
-    /* =========================
-       CONTACT OPTIONS
-    ========================== */
-
-    .contact-options {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .contact-option {
-      padding: 25px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-
-      text-align: center;
-    }
-
-    .contact-option-icon {
-      width: 46px;
-      height: 46px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: .9rem;
-      font-weight: 700;
-    }
-
-    .contact-option h3 {
-      margin: 14px 0 7px;
-
-      color: var(--gtf-navy);
-      font-size: .72rem;
-    }
-
-    .contact-option p {
-      min-height: 48px;
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .contact-option a {
-      display: inline-block;
-      margin-top: 13px;
-
-      color: var(--gtf-blue);
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .contact-option a:hover {
-      color: var(--gtf-blue-dark);
-    }
-
-    /* =========================
-       CONTACT FORM AREA
-    ========================== */
-
-    .contact-form-section {
-      background: #fff;
-    }
-
-    .contact-form-layout {
-      display: grid;
-      grid-template-columns:
-        minmax(0, .72fr)
-        minmax(0, 1.28fr);
-
-      gap: 45px;
-      align-items: start;
-    }
-
-    .contact-info h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-      line-height: 1.3;
-    }
-
-    .contact-info > p {
-      margin: 11px 0 25px;
-
-      color: var(--gtf-muted);
-      font-size: .62rem;
-    }
-
-    .info-list {
-      display: grid;
-      gap: 13px;
-    }
-
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .info-icon {
-      width: 34px;
-      height: 34px;
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 6px;
-
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: .65rem;
-      font-weight: 700;
-    }
-
-    .info-item strong {
-      display: block;
-
-      color: var(--gtf-navy);
-      font-size: .6rem;
-    }
-
-    .info-item span,
-    .info-item a {
-      display: block;
-      margin-top: 2px;
-
-      color: var(--gtf-muted);
-      font-size: .55rem;
-    }
-
-    .info-item a:hover {
-      color: var(--gtf-blue);
-    }
-
-    /* =========================
-       FORM
-    ========================== */
-
-    .contact-form-card {
-      padding: 29px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .contact-form-card h3 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: .82rem;
-    }
-
-    .contact-form-card > p {
-      margin: 6px 0 22px;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 15px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 13px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .form-group label {
-      color: var(--gtf-navy);
-      font-size: .57rem;
-      font-weight: 700;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 5px;
-
-      outline: none;
-
-      background: #fff;
-      color: var(--gtf-text);
-
-      font-size: .58rem;
-    }
-
-    .form-group input,
-    .form-group select {
-      min-height: 40px;
-      padding: 9px 11px;
-    }
-
-    .form-group textarea {
-      min-height: 120px;
-      padding: 10px 11px;
-      resize: vertical;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--gtf-blue);
-
-      box-shadow:
-        0 0 0 2px rgba(20, 93, 160, .1);
-    }
-
-    .form-required {
-      color: var(--gtf-danger);
-    }
-
-    .form-consent {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .form-consent input {
-      margin-top: 2px;
-    }
-
-    .form-consent a {
-      color: var(--gtf-blue);
-      font-weight: 700;
-    }
-
-    .form-submit {
-      min-height: 41px;
-      padding: 10px 18px;
-
-      border: 0;
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .6rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .form-submit:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .form-submit:disabled {
-      opacity: .65;
-      cursor: not-allowed;
-    }
-
-    .form-message {
-      display: none;
-
-      padding: 11px 13px;
-
-      border-radius: 5px;
-
-      font-size: .56rem;
-    }
-
-    .form-message.success {
-      display: block;
-
-      border: 1px solid #b9e3cc;
-      background: #edf9f2;
-      color: var(--gtf-success);
-    }
-
-    .form-message.error {
-      display: block;
-
-      border: 1px solid #f0c5c1;
-      background: #fff4f3;
-      color: var(--gtf-danger);
-    }
-
-    /* =========================
-       SECURITY NOTICE
-    ========================== */
-
-    .security-notice {
-      margin-top: 25px;
-      padding: 17px;
-
-      border-left: 3px solid var(--gtf-gold);
-      background: #fffaf0;
-    }
-
-    .security-notice strong {
-      display: block;
-
-      color: var(--gtf-navy);
-      font-size: .59rem;
-    }
-
-    .security-notice p {
-      margin: 5px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .53rem;
-    }
-
-    /* =========================
-       HOURS
-    ========================== */
-
-    .hours-section {
-      background: #f8fafc;
-    }
-
-    .hours-grid {
-      max-width: 800px;
-      margin: 0 auto;
-
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .hours-card {
-      padding: 23px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fff;
-    }
-
-    .hours-card h3 {
-      margin: 0 0 10px;
-
-      color: var(--gtf-navy);
-      font-size: .7rem;
-    }
-
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      padding: 8px 0;
-
-      border-bottom: 1px solid #edf1f4;
-
-      color: var(--gtf-muted);
-      font-size: .55rem;
-    }
-
-    .hours-row:last-child {
-      border-bottom: 0;
-    }
-
-    .hours-row strong {
-      color: var(--gtf-text);
-    }
-
-    /* =========================
-       FAQ
-    ========================== */
-
-    .faq-list {
-      max-width: 850px;
-      margin: 0 auto;
-
-      display: grid;
-      gap: 10px;
-    }
-
-    .faq-item {
-      overflow: hidden;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .faq-question {
-      width: 100%;
-      padding: 16px 18px;
-
-      border: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      text-align: left;
-
-      font-size: .62rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .faq-question:hover {
-      background: #f8fafc;
-    }
-
-    .faq-symbol {
-      color: var(--gtf-blue);
-      font-size: .9rem;
-      transition: transform .2s ease;
-    }
-
-    .faq-answer {
-      display: none;
-
-      padding: 0 18px 17px;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .faq-item.open .faq-answer {
-      display: block;
-    }
-
-    .faq-item.open .faq-symbol {
-      transform: rotate(45deg);
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .contact-cta {
-      padding: 55px 0;
-      background: #fff;
-    }
-
-    .contact-cta-inner {
-      width: min(950px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 35px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      text-align: center;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .contact-cta h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-    }
-
-    .contact-cta p {
-      max-width: 650px;
-      margin: 10px auto 20px;
-
-      color: var(--gtf-muted);
-      font-size: .64rem;
-    }
-
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .cta-button {
-      min-height: 39px;
-      padding: 9px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid var(--gtf-blue);
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .cta-button.secondary {
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .cta-button:hover {
-      background: var(--gtf-blue-dark);
-      color: #fff;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    .contact-footer {
-      padding: 40px 0 22px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .contact-footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns:
-        1.4fr
-        repeat(3, 1fr);
-
-      gap: 35px;
-
-      padding-bottom: 30px;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-brand img {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    .footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .footer-description {
-      max-width: 290px;
-      margin: 14px 0 0;
-
-      color: #aebfcd;
-      font-size: .57rem;
-    }
-
-    .footer-column h3 {
-      margin: 0 0 11px;
-      font-size: .61rem;
-    }
-
-    .footer-column a {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .footer-column a:hover {
-      color: #fff;
-    }
-
-    .footer-bottom {
-      padding-top: 18px;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .52rem;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1000px) {
-
-      .contact-main-nav,
-      .contact-actions {
-        display: none;
-      }
-
-      .contact-mobile-toggle {
-        display: block;
-      }
-
-      .contact-nav.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .contact-nav.mobile-open .contact-main-nav {
-        display: flex;
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-
-        padding: 7px 0 15px;
-      }
-
-      .contact-nav.mobile-open .contact-main-nav a {
-        padding: 9px 0;
-      }
-
-      .contact-nav.mobile-open
-      .contact-main-nav
-      a.active::after {
-        display: none;
-      }
-
-      .contact-form-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-
-      .contact-options {
-        grid-template-columns: 1fr;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .hours-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .contact-hero-inner {
-        min-height: 300px;
-        padding: 50px 0;
-      }
-
-      .contact-section {
-        padding: 50px 0;
-      }
-
-      .contact-form-card {
-        padding: 21px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-
-      .contact-cta-inner {
-        padding: 25px 18px;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-  <!-- =================================
-       HEADER
-  ================================== -->
 
-  <header class="contact-header">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <div
-      id="contactNav"
-      class="contact-nav"
-    >
+    <header class="site-header">
 
-      <a
-        href="../index.html"
-        class="contact-brand"
-        aria-label="GTF Banking home"
-      >
+        <div class="container nav-container">
 
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
-
-        <span class="contact-brand-text">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="contact-main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="personal.html">
-          Personal
-        </a>
-
-        <a href="business.html">
-          Business
-        </a>
-
-        <a href="cards.html">
-          Cards
-        </a>
-
-        <a href="checking.html">
-          Checking
-        </a>
-
-        <a href="savings.html">
-          Savings
-        </a>
-
-        <a href="loans.html">
-          Loans
-        </a>
-
-        <a
-          href="contact.html"
-          class="active"
-          aria-current="page"
-        >
-          Contact
-        </a>
-
-      </nav>
-
-
-      <div class="contact-actions">
-
-        <a
-          href="../login.html"
-          class="contact-action contact-login"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="contact-action contact-signup"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="contactMobileToggle"
-        class="contact-mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =================================
-       MAIN
-  ================================== -->
-
-  <main>
-
-    <!-- HERO -->
-
-    <section class="contact-hero">
-
-      <div class="contact-hero-inner">
-
-        <div class="contact-hero-content">
-
-          <p class="contact-eyebrow">
-            GTF Banking Support
-          </p>
-
-          <h1>
-            How can we help?
-          </h1>
-
-          <p>
-            Contact GTF Banking for general enquiries,
-            account assistance, support questions and
-            information about available banking services.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTACT OPTIONS -->
-
-    <section class="contact-section">
-
-      <div class="contact-section-inner">
-
-        <div class="contact-heading">
-
-          <p class="eyebrow">
-            Get in touch
-          </p>
-
-          <h2>
-            Choose the support option you need
-          </h2>
-
-          <p>
-            Use the appropriate channel for your
-            enquiry so we can direct you to the
-            right support team.
-          </p>
-
-        </div>
-
-
-        <div class="contact-options">
-
-
-          <article class="contact-option">
-
-            <div class="contact-option-icon">
-              ?
-            </div>
-
-            <h3>
-              General Support
-            </h3>
-
-            <p>
-              Questions about GTF Banking products,
-              services or digital banking.
-            </p>
-
-            <a href="#contact-form">
-              Send an enquiry →
-            </a>
-
-          </article>
-
-
-          <article class="contact-option">
-
-            <div class="contact-option-icon">
-              $
-            </div>
-
-            <h3>
-              Account Assistance
-            </h3>
-
-            <p>
-              Need help with an existing account?
-              Contact the appropriate support channel.
-            </p>
-
-            <a href="#contact-form">
-              Request assistance →
-            </a>
-
-          </article>
-
-
-          <article class="contact-option">
-
-            <div class="contact-option-icon">
-              !
-            </div>
-
-            <h3>
-              Security Concern
-            </h3>
-
-            <p>
-              If you notice suspicious account activity,
-              contact support promptly.
-            </p>
-
-            <a href="#security-notice">
-              Security information →
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTACT FORM -->
-
-    <section
-      id="contact-form"
-      class="contact-section contact-form-section"
-    >
-
-      <div class="contact-section-inner">
-
-        <div class="contact-form-layout">
-
-
-          <!-- INFORMATION -->
-
-          <div class="contact-info">
-
-            <p
-              class="contact-eyebrow"
-              style="color: var(--gtf-blue);"
-            >
-              Contact GTF Banking
-            </p>
-
-            <h2>
-              Send us a message
-            </h2>
-
-            <p>
-              Complete the form with your enquiry.
-              Do not include passwords, PINs, full
-              card numbers or other confidential
-              authentication information.
-            </p>
-
-
-            <div class="info-list">
-
-
-              <div class="info-item">
-
-                <div class="info-icon">
-                  @
-                </div>
-
-                <div>
-
-                  <strong>
-                    Email Support
-                  </strong>
-
-                  <a href="mailto:support@globaltrustfund.us">
-                    support@globaltrustfund.us
-                  </a>
-
-                </div>
-
-              </div>
-
-
-              <div class="info-item">
-
-                <div class="info-icon">
-                  ?
-                </div>
-
-                <div>
-
-                  <strong>
-                    Customer Support
-                  </strong>
-
-                  <span>
-                    Use the support form for
-                    general assistance.
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div class="info-item">
-
-                <div class="info-icon">
-                  ◷
-                </div>
-
-                <div>
-
-                  <strong>
-                    Support Hours
-                  </strong>
-
-                  <span>
-                    Availability may vary by
-                    service and support channel.
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div class="info-item">
-
-                <div class="info-icon">
-                  🔒
-                </div>
-
-                <div>
-
-                  <strong>
-                    Secure Banking
-                  </strong>
-
-                  <span>
-                    Never share your password,
-                    PIN or authentication codes.
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div
-              id="security-notice"
-              class="security-notice"
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
 
-              <strong>
-                Security reminder
-              </strong>
-
-              <p>
-                GTF Banking will not ask you to
-                provide your password, PIN or
-                one-time authentication code
-                through this contact form.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <!-- FORM -->
-
-          <div class="contact-form-card">
-
-            <h3>
-              Contact form
-            </h3>
-
-            <p>
-              Fields marked with
-              <span class="form-required">*</span>
-              are required.
-            </p>
-
-
-            <div
-              id="contactFormMessage"
-              class="form-message"
-              role="alert"
-              aria-live="polite"
-            ></div>
-
-
-            <form
-              id="gtfContactForm"
-              class="contact-form"
-              novalidate
-            >
-
-              <div class="form-row">
-
-                <div class="form-group">
-
-                  <label for="firstName">
-                    First name
-                    <span class="form-required">*</span>
-                  </label>
-
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    autocomplete="given-name"
-                    maxlength="80"
-                    required
-                  >
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label for="lastName">
-                    Last name
-                    <span class="form-required">*</span>
-                  </label>
-
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    autocomplete="family-name"
-                    maxlength="80"
-                    required
-                  >
-
-                </div>
-
-              </div>
-
-
-              <div class="form-row">
-
-                <div class="form-group">
-
-                  <label for="email">
-                    Email address
-                    <span class="form-required">*</span>
-                  </label>
-
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    maxlength="160"
-                    required
-                  >
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label for="phone">
-                    Phone number
-                  </label>
-
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    autocomplete="tel"
-                    maxlength="40"
-                  >
-
-                </div>
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="topic">
-                  What can we help with?
-                  <span class="form-required">*</span>
-                </label>
-
-                <select
-                  id="topic"
-                  name="topic"
-                  required
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
                 >
 
-                  <option value="">
-                    Select an enquiry type
-                  </option>
+                <span class="brand-text">
 
-                  <option value="general">
-                    General enquiry
-                  </option>
+                    <strong>
+                        Global TrustFund
+                    </strong>
 
-                  <option value="checking">
-                    Checking account
-                  </option>
+                    <small>
+                        Banking
+                    </small>
 
-                  <option value="savings">
-                    Savings account
-                  </option>
-
-                  <option value="cards">
-                    Cards
-                  </option>
-
-                  <option value="loans">
-                    Loans
-                  </option>
-
-                  <option value="business">
-                    Business banking
-                  </option>
-
-                  <option value="digital">
-                    Digital banking
-                  </option>
-
-                  <option value="security">
-                    Security concern
-                  </option>
-
-                  <option value="other">
-                    Other
-                  </option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="subject">
-                  Subject
-                  <span class="form-required">*</span>
-                </label>
-
-                <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  maxlength="160"
-                  required
-                >
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="message">
-                  Message
-                  <span class="form-required">*</span>
-                </label>
-
-                <textarea
-                  id="message"
-                  name="message"
-                  maxlength="3000"
-                  placeholder="Tell us how we can help."
-                  required
-                ></textarea>
-
-              </div>
-
-
-              <label class="form-consent">
-
-                <input
-                  id="consent"
-                  name="consent"
-                  type="checkbox"
-                  required
-                >
-
-                <span>
-                  I understand that I should not include
-                  passwords, PINs, card security codes or
-                  other sensitive authentication information
-                  in this form.
                 </span>
 
-              </label>
+            </a>
 
-
-              <button
-                id="contactSubmit"
-                class="form-submit"
-                type="submit"
-              >
-                Send Message
-              </button>
-
-            </form>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- HOURS -->
-
-    <section class="contact-section hours-section">
-
-      <div class="contact-section-inner">
-
-        <div class="contact-heading">
-
-          <p class="eyebrow">
-            Support availability
-          </p>
-
-          <h2>
-            When to contact us
-          </h2>
-
-          <p>
-            Support availability can vary depending
-            on the service and channel being used.
-          </p>
-
-        </div>
-
-
-        <div class="hours-grid">
-
-
-          <article class="hours-card">
-
-            <h3>
-              General enquiries
-            </h3>
-
-            <div class="hours-row">
-
-              <span>
-                Monday – Friday
-              </span>
-
-              <strong>
-                Support hours
-              </strong>
-
-            </div>
-
-            <div class="hours-row">
-
-              <span>
-                Saturday
-              </span>
-
-              <strong>
-                Availability varies
-              </strong>
-
-            </div>
-
-            <div class="hours-row">
-
-              <span>
-                Sunday
-              </span>
-
-              <strong>
-                Availability varies
-              </strong>
-
-            </div>
-
-          </article>
-
-
-          <article class="hours-card">
-
-            <h3>
-              Digital banking
-            </h3>
-
-            <div class="hours-row">
-
-              <span>
-                Online access
-              </span>
-
-              <strong>
-                Subject to service availability
-              </strong>
-
-            </div>
-
-            <div class="hours-row">
-
-              <span>
-                Account assistance
-              </span>
-
-              <strong>
-                Contact support
-              </strong>
-
-            </div>
-
-            <div class="hours-row">
-
-              <span>
-                Emergencies
-              </span>
-
-              <strong>
-                Use the applicable support channel
-              </strong>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- FAQ -->
-
-    <section class="contact-section">
-
-      <div class="contact-section-inner">
-
-        <div class="contact-heading">
-
-          <p class="eyebrow">
-            Frequently asked questions
-          </p>
-
-          <h2>
-            Contact and support questions
-          </h2>
-
-        </div>
-
-
-        <div class="faq-list">
-
-
-          <div class="faq-item">
 
             <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
             >
 
-              <span>
-                What information should I include in my message?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
+                <span></span>
+                <span></span>
+                <span></span>
 
             </button>
 
-            <div class="faq-answer">
-              Include your name, contact information,
-              the general subject of your enquiry and
-              enough information for the support team
-              to understand your question. Do not
-              include passwords, PINs or authentication
-              codes.
-            </div>
 
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
             >
 
-              <span>
-                Can I send account credentials through this form?
-              </span>
+                <a href="./personal.html">
+                    Personal
+                </a>
 
-              <span class="faq-symbol">
-                +
-              </span>
+                <a href="./business.html">
+                    Business
+                </a>
 
-            </button>
+                <a href="./checking.html">
+                    Checking
+                </a>
 
-            <div class="faq-answer">
-              No. Never submit passwords, PINs,
-              one-time authentication codes, card
-              security codes or similar confidential
-              authentication information through
-              a general contact form.
-            </div>
+                <a href="./savings.html">
+                    Savings
+                </a>
 
-          </div>
+                <a href="./cards.html">
+                    Cards
+                </a>
 
+                <a href="./loans.html">
+                    Loans
+                </a>
 
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                What should I do about suspicious account activity?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="faq-answer">
-              Review the activity and contact the
-              appropriate GTF Banking support channel
-              promptly. Do not share your password,
-              PIN or authentication codes with anyone.
-            </div>
-
-          </div>
+                <a href="./security.html">
+                    Security
+                </a>
 
 
-          <div class="faq-item">
+                <div class="nav-actions">
 
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
-            >
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
 
-              <span>
-                Can I ask about checking, savings or cards?
-              </span>
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
 
-              <span class="faq-symbol">
-                +
-              </span>
+                </div>
 
-            </button>
-
-            <div class="faq-answer">
-              Yes. Select the relevant enquiry category
-              in the contact form and provide a general
-              description of your question.
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                How can I access my existing account?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="faq-answer">
-              Use the official GTF Banking sign-in
-              page rather than entering account
-              credentials into a general contact form.
-            </div>
-
-          </div>
+            </nav>
 
         </div>
 
-      </div>
-
-    </section>
+    </header>
 
 
-    <!-- CTA -->
 
-    <section class="contact-cta">
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
-      <div class="contact-cta-inner">
+    <main>
 
-        <h2>
-          Need help with your banking?
-        </h2>
 
-        <p>
-          Sign in to your account, explore our banking
-          services or contact GTF Banking support.
-        </p>
+        <!-- =================================================
+             CONTACT HERO
+             ================================================= -->
 
-        <div class="cta-buttons">
+        <section class="hero">
 
-          <a
-            href="../login.html"
-            class="cta-button"
-          >
-            Sign In
-          </a>
+            <div class="container hero-grid">
 
-          <a
-            href="../signup.html"
-            class="cta-button secondary"
-          >
-            Open an Account
-          </a>
 
-          <a
-            href="checking.html"
-            class="cta-button secondary"
-          >
-            Explore Checking
-          </a>
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        GLOBAL TRUSTFUND SUPPORT
+                    </span>
+
+
+                    <h1>
+
+                        We're here to help you
+                        <span>navigate your banking.</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Have a question about your account,
+                        banking services or the digital banking
+                        platform? Use the available support
+                        channels to get assistance.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="../support.html"
+                            class="button button-primary button-large"
+                        >
+                            Visit Support
+                        </a>
+
+
+                        <a
+                            href="../login.html"
+                            class="button button-light button-large"
+                        >
+                            Sign In
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CONTACT VISUAL
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+
+                    <div class="security-visual">
+
+                        <div class="security-shield">
+
+                            <img
+                                src="../assets/gtf-logo.svg"
+                                alt="Global TrustFund"
+                            >
+
+                        </div>
+
+
+                        <div class="security-visual-text">
+
+                            <small>
+                                GLOBAL TRUSTFUND
+                            </small>
+
+                            <strong>
+                                CUSTOMER SUPPORT
+                            </strong>
+
+                            <span>
+                                Here when you need assistance
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            ?
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Questions?
+                            </strong>
+
+                            <small>
+                                We're ready to assist
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Support
+                            </strong>
+
+                            <small>
+                                Protect your information
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTACT OPTIONS
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        CONTACT OPTIONS
+                    </span>
+
+
+                    <h2>
+                        Choose the right way to get help
+                    </h2>
+
+
+                    <p>
+
+                        Select the support option that best matches
+                        your question or request.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ?
+                        </span>
+
+
+                        <h3>
+                            Customer Support
+                        </h3>
+
+
+                        <p>
+
+                            Find help with account access,
+                            general banking questions and
+                            platform assistance.
+
+                        </p>
+
+
+                        <a
+                            href="../support.html"
+                            class="service-link"
+                        >
+                            Visit support →
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Security Assistance
+                        </h3>
+
+
+                        <p>
+
+                            Learn what to do if you notice
+                            suspicious activity or believe your
+                            credentials may be at risk.
+
+                        </p>
+
+
+                        <a
+                            href="./security.html"
+                            class="service-link"
+                        >
+                            Security center →
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            →
+                        </span>
+
+
+                        <h3>
+                            Account Access
+                        </h3>
+
+
+                        <p>
+
+                            Use the secure sign-in page to access
+                            your account or begin registration.
+
+                        </p>
+
+
+                        <a
+                            href="../login.html"
+                            class="service-link"
+                        >
+                            Sign in →
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            New Customers
+                        </h3>
+
+
+                        <p>
+
+                            Start your registration and provide
+                            the information required to create
+                            your profile.
+
+                        </p>
+
+
+                        <a
+                            href="../signup.html"
+                            class="service-link"
+                        >
+                            Open an account →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTACT FORM
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container">
+
+
+                <div class="split-section">
+
+
+                    <div class="split-content">
+
+                        <span class="eyebrow">
+                            SEND A MESSAGE
+                        </span>
+
+
+                        <h2>
+                            Tell us how we can help
+                        </h2>
+
+
+                        <p>
+
+                            Complete the form with general
+                            information about your request.
+                            Do not include passwords,
+                            authentication codes or other
+                            highly sensitive credentials.
+
+                        </p>
+
+
+                        <div class="feature-list">
+
+
+                            <div class="feature-item">
+
+                                <span class="feature-check">
+                                    ✓
+                                </span>
+
+
+                                <div>
+
+                                    <h3>
+                                        General questions
+                                    </h3>
+
+                                    <p>
+                                        Ask about available
+                                        banking services and
+                                        platform features.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature-item">
+
+                                <span class="feature-check">
+                                    ✓
+                                </span>
+
+
+                                <div>
+
+                                    <h3>
+                                        Account assistance
+                                    </h3>
+
+                                    <p>
+                                        Describe the issue you're
+                                        experiencing without
+                                        sharing your password.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature-item">
+
+                                <span class="feature-check">
+                                    ✓
+                                </span>
+
+
+                                <div>
+
+                                    <h3>
+                                        Security concerns
+                                    </h3>
+
+                                    <p>
+                                        Use the appropriate
+                                        support channel for
+                                        suspected account issues.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="signup-card contact-card">
+
+
+                        <form
+                            id="contactForm"
+                            class="signup-form"
+                            novalidate
+                        >
+
+
+                            <div class="form-header">
+
+                                <h2>
+                                    Contact form
+                                </h2>
+
+                                <p>
+                                    Required fields are marked with
+                                    an asterisk.
+                                </p>
+
+                            </div>
+
+
+
+                            <div class="form-grid">
+
+
+                                <div class="form-group">
+
+                                    <label for="contactName">
+                                        Name
+                                        <span class="required">*</span>
+                                    </label>
+
+                                    <div class="input-wrapper">
+
+                                        <input
+                                            id="contactName"
+                                            name="name"
+                                            type="text"
+                                            autocomplete="name"
+                                            placeholder="Your name"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+
+                                    <label for="contactEmail">
+                                        Email
+                                        <span class="required">*</span>
+                                    </label>
+
+                                    <div class="input-wrapper">
+
+                                        <input
+                                            id="contactEmail"
+                                            name="email"
+                                            type="email"
+                                            autocomplete="email"
+                                            placeholder="you@example.com"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group full-width">
+
+                                    <label for="contactSubject">
+                                        Subject
+                                        <span class="required">*</span>
+                                    </label>
+
+                                    <div class="input-wrapper">
+
+                                        <input
+                                            id="contactSubject"
+                                            name="subject"
+                                            type="text"
+                                            placeholder="How can we help?"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-group full-width">
+
+                                    <label for="contactMessage">
+                                        Message
+                                        <span class="required">*</span>
+                                    </label>
+
+                                    <div class="input-wrapper">
+
+                                        <textarea
+                                            id="contactMessage"
+                                            name="message"
+                                            rows="6"
+                                            placeholder="Describe your question..."
+                                            required
+                                            style="
+                                                width:100%;
+                                                padding:12px;
+                                                border:1px solid var(--gtf-border);
+                                                border-radius:7px;
+                                                outline:none;
+                                                resize:vertical;
+                                                font-family:inherit;
+                                                font-size:9px;
+                                                color:var(--gtf-text);
+                                            "
+                                        ></textarea>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div
+                                id="contactStatus"
+                                class="form-status"
+                                role="status"
+                                aria-live="polite"
+                            ></div>
+
+
+
+                            <button
+                                type="submit"
+                                class="signup-button"
+                            >
+
+                                <span class="button-content">
+                                    Send Message
+                                </span>
+
+                            </button>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SAFETY NOTICE
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="security-panel">
+
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            !
+                        </span>
+
+
+                        <h3>
+                            Never share your password
+                        </h3>
+
+
+                        <p>
+
+                            Do not include passwords, one-time
+                            verification codes, PINs or other
+                            authentication secrets in a contact
+                            form or ordinary message.
+
+                        </p>
+
+
+                        <a
+                            href="./security.html"
+                            class="text-link"
+                        >
+                            Review security guidance →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+
+                <span class="eyebrow">
+                    GLOBAL TRUSTFUND
+                </span>
+
+
+                <h2>
+                    Need immediate account assistance?
+                </h2>
+
+
+                <p>
+
+                    Visit the support center for account and
+                    digital banking assistance.
+
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../support.html"
+                        class="button button-light button-large"
+                    >
+                        Visit Support
+                    </a>
+
+
+                    <a
+                        href="../login.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Sign In
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Secure, convenient digital banking for your
+                    financial journey.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Banking
+                </h3>
+
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+
+                <a href="./about.html">
+                    About
+                </a>
+
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
 
         </div>
 
-      </div>
-
-    </section>
-
-  </main>
 
 
-  <!-- =================================
-       FOOTER
-  ================================== -->
-
-  <footer class="contact-footer">
-
-    <div class="contact-footer-inner">
-
-      <div class="footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking logo"
-              width="40"
-              height="40"
-            >
+        <div class="container footer-bottom">
 
             <span>
 
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
 
             </span>
 
-          </a>
 
-
-          <p class="footer-description">
-            A modern banking experience for
-            personal and business financial needs.
-          </p>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
+    </footer>
 
-        <div class="footer-column">
 
-          <h3>
-            Banking
-          </h3>
 
-          <a href="checking.html">
-            Checking
-          </a>
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
-          <a href="savings.html">
-            Savings
-          </a>
+    <script src="../js/app.js"></script>
 
-          <a href="cards.html">
-            Cards
-          </a>
 
-          <a href="loans.html">
-            Loans
-          </a>
+    <script>
 
-        </div>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const form =
+                document.getElementById("contactForm");
 
-        <div class="footer-column">
+            const status =
+                document.getElementById("contactStatus");
 
-          <h3>
-            Company
-          </h3>
 
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="personal.html">
-            Personal
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a href="security.html">
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          ©
-          <span id="contactFooterYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure banking access
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
-
-  <script>
-    "use strict";
-
-
-    /*
-     * Mobile navigation
-     */
-
-    const contactNav =
-      document.getElementById(
-        "contactNav"
-      );
-
-    const contactMobileToggle =
-      document.getElementById(
-        "contactMobileToggle"
-      );
-
-
-    contactMobileToggle.addEventListener(
-      "click",
-      function () {
-
-        const open =
-          contactNav.classList.toggle(
-            "mobile-open"
-          );
-
-        contactMobileToggle.setAttribute(
-          "aria-expanded",
-          String(open)
-        );
-
-        contactMobileToggle.setAttribute(
-          "aria-label",
-          open
-            ? "Close navigation"
-            : "Open navigation"
-        );
-
-        contactMobileToggle.textContent =
-          open ? "×" : "☰";
-
-      }
-    );
-
-
-    /*
-     * Close mobile menu after
-     * selecting a navigation link.
-     */
-
-    document
-      .querySelectorAll(".contact-main-nav a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            contactNav.classList.remove(
-              "mobile-open"
-            );
-
-            contactMobileToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            contactMobileToggle.setAttribute(
-              "aria-label",
-              "Open navigation"
-            );
-
-            contactMobileToggle.textContent =
-              "☰";
-
-          }
-        );
-
-      });
-
-
-    /*
-     * FAQ accordion
-     */
-
-    document
-      .querySelectorAll(".faq-question")
-      .forEach(function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              button.closest(".faq-item");
-
-            const isOpen =
-              item.classList.contains("open");
-
-
-            document
-              .querySelectorAll(".faq-item")
-              .forEach(function (otherItem) {
-
-                otherItem.classList.remove(
-                  "open"
-                );
-
-                const otherButton =
-                  otherItem.querySelector(
-                    ".faq-question"
-                  );
-
-                if (otherButton) {
-
-                  otherButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
-
-                }
-
-              });
-
-
-            if (!isOpen) {
-
-              item.classList.add("open");
-
-              button.setAttribute(
-                "aria-expanded",
-                "true"
-              );
-
+            if (!form || !status) {
+                return;
             }
 
-          }
-        );
 
-      });
+            form.addEventListener("submit", function (event) {
 
-
-    /*
-     * Contact form
-     *
-     * This validates the form locally.
-     * Connect the submit section to your
-     * backend API when the backend endpoint
-     * is ready.
-     */
-
-    const contactForm =
-      document.getElementById(
-        "gtfContactForm"
-      );
-
-    const contactFormMessage =
-      document.getElementById(
-        "contactFormMessage"
-      );
-
-    const contactSubmit =
-      document.getElementById(
-        "contactSubmit"
-      );
+                event.preventDefault();
 
 
-    function showContactMessage(
-      message,
-      type
-    ) {
+                const name =
+                    document.getElementById("contactName").value.trim();
 
-      contactFormMessage.textContent =
-        message;
+                const email =
+                    document.getElementById("contactEmail").value.trim();
 
-      contactFormMessage.className =
-        "form-message " + type;
+                const subject =
+                    document.getElementById("contactSubject").value.trim();
 
-    }
-
-
-    contactForm.addEventListener(
-      "submit",
-      function (event) {
-
-        event.preventDefault();
+                const message =
+                    document.getElementById("contactMessage").value.trim();
 
 
-        const firstName =
-          document
-            .getElementById("firstName")
-            .value
-            .trim();
-
-        const lastName =
-          document
-            .getElementById("lastName")
-            .value
-            .trim();
-
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
-
-        const topic =
-          document
-            .getElementById("topic")
-            .value;
-
-        const subject =
-          document
-            .getElementById("subject")
-            .value
-            .trim();
-
-        const message =
-          document
-            .getElementById("message")
-            .value
-            .trim();
-
-        const consent =
-          document
-            .getElementById("consent")
-            .checked;
+                status.className = "form-status";
 
 
-        if (
-          !firstName ||
-          !lastName ||
-          !email ||
-          !topic ||
-          !subject ||
-          !message
-        ) {
+                if (!name || !email || !subject || !message) {
 
-          showContactMessage(
-            "Please complete all required fields.",
-            "error"
-          );
+                    status.textContent =
+                        "Please complete all required fields.";
 
-          return;
+                    status.classList.add("error");
 
-        }
+                    return;
+                }
 
 
-        if (!consent) {
-
-          showContactMessage(
-            "Please confirm that you will not submit sensitive authentication information.",
-            "error"
-          );
-
-          return;
-
-        }
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-        const emailPattern =
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+
+                    status.textContent =
+                        "Please enter a valid email address.";
+
+                    status.classList.add("error");
+
+                    return;
+                }
 
 
-        if (!emailPattern.test(email)) {
+                /*
+                 * Frontend-only confirmation.
+                 *
+                 * Connect this form to the approved backend
+                 * support endpoint when the server-side support
+                 * workflow is enabled.
+                 */
 
-          showContactMessage(
-            "Please enter a valid email address.",
-            "error"
-          );
+                status.textContent =
+                    "Your message has been prepared successfully. Please use the official support channel to complete your request.";
 
-          return;
-
-        }
-
-
-        /*
-         * Prevent accidental duplicate submissions.
-         */
-
-        contactSubmit.disabled = true;
-
-        contactSubmit.textContent =
-          "Processing...";
+                status.classList.add("success");
 
 
-        /*
-         * Current frontend-only behavior.
-         *
-         * Replace this section with:
-         *
-         * fetch("../backend/api/contact.js", {
-         *   method: "POST",
-         *   headers: {
-         *     "Content-Type": "application/json"
-         *   },
-         *   body: JSON.stringify({
-         *     firstName,
-         *     lastName,
-         *     email,
-         *     topic,
-         *     subject,
-         *     message
-         *   })
-         * })
-         *
-         * when the contact API is connected.
-         */
+                form.reset();
 
-        window.setTimeout(
-          function () {
+            });
 
-            showContactMessage(
-              "Your enquiry has been prepared successfully. Connect this form to the GTF Banking contact API to submit it to the support system.",
-              "success"
-            );
+        });
 
-            contactForm.reset();
+    </script>
 
-            contactSubmit.disabled = false;
-
-            contactSubmit.textContent =
-              "Send Message";
-
-          },
-          500
-        );
-
-      }
-    );
-
-
-    /*
-     * Footer year
-     */
-
-    const contactFooterYear =
-      document.getElementById(
-        "contactFooterYear"
-      );
-
-    if (contactFooterYear) {
-
-      contactFooterYear.textContent =
-        new Date().getFullYear();
-
-    }
-
-  </script>
 
 </body>
+
 </html>
