@@ -1,2409 +1,1047 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
 
-  <meta
-    name="description"
-    content="GTF Banking cards — explore available debit and business card solutions."
-  >
+    <meta charset="UTF-8">
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <title>Cards | GTF Banking</title>
+    <meta
+        name="description"
+        content="Explore Global TrustFund banking card options and digital card management."
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <title>
+        Banking Cards | Global TrustFund
+    </title>
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-white: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #dce4eb;
-      --gtf-success: #16794c;
-      --gtf-shadow: 0 8px 25px rgba(11, 42, 74, .08);
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* ================================
-       HEADER
-    ================================= */
-
-    .cards-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-      box-shadow: 0 2px 10px rgba(11, 42, 74, .04);
-    }
-
-    .cards-nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .cards-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .cards-brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .cards-brand-text strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .cards-brand-text span {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .cards-main-nav {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .cards-main-nav a {
-      position: relative;
-      padding: 26px 0;
-
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .cards-main-nav a:hover,
-    .cards-main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .cards-main-nav a.active::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .cards-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .cards-action {
-      min-height: 35px;
-      padding: 7px 13px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .cards-login {
-      border: 1px solid var(--gtf-blue);
-      color: var(--gtf-blue);
-      background: #fff;
-    }
-
-    .cards-signup {
-      border: 1px solid var(--gtf-blue);
-      color: #fff;
-      background: var(--gtf-blue);
-    }
-
-    .cards-signup:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .cards-mobile-toggle {
-      display: none;
-
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      cursor: pointer;
-    }
-
-    /* ================================
-       HERO
-    ================================= */
-
-    .cards-hero {
-      color: #fff;
-
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-    }
-
-    .cards-hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 420px;
-      margin: 0 auto;
-      padding: 70px 0;
-
-      display: grid;
-      grid-template-columns:
-        minmax(0, 1.1fr)
-        minmax(300px, .9fr);
-
-      align-items: center;
-      gap: 55px;
-    }
-
-    .cards-eyebrow {
-      margin: 0 0 10px;
-
-      color: #d9b866;
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .cards-hero h1 {
-      max-width: 650px;
-      margin: 0;
-
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      line-height: 1.12;
-    }
-
-    .cards-hero p {
-      max-width: 620px;
-      margin: 18px 0 0;
-
-      color: #dbe7f1;
-      font-size: .77rem;
-    }
-
-    .cards-hero-actions {
-      margin-top: 25px;
-
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .cards-hero-button {
-      min-height: 40px;
-      padding: 9px 17px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .cards-hero-primary {
-      background: #fff;
-      color: var(--gtf-navy);
-    }
-
-    .cards-hero-secondary {
-      border: 1px solid rgba(255,255,255,.4);
-      background: rgba(255,255,255,.06);
-      color: #fff;
-    }
-
-    /* ================================
-       VISUAL CARD
-    ================================= */
-
-    .card-display-area {
-      display: flex;
-      justify-content: center;
-    }
-
-    .bank-card {
-      position: relative;
-
-      width: min(370px, 100%);
-      aspect-ratio: 1.58 / 1;
-
-      padding: 27px;
-
-      overflow: hidden;
-
-      border-radius: 17px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #174f7e,
-          #0b2a4a 58%,
-          #092039
-        );
-
-      box-shadow:
-        0 22px 45px rgba(0,0,0,.27);
-
-      transform: rotate(2deg);
-    }
-
-    .bank-card::before {
-      content: "";
-
-      position: absolute;
-      width: 240px;
-      height: 240px;
-
-      right: -90px;
-      top: -100px;
-
-      border-radius: 50%;
-
-      background: rgba(255,255,255,.08);
-    }
-
-    .bank-card::after {
-      content: "";
-
-      position: absolute;
-      width: 200px;
-      height: 200px;
-
-      left: -100px;
-      bottom: -130px;
-
-      border-radius: 50%;
-
-      background: rgba(201,150,43,.12);
-    }
-
-    .bank-card-top {
-      position: relative;
-      z-index: 1;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .bank-card-logo {
-      width: 45px;
-      height: 45px;
-      object-fit: contain;
-      filter: brightness(0) invert(1);
-    }
-
-    .card-type {
-      color: #dce8f2;
-      font-size: .56rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .chip {
-      position: relative;
-      z-index: 1;
-
-      width: 48px;
-      height: 37px;
-      margin-top: 30px;
-
-      border-radius: 7px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #d7b766,
-          #a9852f
-        );
-
-      border: 1px solid rgba(255,255,255,.3);
-    }
-
-    .chip::before,
-    .chip::after {
-      content: "";
-
-      position: absolute;
-
-      background: rgba(73,55,17,.35);
-    }
-
-    .chip::before {
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-    }
-
-    .chip::after {
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-    }
-
-    .card-number {
-      position: relative;
-      z-index: 1;
-
-      margin-top: 22px;
-
-      color: #fff;
-
-      font-size: 1rem;
-      letter-spacing: .18em;
-    }
-
-    .card-bottom {
-      position: absolute;
-      z-index: 1;
-
-      left: 27px;
-      right: 27px;
-      bottom: 22px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-    }
-
-    .card-holder-label,
-    .card-expiry-label {
-      display: block;
-
-      color: #9fb6c9;
-
-      font-size: .42rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .card-holder {
-      display: block;
-
-      color: #fff;
-
-      font-size: .55rem;
-      font-weight: 700;
-      letter-spacing: .05em;
-    }
-
-    /* ================================
-       GENERAL SECTIONS
-    ================================= */
-
-    .cards-section {
-      padding: 70px 0;
-    }
-
-    .cards-section-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .cards-heading {
-      max-width: 680px;
-      margin: 0 auto 38px;
-      text-align: center;
-    }
-
-    .cards-heading .eyebrow {
-      margin: 0 0 9px;
-
-      color: var(--gtf-blue);
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .cards-heading h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.55rem;
-      line-height: 1.25;
-    }
-
-    .cards-heading p {
-      margin: 12px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .67rem;
-    }
-
-    /* ================================
-       CARD PRODUCTS
-    ================================= */
-
-    .card-products {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .product-card {
-      padding: 27px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .product-card-featured {
-      border-color: rgba(20,93,160,.28);
-    }
-
-    .product-preview {
-      width: 100%;
-      max-width: 330px;
-      aspect-ratio: 1.58 / 1;
-
-      margin-bottom: 22px;
-      padding: 20px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #145da0,
-          #0b2a4a
-        );
-
-      color: #fff;
-      box-shadow: 0 10px 25px rgba(11,42,74,.18);
-    }
-
-    .product-preview.business {
-      background:
-        linear-gradient(
-          135deg,
-          #3d4f60,
-          #0b2a4a
-        );
-    }
-
-    .preview-brand {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      font-size: .55rem;
-      font-weight: 700;
-    }
-
-    .preview-chip {
-      width: 36px;
-      height: 27px;
-
-      border-radius: 5px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #e0c477,
-          #a9852f
-        );
-    }
-
-    .preview-number {
-      font-size: .74rem;
-      letter-spacing: .13em;
-    }
-
-    .product-card h3 {
-      margin: 0 0 8px;
-
-      color: var(--gtf-navy);
-      font-size: .82rem;
-    }
-
-    .product-card > p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .61rem;
-    }
-
-    .product-features {
-      margin: 19px 0 0;
-      padding: 0;
-
-      list-style: none;
-    }
-
-    .product-features li {
-      position: relative;
-
-      padding: 8px 0 8px 22px;
-
-      border-bottom: 1px solid #edf1f4;
-
-      color: var(--gtf-text);
-      font-size: .59rem;
-    }
-
-    .product-features li:last-child {
-      border-bottom: 0;
-    }
-
-    .product-features li::before {
-      content: "✓";
-
-      position: absolute;
-      left: 0;
-
-      color: var(--gtf-success);
-      font-weight: 700;
-    }
-
-    .product-button {
-      display: inline-flex;
-
-      margin-top: 18px;
-      padding: 9px 15px;
-
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .product-button:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    /* ================================
-       BENEFITS
-    ================================= */
-
-    .cards-benefits {
-      background: #fff;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .benefit {
-      padding: 22px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fff;
-    }
-
-    .benefit-icon {
-      width: 40px;
-      height: 40px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 7px;
-
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: .85rem;
-      font-weight: 700;
-    }
-
-    .benefit h3 {
-      margin: 13px 0 6px;
-
-      color: var(--gtf-navy);
-      font-size: .68rem;
-    }
-
-    .benefit p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    /* ================================
-       RESPONSIBLE CARD USE
-    ================================= */
-
-    .responsible-section {
-      background:
-        linear-gradient(
-          180deg,
-          #f8fafc,
-          #eef4f8
-        );
-    }
-
-    .responsible-grid {
-      display: grid;
-      grid-template-columns:
-        minmax(0, .8fr)
-        minmax(0, 1.2fr);
-
-      gap: 45px;
-      align-items: center;
-    }
-
-    .responsible-grid h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-    }
-
-    .responsible-grid > div > p {
-      margin: 11px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .63rem;
-    }
-
-    .responsible-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .responsible-item {
-      padding: 16px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fff;
-    }
-
-    .responsible-item strong {
-      display: block;
-
-      color: var(--gtf-navy);
-      font-size: .62rem;
-    }
-
-    .responsible-item span {
-      display: block;
-
-      margin-top: 5px;
-
-      color: var(--gtf-muted);
-      font-size: .54rem;
-    }
-
-    /* ================================
-       SECURITY
-    ================================= */
-
-    .security-box {
-      padding: 34px;
-
-      border-radius: 10px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .security-box h2 {
-      margin: 0;
-
-      font-size: 1.3rem;
-    }
-
-    .security-box p {
-      max-width: 760px;
-      margin: 10px 0 0;
-
-      color: #c7d7e4;
-      font-size: .63rem;
-    }
-
-    .security-points {
-      margin-top: 25px;
-
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .security-point {
-      padding: 15px;
-
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 7px;
-
-      background: rgba(255,255,255,.05);
-    }
-
-    .security-point strong {
-      display: block;
-      font-size: .61rem;
-    }
-
-    .security-point span {
-      display: block;
-      margin-top: 4px;
-
-      color: #b6c9d8;
-      font-size: .53rem;
-    }
-
-    /* ================================
-       FAQ
-    ================================= */
-
-    .faq-list {
-      max-width: 850px;
-      margin: 0 auto;
-
-      display: grid;
-      gap: 10px;
-    }
-
-    .faq-item {
-      overflow: hidden;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .faq-question {
-      width: 100%;
-      padding: 16px 18px;
-
-      border: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      text-align: left;
-
-      font-size: .62rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .faq-question:hover {
-      background: #f8fafc;
-    }
-
-    .faq-symbol {
-      color: var(--gtf-blue);
-      font-size: .9rem;
-      flex-shrink: 0;
-    }
-
-    .faq-answer {
-      display: none;
-
-      padding: 0 18px 17px;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .faq-item.open .faq-answer {
-      display: block;
-    }
-
-    .faq-item.open .faq-symbol {
-      transform: rotate(45deg);
-    }
-
-    /* ================================
-       CTA
-    ================================= */
-
-    .cards-cta {
-      padding: 55px 0;
-      background: #fff;
-    }
-
-    .cards-cta-inner {
-      width: min(950px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 35px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      text-align: center;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .cards-cta h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-    }
-
-    .cards-cta p {
-      max-width: 650px;
-      margin: 10px auto 20px;
-
-      color: var(--gtf-muted);
-      font-size: .65rem;
-    }
-
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .cta-button {
-      min-height: 39px;
-      padding: 9px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .cta-button.secondary {
-      border: 1px solid var(--gtf-blue);
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .cta-button:hover {
-      background: var(--gtf-blue-dark);
-      color: #fff;
-    }
-
-    .cta-button.secondary:hover {
-      background: var(--gtf-blue);
-    }
-
-    /* ================================
-       FOOTER
-    ================================= */
-
-    .cards-footer {
-      padding: 40px 0 22px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .cards-footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns:
-        1.4fr
-        repeat(3, 1fr);
-
-      gap: 35px;
-
-      padding-bottom: 30px;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-brand img {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    .footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .footer-description {
-      max-width: 290px;
-      margin: 14px 0 0;
-
-      color: #aebfcd;
-      font-size: .57rem;
-    }
-
-    .footer-column h3 {
-      margin: 0 0 11px;
-      font-size: .61rem;
-    }
-
-    .footer-column a {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .footer-column a:hover {
-      color: #fff;
-    }
-
-    .footer-bottom {
-      padding-top: 18px;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .52rem;
-    }
-
-    /* ================================
-       RESPONSIVE
-    ================================= */
-
-    @media (max-width: 980px) {
-
-      .cards-main-nav,
-      .cards-actions {
-        display: none;
-      }
-
-      .cards-mobile-toggle {
-        display: block;
-      }
-
-      .cards-nav.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .cards-nav.mobile-open .cards-main-nav {
-        display: flex;
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-
-        padding: 7px 0 15px;
-      }
-
-      .cards-nav.mobile-open .cards-main-nav a {
-        padding: 9px 0;
-      }
-
-      .cards-nav.mobile-open
-      .cards-main-nav
-      a.active::after {
-        display: none;
-      }
-
-      .cards-hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .responsible-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .security-points {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 760px) {
-
-      .card-products {
-        grid-template-columns: 1fr;
-      }
-
-      .benefits-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .security-points {
-        grid-template-columns: 1fr;
-      }
-
-      .responsible-list {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-
-      .cards-hero-inner {
-        padding: 55px 0;
-      }
-
-      .cards-section {
-        padding: 50px 0;
-      }
-
-      .bank-card {
-        transform: none;
-      }
-
-      .security-box {
-        padding: 25px;
-      }
-
-      .cards-cta-inner {
-        padding: 25px 18px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-  <!-- =================================
-       HEADER
-  ================================== -->
 
-  <header class="cards-header">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <div
-      id="cardsNav"
-      class="cards-nav"
-    >
+    <header class="site-header">
 
-      <a
-        href="../index.html"
-        class="cards-brand"
-        aria-label="GTF Banking home"
-      >
-
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
-
-        <span class="cards-brand-text">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="cards-main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="personal.html">
-          Personal
-        </a>
-
-        <a href="business.html">
-          Business
-        </a>
-
-        <a
-          href="cards.html"
-          class="active"
-          aria-current="page"
-        >
-          Cards
-        </a>
-
-        <a href="loans.html">
-          Loans
-        </a>
-
-        <a href="../support.html">
-          Support
-        </a>
-
-      </nav>
-
-
-      <div class="cards-actions">
-
-        <a
-          href="../login.html"
-          class="cards-action cards-login"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="cards-action cards-signup"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="cardsMobileToggle"
-        class="cards-mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =================================
-       HERO
-  ================================== -->
-
-  <main>
-
-    <section class="cards-hero">
-
-      <div class="cards-hero-inner">
-
-        <div>
-
-          <p class="cards-eyebrow">
-            GTF Banking Cards
-          </p>
-
-          <h1>
-            A card for the way
-            you manage your money.
-          </h1>
-
-          <p>
-            Explore GTF Banking card solutions
-            designed to provide convenient access
-            to eligible banking accounts and
-            everyday spending.
-          </p>
-
-
-          <div class="cards-hero-actions">
+        <div class="container nav-container">
 
             <a
-              href="../signup.html"
-              class="cards-hero-button cards-hero-primary"
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
-              Get Started
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Banking
+                    </small>
+
+                </span>
+
             </a>
 
-            <a
-              href="#card-options"
-              class="cards-hero-button cards-hero-secondary"
-            >
-              Explore Cards
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <div class="card-display-area">
-
-          <div class="bank-card">
-
-            <div class="bank-card-top">
-
-              <img
-                src="../assets/gtf-logo.svg"
-                alt=""
-                class="bank-card-logo"
-              >
-
-              <span class="card-type">
-                Debit
-              </span>
-
-            </div>
-
-
-            <div class="chip"></div>
-
-
-            <div class="card-number">
-              •••• &nbsp; •••• &nbsp; •••• &nbsp; 0000
-            </div>
-
-
-            <div class="card-bottom">
-
-              <div>
-
-                <span class="card-holder-label">
-                  Cardholder
-                </span>
-
-                <span class="card-holder">
-                  GTF BANKING CUSTOMER
-                </span>
-
-              </div>
-
-
-              <div>
-
-                <span class="card-expiry-label">
-                  Valid Thru
-                </span>
-
-                <span class="card-holder">
-                  MM/YY
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================
-         CARD OPTIONS
-    ================================== -->
-
-    <section
-      id="card-options"
-      class="cards-section"
-    >
-
-      <div class="cards-section-inner">
-
-        <div class="cards-heading">
-
-          <p class="eyebrow">
-            Card options
-          </p>
-
-          <h2>
-            Choose a card solution
-            that fits your needs
-          </h2>
-
-          <p>
-            Available card products, features,
-            fees and eligibility requirements may
-            vary by account and customer.
-          </p>
-
-        </div>
-
-
-        <div class="card-products">
-
-
-          <!-- PERSONAL CARD -->
-
-          <article class="product-card product-card-featured">
-
-            <div class="product-preview">
-
-              <div class="preview-brand">
-
-                <span>
-                  GTF BANKING
-                </span>
-
-                <span>
-                  DEBIT
-                </span>
-
-              </div>
-
-              <div class="preview-chip"></div>
-
-              <div class="preview-number">
-                •••• •••• •••• 0000
-              </div>
-
-            </div>
-
-
-            <h3>
-              GTF Personal Debit Card
-            </h3>
-
-            <p>
-              A convenient card solution for
-              eligible personal banking customers.
-            </p>
-
-
-            <ul class="product-features">
-
-              <li>
-                Everyday spending access
-              </li>
-
-              <li>
-                Connected to an eligible account
-              </li>
-
-              <li>
-                Card transaction monitoring
-              </li>
-
-              <li>
-                Digital banking support
-              </li>
-
-            </ul>
-
-
-            <a
-              href="../signup.html"
-              class="product-button"
-            >
-              Get Started
-            </a>
-
-          </article>
-
-
-          <!-- BUSINESS CARD -->
-
-          <article class="product-card">
-
-            <div class="product-preview business">
-
-              <div class="preview-brand">
-
-                <span>
-                  GTF BANKING
-                </span>
-
-                <span>
-                  BUSINESS
-                </span>
-
-              </div>
-
-              <div class="preview-chip"></div>
-
-              <div class="preview-number">
-                •••• •••• •••• 0000
-              </div>
-
-            </div>
-
-
-            <h3>
-              GTF Business Card
-            </h3>
-
-            <p>
-              Card services designed for eligible
-              business banking customers.
-            </p>
-
-
-            <ul class="product-features">
-
-              <li>
-                Business spending access
-              </li>
-
-              <li>
-                Support for eligible business accounts
-              </li>
-
-              <li>
-                Transaction visibility
-              </li>
-
-              <li>
-                Business banking support
-              </li>
-
-            </ul>
-
-
-            <a
-              href="business.html"
-              class="product-button"
-            >
-              Business Banking
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================
-         BENEFITS
-    ================================== -->
-
-    <section class="cards-section cards-benefits">
-
-      <div class="cards-section-inner">
-
-        <div class="cards-heading">
-
-          <p class="eyebrow">
-            Card benefits
-          </p>
-
-          <h2>
-            Designed around everyday banking
-          </h2>
-
-          <p>
-            GTF Banking card services are intended
-            to make eligible everyday transactions
-            easier to manage.
-          </p>
-
-        </div>
-
-
-        <div class="benefits-grid">
-
-
-          <article class="benefit">
-
-            <div class="benefit-icon">
-              $
-            </div>
-
-            <h3>
-              Everyday Spending
-            </h3>
-
-            <p>
-              Use an eligible card for supported
-              everyday purchases.
-            </p>
-
-          </article>
-
-
-          <article class="benefit">
-
-            <div class="benefit-icon">
-              ◉
-            </div>
-
-            <h3>
-              Account Connection
-            </h3>
-
-            <p>
-              Eligible cards can be connected to
-              supported banking accounts.
-            </p>
-
-          </article>
-
-
-          <article class="benefit">
-
-            <div class="benefit-icon">
-              ✓
-            </div>
-
-            <h3>
-              Transaction Awareness
-            </h3>
-
-            <p>
-              Review eligible card activity through
-              available banking channels.
-            </p>
-
-          </article>
-
-
-          <article class="benefit">
-
-            <div class="benefit-icon">
-              ?
-            </div>
-
-            <h3>
-              Customer Support
-            </h3>
-
-            <p>
-              Get assistance with supported card
-              questions and account access.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================
-         RESPONSIBLE USE
-    ================================== -->
-
-    <section class="cards-section responsible-section">
-
-      <div class="cards-section-inner">
-
-        <div class="responsible-grid">
-
-
-          <div>
-
-            <p
-              class="cards-eyebrow"
-              style="color: var(--gtf-blue);"
-            >
-              Responsible card use
-            </p>
-
-            <h2>
-              Keep your card information protected.
-            </h2>
-
-            <p>
-              Your card and account information
-              should be treated as sensitive.
-              Use your card carefully and review
-              account activity regularly.
-            </p>
-
-          </div>
-
-
-          <div class="responsible-list">
-
-
-            <div class="responsible-item">
-
-              <strong>
-                Protect your PIN
-              </strong>
-
-              <span>
-                Keep your PIN private and do not
-                share it with others.
-              </span>
-
-            </div>
-
-
-            <div class="responsible-item">
-
-              <strong>
-                Protect card details
-              </strong>
-
-              <span>
-                Do not unnecessarily disclose card
-                numbers or security information.
-              </span>
-
-            </div>
-
-
-            <div class="responsible-item">
-
-              <strong>
-                Review transactions
-              </strong>
-
-              <span>
-                Check your account activity and
-                report unfamiliar transactions.
-              </span>
-
-            </div>
-
-
-            <div class="responsible-item">
-
-              <strong>
-                Contact support
-              </strong>
-
-              <span>
-                Contact the appropriate support
-                channel when you need assistance.
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================
-         SECURITY
-    ================================== -->
-
-    <section class="cards-section">
-
-      <div class="cards-section-inner">
-
-        <div class="security-box">
-
-          <h2>
-            Security is part of your banking experience.
-          </h2>
-
-          <p>
-            Protect your login information and card
-            credentials. GTF Banking will not ask you
-            to disclose sensitive authentication
-            information through an unverified channel.
-          </p>
-
-
-          <div class="security-points">
-
-
-            <div class="security-point">
-
-              <strong>
-                Secure Access
-              </strong>
-
-              <span>
-                Use your official GTF Banking
-                account access page.
-              </span>
-
-            </div>
-
-
-            <div class="security-point">
-
-              <strong>
-                Monitor Activity
-              </strong>
-
-              <span>
-                Review account and card activity
-                regularly.
-              </span>
-
-            </div>
-
-
-            <div class="security-point">
-
-              <strong>
-                Report Concerns
-              </strong>
-
-              <span>
-                Contact support if you identify
-                suspicious activity.
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================
-         FAQ
-    ================================== -->
-
-    <section class="cards-section">
-
-      <div class="cards-section-inner">
-
-        <div class="cards-heading">
-
-          <p class="eyebrow">
-            Card questions
-          </p>
-
-          <h2>
-            Frequently asked questions
-          </h2>
-
-        </div>
-
-
-        <div class="faq-list">
-
-
-          <div class="faq-item">
 
             <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
             >
 
-              <span>
-                How do I get a GTF Banking card?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
+                <span></span>
+                <span></span>
+                <span></span>
 
             </button>
 
 
-            <div class="faq-answer">
-
-              Eligible customers can follow the
-              available account and card application
-              process. Product availability and
-              eligibility requirements may apply.
-
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
             >
 
-              <span>
-                Can I use my card for everyday purchases?
-              </span>
+                <a href="./personal.html">
+                    Personal
+                </a>
 
-              <span class="faq-symbol">
-                +
-              </span>
+                <a href="./business.html">
+                    Business
+                </a>
 
-            </button>
+                <a href="./checking.html">
+                    Checking
+                </a>
 
+                <a href="./savings.html">
+                    Savings
+                </a>
 
-            <div class="faq-answer">
+                <a
+                    href="./cards.html"
+                    class="active"
+                >
+                    Cards
+                </a>
 
-              Eligible cards may be used for supported
-              purchases and transactions according to
-              the applicable card and account terms.
+                <a href="./loans.html">
+                    Loans
+                </a>
 
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                What should I do if I do not recognize
-                a card transaction?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
-
-            </button>
+                <a href="./security.html">
+                    Security
+                </a>
 
 
-            <div class="faq-answer">
+                <div class="nav-actions">
 
-              Review the transaction carefully and
-              contact the appropriate GTF Banking
-              support channel promptly if you believe
-              the activity is unauthorized.
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
 
-            </div>
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
 
-          </div>
+                </div>
 
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Are business cards available?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
-
-            </button>
-
-
-            <div class="faq-answer">
-
-              Business card services may be available
-              to eligible business customers. Visit
-              the Business Banking section for more
-              information.
-
-            </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Can I manage my card online?
-              </span>
-
-              <span class="faq-symbol">
-                +
-              </span>
-
-            </button>
-
-
-            <div class="faq-answer">
-
-              Available digital card and account
-              management features depend on the
-              account and services provided to you.
-
-            </div>
-
-          </div>
+            </nav>
 
         </div>
 
-      </div>
-
-    </section>
+    </header>
 
 
-    <!-- =================================
-         CTA
-    ================================== -->
 
-    <section class="cards-cta">
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
-      <div class="cards-cta-inner">
-
-        <h2>
-          Ready to get started?
-        </h2>
-
-        <p>
-          Open an account or sign in to manage
-          your existing GTF Banking relationship.
-        </p>
+    <main>
 
 
-        <div class="cta-buttons">
+        <!-- =================================================
+             HERO
+             ================================================= -->
 
-          <a
-            href="../signup.html"
-            class="cta-button"
-          >
-            Open an Account
-          </a>
+        <section class="hero">
 
-          <a
-            href="../login.html"
-            class="cta-button secondary"
-          >
-            Sign In
-          </a>
+            <div class="container hero-grid">
 
-          <a
-            href="../support.html"
-            class="cta-button secondary"
-          >
-            Contact Support
-          </a>
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        BANKING CARDS
+                    </span>
+
+
+                    <h1>
+
+                        Your banking,
+                        <span>right in your hands.</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        Explore Global TrustFund card options
+                        designed to provide convenient access
+                        for eligible everyday purchases and
+                        financial activity.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="../signup.html"
+                            class="button button-primary button-large"
+                        >
+                            Get Started
+                        </a>
+
+
+                        <a
+                            href="../login.html"
+                            class="button button-light button-large"
+                        >
+                            Sign In
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-trust">
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Convenient
+                            </strong>
+
+                            <span>
+                                Everyday purchases
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Digital
+                            </strong>
+
+                            <span>
+                                Account management
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Secure
+                            </strong>
+
+                            <span>
+                                Protected access
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     CARD VISUAL
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+
+                    <div class="bank-card-preview">
+
+                        <div class="card-top">
+
+                            <span class="card-chip"></span>
+
+                            <span class="card-brand">
+                                GTF
+                            </span>
+
+                        </div>
+
+
+                        <div class="card-balance">
+
+                            <small>
+                                GLOBAL TRUSTFUND CARD
+                            </small>
+
+                            <strong>
+                                BANK WITH CONFIDENCE
+                            </strong>
+
+                        </div>
+
+
+                        <div class="card-bottom">
+
+                            <span>
+                                GLOBAL TRUSTFUND
+                            </span>
+
+                            <span>
+                                GTF CARD
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Access
+                            </strong>
+
+                            <small>
+                                Account protection
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            ▣
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Card Management
+                            </strong>
+
+                            <small>
+                                Manage digitally
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARD OPTIONS
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        CARD OPTIONS
+                    </span>
+
+
+                    <h2>
+                        Explore your card options
+                    </h2>
+
+
+                    <p>
+
+                        Choose the card category that matches
+                        your banking needs and eligibility.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <!-- PERSONAL CARD -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ▣
+                        </span>
+
+
+                        <h3>
+                            Personal Cards
+                        </h3>
+
+
+                        <p>
+
+                            Explore card solutions intended for
+                            eligible personal banking customers.
+
+                        </p>
+
+
+                        <a
+                            href="./personal.html"
+                            class="service-link"
+                        >
+                            Personal banking →
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- BUSINESS CARD -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+
+                        <h3>
+                            Business Cards
+                        </h3>
+
+
+                        <p>
+
+                            Explore card solutions for eligible
+                            business banking customers.
+
+                        </p>
+
+
+                        <a
+                            href="./business.html"
+                            class="service-link"
+                        >
+                            Business banking →
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- DIGITAL ACCESS -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            →
+                        </span>
+
+
+                        <h3>
+                            Digital Management
+                        </h3>
+
+
+                        <p>
+
+                            Access available card and account
+                            information through the digital
+                            banking platform.
+
+                        </p>
+
+
+                        <a
+                            href="../login.html"
+                            class="service-link"
+                        >
+                            Sign in →
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- SECURITY -->
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Card Security
+                        </h3>
+
+
+                        <p>
+
+                            Learn about account protection and
+                            security practices for digital banking.
+
+                        </p>
+
+
+                        <a
+                            href="./security.html"
+                            class="service-link"
+                        >
+                            Security center →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARD EXPERIENCE
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container split-section">
+
+
+                <div class="split-content">
+
+                    <span class="eyebrow">
+                        CARD EXPERIENCE
+                    </span>
+
+
+                    <h2>
+                        Convenient access when you need it
+                    </h2>
+
+
+                    <p>
+
+                        A banking card can make everyday
+                        purchases easier while giving you
+                        access to eligible account services.
+
+                    </p>
+
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Everyday purchases
+                                </h3>
+
+                                <p>
+
+                                    Use eligible cards for
+                                    everyday purchases according
+                                    to the applicable card terms.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Account connection
+                                </h3>
+
+                                <p>
+
+                                    Keep eligible card activity
+                                    connected with your banking
+                                    account.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Digital visibility
+                                </h3>
+
+                                <p>
+
+                                    Review available card and
+                                    account information through
+                                    digital banking.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="security-panel">
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Protect your card
+                        </h3>
+
+
+                        <p>
+
+                            Keep your account credentials and
+                            card information secure. Never share
+                            sensitive login information with
+                            anyone.
+
+                        </p>
+
+
+                        <a
+                            href="./security.html"
+                            class="text-link"
+                        >
+                            Visit security center →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RELATED SERVICES
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        EXPLORE MORE
+                    </span>
+
+
+                    <h2>
+                        Complete your banking experience
+                    </h2>
+
+
+                    <p>
+
+                        Explore other Global TrustFund products
+                        and services.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <a
+                        href="./checking.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+
+                        <h3>
+                            Checking
+                        </h3>
+
+
+                        <p>
+
+                            Explore everyday checking account
+                            services.
+
+                        </p>
+
+
+                        <span class="service-link">
+                            Explore checking →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="./savings.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            ↑
+                        </span>
+
+
+                        <h3>
+                            Savings
+                        </h3>
+
+
+                        <p>
+
+                            Organize money for future goals
+                            with savings options.
+
+                        </p>
+
+
+                        <span class="service-link">
+                            Explore savings →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="./loans.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            Loans
+                        </h3>
+
+
+                        <p>
+
+                            Explore available financing options
+                            for eligible customers.
+
+                        </p>
+
+
+                        <span class="service-link">
+                            Explore loans →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+
+                <span class="eyebrow">
+                    GLOBAL TRUSTFUND CARDS
+                </span>
+
+
+                <h2>
+                    Ready to explore your options?
+                </h2>
+
+
+                <p>
+
+                    Create your Global TrustFund profile to
+                    begin the registration process.
+
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../signup.html"
+                        class="button button-light button-large"
+                    >
+                        Open an Account
+                    </a>
+
+
+                    <a
+                        href="../login.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Sign In
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Secure, convenient digital banking for your
+                    financial journey.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Banking
+                </h3>
+
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+
+                <a href="./about.html">
+                    About
+                </a>
+
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
 
         </div>
 
-      </div>
-
-    </section>
-
-  </main>
 
 
-  <!-- =================================
-       FOOTER
-  ================================== -->
-
-  <footer class="cards-footer">
-
-    <div class="cards-footer-inner">
-
-      <div class="footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking logo"
-              width="40"
-              height="40"
-            >
+        <div class="container footer-bottom">
 
             <span>
 
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
 
             </span>
 
-          </a>
 
-
-          <p class="footer-description">
-            A modern banking experience for
-            personal and business financial needs.
-          </p>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
+    </footer>
 
-        <div class="footer-column">
 
-          <h3>
-            Banking
-          </h3>
 
-          <a href="checking.html">
-            Checking
-          </a>
+    <!-- =====================================================
+         SHARED JAVASCRIPT
+         ===================================================== -->
 
-          <a href="savings.html">
-            Savings
-          </a>
-
-          <a href="cards.html">
-            Cards
-          </a>
-
-          <a href="loans.html">
-            Loans
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Company
-          </h3>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a href="security.html">
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          ©
-          <span id="cardsFooterYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure banking access
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
-
-  <script>
-    "use strict";
-
-    /*
-     * Mobile navigation
-     */
-
-    const cardsNav =
-      document.getElementById("cardsNav");
-
-    const cardsMobileToggle =
-      document.getElementById(
-        "cardsMobileToggle"
-      );
-
-
-    cardsMobileToggle.addEventListener(
-      "click",
-      function () {
-
-        const open =
-          cardsNav.classList.toggle(
-            "mobile-open"
-          );
-
-        cardsMobileToggle.setAttribute(
-          "aria-expanded",
-          String(open)
-        );
-
-        cardsMobileToggle.setAttribute(
-          "aria-label",
-          open
-            ? "Close navigation"
-            : "Open navigation"
-        );
-
-        cardsMobileToggle.textContent =
-          open ? "×" : "☰";
-      }
-    );
-
-
-    /*
-     * Close mobile navigation after
-     * selecting a navigation link.
-     */
-
-    document
-      .querySelectorAll(".cards-main-nav a")
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            cardsNav.classList.remove(
-              "mobile-open"
-            );
-
-            cardsMobileToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            cardsMobileToggle.setAttribute(
-              "aria-label",
-              "Open navigation"
-            );
-
-            cardsMobileToggle.textContent =
-              "☰";
-          }
-        );
-
-      });
-
-
-    /*
-     * FAQ accordion
-     */
-
-    document
-      .querySelectorAll(".faq-question")
-      .forEach(function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              button.closest(".faq-item");
-
-            const isOpen =
-              item.classList.contains("open");
-
-
-            document
-              .querySelectorAll(".faq-item")
-              .forEach(function (otherItem) {
-
-                otherItem.classList.remove(
-                  "open"
-                );
-
-                const otherButton =
-                  otherItem.querySelector(
-                    ".faq-question"
-                  );
-
-                if (otherButton) {
-
-                  otherButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
-
-                }
-
-              });
-
-
-            if (!isOpen) {
-
-              item.classList.add("open");
-
-              button.setAttribute(
-                "aria-expanded",
-                "true"
-              );
-
-            }
-
-          }
-        );
-
-      });
-
-
-    /*
-     * Footer year
-     */
-
-    document.getElementById(
-      "cardsFooterYear"
-    ).textContent =
-      new Date().getFullYear();
-
-  </script>
+    <script src="../js/app.js"></script>
 
 </body>
+
 </html>
