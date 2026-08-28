@@ -1,1820 +1,2632 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Accounts | GTF Admin</title>
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="GTF Banking administration account management."
-  >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="description"
+        content="Global TrustFund administrator accounts management."
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <style>
-    .admin-page {
-      min-height: 100vh;
-      background: #f4f7fa;
-    }
+    <title>
+        Accounts | Global TrustFund Admin
+    </title>
 
-    .accounts-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    .accounts-search {
-      min-width: 280px;
-      flex: 1;
-      max-width: 430px;
-    }
+    <style>
 
-    .accounts-search input,
-    .accounts-filter select {
-      width: 100%;
-      min-height: 40px;
-      padding: 9px 12px;
-      border: 1px solid #d9e2ea;
-      border-radius: 6px;
-      background: #fff;
-      color: #172b3a;
-      outline: none;
-    }
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-dark: #092f24;
+            --gtf-light: #176b48;
+            --gtf-bg: #f4f8f6;
+            --gtf-soft: #eaf3ee;
+            --gtf-border: #dfe8e3;
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
+            --gtf-white: #ffffff;
+            --gtf-warning: #876b27;
+            --gtf-warning-bg: #fbf5df;
+            --gtf-danger: #8b4444;
+            --gtf-danger-bg: #f9eded;
+        }
 
-    .accounts-search input:focus,
-    .accounts-filter select:focus {
-      border-color: #145da0;
-      box-shadow: 0 0 0 3px rgba(20, 93, 160, .08);
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .accounts-filters {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+        html {
+            min-height: 100%;
+        }
 
-    .accounts-filter {
-      min-width: 150px;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
 
-    .accounts-action {
-      min-height: 40px;
-      padding: 9px 14px;
-      border: 1px solid #145da0;
-      border-radius: 6px;
-      background: #145da0;
-      color: #fff;
-      font-size: .72rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
 
-    .accounts-action:hover {
-      background: #0d477c;
-    }
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
 
-    .accounts-action.secondary {
-      background: #fff;
-      color: #145da0;
-    }
+        button,
+        input,
+        select {
+            font: inherit;
+        }
 
-    .accounts-summary {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
-    }
+        /* =====================================================
+           PAGE
+           ===================================================== */
 
-    .account-summary-card {
-      padding: 18px;
-      border: 1px solid #dce4eb;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 7px 22px rgba(11, 42, 74, .05);
-    }
+        .admin-page {
+            min-height: 100vh;
 
-    .account-summary-card span {
-      display: block;
-      color: #66788a;
-      font-size: .65rem;
-      font-weight: 600;
-    }
+            display: flex;
+            flex-direction: column;
+        }
 
-    .account-summary-card strong {
-      display: block;
-      margin-top: 5px;
-      color: #0b2a4a;
-      font-size: 1.35rem;
-    }
+        /* =====================================================
+           HEADER
+           ===================================================== */
 
-    .accounts-table-card {
-      overflow: hidden;
-      border: 1px solid #dce4eb;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 7px 22px rgba(11, 42, 74, .05);
-    }
+        .admin-header {
+            background: #ffffff;
 
-    .accounts-table-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #e3e9ee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
+            border-bottom:
+                1px solid
+                var(--gtf-border);
+        }
 
-    .accounts-table-header h2 {
-      margin: 0;
-      color: #0b2a4a;
-      font-size: 1rem;
-    }
+        .admin-header-inner {
+            width: 100%;
+            max-width: 1280px;
 
-    .accounts-table-header span {
-      color: #66788a;
-      font-size: .62rem;
-    }
+            min-height: 76px;
 
-    .accounts-table-wrap {
-      width: 100%;
-      overflow-x: auto;
-    }
+            margin: 0 auto;
+            padding: 12px 20px;
 
-    .accounts-table {
-      width: 100%;
-      min-width: 900px;
-      border-collapse: collapse;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    .accounts-table th {
-      padding: 13px 15px;
-      background: #f8fafc;
-      color: #607386;
-      border-bottom: 1px solid #dce4eb;
-      text-align: left;
-      font-size: .58rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
+            gap: 20px;
+        }
 
-    .accounts-table td {
-      padding: 14px 15px;
-      border-bottom: 1px solid #edf1f4;
-      color: #334b5d;
-      font-size: .62rem;
-      vertical-align: middle;
-    }
+        .brand {
+            display: inline-flex;
+            align-items: center;
 
-    .accounts-table tr:hover td {
-      background: #fbfdff;
-    }
+            gap: 10px;
 
-    .account-name {
-      color: #0b2a4a;
-      font-weight: 700;
-    }
+            color: var(--gtf-green);
+            text-decoration: none;
+        }
 
-    .account-number {
-      color: #66788a;
-      font-family: monospace;
-      font-size: .6rem;
-    }
+        .brand-logo {
+            width: 45px;
+            height: 45px;
 
-    .account-balance {
-      color: #0b2a4a;
-      font-weight: 700;
-    }
+            display: block;
+            object-fit: contain;
+        }
 
-    .account-status {
-      display: inline-flex;
-      align-items: center;
-      min-height: 24px;
-      padding: 4px 9px;
-      border-radius: 20px;
-      font-size: .5rem;
-      font-weight: 700;
-    }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .account-status.active {
-      background: #e7f6ed;
-      color: #18733c;
-    }
+        .brand-text strong {
+            color: var(--gtf-green);
 
-    .account-status.pending {
-      background: #fff5dc;
-      color: #8a6816;
-    }
+            font-size: 14px;
+            font-weight: 800;
 
-    .account-status.locked {
-      background: #fdebec;
-      color: #a52d36;
-    }
+            line-height: 1.2;
+        }
 
-    .account-type {
-      color: #145da0;
-      font-weight: 700;
-    }
+        .brand-text small {
+            margin-top: 3px;
 
-    .account-row-actions {
-      display: flex;
-      gap: 6px;
-    }
+            color: var(--gtf-muted);
 
-    .row-button {
-      min-height: 30px;
-      padding: 5px 9px;
-      border: 1px solid #d5e0e8;
-      border-radius: 5px;
-      background: #fff;
-      color: #145da0;
-      font-size: .52rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
+            font-size: 8px;
+            font-weight: 600;
+        }
 
-    .row-button:hover {
-      background: #edf5fb;
-    }
+        .admin-header-right {
+            display: flex;
+            align-items: center;
 
-    .row-button.danger {
-      color: #a52d36;
-    }
+            gap: 12px;
+        }
 
-    .accounts-empty {
-      display: none;
-      padding: 45px 20px;
-      text-align: center;
-      color: #66788a;
-      font-size: .65rem;
-    }
+        .admin-badge {
+            padding: 6px 9px;
 
-    .accounts-pagination {
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-top: 1px solid #e7edf1;
-    }
+            border-radius: 5px;
 
-    .accounts-pagination-info {
-      color: #66788a;
-      font-size: .56rem;
-    }
+            background: var(--gtf-soft);
+            color: var(--gtf-green);
 
-    .pagination-buttons {
-      display: flex;
-      gap: 6px;
-    }
+            font-size: 7px;
+            font-weight: 800;
 
-    .pagination-button {
-      min-width: 31px;
-      min-height: 31px;
-      border: 1px solid #d6e0e7;
-      border-radius: 5px;
-      background: #fff;
-      color: #42586b;
-      font-size: .55rem;
-      cursor: pointer;
-    }
+            letter-spacing: .5px;
+        }
 
-    .pagination-button.active {
-      background: #145da0;
-      border-color: #145da0;
-      color: #fff;
-    }
+        .admin-user {
+            color: var(--gtf-muted);
 
-    .accounts-notice {
-      margin-bottom: 18px;
-      padding: 12px 15px;
-      border-left: 3px solid #c9962b;
-      border-radius: 4px;
-      background: #fffaf0;
-      color: #6e5a2b;
-      font-size: .57rem;
-    }
+            font-size: 8px;
+        }
 
-    @media (max-width: 1000px) {
-      .accounts-summary {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+        /* =====================================================
+           BODY
+           ===================================================== */
 
-    @media (max-width: 700px) {
-      .accounts-summary {
-        grid-template-columns: 1fr;
-      }
+        .admin-body {
+            width: 100%;
+            max-width: 1280px;
 
-      .accounts-toolbar {
-        align-items: stretch;
-      }
+            margin: 0 auto;
 
-      .accounts-search {
-        max-width: none;
-      }
+            padding: 25px 20px 50px;
 
-      .accounts-filters {
-        width: 100%;
-      }
+            display: grid;
 
-      .accounts-filter {
-        flex: 1;
-      }
+            grid-template-columns:
+                205px
+                minmax(0, 1fr);
 
-      .accounts-pagination {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
+            gap: 24px;
+        }
+
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
+
+        .admin-sidebar {
+            align-self: start;
+
+            padding: 15px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 8px 24px
+                rgba(11,61,46,.04);
+        }
+
+        .sidebar-title {
+            margin: 3px 8px 12px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .admin-nav {
+            display: grid;
+            gap: 4px;
+        }
+
+        .admin-nav a {
+            min-height: 37px;
+
+            padding: 0 10px;
+
+            display: flex;
+            align-items: center;
+
+            border-radius: 7px;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+        .admin-nav a:hover {
+            background: var(--gtf-soft);
+            color: var(--gtf-green);
+        }
+
+        .admin-nav a.active {
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+
+            margin: 12px 4px;
+
+            background: var(--gtf-border);
+        }
+
+        .admin-nav a.signout {
+            color: var(--gtf-danger);
+        }
+
+        .admin-nav a.signout:hover {
+            background: var(--gtf-danger-bg);
+        }
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .admin-main {
+            min-width: 0;
+        }
+
+        .page-heading {
+            margin-bottom: 22px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .eyebrow {
+            color: var(--gtf-light);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: 1.2px;
+        }
+
+        .page-heading h1 {
+            margin: 6px 0 5px;
+
+            color: var(--gtf-green);
+
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        .page-heading p {
+            margin: 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           STATISTICS
+           ===================================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 13px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            padding: 18px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 11px;
+
+            box-shadow:
+                0 8px 22px
+                rgba(11,61,46,.04);
+        }
+
+        .stat-label {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: .6px;
+        }
+
+        .stat-value {
+            margin-top: 8px;
+
+            color: var(--gtf-green);
+
+            font-size: 23px;
+            font-weight: 800;
+
+            line-height: 1;
+        }
+
+        .stat-description {
+            margin-top: 7px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           ACCOUNTS PANEL
+           ===================================================== */
+
+        .accounts-panel {
+            background: #ffffff;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 8px 24px
+                rgba(11,61,46,.04);
+
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 15px 17px;
+
+            border-bottom:
+                1px solid
+                var(--gtf-border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .panel-title h2 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 13px;
+        }
+
+        .panel-title p {
+            margin: 5px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .refresh-button {
+            min-height: 35px;
+
+            padding: 0 12px;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .refresh-button:hover {
+            background: var(--gtf-soft);
+        }
+
+        /* =====================================================
+           FILTERS
+           ===================================================== */
+
+        .filters {
+            padding: 14px 17px;
+
+            border-bottom:
+                1px solid
+                var(--gtf-border);
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(180px, 1.5fr)
+                minmax(130px, 1fr)
+                minmax(130px, 1fr)
+                auto;
+
+            gap: 9px;
+        }
+
+        .filter-input,
+        .filter-select {
+            width: 100%;
+
+            min-height: 36px;
+
+            padding: 0 10px;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #ffffff;
+            color: var(--gtf-text);
+
+            font-size: 7px;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            border-color:
+                var(--gtf-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.08);
+        }
+
+        .clear-button {
+            min-height: 36px;
+
+            padding: 0 11px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background: var(--gtf-soft);
+            color: var(--gtf-green);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .clear-button:hover {
+            background: #dcece4;
+        }
+
+        /* =====================================================
+           TABLE
+           ===================================================== */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        .accounts-table {
+            width: 100%;
+
+            min-width: 780px;
+
+            border-collapse: collapse;
+        }
+
+        .accounts-table th {
+            padding: 11px 13px;
+
+            background: #fbfcfb;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+            font-weight: 800;
+
+            text-align: left;
+
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .accounts-table td {
+            padding: 12px 13px;
+
+            border-top:
+                1px solid
+                var(--gtf-border);
+
+            color: var(--gtf-text);
+
+            font-size: 7px;
+
+            vertical-align: middle;
+        }
+
+        .accounts-table tbody tr:hover {
+            background: #fcfefd;
+        }
+
+        .account-number {
+            color: var(--gtf-green);
+
+            font-weight: 800;
+            letter-spacing: .2px;
+        }
+
+        .customer-name {
+            font-weight: 700;
+        }
+
+        .muted {
+            color: var(--gtf-muted);
+        }
+
+        .account-type {
+            color: var(--gtf-text);
+
+            font-weight: 700;
+        }
+
+        .balance {
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .status {
+            display: inline-flex;
+
+            padding: 4px 7px;
+
+            border-radius: 5px;
+
+            font-size: 6px;
+            font-weight: 800;
+        }
+
+        .status.active {
+            background: var(--gtf-soft);
+            color: var(--gtf-light);
+        }
+
+        .status.pending {
+            background: var(--gtf-warning-bg);
+            color: var(--gtf-warning);
+        }
+
+        .status.suspended {
+            background: var(--gtf-danger-bg);
+            color: var(--gtf-danger);
+        }
+
+        .status.closed {
+            background: #eef0f1;
+            color: #66706c;
+        }
+
+        .action-button {
+            min-height: 27px;
+
+            padding: 0 8px;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            font-size: 6px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .action-button:hover {
+            background: var(--gtf-soft);
+        }
+
+        /* =====================================================
+           EMPTY / LOADING
+           ===================================================== */
+
+        .table-message {
+            padding: 35px 20px;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+
+            text-align: center;
+        }
+
+        /* =====================================================
+           PAGINATION
+           ===================================================== */
+
+        .table-footer {
+            min-height: 55px;
+
+            padding: 10px 17px;
+
+            border-top:
+                1px solid
+                var(--gtf-border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .result-count {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 5px;
+        }
+
+        .page-button {
+            width: 29px;
+            height: 29px;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .page-button:hover {
+            background: var(--gtf-soft);
+            color: var(--gtf-green);
+        }
+
+        .page-button.active {
+            background: var(--gtf-green);
+            border-color: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        /* =====================================================
+           ALERT
+           ===================================================== */
+
+        .admin-alert {
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 11px 13px;
+
+            border-radius: 7px;
+
+            background: var(--gtf-warning-bg);
+            color: var(--gtf-warning);
+
+            font-size: 8px;
+            line-height: 1.5;
+        }
+
+        .admin-alert.show {
+            display: block;
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .admin-footer {
+            margin-top: auto;
+
+            padding: 18px 20px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid
+                var(--gtf-border);
+        }
+
+        .admin-footer-inner {
+            width: 100%;
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .admin-body {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-nav {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+            .sidebar-title,
+            .sidebar-divider {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .filters {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 760px) {
+
+            .admin-header-right {
+                display: none;
+            }
+
+            .admin-body {
+                padding:
+                    18px 13px 35px;
+            }
+
+            .admin-nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .table-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <div class="admin-page">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-
-      <div class="side-brand">
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking"
-          style="width:38px;height:38px;object-fit:contain;"
-        >
-        <span>GTF</span> ADMIN
-      </div>
-
-      <nav class="side-nav">
-
-        <a href="index.html">
-          Dashboard
-        </a>
-
-        <a href="customers.html">
-          Customers
-        </a>
-
-        <a
-          href="accounts.html"
-          class="active"
-          aria-current="page"
-        >
-          Accounts
-        </a>
-
-        <a href="audit.html">
-          Audit Logs
-        </a>
-
-        <a href="compliance.html">
-          Compliance
-        </a>
-
-        <a href="reports.html">
-          Reports
-        </a>
-
-        <a href="settings.html">
-          Settings
-        </a>
-
-      </nav>
-
-    </aside>
+<div class="admin-page">
 
 
-    <!-- Main -->
-    <main class="main-content">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-      <header class="topbar">
+    <header class="admin-header">
 
-        <div>
-          <h1>
-            Accounts
-          </h1>
-
-          <p>
-            Manage customer banking accounts and account status.
-          </p>
-        </div>
-
-        <div class="topbar-actions">
-
-          <a
-            href="../index.html"
-            class="btn btn-secondary"
-          >
-            View Website
-          </a>
-
-          <button
-            id="logoutButton"
-            class="btn btn-danger"
-            type="button"
-          >
-            Sign Out
-          </button>
-
-        </div>
-
-      </header>
+        <div class="admin-header-inner">
 
 
-      <section class="content-section">
-
-        <div class="accounts-notice">
-          Account information shown here should be loaded from
-          the authenticated GTF backend. Do not place real
-          customer credentials, secrets or service-role keys
-          in this frontend page.
-        </div>
-
-
-        <!-- Summary -->
-        <div class="accounts-summary">
-
-          <div class="account-summary-card">
-
-            <span>
-              Total Accounts
-            </span>
-
-            <strong id="totalAccounts">
-              0
-            </strong>
-
-          </div>
-
-
-          <div class="account-summary-card">
-
-            <span>
-              Active Accounts
-            </span>
-
-            <strong id="activeAccounts">
-              0
-            </strong>
-
-          </div>
-
-
-          <div class="account-summary-card">
-
-            <span>
-              Pending Accounts
-            </span>
-
-            <strong id="pendingAccounts">
-              0
-            </strong>
-
-          </div>
-
-
-          <div class="account-summary-card">
-
-            <span>
-              Locked Accounts
-            </span>
-
-            <strong id="lockedAccounts">
-              0
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <!-- Toolbar -->
-        <div class="accounts-toolbar">
-
-          <div class="accounts-search">
-
-            <input
-              id="accountSearch"
-              type="search"
-              placeholder="Search account number, customer or email..."
-              autocomplete="off"
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
 
-          </div>
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Administration
+                    </small>
+
+                </span>
+
+            </a>
 
 
-          <div class="accounts-filters">
+            <div class="admin-header-right">
 
-            <div class="accounts-filter">
+                <span class="admin-badge">
+                    ADMIN PORTAL
+                </span>
 
-              <select id="accountTypeFilter">
-
-                <option value="all">
-                  All account types
-                </option>
-
-                <option value="checking">
-                  Checking
-                </option>
-
-                <option value="savings">
-                  Savings
-                </option>
-
-                <option value="business">
-                  Business
-                </option>
-
-              </select>
+                <span
+                    id="adminUser"
+                    class="admin-user"
+                >
+                    Administrator
+                </span>
 
             </div>
 
-
-            <div class="accounts-filter">
-
-              <select id="accountStatusFilter">
-
-                <option value="all">
-                  All statuses
-                </option>
-
-                <option value="active">
-                  Active
-                </option>
-
-                <option value="pending">
-                  Pending
-                </option>
-
-                <option value="locked">
-                  Locked
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <button
-              id="refreshAccounts"
-              class="accounts-action secondary"
-              type="button"
-            >
-              Refresh
-            </button>
-
-          </div>
-
         </div>
 
+    </header>
 
-        <!-- Table -->
-        <section class="accounts-table-card">
 
-          <div class="accounts-table-header">
+    <!-- =====================================================
+         BODY
+         ===================================================== -->
 
-            <div>
+    <div class="admin-body">
 
-              <h2>
-                Customer Accounts
-              </h2>
 
-              <span id="accountsResultCount">
-                0 accounts
-              </span>
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
 
+        <aside class="admin-sidebar">
+
+            <div class="sidebar-title">
+                Administration
             </div>
 
-            <button
-              id="exportAccounts"
-              class="accounts-action"
-              type="button"
+
+            <nav
+                class="admin-nav"
+                aria-label="Admin navigation"
             >
-              Export CSV
-            </button>
 
-          </div>
+                <a href="./index.html">
+                    Dashboard
+                </a>
+
+                <a href="./customers.html">
+                    Customers
+                </a>
+
+                <a
+                    href="./accounts.html"
+                    class="active"
+                >
+                    Accounts
+                </a>
+
+                <a href="./transactions.html">
+                    Transactions
+                </a>
+
+                <a href="./reports.html">
+                    Reports
+                </a>
+
+                <a href="./compliance.html">
+                    Compliance
+                </a>
+
+                <a href="./audit.html">
+                    Audit Logs
+                </a>
+
+                <a href="./settings.html">
+                    Settings
+                </a>
+
+                <div class="sidebar-divider"></div>
+
+                <a
+                    href="../dashboard/signout.html"
+                    class="signout"
+                >
+                    Sign Out
+                </a>
+
+            </nav>
+
+        </aside>
 
 
-          <div class="accounts-table-wrap">
+        <!-- =================================================
+             MAIN
+             ================================================= -->
 
-            <table class="accounts-table">
-
-              <thead>
-
-                <tr>
-
-                  <th>
-                    Customer
-                  </th>
-
-                  <th>
-                    Account Number
-                  </th>
-
-                  <th>
-                    Type
-                  </th>
-
-                  <th>
-                    Currency
-                  </th>
-
-                  <th>
-                    Balance
-                  </th>
-
-                  <th>
-                    Status
-                  </th>
-
-                  <th>
-                    Updated
-                  </th>
-
-                  <th>
-                    Actions
-                  </th>
-
-                </tr>
-
-              </thead>
+        <main class="admin-main">
 
 
-              <tbody id="accountsTableBody">
-                <!-- Accounts loaded by JavaScript -->
-              </tbody>
+            <!-- PAGE HEADING -->
 
-            </table>
+            <section class="page-heading">
 
+                <div>
+
+                    <span class="eyebrow">
+                        ACCOUNT MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Banking Accounts
+                    </h1>
+
+                    <p>
+                        Review and monitor customer banking
+                        accounts and their current status.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ALERT -->
 
             <div
-              id="accountsEmpty"
-              class="accounts-empty"
-            >
-              No accounts match the current search or filters.
-            </div>
-
-          </div>
+                id="adminAlert"
+                class="admin-alert"
+                role="status"
+                aria-live="polite"
+            ></div>
 
 
-          <div class="accounts-pagination">
+            <!-- =================================================
+                 STATISTICS
+                 ================================================= -->
 
-            <div
-              id="paginationInfo"
-              class="accounts-pagination-info"
-            >
-              Showing 0 accounts
-            </div>
-
-            <div class="pagination-buttons">
-
-              <button
-                id="previousPage"
-                class="pagination-button"
-                type="button"
-              >
-                ‹
-              </button>
-
-              <button
-                class="pagination-button active"
-                type="button"
-              >
-                1
-              </button>
-
-              <button
-                id="nextPage"
-                class="pagination-button"
-                type="button"
-              >
-                ›
-              </button>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      </section>
-
-    </main>
-
-  </div>
+            <section class="stats-grid">
 
 
-  <script>
-    "use strict";
+                <article class="stat-card">
 
-    /*
-     * =====================================================
-     * GTF ADMIN ACCOUNTS
-     * =====================================================
-     *
-     * This page is intentionally frontend-safe.
-     *
-     * Replace the API endpoint below with the authenticated
-     * backend endpoint used by your GTF Banking application.
-     *
-     * No Supabase service-role key or database secret should
-     * ever be placed in this file.
-     * =====================================================
-     */
+                    <div class="stat-label">
+                        Total Accounts
+                    </div>
 
-    const API_BASE =
-      window.GTF_API_BASE ||
-      "/api";
+                    <div
+                        id="totalAccounts"
+                        class="stat-value"
+                    >
+                        —
+                    </div>
 
-    const ACCOUNTS_ENDPOINT =
-      API_BASE + "/accounts";
+                    <div class="stat-description">
+                        All registered accounts
+                    </div>
 
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-label">
+                        Active
+                    </div>
+
+                    <div
+                        id="activeAccounts"
+                        class="stat-value"
+                    >
+                        —
+                    </div>
+
+                    <div class="stat-description">
+                        Currently active accounts
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                    <div
+                        id="pendingAccounts"
+                        class="stat-value"
+                    >
+                        —
+                    </div>
+
+                    <div class="stat-description">
+                        Awaiting account review
+                    </div>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <div class="stat-label">
+                        Suspended
+                    </div>
+
+                    <div
+                        id="suspendedAccounts"
+                        class="stat-value"
+                    >
+                        —
+                    </div>
+
+                    <div class="stat-description">
+                        Accounts requiring attention
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 ACCOUNTS
+                 ================================================= -->
+
+            <section class="accounts-panel">
+
+
+                <div class="panel-header">
+
+                    <div class="panel-title">
+
+                        <h2>
+                            Account Directory
+                        </h2>
+
+                        <p>
+                            Search and filter banking accounts.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="refreshButton"
+                        class="refresh-button"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+
+                </div>
+
+
+                <!-- FILTERS -->
+
+                <div class="filters">
+
+
+                    <input
+                        id="searchInput"
+                        class="filter-input"
+                        type="search"
+                        placeholder="Search account number or customer..."
+                        autocomplete="off"
+                    >
+
+
+                    <select
+                        id="typeFilter"
+                        class="filter-select"
+                    >
+
+                        <option value="">
+                            All account types
+                        </option>
+
+                        <option value="checking">
+                            Checking
+                        </option>
+
+                        <option value="savings">
+                            Savings
+                        </option>
+
+                        <option value="business">
+                            Business
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="statusFilter"
+                        class="filter-select"
+                    >
+
+                        <option value="">
+                            All statuses
+                        </option>
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="suspended">
+                            Suspended
+                        </option>
+
+                        <option value="closed">
+                            Closed
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        id="clearButton"
+                        class="clear-button"
+                        type="button"
+                    >
+                        Clear
+
+                    </button>
+
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="table-wrapper">
+
+                    <table class="accounts-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Account
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Balance
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Created
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="accountsTableBody"
+                        >
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="table-message"
+                                >
+                                    Loading accounts...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- TABLE FOOTER -->
+
+                <div class="table-footer">
+
+                    <span
+                        id="resultCount"
+                        class="result-count"
+                    >
+                        Loading accounts...
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            id="previousButton"
+                            class="page-button"
+                            type="button"
+                            aria-label="Previous page"
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            class="page-button active"
+                            type="button"
+                            aria-current="page"
+                        >
+                            1
+                        </button>
+
+                        <button
+                            id="nextButton"
+                            class="page-button"
+                            type="button"
+                            aria-label="Next page"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="admin-footer">
+
+        <div class="admin-footer-inner">
+
+            <span>
+
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
+
+            </span>
+
+            <span>
+                Administrative Control Center
+            </span>
+
+        </div>
+
+    </footer>
+
+
+</div>
+
+
+<!-- =========================================================
+     EXISTING JAVASCRIPT
+     ========================================================= -->
+
+<script src="../js/app.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/role-guard.js"></script>
+
+
+<script>
 
     let allAccounts = [];
 
+    let filteredAccounts = [];
 
-    /*
-     * Demo-free initial state.
-     *
-     * The table remains empty until the backend returns
-     * authenticated account data.
-     */
-
-    const tableBody =
-      document.getElementById(
-        "accountsTableBody"
-      );
-
-    const emptyState =
-      document.getElementById(
-        "accountsEmpty"
-      );
-
-
-    const searchInput =
-      document.getElementById(
-        "accountSearch"
-      );
-
-    const typeFilter =
-      document.getElementById(
-        "accountTypeFilter"
-      );
-
-    const statusFilter =
-      document.getElementById(
-        "accountStatusFilter"
-      );
-
-
-    const totalAccounts =
-      document.getElementById(
-        "totalAccounts"
-      );
-
-    const activeAccounts =
-      document.getElementById(
-        "activeAccounts"
-      );
-
-    const pendingAccounts =
-      document.getElementById(
-        "pendingAccounts"
-      );
-
-    const lockedAccounts =
-      document.getElementById(
-        "lockedAccounts"
-      );
-
-
-    const resultCount =
-      document.getElementById(
-        "accountsResultCount"
-      );
-
-    const paginationInfo =
-      document.getElementById(
-        "paginationInfo"
-      );
-
-
-    /*
-     * Escape HTML before rendering backend data.
-     */
-
-    function escapeHTML(value) {
-
-      return String(
-        value ?? ""
-      )
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    /*
-     * Normalize backend account objects.
-     */
-
-    function normalizeAccount(account) {
-
-      return {
-
-        id:
-          account.id ||
-          account.account_id ||
-          "",
-
-        customerName:
-          account.customerName ||
-          account.customer_name ||
-          account.user_name ||
-          account.name ||
-          "Unknown customer",
-
-        email:
-          account.email ||
-          "",
-
-        accountNumber:
-          account.accountNumber ||
-          account.account_number ||
-          "—",
-
-        type:
-          String(
-            account.type ||
-            account.account_type ||
-            "checking"
-          ).toLowerCase(),
-
-        currency:
-          account.currency ||
-          "USD",
-
-        balance:
-          Number(
-            account.balance ??
-            account.available_balance ??
-            0
-          ),
-
-        status:
-          String(
-            account.status ||
-            "pending"
-          ).toLowerCase(),
-
-        updatedAt:
-          account.updatedAt ||
-          account.updated_at ||
-          account.createdAt ||
-          account.created_at ||
-          ""
-
-      };
-
-    }
-
-
-    /*
-     * Currency formatter.
-     */
+    let currentPage = 1;
 
-    function formatMoney(
-      amount,
-      currency
-    ) {
+    const pageSize = 10;
 
-      try {
 
-        return new Intl.NumberFormat(
-          undefined,
-          {
-            style: "currency",
-            currency: currency || "USD",
-            maximumFractionDigits: 2
-          }
-        ).format(
-          Number(amount) || 0
-        );
+    /* =====================================================
+       INITIALIZE
+       ===================================================== */
 
-      } catch (error) {
+    document.addEventListener(
+        "DOMContentLoaded",
+        async function () {
 
-        return (
-          String(currency || "USD") +
-          " " +
-          Number(amount || 0).toFixed(2)
-        );
+            document.getElementById(
+                "currentYear"
+            ).textContent =
+                new Date().getFullYear();
 
-      }
 
-    }
+            try {
 
+                if (
+                    typeof window.requireAdmin ===
+                    "function"
+                ) {
 
-    /*
-     * Date formatter.
-     */
+                    await window.requireAdmin();
 
-    function formatDate(value) {
+                } else if (
+                    typeof window.requireRole ===
+                    "function"
+                ) {
 
-      if (!value) {
-        return "—";
-      }
+                    await window.requireRole(
+                        "admin"
+                    );
 
-      const date =
-        new Date(value);
+                }
 
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-        return "—";
-      }
+            } catch (error) {
 
-      return date.toLocaleDateString(
-        undefined,
-        {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        }
-      );
+                console.warn(
+                    "Admin role guard:",
+                    error
+                );
 
-    }
+            }
 
 
-    /*
-     * Status class.
-     */
+            bindEvents();
 
-    function statusClass(status) {
+            await loadAdminUser();
 
-      if (
-        status === "active"
-      ) {
-        return "active";
-      }
-
-      if (
-        status === "locked" ||
-        status === "suspended"
-      ) {
-        return "locked";
-      }
-
-      return "pending";
-
-    }
-
-
-    /*
-     * Render table.
-     */
-
-    function renderAccounts(
-      accounts
-    ) {
-
-      tableBody.innerHTML = "";
-
-
-      if (!accounts.length) {
-
-        emptyState.style.display =
-          "block";
-
-        resultCount.textContent =
-          "0 accounts";
-
-        paginationInfo.textContent =
-          "Showing 0 accounts";
-
-        return;
-
-      }
-
-
-      emptyState.style.display =
-        "none";
-
-
-      accounts.forEach(
-        function (account) {
-
-          const row =
-            document.createElement(
-              "tr"
-            );
-
-
-          const status =
-            statusClass(
-              account.status
-            );
-
-
-          row.innerHTML = `
-
-            <td>
-
-              <div class="account-name">
-                ${escapeHTML(
-                  account.customerName
-                )}
-              </div>
-
-              ${
-                account.email
-                  ? `
-                    <div
-                      style="
-                        color:#8495a4;
-                        font-size:.52rem;
-                        margin-top:2px;
-                      "
-                    >
-                      ${escapeHTML(
-                        account.email
-                      )}
-                    </div>
-                  `
-                  : ""
-              }
-
-            </td>
-
-
-            <td>
-
-              <span class="account-number">
-                ${escapeHTML(
-                  account.accountNumber
-                )}
-              </span>
-
-            </td>
-
-
-            <td>
-
-              <span class="account-type">
-                ${escapeHTML(
-                  account.type
-                    .charAt(0)
-                    .toUpperCase() +
-                  account.type.slice(1)
-                )}
-              </span>
-
-            </td>
-
-
-            <td>
-              ${escapeHTML(
-                account.currency
-              )}
-            </td>
-
-
-            <td>
-
-              <span class="account-balance">
-                ${formatMoney(
-                  account.balance,
-                  account.currency
-                )}
-              </span>
-
-            </td>
-
-
-            <td>
-
-              <span
-                class="account-status ${status}"
-              >
-                ${escapeHTML(
-                  account.status
-                    .charAt(0)
-                    .toUpperCase() +
-                  account.status.slice(1)
-                )}
-              </span>
-
-            </td>
-
-
-            <td>
-              ${escapeHTML(
-                formatDate(
-                  account.updatedAt
-                )
-              )}
-            </td>
-
-
-            <td>
-
-              <div class="account-row-actions">
-
-                <button
-                  class="row-button"
-                  type="button"
-                  data-action="view"
-                  data-id="${escapeHTML(
-                    account.id
-                  )}"
-                >
-                  View
-                </button>
-
-                <button
-                  class="row-button"
-                  type="button"
-                  data-action="manage"
-                  data-id="${escapeHTML(
-                    account.id
-                  )}"
-                >
-                  Manage
-                </button>
-
-              </div>
-
-            </td>
-
-          `;
-
-
-          tableBody.appendChild(
-            row
-          );
+            await loadAccounts();
 
         }
-      );
+    );
 
 
-      resultCount.textContent =
-        `${accounts.length} account${
-          accounts.length === 1
-            ? ""
-            : "s"
-        }`;
+    /* =====================================================
+       EVENTS
+       ===================================================== */
 
-      paginationInfo.textContent =
-        `Showing ${accounts.length} account${
-          accounts.length === 1
-            ? ""
-            : "s"
-        }`;
+    function bindEvents() {
 
-    }
-
-
-    /*
-     * Update dashboard totals.
-     */
-
-    function updateSummary() {
-
-      const accounts =
-        allAccounts;
-
-
-      totalAccounts.textContent =
-        accounts.length;
-
-
-      activeAccounts.textContent =
-        accounts.filter(
-          function (account) {
-            return account.status === "active";
-          }
-        ).length;
-
-
-      pendingAccounts.textContent =
-        accounts.filter(
-          function (account) {
-            return account.status === "pending";
-          }
-        ).length;
-
-
-      lockedAccounts.textContent =
-        accounts.filter(
-          function (account) {
-
-            return (
-              account.status === "locked" ||
-              account.status === "suspended"
+        document
+            .getElementById("searchInput")
+            .addEventListener(
+                "input",
+                applyFilters
             );
 
-          }
-        ).length;
 
-    }
-
-
-    /*
-     * Search and filtering.
-     */
-
-    function applyFilters() {
-
-      const search =
-        searchInput.value
-          .trim()
-          .toLowerCase();
-
-      const selectedType =
-        typeFilter.value;
-
-      const selectedStatus =
-        statusFilter.value;
-
-
-      const filtered =
-        allAccounts.filter(
-          function (account) {
-
-            const searchable =
-              [
-                account.customerName,
-                account.email,
-                account.accountNumber,
-                account.type,
-                account.currency,
-                account.status
-              ]
-                .join(" ")
-                .toLowerCase();
-
-
-            const matchesSearch =
-              !search ||
-              searchable.includes(
-                search
-              );
-
-
-            const matchesType =
-              selectedType === "all" ||
-              account.type ===
-                selectedType;
-
-
-            const matchesStatus =
-              selectedStatus === "all" ||
-              account.status ===
-                selectedStatus;
-
-
-            return (
-              matchesSearch &&
-              matchesType &&
-              matchesStatus
+        document
+            .getElementById("typeFilter")
+            .addEventListener(
+                "change",
+                applyFilters
             );
 
-          }
-        );
+
+        document
+            .getElementById("statusFilter")
+            .addEventListener(
+                "change",
+                applyFilters
+            );
 
 
-      renderAccounts(
-        filtered
-      );
+        document
+            .getElementById("clearButton")
+            .addEventListener(
+                "click",
+                clearFilters
+            );
+
+
+        document
+            .getElementById("refreshButton")
+            .addEventListener(
+                "click",
+                async function () {
+
+                    this.disabled = true;
+
+                    this.textContent =
+                        "Refreshing...";
+
+                    try {
+
+                        await loadAccounts();
+
+                    } finally {
+
+                        this.disabled = false;
+
+                        this.textContent =
+                            "Refresh";
+
+                    }
+
+                }
+            );
+
+
+        document
+            .getElementById("previousButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    if (currentPage > 1) {
+
+                        currentPage--;
+
+                        renderAccounts();
+
+                    }
+
+                }
+            );
+
+
+        document
+            .getElementById("nextButton")
+            .addEventListener(
+                "click",
+                function () {
+
+                    const totalPages =
+                        Math.max(
+                            1,
+                            Math.ceil(
+                                filteredAccounts.length /
+                                pageSize
+                            )
+                        );
+
+
+                    if (
+                        currentPage <
+                        totalPages
+                    ) {
+
+                        currentPage++;
+
+                        renderAccounts();
+
+                    }
+
+                }
+            );
 
     }
 
 
-    /*
-     * Fetch authenticated accounts.
-     */
+    /* =====================================================
+       LOAD ADMIN USER
+       ===================================================== */
+
+    async function loadAdminUser() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "../api/users/me",
+                    {
+                        method: "GET",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                return;
+            }
+
+
+            const result =
+                await response.json();
+
+
+            const user =
+                result?.user ||
+                result?.data ||
+                result;
+
+
+            const name =
+                user?.full_name ||
+                user?.fullName ||
+                user?.name ||
+                user?.email;
+
+
+            if (name) {
+
+                document.getElementById(
+                    "adminUser"
+                ).textContent =
+                    name;
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to load administrator:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD ACCOUNTS
+       ===================================================== */
 
     async function loadAccounts() {
 
-      tableBody.innerHTML = "";
+        clearAlert();
 
-      emptyState.style.display =
-        "none";
-
-      resultCount.textContent =
-        "Loading accounts...";
+        showLoading();
 
 
-      try {
+        try {
 
-        const response =
-          await fetch(
-            ACCOUNTS_ENDPOINT,
-            {
-              method: "GET",
-              credentials: "include",
-              headers: {
-                "Accept":
-                  "application/json"
-              }
+            const response =
+                await fetch(
+                    "../api/accounts",
+                    {
+                        method: "GET",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Accounts API returned " +
+                    response.status
+                );
+
             }
-          );
 
 
-        if (
-          response.status === 401 ||
-          response.status === 403
-        ) {
-
-          window.location.href =
-            "login.html";
-
-          return;
-
-        }
+            const result =
+                await response.json();
 
 
-        if (!response.ok) {
-
-          throw new Error(
-            `Account request failed (${response.status})`
-          );
-
-        }
+            const accounts =
+                result?.accounts ||
+                result?.data ||
+                result?.items ||
+                [];
 
 
-        const payload =
-          await response.json();
+            allAccounts =
+                Array.isArray(accounts)
+                    ? accounts
+                    : [];
 
 
-        const data =
-          Array.isArray(payload)
-            ? payload
-            : (
-              payload.accounts ||
-              payload.data ||
-              []
+            /*
+             * If the backend returns a summary,
+             * update it when available.
+             */
+
+            updateStatistics(
+                result?.summary ||
+                result?.statistics ||
+                {}
             );
 
 
-        allAccounts =
-          data.map(
-            normalizeAccount
-          );
+            applyFilters();
 
 
-        updateSummary();
-        applyFilters();
+        } catch (error) {
+
+            console.warn(
+                "Unable to load accounts:",
+                error
+            );
 
 
-      } catch (error) {
+            allAccounts = [];
 
-        console.error(
-          "Unable to load accounts:",
-          error
-        );
+            filteredAccounts = [];
 
-
-        allAccounts = [];
-
-        updateSummary();
+            renderAccounts();
 
 
-        tableBody.innerHTML = "";
+            showAlert(
+                "Account data could not be loaded from the API. The account directory is ready for the backend connection."
+            );
 
-        emptyState.style.display =
-          "block";
-
-        emptyState.textContent =
-          "Accounts could not be loaded from the backend. Check the authenticated API connection.";
-
-
-        resultCount.textContent =
-          "Unable to load accounts";
-
-        paginationInfo.textContent =
-          "No account data loaded";
-
-      }
+        }
 
     }
 
 
-    /*
-     * Export currently filtered data.
-     */
+    /* =====================================================
+       FILTERING
+       ===================================================== */
 
-    function exportCSV() {
+    function applyFilters() {
 
-      const search =
-        searchInput.value
-          .trim()
-          .toLowerCase();
-
-      const selectedType =
-        typeFilter.value;
-
-      const selectedStatus =
-        statusFilter.value;
-
-
-      const accounts =
-        allAccounts.filter(
-          function (account) {
-
-            const searchable =
-              [
-                account.customerName,
-                account.email,
-                account.accountNumber,
-                account.type,
-                account.currency,
-                account.status
-              ]
-                .join(" ")
+        const search =
+            document
+                .getElementById(
+                    "searchInput"
+                )
+                .value
+                .trim()
                 .toLowerCase();
 
 
-            return (
-              (!search ||
-                searchable.includes(
-                  search
-                )) &&
-              (
-                selectedType === "all" ||
-                account.type ===
-                  selectedType
-              ) &&
-              (
-                selectedStatus === "all" ||
-                account.status ===
-                  selectedStatus
-              )
-            );
-
-          }
-        );
+        const type =
+            document
+                .getElementById(
+                    "typeFilter"
+                )
+                .value
+                .toLowerCase();
 
 
-      if (!accounts.length) {
-
-        alert(
-          "There are no account records to export."
-        );
-
-        return;
-
-      }
+        const status =
+            document
+                .getElementById(
+                    "statusFilter"
+                )
+                .value
+                .toLowerCase();
 
 
-      const headers = [
-        "Customer",
-        "Email",
-        "Account Number",
-        "Account Type",
-        "Currency",
-        "Balance",
-        "Status",
-        "Updated"
-      ];
+        filteredAccounts =
+            allAccounts.filter(
+                function (account) {
+
+                    const accountNumber =
+                        String(
+                            account.account_number ||
+                            account.accountNumber ||
+                            ""
+                        ).toLowerCase();
 
 
-      const rows =
-        accounts.map(
-          function (account) {
-
-            return [
-
-              account.customerName,
-
-              account.email,
-
-              account.accountNumber,
-
-              account.type,
-
-              account.currency,
-
-              account.balance,
-
-              account.status,
-
-              formatDate(
-                account.updatedAt
-              )
-
-            ];
-
-          }
-        );
+                    const customer =
+                        String(
+                            account.customer_name ||
+                            account.customerName ||
+                            account.name ||
+                            account.email ||
+                            ""
+                        ).toLowerCase();
 
 
-      const csvRows =
-        [
-          headers,
-          ...rows
-        ].map(
-          function (row) {
+                    const accountType =
+                        String(
+                            account.type ||
+                            account.account_type ||
+                            account.accountType ||
+                            ""
+                        ).toLowerCase();
 
-            return row
-              .map(
-                function (value) {
 
-                  const stringValue =
-                    String(
-                      value ?? ""
+                    const accountStatus =
+                        String(
+                            account.status ||
+                            ""
+                        ).toLowerCase();
+
+
+                    const matchesSearch =
+                        !search ||
+                        accountNumber.includes(
+                            search
+                        ) ||
+                        customer.includes(
+                            search
+                        );
+
+
+                    const matchesType =
+                        !type ||
+                        accountType === type;
+
+
+                    const matchesStatus =
+                        !status ||
+                        accountStatus === status;
+
+
+                    return (
+                        matchesSearch &&
+                        matchesType &&
+                        matchesStatus
                     );
 
-                  return `"${stringValue
-                    .replace(
-                      /"/g,
-                      '""'
-                    )}"`;
-
                 }
-              )
-              .join(",");
-
-          }
-        );
+            );
 
 
-      const blob =
-        new Blob(
-          [
-            csvRows.join("\n")
-          ],
-          {
-            type:
-              "text/csv;charset=utf-8;"
-          }
-        );
+        currentPage = 1;
 
-
-      const url =
-        URL.createObjectURL(
-          blob
-        );
-
-
-      const link =
-        document.createElement(
-          "a"
-        );
-
-      link.href = url;
-
-      link.download =
-        "gtf-accounts.csv";
-
-      document.body.appendChild(
-        link
-      );
-
-      link.click();
-
-      link.remove();
-
-      URL.revokeObjectURL(
-        url
-      );
+        renderAccounts();
 
     }
 
 
-    /*
-     * Table actions.
-     */
+    /* =====================================================
+       RENDER TABLE
+       ===================================================== */
 
-    tableBody.addEventListener(
-      "click",
-      function (event) {
+    function renderAccounts() {
 
-        const button =
-          event.target.closest(
-            "button[data-action]"
-          );
+        const tbody =
+            document.getElementById(
+                "accountsTableBody"
+            );
 
 
-        if (!button) {
-          return;
+        if (!tbody) {
+            return;
         }
 
 
-        const accountId =
-          button.dataset.id;
+        if (
+            filteredAccounts.length === 0
+        ) {
 
-        const action =
-          button.dataset.action;
+            tbody.innerHTML = `
 
+                <tr>
 
-        if (!accountId) {
+                    <td
+                        colspan="7"
+                        class="table-message"
+                    >
+                        No accounts found.
 
-          alert(
-            "This account does not have a valid ID."
-          );
+                    </td>
 
-          return;
+                </tr>
 
-        }
-
-
-        if (action === "view") {
-
-          /*
-           * Keep account management routed through
-           * the authenticated application.
-           */
-
-          window.location.href =
-            `account.html?id=${encodeURIComponent(
-              accountId
-            )}`;
-
-          return;
-
-        }
+            `;
 
 
-        if (action === "manage") {
+            document.getElementById(
+                "resultCount"
+            ).textContent =
+                "0 accounts";
 
-          window.location.href =
-            `account.html?id=${encodeURIComponent(
-              accountId
-            )}&mode=manage`;
+
+            updatePagination();
+
+            return;
 
         }
 
-      }
-    );
+
+        const start =
+            (
+                currentPage -
+                1
+            ) *
+            pageSize;
 
 
-    /*
-     * Events.
-     */
-
-    searchInput.addEventListener(
-      "input",
-      applyFilters
-    );
-
-    typeFilter.addEventListener(
-      "change",
-      applyFilters
-    );
-
-    statusFilter.addEventListener(
-      "change",
-      applyFilters
-    );
+        const pageAccounts =
+            filteredAccounts.slice(
+                start,
+                start + pageSize
+            );
 
 
-    document
-      .getElementById(
-        "refreshAccounts"
-      )
-      .addEventListener(
-        "click",
-        loadAccounts
-      );
+        tbody.innerHTML = "";
 
 
-    document
-      .getElementById(
-        "exportAccounts"
-      )
-      .addEventListener(
-        "click",
-        exportCSV
-      );
+        pageAccounts.forEach(
+            function (account) {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
 
 
-    /*
-     * Sign out.
-     */
+                const number =
+                    account.account_number ||
+                    account.accountNumber ||
+                    "—";
 
-    document
-      .getElementById(
-        "logoutButton"
-      )
-      .addEventListener(
-        "click",
-        async function () {
 
-          try {
+                const customer =
+                    account.customer_name ||
+                    account.customerName ||
+                    account.name ||
+                    account.email ||
+                    "—";
 
-            await fetch(
-              API_BASE + "/auth/logout",
-              {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                  "Accept":
-                    "application/json"
+
+                const type =
+                    account.type ||
+                    account.account_type ||
+                    account.accountType ||
+                    "—";
+
+
+                const balance =
+                    account.balance ??
+                    account.available_balance ??
+                    account.availableBalance ??
+                    0;
+
+
+                const status =
+                    account.status ||
+                    "active";
+
+
+                const created =
+                    account.created_at ||
+                    account.createdAt ||
+                    account.created ||
+                    "";
+
+
+                const id =
+                    account.id ||
+                    account.account_id ||
+                    account.accountId ||
+                    "";
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        <span class="account-number">
+                            ${escapeHtml(number)}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="customer-name">
+                            ${escapeHtml(customer)}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="account-type">
+                            ${escapeHtml(
+                                capitalize(type)
+                            )}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="balance">
+                            ${formatCurrency(balance)}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span
+                            class="status ${getStatusClass(status)}"
+                        >
+                            ${escapeHtml(
+                                capitalize(status)
+                            )}
+                        </span>
+
+                    </td>
+
+                    <td class="muted">
+                        ${escapeHtml(
+                            formatDate(created)
+                        )}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="action-button"
+                            type="button"
+                            data-account-id="${escapeHtml(id)}"
+                        >
+                            View
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                const action =
+                    row.querySelector(
+                        ".action-button"
+                    );
+
+
+                if (action) {
+
+                    action.addEventListener(
+                        "click",
+                        function () {
+
+                            viewAccount(
+                                account
+                            );
+
+                        }
+                    );
+
                 }
-              }
+
+
+                tbody.appendChild(row);
+
+            }
+        );
+
+
+        const startNumber =
+            start + 1;
+
+
+        const endNumber =
+            Math.min(
+                start +
+                pageSize,
+                filteredAccounts.length
             );
 
-          } catch (error) {
 
-            console.error(
-              "Logout request failed:",
-              error
+        document.getElementById(
+            "resultCount"
+        ).textContent =
+            `Showing ${startNumber}–${endNumber} of ${filteredAccounts.length} accounts`;
+
+
+        updatePagination();
+
+    }
+
+
+    /* =====================================================
+       STATISTICS
+       ===================================================== */
+
+    function updateStatistics(
+        summary
+    ) {
+
+        const total =
+            summary.total ??
+            summary.total_accounts;
+
+
+        const active =
+            summary.active ??
+            summary.active_accounts;
+
+
+        const pending =
+            summary.pending ??
+            summary.pending_accounts;
+
+
+        const suspended =
+            summary.suspended ??
+            summary.suspended_accounts;
+
+
+        if (
+            total !== undefined
+        ) {
+
+            setText(
+                "totalAccounts",
+                formatNumber(total)
             );
 
-          } finally {
+        } else {
+
+            setText(
+                "totalAccounts",
+                formatNumber(
+                    allAccounts.length
+                )
+            );
+
+        }
+
+
+        if (
+            active !== undefined
+        ) {
+
+            setText(
+                "activeAccounts",
+                formatNumber(active)
+            );
+
+        } else {
+
+            setText(
+                "activeAccounts",
+                formatNumber(
+                    countStatus(
+                        "active"
+                    )
+                )
+            );
+
+        }
+
+
+        if (
+            pending !== undefined
+        ) {
+
+            setText(
+                "pendingAccounts",
+                formatNumber(pending)
+            );
+
+        } else {
+
+            setText(
+                "pendingAccounts",
+                formatNumber(
+                    countStatus(
+                        "pending"
+                    )
+                )
+            );
+
+        }
+
+
+        if (
+            suspended !== undefined
+        ) {
+
+            setText(
+                "suspendedAccounts",
+                formatNumber(suspended)
+            );
+
+        } else {
+
+            setText(
+                "suspendedAccounts",
+                formatNumber(
+                    countStatus(
+                        "suspended"
+                    )
+                )
+            );
+
+        }
+
+    }
+
+
+    function countStatus(
+        targetStatus
+    ) {
+
+        return allAccounts.filter(
+            function (account) {
+
+                return String(
+                    account.status ||
+                    ""
+                ).toLowerCase() ===
+                targetStatus;
+
+            }
+        ).length;
+
+    }
+
+
+    /* =====================================================
+       VIEW ACCOUNT
+       ===================================================== */
+
+    function viewAccount(
+        account
+    ) {
+
+        const id =
+            account.id ||
+            account.account_id ||
+            account.accountId;
+
+
+        if (id) {
 
             window.location.href =
-              "login.html";
+                "./accounts.html?account=" +
+                encodeURIComponent(id);
 
-          }
-
-        }
-      );
-
-
-    /*
-     * Pagination placeholders.
-     *
-     * Actual server-side pagination should be connected
-     * when the backend endpoint supports it.
-     */
-
-    document
-      .getElementById(
-        "previousPage"
-      )
-      .addEventListener(
-        "click",
-        function () {
-
-          alert(
-            "You are already on the first page."
-          );
+            return;
 
         }
-      );
 
 
-    document
-      .getElementById(
-        "nextPage"
-      )
-      .addEventListener(
-        "click",
-        function () {
+        /*
+         * Safe fallback when the backend does
+         * not provide an account ID.
+         */
 
-          alert(
-            "Additional pages will be enabled when server-side pagination is connected."
-          );
+        alert(
+            "Account details are not available yet."
+        );
+
+    }
+
+
+    /* =====================================================
+       PAGINATION
+       ===================================================== */
+
+    function updatePagination() {
+
+        const totalPages =
+            Math.max(
+                1,
+                Math.ceil(
+                    filteredAccounts.length /
+                    pageSize
+                )
+            );
+
+
+        const previous =
+            document.getElementById(
+                "previousButton"
+            );
+
+
+        const next =
+            document.getElementById(
+                "nextButton"
+            );
+
+
+        previous.disabled =
+            currentPage <= 1;
+
+
+        next.disabled =
+            currentPage >= totalPages;
+
+    }
+
+
+    /* =====================================================
+       CLEAR FILTERS
+       ===================================================== */
+
+    function clearFilters() {
+
+        document.getElementById(
+            "searchInput"
+        ).value = "";
+
+
+        document.getElementById(
+            "typeFilter"
+        ).value = "";
+
+
+        document.getElementById(
+            "statusFilter"
+        ).value = "";
+
+
+        applyFilters();
+
+    }
+
+
+    /* =====================================================
+       LOADING
+       ===================================================== */
+
+    function showLoading() {
+
+        const tbody =
+            document.getElementById(
+                "accountsTableBody"
+            );
+
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="table-message"
+                >
+                    Loading accounts...
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       HELPERS
+       ===================================================== */
+
+    function formatCurrency(
+        value
+    ) {
+
+        const number =
+            Number(value || 0);
+
+
+        return new Intl.NumberFormat(
+            "en-US",
+            {
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 2
+            }
+        ).format(number);
+
+    }
+
+
+    function formatNumber(
+        value
+    ) {
+
+        return Number(
+            value || 0
+        ).toLocaleString();
+
+    }
+
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+            return "—";
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return String(value);
 
         }
-      );
 
 
-    /*
-     * Initial load.
-     */
+        return date.toLocaleDateString(
+            [],
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            }
+        );
 
-    loadAccounts();
+    }
 
-  </script>
+
+    function capitalize(
+        value
+    ) {
+
+        const text =
+            String(value || "");
+
+
+        return (
+            text.charAt(0).toUpperCase() +
+            text.slice(1)
+        );
+
+    }
+
+
+    function getStatusClass(
+        status
+    ) {
+
+        const value =
+            String(
+                status || ""
+            ).toLowerCase();
+
+
+        if (
+            value === "pending"
+        ) {
+
+            return "pending";
+
+        }
+
+
+        if (
+            value === "suspended"
+        ) {
+
+            return "suspended";
+
+        }
+
+
+        if (
+            value === "closed"
+        ) {
+
+            return "closed";
+
+        }
+
+
+        return "active";
+
+    }
+
+
+    function setText(
+        id,
+        value
+    ) {
+
+        const element =
+            document.getElementById(
+                id
+            );
+
+
+        if (element) {
+
+            element.textContent =
+                value;
+
+        }
+
+    }
+
+
+    function escapeHtml(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+    }
+
+
+    /* =====================================================
+       ALERT
+       ===================================================== */
+
+    function showAlert(
+        message
+    ) {
+
+        const alert =
+            document.getElementById(
+                "adminAlert"
+            );
+
+
+        alert.textContent =
+            message;
+
+
+        alert.classList.add(
+            "show"
+        );
+
+    }
+
+
+    function clearAlert() {
+
+        const alert =
+            document.getElementById(
+                "adminAlert"
+            );
+
+
+        alert.textContent =
+            "";
+
+
+        alert.classList.remove(
+            "show"
+        );
+
+    }
+
+</script>
+
 
 </body>
+
 </html>
