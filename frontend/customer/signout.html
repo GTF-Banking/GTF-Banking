@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund secure customer sign-out"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <meta
+        http-equiv="Cache-Control"
+        content="no-store, no-cache, must-revalidate"
+    >
+
+    <meta
+        http-equiv="Pragma"
+        content="no-cache"
+    >
+
+    <meta
+        http-equiv="Expires"
+        content="0"
+    >
+
+    <title>Signing Out | Global TrustFund</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="../assets/gtf-logo.svg"
+    >
+
+    <style>
+        .signout-page {
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f8f6 0%,
+                    #eaf3ee 100%
+                );
+        }
+
+        .signout-card {
+            width: min(
+                100%,
+                480px
+            );
+
+            padding: 42px 32px;
+
+            background:
+                var(--gtf-white);
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius:
+                var(--gtf-radius-xl);
+
+            box-shadow:
+                var(--gtf-shadow-lg);
+
+            text-align: center;
+        }
+
+        .signout-brand {
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 30px;
+        }
+
+        .signout-icon {
+            width: 72px;
+            height: 72px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin:
+                0 auto 22px;
+
+            border-radius: 50%;
+
+            background:
+                var(--gtf-green-soft);
+
+            color:
+                var(--gtf-green);
+
+            font-size: 28px;
+
+            font-weight: 800;
+        }
+
+        .signout-spinner {
+            width: 24px;
+            height: 24px;
+
+            margin:
+                20px auto;
+
+            border:
+                3px solid
+                rgba(23,107,72,.16);
+
+            border-top-color:
+                var(--gtf-green);
+
+            border-radius: 50%;
+
+            animation:
+                signout-spin .7s linear infinite;
+        }
+
+        @keyframes signout-spin {
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+        .signout-card h1 {
+            margin-bottom: 10px;
+
+            color:
+                var(--gtf-green);
+
+            font-size: 24px;
+
+            line-height: 1.2;
+        }
+
+        .signout-card p {
+            max-width: 350px;
+
+            margin:
+                0 auto 20px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+        .signout-status {
+            min-height: 20px;
+
+            margin-top: 10px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 8px;
+        }
+
+        .signout-actions {
+            display: none;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .signout-security {
+            margin-top: 25px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                var(--gtf-border);
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+
+            line-height: 1.7;
+        }
+
+        .signout-security strong {
+            color:
+                var(--gtf-green);
+        }
+
+        @media (max-width: 450px) {
+
+            .signout-page {
+                padding: 15px;
+            }
+
+            .signout-card {
+                padding:
+                    32px 20px;
+            }
+
+            .signout-card h1 {
+                font-size: 21px;
+            }
+
+            .signout-icon {
+                width: 62px;
+                height: 62px;
+
+                font-size: 23px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .signout-spinner {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="signout-page">
+
+        <section
+            class="signout-card"
+            aria-labelledby="signout-title"
+        >
+
+            <div class="signout-brand">
+                <a
+                    href="../index.html"
+                    class="brand"
+                    aria-label="Global TrustFund home"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+                    <span class="brand-text">
+                        <strong>GLOBAL TRUSTFUND</strong>
+                        <small>SECURE BANKING</small>
+                    </span>
+
+                </a>
+            </div>
+
+            <div
+                class="signout-icon"
+                aria-hidden="true"
+            >
+                ✓
+            </div>
+
+            <h1 id="signout-title">
+                Signing You Out
+            </h1>
+
+            <p id="signout-message">
+                Please wait while we securely end your banking session.
+            </p>
+
+            <div
+                class="signout-spinner"
+                id="signout-spinner"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="signout-status"
+                id="signout-status"
+                role="status"
+                aria-live="polite"
+            >
+                Securing your session...
+            </div>
+
+            <div
+                class="signout-actions"
+                id="signout-actions"
+            >
+
+                <a
+                    href="login.html"
+                    class="button button-primary"
+                >
+                    Sign In Again
+                </a>
+
+                <a
+                    href="../index.html"
+                    class="button button-outline"
+                >
+                    Return Home
+                </a>
+
+            </div>
+
+            <div class="signout-security">
+                <strong>Security reminder:</strong>
+                For your protection, always sign out when using
+                Global TrustFund on a shared or public device.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+        (function () {
+
+            "use strict";
+
+            const LOGIN_PAGE = "login.html";
+
+            const API_LOGOUT_ENDPOINT =
+                "/api/auth/logout";
+
+            const statusElement =
+                document.getElementById("signout-status");
+
+            const messageElement =
+                document.getElementById("signout-message");
+
+            const spinnerElement =
+                document.getElementById("signout-spinner");
+
+            const actionsElement =
+                document.getElementById("signout-actions");
+
+
+            /*
+             * ---------------------------------------------------------
+             * Broadcast logout to other browser tabs/windows.
+             * ---------------------------------------------------------
+             */
+
+            try {
+
+                if ("BroadcastChannel" in window) {
+
+                    const channel =
+                        new BroadcastChannel("gtf-auth");
+
+                    channel.postMessage({
+                        type: "SIGNED_OUT",
+                        timestamp: Date.now()
+                    });
+
+                    channel.close();
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Logout broadcast unavailable.",
+                    error
+                );
+            }
+
+
+            /*
+             * ---------------------------------------------------------
+             * Remove client-side authentication/session data.
+             * ---------------------------------------------------------
+             */
+
+            function clearClientSession() {
+
+                const sensitiveKeys = [
+                    "token",
+                    "access_token",
+                    "refresh_token",
+                    "auth_token",
+                    "session",
+                    "session_token",
+                    "user",
+                    "user_data",
+                    "current_user",
+                    "customer",
+                    "customer_data",
+                    "gtf_user",
+                    "gtf_session",
+                    "gtf_auth",
+                    "supabase.auth.token"
+                ];
+
+
+                sensitiveKeys.forEach(function (key) {
+
+                    try {
+                        localStorage.removeItem(key);
+                    } catch (error) {
+                        console.warn(
+                            "Unable to clear localStorage key:",
+                            key
+                        );
+                    }
+
+                    try {
+                        sessionStorage.removeItem(key);
+                    } catch (error) {
+                        console.warn(
+                            "Unable to clear sessionStorage key:",
+                            key
+                        );
+                    }
+
+                });
+
+
+                /*
+                 * Remove application-specific local storage
+                 * entries beginning with GTF.
+                 */
+
+                try {
+
+                    const localKeys = [];
+
+                    for (
+                        let index = 0;
+                        index < localStorage.length;
+                        index++
+                    ) {
+
+                        const key =
+                            localStorage.key(index);
+
+                        if (
+                            key &&
+                            (
+                                key.toLowerCase().startsWith("gtf_") ||
+                                key.toLowerCase().startsWith("gtf-")
+                            )
+                        ) {
+                            localKeys.push(key);
+                        }
+                    }
+
+                    localKeys.forEach(function (key) {
+                        localStorage.removeItem(key);
+                    });
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to clear GTF local storage.",
+                        error
+                    );
+                }
+
+
+                /*
+                 * Clear session storage completely.
+                 *
+                 * Authentication/session data should not remain
+                 * available after logout.
+                 */
+
+                try {
+                    sessionStorage.clear();
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to clear sessionStorage.",
+                        error
+                    );
+                }
+
+            }
+
+
+            /*
+             * ---------------------------------------------------------
+             * Ask the backend to terminate the server-side session.
+             * ---------------------------------------------------------
+             */
+
+            async function serverLogout() {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            API_LOGOUT_ENDPOINT,
+                            {
+                                method: "POST",
+
+                                credentials: "include",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json"
+                                },
+
+                                cache: "no-store"
+                            }
+                        );
+
+                    /*
+                     * Even if the endpoint returns an error,
+                     * local session cleanup should still happen.
+                     */
+
+                    return response.ok;
+
+                } catch (error) {
+
+                    console.warn(
+                        "Server logout request failed.",
+                        error
+                    );
+
+                    return false;
+                }
+            }
+
+
+            /*
+             * ---------------------------------------------------------
+             * Finish logout.
+             * ---------------------------------------------------------
+             */
+
+            function finishLogout() {
+
+                clearClientSession();
+
+                statusElement.textContent =
+                    "Your session has been securely closed.";
+
+                messageElement.textContent =
+                    "You have been signed out of Global TrustFund.";
+
+                spinnerElement.style.display =
+                    "none";
+
+                actionsElement.style.display =
+                    "flex";
+
+
+                /*
+                 * Give the user enough time to see the
+                 * confirmation before redirecting.
+                 */
+
+                setTimeout(function () {
+
+                    window.location.replace(
+                        LOGIN_PAGE
+                    );
+
+                }, 1400);
+
+            }
+
+
+            /*
+             * ---------------------------------------------------------
+             * Execute logout.
+             * ---------------------------------------------------------
+             */
+
+            async function logout() {
+
+                statusElement.textContent =
+                    "Ending your secure session...";
+
+                /*
+                 * Attempt server-side logout first.
+                 */
+
+                await serverLogout();
+
+                /*
+                 * Always clean local authentication state.
+                 */
+
+                clearClientSession();
+
+                statusElement.textContent =
+                    "Session secured.";
+
+                messageElement.textContent =
+                    "You have been safely signed out.";
+
+                spinnerElement.style.display =
+                    "none";
+
+                actionsElement.style.display =
+                    "flex";
+
+
+                /*
+                 * Redirect after a short confirmation period.
+                 */
+
+                setTimeout(function () {
+
+                    window.location.replace(
+                        LOGIN_PAGE
+                    );
+
+                }, 1400);
+
+            }
+
+
+            /*
+             * Prevent browser back navigation from exposing
+             * previously cached authenticated pages.
+             */
+
+            window.addEventListener(
+                "pageshow",
+                function (event) {
+
+                    if (event.persisted) {
+
+                        window.location.reload();
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * Start logout.
+             */
+
+            logout();
+
+        })();
+    </script>
+
+</body>
+</html>
