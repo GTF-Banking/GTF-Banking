@@ -1,0 +1,2644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Support | Cashier | Global TrustFund</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        :root {
+            --gtf-green: #0b5d3b;
+            --gtf-dark: #073d28;
+            --gtf-light: #16865a;
+            --gtf-gold: #c9962b;
+
+            --background: #f4f8f6;
+            --surface: #ffffff;
+            --surface-soft: #f8fbf9;
+            --border: #dce7e1;
+
+            --text: #18352a;
+            --muted: #718078;
+
+            --success: #19734b;
+            --success-bg: #eaf7ef;
+
+            --warning: #946b17;
+            --warning-bg: #fff7df;
+
+            --danger: #a33f3f;
+            --danger-bg: #fff0f0;
+
+            --info: #246b91;
+            --info-bg: #edf7fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+
+            padding: 22px 16px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--gtf-dark),
+                    #052e1f
+                );
+
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 5px 8px 22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.12);
+
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .nav-title {
+            margin: 23px 9px 9px;
+            color: rgba(255,255,255,.42);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: grid;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            min-height: 38px;
+            padding: 0 11px;
+
+            border-radius: 7px;
+
+            color: rgba(255,255,255,.72);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition:
+                background .15s ease,
+                color .15s ease;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.10);
+            color: #fff;
+        }
+
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .profile {
+            margin-top: 30px;
+            padding: 13px;
+
+            border:
+                1px solid rgba(255,255,255,.10);
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,.05);
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 9px;
+        }
+
+        .profile span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .logout {
+            width: 100%;
+            min-height: 30px;
+            margin-top: 10px;
+
+            border:
+                1px solid rgba(255,255,255,.15);
+
+            border-radius: 6px;
+
+            background: transparent;
+            color: rgba(255,255,255,.75);
+
+            font-size: 8px;
+        }
+
+        /* MAIN */
+
+        .main {
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 68px;
+
+            padding: 14px 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            background: #fff;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            color: var(--gtf-dark);
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 8px;
+        }
+
+        .session {
+            padding: 7px 10px;
+
+            border-radius: 20px;
+
+            background: var(--success-bg);
+            color: var(--success);
+
+            font-size: 7px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .content {
+            padding: 27px;
+        }
+
+        /* HERO */
+
+        .support-hero {
+            padding: 24px;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gtf-dark),
+                    var(--gtf-green)
+                );
+
+            color: #fff;
+
+            margin-bottom: 20px;
+        }
+
+        .support-hero h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .support-hero p {
+            max-width: 650px;
+
+            margin: 8px 0 0;
+
+            color: rgba(255,255,255,.72);
+
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+        /* GRID */
+
+        .support-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.25fr)
+                minmax(280px, .75fr);
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+        .card {
+            overflow: hidden;
+
+            background: var(--surface);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 11px;
+        }
+
+        .card + .card {
+            margin-top: 20px;
+        }
+
+        .card-header {
+            padding: 17px 18px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .card-header h2 {
+            margin: 0;
+
+            color: var(--gtf-dark);
+
+            font-size: 13px;
+        }
+
+        .card-header p {
+            margin: 5px 0 0;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        .card-body {
+            padding: 19px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: var(--gtf-dark);
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .input,
+        .select,
+        .textarea {
+            width: 100%;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #fff;
+
+            color: var(--text);
+
+            font-size: 9px;
+        }
+
+        .input,
+        .select {
+            min-height: 39px;
+
+            padding: 0 11px;
+        }
+
+        .textarea {
+            min-height: 120px;
+
+            padding: 10px 11px;
+
+            resize: vertical;
+        }
+
+        .input:focus,
+        .select:focus,
+        .textarea:focus {
+            border-color:
+                var(--gtf-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(22,134,90,.08);
+        }
+
+        .button {
+            min-height: 39px;
+
+            padding: 0 16px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .button.primary {
+            background: var(--gtf-green);
+            color: #fff;
+        }
+
+        .button.secondary {
+            background: #edf3f0;
+            color: var(--gtf-dark);
+        }
+
+        .button.danger {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .button:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        .form-actions {
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            margin-top: 18px;
+
+            padding-top: 16px;
+
+            border-top:
+                1px solid var(--border);
+        }
+
+        /* SUPPORT CATEGORIES */
+
+        .category-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 9px;
+        }
+
+        .category {
+            padding: 13px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: var(--surface-soft);
+
+            cursor: pointer;
+
+            transition:
+                border-color .15s ease,
+                transform .15s ease;
+        }
+
+        .category:hover {
+            border-color:
+                var(--gtf-light);
+
+            transform:
+                translateY(-1px);
+        }
+
+        .category-icon {
+            font-size: 15px;
+        }
+
+        .category strong {
+            display: block;
+
+            margin-top: 7px;
+
+            color: var(--gtf-dark);
+
+            font-size: 8px;
+        }
+
+        .category span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--muted);
+
+            font-size: 6px;
+
+            line-height: 1.4;
+        }
+
+        /* CONTACT */
+
+        .contact-list {
+            display: grid;
+            gap: 9px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            padding: 12px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: var(--surface-soft);
+        }
+
+        .contact-icon {
+            width: 31px;
+            height: 31px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 7px;
+
+            background: var(--success-bg);
+
+            color: var(--success);
+
+            font-size: 12px;
+        }
+
+        .contact-item strong {
+            display: block;
+
+            color: var(--gtf-dark);
+
+            font-size: 8px;
+        }
+
+        .contact-item span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        /* FAQ */
+
+        .faq {
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .faq:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-question {
+            width: 100%;
+
+            padding: 13px 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--gtf-dark);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            text-align: left;
+        }
+
+        .faq-answer {
+            display: none;
+
+            padding:
+                0 0 14px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+
+            line-height: 1.6;
+        }
+
+        .faq.open .faq-answer {
+            display: block;
+        }
+
+        .faq-arrow {
+            font-size: 11px;
+        }
+
+        /* TICKET */
+
+        .ticket {
+            padding: 13px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: var(--surface-soft);
+
+            margin-bottom: 9px;
+        }
+
+        .ticket:last-child {
+            margin-bottom: 0;
+        }
+
+        .ticket-head {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .ticket strong {
+            color: var(--gtf-dark);
+
+            font-size: 8px;
+        }
+
+        .ticket small {
+            display: block;
+
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 6px;
+        }
+
+        .ticket-status {
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            background: var(--success-bg);
+
+            color: var(--success);
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .ticket-message {
+            margin-top: 9px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+        /* NOTICE */
+
+        .notice {
+            padding: 12px;
+
+            border-radius: 7px;
+
+            background: var(--info-bg);
+
+            color: var(--info);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+        .notice strong {
+            display: block;
+
+            margin-bottom: 4px;
+
+            font-size: 8px;
+        }
+
+        /* MODAL */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0,0,0,.45);
+
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-card {
+            width: min(500px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 11px;
+
+            background: #fff;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,.22);
+        }
+
+        .modal-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 17px 18px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            color: var(--gtf-dark);
+
+            font-size: 13px;
+        }
+
+        .modal-close {
+            width: 30px;
+            height: 30px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background: #edf3f0;
+
+            color: var(--gtf-dark);
+
+            font-size: 14px;
+        }
+
+        .modal-body {
+            padding: 19px;
+        }
+
+        /* TOAST */
+
+        .toast {
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 2000;
+
+            min-width: 250px;
+
+            max-width: 380px;
+
+            padding: 13px 15px;
+
+            border-radius: 8px;
+
+            background: var(--gtf-dark);
+
+            color: #fff;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.18);
+
+            font-size: 8px;
+
+            transform:
+                translateY(20px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                opacity .2s ease,
+                transform .2s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1050px) {
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+
+                height: auto;
+            }
+
+            .profile {
+                display: none;
+            }
+
+            .nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content {
+                padding: 17px;
+            }
+
+        }
+
+        @media (max-width: 560px) {
+
+            .topbar {
+                padding: 13px 17px;
+            }
+
+            .session {
+                display: none;
+            }
+
+            .form-grid,
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .button {
+                width: 100%;
+            }
+
+            .support-hero {
+                padding: 18px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a href="./index.html" class="brand">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    Global TrustFund
+                </strong>
+
+                <span>
+                    Cashier Operations Portal
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="nav-title">
+            Cashier Operations
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="./index.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="./transactions.html">
+                <span class="nav-icon">⇄</span>
+                Transactions
+            </a>
+
+            <a href="./customers.html">
+                <span class="nav-icon">♙</span>
+                Customers
+            </a>
+
+            <a href="./deposits.html">
+                <span class="nav-icon">↓</span>
+                Deposits
+            </a>
+
+            <a href="./withdrawals.html">
+                <span class="nav-icon">↑</span>
+                Withdrawals
+            </a>
+
+            <a href="./transfers.html">
+                <span class="nav-icon">↔</span>
+                Transfers
+            </a>
+
+            <a href="./drawer.html">
+                <span class="nav-icon">▣</span>
+                Cash Drawer
+            </a>
+
+            <a
+                href="./support.html"
+                class="active"
+            >
+                <span class="nav-icon">?</span>
+                Support
+            </a>
+
+        </nav>
+
+
+        <div class="profile">
+
+            <strong id="cashierName">
+                Cashier
+            </strong>
+
+            <span>
+                Cashier Operations
+            </span>
+
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Cashier Support
+                </h1>
+
+                <p>
+                    Get help with cashier operations, transactions and system issues.
+                </p>
+
+            </div>
+
+            <span class="session">
+                ● Cashier Session Active
+            </span>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- HERO -->
+
+            <section class="support-hero">
+
+                <h2>
+                    How can we help?
+                </h2>
+
+                <p>
+                    Find answers to common cashier questions or contact the
+                    support team when you need assistance with an operational
+                    issue.
+                </p>
+
+            </section>
+
+
+            <div class="support-grid">
+
+                <!-- LEFT COLUMN -->
+
+                <div>
+
+
+                    <!-- CREATE TICKET -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Contact Support
+                            </h2>
+
+                            <p>
+                                Submit an operational support request.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <form id="supportForm">
+
+                                <div class="form-grid">
+
+
+                                    <div class="field">
+
+                                        <label for="category">
+                                            Support Category
+                                        </label>
+
+                                        <select
+                                            id="category"
+                                            class="select"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Select category
+                                            </option>
+
+                                            <option value="transaction">
+                                                Transaction Issue
+                                            </option>
+
+                                            <option value="customer">
+                                                Customer Issue
+                                            </option>
+
+                                            <option value="cash-drawer">
+                                                Cash Drawer
+                                            </option>
+
+                                            <option value="system">
+                                                System / Technical
+                                            </option>
+
+                                            <option value="access">
+                                                Account Access
+                                            </option>
+
+                                            <option value="other">
+                                                Other
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="field">
+
+                                        <label for="priority">
+                                            Priority
+                                        </label>
+
+                                        <select
+                                            id="priority"
+                                            class="select"
+                                            required
+                                        >
+
+                                            <option value="normal">
+                                                Normal
+                                            </option>
+
+                                            <option value="high">
+                                                High
+                                            </option>
+
+                                            <option value="urgent">
+                                                Urgent
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="field">
+
+                                        <label for="reference">
+                                            Transaction / Reference ID
+                                        </label>
+
+                                        <input
+                                            id="reference"
+                                            class="input"
+                                            type="text"
+                                            placeholder="Optional reference"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="field">
+
+                                        <label for="subject">
+                                            Subject
+                                        </label>
+
+                                        <input
+                                            id="subject"
+                                            class="input"
+                                            type="text"
+                                            maxlength="120"
+                                            placeholder="Brief description"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="field full">
+
+                                        <label for="message">
+                                            Description
+                                        </label>
+
+                                        <textarea
+                                            id="message"
+                                            class="textarea"
+                                            maxlength="3000"
+                                            placeholder="Describe the issue and any relevant details..."
+                                            required
+                                        ></textarea>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="notice" style="margin-top:15px;">
+
+                                    <strong>
+                                        Security reminder
+                                    </strong>
+
+                                    Never include passwords, PINs, authentication
+                                    codes or complete payment-card credentials in
+                                    a support ticket.
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="reset"
+                                        class="button secondary"
+                                    >
+                                        Clear
+                                    </button>
+
+
+                                    <button
+                                        type="submit"
+                                        class="button primary"
+                                        id="submitTicket"
+                                    >
+                                        Submit Support Request
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- MY TICKETS -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                My Support Requests
+                            </h2>
+
+                            <p>
+                                Recent requests submitted by your cashier account.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div id="ticketsList">
+
+                                <div class="ticket">
+
+                                    <div class="ticket-head">
+
+                                        <div>
+
+                                            <strong>
+                                                Loading support requests...
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- RIGHT COLUMN -->
+
+                <aside>
+
+
+                    <!-- CATEGORIES -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Quick Help
+                            </h2>
+
+                            <p>
+                                Select a topic to start a support request.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="category-grid">
+
+
+                                <div
+                                    class="category"
+                                    data-category="transaction"
+                                >
+
+                                    <div class="category-icon">
+                                        ⇄
+                                    </div>
+
+                                    <strong>
+                                        Transactions
+                                    </strong>
+
+                                    <span>
+                                        Failed, pending or incorrect transactions.
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="category"
+                                    data-category="customer"
+                                >
+
+                                    <div class="category-icon">
+                                        ♙
+                                    </div>
+
+                                    <strong>
+                                        Customer
+                                    </strong>
+
+                                    <span>
+                                        Customer account and service issues.
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="category"
+                                    data-category="cash-drawer"
+                                >
+
+                                    <div class="category-icon">
+                                        ▣
+                                    </div>
+
+                                    <strong>
+                                        Cash Drawer
+                                    </strong>
+
+                                    <span>
+                                        Drawer opening, counting and reconciliation.
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="category"
+                                    data-category="system"
+                                >
+
+                                    <div class="category-icon">
+                                        ⚙
+                                    </div>
+
+                                    <strong>
+                                        Technical
+                                    </strong>
+
+                                    <span>
+                                        Login, application or system problems.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CONTACT CHANNELS -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Support Channels
+                            </h2>
+
+                            <p>
+                                Available internal support channels.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="contact-list">
+
+
+                                <div class="contact-item">
+
+                                    <div class="contact-icon">
+                                        ?
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Operations Desk
+                                        </strong>
+
+                                        <span>
+                                            For cashier operational assistance
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="contact-item">
+
+                                    <div class="contact-icon">
+                                        ⚙
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            IT Support
+                                        </strong>
+
+                                        <span>
+                                            For system and technical problems
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="contact-item">
+
+                                    <div class="contact-icon">
+                                        !
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Security Desk
+                                        </strong>
+
+                                        <span>
+                                            For suspected security incidents
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- FAQ -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Frequently Asked Questions
+                            </h2>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+
+                            <div class="faq">
+
+                                <button
+                                    class="faq-question"
+                                    type="button"
+                                >
+
+                                    How do I report a failed transaction?
+
+                                    <span class="faq-arrow">
+                                        +
+                                    </span>
+
+                                </button>
+
+                                <div class="faq-answer">
+
+                                    Submit a support request using the
+                                    Transaction Issue category and include the
+                                    transaction reference ID.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="faq">
+
+                                <button
+                                    class="faq-question"
+                                    type="button"
+                                >
+
+                                    What should I do if my drawer does not balance?
+
+                                    <span class="faq-arrow">
+                                        +
+                                    </span>
+
+                                </button>
+
+                                <div class="faq-answer">
+
+                                    Recount the physical cash, verify posted
+                                    transactions and submit a Cash Drawer
+                                    support request if the discrepancy remains.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="faq">
+
+                                <button
+                                    class="faq-question"
+                                    type="button"
+                                >
+
+                                    When should I report a security issue?
+
+                                    <span class="faq-arrow">
+                                        +
+                                    </span>
+
+                                </button>
+
+                                <div class="faq-answer">
+
+                                    Report suspected unauthorized access,
+                                    suspicious activity or compromised
+                                    credentials through the designated security
+                                    channel immediately.
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="faq">
+
+                                <button
+                                    class="faq-question"
+                                    type="button"
+                                >
+
+                                    Can I include a customer's password?
+
+                                    <span class="faq-arrow">
+                                        +
+                                    </span>
+
+                                </button>
+
+                                <div class="faq-answer">
+
+                                    No. Never include passwords, PINs,
+                                    authentication codes or other sensitive
+                                    authentication information in support
+                                    requests.
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- TICKET MODAL -->
+
+<div
+    class="modal"
+    id="ticketModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ticketModalTitle"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2 id="ticketModalTitle">
+                Support Request
+            </h2>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <p
+                id="modalMessage"
+                style="
+                    margin:0;
+                    color:var(--muted);
+                    font-size:8px;
+                    line-height:1.6;
+                "
+            ></p>
+
+            <button
+                type="button"
+                class="button primary"
+                id="modalDone"
+                style="
+                    width:100%;
+                    margin-top:18px;
+                "
+            >
+                Done
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+></div>
+
+
+<script>
+
+    /*
+     * ============================================================
+     * GLOBAL TRUSTFUND — CASHIER SUPPORT
+     * ============================================================
+     *
+     * API CONTRACT:
+     *
+     * GET  /api/support/tickets
+     * POST /api/support/tickets
+     * POST /api/auth/signout
+     *
+     * The backend must authenticate the cashier and determine the
+     * cashier identity from the authenticated session/token.
+     *
+     * Do not trust cashier_id supplied by the browser.
+     */
+
+
+    const API_BASE = "/api";
+
+
+    /* ------------------------------------------------------------
+       HELPERS
+    ------------------------------------------------------------ */
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function showToast(
+        message
+    ) {
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        clearTimeout(
+            window.__toastTimer
+        );
+
+
+        window.__toastTimer =
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                3500
+            );
+
+    }
+
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+            return "—";
+        }
+
+
+        const date =
+            new Date(
+                value
+            );
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return escapeHtml(
+                value
+            );
+
+        }
+
+
+        return date.toLocaleString(
+            "en-NG",
+            {
+                dateStyle: "medium",
+                timeStyle: "short"
+            }
+        );
+
+    }
+
+
+    function getCashierName() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    "gtf_user"
+                );
+
+
+            if (saved) {
+
+                const user =
+                    JSON.parse(
+                        saved
+                    );
+
+
+                return (
+                    user.full_name ||
+                    user.name ||
+                    user.email ||
+                    "Cashier"
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Unable to read cashier profile.",
+                error
+            );
+
+        }
+
+
+        return "Cashier";
+
+    }
+
+
+    document.getElementById(
+        "cashierName"
+    ).textContent =
+        getCashierName();
+
+
+    /* ------------------------------------------------------------
+       CATEGORY SHORTCUTS
+    ------------------------------------------------------------ */
+
+    document
+        .querySelectorAll(
+            ".category"
+        )
+        .forEach(
+            category => {
+
+                category.addEventListener(
+                    "click",
+                    () => {
+
+                        const value =
+                            category.dataset.category;
+
+
+                        document.getElementById(
+                            "category"
+                        ).value =
+                            value;
+
+
+                        document.getElementById(
+                            "subject"
+                        ).focus();
+
+
+                        window.scrollTo(
+                            {
+                                top: 0,
+                                behavior: "smooth"
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* ------------------------------------------------------------
+       FAQ
+    ------------------------------------------------------------ */
+
+    document
+        .querySelectorAll(
+            ".faq-question"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const faq =
+                            button.parentElement;
+
+
+                        faq.classList.toggle(
+                            "open"
+                        );
+
+
+                        const arrow =
+                            button.querySelector(
+                                ".faq-arrow"
+                            );
+
+
+                        arrow.textContent =
+                            faq.classList.contains(
+                                "open"
+                            )
+                                ? "−"
+                                : "+";
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* ------------------------------------------------------------
+       SUBMIT TICKET
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "supportForm"
+    ).addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const category =
+                document.getElementById(
+                    "category"
+                ).value;
+
+
+            const priority =
+                document.getElementById(
+                    "priority"
+                ).value;
+
+
+            const reference =
+                document.getElementById(
+                    "reference"
+                ).value.trim();
+
+
+            const subject =
+                document.getElementById(
+                    "subject"
+                ).value.trim();
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                ).value.trim();
+
+
+            if (!category) {
+
+                showToast(
+                    "Select a support category."
+                );
+
+                return;
+
+            }
+
+
+            if (!subject) {
+
+                showToast(
+                    "Enter a support subject."
+                );
+
+                return;
+
+            }
+
+
+            if (!message) {
+
+                showToast(
+                    "Describe the issue."
+                );
+
+                return;
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "submitTicket"
+                );
+
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "Submitting...";
+
+
+            const payload = {
+
+                category:
+                    category,
+
+                priority:
+                    priority,
+
+                reference_id:
+                    reference || null,
+
+                subject:
+                    subject,
+
+                message:
+                    message
+
+            };
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/support/tickets`,
+                        {
+                            method: "POST",
+
+                            credentials:
+                                "include",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json()
+                        .catch(
+                            () => ({})
+                        );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        data.message ||
+                        "Unable to submit support request."
+                    );
+
+                }
+
+
+                const ticket =
+                    data.ticket ||
+                    data.data ||
+                    data;
+
+
+                showSuccessModal(
+                    ticket.id ||
+                    ticket.ticket_id ||
+                    "Submitted"
+                );
+
+
+                document.getElementById(
+                    "supportForm"
+                ).reset();
+
+
+                loadTickets();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Support request error:",
+                    error
+                );
+
+
+                /*
+                 * Development fallback.
+                 *
+                 * This does not replace backend persistence in
+                 * production. It simply allows UI testing when the
+                 * support endpoint has not yet been implemented.
+                 */
+
+                const localTicket = {
+
+                    id:
+                        "SUP-" +
+                        Date.now()
+                            .toString()
+                            .slice(-8),
+
+                    category:
+                        category,
+
+                    priority:
+                        priority,
+
+                    reference_id:
+                        reference || null,
+
+                    subject:
+                        subject,
+
+                    message:
+                        message,
+
+                    status:
+                        "Open",
+
+                    created_at:
+                        new Date()
+                            .toISOString()
+
+                };
+
+
+                const existing =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "gtf_support_tickets"
+                        ) ||
+                        "[]"
+                    );
+
+
+                existing.unshift(
+                    localTicket
+                );
+
+
+                localStorage.setItem(
+                    "gtf_support_tickets",
+                    JSON.stringify(
+                        existing
+                    )
+                );
+
+
+                showSuccessModal(
+                    localTicket.id
+                );
+
+
+                document.getElementById(
+                    "supportForm"
+                ).reset();
+
+
+                loadTickets();
+
+            }
+
+            finally {
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Submit Support Request";
+
+            }
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       SUCCESS MODAL
+    ------------------------------------------------------------ */
+
+    function showSuccessModal(
+        ticketId
+    ) {
+
+        document.getElementById(
+            "ticketModalTitle"
+        ).textContent =
+            "Support Request Submitted";
+
+
+        document.getElementById(
+            "modalMessage"
+        ).textContent =
+            `Your support request has been submitted successfully. Reference: ${ticketId}. Keep this reference for follow-up.`;
+
+
+        document.getElementById(
+            "ticketModal"
+        ).classList.add(
+            "show"
+        );
+
+    }
+
+
+    function closeModal() {
+
+        document.getElementById(
+            "ticketModal"
+        ).classList.remove(
+            "show"
+        );
+
+    }
+
+
+    document.getElementById(
+        "closeModal"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "modalDone"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "ticketModal"
+    ).addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target.id ===
+                "ticketModal"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       LOAD TICKETS
+    ------------------------------------------------------------ */
+
+    async function loadTickets() {
+
+        const list =
+            document.getElementById(
+                "ticketsList"
+            );
+
+
+        let tickets =
+            [];
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/support/tickets`,
+                    {
+                        method: "GET",
+
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            const data =
+                await response.json()
+                    .catch(
+                        () => ({})
+                    );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Unable to load tickets."
+                );
+
+            }
+
+
+            tickets =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(data.tickets)
+                        ? data.tickets
+                        : Array.isArray(data.data)
+                            ? data.data
+                            : [];
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Support API unavailable.",
+                error
+            );
+
+
+            tickets =
+                JSON.parse(
+                    localStorage.getItem(
+                        "gtf_support_tickets"
+                    ) ||
+                    "[]"
+                );
+
+        }
+
+
+        renderTickets(
+            tickets
+        );
+
+    }
+
+
+    function renderTickets(
+        tickets
+    ) {
+
+        const list =
+            document.getElementById(
+                "ticketsList"
+            );
+
+
+        list.innerHTML = "";
+
+
+        if (!tickets.length) {
+
+            list.innerHTML = `
+
+                <div
+                    class="notice"
+                    style="
+                        background:var(--surface-soft);
+                        color:var(--muted);
+                    "
+                >
+
+                    <strong>
+                        No support requests
+                    </strong>
+
+                    You have not submitted any support
+                    requests yet.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        tickets
+            .slice(0, 10)
+            .forEach(
+                ticket => {
+
+                    const status =
+                        ticket.status ||
+                        "Open";
+
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "ticket";
+
+
+                    item.innerHTML = `
+
+                        <div class="ticket-head">
+
+                            <div>
+
+                                <strong>
+                                    ${escapeHtml(
+                                        ticket.subject ||
+                                        "Support Request"
+                                    )}
+                                </strong>
+
+                                <small>
+                                    ${escapeHtml(
+                                        ticket.id ||
+                                        ticket.ticket_id ||
+                                        "—"
+                                    )}
+                                    ·
+                                    ${escapeHtml(
+                                        formatDate(
+                                            ticket.created_at ||
+                                            ticket.created
+                                        )
+                                    )}
+                                </small>
+
+                            </div>
+
+                            <span class="ticket-status">
+                                ${escapeHtml(
+                                    status
+                                )}
+                            </span>
+
+                        </div>
+
+
+                        <div class="ticket-message">
+
+                            ${escapeHtml(
+                                ticket.message ||
+                                "No description available."
+                            )}
+
+                        </div>
+
+                    `;
+
+
+                    list.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* ------------------------------------------------------------
+       LOGOUT
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await fetch(
+                    `${API_BASE}/auth/signout`,
+                    {
+                        method: "POST",
+
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                role: "cashier"
+                            })
+                    }
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Signout API unavailable.",
+                    error
+                );
+
+            }
+
+
+            [
+                "gtf_user",
+                "gtf_cashier",
+                "gtf_session",
+                "gtf_access_token",
+                "gtf_refresh_token",
+                "access_token",
+                "refresh_token"
+            ]
+            .forEach(
+                key => {
+
+                    localStorage.removeItem(
+                        key
+                    );
+
+                }
+            );
+
+
+            sessionStorage.clear();
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       INITIALIZE
+    ------------------------------------------------------------ */
+
+    loadTickets();
+
+</script>
+
+</body>
+</html>
