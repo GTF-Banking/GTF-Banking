@@ -1,2391 +1,922 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="GTF Banking Personal Banking - checking, savings, cards, loans and everyday banking services."
-  >
-
-  <meta name="theme-color" content="#0b2a4a">
-
-  <title>Personal Banking | GTF Banking</title>
-
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
-
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
-
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-white: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #dce4eb;
-      --gtf-success: #16794c;
-      --gtf-shadow: 0 8px 25px rgba(11, 42, 74, .08);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    .personal-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-      box-shadow: 0 2px 10px rgba(11, 42, 74, .04);
-    }
-
-    .personal-nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .personal-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .personal-brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .personal-brand-text strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .personal-brand-text span {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .personal-main-nav {
-      display: flex;
-      align-items: center;
-      gap: 21px;
-    }
-
-    .personal-main-nav a {
-      position: relative;
-      padding: 26px 0;
-
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .personal-main-nav a:hover,
-    .personal-main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .personal-main-nav a.active::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .personal-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .personal-action {
-      min-height: 35px;
-      padding: 7px 13px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .personal-login {
-      border: 1px solid var(--gtf-blue);
-      color: var(--gtf-blue);
-      background: #fff;
-    }
-
-    .personal-signup {
-      border: 1px solid var(--gtf-blue);
-      color: #fff;
-      background: var(--gtf-blue);
-    }
-
-    .personal-signup:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .personal-mobile-toggle {
-      display: none;
-
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      cursor: pointer;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .personal-hero {
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-    }
-
-    .personal-hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 440px;
-      margin: 0 auto;
-      padding: 70px 0;
-
-      display: grid;
-      grid-template-columns: 1.12fr .88fr;
-      align-items: center;
-      gap: 55px;
-    }
-
-    .personal-eyebrow {
-      margin: 0 0 10px;
-
-      color: #d9b866;
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .personal-hero h1 {
-      max-width: 680px;
-      margin: 0;
-
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      line-height: 1.08;
-    }
-
-    .personal-hero-copy {
-      max-width: 650px;
-      margin: 18px 0 0;
-
-      color: #dbe7f1;
-      font-size: .76rem;
-    }
-
-    .personal-hero-actions {
-      margin-top: 25px;
-
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .personal-hero-button {
-      min-height: 42px;
-      padding: 10px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid transparent;
-      border-radius: 5px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .personal-hero-button.secondary {
-      border-color: rgba(255,255,255,.45);
-      background: transparent;
-      color: #fff;
-    }
-
-    .personal-hero-button:hover {
-      transform: translateY(-1px);
-    }
-
-    .personal-hero-panel {
-      padding: 28px;
-
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 10px;
-
-      background: rgba(255,255,255,.1);
-      backdrop-filter: blur(4px);
-    }
-
-    .personal-hero-panel h2 {
-      margin: 0;
-
-      color: #fff;
-      font-size: .84rem;
-    }
-
-    .personal-hero-panel > p {
-      margin: 8px 0 20px;
-
-      color: #d6e3ed;
-      font-size: .57rem;
-    }
-
-    .personal-feature-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .personal-feature {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      color: #eef5f9;
-      font-size: .58rem;
-    }
-
-    .personal-feature-icon {
-      width: 29px;
-      height: 29px;
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-      background: rgba(255,255,255,.14);
-
-      color: #fff;
-      font-size: .6rem;
-      font-weight: 700;
-    }
-
-    /* =========================
-       GENERAL SECTIONS
-    ========================== */
-
-    .personal-section {
-      padding: 65px 0;
-    }
-
-    .personal-section-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .personal-heading {
-      max-width: 700px;
-      margin: 0 auto 38px;
-
-      text-align: center;
-    }
-
-    .personal-heading .eyebrow {
-      margin: 0 0 9px;
-
-      color: var(--gtf-blue);
-      font-size: .6rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .personal-heading h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.55rem;
-      line-height: 1.25;
-    }
-
-    .personal-heading p {
-      margin: 11px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .66rem;
-    }
-
-    /* =========================
-       SERVICES
-    ========================== */
-
-    .personal-services {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .personal-service {
-      padding: 26px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .personal-service:hover {
-      transform: translateY(-2px);
-    }
-
-    .personal-service-icon {
-      width: 47px;
-      height: 47px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: .85rem;
-      font-weight: 700;
-    }
-
-    .personal-service h3 {
-      margin: 15px 0 7px;
-
-      color: var(--gtf-navy);
-      font-size: .76rem;
-    }
-
-    .personal-service p {
-      min-height: 63px;
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .personal-service-link {
-      display: inline-flex;
-      margin-top: 17px;
-
-      color: var(--gtf-blue);
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .personal-service-link:hover {
-      color: var(--gtf-blue-dark);
-    }
-
-    /* =========================
-       EVERYDAY BANKING
-    ========================== */
-
-    .personal-everyday {
-      background: #fff;
-    }
-
-    .personal-everyday-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .personal-everyday-content h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.5rem;
-      line-height: 1.25;
-    }
-
-    .personal-everyday-content > p {
-      margin: 12px 0 22px;
-
-      color: var(--gtf-muted);
-      font-size: .62rem;
-    }
-
-    .personal-check-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .personal-check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .personal-check {
-      width: 26px;
-      height: 26px;
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #eaf7f0;
-      color: var(--gtf-success);
-
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .personal-check-item strong {
-      display: block;
-
-      color: var(--gtf-navy);
-      font-size: .6rem;
-    }
-
-    .personal-check-item span {
-      display: block;
-
-      color: var(--gtf-muted);
-      font-size: .54rem;
-    }
-
-    .personal-account-card {
-      padding: 30px;
-
-      border-radius: 10px;
-
-      background:
-        linear-gradient(
-          145deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .personal-account-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .personal-account-card h3 {
-      margin: 0;
-
-      color: #fff;
-      font-size: .78rem;
-    }
-
-    .personal-account-card small {
-      color: #bcd0df;
-      font-size: .48rem;
-    }
-
-    .personal-account-number {
-      margin-top: 28px;
-
-      color: #dbe7f1;
-      font-size: .56rem;
-      letter-spacing: .08em;
-    }
-
-    .personal-account-balance {
-      margin-top: 4px;
-
-      color: #fff;
-      font-size: 1.55rem;
-      font-weight: 700;
-    }
-
-    .personal-account-footer {
-      margin-top: 27px;
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #bdd0de;
-      font-size: .49rem;
-    }
-
-    /* =========================
-       DIGITAL BANKING
-    ========================== */
-
-    .personal-digital-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .personal-digital-card {
-      padding: 23px 20px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fff;
-    }
-
-    .personal-digital-card-number {
-      color: var(--gtf-blue);
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .personal-digital-card h3 {
-      margin: 12px 0 6px;
-
-      color: var(--gtf-navy);
-      font-size: .67rem;
-    }
-
-    .personal-digital-card p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .55rem;
-    }
-
-    /* =========================
-       SECURITY
-    ========================== */
-
-    .personal-security {
-      background: #fff;
-    }
-
-    .personal-security-box {
-      max-width: 980px;
-      margin: 0 auto;
-
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 40px;
-      align-items: center;
-
-      padding: 35px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .personal-security-icon {
-      width: 105px;
-      height: 105px;
-      margin: 0 auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #edf5fb;
-      color: var(--gtf-blue);
-
-      font-size: 1.8rem;
-      font-weight: 700;
-    }
-
-    .personal-security-content h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.3rem;
-    }
-
-    .personal-security-content p {
-      margin: 9px 0 18px;
-
-      color: var(--gtf-muted);
-      font-size: .59rem;
-    }
-
-    .personal-security-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .personal-security-link {
-      min-height: 36px;
-      padding: 8px 14px;
-
-      display: inline-flex;
-      align-items: center;
-
-      border: 1px solid var(--gtf-blue);
-      border-radius: 5px;
-
-      color: var(--gtf-blue);
-
-      font-size: .56rem;
-      font-weight: 700;
-    }
-
-    .personal-security-link.primary {
-      background: var(--gtf-blue);
-      color: #fff;
-    }
-
-    /* =========================
-       FAQ
-    ========================== */
-
-    .personal-faq {
-      max-width: 850px;
-      margin: 0 auto;
-
-      display: grid;
-      gap: 10px;
-    }
-
-    .personal-faq-item {
-      overflow: hidden;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .personal-faq-question {
-      width: 100%;
-      padding: 16px 18px;
-
-      border: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      text-align: left;
-
-      font-size: .62rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .personal-faq-question:hover {
-      background: #f8fafc;
-    }
-
-    .personal-faq-symbol {
-      color: var(--gtf-blue);
-      font-size: .9rem;
-      transition: transform .2s ease;
-    }
-
-    .personal-faq-answer {
-      display: none;
-
-      padding: 0 18px 17px;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-    }
-
-    .personal-faq-item.open .personal-faq-answer {
-      display: block;
-    }
-
-    .personal-faq-item.open .personal-faq-symbol {
-      transform: rotate(45deg);
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .personal-cta {
-      padding: 55px 0;
-      background: #fff;
-    }
-
-    .personal-cta-inner {
-      width: min(950px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 36px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      text-align: center;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .personal-cta h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-    }
-
-    .personal-cta p {
-      max-width: 650px;
-      margin: 10px auto 20px;
-
-      color: var(--gtf-muted);
-      font-size: .64rem;
-    }
-
-    .personal-cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .personal-cta-button {
-      min-height: 39px;
-      padding: 9px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid var(--gtf-blue);
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .personal-cta-button.secondary {
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .personal-cta-button:hover {
-      background: var(--gtf-blue-dark);
-      color: #fff;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    .personal-footer {
-      padding: 40px 0 22px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .personal-footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .personal-footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 35px;
-
-      padding-bottom: 30px;
-    }
-
-    .personal-footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .personal-footer-brand img {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    .personal-footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .personal-footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .personal-footer-description {
-      max-width: 290px;
-      margin: 14px 0 0;
-
-      color: #aebfcd;
-      font-size: .57rem;
-    }
-
-    .personal-footer-column h3 {
-      margin: 0 0 11px;
-      font-size: .61rem;
-    }
-
-    .personal-footer-column a {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .personal-footer-column a:hover {
-      color: #fff;
-    }
-
-    .personal-footer-bottom {
-      padding-top: 18px;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .52rem;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1050px) {
-
-      .personal-main-nav,
-      .personal-actions {
-        display: none;
-      }
-
-      .personal-mobile-toggle {
-        display: block;
-      }
-
-      .personal-nav.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .personal-nav.mobile-open .personal-main-nav {
-        display: flex;
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-        padding: 7px 0 15px;
-      }
-
-      .personal-nav.mobile-open .personal-main-nav a {
-        padding: 9px 0;
-      }
-
-      .personal-nav.mobile-open
-      .personal-main-nav
-      a.active::after {
-        display: none;
-      }
-    }
-
-    @media (max-width: 900px) {
-
-      .personal-hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .personal-hero-panel {
-        max-width: 600px;
-      }
-
-      .personal-services {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .personal-digital-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .personal-everyday-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .personal-security-box {
-        grid-template-columns: 1fr;
-      }
-
-      .personal-security-icon {
-        margin: 0;
-      }
-    }
-
-    @media (max-width: 700px) {
-
-      .personal-services,
-      .personal-digital-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .personal-section {
-        padding: 50px 0;
-      }
-
-      .personal-footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
-
-      .personal-hero-inner {
-        padding: 50px 0;
-      }
-
-      .personal-footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .personal-footer-bottom {
-        flex-direction: column;
-      }
-
-      .personal-cta-inner {
-        padding: 25px 18px;
-      }
-
-      .personal-security-box {
-        padding: 25px 20px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund personal banking services for everyday banking, saving and financial management."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>Personal Banking | Global TrustFund</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 </head>
+
 
 <body>
 
-  <!-- =================================
-       HEADER
-  ================================== -->
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-  <header class="personal-header">
+    <header class="site-header">
 
-    <div
-      id="personalNav"
-      class="personal-nav"
-    >
-
-      <a
-        href="../index.html"
-        class="personal-brand"
-        aria-label="GTF Banking home"
-      >
-
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
-
-        <span class="personal-brand-text">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="personal-main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a
-          href="personal.html"
-          class="active"
-          aria-current="page"
-        >
-          Personal
-        </a>
-
-        <a href="business.html">
-          Business
-        </a>
-
-        <a href="cards.html">
-          Cards
-        </a>
-
-        <a href="checking.html">
-          Checking
-        </a>
-
-        <a href="savings.html">
-          Savings
-        </a>
-
-        <a href="loans.html">
-          Loans
-        </a>
-
-        <a href="contact.html">
-          Contact
-        </a>
-
-      </nav>
-
-
-      <div class="personal-actions">
-
-        <a
-          href="../login.html"
-          class="personal-action personal-login"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="personal-action personal-signup"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="personalMobileToggle"
-        class="personal-mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =================================
-       MAIN
-  ================================== -->
-
-  <main>
-
-    <!-- HERO -->
-
-    <section class="personal-hero">
-
-      <div class="personal-hero-inner">
-
-        <div>
-
-          <p class="personal-eyebrow">
-            Personal Banking
-          </p>
-
-          <h1>
-            Banking built around your everyday life.
-          </h1>
-
-          <p class="personal-hero-copy">
-            Manage your everyday finances with GTF
-            Banking personal banking services, including
-            checking, savings, cards and lending options.
-          </p>
-
-
-          <div class="personal-hero-actions">
+        <div class="container nav-container">
 
             <a
-              href="../signup.html"
-              class="personal-hero-button"
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
-              Open an Account
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Banking
+                    </small>
+
+                </span>
+
             </a>
 
-            <a
-              href="../login.html"
-              class="personal-hero-button secondary"
-            >
-              Sign In
-            </a>
 
-          </div>
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
+            >
+
+                <a
+                    href="./personal.html"
+                    class="active"
+                >
+                    Personal
+                </a>
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
+
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
+
+                </div>
+
+            </nav>
 
         </div>
 
+    </header>
 
-        <aside class="personal-hero-panel">
 
-          <h2>
-            Your personal banking hub
-          </h2>
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
-          <p>
-            Access the services you need for everyday
-            money management and planned financial goals.
-          </p>
+    <main>
 
 
-          <div class="personal-feature-list">
+        <!-- =================================================
+             HERO
+             ================================================= -->
 
-            <div class="personal-feature">
+        <section class="hero">
 
-              <span class="personal-feature-icon">
-                C
-              </span>
+            <div class="container hero-grid">
 
-              <span>
-                Everyday checking and payment access
-              </span>
+                <div class="hero-content">
 
-            </div>
+                    <span class="eyebrow">
+                        PERSONAL BANKING
+                    </span>
 
+                    <h1>
+                        Banking that fits
+                        <span>your everyday life.</span>
+                    </h1>
 
-            <div class="personal-feature">
+                    <p>
+                        Global TrustFund gives you convenient
+                        digital banking tools to manage your
+                        money, organize your finances and plan
+                        for the future.
+                    </p>
 
-              <span class="personal-feature-icon">
-                S
-              </span>
 
-              <span>
-                Savings tools for planned goals
-              </span>
+                    <div class="hero-actions">
 
-            </div>
+                        <a
+                            href="../signup.html"
+                            class="button button-primary button-large"
+                        >
+                            Open an Account
+                        </a>
 
+                        <a
+                            href="./checking.html"
+                            class="button button-light button-large"
+                        >
+                            Explore Accounts
+                        </a>
 
-            <div class="personal-feature">
+                    </div>
 
-              <span class="personal-feature-icon">
-                D
-              </span>
 
-              <span>
-                Digital account management
-              </span>
+                    <div class="hero-trust">
 
-            </div>
+                        <div class="trust-item">
 
+                            <strong>
+                                Checking
+                            </strong>
 
-            <div class="personal-feature">
+                            <span>
+                                Everyday banking
+                            </span>
 
-              <span class="personal-feature-icon">
-                L
-              </span>
+                        </div>
 
-              <span>
-                Lending options for eligible customers
-              </span>
 
-            </div>
+                        <div class="trust-item">
 
-          </div>
+                            <strong>
+                                Savings
+                            </strong>
 
-        </aside>
+                            <span>
+                                Plan ahead
+                            </span>
 
-      </div>
+                        </div>
 
-    </section>
 
+                        <div class="trust-item">
 
-    <!-- SERVICES -->
+                            <strong>
+                                Digital
+                            </strong>
 
-    <section class="personal-section">
+                            <span>
+                                Manage online
+                            </span>
 
-      <div class="personal-section-inner">
+                        </div>
 
-        <div class="personal-heading">
-
-          <p class="eyebrow">
-            Personal banking services
-          </p>
-
-          <h2>
-            One place for your everyday financial needs
-          </h2>
-
-          <p>
-            Explore GTF Banking products and services
-            designed for personal banking.
-          </p>
-
-        </div>
-
-
-        <div class="personal-services">
-
-
-          <article class="personal-service">
-
-            <div class="personal-service-icon">
-              C
-            </div>
-
-            <h3>
-              Checking
-            </h3>
-
-            <p>
-              Manage everyday spending, deposits,
-              withdrawals and eligible payment services
-              through a checking account.
-            </p>
-
-            <a
-              href="checking.html"
-              class="personal-service-link"
-            >
-              Explore checking →
-            </a>
-
-          </article>
-
-
-          <article class="personal-service">
-
-            <div class="personal-service-icon">
-              S
-            </div>
-
-            <h3>
-              Savings
-            </h3>
-
-            <p>
-              Set money aside for short-term goals,
-              longer-term plans and future financial
-              needs.
-            </p>
-
-            <a
-              href="savings.html"
-              class="personal-service-link"
-            >
-              Explore savings →
-            </a>
-
-          </article>
-
-
-          <article class="personal-service">
-
-            <div class="personal-service-icon">
-              C
-            </div>
-
-            <h3>
-              Cards
-            </h3>
-
-            <p>
-              Explore card services for eligible
-              customers and manage your card needs
-              through your banking relationship.
-            </p>
-
-            <a
-              href="cards.html"
-              class="personal-service-link"
-            >
-              Explore cards →
-            </a>
-
-          </article>
-
-
-          <article class="personal-service">
-
-            <div class="personal-service-icon">
-              L
-            </div>
-
-            <h3>
-              Loans
-            </h3>
-
-            <p>
-              Review lending options that may support
-              eligible personal financial needs and
-              planned expenses.
-            </p>
-
-            <a
-              href="loans.html"
-              class="personal-service-link"
-            >
-              Explore loans →
-            </a>
-
-          </article>
-
-
-          <article class="personal-service">
-
-            <div class="personal-service-icon">
-              D
-            </div>
-
-            <h3>
-              Digital Banking
-            </h3>
-
-            <p>
-              Access your account through the GTF
-              Banking digital experience and manage
-              your banking activity.
-            </p>
-
-            <a
-              href="../login.html"
-              class="personal-service-link"
-            >
-              Sign in to banking →
-            </a>
-
-          </article>
-
-
-          <article class="personal-service">
-
-            <div class="personal-service-icon">
-              H
-            </div>
-
-            <h3>
-              Help & Support
-            </h3>
-
-            <p>
-              Get assistance with account questions,
-              banking services and general customer
-              support.
-            </p>
-
-            <a
-              href="../support.html"
-              class="personal-service-link"
-            >
-              Get support →
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- EVERYDAY BANKING -->
-
-    <section class="personal-section personal-everyday">
-
-      <div class="personal-section-inner">
-
-        <div class="personal-everyday-grid">
-
-
-          <div class="personal-everyday-content">
-
-            <p
-              class="personal-eyebrow"
-              style="color: var(--gtf-blue);"
-            >
-              Everyday banking
-            </p>
-
-            <h2>
-              Keep your financial life organized
-            </h2>
-
-            <p>
-              GTF Banking brings everyday account services
-              together so you can monitor your finances,
-              manage payments and work toward your goals.
-            </p>
-
-
-            <div class="personal-check-list">
-
-
-              <div class="personal-check-item">
-
-                <div class="personal-check">
-                  ✓
-                </div>
-
-                <div>
-
-                  <strong>
-                    Monitor account activity
-                  </strong>
-
-                  <span>
-                    Keep track of eligible deposits,
-                    withdrawals and transactions.
-                  </span>
+                    </div>
 
                 </div>
 
-              </div>
+
+                <!-- =================================================
+                     BANKING CARD
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+                    <div class="bank-card-preview">
+
+                        <div class="card-top">
+
+                            <span class="card-chip"></span>
+
+                            <span class="card-brand">
+                                GTF
+                            </span>
+
+                        </div>
 
 
-              <div class="personal-check-item">
+                        <div class="card-balance">
 
-                <div class="personal-check">
-                  ✓
+                            <small>
+                                PERSONAL BANKING
+                            </small>
+
+                            <strong>
+                                SIMPLE &amp; SECURE
+                            </strong>
+
+                        </div>
+
+
+                        <div class="card-bottom">
+
+                            <span>
+                                GLOBAL TRUSTFUND
+                            </span>
+
+                            <span>
+                                PERSONAL
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Access
+                            </strong>
+
+                            <small>
+                                Account protection
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            $
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Manage Money
+                            </strong>
+
+                            <small>
+                                Banking made simple
+                            </small>
+
+                        </div>
+
+                    </div>
+
                 </div>
-
-                <div>
-
-                  <strong>
-                    Manage your money digitally
-                  </strong>
-
-                  <span>
-                    Access your account through the
-                    available digital banking experience.
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div class="personal-check-item">
-
-                <div class="personal-check">
-                  ✓
-                </div>
-
-                <div>
-
-                  <strong>
-                    Plan for the future
-                  </strong>
-
-                  <span>
-                    Combine everyday banking with savings
-                    and eligible lending services.
-                  </span>
-
-                </div>
-
-              </div>
-
-
-              <div class="personal-check-item">
-
-                <div class="personal-check">
-                  ✓
-                </div>
-
-                <div>
-
-                  <strong>
-                    Get assistance when needed
-                  </strong>
-
-                  <span>
-                    Contact GTF Banking support for
-                    questions about your banking services.
-                  </span>
-
-                </div>
-
-              </div>
 
             </div>
 
-          </div>
+        </section>
 
 
-          <div class="personal-account-card">
+        <!-- =================================================
+             SERVICES
+             ================================================= -->
 
-            <div class="personal-account-card-top">
+        <section class="section">
 
-              <div>
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        PERSONAL BANKING OPTIONS
+                    </span>
+
+                    <h2>
+                        Choose the banking tools you need
+                    </h2>
+
+                    <p>
+                        Explore personal banking products designed
+                        for everyday spending, saving and financial
+                        planning.
+                    </p>
+
+                </div>
+
+
+                <div class="service-grid">
+
+
+                    <!-- CHECKING -->
+
+                    <a
+                        href="./checking.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+                        <h3>
+                            Checking Accounts
+                        </h3>
+
+                        <p>
+                            Manage everyday expenses with convenient
+                            access to your account and digital banking
+                            tools.
+                        </p>
+
+                        <span class="service-link">
+                            Explore checking →
+                        </span>
+
+                    </a>
+
+
+                    <!-- SAVINGS -->
+
+                    <a
+                        href="./savings.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            ↑
+                        </span>
+
+                        <h3>
+                            Savings Accounts
+                        </h3>
+
+                        <p>
+                            Organize your savings and work toward your
+                            financial goals with a dedicated savings
+                            account.
+                        </p>
+
+                        <span class="service-link">
+                            Explore savings →
+                        </span>
+
+                    </a>
+
+
+                    <!-- CARDS -->
+
+                    <a
+                        href="./cards.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            ▣
+                        </span>
+
+                        <h3>
+                            Banking Cards
+                        </h3>
+
+                        <p>
+                            Explore convenient card options for
+                            purchases and everyday financial needs.
+                        </p>
+
+                        <span class="service-link">
+                            Explore cards →
+                        </span>
+
+                    </a>
+
+
+                    <!-- LOANS -->
+
+                    <a
+                        href="./loans.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+                        <h3>
+                            Personal Loans
+                        </h3>
+
+                        <p>
+                            Explore financing options that may help
+                            support important personal goals.
+                        </p>
+
+                        <span class="service-link">
+                            Explore loans →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             WHY PERSONAL BANKING
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container split-section">
+
+
+                <div class="split-content">
+
+                    <span class="eyebrow">
+                        BANK WITH CONFIDENCE
+                    </span>
+
+                    <h2>
+                        Your finances, your way
+                    </h2>
+
+                    <p>
+                        Global TrustFund is designed to provide
+                        a straightforward digital banking experience
+                        while keeping security and customer access
+                        at the center.
+                    </p>
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Convenient banking
+                                </h3>
+
+                                <p>
+                                    Access your banking information
+                                    and manage your accounts through
+                                    the digital platform.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Account visibility
+                                </h3>
+
+                                <p>
+                                    Keep track of balances, account
+                                    activity and important banking
+                                    information in one place.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Security focused
+                                </h3>
+
+                                <p>
+                                    Authentication and authorization
+                                    controls help protect access to
+                                    your banking profile.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="security-panel">
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            ✓
+                        </span>
+
+                        <h3>
+                            Banking security matters
+                        </h3>
+
+                        <p>
+                            Learn more about the security features
+                            and account protection principles used
+                            throughout the Global TrustFund platform.
+                        </p>
+
+                        <a
+                            href="./security.html"
+                            class="text-link"
+                        >
+                            Learn about security →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GET STARTED
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        GET STARTED
+                    </span>
+
+                    <h2>
+                        Start your banking journey
+                    </h2>
+
+                    <p>
+                        Choose the account or service that fits
+                        your needs and continue with Global TrustFund.
+                    </p>
+
+                </div>
+
+
+                <div class="service-grid">
+
+
+                    <a
+                        href="./checking.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            01
+                        </span>
+
+                        <h3>
+                            Everyday Banking
+                        </h3>
+
+                        <p>
+                            Explore checking options for everyday
+                            financial activity.
+                        </p>
+
+                        <span class="service-link">
+                            View checking →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="./savings.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            02
+                        </span>
+
+                        <h3>
+                            Save for the Future
+                        </h3>
+
+                        <p>
+                            Explore savings options and organize
+                            your financial goals.
+                        </p>
+
+                        <span class="service-link">
+                            View savings →
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="../signup.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            03
+                        </span>
+
+                        <h3>
+                            Open an Account
+                        </h3>
+
+                        <p>
+                            Create your Global TrustFund profile
+                            to begin the registration process.
+                        </p>
+
+                        <span class="service-link">
+                            Get started →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+                <span class="eyebrow">
+                    GLOBAL TRUSTFUND
+                </span>
+
+                <h2>
+                    Banking designed around you
+                </h2>
+
+                <p>
+                    Explore your options and create your
+                    Global TrustFund profile.
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../signup.html"
+                        class="button button-light button-large"
+                    >
+                        Open an Account
+                    </a>
+
+                    <a
+                        href="../login.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Sign In
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Secure, convenient digital banking for your
+                    financial journey.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
 
                 <h3>
-                  GTF Personal Account
+                    Banking
                 </h3>
 
-                <small>
-                  Digital banking overview
-                </small>
+                <a href="./personal.html">
+                    Personal
+                </a>
 
-              </div>
+                <a href="./business.html">
+                    Business
+                </a>
 
-              <strong>
-                GTF
-              </strong>
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+                <a href="./security.html">
+                    Security
+                </a>
 
             </div>
 
 
-            <div class="personal-account-number">
-              ACCOUNT •••• 4821
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+                <a href="./about.html">
+                    About
+                </a>
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+                <a href="../support.html">
+                    Support
+                </a>
+
             </div>
-
-            <div
-              class="personal-account-balance"
-              aria-label="Account balance example"
-            >
-              $24,680.00
-            </div>
-
-
-            <div class="personal-account-footer">
-
-              <span>
-                Available balance
-              </span>
-
-              <span>
-                Secure access
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- DIGITAL BANKING -->
-
-    <section class="personal-section">
-
-      <div class="personal-section-inner">
-
-        <div class="personal-heading">
-
-          <p class="eyebrow">
-            Digital banking
-          </p>
-
-          <h2>
-            Manage your banking from wherever you are
-          </h2>
-
-          <p>
-            Use your GTF Banking account to access
-            supported digital banking functions.
-          </p>
 
         </div>
 
 
-        <div class="personal-digital-grid">
-
-
-          <article class="personal-digital-card">
-
-            <div class="personal-digital-card-number">
-              01
-            </div>
-
-            <h3>
-              Account Overview
-            </h3>
-
-            <p>
-              Review supported account information
-              and balances.
-            </p>
-
-          </article>
-
-
-          <article class="personal-digital-card">
-
-            <div class="personal-digital-card-number">
-              02
-            </div>
-
-            <h3>
-              Transactions
-            </h3>
-
-            <p>
-              Review eligible transaction activity
-              through your account.
-            </p>
-
-          </article>
-
-
-          <article class="personal-digital-card">
-
-            <div class="personal-digital-card-number">
-              03
-            </div>
-
-            <h3>
-              Transfers
-            </h3>
-
-            <p>
-              Access supported transfer functions
-              after authentication.
-            </p>
-
-          </article>
-
-
-          <article class="personal-digital-card">
-
-            <div class="personal-digital-card-number">
-              04
-            </div>
-
-            <h3>
-              Profile & Security
-            </h3>
-
-            <p>
-              Manage supported profile and account
-              security settings.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- SECURITY -->
-
-    <section class="personal-section personal-security">
-
-      <div class="personal-section-inner">
-
-        <div class="personal-security-box">
-
-
-          <div>
-
-            <div class="personal-security-icon">
-              ✓
-            </div>
-
-          </div>
-
-
-          <div class="personal-security-content">
-
-            <h2>
-              Security is part of your banking experience
-            </h2>
-
-            <p>
-              Protect your account by using strong
-              authentication credentials, keeping your
-              contact information current and reviewing
-              account activity regularly. Never share
-              passwords, one-time codes or authentication
-              credentials with another person.
-            </p>
-
-
-            <div class="personal-security-links">
-
-              <a
-                href="security.html"
-                class="personal-security-link primary"
-              >
-                Security Center
-              </a>
-
-              <a
-                href="privacy.html"
-                class="personal-security-link"
-              >
-                Privacy
-              </a>
-
-              <a
-                href="../support.html"
-                class="personal-security-link"
-              >
-                Get Help
-              </a>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- FAQ -->
-
-    <section class="personal-section">
-
-      <div class="personal-section-inner">
-
-        <div class="personal-heading">
-
-          <p class="eyebrow">
-            Personal banking questions
-          </p>
-
-          <h2>
-            Frequently asked questions
-          </h2>
-
-          <p>
-            General information about GTF personal banking.
-          </p>
-
-        </div>
-
-
-        <div class="personal-faq">
-
-
-          <div class="personal-faq-item">
-
-            <button
-              class="personal-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                What personal banking services does GTF offer?
-              </span>
-
-              <span class="personal-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="personal-faq-answer">
-              Personal banking services may include
-              checking, savings, cards, lending and
-              digital account services. Availability
-              depends on the applicable GTF Banking
-              product and customer eligibility.
-            </div>
-
-          </div>
-
-
-          <div class="personal-faq-item">
-
-            <button
-              class="personal-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                How do I access my account?
-              </span>
-
-              <span class="personal-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="personal-faq-answer">
-              Use the GTF Banking sign-in page to
-              authenticate to your account. Keep your
-              login information private and do not
-              share authentication codes.
-            </div>
-
-          </div>
-
-
-          <div class="personal-faq-item">
-
-            <button
-              class="personal-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Can I open a GTF Banking account online?
-              </span>
-
-              <span class="personal-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="personal-faq-answer">
-              If online account opening is enabled for
-              your banking environment, you can begin
-              through the account-opening page. Additional
-              verification or information may be required.
-            </div>
-
-          </div>
-
-
-          <div class="personal-faq-item">
-
-            <button
-              class="personal-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                Where can I get help with my account?
-              </span>
-
-              <span class="personal-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="personal-faq-answer">
-              Visit the GTF Banking support page or
-              contact the appropriate customer-support
-              channel for assistance.
-            </div>
-
-          </div>
-
-
-          <div class="personal-faq-item">
-
-            <button
-              class="personal-faq-question"
-              type="button"
-              aria-expanded="false"
-            >
-
-              <span>
-                How can I protect my account?
-              </span>
-
-              <span class="personal-faq-symbol">
-                +
-              </span>
-
-            </button>
-
-            <div class="personal-faq-answer">
-              Use strong credentials, enable available
-              security controls, keep your devices and
-              contact information current, and never
-              disclose passwords or one-time authentication
-              codes.
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CTA -->
-
-    <section class="personal-cta">
-
-      <div class="personal-cta-inner">
-
-        <h2>
-          Ready to manage your banking with GTF?
-        </h2>
-
-        <p>
-          Sign in to your existing account or start
-          the account-opening process.
-        </p>
-
-
-        <div class="personal-cta-buttons">
-
-          <a
-            href="../login.html"
-            class="personal-cta-button"
-          >
-            Sign In
-          </a>
-
-          <a
-            href="../signup.html"
-            class="personal-cta-button secondary"
-          >
-            Open an Account
-          </a>
-
-          <a
-            href="contact.html"
-            class="personal-cta-button secondary"
-          >
-            Contact Us
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =================================
-       FOOTER
-  ================================== -->
-
-  <footer class="personal-footer">
-
-    <div class="personal-footer-inner">
-
-      <div class="personal-footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="personal-footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking logo"
-              width="40"
-              height="40"
-            >
+        <div class="container footer-bottom">
 
             <span>
-
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
-
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
             </span>
 
-          </a>
-
-
-          <p class="personal-footer-description">
-            A modern banking experience for personal
-            and business financial needs.
-          </p>
+            <span>
+                Secure digital banking platform
+            </span>
 
         </div>
 
+    </footer>
 
-        <div class="personal-footer-column">
 
-          <h3>
-            Banking
-          </h3>
+    <!-- =====================================================
+         SHARED JAVASCRIPT
+         ===================================================== -->
 
-          <a href="checking.html">
-            Checking
-          </a>
-
-          <a href="savings.html">
-            Savings
-          </a>
-
-          <a href="cards.html">
-            Cards
-          </a>
-
-          <a href="loans.html">
-            Loans
-          </a>
-
-        </div>
-
-
-        <div class="personal-footer-column">
-
-          <h3>
-            Company
-          </h3>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="personal.html">
-            Personal
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="personal-footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a href="security.html">
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="personal-footer-bottom">
-
-        <span>
-          ©
-          <span id="personalFooterYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure banking access
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
-
-  <script>
-    "use strict";
-
-
-    /*
-     * Mobile navigation
-     */
-
-    const personalNav =
-      document.getElementById(
-        "personalNav"
-      );
-
-    const personalMobileToggle =
-      document.getElementById(
-        "personalMobileToggle"
-      );
-
-
-    personalMobileToggle.addEventListener(
-      "click",
-      function () {
-
-        const open =
-          personalNav.classList.toggle(
-            "mobile-open"
-          );
-
-        personalMobileToggle.setAttribute(
-          "aria-expanded",
-          String(open)
-        );
-
-        personalMobileToggle.setAttribute(
-          "aria-label",
-          open
-            ? "Close navigation"
-            : "Open navigation"
-        );
-
-        personalMobileToggle.textContent =
-          open ? "×" : "☰";
-
-      }
-    );
-
-
-    /*
-     * Close mobile navigation after
-     * selecting a navigation link.
-     */
-
-    document
-      .querySelectorAll(
-        ".personal-main-nav a"
-      )
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function () {
-
-            personalNav.classList.remove(
-              "mobile-open"
-            );
-
-            personalMobileToggle.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            personalMobileToggle.setAttribute(
-              "aria-label",
-              "Open navigation"
-            );
-
-            personalMobileToggle.textContent =
-              "☰";
-
-          }
-        );
-
-      });
-
-
-    /*
-     * FAQ accordion.
-     */
-
-    document
-      .querySelectorAll(
-        ".personal-faq-question"
-      )
-      .forEach(function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              button.closest(
-                ".personal-faq-item"
-              );
-
-            const isOpen =
-              item.classList.contains(
-                "open"
-              );
-
-
-            document
-              .querySelectorAll(
-                ".personal-faq-item"
-              )
-              .forEach(function (
-                otherItem
-              ) {
-
-                otherItem.classList.remove(
-                  "open"
-                );
-
-                const otherButton =
-                  otherItem.querySelector(
-                    ".personal-faq-question"
-                  );
-
-                if (otherButton) {
-
-                  otherButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
-
-                }
-
-              });
-
-
-            if (!isOpen) {
-
-              item.classList.add(
-                "open"
-              );
-
-              button.setAttribute(
-                "aria-expanded",
-                "true"
-              );
-
-            }
-
-          }
-        );
-
-      });
-
-
-    /*
-     * Footer year.
-     */
-
-    const personalFooterYear =
-      document.getElementById(
-        "personalFooterYear"
-      );
-
-    if (personalFooterYear) {
-
-      personalFooterYear.textContent =
-        new Date().getFullYear();
-
-    }
-
-  </script>
+    <script src="../js/app.js"></script>
 
 </body>
+
 </html>
