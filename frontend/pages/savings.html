@@ -1,2527 +1,1004 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Savings Accounts | GTF Banking</title>
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="Explore GTF Banking savings accounts designed to help you save, manage your money and work toward your financial goals."
-  >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="description"
+        content="Global TrustFund savings accounts for organizing money and planning toward future financial goals."
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <title>
+        Savings Accounts | Global TrustFund
+    </title>
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-white: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #dce4eb;
-      --gtf-shadow: 0 10px 30px rgba(11, 42, 74, .08);
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    .savings-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-      box-shadow: 0 2px 12px rgba(11, 42, 74, .05);
-    }
-
-    .savings-nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 72px;
-      margin: auto;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .savings-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .savings-brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .savings-brand-text strong {
-      display: block;
-      color: var(--gtf-navy);
-      font-size: .94rem;
-    }
-
-    .savings-brand-text span {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .52rem;
-    }
-
-    .savings-main-nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .savings-main-nav a {
-      position: relative;
-      padding: 26px 0;
-
-      color: #42586b;
-      font-size: .64rem;
-      font-weight: 700;
-    }
-
-    .savings-main-nav a:hover,
-    .savings-main-nav a.active {
-      color: var(--gtf-blue);
-    }
-
-    .savings-main-nav a.active::after {
-      content: "";
-
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 17px;
-
-      height: 2px;
-      background: var(--gtf-gold);
-    }
-
-    .savings-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .savings-action {
-      min-height: 35px;
-      padding: 7px 13px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 5px;
-
-      font-size: .59rem;
-      font-weight: 700;
-    }
-
-    .savings-login {
-      border: 1px solid var(--gtf-blue);
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    .savings-open {
-      border: 1px solid var(--gtf-blue);
-      background: var(--gtf-blue);
-      color: #fff;
-    }
-
-    .savings-open:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .savings-mobile-toggle {
-      display: none;
-
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      cursor: pointer;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .savings-hero {
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-
-      color: #fff;
-    }
-
-    .savings-hero-inner {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 430px;
-      margin: auto;
-
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      align-items: center;
-      gap: 50px;
-
-      padding: 65px 0;
-    }
-
-    .savings-eyebrow {
-      margin: 0 0 10px;
-
-      color: #d9b866;
-      font-size: .61rem;
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-
-    .savings-hero h1 {
-      max-width: 650px;
-      margin: 0;
-
-      color: #fff;
-      font-size: clamp(2.1rem, 5vw, 3.55rem);
-      line-height: 1.05;
-    }
-
-    .savings-hero-copy {
-      max-width: 610px;
-      margin: 18px 0 0;
-
-      color: #dbe7f1;
-      font-size: .69rem;
-    }
-
-    .savings-hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-
-      margin-top: 25px;
-    }
-
-    .savings-hero-button {
-      min-height: 42px;
-      padding: 10px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #fff;
-      border-radius: 5px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      font-size: .61rem;
-      font-weight: 700;
-    }
-
-    .savings-hero-button.secondary {
-      background: transparent;
-      color: #fff;
-    }
-
-    .savings-hero-button:hover {
-      transform: translateY(-1px);
-    }
-
-    /* =========================
-       SAVINGS VISUAL
-    ========================== */
-
-    .savings-hero-card {
-      position: relative;
-
-      padding: 28px;
-
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 12px;
-
-      background: rgba(255,255,255,.1);
-      box-shadow: 0 20px 45px rgba(0,0,0,.12);
-
-      backdrop-filter: blur(10px);
-    }
-
-    .savings-hero-card-label {
-      color: #c9dbe8;
-      font-size: .56rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .savings-balance {
-      margin: 8px 0 17px;
-
-      color: #fff;
-      font-size: 2.15rem;
-      font-weight: 700;
-      letter-spacing: -.03em;
-    }
-
-    .savings-balance-note {
-      color: #c8dbe8;
-      font-size: .53rem;
-    }
-
-    .savings-progress {
-      height: 7px;
-      margin: 17px 0 8px;
-
-      overflow: hidden;
-
-      border-radius: 20px;
-      background: rgba(255,255,255,.18);
-    }
-
-    .savings-progress span {
-      display: block;
-
-      width: 72%;
-      height: 100%;
-
-      border-radius: inherit;
-      background: var(--gtf-gold);
-    }
-
-    .savings-progress-text {
-      display: flex;
-      justify-content: space-between;
-
-      color: #c8dbe8;
-      font-size: .5rem;
-    }
-
-    /* =========================
-       TRUST STRIP
-    ========================== */
-
-    .savings-trust {
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
-    }
-
-    .savings-trust-inner {
-      width: min(1100px, calc(100% - 32px));
-      min-height: 75px;
-      margin: auto;
-
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: center;
-      gap: 20px;
-    }
-
-    .savings-trust-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      color: var(--gtf-muted);
-      font-size: .56rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .savings-trust-icon {
-      width: 25px;
-      height: 25px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #eaf3fa;
-      color: var(--gtf-blue);
-
-      font-size: .65rem;
-    }
-
-    /* =========================
-       GENERAL SECTION
-    ========================== */
-
-    .savings-section {
-      padding: 70px 0;
-    }
-
-    .savings-container {
-      width: min(1100px, calc(100% - 32px));
-      margin: auto;
-    }
-
-    .savings-section-heading {
-      max-width: 680px;
-      margin: 0 auto 35px;
-
-      text-align: center;
-    }
-
-    .savings-section-heading span {
-      display: block;
-      margin-bottom: 7px;
-
-      color: var(--gtf-blue);
-      font-size: .58rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .savings-section-heading h2 {
-      margin: 0;
-
-      color: var(--gtf-navy);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      line-height: 1.2;
-    }
-
-    .savings-section-heading p {
-      margin: 11px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .61rem;
-    }
-
-    /* =========================
-       PRODUCT CARDS
-    ========================== */
-
-    .savings-products {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-
-    .savings-product {
-      position: relative;
-
-      padding: 27px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-    }
-
-    .savings-product:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(11,42,74,.11);
-    }
-
-    .savings-product.featured {
-      border-top: 3px solid var(--gtf-gold);
-    }
-
-    .savings-product-badge {
-      position: absolute;
-      top: 17px;
-      right: 17px;
-
-      padding: 5px 8px;
-
-      border-radius: 4px;
-
-      background: #f8f0dc;
-      color: #886718;
-
-      font-size: .45rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .savings-product-icon {
-      width: 45px;
-      height: 45px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: 17px;
-
-      border-radius: 8px;
-
-      background: #eaf3fa;
-      color: var(--gtf-blue);
-
-      font-size: 1.05rem;
-      font-weight: 700;
-    }
-
-    .savings-product h3 {
-      margin: 0 0 7px;
-
-      color: var(--gtf-navy);
-      font-size: .93rem;
-    }
-
-    .savings-product p {
-      min-height: 65px;
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .savings-product-rate {
-      margin: 20px 0;
-
-      padding: 13px 0;
-
-      border-top: 1px solid var(--gtf-border);
-      border-bottom: 1px solid var(--gtf-border);
-    }
-
-    .savings-product-rate span {
-      display: block;
-
-      color: var(--gtf-muted);
-      font-size: .48rem;
-    }
-
-    .savings-product-rate strong {
-      display: block;
-
-      margin-top: 2px;
-
-      color: var(--gtf-blue);
-      font-size: 1.15rem;
-    }
-
-    .savings-product-list {
-      margin: 0;
-      padding: 0;
-
-      list-style: none;
-    }
-
-    .savings-product-list li {
-      position: relative;
-
-      margin-bottom: 8px;
-      padding-left: 17px;
-
-      color: var(--gtf-muted);
-      font-size: .54rem;
-    }
-
-    .savings-product-list li::before {
-      content: "✓";
-
-      position: absolute;
-      left: 0;
-
-      color: var(--gtf-blue);
-      font-weight: 700;
-    }
-
-    .savings-product-button {
-      width: 100%;
-      min-height: 38px;
-
-      margin-top: 20px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid var(--gtf-blue);
-      border-radius: 5px;
-
-      background: var(--gtf-blue);
-      color: #fff;
-
-      font-size: .56rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .savings-product-button:hover {
-      background: var(--gtf-blue-dark);
-    }
-
-    .savings-product-button.secondary {
-      background: #fff;
-      color: var(--gtf-blue);
-    }
-
-    /* =========================
-       FEATURES
-    ========================== */
-
-    .savings-features-section {
-      background: #fff;
-    }
-
-    .savings-features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .savings-feature {
-      padding: 23px 18px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
-
-      background: #fbfcfd;
-    }
-
-    .savings-feature-icon {
-      width: 38px;
-      height: 38px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin-bottom: 14px;
-
-      border-radius: 7px;
-
-      background: #eaf3fa;
-      color: var(--gtf-blue);
-
-      font-weight: 700;
-    }
-
-    .savings-feature h3 {
-      margin: 0 0 7px;
-
-      color: var(--gtf-navy);
-      font-size: .66rem;
-    }
-
-    .savings-feature p {
-      margin: 0;
-
-      color: var(--gtf-muted);
-      font-size: .54rem;
-    }
-
-    /* =========================
-       GOAL SECTION
-    ========================== */
-
-    .savings-goal {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .savings-goal-copy span {
-      color: var(--gtf-blue);
-
-      font-size: .57rem;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .savings-goal-copy h2 {
-      margin: 8px 0 12px;
-
-      color: var(--gtf-navy);
-      font-size: 1.75rem;
-      line-height: 1.2;
-    }
-
-    .savings-goal-copy p {
-      margin: 0 0 15px;
-
-      color: var(--gtf-muted);
-      font-size: .6rem;
-    }
-
-    .savings-goal-list {
-      margin: 0;
-      padding: 0;
-
-      list-style: none;
-    }
-
-    .savings-goal-list li {
-      position: relative;
-
-      margin-bottom: 9px;
-      padding-left: 20px;
-
-      color: var(--gtf-muted);
-      font-size: .57rem;
-    }
-
-    .savings-goal-list li::before {
-      content: "✓";
-
-      position: absolute;
-      left: 0;
-
-      color: var(--gtf-blue);
-      font-weight: 700;
-    }
-
-    .savings-calculator {
-      padding: 28px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
-
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .savings-calculator h3 {
-      margin: 0 0 18px;
-
-      color: var(--gtf-navy);
-      font-size: .8rem;
-    }
-
-    .savings-input-group {
-      margin-bottom: 14px;
-    }
-
-    .savings-input-group label {
-      display: block;
-      margin-bottom: 5px;
-
-      color: #4c6273;
-      font-size: .53rem;
-      font-weight: 700;
-    }
-
-    .savings-input-group input {
-      width: 100%;
-      min-height: 40px;
-
-      padding: 8px 11px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 5px;
-
-      outline: none;
-
-      color: var(--gtf-text);
-      background: #fff;
-
-      font-size: .6rem;
-    }
-
-    .savings-input-group input:focus {
-      border-color: var(--gtf-blue);
-      box-shadow: 0 0 0 3px rgba(20,93,160,.08);
-    }
-
-    .savings-calculator-result {
-      margin-top: 18px;
-      padding: 17px;
-
-      border-radius: 7px;
-
-      background: #edf5fb;
-    }
-
-    .savings-calculator-result span {
-      display: block;
-
-      color: var(--gtf-muted);
-      font-size: .49rem;
-    }
-
-    .savings-calculator-result strong {
-      display: block;
-
-      margin-top: 3px;
-
-      color: var(--gtf-navy);
-      font-size: 1.25rem;
-    }
-
-    .savings-calculator-note {
-      margin: 10px 0 0;
-
-      color: var(--gtf-muted);
-      font-size: .47rem;
-    }
-
-    /* =========================
-       FAQ
-    ========================== */
-
-    .savings-faq {
-      max-width: 850px;
-      margin: auto;
-    }
-
-    .savings-faq-item {
-      margin-bottom: 9px;
-
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-
-      background: #fff;
-    }
-
-    .savings-faq-question {
-      width: 100%;
-
-      padding: 16px 18px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-
-      border: 0;
-      background: transparent;
-
-      color: var(--gtf-navy);
-
-      text-align: left;
-      font-size: .59rem;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .savings-faq-symbol {
-      color: var(--gtf-blue);
-      font-size: .9rem;
-    }
-
-    .savings-faq-answer {
-      display: none;
-
-      padding: 0 18px 16px;
-
-      color: var(--gtf-muted);
-      font-size: .55rem;
-    }
-
-    .savings-faq-item.open
-    .savings-faq-answer {
-      display: block;
-    }
-
-    /* =========================
-       CTA
-    ========================== */
-
-    .savings-cta {
-      padding: 55px 0;
-
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
-    }
-
-    .savings-cta-inner {
-      width: min(900px, calc(100% - 32px));
-      margin: auto;
-
-      text-align: center;
-    }
-
-    .savings-cta h2 {
-      margin: 0;
-
-      color: #fff;
-      font-size: 1.65rem;
-    }
-
-    .savings-cta p {
-      max-width: 620px;
-      margin: 10px auto 20px;
-
-      color: #dbe7f1;
-      font-size: .59rem;
-    }
-
-    .savings-cta-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .savings-cta-button {
-      min-height: 40px;
-      padding: 10px 18px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #fff;
-      border-radius: 5px;
-
-      background: #fff;
-      color: var(--gtf-navy);
-
-      font-size: .57rem;
-      font-weight: 700;
-    }
-
-    .savings-cta-button.secondary {
-      background: transparent;
-      color: #fff;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    .savings-footer {
-      padding: 40px 0 22px;
-
-      background: var(--gtf-navy);
-      color: #fff;
-    }
-
-    .savings-footer-inner {
-      width: min(1100px, calc(100% - 32px));
-      margin: auto;
-    }
-
-    .savings-footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr repeat(3, 1fr);
-      gap: 35px;
-
-      padding-bottom: 28px;
-    }
-
-    .savings-footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .savings-footer-brand img {
-      width: 40px;
-      height: 40px;
-      filter: brightness(0) invert(1);
-    }
-
-    .savings-footer-brand strong {
-      display: block;
-      font-size: .82rem;
-    }
-
-    .savings-footer-brand span {
-      display: block;
-      color: #9fb4c5;
-      font-size: .5rem;
-    }
-
-    .savings-footer-description {
-      max-width: 290px;
-      margin: 13px 0 0;
-
-      color: #aebfcd;
-      font-size: .56rem;
-    }
-
-    .savings-footer-column h3 {
-      margin: 0 0 10px;
-      font-size: .61rem;
-    }
-
-    .savings-footer-column a {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #aebfcd;
-      font-size: .55rem;
-    }
-
-    .savings-footer-column a:hover {
-      color: #fff;
-    }
-
-    .savings-footer-bottom {
-      padding-top: 17px;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-
-      color: #8fa5b6;
-      font-size: .5rem;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 1100px) {
-
-      .savings-main-nav,
-      .savings-actions {
-        display: none;
-      }
-
-      .savings-mobile-toggle {
-        display: block;
-      }
-
-      .savings-nav.mobile-open {
-        flex-wrap: wrap;
-      }
-
-      .savings-nav.mobile-open
-      .savings-main-nav {
-        display: flex;
-
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 0;
-        padding-bottom: 15px;
-      }
-
-      .savings-nav.mobile-open
-      .savings-main-nav a {
-        padding: 9px 0;
-      }
-
-      .savings-nav.mobile-open
-      .savings-main-nav
-      a.active::after {
-        display: none;
-      }
-    }
-
-    @media (max-width: 900px) {
-
-      .savings-hero-inner {
-        grid-template-columns: 1fr;
-      }
-
-      .savings-hero-card {
-        max-width: 550px;
-      }
-
-      .savings-products {
-        grid-template-columns: 1fr;
-      }
-
-      .savings-features {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .savings-goal {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-
-      .savings-trust-inner {
-        grid-template-columns: 1fr;
-        padding: 18px 0;
-      }
-
-      .savings-features {
-        grid-template-columns: 1fr;
-      }
-
-      .savings-footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .savings-footer-bottom {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 500px) {
-
-      .savings-hero-inner {
-        padding: 50px 0;
-      }
-
-      .savings-section {
-        padding: 50px 0;
-      }
-
-      .savings-product,
-      .savings-calculator {
-        padding: 21px;
-      }
-
-      .savings-footer-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-  <!-- =================================
-       HEADER
-  ================================== -->
 
-  <header class="savings-header">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <div
-      id="savingsNav"
-      class="savings-nav"
-    >
+    <header class="site-header">
 
-      <a
-        href="../index.html"
-        class="savings-brand"
-        aria-label="GTF Banking home"
-      >
+        <div class="container nav-container">
 
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          width="43"
-          height="43"
-        >
 
-        <span class="savings-brand-text">
-
-          <strong>
-            GTF Banking
-          </strong>
-
-          <span>
-            Banking made simple
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <nav
-        class="savings-main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a href="../index.html">
-          Home
-        </a>
-
-        <a href="about.html">
-          About
-        </a>
-
-        <a href="personal.html">
-          Personal
-        </a>
-
-        <a href="business.html">
-          Business
-        </a>
-
-        <a href="cards.html">
-          Cards
-        </a>
-
-        <a href="checking.html">
-          Checking
-        </a>
-
-        <a
-          href="savings.html"
-          class="active"
-          aria-current="page"
-        >
-          Savings
-        </a>
-
-        <a href="loans.html">
-          Loans
-        </a>
-
-        <a href="contact.html">
-          Contact
-        </a>
-
-      </nav>
-
-
-      <div class="savings-actions">
-
-        <a
-          href="../login.html"
-          class="savings-action savings-login"
-        >
-          Sign In
-        </a>
-
-        <a
-          href="../signup.html"
-          class="savings-action savings-open"
-        >
-          Open Account
-        </a>
-
-      </div>
-
-
-      <button
-        id="savingsMobileToggle"
-        class="savings-mobile-toggle"
-        type="button"
-        aria-label="Open navigation"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =================================
-       HERO
-  ================================== -->
-
-  <section class="savings-hero">
-
-    <div class="savings-hero-inner">
-
-      <div>
-
-        <p class="savings-eyebrow">
-          Personal Savings
-        </p>
-
-        <h1>
-          Put your money to work for your future.
-        </h1>
-
-        <p class="savings-hero-copy">
-          Build your savings with an account designed
-          around your goals. Whether you're creating an
-          emergency fund, planning a major purchase or
-          simply setting money aside, GTF Banking gives
-          you tools to help stay on track.
-        </p>
-
-
-        <div class="savings-hero-actions">
-
-          <a
-            href="../signup.html"
-            class="savings-hero-button"
-          >
-            Open a Savings Account
-          </a>
-
-          <a
-            href="#savings-options"
-            class="savings-hero-button secondary"
-          >
-            Explore Options
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="savings-hero-card">
-
-        <div class="savings-hero-card-label">
-          Example savings goal
-        </div>
-
-        <div class="savings-balance">
-          $7,250.00
-        </div>
-
-        <div class="savings-balance-note">
-          Progress toward a $10,000 goal
-        </div>
-
-        <div class="savings-progress">
-          <span></span>
-        </div>
-
-        <div class="savings-progress-text">
-          <span>
-            72% complete
-          </span>
-
-          <span>
-            $2,750 remaining
-          </span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       TRUST STRIP
-  ================================== -->
-
-  <section class="savings-trust">
-
-    <div class="savings-trust-inner">
-
-      <div class="savings-trust-item">
-
-        <span class="savings-trust-icon">
-          ✓
-        </span>
-
-        <span>
-          Secure account access
-        </span>
-
-      </div>
-
-
-      <div class="savings-trust-item">
-
-        <span class="savings-trust-icon">
-          $
-        </span>
-
-        <span>
-          Flexible savings options
-        </span>
-
-      </div>
-
-
-      <div class="savings-trust-item">
-
-        <span class="savings-trust-icon">
-          ↗
-        </span>
-
-        <span>
-          Digital money management
-        </span>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       SAVINGS PRODUCTS
-  ================================== -->
-
-  <section
-    id="savings-options"
-    class="savings-section"
-  >
-
-    <div class="savings-container">
-
-      <div class="savings-section-heading">
-
-        <span>
-          Choose your account
-        </span>
-
-        <h2>
-          Savings designed for different goals
-        </h2>
-
-        <p>
-          Select an account type based on how you plan
-          to save and how often you expect to access your
-          money.
-        </p>
-
-      </div>
-
-
-      <div class="savings-products">
-
-
-        <!-- BASIC -->
-
-        <article class="savings-product">
-
-          <div class="savings-product-icon">
-            $
-          </div>
-
-          <h3>
-            GTF Essential Savings
-          </h3>
-
-          <p>
-            A straightforward savings account for
-            everyday saving and building a financial
-            cushion.
-          </p>
-
-          <div class="savings-product-rate">
-
-            <span>
-              Savings rate
-            </span>
-
-            <strong>
-              Competitive
-            </strong>
-
-          </div>
-
-          <ul class="savings-product-list">
-
-            <li>
-              Easy account management
-            </li>
-
-            <li>
-              Online and mobile access
-            </li>
-
-            <li>
-              Goal-oriented saving tools
-            </li>
-
-            <li>
-              Account activity visibility
-            </li>
-
-          </ul>
-
-          <a
-            href="../signup.html"
-            class="savings-product-button"
-          >
-            Open Account
-          </a>
-
-        </article>
-
-
-        <!-- HIGHER BALANCE -->
-
-        <article class="savings-product featured">
-
-          <span class="savings-product-badge">
-            Popular
-          </span>
-
-          <div class="savings-product-icon">
-            ↑
-          </div>
-
-          <h3>
-            GTF Growth Savings
-          </h3>
-
-          <p>
-            Designed for customers who want to build a
-            larger balance while keeping convenient access
-            to their savings.
-          </p>
-
-          <div class="savings-product-rate">
-
-            <span>
-              Savings rate
-            </span>
-
-            <strong>
-              Competitive
-            </strong>
-
-          </div>
-
-          <ul class="savings-product-list">
-
-            <li>
-              Digital account management
-            </li>
-
-            <li>
-              Automated savings support
-            </li>
-
-            <li>
-              Savings goal tracking
-            </li>
-
-            <li>
-              Account monitoring tools
-            </li>
-
-          </ul>
-
-          <a
-            href="../signup.html"
-            class="savings-product-button"
-          >
-            Open Account
-          </a>
-
-        </article>
-
-
-        <!-- GOAL -->
-
-        <article class="savings-product">
-
-          <div class="savings-product-icon">
-            ◎
-          </div>
-
-          <h3>
-            GTF Goal Savings
-          </h3>
-
-          <p>
-            Organize money around a specific objective,
-            such as education, travel, an emergency fund or
-            another planned expense.
-          </p>
-
-          <div class="savings-product-rate">
-
-            <span>
-              Savings rate
-            </span>
-
-            <strong>
-              Competitive
-            </strong>
-
-          </div>
-
-          <ul class="savings-product-list">
-
-            <li>
-              Dedicated savings goals
-            </li>
-
-            <li>
-              Progress tracking
-            </li>
-
-            <li>
-              Flexible goal planning
-            </li>
-
-            <li>
-              Digital account access
-            </li>
-
-          </ul>
-
-          <a
-            href="../signup.html"
-            class="savings-product-button secondary"
-          >
-            Start Saving
-          </a>
-
-        </article>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       FEATURES
-  ================================== -->
-
-  <section class="savings-section savings-features-section">
-
-    <div class="savings-container">
-
-      <div class="savings-section-heading">
-
-        <span>
-          Built around you
-        </span>
-
-        <h2>
-          Tools that make saving easier
-        </h2>
-
-        <p>
-          Manage your savings from one convenient digital
-          banking experience.
-        </p>
-
-      </div>
-
-
-      <div class="savings-features">
-
-
-        <article class="savings-feature">
-
-          <div class="savings-feature-icon">
-            $
-          </div>
-
-          <h3>
-            Automatic Saving
-          </h3>
-
-          <p>
-            Set up recurring transfers when available to
-            help make saving a consistent habit.
-          </p>
-
-        </article>
-
-
-        <article class="savings-feature">
-
-          <div class="savings-feature-icon">
-            ◎
-          </div>
-
-          <h3>
-            Goal Tracking
-          </h3>
-
-          <p>
-            Organize your savings around specific financial
-            objectives and monitor your progress.
-          </p>
-
-        </article>
-
-
-        <article class="savings-feature">
-
-          <div class="savings-feature-icon">
-            ↗
-          </div>
-
-          <h3>
-            Digital Access
-          </h3>
-
-          <p>
-            View your account and manage eligible banking
-            activities through your digital account.
-          </p>
-
-        </article>
-
-
-        <article class="savings-feature">
-
-          <div class="savings-feature-icon">
-            ✓
-          </div>
-
-          <h3>
-            Account Security
-          </h3>
-
-          <p>
-            Security controls and authentication help
-            protect your account and financial information.
-          </p>
-
-        </article>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       SAVINGS GOAL
-  ================================== -->
-
-  <section class="savings-section">
-
-    <div class="savings-container">
-
-      <div class="savings-goal">
-
-
-        <div class="savings-goal-copy">
-
-          <span>
-            Plan your progress
-          </span>
-
-          <h2>
-            Turn a savings target into a clear plan.
-          </h2>
-
-          <p>
-            A savings goal becomes easier to manage when
-            you know how much you need and how regularly
-            you want to contribute.
-          </p>
-
-          <ul class="savings-goal-list">
-
-            <li>
-              Define a target amount.
-            </li>
-
-            <li>
-              Choose a target date.
-            </li>
-
-            <li>
-              Estimate regular contributions.
-            </li>
-
-            <li>
-              Track progress over time.
-            </li>
-
-          </ul>
-
-        </div>
-
-
-        <div class="savings-calculator">
-
-          <h3>
-            Savings Goal Calculator
-          </h3>
-
-
-          <div class="savings-input-group">
-
-            <label for="savingsTarget">
-              Target amount
-            </label>
-
-            <input
-              id="savingsTarget"
-              type="number"
-              min="0"
-              step="0.01"
-              value="10000"
-              inputmode="decimal"
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
 
-          </div>
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        Global TrustFund
+                    </strong>
+
+                    <small>
+                        Banking
+                    </small>
+
+                </span>
+
+            </a>
 
 
-          <div class="savings-input-group">
-
-            <label for="savingsCurrent">
-              Current savings
-            </label>
-
-            <input
-              id="savingsCurrent"
-              type="number"
-              min="0"
-              step="0.01"
-              value="2500"
-              inputmode="decimal"
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNavigation"
             >
 
-          </div>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
 
 
-          <div class="savings-input-group">
-
-            <label for="savingsMonths">
-              Months remaining
-            </label>
-
-            <input
-              id="savingsMonths"
-              type="number"
-              min="1"
-              step="1"
-              value="12"
-              inputmode="numeric"
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
             >
 
-          </div>
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+                <a
+                    href="./savings.html"
+                    class="active"
+                >
+                    Savings
+                </a>
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+                <a href="./security.html">
+                    Security
+                </a>
 
 
-          <div class="savings-calculator-result">
+                <div class="nav-actions">
+
+                    <a
+                        href="../login.html"
+                        class="button button-outline"
+                    >
+                        Sign In
+                    </a>
+
+                    <a
+                        href="../signup.html"
+                        class="button button-primary"
+                    >
+                        Open an Account
+                    </a>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="hero">
+
+            <div class="container hero-grid">
+
+
+                <div class="hero-content">
+
+                    <span class="eyebrow">
+                        SAVINGS ACCOUNTS
+                    </span>
+
+
+                    <h1>
+
+                        Make room for
+                        <span>what comes next.</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        A Global TrustFund savings account can help
+                        you organize money for future plans,
+                        important expenses and financial goals.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a
+                            href="../signup.html"
+                            class="button button-primary button-large"
+                        >
+                            Open an Account
+                        </a>
+
+
+                        <a
+                            href="./personal.html"
+                            class="button button-light button-large"
+                        >
+                            Personal Banking
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-trust">
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Organized
+                            </strong>
+
+                            <span>
+                                Set money aside
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Digital
+                            </strong>
+
+                            <span>
+                                Manage online
+                            </span>
+
+                        </div>
+
+
+                        <div class="trust-item">
+
+                            <strong>
+                                Secure
+                            </strong>
+
+                            <span>
+                                Protected access
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     SAVINGS CARD
+                     ================================================= -->
+
+                <div class="hero-card-wrapper">
+
+
+                    <div class="bank-card-preview">
+
+                        <div class="card-top">
+
+                            <span class="card-chip"></span>
+
+                            <span class="card-brand">
+                                GTF
+                            </span>
+
+                        </div>
+
+
+                        <div class="card-balance">
+
+                            <small>
+                                SAVINGS ACCOUNT
+                            </small>
+
+                            <strong>
+                                PLAN FOR TOMORROW
+                            </strong>
+
+                        </div>
+
+
+                        <div class="card-bottom">
+
+                            <span>
+                                GLOBAL TRUSTFUND
+                            </span>
+
+                            <span>
+                                SAVINGS
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-one">
+
+                        <span class="floating-icon">
+                            ↑
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Save With Purpose
+                            </strong>
+
+                            <small>
+                                Organize your goals
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="floating-card floating-card-two">
+
+                        <span class="floating-icon">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Access
+                            </strong>
+
+                            <small>
+                                Protected account
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SAVINGS FEATURES
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        SAVINGS FEATURES
+                    </span>
+
+
+                    <h2>
+                        Put your financial goals in focus
+                    </h2>
+
+
+                    <p>
+
+                        Use a dedicated savings account to organize
+                        money for the things that matter to you.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ↑
+                        </span>
+
+
+                        <h3>
+                            Goal-Oriented Saving
+                        </h3>
+
+
+                        <p>
+
+                            Keep money intended for future goals
+                            separate from everyday spending.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+
+                        <h3>
+                            Financial Organization
+                        </h3>
+
+
+                        <p>
+
+                            Create a clearer distinction between
+                            everyday expenses and money you want
+                            to set aside.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Digital Access
+                        </h3>
+
+
+                        <p>
+
+                            Keep your savings information accessible
+                            through the Global TrustFund platform.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="service-card">
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            Account Visibility
+                        </h3>
+
+
+                        <p>
+
+                            Review available account information
+                            and monitor your savings activity.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SAVING GOALS
+             ================================================= -->
+
+        <section class="section section-muted">
+
+            <div class="container split-section">
+
+
+                <div class="split-content">
+
+                    <span class="eyebrow">
+                        PLAN AHEAD
+                    </span>
+
+
+                    <h2>
+                        Save with a purpose
+                    </h2>
+
+
+                    <p>
+
+                        Saving can make it easier to separate money
+                        for planned expenses and longer-term financial
+                        objectives.
+
+                    </p>
+
+
+
+                    <div class="feature-list">
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Emergency planning
+                                </h3>
+
+                                <p>
+
+                                    Consider setting aside money
+                                    for unexpected expenses and
+                                    financial needs.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Future purchases
+                                </h3>
+
+                                <p>
+
+                                    Organize savings for planned
+                                    purchases and upcoming expenses.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature-item">
+
+                            <span class="feature-check">
+                                ✓
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Long-term goals
+                                </h3>
+
+                                <p>
+
+                                    Keep your longer-term financial
+                                    objectives visible and organized.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="security-panel">
+
+                    <div class="security-panel-inner">
+
+                        <span class="security-icon">
+                            ✓
+                        </span>
+
+
+                        <h3>
+                            Protect your savings
+                        </h3>
+
+
+                        <p>
+
+                            Account security is an important part
+                            of managing your financial information
+                            online.
+
+                        </p>
+
+
+                        <a
+                            href="./security.html"
+                            class="text-link"
+                        >
+                            Learn about security →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RELATED PRODUCTS
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="eyebrow">
+                        EXPLORE MORE
+                    </span>
+
+
+                    <h2>
+                        Find the right banking tools
+                    </h2>
+
+
+                    <p>
+
+                        Explore additional Global TrustFund
+                        banking products and services.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="service-grid">
+
+
+                    <a
+                        href="./checking.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            $
+                        </span>
+
+
+                        <h3>
+                            Checking
+                        </h3>
+
+
+                        <p>
+
+                            Explore everyday banking and checking
+                            account options.
+
+                        </p>
+
+
+                        <span class="service-link">
+                            Explore checking →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="./cards.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            ▣
+                        </span>
+
+
+                        <h3>
+                            Cards
+                        </h3>
+
+
+                        <p>
+
+                            Explore available card options for
+                            eligible banking activity.
+
+                        </p>
+
+
+                        <span class="service-link">
+                            Explore cards →
+                        </span>
+
+                    </a>
+
+
+
+                    <a
+                        href="./loans.html"
+                        class="service-card"
+                    >
+
+                        <span class="service-icon">
+                            #
+                        </span>
+
+
+                        <h3>
+                            Loans
+                        </h3>
+
+
+                        <p>
+
+                            Review financing options for eligible
+                            financial goals.
+
+                        </p>
+
+
+                        <span class="service-link">
+                            Explore loans →
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA
+             ================================================= -->
+
+        <section class="cta-section">
+
+            <div class="container cta-content">
+
+
+                <span class="eyebrow">
+                    START SAVING
+                </span>
+
+
+                <h2>
+                    Give your goals a place to grow
+                </h2>
+
+
+                <p>
+
+                    Create your Global TrustFund profile and
+                    begin the account registration process.
+
+                </p>
+
+
+                <div class="cta-actions">
+
+                    <a
+                        href="../signup.html"
+                        class="button button-light button-large"
+                    >
+                        Open an Account
+                    </a>
+
+
+                    <a
+                        href="../login.html"
+                        class="button button-ghost-light button-large"
+                    >
+                        Sign In
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="../index.html"
+                    class="brand brand-footer"
+                >
+
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
+
+
+                    <span class="brand-text">
+
+                        <strong>
+                            Global TrustFund
+                        </strong>
+
+                        <small>
+                            Banking
+                        </small>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Secure, convenient digital banking for your
+                    financial journey.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Banking
+                </h3>
+
+
+                <a href="./personal.html">
+                    Personal
+                </a>
+
+
+                <a href="./business.html">
+                    Business
+                </a>
+
+
+                <a href="./checking.html">
+                    Checking
+                </a>
+
+
+                <a href="./savings.html">
+                    Savings
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Products
+                </h3>
+
+
+                <a href="./cards.html">
+                    Cards
+                </a>
+
+
+                <a href="./loans.html">
+                    Loans
+                </a>
+
+
+                <a href="./security.html">
+                    Security
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Company
+                </h3>
+
+
+                <a href="./about.html">
+                    About
+                </a>
+
+
+                <a href="./contact.html">
+                    Contact
+                </a>
+
+
+                <a href="./privacy.html">
+                    Privacy
+                </a>
+
+
+                <a href="../support.html">
+                    Support
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="container footer-bottom">
 
             <span>
-              Estimated monthly contribution
+
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
+
             </span>
 
-            <strong id="monthlySavingsResult">
-              $625.00
-            </strong>
-
-          </div>
-
-
-          <p class="savings-calculator-note">
-            This calculator is an illustrative planning
-            tool. It does not include interest, fees,
-            taxes or other account-specific factors.
-          </p>
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       FAQ
-  ================================== -->
-
-  <section class="savings-section savings-features-section">
-
-    <div class="savings-container">
-
-      <div class="savings-section-heading">
-
-        <span>
-          Questions
-        </span>
-
-        <h2>
-          Savings account FAQs
-        </h2>
-
-      </div>
-
-
-      <div class="savings-faq">
-
-
-        <div class="savings-faq-item">
-
-          <button
-            class="savings-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
 
             <span>
-              What is a savings account?
+                Secure digital banking platform
             </span>
-
-            <span class="savings-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="savings-faq-answer">
-
-            A savings account is designed to help you
-            set aside money for future needs while
-            providing access to your funds according to
-            the account's terms.
-
-          </div>
 
         </div>
 
+    </footer>
 
-        <div class="savings-faq-item">
 
-          <button
-            class="savings-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
 
-            <span>
-              Can I have more than one savings goal?
-            </span>
+    <!-- =====================================================
+         SHARED JAVASCRIPT
+         ===================================================== -->
 
-            <span class="savings-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="savings-faq-answer">
-
-            Depending on the account and available
-            features, you may be able to organize savings
-            around multiple financial goals.
-
-          </div>
-
-        </div>
-
-
-        <div class="savings-faq-item">
-
-          <button
-            class="savings-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              Can I transfer money into my savings account?
-            </span>
-
-            <span class="savings-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="savings-faq-answer">
-
-            Eligible transfers may be available through
-            your digital banking account. Availability and
-            limits depend on the account and applicable
-            terms.
-
-          </div>
-
-        </div>
-
-
-        <div class="savings-faq-item">
-
-          <button
-            class="savings-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              How do I open a savings account?
-            </span>
-
-            <span class="savings-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="savings-faq-answer">
-
-            Select "Open Account" to begin the GTF Banking
-            account-opening process. Additional identity
-            verification and eligibility requirements may
-            apply.
-
-          </div>
-
-        </div>
-
-
-        <div class="savings-faq-item">
-
-          <button
-            class="savings-faq-question"
-            type="button"
-            aria-expanded="false"
-          >
-
-            <span>
-              Is the calculator an offer or financial advice?
-            </span>
-
-            <span class="savings-faq-symbol">
-              +
-            </span>
-
-          </button>
-
-          <div class="savings-faq-answer">
-
-            No. The calculator provides an illustrative
-            estimate for planning purposes and does not
-            constitute financial advice or an offer for a
-            particular savings product.
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       CTA
-  ================================== -->
-
-  <section class="savings-cta">
-
-    <div class="savings-cta-inner">
-
-      <h2>
-        Ready to start saving?
-      </h2>
-
-      <p>
-        Open an account or sign in to manage your existing
-        GTF Banking relationship.
-      </p>
-
-
-      <div class="savings-cta-buttons">
-
-        <a
-          href="../signup.html"
-          class="savings-cta-button"
-        >
-          Open an Account
-        </a>
-
-        <a
-          href="../login.html"
-          class="savings-cta-button secondary"
-        >
-          Sign In
-        </a>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================
-       FOOTER
-  ================================== -->
-
-  <footer class="savings-footer">
-
-    <div class="savings-footer-inner">
-
-      <div class="savings-footer-grid">
-
-
-        <div>
-
-          <a
-            href="../index.html"
-            class="savings-footer-brand"
-          >
-
-            <img
-              src="../assets/gtf-logo.svg"
-              alt="GTF Banking logo"
-              width="40"
-              height="40"
-            >
-
-            <span>
-
-              <strong>
-                GTF Banking
-              </strong>
-
-              <span>
-                Banking made simple
-              </span>
-
-            </span>
-
-          </a>
-
-
-          <p class="savings-footer-description">
-            A modern banking experience for personal and
-            business financial needs.
-          </p>
-
-        </div>
-
-
-        <div class="savings-footer-column">
-
-          <h3>
-            Banking
-          </h3>
-
-          <a href="checking.html">
-            Checking
-          </a>
-
-          <a
-            href="savings.html"
-            aria-current="page"
-          >
-            Savings
-          </a>
-
-          <a href="cards.html">
-            Cards
-          </a>
-
-          <a href="loans.html">
-            Loans
-          </a>
-
-        </div>
-
-
-        <div class="savings-footer-column">
-
-          <h3>
-            Company
-          </h3>
-
-          <a href="about.html">
-            About
-          </a>
-
-          <a href="personal.html">
-            Personal
-          </a>
-
-          <a href="business.html">
-            Business
-          </a>
-
-          <a href="contact.html">
-            Contact
-          </a>
-
-        </div>
-
-
-        <div class="savings-footer-column">
-
-          <h3>
-            Legal & Security
-          </h3>
-
-          <a href="privacy.html">
-            Privacy
-          </a>
-
-          <a href="security.html">
-            Security
-          </a>
-
-          <a href="terms.html">
-            Terms
-          </a>
-
-          <a href="../support.html">
-            Support
-          </a>
-
-        </div>
-
-
-      </div>
-
-
-      <div class="savings-footer-bottom">
-
-        <span>
-          ©
-          <span id="savingsFooterYear"></span>
-          GTF Banking. All rights reserved.
-        </span>
-
-        <span>
-          Secure digital banking
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================
-       JAVASCRIPT
-  ================================== -->
-
-  <script>
-    "use strict";
-
-
-    /*
-     * Mobile navigation
-     */
-
-    const savingsNav =
-      document.getElementById(
-        "savingsNav"
-      );
-
-    const savingsMobileToggle =
-      document.getElementById(
-        "savingsMobileToggle"
-      );
-
-
-    if (
-      savingsNav &&
-      savingsMobileToggle
-    ) {
-
-      savingsMobileToggle.addEventListener(
-        "click",
-        function () {
-
-          const open =
-            savingsNav.classList.toggle(
-              "mobile-open"
-            );
-
-          savingsMobileToggle.setAttribute(
-            "aria-expanded",
-            String(open)
-          );
-
-          savingsMobileToggle.setAttribute(
-            "aria-label",
-            open
-              ? "Close navigation"
-              : "Open navigation"
-          );
-
-          savingsMobileToggle.textContent =
-            open ? "×" : "☰";
-
-        }
-      );
-
-
-      document
-        .querySelectorAll(
-          ".savings-main-nav a"
-        )
-        .forEach(function (link) {
-
-          link.addEventListener(
-            "click",
-            function () {
-
-              savingsNav.classList.remove(
-                "mobile-open"
-              );
-
-              savingsMobileToggle.setAttribute(
-                "aria-expanded",
-                "false"
-              );
-
-              savingsMobileToggle.setAttribute(
-                "aria-label",
-                "Open navigation"
-              );
-
-              savingsMobileToggle.textContent =
-                "☰";
-
-            }
-          );
-
-        });
-
-    }
-
-
-    /*
-     * Savings calculator
-     */
-
-    const savingsTarget =
-      document.getElementById(
-        "savingsTarget"
-      );
-
-    const savingsCurrent =
-      document.getElementById(
-        "savingsCurrent"
-      );
-
-    const savingsMonths =
-      document.getElementById(
-        "savingsMonths"
-      );
-
-    const monthlySavingsResult =
-      document.getElementById(
-        "monthlySavingsResult"
-      );
-
-
-    function calculateSavings() {
-
-      const target =
-        Number(savingsTarget.value) || 0;
-
-      const current =
-        Number(savingsCurrent.value) || 0;
-
-      const months =
-        Number(savingsMonths.value) || 1;
-
-
-      const remaining =
-        Math.max(
-          target - current,
-          0
-        );
-
-
-      const monthly =
-        remaining / months;
-
-
-      monthlySavingsResult.textContent =
-        monthly.toLocaleString(
-          "en-US",
-          {
-            style: "currency",
-            currency: "USD"
-          }
-        );
-
-    }
-
-
-    [
-      savingsTarget,
-      savingsCurrent,
-      savingsMonths
-    ].forEach(function (input) {
-
-      input.addEventListener(
-        "input",
-        calculateSavings
-      );
-
-    });
-
-
-    calculateSavings();
-
-
-    /*
-     * FAQ accordion
-     */
-
-    const faqQuestions =
-      document.querySelectorAll(
-        ".savings-faq-question"
-      );
-
-
-    faqQuestions.forEach(
-      function (question) {
-
-        question.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              question.closest(
-                ".savings-faq-item"
-              );
-
-            const currentlyOpen =
-              item.classList.contains(
-                "open"
-              );
-
-
-            document
-              .querySelectorAll(
-                ".savings-faq-item"
-              )
-              .forEach(function (otherItem) {
-
-                otherItem.classList.remove(
-                  "open"
-                );
-
-                const otherQuestion =
-                  otherItem.querySelector(
-                    ".savings-faq-question"
-                  );
-
-                const otherSymbol =
-                  otherItem.querySelector(
-                    ".savings-faq-symbol"
-                  );
-
-
-                if (otherQuestion) {
-
-                  otherQuestion.setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
-
-                }
-
-                if (otherSymbol) {
-
-                  otherSymbol.textContent =
-                    "+";
-
-                }
-
-              });
-
-
-            if (!currentlyOpen) {
-
-              item.classList.add(
-                "open"
-              );
-
-              question.setAttribute(
-                "aria-expanded",
-                "true"
-              );
-
-              const symbol =
-                question.querySelector(
-                  ".savings-faq-symbol"
-                );
-
-              if (symbol) {
-
-                symbol.textContent =
-                  "−";
-
-              }
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-
-    /*
-     * Footer year
-     */
-
-    const savingsFooterYear =
-      document.getElementById(
-        "savingsFooterYear"
-      );
-
-
-    if (savingsFooterYear) {
-
-      savingsFooterYear.textContent =
-        new Date().getFullYear();
-
-    }
-
-  </script>
+    <script src="../js/app.js"></script>
 
 </body>
+
 </html>
