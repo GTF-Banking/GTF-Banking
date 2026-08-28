@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Reports | Manager Portal | Global TrustFund</title>
 
     <link rel="stylesheet" href="../css/styles.css">
@@ -200,8 +199,8 @@
 
         .page-header {
             display: flex;
-            justify-content: space-between;
             align-items: flex-end;
+            justify-content: space-between;
             gap: 20px;
             margin-bottom: 20px;
         }
@@ -243,18 +242,22 @@
             color: var(--green);
         }
 
-        .filter-card {
-            margin-bottom: 20px;
-            padding: 17px;
+        .filter-card,
+        .card {
+            margin-bottom: 18px;
             background: #fff;
             border: 1px solid var(--border);
             border-radius: 11px;
         }
 
+        .filter-card {
+            padding: 16px;
+        }
+
         .filters {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 11px;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
             align-items: end;
         }
 
@@ -284,52 +287,59 @@
             border-color: var(--green);
         }
 
-        .report-grid {
+        .cards {
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 14px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
         }
 
-        .metric {
-            padding: 17px;
-            background: #fff;
+        .report-card {
+            padding: 19px;
             border: 1px solid var(--border);
             border-radius: 10px;
+            background: #fff;
         }
 
-        .metric-label {
-            color: var(--muted);
-            font-size: 7px;
+        .report-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: #eaf7ef;
+            color: var(--green);
+            font-size: 15px;
             font-weight: 800;
-            text-transform: uppercase;
         }
 
-        .metric-value {
-            margin-top: 8px;
+        .report-card h3 {
+            margin: 14px 0 5px;
             color: var(--dark);
-            font-size: 19px;
-            font-weight: 800;
+            font-size: 11px;
         }
 
-        .metric-note {
-            margin-top: 6px;
+        .report-card p {
+            min-height: 30px;
+            margin: 0 0 15px;
             color: var(--muted);
             font-size: 7px;
+            line-height: 1.5;
         }
 
-        .grid-two {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 16px;
-            margin-bottom: 20px;
+        .report-action {
+            width: 100%;
+            height: 33px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: #fff;
+            color: var(--green);
+            font-size: 7px;
+            font-weight: 800;
         }
 
         .card {
             overflow: hidden;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 11px;
         }
 
         .card-header {
@@ -349,107 +359,32 @@
             font-size: 7px;
         }
 
-        .chart {
-            min-height: 250px;
-            padding: 20px;
-            display: flex;
-            align-items: flex-end;
-            gap: 10px;
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 17px;
         }
 
-        .bar {
-            flex: 1;
-            min-width: 15px;
-            border-radius: 5px 5px 0 0;
-            background: var(--green);
-            opacity: .9;
+        .summary {
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #f9fbfa;
         }
 
-        .bar-label {
-            margin-top: 6px;
+        .summary-label {
             color: var(--muted);
-            text-align: center;
-            font-size: 6px;
-        }
-
-        .bars {
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: flex-end;
-            gap: 9px;
-        }
-
-        .bar-column {
-            flex: 1;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            text-align: center;
-        }
-
-        .bar-value {
-            margin-bottom: 5px;
-            color: var(--dark);
             font-size: 6px;
             font-weight: 800;
+            text-transform: uppercase;
         }
 
-        .bar-fill {
-            min-height: 3px;
-            border-radius: 4px 4px 0 0;
-            background: var(--green);
-        }
-
-        .legend {
-            padding: 0 17px 16px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 13px;
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        .legend span {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .dot {
-            width: 7px;
-            height: 7px;
-            display: inline-block;
-            border-radius: 50%;
-            background: var(--green);
-        }
-
-        .summary-list {
-            padding: 5px 17px 15px;
-        }
-
-        .summary-row {
-            min-height: 45px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .summary-row:last-child {
-            border-bottom: 0;
-        }
-
-        .summary-row span {
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        .summary-row strong {
+        .summary-value {
+            margin-top: 7px;
             color: var(--dark);
-            font-size: 8px;
+            font-size: 17px;
+            font-weight: 800;
         }
 
         .table-wrap {
@@ -477,15 +412,14 @@
         }
 
         td strong {
-            display: block;
             color: var(--dark);
         }
 
-        td small {
-            display: block;
-            margin-top: 3px;
+        .empty {
+            padding: 35px;
+            text-align: center;
             color: var(--muted);
-            font-size: 6px;
+            font-size: 8px;
         }
 
         .status {
@@ -498,25 +432,17 @@
             font-weight: 800;
         }
 
-        .empty,
-        .loading {
-            padding: 35px;
-            text-align: center;
-            color: var(--muted);
-            font-size: 8px;
-        }
+        @media (max-width: 1050px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-        @media (max-width: 1100px) {
-            .report-grid {
+            .summary-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
             .filters {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .grid-two {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
         }
 
@@ -544,7 +470,8 @@
         }
 
         @media (max-width: 550px) {
-            .report-grid,
+            .cards,
+            .summary-grid,
             .filters {
                 grid-template-columns: 1fr;
             }
@@ -613,11 +540,6 @@
                 Approvals
             </a>
 
-            <a href="./reports.html" class="active">
-                <span class="nav-icon">▤</span>
-                Reports
-            </a>
-
             <a href="./staff.html">
                 <span class="nav-icon">♟</span>
                 Staff
@@ -626,6 +548,11 @@
             <a href="./compliance.html">
                 <span class="nav-icon">!</span>
                 Compliance
+            </a>
+
+            <a href="./reports.html" class="active">
+                <span class="nav-icon">▤</span>
+                Reports
             </a>
 
             <a href="./support.html">
@@ -637,9 +564,13 @@
 
         <div class="profile">
 
-            <strong id="managerName">Manager</strong>
+            <strong id="managerName">
+                Manager
+            </strong>
 
-            <span>Branch / Operations Manager</span>
+            <span>
+                Branch / Operations Manager
+            </span>
 
             <button
                 type="button"
@@ -659,11 +590,15 @@
         <header class="topbar">
 
             <div>
-                <h1>Management Reports</h1>
+
+                <h1>
+                    Reports
+                </h1>
 
                 <p>
-                    Monitor branch performance, transactions and operational activity.
+                    Operational and branch performance reporting.
                 </p>
+
             </div>
 
             <span class="session">
@@ -678,11 +613,16 @@
             <div class="page-header">
 
                 <div>
-                    <h2>Performance Reports</h2>
+
+                    <h2>
+                        Management Reports
+                    </h2>
 
                     <p>
-                        Select a reporting period and review the latest operational metrics.
+                        Generate reports for transactions,
+                        customers, accounts and branch operations.
                     </p>
+
                 </div>
 
                 <div class="toolbar">
@@ -695,264 +635,339 @@
                         ↻ Refresh
                     </button>
 
-                    <button
-                        type="button"
-                        class="button primary"
-                        id="printButton"
-                    >
-                        Print Report
-                    </button>
-
                 </div>
 
             </div>
 
 
-            <!-- FILTERS -->
-
             <section class="filter-card">
 
-                <form id="filterForm">
+                <div class="filters">
 
-                    <div class="filters">
+                    <div>
 
-                        <div>
-                            <label for="startDate">
-                                Start Date
-                            </label>
+                        <label for="startDate">
+                            Start Date
+                        </label>
 
-                            <input
-                                id="startDate"
-                                type="date"
-                            >
-                        </div>
-
-                        <div>
-                            <label for="endDate">
-                                End Date
-                            </label>
-
-                            <input
-                                id="endDate"
-                                type="date"
-                            >
-                        </div>
-
-                        <div>
-                            <label for="reportType">
-                                Report Type
-                            </label>
-
-                            <select id="reportType">
-
-                                <option value="overview">
-                                    Branch Overview
-                                </option>
-
-                                <option value="transactions">
-                                    Transactions
-                                </option>
-
-                                <option value="accounts">
-                                    Accounts
-                                </option>
-
-                                <option value="customers">
-                                    Customers
-                                </option>
-
-                                <option value="approvals">
-                                    Approvals
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="button primary"
+                        <input
+                            type="date"
+                            id="startDate"
                         >
-                            Generate Report
-                        </button>
 
                     </div>
 
-                </form>
+                    <div>
 
-            </section>
+                        <label for="endDate">
+                            End Date
+                        </label>
 
-
-            <!-- METRICS -->
-
-            <section class="report-grid">
-
-                <div class="metric">
-
-                    <div class="metric-label">
-                        Total Transactions
-                    </div>
-
-                    <div
-                        class="metric-value"
-                        id="totalTransactions"
-                    >
-                        —
-                    </div>
-
-                    <div class="metric-note">
-                        Selected reporting period
-                    </div>
-
-                </div>
-
-
-                <div class="metric">
-
-                    <div class="metric-label">
-                        Transaction Volume
-                    </div>
-
-                    <div
-                        class="metric-value"
-                        id="transactionVolume"
-                    >
-                        —
-                    </div>
-
-                    <div class="metric-note">
-                        Total processed value
-                    </div>
-
-                </div>
-
-
-                <div class="metric">
-
-                    <div class="metric-label">
-                        Active Accounts
-                    </div>
-
-                    <div
-                        class="metric-value"
-                        id="activeAccounts"
-                    >
-                        —
-                    </div>
-
-                    <div class="metric-note">
-                        Current branch accounts
-                    </div>
-
-                </div>
-
-
-                <div class="metric">
-
-                    <div class="metric-label">
-                        Pending Approvals
-                    </div>
-
-                    <div
-                        class="metric-value"
-                        id="pendingApprovals"
-                    >
-                        —
-                    </div>
-
-                    <div class="metric-note">
-                        Awaiting manager action
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- CHARTS -->
-
-            <section class="grid-two">
-
-                <div class="card">
-
-                    <div class="card-header">
-
-                        <h3>
-                            Transaction Activity
-                        </h3>
-
-                        <p>
-                            Transaction volume by reporting period.
-                        </p>
-
-                    </div>
-
-                    <div class="chart">
-
-                        <div
-                            class="bars"
-                            id="transactionChart"
+                        <input
+                            type="date"
+                            id="endDate"
                         >
-                            <div class="loading">
-                                Loading report...
-                            </div>
-                        </div>
 
                     </div>
 
-                    <div class="legend">
-                        <span>
-                            <i class="dot"></i>
-                            Transactions
-                        </span>
+                    <div>
+
+                        <label for="reportType">
+                            Report Type
+                        </label>
+
+                        <select id="reportType">
+
+                            <option value="summary">
+                                Branch Summary
+                            </option>
+
+                            <option value="transactions">
+                                Transactions
+                            </option>
+
+                            <option value="accounts">
+                                Accounts
+                            </option>
+
+                            <option value="customers">
+                                Customers
+                            </option>
+
+                            <option value="compliance">
+                                Compliance
+                            </option>
+
+                        </select>
+
                     </div>
 
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-header">
-
-                        <h3>
-                            Report Summary
-                        </h3>
-
-                        <p>
-                            Key operational indicators.
-                        </p>
-
-                    </div>
-
-                    <div
-                        class="summary-list"
-                        id="summaryList"
+                    <button
+                        type="button"
+                        class="button primary"
+                        id="generateButton"
                     >
-                        <div class="loading">
-                            Loading...
-                        </div>
-                    </div>
+                        Generate Report
+                    </button>
 
                 </div>
 
             </section>
 
 
-            <!-- RECENT REPORT DATA -->
+            <section class="cards">
+
+                <article class="report-card">
+
+                    <div class="report-icon">
+                        ₦
+                    </div>
+
+                    <h3>
+                        Financial Summary
+                    </h3>
+
+                    <p>
+                        Review deposits, withdrawals,
+                        transfers and branch totals.
+                    </p>
+
+                    <button
+                        class="report-action"
+                        data-report="summary"
+                    >
+                        View Report
+                    </button>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-icon">
+                        ⇄
+                    </div>
+
+                    <h3>
+                        Transaction Report
+                    </h3>
+
+                    <p>
+                        Review transaction volumes and
+                        operational activity.
+                    </p>
+
+                    <button
+                        class="report-action"
+                        data-report="transactions"
+                    >
+                        View Report
+                    </button>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-icon">
+                        ♙
+                    </div>
+
+                    <h3>
+                        Customer Report
+                    </h3>
+
+                    <p>
+                        Review customer registrations,
+                        activity and account relationships.
+                    </p>
+
+                    <button
+                        class="report-action"
+                        data-report="customers"
+                    >
+                        View Report
+                    </button>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-icon">
+                        ▣
+                    </div>
+
+                    <h3>
+                        Account Report
+                    </h3>
+
+                    <p>
+                        Review account openings,
+                        statuses and balances.
+                    </p>
+
+                    <button
+                        class="report-action"
+                        data-report="accounts"
+                    >
+                        View Report
+                    </button>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-icon">
+                        !
+                    </div>
+
+                    <h3>
+                        Compliance Report
+                    </h3>
+
+                    <p>
+                        Review compliance cases,
+                        risk levels and escalations.
+                    </p>
+
+                    <button
+                        class="report-action"
+                        data-report="compliance"
+                    >
+                        View Report
+                    </button>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-icon">
+                        ↓
+                    </div>
+
+                    <h3>
+                        Export Data
+                    </h3>
+
+                    <p>
+                        Export the currently generated
+                        report for authorized use.
+                    </p>
+
+                    <button
+                        class="report-action"
+                        id="exportButton"
+                    >
+                        Export CSV
+                    </button>
+
+                </article>
+
+            </section>
+
 
             <section class="card">
 
                 <div class="card-header">
 
                     <h3>
-                        Report Details
+                        Report Summary
                     </h3>
 
-                    <p>
-                        Recent activity included in the selected report.
+                    <p id="reportPeriod">
+                        Select a reporting period and generate a report.
                     </p>
 
                 </div>
+
+
+                <div class="summary-grid">
+
+                    <div class="summary">
+
+                        <div class="summary-label">
+                            Total Transactions
+                        </div>
+
+                        <div
+                            class="summary-value"
+                            id="totalTransactions"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary">
+
+                        <div class="summary-label">
+                            Total Deposits
+                        </div>
+
+                        <div
+                            class="summary-value"
+                            id="totalDeposits"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary">
+
+                        <div class="summary-label">
+                            Total Withdrawals
+                        </div>
+
+                        <div
+                            class="summary-value"
+                            id="totalWithdrawals"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary">
+
+                        <div class="summary-label">
+                            Active Accounts
+                        </div>
+
+                        <div
+                            class="summary-value"
+                            id="activeAccounts"
+                        >
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Recent Reports
+                    </h3>
+
+                    <p>
+                        Previously generated manager reports.
+                    </p>
+
+                </div>
+
 
                 <div class="table-wrap">
 
@@ -961,24 +976,20 @@
                         <thead>
 
                             <tr>
-                                <th>Reference</th>
-                                <th>Customer</th>
-                                <th>Type</th>
-                                <th>Amount</th>
-                                <th>Date</th>
+                                <th>Report</th>
+                                <th>Period</th>
+                                <th>Generated By</th>
                                 <th>Status</th>
+                                <th>Created</th>
                             </tr>
 
                         </thead>
 
-                        <tbody id="reportTable">
+                        <tbody id="reportsTable">
 
                             <tr>
-                                <td
-                                    colspan="6"
-                                    class="loading"
-                                >
-                                    Loading report data...
+                                <td colspan="5" class="empty">
+                                    Loading reports...
                                 </td>
                             </tr>
 
@@ -1001,34 +1012,42 @@
 
     const API_BASE = "/api";
 
-    const PAGE_SIZE = 10;
+    let currentReport = null;
 
-
-    /* ------------------------------------------------------------
-       API
-    ------------------------------------------------------------ */
 
     async function apiRequest(
         endpoint,
         options = {}
     ) {
 
-        const response = await fetch(
-            `${API_BASE}${endpoint}`,
-            {
-                method:
-                    options.method || "GET",
+        const response =
+            await fetch(
+                `${API_BASE}${endpoint}`,
+                {
+                    method:
+                        options.method || "GET",
 
-                credentials: "include",
+                    credentials:
+                        "include",
 
-                headers: {
-                    "Accept":
-                        "application/json",
+                    headers: {
+                        "Accept":
+                            "application/json",
 
-                    ...(options.headers || {})
+                        "Content-Type":
+                            "application/json",
+
+                        ...(options.headers || {})
+                    },
+
+                    body:
+                        options.body
+                            ? JSON.stringify(
+                                options.body
+                            )
+                            : undefined
                 }
-            }
-        );
+            );
 
 
         const data =
@@ -1053,10 +1072,6 @@
     }
 
 
-    /* ------------------------------------------------------------
-       HELPERS
-    ------------------------------------------------------------ */
-
     function escapeHtml(value) {
 
         return String(value ?? "")
@@ -1069,50 +1084,33 @@
     }
 
 
-    function money(
-        value,
-        currency = "NGN"
-    ) {
+    function getArray(data) {
 
-        if (
-            value === null ||
-            value === undefined ||
-            value === ""
-        ) {
-
-            return "—";
-
+        if (Array.isArray(data)) {
+            return data;
         }
 
-
-        const number = Number(value);
-
-
-        if (Number.isNaN(number)) {
-
-            return String(value);
-
+        if (Array.isArray(data?.reports)) {
+            return data.reports;
         }
 
-
-        try {
-
-            return new Intl.NumberFormat(
-                "en-NG",
-                {
-                    style: "currency",
-                    currency,
-                    maximumFractionDigits: 2
-                }
-            ).format(number);
-
+        if (Array.isArray(data?.data)) {
+            return data.data;
         }
 
-        catch {
+        return [];
 
-            return `${currency} ${number.toLocaleString()}`;
+    }
 
-        }
+
+    function formatNumber(value) {
+
+        const number =
+            Number(value || 0);
+
+        return number.toLocaleString(
+            "en-NG"
+        );
 
     }
 
@@ -1123,9 +1121,14 @@
             return "—";
         }
 
-        const date = new Date(value);
+        const date =
+            new Date(value);
 
-        if (Number.isNaN(date.getTime())) {
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
             return "—";
         }
 
@@ -1141,70 +1144,136 @@
     }
 
 
-    function getArray(
-        data,
-        keys = []
-    ) {
+    async function loadReports() {
 
-        if (Array.isArray(data)) {
-            return data;
-        }
+        const table =
+            document.getElementById(
+                "reportsTable"
+            );
 
-        for (const key of keys) {
 
-            if (Array.isArray(data?.[key])) {
-                return data[key];
+        try {
+
+            const data =
+                await apiRequest(
+                    "/reports"
+                );
+
+
+            const reports =
+                getArray(data);
+
+
+            if (!reports.length) {
+
+                table.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="empty"
+                        >
+                            No previously generated reports found.
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
             }
 
+
+            table.innerHTML =
+                reports
+                    .map(
+                        report => `
+
+                            <tr>
+
+                                <td>
+                                    <strong>
+                                        ${escapeHtml(
+                                            report.name ||
+                                            report.report_type ||
+                                            report.type ||
+                                            "Management Report"
+                                        )}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    ${escapeHtml(
+                                        report.period ||
+                                        `${report.start_date || ""} - ${report.end_date || ""}`
+                                    )}
+                                </td>
+
+                                <td>
+                                    ${escapeHtml(
+                                        report.generated_by ||
+                                        report.generatedBy ||
+                                        "Manager"
+                                    )}
+                                </td>
+
+                                <td>
+                                    <span class="status">
+                                        ${escapeHtml(
+                                            report.status ||
+                                            "Generated"
+                                        )}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    ${escapeHtml(
+                                        formatDate(
+                                            report.created_at ||
+                                            report.createdAt
+                                        )
+                                    )}
+                                </td>
+
+                            </tr>
+
+                        `
+                    )
+                    .join("");
+
         }
 
-        if (Array.isArray(data?.data)) {
-            return data.data;
-        }
+        catch (error) {
 
-        return [];
+            console.error(
+                error
+            );
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="empty"
+                    >
+                        Report history is currently unavailable.
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
 
     }
 
 
-    /* ------------------------------------------------------------
-       DATE DEFAULTS
-    ------------------------------------------------------------ */
-
-    function setDefaultDates() {
-
-        const end =
-            new Date();
-
-        const start =
-            new Date();
-
-        start.setDate(
-            start.getDate() - 30
-        );
-
-
-        document.getElementById(
-            "startDate"
-        ).value =
-            start.toISOString()
-                .slice(0, 10);
-
-
-        document.getElementById(
-            "endDate"
-        ).value =
-            end.toISOString()
-                .slice(0, 10);
-
-    }
-
-
-    /* ------------------------------------------------------------
-       LOAD REPORT
-    ------------------------------------------------------------ */
-
-    async function loadReport() {
+    async function generateReport(
+        type
+    ) {
 
         const start =
             document.getElementById(
@@ -1218,10 +1287,26 @@
             ).value;
 
 
-        const type =
+        const reportType =
+            type ||
             document.getElementById(
                 "reportType"
             ).value;
+
+
+        if (
+            start &&
+            end &&
+            start > end
+        ) {
+
+            alert(
+                "Start date cannot be after the end date."
+            );
+
+            return;
+
+        }
 
 
         const params =
@@ -1244,25 +1329,73 @@
         }
 
 
-        if (type) {
-            params.set(
-                "type",
-                type
-            );
-        }
+        params.set(
+            "type",
+            reportType
+        );
 
 
         try {
 
             const data =
                 await apiRequest(
-                    `/reports?${params.toString()}`
+                    `/reports/summary?${params.toString()}`
                 );
 
 
-            renderReport(
-                data
-            );
+            currentReport =
+                data.report ||
+                data.data ||
+                data;
+
+
+            const report =
+                currentReport || {};
+
+
+            document.getElementById(
+                "totalTransactions"
+            ).textContent =
+                formatNumber(
+                    report.total_transactions ||
+                    report.totalTransactions
+                );
+
+
+            document.getElementById(
+                "totalDeposits"
+            ).textContent =
+                formatNumber(
+                    report.total_deposits ||
+                    report.totalDeposits
+                );
+
+
+            document.getElementById(
+                "totalWithdrawals"
+            ).textContent =
+                formatNumber(
+                    report.total_withdrawals ||
+                    report.totalWithdrawals
+                );
+
+
+            document.getElementById(
+                "activeAccounts"
+            ).textContent =
+                formatNumber(
+                    report.active_accounts ||
+                    report.activeAccounts
+                );
+
+
+            document.getElementById(
+                "reportPeriod"
+            ).textContent =
+                start || end
+                    ? `Reporting period: ${start || "Beginning"} to ${end || "Present"}`
+                    : "Current reporting period";
+
 
         }
 
@@ -1273,527 +1406,184 @@
             );
 
 
-            /*
-             * If the report endpoint is not yet implemented,
-             * keep the interface usable rather than displaying
-             * fabricated financial data.
-             */
-
-            document.getElementById(
-                "reportTable"
-            ).innerHTML = `
-
-                <tr>
-                    <td
-                        colspan="6"
-                        class="empty"
-                    >
-                        Report data is currently unavailable.
-                    </td>
-                </tr>
-
-            `;
-
-            document.getElementById(
-                "summaryList"
-            ).innerHTML = `
-
-                <div class="empty">
-                    Unable to load report summary.
-                </div>
-
-            `;
-
-            document.getElementById(
-                "transactionChart"
-            ).innerHTML = `
-
-                <div class="empty">
-                    No chart data available.
-                </div>
-
-            `;
+            alert(
+                error.message ||
+                "Unable to generate report."
+            );
 
         }
 
     }
 
 
-    /* ------------------------------------------------------------
-       RENDER REPORT
-    ------------------------------------------------------------ */
+    document.querySelectorAll(
+        "[data-report]"
+    ).forEach(
+        button => {
 
-    function renderReport(
-        data
-    ) {
+            button.addEventListener(
+                "click",
+                () => {
 
-        const summary =
-            data.summary ||
-            data.metrics ||
-            data.report ||
-            data;
+                    const type =
+                        button.dataset.report;
 
 
-        document.getElementById(
-            "totalTransactions"
-        ).textContent =
-            Number(
-                summary.total_transactions ??
-                summary.transactions ??
-                0
-            ).toLocaleString();
+                    document.getElementById(
+                        "reportType"
+                    ).value =
+                        type;
 
 
-        document.getElementById(
-            "transactionVolume"
-        ).textContent =
-            money(
-                summary.transaction_volume ??
-                summary.total_volume ??
-                summary.volume ??
-                0
-            );
+                    generateReport(
+                        type
+                    );
 
-
-        document.getElementById(
-            "activeAccounts"
-        ).textContent =
-            Number(
-                summary.active_accounts ??
-                summary.accounts ??
-                0
-            ).toLocaleString();
-
-
-        document.getElementById(
-            "pendingApprovals"
-        ).textContent =
-            Number(
-                summary.pending_approvals ??
-                summary.pending ??
-                0
-            ).toLocaleString();
-
-
-        renderSummary(
-            summary
-        );
-
-
-        renderChart(
-            data.chart ||
-            data.activity ||
-            data.series ||
-            []
-        );
-
-
-        renderTable(
-            getArray(
-                data,
-                [
-                    "transactions",
-                    "rows",
-                    "details",
-                    "activity"
-                ]
-            )
-        );
-
-    }
-
-
-    /* ------------------------------------------------------------
-       SUMMARY
-    ------------------------------------------------------------ */
-
-    function renderSummary(
-        summary
-    ) {
-
-        const rows = [
-
-            [
-                "Total transactions",
-                Number(
-                    summary.total_transactions ??
-                    summary.transactions ??
-                    0
-                ).toLocaleString()
-            ],
-
-            [
-                "Transaction volume",
-                money(
-                    summary.transaction_volume ??
-                    summary.total_volume ??
-                    0
-                )
-            ],
-
-            [
-                "Deposits",
-                money(
-                    summary.total_deposits ??
-                    summary.deposits ??
-                    0
-                )
-            ],
-
-            [
-                "Withdrawals",
-                money(
-                    summary.total_withdrawals ??
-                    summary.withdrawals ??
-                    0
-                )
-            ],
-
-            [
-                "Transfers",
-                money(
-                    summary.total_transfers ??
-                    summary.transfers ??
-                    0
-                )
-            ],
-
-            [
-                "Pending approvals",
-                Number(
-                    summary.pending_approvals ??
-                    summary.pending ??
-                    0
-                ).toLocaleString()
-            ]
-
-        ];
-
-
-        document.getElementById(
-            "summaryList"
-        ).innerHTML =
-            rows
-                .map(
-                    row => `
-
-                        <div class="summary-row">
-
-                            <span>
-                                ${escapeHtml(row[0])}
-                            </span>
-
-                            <strong>
-                                ${escapeHtml(row[1])}
-                            </strong>
-
-                        </div>
-
-                    `
-                )
-                .join("");
-
-    }
-
-
-    /* ------------------------------------------------------------
-       CHART
-    ------------------------------------------------------------ */
-
-    function renderChart(
-        series
-    ) {
-
-        const chart =
-            document.getElementById(
-                "transactionChart"
-            );
-
-
-        if (!Array.isArray(series) ||
-            !series.length) {
-
-            chart.innerHTML = `
-                <div class="empty">
-                    No activity data available.
-                </div>
-            `;
-
-            return;
-
-        }
-
-
-        const values =
-            series.map(
-                item =>
-                    Number(
-                        item.value ??
-                        item.count ??
-                        item.transactions ??
-                        0
-                    )
-            );
-
-
-        const max =
-            Math.max(
-                ...values,
-                1
-            );
-
-
-        chart.innerHTML = `
-
-            <div class="bars">
-
-                ${
-                    series
-                        .slice(0, 12)
-                        .map(
-                            item => {
-
-                                const value =
-                                    Number(
-                                        item.value ??
-                                        item.count ??
-                                        item.transactions ??
-                                        0
-                                    );
-
-
-                                const height =
-                                    Math.max(
-                                        3,
-                                        (value / max) * 100
-                                    );
-
-
-                                return `
-
-                                    <div class="bar-column">
-
-                                        <div class="bar-value">
-                                            ${value.toLocaleString()}
-                                        </div>
-
-                                        <div
-                                            class="bar-fill"
-                                            style="height:${height}%"
-                                        ></div>
-
-                                        <div class="bar-label">
-                                            ${escapeHtml(
-                                                item.label ||
-                                                item.date ||
-                                                item.period ||
-                                                ""
-                                            )}
-                                        </div>
-
-                                    </div>
-
-                                `;
-
-                            }
-                        )
-                        .join("")
                 }
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* ------------------------------------------------------------
-       TABLE
-    ------------------------------------------------------------ */
-
-    function renderTable(
-        rows
-    ) {
-
-        const table =
-            document.getElementById(
-                "reportTable"
             );
-
-
-        if (!rows.length) {
-
-            table.innerHTML = `
-
-                <tr>
-                    <td
-                        colspan="6"
-                        class="empty"
-                    >
-                        No report records found.
-                    </td>
-                </tr>
-
-            `;
-
-            return;
-
-        }
-
-
-        table.innerHTML =
-            rows
-                .slice(0, PAGE_SIZE)
-                .map(
-                    item => {
-
-                        const reference =
-                            item.reference ||
-                            item.transaction_reference ||
-                            item.id ||
-                            "—";
-
-
-                        const customer =
-                            item.customer_name ||
-                            item.customer?.full_name ||
-                            item.customer?.name ||
-                            "—";
-
-
-                        const type =
-                            item.type ||
-                            item.transaction_type ||
-                            "—";
-
-
-                        const amount =
-                            item.amount ??
-                            item.value;
-
-
-                        const status =
-                            item.status ||
-                            "Completed";
-
-
-                        return `
-
-                            <tr>
-
-                                <td>
-
-                                    <strong>
-                                        ${escapeHtml(reference)}
-                                    </strong>
-
-                                    <small>
-                                        ${escapeHtml(
-                                            item.account_number ||
-                                            ""
-                                        )}
-                                    </small>
-
-                                </td>
-
-                                <td>
-                                    ${escapeHtml(customer)}
-                                </td>
-
-                                <td>
-                                    ${escapeHtml(type)}
-                                </td>
-
-                                <td>
-                                    ${
-                                        amount !== undefined
-                                            ? escapeHtml(
-                                                money(
-                                                    amount,
-                                                    item.currency ||
-                                                    "NGN"
-                                                )
-                                            )
-                                            : "—"
-                                    }
-                                </td>
-
-                                <td>
-                                    ${escapeHtml(
-                                        formatDate(
-                                            item.created_at ||
-                                            item.transaction_date ||
-                                            item.date
-                                        )
-                                    )}
-                                </td>
-
-                                <td>
-                                    <span class="status">
-                                        ${escapeHtml(status)}
-                                    </span>
-                                </td>
-
-                            </tr>
-
-                        `;
-
-                    }
-                )
-                .join("");
-
-    }
-
-
-    /* ------------------------------------------------------------
-       FILTER
-    ------------------------------------------------------------ */
-
-    document.getElementById(
-        "filterForm"
-    ).addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-            loadReport();
 
         }
     );
 
 
-    /* ------------------------------------------------------------
-       REFRESH
-    ------------------------------------------------------------ */
+    document.getElementById(
+        "generateButton"
+    ).addEventListener(
+        "click",
+        () => generateReport()
+    );
+
 
     document.getElementById(
         "refreshButton"
     ).addEventListener(
         "click",
-        loadReport
-    );
-
-
-    /* ------------------------------------------------------------
-       PRINT
-    ------------------------------------------------------------ */
-
-    document.getElementById(
-        "printButton"
-    ).addEventListener(
-        "click",
         () => {
 
-            window.print();
+            loadReports();
+            generateReport();
 
         }
     );
 
 
-    /* ------------------------------------------------------------
-       USER
-    ------------------------------------------------------------ */
+    document.getElementById(
+        "exportButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            if (!currentReport) {
+
+                alert(
+                    "Generate a report before exporting."
+                );
+
+                return;
+
+            }
+
+
+            const rows = [
+                [
+                    "Metric",
+                    "Value"
+                ],
+
+                [
+                    "Total Transactions",
+                    currentReport.total_transactions ||
+                    currentReport.totalTransactions ||
+                    0
+                ],
+
+                [
+                    "Total Deposits",
+                    currentReport.total_deposits ||
+                    currentReport.totalDeposits ||
+                    0
+                ],
+
+                [
+                    "Total Withdrawals",
+                    currentReport.total_withdrawals ||
+                    currentReport.totalWithdrawals ||
+                    0
+                ],
+
+                [
+                    "Active Accounts",
+                    currentReport.active_accounts ||
+                    currentReport.activeAccounts ||
+                    0
+                ]
+            ];
+
+
+            const csv =
+                rows
+                    .map(
+                        row =>
+                            row
+                                .map(
+                                    value =>
+                                        `"${String(value)
+                                            .replace(
+                                                /"/g,
+                                                '""'
+                                            )}"`
+                                )
+                                .join(",")
+                    )
+                    .join("\n");
+
+
+            const blob =
+                new Blob(
+                    [csv],
+                    {
+                        type:
+                            "text/csv;charset=utf-8;"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href = url;
+
+            link.download =
+                `gtf-manager-report-${new Date()
+                    .toISOString()
+                    .slice(0,10)}.csv`;
+
+
+            document.body.appendChild(
+                link
+            );
+
+            link.click();
+
+            link.remove();
+
+
+            URL.revokeObjectURL(
+                url
+            );
+
+        }
+    );
+
 
     try {
 
@@ -1822,15 +1612,9 @@
     }
 
     catch {
-
-        /* Ignore malformed local profile data. */
-
+        /* Ignore invalid profile data. */
     }
 
-
-    /* ------------------------------------------------------------
-       LOGOUT
-    ------------------------------------------------------------ */
 
     document.getElementById(
         "logoutButton"
@@ -1867,8 +1651,7 @@
                 "gtf_refresh_token",
                 "access_token",
                 "refresh_token"
-            ]
-            .forEach(
+            ].forEach(
                 key =>
                     localStorage.removeItem(
                         key
@@ -1887,13 +1670,7 @@
     );
 
 
-    /* ------------------------------------------------------------
-       INITIALIZE
-    ------------------------------------------------------------ */
-
-    setDefaultDates();
-
-    loadReport();
+    loadReports();
 
 </script>
 
