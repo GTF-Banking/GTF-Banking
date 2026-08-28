@@ -1,2705 +1,2286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="GTF Banking Manager Dashboard"
-  >
-
-  <meta
-    name="theme-color"
-    content="#0b2a4a"
-  >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manager Dashboard | Global TrustFund</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        :root {
+            --gtf-green: #0b5d3b;
+            --gtf-dark: #073d28;
+            --gtf-light: #16865a;
+            --gtf-gold: #c9962b;
+
+            --bg: #f4f8f6;
+            --surface: #fff;
+            --border: #dce7e1;
+            --text: #18352a;
+            --muted: #718078;
+
+            --success: #19734b;
+            --success-bg: #eaf7ef;
+
+            --warning: #946b17;
+            --warning-bg: #fff7df;
+
+            --danger: #a33f3f;
+            --danger-bg: #fff0f0;
+
+            --info: #246b91;
+            --info-bg: #edf7fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+
+            padding: 22px 16px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--gtf-dark),
+                    #052e1f
+                );
+
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 5px 8px 22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.12);
+
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .nav-title {
+            margin: 23px 9px 9px;
+            color: rgba(255,255,255,.42);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
-  <title>Manager Dashboard | GTF Banking</title>
+        .nav {
+            display: grid;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            min-height: 38px;
+            padding: 0 11px;
+
+            border-radius: 7px;
 
-  <link
-    rel="icon"
-    href="../assets/gtf-logo.svg"
-    type="image/svg+xml"
-  >
+            color: rgba(255,255,255,.72);
+
+            font-size: 9px;
+            font-weight: 600;
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+            text-decoration: none;
+        }
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.10);
+            color: #fff;
+        }
 
-      --page-bg: #f4f7fa;
-      --surface: #ffffff;
-      --surface-soft: #f8fafc;
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 11px;
+        }
 
-      --text: #172b3a;
-      --muted: #66788a;
+        .profile {
+            margin-top: 30px;
+            padding: 13px;
 
-      --border: #dce4eb;
+            border:
+                1px solid rgba(255,255,255,.10);
 
-      --success: #16794c;
-      --success-bg: #eaf8f0;
+            border-radius: 9px;
 
-      --warning: #996b00;
-      --warning-bg: #fff8e5;
+            background: rgba(255,255,255,.05);
+        }
 
-      --danger: #b42318;
-      --danger-bg: #fff0ee;
+        .profile strong {
+            display: block;
+            font-size: 9px;
+        }
 
-      --shadow:
-        0 8px 25px rgba(11, 42, 74, .08);
-    }
+        .profile span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        .logout {
+            width: 100%;
+            min-height: 30px;
+            margin-top: 10px;
 
-    html {
-      min-height: 100%;
-    }
+            border:
+                1px solid rgba(255,255,255,.15);
 
-    body {
-      margin: 0;
-      min-height: 100vh;
+            border-radius: 6px;
 
-      background: var(--page-bg);
-      color: var(--text);
+            background: transparent;
+            color: rgba(255,255,255,.75);
 
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-    }
+            font-size: 8px;
+        }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
+        /* MAIN */
 
-    button {
-      cursor: pointer;
-    }
+        .main {
+            min-width: 0;
+        }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+        .topbar {
+            min-height: 68px;
 
-    /* =========================================
-       LAYOUT
-    ========================================== */
+            padding: 14px 28px;
 
-    .manager-app {
-      min-height: 100vh;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
 
-    .sidebar {
-      position: fixed;
+            background: #fff;
 
-      top: 0;
-      left: 0;
-      bottom: 0;
+            border-bottom:
+                1px solid var(--border);
+        }
 
-      width: 245px;
+        .topbar h1 {
+            margin: 0;
+            color: var(--gtf-dark);
+            font-size: 20px;
+        }
 
-      background: var(--gtf-navy);
+        .topbar p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 8px;
+        }
 
-      color: #fff;
+        .session {
+            padding: 7px 10px;
 
-      z-index: 1000;
+            border-radius: 20px;
 
-      overflow-y: auto;
-    }
+            background: var(--success-bg);
+            color: var(--success);
 
-    .main-area {
-      min-height: 100vh;
+            font-size: 7px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
 
-      margin-left: 245px;
-    }
+        .content {
+            padding: 27px;
+        }
 
-    /* =========================================
-       SIDEBAR BRAND
-    ========================================== */
+        /* WELCOME */
 
-    .sidebar-brand {
-      min-height: 76px;
+        .welcome {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
 
-      padding: 14px 18px;
+            padding: 22px 24px;
 
-      display: flex;
-      align-items: center;
+            margin-bottom: 20px;
 
-      gap: 11px;
+            border-radius: 12px;
 
-      border-bottom:
-        1px solid
-        rgba(255,255,255,.10);
-    }
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gtf-dark),
+                    var(--gtf-green)
+                );
 
-    .sidebar-logo {
-      width: 43px;
-      height: 43px;
+            color: #fff;
+        }
 
-      object-fit: contain;
-    }
+        .welcome h2 {
+            margin: 0;
+            font-size: 18px;
+        }
 
-    .brand-text strong {
-      display: block;
+        .welcome p {
+            margin: 7px 0 0;
 
-      color: #fff;
+            color: rgba(255,255,255,.72);
 
-      font-size: .92rem;
-    }
+            font-size: 8px;
+        }
 
-    .brand-text span {
-      display: block;
+        .date-box {
+            padding: 10px 13px;
 
-      margin-top: 3px;
+            border:
+                1px solid rgba(255,255,255,.14);
 
-      color: #b9c9d8;
+            border-radius: 8px;
 
-      font-size: .58rem;
-    }
+            background: rgba(255,255,255,.08);
 
-    /* =========================================
-       SIDEBAR NAV
-    ========================================== */
+            color: rgba(255,255,255,.85);
 
-    .sidebar-nav {
-      padding: 18px 12px;
-    }
+            font-size: 8px;
+            white-space: nowrap;
+        }
 
-    .nav-section-title {
-      padding:
-        9px 10px 7px;
+        /* KPI */
 
-      color: #8fa5b9;
+        .kpi-grid {
+            display: grid;
 
-      font-size: .55rem;
-      font-weight: 700;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
 
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
+            gap: 14px;
 
-    .nav-item {
-      width: 100%;
+            margin-bottom: 20px;
+        }
 
-      min-height: 40px;
+        .kpi {
+            padding: 17px;
 
-      margin-bottom: 4px;
+            background: var(--surface);
 
-      padding:
-        9px 11px;
+            border:
+                1px solid var(--border);
 
-      display: flex;
-      align-items: center;
+            border-radius: 10px;
+        }
 
-      gap: 10px;
+        .kpi-label {
+            color: var(--muted);
+            font-size: 7px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
 
-      border-radius: 6px;
+        .kpi-value {
+            margin-top: 8px;
 
-      color: #d6e1ea;
+            color: var(--gtf-dark);
 
-      font-size: .68rem;
+            font-size: 19px;
+            font-weight: 800;
+        }
 
-      transition:
-        background .15s ease,
-        color .15s ease;
-    }
+        .kpi-change {
+            margin-top: 6px;
 
-    .nav-item:hover,
-    .nav-item.active {
-      background:
-        rgba(255,255,255,.10);
+            color: var(--success);
 
-      color: #fff;
-    }
+            font-size: 7px;
+            font-weight: 700;
+        }
 
-    .nav-icon {
-      width: 20px;
+        .kpi-change.warning {
+            color: var(--warning);
+        }
 
-      text-align: center;
+        .kpi-change.danger {
+            color: var(--danger);
+        }
 
-      font-size: .82rem;
-    }
+        /* MAIN GRID */
 
-    .sidebar-bottom {
-      padding: 12px;
+        .dashboard-grid {
+            display: grid;
 
-      border-top:
-        1px solid
-        rgba(255,255,255,.10);
-    }
+            grid-template-columns:
+                minmax(0, 1.4fr)
+                minmax(280px, .6fr);
 
-    .logout-button {
-      width: 100%;
+            gap: 20px;
 
-      min-height: 39px;
+            align-items: start;
+        }
 
-      border:
-        1px solid
-        rgba(255,255,255,.18);
+        .card {
+            background: var(--surface);
 
-      border-radius: 6px;
+            border:
+                1px solid var(--border);
 
-      background:
-        rgba(255,255,255,.05);
+            border-radius: 11px;
 
-      color: #fff;
+            overflow: hidden;
+        }
 
-      font-size: .66rem;
-      font-weight: 700;
-    }
+        .card + .card {
+            margin-top: 20px;
+        }
 
-    .logout-button:hover {
-      background:
-        rgba(255,255,255,.11);
-    }
+        .card-header {
+            min-height: 57px;
 
-    /* =========================================
-       TOP BAR
-    ========================================== */
+            padding: 15px 17px;
 
-    .topbar {
-      min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
 
-      padding:
-        10px 25px;
+            border-bottom:
+                1px solid var(--border);
+        }
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        .card-header h2 {
+            margin: 0;
 
-      gap: 20px;
+            color: var(--gtf-dark);
 
-      background: #fff;
+            font-size: 12px;
+        }
 
-      border-bottom:
-        1px solid var(--border);
-    }
+        .card-header p {
+            margin: 4px 0 0;
 
-    .mobile-menu {
-      display: none;
+            color: var(--muted);
 
-      width: 37px;
-      height: 37px;
+            font-size: 7px;
+        }
 
-      border:
-        1px solid var(--border);
+        .card-body {
+            padding: 17px;
+        }
 
-      border-radius: 6px;
+        .view-link {
+            color: var(--gtf-green);
 
-      background: #fff;
+            font-size: 7px;
+            font-weight: 800;
 
-      color: var(--gtf-navy);
-    }
+            text-decoration: none;
+        }
 
-    .page-heading h1 {
-      margin: 0;
+        /* TABLE */
 
-      color: var(--gtf-navy);
+        .table-wrap {
+            overflow-x: auto;
+        }
 
-      font-size: 1.1rem;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .page-heading p {
-      margin: 4px 0 0;
+        th {
+            padding: 10px;
 
-      color: var(--muted);
+            background: #f8fbf9;
 
-      font-size: .62rem;
-    }
+            color: var(--muted);
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
+            font-size: 6px;
+            text-align: left;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
 
-      gap: 13px;
-    }
+        td {
+            padding: 12px 10px;
 
-    .status-badge {
-      padding: 6px 9px;
+            border-top:
+                1px solid var(--border);
 
-      border:
-        1px solid #b9dec9;
+            color: var(--text);
 
-      border-radius: 999px;
+            font-size: 7px;
+        }
 
-      background: var(--success-bg);
+        td strong {
+            display: block;
+            color: var(--gtf-dark);
+            font-size: 7px;
+        }
 
-      color: var(--success);
+        td small {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 6px;
+        }
 
-      font-size: .57rem;
-      font-weight: 700;
-    }
+        .status {
+            display: inline-block;
 
-    .manager-profile {
-      display: flex;
-      align-items: center;
+            padding: 5px 8px;
 
-      gap: 9px;
-    }
+            border-radius: 20px;
 
-    .avatar {
-      width: 35px;
-      height: 35px;
+            font-size: 6px;
+            font-weight: 800;
+        }
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        .status.approved,
+        .status.completed,
+        .status.active {
+            background: var(--success-bg);
+            color: var(--success);
+        }
 
-      border-radius: 50%;
+        .status.pending {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
 
-      background: var(--gtf-blue);
+        .status.review {
+            background: var(--info-bg);
+            color: var(--info);
+        }
 
-      color: #fff;
+        .status.rejected {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
 
-      font-size: .7rem;
-      font-weight: 700;
-    }
+        /* ALERTS */
 
-    .manager-info strong {
-      display: block;
+        .alert-list {
+            display: grid;
+            gap: 9px;
+        }
 
-      color: var(--text);
+        .alert {
+            padding: 12px;
 
-      font-size: .65rem;
-    }
+            border-radius: 8px;
 
-    .manager-info span {
-      display: block;
+            border:
+                1px solid var(--border);
 
-      margin-top: 2px;
+            background: #f9fbfa;
+        }
 
-      color: var(--muted);
+        .alert strong {
+            display: block;
 
-      font-size: .55rem;
-    }
+            color: var(--gtf-dark);
 
-    /* =========================================
-       CONTENT
-    ========================================== */
+            font-size: 8px;
+        }
 
-    .content {
-      padding: 25px;
-    }
+        .alert p {
+            margin: 5px 0 0;
 
-    .welcome-panel {
-      margin-bottom: 22px;
+            color: var(--muted);
 
-      padding: 21px 23px;
+            font-size: 7px;
+            line-height: 1.5;
+        }
 
-      border-radius: 9px;
+        .alert.warning {
+            border-color: #eadcae;
+            background: var(--warning-bg);
+        }
 
-      background:
-        linear-gradient(
-          110deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
-        );
+        .alert.danger {
+            border-color: #efd0d0;
+            background: var(--danger-bg);
+        }
 
-      color: #fff;
+        .alert.info {
+            border-color: #d2e7f1;
+            background: var(--info-bg);
+        }
 
-      box-shadow:
-        0 8px 25px
-        rgba(11,42,74,.12);
-    }
+        /* QUICK ACTIONS */
 
-    .welcome-panel h2 {
-      margin: 0;
+        .action-grid {
+            display: grid;
 
-      font-size: 1.05rem;
-    }
+            grid-template-columns:
+                1fr 1fr;
 
-    .welcome-panel p {
-      margin: 7px 0 0;
+            gap: 9px;
+        }
 
-      color: #dce9f3;
+        .action {
+            min-height: 73px;
 
-      font-size: .64rem;
-    }
+            padding: 12px;
 
-    /* =========================================
-       KPI CARDS
-    ========================================== */
+            border:
+                1px solid var(--border);
 
-    .stats-grid {
-      display: grid;
+            border-radius: 8px;
 
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+            background: #f9fbfa;
 
-      gap: 15px;
+            color: var(--gtf-dark);
 
-      margin-bottom: 22px;
-    }
+            text-decoration: none;
+        }
 
-    .stat-card {
-      padding: 18px;
+        .action:hover {
+            border-color: var(--gtf-light);
+        }
 
-      background: var(--surface);
+        .action-icon {
+            font-size: 14px;
+        }
 
-      border:
-        1px solid var(--border);
+        .action strong {
+            display: block;
 
-      border-radius: 8px;
+            margin-top: 7px;
 
-      box-shadow: var(--shadow);
-    }
+            font-size: 8px;
+        }
 
-    .stat-label {
-      color: var(--muted);
+        .action span {
+            display: block;
 
-      font-size: .59rem;
-      font-weight: 700;
-    }
+            margin-top: 3px;
 
-    .stat-value {
-      margin-top: 8px;
+            color: var(--muted);
 
-      color: var(--gtf-navy);
+            font-size: 6px;
+        }
 
-      font-size: 1.22rem;
-      font-weight: 700;
-    }
+        /* STAFF */
 
-    .stat-meta {
-      margin-top: 7px;
+        .staff-list {
+            display: grid;
+            gap: 9px;
+        }
 
-      font-size: .57rem;
-    }
+        .staff {
+            display: flex;
 
-    .positive {
-      color: var(--success);
-    }
+            align-items: center;
 
-    .neutral {
-      color: var(--muted);
-    }
+            gap: 10px;
 
-    .warning {
-      color: var(--warning);
-    }
+            padding: 10px;
 
-    /* =========================================
-       GRID
-    ========================================== */
+            border:
+                1px solid var(--border);
 
-    .dashboard-grid {
-      display: grid;
+            border-radius: 8px;
+        }
 
-      grid-template-columns:
-        minmax(0, 1.6fr)
-        minmax(280px, .8fr);
+        .avatar {
+            width: 32px;
+            height: 32px;
 
-      gap: 18px;
-    }
+            display: grid;
+            place-items: center;
 
-    .card {
-      background: var(--surface);
+            border-radius: 50%;
 
-      border:
-        1px solid var(--border);
+            background: #e6f1eb;
 
-      border-radius: 8px;
+            color: var(--gtf-green);
 
-      box-shadow: var(--shadow);
+            font-size: 8px;
+            font-weight: 800;
+        }
 
-      overflow: hidden;
-    }
+        .staff-info {
+            min-width: 0;
+            flex: 1;
+        }
 
-    .card-header {
-      min-height: 55px;
+        .staff-info strong {
+            display: block;
 
-      padding:
-        13px 17px;
+            color: var(--gtf-dark);
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+            font-size: 8px;
+        }
 
-      gap: 12px;
+        .staff-info span {
+            display: block;
 
-      border-bottom:
-        1px solid var(--border);
-    }
+            margin-top: 3px;
 
-    .card-title {
-      margin: 0;
+            color: var(--muted);
 
-      color: var(--gtf-navy);
+            font-size: 6px;
+        }
 
-      font-size: .72rem;
-      font-weight: 700;
-    }
+        .online {
+            width: 7px;
+            height: 7px;
 
-    .card-link {
-      color: var(--gtf-blue);
+            border-radius: 50%;
 
-      font-size: .58rem;
-      font-weight: 700;
-    }
+            background: var(--success);
+        }
 
-    .card-body {
-      padding: 16px;
-    }
+        .offline {
+            width: 7px;
+            height: 7px;
 
-    /* =========================================
-       TRANSACTIONS
-    ========================================== */
+            border-radius: 50%;
 
-    .transaction-table {
-      width: 100%;
+            background: #aab5af;
+        }
 
-      border-collapse: collapse;
-    }
+        /* LOADING */
 
-    .transaction-table th {
-      padding:
-        9px 7px;
+        .loading {
+            color: var(--muted);
 
-      color: var(--muted);
+            text-align: center;
 
-      border-bottom:
-        1px solid var(--border);
+            padding: 25px;
 
-      text-align: left;
+            font-size: 8px;
+        }
 
-      font-size: .55rem;
-      font-weight: 700;
-    }
+        /* MOBILE */
 
-    .transaction-table td {
-      padding:
-        11px 7px;
+        @media (max-width: 1100px) {
 
-      border-bottom:
-        1px solid #edf1f4;
+            .kpi-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
 
-      font-size: .59rem;
-    }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-    .transaction-table tr:last-child td {
-      border-bottom: 0;
-    }
+        @media (max-width: 800px) {
 
-    .customer-name {
-      color: var(--text);
+            .app {
+                grid-template-columns: 1fr;
+            }
 
-      font-weight: 700;
-    }
+            .sidebar {
+                position: static;
+                height: auto;
+            }
 
-    .transaction-id {
-      margin-top: 2px;
+            .profile {
+                display: none;
+            }
 
-      color: var(--muted);
+            .nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
 
-      font-size: .5rem;
-    }
+            .content {
+                padding: 17px;
+            }
 
-    .amount-credit {
-      color: var(--success);
+            .welcome {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
 
-      font-weight: 700;
-    }
+        @media (max-width: 550px) {
 
-    .amount-debit {
-      color: var(--danger);
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
 
-      font-weight: 700;
-    }
+            .topbar {
+                padding: 13px 17px;
+            }
 
-    .transaction-status {
-      display: inline-block;
+            .session {
+                display: none;
+            }
 
-      padding:
-        4px 7px;
-
-      border-radius: 999px;
-
-      background: var(--success-bg);
-
-      color: var(--success);
-
-      font-size: .49rem;
-      font-weight: 700;
-    }
-
-    /* =========================================
-       QUICK ACTIONS
-    ========================================== */
-
-    .action-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 9px;
-    }
-
-    .action-button {
-      min-height: 75px;
-
-      padding: 10px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 7px;
-
-      background: var(--surface-soft);
-
-      color: var(--gtf-navy);
-
-      text-align: left;
-    }
-
-    .action-button:hover {
-      border-color:
-        #b9cede;
-
-      background: #f1f7fc;
-    }
-
-    .action-icon {
-      margin-bottom: 7px;
-
-      color: var(--gtf-blue);
-
-      font-size: .9rem;
-    }
-
-    .action-title {
-      font-size: .6rem;
-      font-weight: 700;
-    }
-
-    .action-description {
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: .48rem;
-    }
-
-    /* =========================================
-       ALERTS
-    ========================================== */
-
-    .alert-list {
-      display: flex;
-      flex-direction: column;
-
-      gap: 9px;
-    }
-
-    .manager-alert {
-      padding: 10px;
-
-      border-left:
-        3px solid var(--gtf-gold);
-
-      background: var(--warning-bg);
-    }
-
-    .manager-alert strong {
-      display: block;
-
-      color: var(--text);
-
-      font-size: .58rem;
-    }
-
-    .manager-alert span {
-      display: block;
-
-      margin-top: 4px;
-
-      color: var(--muted);
-
-      font-size: .52rem;
-      line-height: 1.4;
-    }
-
-    /* =========================================
-       BRANCH PERFORMANCE
-    ========================================== */
-
-    .branch-row {
-      margin-bottom: 14px;
-    }
-
-    .branch-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .branch-label {
-      margin-bottom: 5px;
-
-      display: flex;
-      justify-content: space-between;
-
-      color: var(--text);
-
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .progress {
-      height: 6px;
-
-      overflow: hidden;
-
-      border-radius: 999px;
-
-      background: #e7edf2;
-    }
-
-    .progress-bar {
-      height: 100%;
-
-      border-radius: inherit;
-
-      background: var(--gtf-blue);
-    }
-
-    /* =========================================
-       FOOTER
-    ========================================== */
-
-    .dashboard-footer {
-      padding: 20px 25px 25px;
-
-      color: var(--muted);
-
-      font-size: .54rem;
-
-      text-align: center;
-    }
-
-    /* =========================================
-       MOBILE
-    ========================================== */
-
-    @media (max-width: 1050px) {
-
-      .stats-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
-
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-
-      .sidebar {
-        transform:
-          translateX(-100%);
-
-        transition:
-          transform .2s ease;
-      }
-
-      .sidebar.open {
-        transform:
-          translateX(0);
-      }
-
-      .main-area {
-        margin-left: 0;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-
-      .topbar {
-        padding:
-          10px 14px;
-      }
-
-      .topbar-right {
-        gap: 7px;
-      }
-
-      .status-badge {
-        display: none;
-      }
-
-      .manager-info {
-        display: none;
-      }
-
-      .content {
-        padding: 17px 13px;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .stat-card {
-        padding: 14px;
-      }
-
-      .stat-value {
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 520px) {
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .welcome-panel {
-        padding: 17px;
-      }
-
-      .transaction-table {
-        min-width: 620px;
-      }
-
-      .table-wrapper {
-        overflow-x: auto;
-      }
-
-      .action-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="manager-app">
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a href="./index.html" class="brand">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    Global TrustFund
+                </strong>
+
+                <span>
+                    Manager Operations Portal
+                </span>
+
+            </div>
+
+        </a>
 
 
-  <!-- =========================================
-       SIDEBAR
-  ========================================== -->
-
-  <aside
-    id="sidebar"
-    class="sidebar"
-    aria-label="Manager navigation"
-  >
-
-    <a
-      href="index.html"
-      class="sidebar-brand"
-    >
-
-      <img
-        src="../assets/gtf-logo.svg"
-        alt="GTF Banking"
-        class="sidebar-logo"
-        width="43"
-        height="43"
-      >
-
-      <span class="brand-text">
-
-        <strong>
-          GTF Banking
-        </strong>
-
-        <span>
-          Manager Operations
-        </span>
-
-      </span>
-
-    </a>
-
-
-    <nav class="sidebar-nav">
-
-      <div class="nav-section-title">
-        Overview
-      </div>
-
-      <a
-        href="index.html"
-        class="nav-item active"
-      >
-        <span class="nav-icon">⌂</span>
-        <span>Dashboard</span>
-      </a>
-
-
-      <div class="nav-section-title">
-        Banking Operations
-      </div>
-
-      <a
-        href="../dashboard/accounts.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">▣</span>
-        <span>Accounts</span>
-      </a>
-
-      <a
-        href="../dashboard/transactions.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">↔</span>
-        <span>Transactions</span>
-      </a>
-
-      <a
-        href="../cashier/index.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">▤</span>
-        <span>Cashier</span>
-      </a>
-
-
-      <div class="nav-section-title">
-        Customers
-      </div>
-
-      <a
-        href="../admin/customers.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">♙</span>
-        <span>Customers</span>
-      </a>
-
-      <a
-        href="../support.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">?</span>
-        <span>Support</span>
-      </a>
-
-
-      <div class="nav-section-title">
-        Reports
-      </div>
-
-      <a
-        href="../admin/reports.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">▥</span>
-        <span>Reports</span>
-      </a>
-
-      <a
-        href="../admin/audit.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">✓</span>
-        <span>Audit Logs</span>
-      </a>
-
-
-      <div class="nav-section-title">
-        Management
-      </div>
-
-      <a
-        href="../admin/compliance.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">◈</span>
-        <span>Compliance</span>
-      </a>
-
-      <a
-        href="../admin/settings.html"
-        class="nav-item"
-      >
-        <span class="nav-icon">⚙</span>
-        <span>Settings</span>
-      </a>
-
-    </nav>
-
-
-    <div class="sidebar-bottom">
-
-      <button
-        id="logoutButton"
-        class="logout-button"
-        type="button"
-      >
-        Sign Out
-      </button>
-
-    </div>
-
-  </aside>
-
-
-  <!-- =========================================
-       MAIN AREA
-  ========================================== -->
-
-  <div class="main-area">
-
-
-    <!-- TOPBAR -->
-
-    <header class="topbar">
-
-      <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:12px;
-        "
-      >
-
-        <button
-          id="mobileMenu"
-          class="mobile-menu"
-          type="button"
-          aria-label="Open navigation"
-          aria-expanded="false"
-        >
-          ☰
-        </button>
-
-
-        <div class="page-heading">
-
-          <h1>
-            Manager Dashboard
-          </h1>
-
-          <p>
-            Banking operations and branch management
-          </p>
-
+        <div class="nav-title">
+            Manager Operations
         </div>
 
-      </div>
+
+        <nav class="nav">
+
+            <a
+                href="./index.html"
+                class="active"
+            >
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="./customers.html">
+                <span class="nav-icon">♙</span>
+                Customers
+            </a>
+
+            <a href="./accounts.html">
+                <span class="nav-icon">▣</span>
+                Accounts
+            </a>
+
+            <a href="./transactions.html">
+                <span class="nav-icon">⇄</span>
+                Transactions
+            </a>
+
+            <a href="./approvals.html">
+                <span class="nav-icon">✓</span>
+                Approvals
+            </a>
+
+            <a href="./reports.html">
+                <span class="nav-icon">▤</span>
+                Reports
+            </a>
+
+            <a href="./staff.html">
+                <span class="nav-icon">♟</span>
+                Staff
+            </a>
+
+            <a href="./compliance.html">
+                <span class="nav-icon">!</span>
+                Compliance
+            </a>
+
+            <a href="./support.html">
+                <span class="nav-icon">?</span>
+                Support
+            </a>
+
+        </nav>
 
 
-      <div class="topbar-right">
-
-        <span class="status-badge">
-          ● System Operational
-        </span>
-
-
-        <div class="manager-profile">
-
-          <div
-            id="managerAvatar"
-            class="avatar"
-          >
-            M
-          </div>
-
-          <div class="manager-info">
+        <div class="profile">
 
             <strong id="managerName">
-              Manager
+                Manager
             </strong>
 
-            <span id="managerRole">
-              Branch Manager
+            <span>
+                Branch / Operations Manager
             </span>
 
-          </div>
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
 
         </div>
 
-      </div>
-
-    </header>
+    </aside>
 
 
-    <!-- CONTENT -->
+    <!-- MAIN -->
 
-    <main class="content">
+    <main class="main">
 
+        <header class="topbar">
 
-      <!-- WELCOME -->
+            <div>
 
-      <section class="welcome-panel">
+                <h1>
+                    Manager Dashboard
+                </h1>
 
-        <h2 id="welcomeTitle">
-          Welcome back, Manager
-        </h2>
-
-        <p>
-          Monitor banking operations, customer
-          activity, transactions and branch
-          performance from one secure workspace.
-        </p>
-
-      </section>
-
-
-      <!-- =====================================
-           STATISTICS
-      ====================================== -->
-
-      <section
-        class="stats-grid"
-        aria-label="Banking statistics"
-      >
-
-        <article class="stat-card">
-
-          <div class="stat-label">
-            TOTAL CUSTOMER ACCOUNTS
-          </div>
-
-          <div
-            id="customerCount"
-            class="stat-value"
-          >
-            —
-          </div>
-
-          <div class="stat-meta positive">
-            Active customer accounts
-          </div>
-
-        </article>
-
-
-        <article class="stat-card">
-
-          <div class="stat-label">
-            TODAY'S TRANSACTIONS
-          </div>
-
-          <div
-            id="transactionCount"
-            class="stat-value"
-          >
-            —
-          </div>
-
-          <div class="stat-meta neutral">
-            Today's transaction activity
-          </div>
-
-        </article>
-
-
-        <article class="stat-card">
-
-          <div class="stat-label">
-            PENDING REVIEW
-          </div>
-
-          <div
-            id="pendingCount"
-            class="stat-value"
-          >
-            —
-          </div>
-
-          <div class="stat-meta warning">
-            Requires management attention
-          </div>
-
-        </article>
-
-
-        <article class="stat-card">
-
-          <div class="stat-label">
-            ACTIVE SESSIONS
-          </div>
-
-          <div
-            id="sessionCount"
-            class="stat-value"
-          >
-            —
-          </div>
-
-          <div class="stat-meta positive">
-            Current authenticated sessions
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- =====================================
-           MAIN GRID
-      ====================================== -->
-
-      <div class="dashboard-grid">
-
-
-        <!-- LEFT COLUMN -->
-
-        <div>
-
-
-          <!-- RECENT TRANSACTIONS -->
-
-          <section class="card">
-
-            <div class="card-header">
-
-              <h2 class="card-title">
-                Recent Transactions
-              </h2>
-
-              <a
-                href="../dashboard/transactions.html"
-                class="card-link"
-              >
-                View all
-              </a>
+                <p>
+                    Monitor branch activity, staff performance and operational approvals.
+                </p>
 
             </div>
 
+            <span class="session">
+                ● Manager Session Active
+            </span>
 
-            <div class="card-body">
+        </header>
 
-              <div class="table-wrapper">
 
-                <table
-                  class="transaction-table"
+        <section class="content">
+
+            <!-- WELCOME -->
+
+            <section class="welcome">
+
+                <div>
+
+                    <h2 id="welcomeTitle">
+                        Welcome back
+                    </h2>
+
+                    <p>
+                        Here is your current branch operations overview.
+                    </p>
+
+                </div>
+
+                <div
+                    class="date-box"
+                    id="currentDate"
                 >
+                    Loading date...
+                </div>
 
-                  <thead>
-
-                    <tr>
-
-                      <th>
-                        CUSTOMER
-                      </th>
-
-                      <th>
-                        TYPE
-                      </th>
-
-                      <th>
-                        AMOUNT
-                      </th>
-
-                      <th>
-                        STATUS
-                      </th>
-
-                    </tr>
-
-                  </thead>
+            </section>
 
 
-                  <tbody
-                    id="transactionRows"
-                  >
+            <!-- KPI -->
 
-                    <tr>
+            <section class="kpi-grid">
 
-                      <td
-                        colspan="4"
-                        style="
-                          text-align:center;
-                          padding:25px;
-                          color:#66788a;
-                        "
-                      >
-                        Loading transactions...
-                      </td>
+                <div class="kpi">
 
-                    </tr>
+                    <div class="kpi-label">
+                        Customers
+                    </div>
 
-                  </tbody>
+                    <div
+                        class="kpi-value"
+                        id="customersValue"
+                    >
+                        —
+                    </div>
 
-                </table>
+                    <div class="kpi-change">
+                        Active customer accounts
+                    </div>
 
-              </div>
+                </div>
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        Accounts
+                    </div>
+
+                    <div
+                        class="kpi-value"
+                        id="accountsValue"
+                    >
+                        —
+                    </div>
+
+                    <div class="kpi-change">
+                        Managed accounts
+                    </div>
+
+                </div>
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        Pending Approvals
+                    </div>
+
+                    <div
+                        class="kpi-value"
+                        id="approvalsValue"
+                    >
+                        —
+                    </div>
+
+                    <div
+                        class="kpi-change warning"
+                    >
+                        Requires attention
+                    </div>
+
+                </div>
+
+
+                <div class="kpi">
+
+                    <div class="kpi-label">
+                        Today's Transactions
+                    </div>
+
+                    <div
+                        class="kpi-value"
+                        id="transactionsValue"
+                    >
+                        —
+                    </div>
+
+                    <div class="kpi-change">
+                        Branch activity
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <div class="dashboard-grid">
+
+                <!-- LEFT -->
+
+                <div>
+
+                    <!-- RECENT TRANSACTIONS -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Recent Transactions
+                                </h2>
+
+                                <p>
+                                    Latest branch transaction activity
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="view-link"
+                                href="./transactions.html"
+                            >
+                                View all
+                            </a>
+
+                        </div>
+
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Reference
+                                        </th>
+
+                                        <th>
+                                            Customer
+                                        </th>
+
+                                        <th>
+                                            Type
+                                        </th>
+
+                                        <th>
+                                            Amount
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody
+                                    id="transactionsTable"
+                                >
+
+                                    <tr>
+
+                                        <td
+                                            colspan="5"
+                                            class="loading"
+                                        >
+                                            Loading transactions...
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- APPROVAL QUEUE -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Approval Queue
+                                </h2>
+
+                                <p>
+                                    Items awaiting manager review
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="view-link"
+                                href="./approvals.html"
+                            >
+                                Review
+                            </a>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div
+                                id="approvalList"
+                                class="alert-list"
+                            >
+
+                                <div class="loading">
+                                    Loading approvals...
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <aside>
+
+                    <!-- QUICK ACTIONS -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Quick Actions
+                                </h2>
+
+                                <p>
+                                    Common manager operations
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="action-grid">
+
+                                <a
+                                    class="action"
+                                    href="./approvals.html"
+                                >
+
+                                    <div class="action-icon">
+                                        ✓
+                                    </div>
+
+                                    <strong>
+                                        Review Approvals
+                                    </strong>
+
+                                    <span>
+                                        Review pending requests
+                                    </span>
+
+                                </a>
+
+
+                                <a
+                                    class="action"
+                                    href="./customers.html"
+                                >
+
+                                    <div class="action-icon">
+                                        ♙
+                                    </div>
+
+                                    <strong>
+                                        Customers
+                                    </strong>
+
+                                    <span>
+                                        Search customer records
+                                    </span>
+
+                                </a>
+
+
+                                <a
+                                    class="action"
+                                    href="./transactions.html"
+                                >
+
+                                    <div class="action-icon">
+                                        ⇄
+                                    </div>
+
+                                    <strong>
+                                        Transactions
+                                    </strong>
+
+                                    <span>
+                                        Monitor branch activity
+                                    </span>
+
+                                </a>
+
+
+                                <a
+                                    class="action"
+                                    href="./reports.html"
+                                >
+
+                                    <div class="action-icon">
+                                        ▤
+                                    </div>
+
+                                    <strong>
+                                        Reports
+                                    </strong>
+
+                                    <span>
+                                        View operational reports
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- STAFF -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Staff Status
+                                </h2>
+
+                                <p>
+                                    Current branch staff activity
+                                </p>
+
+                            </div>
+
+                            <a
+                                class="view-link"
+                                href="./staff.html"
+                            >
+                                Manage
+                            </a>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div
+                                id="staffList"
+                                class="staff-list"
+                            >
+
+                                <div class="loading">
+                                    Loading staff...
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- OPERATIONAL ALERTS -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h2>
+                                    Operational Alerts
+                                </h2>
+
+                                <p>
+                                    Items requiring attention
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="alert-list">
+
+                                <div class="alert warning">
+
+                                    <strong>
+                                        Approval monitoring
+                                    </strong>
+
+                                    <p>
+                                        Review pending customer and account
+                                        requests according to branch procedures.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="alert info">
+
+                                    <strong>
+                                        Compliance reminder
+                                    </strong>
+
+                                    <p>
+                                        Review flagged activity through the
+                                        designated compliance workflow.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </aside>
 
             </div>
 
-          </section>
-
-
-          <!-- BRANCH PERFORMANCE -->
-
-          <section
-            class="card"
-            style="margin-top:18px;"
-          >
-
-            <div class="card-header">
-
-              <h2 class="card-title">
-                Branch Performance
-              </h2>
-
-              <span
-                style="
-                  color:#66788a;
-                  font-size:.55rem;
-                "
-              >
-                Current period
-              </span>
-
-            </div>
-
-
-            <div class="card-body">
-
-              <div class="branch-row">
-
-                <div class="branch-label">
-                  <span>
-                    Customer Service
-                  </span>
-
-                  <span>
-                    86%
-                  </span>
-                </div>
-
-                <div class="progress">
-                  <div
-                    class="progress-bar"
-                    style="width:86%;"
-                  ></div>
-                </div>
-
-              </div>
-
-
-              <div class="branch-row">
-
-                <div class="branch-label">
-                  <span>
-                    Account Operations
-                  </span>
-
-                  <span>
-                    79%
-                  </span>
-                </div>
-
-                <div class="progress">
-                  <div
-                    class="progress-bar"
-                    style="width:79%;"
-                  ></div>
-                </div>
-
-              </div>
-
-
-              <div class="branch-row">
-
-                <div class="branch-label">
-                  <span>
-                    Transaction Processing
-                  </span>
-
-                  <span>
-                    92%
-                  </span>
-                </div>
-
-                <div class="progress">
-                  <div
-                    class="progress-bar"
-                    style="width:92%;"
-                  ></div>
-                </div>
-
-              </div>
-
-
-              <div class="branch-row">
-
-                <div class="branch-label">
-                  <span>
-                    Compliance Review
-                  </span>
-
-                  <span>
-                    74%
-                  </span>
-                </div>
-
-                <div class="progress">
-                  <div
-                    class="progress-bar"
-                    style="width:74%;"
-                  ></div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </section>
-
-        </div>
-
-
-        <!-- RIGHT COLUMN -->
-
-        <div>
-
-
-          <!-- QUICK ACTIONS -->
-
-          <section class="card">
-
-            <div class="card-header">
-
-              <h2 class="card-title">
-                Quick Actions
-              </h2>
-
-            </div>
-
-
-            <div class="card-body">
-
-              <div class="action-grid">
-
-
-                <a
-                  href="../dashboard/accounts.html"
-                  class="action-button"
-                >
-
-                  <span class="action-icon">
-                    ▣
-                  </span>
-
-                  <span class="action-title">
-                    Accounts
-                  </span>
-
-                  <span class="action-description">
-                    Manage accounts
-                  </span>
-
-                </a>
-
-
-                <a
-                  href="../dashboard/transactions.html"
-                  class="action-button"
-                >
-
-                  <span class="action-icon">
-                    ↔
-                  </span>
-
-                  <span class="action-title">
-                    Transactions
-                  </span>
-
-                  <span class="action-description">
-                    Review activity
-                  </span>
-
-                </a>
-
-
-                <a
-                  href="../admin/customers.html"
-                  class="action-button"
-                >
-
-                  <span class="action-icon">
-                    ♙
-                  </span>
-
-                  <span class="action-title">
-                    Customers
-                  </span>
-
-                  <span class="action-description">
-                    Customer records
-                  </span>
-
-                </a>
-
-
-                <a
-                  href="../admin/reports.html"
-                  class="action-button"
-                >
-
-                  <span class="action-icon">
-                    ▥
-                  </span>
-
-                  <span class="action-title">
-                    Reports
-                  </span>
-
-                  <span class="action-description">
-                    View reports
-                  </span>
-
-                </a>
-
-
-                <a
-                  href="../admin/compliance.html"
-                  class="action-button"
-                >
-
-                  <span class="action-icon">
-                    ◈
-                  </span>
-
-                  <span class="action-title">
-                    Compliance
-                  </span>
-
-                  <span class="action-description">
-                    Review compliance
-                  </span>
-
-                </a>
-
-
-                <a
-                  href="../admin/audit.html"
-                  class="action-button"
-                >
-
-                  <span class="action-icon">
-                    ✓
-                  </span>
-
-                  <span class="action-title">
-                    Audit
-                  </span>
-
-                  <span class="action-description">
-                    Audit activity
-                  </span>
-
-                </a>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          <!-- MANAGEMENT ALERTS -->
-
-          <section
-            class="card"
-            style="margin-top:18px;"
-          >
-
-            <div class="card-header">
-
-              <h2 class="card-title">
-                Management Alerts
-              </h2>
-
-            </div>
-
-
-            <div class="card-body">
-
-              <div
-                id="alertsList"
-                class="alert-list"
-              >
-
-                <div class="manager-alert">
-
-                  <strong>
-                    System monitoring active
-                  </strong>
-
-                  <span>
-                    Management alerts will appear
-                    here when available.
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-        </div>
-
-      </div>
+        </section>
 
     </main>
-
-
-    <!-- FOOTER -->
-
-    <footer class="dashboard-footer">
-
-      ©
-      <span id="currentYear"></span>
-      GTF Banking. All rights reserved.
-
-    </footer>
-
-  </div>
 
 </div>
 
 
-<!-- ===========================================
-     APPLICATION SCRIPT
-=========================================== -->
-
-<script src="../js/app.js"></script>
-
-
 <script>
-"use strict";
+
+    /*
+     * ============================================================
+     * GLOBAL TRUSTFUND — MANAGER DASHBOARD
+     * ============================================================
+     *
+     * Expected API:
+     *
+     * GET  /api/dashboard/summary
+     * GET  /api/transactions
+     * GET  /api/approvals
+     * GET  /api/staff
+     * POST /api/auth/signout
+     *
+     * Authentication should be enforced by the backend.
+     *
+     * The frontend does NOT decide whether a user is a manager.
+     */
 
 
-/* =========================================
-   CONFIGURATION
-========================================= */
-
-const API_BASE = "";
+    const API_BASE = "/api";
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
+    /* ------------------------------------------------------------
+       HELPERS
+    ------------------------------------------------------------ */
 
-const sidebar =
-  document.getElementById("sidebar");
+    function escapeHtml(value) {
 
-const mobileMenu =
-  document.getElementById("mobileMenu");
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
-const logoutButton =
-  document.getElementById("logoutButton");
-
-const managerName =
-  document.getElementById("managerName");
-
-const managerRole =
-  document.getElementById("managerRole");
-
-const managerAvatar =
-  document.getElementById("managerAvatar");
-
-const welcomeTitle =
-  document.getElementById("welcomeTitle");
-
-const customerCount =
-  document.getElementById("customerCount");
-
-const transactionCount =
-  document.getElementById("transactionCount");
-
-const pendingCount =
-  document.getElementById("pendingCount");
-
-const sessionCount =
-  document.getElementById("sessionCount");
-
-const transactionRows =
-  document.getElementById("transactionRows");
-
-const alertsList =
-  document.getElementById("alertsList");
+    }
 
 
-/* =========================================
-   YEAR
-========================================= */
+    function getStoredUser() {
 
-document.getElementById(
-  "currentYear"
-).textContent =
-  new Date().getFullYear();
+        try {
 
-
-/* =========================================
-   MOBILE NAVIGATION
-========================================= */
-
-mobileMenu.addEventListener(
-  "click",
-  () => {
-
-    const opened =
-      sidebar.classList.toggle(
-        "open"
-      );
-
-    mobileMenu.setAttribute(
-      "aria-expanded",
-      String(opened)
-    );
-  }
-);
+            const raw =
+                localStorage.getItem(
+                    "gtf_user"
+                );
 
 
-document.querySelectorAll(
-  ".sidebar .nav-item"
-).forEach(
-  item => {
+            return raw
+                ? JSON.parse(raw)
+                : null;
 
-    item.addEventListener(
-      "click",
-      () => {
-
-        sidebar.classList.remove(
-          "open"
-        );
-
-        mobileMenu.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-      }
-    );
-  }
-);
-
-
-/* =========================================
-   SAFE TEXT
-========================================= */
-
-function safeText(
-  value,
-  fallback = "—"
-) {
-
-  if (
-    value === null ||
-    value === undefined ||
-    value === ""
-  ) {
-    return fallback;
-  }
-
-  return String(value);
-}
-
-
-/* =========================================
-   GET JSON
-========================================= */
-
-async function getJSON(
-  url
-) {
-
-  const response =
-    await fetch(
-      `${API_BASE}${url}`,
-      {
-        method: "GET",
-
-        credentials: "include",
-
-        headers: {
-          "Accept":
-            "application/json"
         }
-      }
-    );
 
+        catch (error) {
 
-  let data = null;
+            console.warn(
+                "Unable to parse stored user.",
+                error
+            );
 
+            return null;
 
-  try {
+        }
 
-    data =
-      await response.json();
-
-  } catch {
-
-    data = null;
-  }
-
-
-  if (!response.ok) {
-
-    const error =
-      new Error(
-        data?.message ||
-        data?.error ||
-        `Request failed (${response.status})`
-      );
-
-    error.status =
-      response.status;
-
-    throw error;
-  }
-
-
-  return data;
-}
-
-
-/* =========================================
-   AUTHENTICATED USER
-========================================= */
-
-async function loadCurrentUser() {
-
-  try {
-
-    const data =
-      await getJSON(
-        "/api/auth/me"
-      );
-
-
-    const user =
-      data?.user ||
-      data?.data?.user ||
-      data?.profile;
-
-
-    if (!user) {
-      return;
     }
 
 
-    const name =
-      user.full_name ||
-      user.fullName ||
-      user.name ||
-      user.email ||
-      "Manager";
+    function getManagerName() {
 
+        const user =
+            getStoredUser();
 
-    const role =
-      user.role ||
-      user.user_role ||
-      user.userRole ||
-      "Manager";
 
+        if (!user) {
+            return "Manager";
+        }
 
-    managerName.textContent =
-      name;
 
-
-    managerRole.textContent =
-      formatRole(role);
-
-
-    managerAvatar.textContent =
-      getInitials(name);
-
-
-    welcomeTitle.textContent =
-      `Welcome back, ${firstName(name)}`;
-
-
-    try {
-
-      sessionStorage.setItem(
-        "gtf_manager_user",
-        JSON.stringify({
-          id:
-            user.id || null,
-
-          full_name:
-            name,
-
-          role:
-            role
-        })
-      );
-
-    } catch {}
-
-  } catch (error) {
-
-    /*
-     * 401/403 means the backend rejected
-     * the current session.
-     */
-
-    if (
-      error.status === 401 ||
-      error.status === 403
-    ) {
-
-      redirectToLogin();
-
-      return;
-    }
-
-
-    /*
-     * If the API is temporarily unavailable,
-     * don't expose a fake authorization state.
-     */
-
-    console.warn(
-      "Unable to load current manager:",
-      error
-    );
-  }
-}
-
-
-/* =========================================
-   ROLE FORMATTER
-========================================= */
-
-function formatRole(
-  role
-) {
-
-  return String(role)
-    .replace(/[_-]+/g, " ")
-    .replace(
-      /\b\w/g,
-      char => char.toUpperCase()
-    );
-}
-
-
-/* =========================================
-   INITIALS
-========================================= */
-
-function getInitials(
-  name
-) {
-
-  const parts =
-    String(name)
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean);
-
-
-  if (!parts.length) {
-    return "M";
-  }
-
-
-  if (parts.length === 1) {
-
-    return parts[0]
-      .substring(0, 2)
-      .toUpperCase();
-  }
-
-
-  return (
-    parts[0][0] +
-    parts[parts.length - 1][0]
-  ).toUpperCase();
-}
-
-
-/* =========================================
-   FIRST NAME
-========================================= */
-
-function firstName(
-  name
-) {
-
-  return String(name)
-    .trim()
-    .split(/\s+/)[0] ||
-    "Manager";
-}
-
-
-/* =========================================
-   DASHBOARD STATISTICS
-========================================= */
-
-async function loadStatistics() {
-
-  /*
-   * These endpoints are expected to be
-   * protected by the backend.
-   */
-
-  const requests = [
-    getJSON(
-      "/api/users?summary=true"
-    ),
-
-    getJSON(
-      "/api/transactions?summary=true"
-    )
-  ];
-
-
-  try {
-
-    const [
-      usersData,
-      transactionsData
-    ] =
-      await Promise.all(
-        requests
-      );
-
-
-    const users =
-      usersData?.users ||
-      usersData?.data?.users ||
-      usersData?.data ||
-      [];
-
-
-    const transactions =
-      transactionsData?.transactions ||
-      transactionsData?.data?.transactions ||
-      transactionsData?.data ||
-      [];
-
-
-    /*
-     * Prefer backend summary values.
-     * Fall back to returned array lengths.
-     */
-
-    const totalUsers =
-      usersData?.total ??
-      usersData?.count ??
-      (
-        Array.isArray(users)
-          ? users.length
-          : 0
-      );
-
-
-    const totalTransactions =
-      transactionsData?.todayCount ??
-      transactionsData?.today_count ??
-      transactionsData?.count ??
-      (
-        Array.isArray(transactions)
-          ? transactions.length
-          : 0
-      );
-
-
-    const pending =
-      transactionsData?.pendingCount ??
-      transactionsData?.pending_count ??
-      (
-        Array.isArray(transactions)
-          ? transactions.filter(
-              item =>
-                String(
-                  item.status || ""
-                ).toLowerCase() ===
-                "pending"
-            ).length
-          : 0
-      );
-
-
-    customerCount.textContent =
-      formatNumber(totalUsers);
-
-
-    transactionCount.textContent =
-      formatNumber(
-        totalTransactions
-      );
-
-
-    pendingCount.textContent =
-      formatNumber(pending);
-
-
-    /*
-     * Session count is only shown when
-     * the backend provides it.
-     */
-
-    if (
-      transactionsData?.activeSessions !==
-        undefined
-    ) {
-
-      sessionCount.textContent =
-        formatNumber(
-          transactionsData.activeSessions
+        return (
+            user.full_name ||
+            user.name ||
+            user.email ||
+            "Manager"
         );
 
-    } else {
-
-      sessionCount.textContent =
-        "—";
     }
 
 
-    if (
-      Array.isArray(transactions)
+    function formatAmount(
+        value
     ) {
 
-      renderTransactions(
-        transactions.slice(0, 6)
-      );
+        const amount =
+            Number(value);
+
+
+        if (!Number.isFinite(amount)) {
+            return "—";
+        }
+
+
+        return new Intl.NumberFormat(
+            "en-NG",
+            {
+                style: "currency",
+                currency: "NGN",
+                maximumFractionDigits: 2
+            }
+        ).format(amount);
+
     }
 
 
-  } catch (error) {
+    function formatDate(
+        value
+    ) {
 
-    /*
-     * Do not manufacture banking metrics.
-     */
-
-    console.warn(
-      "Dashboard statistics unavailable:",
-      error
-    );
+        if (!value) {
+            return "—";
+        }
 
 
-    customerCount.textContent =
-      "—";
-
-    transactionCount.textContent =
-      "—";
-
-    pendingCount.textContent =
-      "—";
-
-    sessionCount.textContent =
-      "—";
+        const date =
+            new Date(value);
 
 
-    renderTransactions([]);
-  }
-}
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+            return escapeHtml(value);
+        }
 
 
-/* =========================================
-   NUMBER FORMAT
-========================================= */
+        return date.toLocaleString(
+            "en-NG",
+            {
+                dateStyle: "medium",
+                timeStyle: "short"
+            }
+        );
 
-function formatNumber(
-  value
-) {
-
-  const number =
-    Number(value);
-
-
-  if (
-    !Number.isFinite(number)
-  ) {
-
-    return "—";
-  }
+    }
 
 
-  return number.toLocaleString(
-    "en-US"
-  );
-}
+    function statusClass(
+        status
+    ) {
+
+        const value =
+            String(
+                status || ""
+            )
+            .toLowerCase();
 
 
-/* =========================================
-   TRANSACTIONS
-========================================= */
-
-function renderTransactions(
-  transactions
-) {
-
-  if (
-    !Array.isArray(transactions) ||
-    transactions.length === 0
-  ) {
-
-    transactionRows.innerHTML = `
-      <tr>
-        <td
-          colspan="4"
-          style="
-            text-align:center;
-            padding:25px;
-            color:#66788a;
-          "
-        >
-          No recent transactions available.
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
+        if (
+            value.includes("complete") ||
+            value.includes("approved") ||
+            value === "success" ||
+            value === "active"
+        ) {
+            return "completed";
+        }
 
 
-  transactionRows.innerHTML =
-    transactions
-      .map(
-        transaction => {
-
-          const customer =
-            transaction.customer_name ||
-            transaction.customerName ||
-            transaction.user_name ||
-            transaction.userName ||
-            transaction.email ||
-            "Customer";
+        if (
+            value.includes("pending")
+        ) {
+            return "pending";
+        }
 
 
-          const id =
-            transaction.id ||
-            transaction.transaction_id ||
-            transaction.transactionId ||
-            "—";
+        if (
+            value.includes("review")
+        ) {
+            return "review";
+        }
 
 
-          const type =
-            transaction.type ||
-            transaction.transaction_type ||
-            transaction.transactionType ||
-            "Transaction";
+        if (
+            value.includes("reject") ||
+            value.includes("failed")
+        ) {
+            return "rejected";
+        }
 
 
-          const amount =
-            transaction.amount ??
-            0;
+        return "review";
+
+    }
 
 
-          const currency =
-            transaction.currency ||
-            "USD";
+    /* ------------------------------------------------------------
+       USER DISPLAY
+    ------------------------------------------------------------ */
+
+    const managerName =
+        getManagerName();
 
 
-          const status =
-            transaction.status ||
-            "Unknown";
+    document.getElementById(
+        "managerName"
+    ).textContent =
+        managerName;
 
 
-          const direction =
-            String(type)
-              .toLowerCase()
-              .includes("deposit") ||
-            String(type)
-              .toLowerCase()
-              .includes("credit");
+    document.getElementById(
+        "welcomeTitle"
+    ).textContent =
+        `Welcome back, ${managerName}`;
 
 
-          return `
-            <tr>
+    document.getElementById(
+        "currentDate"
+    ).textContent =
+        new Date().toLocaleDateString(
+            "en-NG",
+            {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            }
+        );
 
-              <td>
-                <div class="customer-name">
-                  ${escapeHTML(customer)}
-                </div>
 
-                <div class="transaction-id">
-                  ${escapeHTML(id)}
-                </div>
-              </td>
+    /* ------------------------------------------------------------
+       GENERIC API
+    ------------------------------------------------------------ */
 
-              <td>
-                ${escapeHTML(
-                  formatRole(type)
-                )}
-              </td>
+    async function apiRequest(
+        endpoint,
+        options = {}
+    ) {
 
-              <td
-                class="${
-                  direction
-                    ? "amount-credit"
-                    : "amount-debit"
-                }"
-              >
-                ${
-                  direction
-                    ? "+"
-                    : "-"
+        const response =
+            await fetch(
+                `${API_BASE}${endpoint}`,
+                {
+                    credentials:
+                        "include",
+
+                    headers: {
+                        "Accept":
+                            "application/json",
+
+                        ...(options.body
+                            ? {
+                                "Content-Type":
+                                    "application/json"
+                            }
+                            : {}),
+
+                        ...(options.headers || {})
+                    },
+
+                    ...options
                 }
-                ${formatCurrency(
-                  amount,
-                  currency
-                )}
-              </td>
+            );
 
-              <td>
 
-                <span class="transaction-status">
-                  ${escapeHTML(
-                    formatRole(status)
-                  )}
-                </span>
+        const data =
+            await response.json()
+                .catch(
+                    () => ({})
+                );
 
-              </td>
 
-            </tr>
-          `;
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                data.message ||
+                `Request failed (${response.status})`
+            );
+
         }
-      )
-      .join("");
-}
 
 
-/* =========================================
-   CURRENCY
-========================================= */
+        return data;
 
-function formatCurrency(
-  amount,
-  currency
-) {
-
-  const number =
-    Number(amount);
-
-
-  if (
-    !Number.isFinite(number)
-  ) {
-
-    return "—";
-  }
-
-
-  try {
-
-    return new Intl.NumberFormat(
-      "en-US",
-      {
-        style: "currency",
-        currency:
-          String(currency)
-            .toUpperCase()
-      }
-    ).format(number);
-
-  } catch {
-
-    return `${currency} ${number.toLocaleString()}`;
-  }
-}
-
-
-/* =========================================
-   HTML ESCAPE
-========================================= */
-
-function escapeHTML(
-  value
-) {
-
-  return String(value)
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-}
-
-
-/* =========================================
-   MANAGEMENT ALERTS
-========================================= */
-
-async function loadAlerts() {
-
-  /*
-   * The dashboard does not invent compliance
-   * or security alerts.
-   *
-   * If your backend later exposes:
-   *
-   * GET /api/audit/alerts
-   *
-   * this function can be connected to it.
-   */
-
-  try {
-
-    const data =
-      await getJSON(
-        "/api/audit/alerts"
-      );
-
-
-    const alerts =
-      data?.alerts ||
-      data?.data?.alerts ||
-      [];
-
-
-    if (
-      !Array.isArray(alerts) ||
-      alerts.length === 0
-    ) {
-
-      renderDefaultAlert();
-
-      return;
     }
 
 
-    alertsList.innerHTML =
-      alerts
-        .slice(0, 5)
-        .map(
-          alert => `
-            <div class="manager-alert">
+    /* ------------------------------------------------------------
+       SUMMARY
+    ------------------------------------------------------------ */
 
-              <strong>
-                ${escapeHTML(
-                  alert.title ||
-                  "Management Alert"
-                )}
-              </strong>
+    async function loadSummary() {
 
-              <span>
-                ${escapeHTML(
-                  alert.message ||
-                  "Review the management alert."
-                )}
-              </span>
+        try {
 
-            </div>
-          `
-        )
-        .join("");
-
-  } catch {
-
-    renderDefaultAlert();
-  }
-}
+            const data =
+                await apiRequest(
+                    "/dashboard/summary"
+                );
 
 
-/* =========================================
-   DEFAULT ALERT
-========================================= */
-
-function renderDefaultAlert() {
-
-  alertsList.innerHTML = `
-    <div class="manager-alert">
-
-      <strong>
-        System monitoring active
-      </strong>
-
-      <span>
-        No additional management alerts
-        are currently available.
-      </span>
-
-    </div>
-  `;
-}
+            const summary =
+                data.summary ||
+                data.data ||
+                data;
 
 
-/* =========================================
-   LOGOUT
-========================================= */
-
-async function logout() {
-
-  logoutButton.disabled =
-    true;
-
-  logoutButton.textContent =
-    "Signing Out...";
+            document.getElementById(
+                "customersValue"
+            ).textContent =
+                summary.customers ??
+                summary.total_customers ??
+                "—";
 
 
-  try {
+            document.getElementById(
+                "accountsValue"
+            ).textContent =
+                summary.accounts ??
+                summary.total_accounts ??
+                "—";
 
-    await fetch(
-      "/api/auth/logout",
-      {
-        method: "POST",
 
-        credentials: "include",
+            document.getElementById(
+                "approvalsValue"
+            ).textContent =
+                summary.pending_approvals ??
+                summary.approvals ??
+                "—";
 
-        headers: {
-          "Accept":
-            "application/json"
+
+            document.getElementById(
+                "transactionsValue"
+            ).textContent =
+                summary.today_transactions ??
+                summary.transactions_today ??
+                summary.transactions ??
+                "—";
+
         }
-      }
+
+        catch (error) {
+
+            console.warn(
+                "Dashboard summary unavailable:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* ------------------------------------------------------------
+       TRANSACTIONS
+    ------------------------------------------------------------ */
+
+    async function loadTransactions() {
+
+        const table =
+            document.getElementById(
+                "transactionsTable"
+            );
+
+
+        try {
+
+            const data =
+                await apiRequest(
+                    "/transactions"
+                );
+
+
+            const transactions =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(data.transactions)
+                        ? data.transactions
+                        : Array.isArray(data.data)
+                            ? data.data
+                            : [];
+
+
+            if (!transactions.length) {
+
+                table.innerHTML = `
+
+                    <tr>
+                        <td
+                            colspan="5"
+                            class="loading"
+                        >
+                            No recent transactions found.
+                        </td>
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+            table.innerHTML =
+                transactions
+                    .slice(0, 8)
+                    .map(
+                        transaction => {
+
+                            const status =
+                                transaction.status ||
+                                "Pending";
+
+
+                            return `
+
+                                <tr>
+
+                                    <td>
+
+                                        <strong>
+                                            ${escapeHtml(
+                                                transaction.reference ||
+                                                transaction.reference_id ||
+                                                transaction.id ||
+                                                "—"
+                                            )}
+                                        </strong>
+
+                                        <small>
+                                            ${escapeHtml(
+                                                formatDate(
+                                                    transaction.created_at ||
+                                                    transaction.created
+                                                )
+                                            )}
+                                        </small>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <strong>
+                                            ${escapeHtml(
+                                                transaction.customer_name ||
+                                                transaction.customer ||
+                                                "Customer"
+                                            )}
+                                        </strong>
+
+                                    </td>
+
+
+                                    <td>
+                                        ${escapeHtml(
+                                            transaction.type ||
+                                            transaction.transaction_type ||
+                                            "—"
+                                        )}
+                                    </td>
+
+
+                                    <td>
+                                        ${escapeHtml(
+                                            formatAmount(
+                                                transaction.amount
+                                            )
+                                        )}
+                                    </td>
+
+
+                                    <td>
+
+                                        <span
+                                            class="status ${statusClass(status)}"
+                                        >
+                                            ${escapeHtml(status)}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Transactions unavailable:",
+                error
+            );
+
+
+            table.innerHTML = `
+
+                <tr>
+                    <td
+                        colspan="5"
+                        class="loading"
+                    >
+                        Transaction data is currently unavailable.
+                    </td>
+                </tr>
+
+            `;
+
+        }
+
+    }
+
+
+    /* ------------------------------------------------------------
+       APPROVALS
+    ------------------------------------------------------------ */
+
+    async function loadApprovals() {
+
+        const container =
+            document.getElementById(
+                "approvalList"
+            );
+
+
+        try {
+
+            const data =
+                await apiRequest(
+                    "/approvals"
+                );
+
+
+            const approvals =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(data.approvals)
+                        ? data.approvals
+                        : Array.isArray(data.data)
+                            ? data.data
+                            : [];
+
+
+            if (!approvals.length) {
+
+                container.innerHTML = `
+
+                    <div class="alert info">
+
+                        <strong>
+                            Approval queue clear
+                        </strong>
+
+                        <p>
+                            There are currently no pending approval items.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML =
+                approvals
+                    .slice(0, 5)
+                    .map(
+                        approval => {
+
+                            return `
+
+                                <div class="alert warning">
+
+                                    <strong>
+                                        ${escapeHtml(
+                                            approval.title ||
+                                            approval.subject ||
+                                            approval.type ||
+                                            "Pending Approval"
+                                        )}
+                                    </strong>
+
+                                    <p>
+                                        ${escapeHtml(
+                                            approval.description ||
+                                            approval.message ||
+                                            "This item requires manager review."
+                                        )}
+                                    </p>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Approvals unavailable:",
+                error
+            );
+
+
+            container.innerHTML = `
+
+                <div class="alert info">
+
+                    <strong>
+                        Approval service unavailable
+                    </strong>
+
+                    <p>
+                        Open the Approvals page to retry the request.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    /* ------------------------------------------------------------
+       STAFF
+    ------------------------------------------------------------ */
+
+    async function loadStaff() {
+
+        const container =
+            document.getElementById(
+                "staffList"
+            );
+
+
+        try {
+
+            const data =
+                await apiRequest(
+                    "/staff"
+                );
+
+
+            const staff =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(data.staff)
+                        ? data.staff
+                        : Array.isArray(data.data)
+                            ? data.data
+                            : [];
+
+
+            if (!staff.length) {
+
+                container.innerHTML = `
+
+                    <div class="loading">
+                        No staff records available.
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            container.innerHTML =
+                staff
+                    .slice(0, 6)
+                    .map(
+                        person => {
+
+                            const name =
+                                person.full_name ||
+                                person.name ||
+                                person.email ||
+                                "Staff";
+
+
+                            const initials =
+                                name
+                                    .split(" ")
+                                    .filter(Boolean)
+                                    .slice(0, 2)
+                                    .map(
+                                        part =>
+                                            part[0]
+                                                .toUpperCase()
+                                    )
+                                    .join("");
+
+
+                            const active =
+                                person.online ??
+                                person.is_online ??
+                                person.status === "active";
+
+
+                            return `
+
+                                <div class="staff">
+
+                                    <div class="avatar">
+                                        ${escapeHtml(
+                                            initials ||
+                                            "ST"
+                                        )}
+                                    </div>
+
+
+                                    <div class="staff-info">
+
+                                        <strong>
+                                            ${escapeHtml(name)}
+                                        </strong>
+
+                                        <span>
+                                            ${escapeHtml(
+                                                person.role ||
+                                                "Staff"
+                                            )}
+                                        </span>
+
+                                    </div>
+
+
+                                    <span
+                                        class="${active ? "online" : "offline"}"
+                                        title="${active ? "Online" : "Offline"}"
+                                    ></span>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Staff endpoint unavailable:",
+                error
+            );
+
+
+            container.innerHTML = `
+
+                <div class="loading">
+                    Staff information is currently unavailable.
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    /* ------------------------------------------------------------
+       LOGOUT
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            const button =
+                document.getElementById(
+                    "logoutButton"
+                );
+
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "Signing out...";
+
+
+            try {
+
+                await apiRequest(
+                    "/auth/signout",
+                    {
+                        method: "POST",
+
+                        body:
+                            JSON.stringify({
+                                role: "manager"
+                            })
+                    }
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Signout request failed:",
+                    error
+                );
+
+            }
+
+
+            [
+                "gtf_user",
+                "gtf_manager",
+                "gtf_session",
+                "gtf_access_token",
+                "gtf_refresh_token",
+                "access_token",
+                "refresh_token"
+            ]
+            .forEach(
+                key =>
+                    localStorage.removeItem(
+                        key
+                    )
+            );
+
+
+            sessionStorage.clear();
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+        }
     );
 
-  } catch (error) {
 
-    console.warn(
-      "Logout request failed:",
-      error
-    );
+    /* ------------------------------------------------------------
+       INITIALIZE
+    ------------------------------------------------------------ */
 
-  } finally {
+    async function initializeDashboard() {
 
-    try {
-      sessionStorage.removeItem(
-        "gtf_manager_user"
-      );
-    } catch {}
-
-    window.location.href =
-      "login.html";
-  }
-}
-
-
-logoutButton.addEventListener(
-  "click",
-  logout
-);
-
-
-/* =========================================
-   LOGIN REDIRECT
-========================================= */
-
-function redirectToLogin() {
-
-  try {
-
-    sessionStorage.removeItem(
-      "gtf_manager_user"
-    );
-
-  } catch {}
-
-
-  window.location.href =
-    "login.html";
-}
-
-
-/* =========================================
-   INITIALIZATION
-========================================= */
-
-async function initializeDashboard() {
-
-  await loadCurrentUser();
-
-  await Promise.all([
-    loadStatistics(),
-    loadAlerts()
-  ]);
-}
-
-
-initializeDashboard();
-
-
-/* =========================================
-   REFRESH DASHBOARD
-========================================= */
-
-let refreshTimer =
-  setInterval(
-    () => {
-
-      loadStatistics();
-
-      loadAlerts();
-
-    },
-    60000
-  );
-
-
-/*
- * Stop unnecessary refresh work when
- * the browser tab is hidden.
- */
-
-document.addEventListener(
-  "visibilitychange",
-  () => {
-
-    if (
-      document.hidden
-    ) {
-
-      clearInterval(
-        refreshTimer
-      );
-
-    } else {
-
-      loadStatistics();
-
-      loadAlerts();
-
-
-      refreshTimer =
-        setInterval(
-          () => {
-
-            loadStatistics();
-
-            loadAlerts();
-
-          },
-          60000
+        await Promise.allSettled(
+            [
+                loadSummary(),
+                loadTransactions(),
+                loadApprovals(),
+                loadStaff()
+            ]
         );
+
     }
-  }
-);
+
+
+    initializeDashboard();
+
+
+    /*
+     * Refresh dashboard information every 60 seconds.
+     */
+
+    setInterval(
+        initializeDashboard,
+        60000
+    );
 
 </script>
 
