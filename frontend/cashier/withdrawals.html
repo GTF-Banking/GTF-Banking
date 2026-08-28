@@ -1,0 +1,3616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Global TrustFund Banking cashier withdrawal processing portal."
+    >
+
+    <title>Withdrawals | Cashier | GTF Banking</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        :root {
+            --gtf-green: #0b5d3b;
+            --gtf-dark: #073d28;
+            --gtf-light: #16865a;
+            --gtf-gold: #c9962b;
+
+            --background: #f4f8f6;
+            --surface: #ffffff;
+            --surface-soft: #f8fbf9;
+
+            --border: #dce7e1;
+
+            --text: #18352a;
+            --muted: #718078;
+
+            --success: #19734b;
+            --success-bg: #eaf7ef;
+
+            --warning: #946b17;
+            --warning-bg: #fff7df;
+
+            --danger: #a33f3f;
+            --danger-bg: #fff0f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* ==================================================
+           APP
+        ================================================== */
+
+        .app {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        /* ==================================================
+           SIDEBAR
+        ================================================== */
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+
+            padding: 22px 16px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--gtf-dark),
+                    #052e1f
+                );
+
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 5px 8px 22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.12);
+
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 4px;
+
+            color: rgba(255,255,255,.55);
+
+            font-size: 7px;
+        }
+
+        .nav-title {
+            margin: 23px 9px 9px;
+
+            color: rgba(255,255,255,.42);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: grid;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            min-height: 38px;
+
+            padding: 0 11px;
+
+            border-radius: 7px;
+
+            color: rgba(255,255,255,.72);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition:
+                background .15s ease,
+                color .15s ease;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.10);
+            color: #fff;
+        }
+
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .profile {
+            margin-top: 30px;
+
+            padding: 13px;
+
+            border:
+                1px solid rgba(255,255,255,.10);
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.05);
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 9px;
+        }
+
+        .profile span {
+            display: block;
+            margin-top: 4px;
+
+            color: rgba(255,255,255,.55);
+
+            font-size: 7px;
+        }
+
+        .logout {
+            width: 100%;
+            min-height: 30px;
+
+            margin-top: 10px;
+
+            border:
+                1px solid rgba(255,255,255,.15);
+
+            border-radius: 6px;
+
+            background: transparent;
+            color: rgba(255,255,255,.75);
+
+            font-size: 8px;
+        }
+
+        .logout:hover {
+            background:
+                rgba(255,255,255,.08);
+        }
+
+        /* ==================================================
+           MAIN
+        ================================================== */
+
+        .main {
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 68px;
+
+            padding: 14px 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            background: #fff;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .topbar h1 {
+            margin: 0;
+
+            color: var(--gtf-dark);
+
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 5px 0 0;
+
+            color: var(--muted);
+
+            font-size: 8px;
+        }
+
+        .session {
+            padding: 7px 10px;
+
+            border-radius: 20px;
+
+            background:
+                var(--success-bg);
+
+            color:
+                var(--success);
+
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        .content {
+            padding: 27px;
+        }
+
+        /* ==================================================
+           STATISTICS
+        ================================================== */
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            padding: 17px;
+
+            background: var(--surface);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+        }
+
+        .stat-label {
+            color: var(--muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: .5px;
+
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            margin-top: 7px;
+
+            color: var(--gtf-dark);
+
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .stat-note {
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        /* ==================================================
+           LAYOUT
+        ================================================== */
+
+        .withdrawal-layout {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.4fr)
+                minmax(280px, .8fr);
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+        .card {
+            overflow: hidden;
+
+            background: #fff;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 11px;
+        }
+
+        .card + .card {
+            margin-top: 20px;
+        }
+
+        .card-header {
+            padding: 17px 18px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .card-header h2 {
+            margin: 0;
+
+            color: var(--gtf-dark);
+
+            font-size: 13px;
+        }
+
+        .card-header p {
+            margin: 5px 0 0;
+
+            color: var(--muted);
+
+            font-size: 7px;
+        }
+
+        .card-body {
+            padding: 19px;
+        }
+
+        /* ==================================================
+           FORM
+        ================================================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+
+            gap: 6px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: var(--gtf-dark);
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .field label span {
+            color: var(--danger);
+        }
+
+        .input,
+        .select,
+        .textarea {
+            width: 100%;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #fff;
+            color: var(--text);
+
+            font-size: 9px;
+        }
+
+        .input,
+        .select {
+            min-height: 39px;
+            padding: 0 11px;
+        }
+
+        .textarea {
+            min-height: 82px;
+
+            padding: 10px 11px;
+
+            resize: vertical;
+        }
+
+        .input:focus,
+        .select:focus,
+        .textarea:focus {
+            border-color:
+                var(--gtf-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(22,134,90,.08);
+        }
+
+        .input-help {
+            color: var(--muted);
+
+            font-size: 7px;
+            line-height: 1.5;
+        }
+
+        /* ==================================================
+           ACCOUNT SEARCH
+        ================================================== */
+
+        .account-search {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto;
+
+            gap: 8px;
+        }
+
+        .search-button {
+            min-width: 85px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background:
+                var(--gtf-dark);
+
+            color: #fff;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .search-button:hover {
+            background:
+                var(--gtf-green);
+        }
+
+        /* ==================================================
+           CUSTOMER PREVIEW
+        ================================================== */
+
+        .customer-preview {
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 12px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 7px;
+
+            background:
+                var(--surface-soft);
+        }
+
+        .customer-preview.show {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .customer-avatar {
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 50%;
+
+            background:
+                #e6f2eb;
+
+            color:
+                var(--gtf-green);
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .customer-preview strong {
+            display: block;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 8px;
+        }
+
+        .customer-preview span {
+            display: block;
+
+            margin-top: 3px;
+
+            color:
+                var(--muted);
+
+            font-size: 7px;
+        }
+
+        /* ==================================================
+           AMOUNT
+        ================================================== */
+
+        .amount-wrapper {
+            position: relative;
+        }
+
+        .currency {
+            position: absolute;
+
+            left: 11px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--muted);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            pointer-events: none;
+        }
+
+        .amount-input {
+            padding-left: 43px !important;
+
+            font-size: 13px !important;
+            font-weight: 800;
+        }
+
+        /* ==================================================
+           ACTIONS
+        ================================================== */
+
+        .form-actions {
+            margin-top: 20px;
+
+            padding-top: 16px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            border-top:
+                1px solid var(--border);
+        }
+
+        .button {
+            min-height: 39px;
+
+            padding: 0 16px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .button.primary {
+            background:
+                var(--gtf-green);
+
+            color: #fff;
+        }
+
+        .button.primary:hover {
+            background:
+                var(--gtf-light);
+        }
+
+        .button.secondary {
+            background:
+                #edf3f0;
+
+            color:
+                var(--gtf-dark);
+        }
+
+        .button.secondary:hover {
+            background:
+                #e1ebe6;
+        }
+
+        .button.danger {
+            background:
+                var(--danger);
+
+            color: #fff;
+        }
+
+        .button.danger:hover {
+            background:
+                #8f3535;
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: .55;
+        }
+
+        /* ==================================================
+           SUMMARY
+        ================================================== */
+
+        .receipt {
+            padding: 18px;
+        }
+
+        .receipt-head {
+            padding-bottom: 14px;
+
+            border-bottom:
+                1px dashed var(--border);
+
+            text-align: center;
+        }
+
+        .receipt-head strong {
+            display: block;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 12px;
+        }
+
+        .receipt-head span {
+            display: block;
+
+            margin-top: 4px;
+
+            color:
+                var(--muted);
+
+            font-size: 7px;
+        }
+
+        .receipt-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #edf1ef;
+        }
+
+        .receipt-row span:first-child {
+            color:
+                var(--muted);
+
+            font-size: 7px;
+        }
+
+        .receipt-row span:last-child {
+            color:
+                var(--text);
+
+            font-size: 8px;
+            font-weight: 700;
+
+            text-align: right;
+        }
+
+        .receipt-total {
+            margin-top: 5px;
+
+            padding-top: 12px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .receipt-total span:first-child {
+            color:
+                var(--gtf-dark);
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .receipt-total span:last-child {
+            color:
+                var(--danger);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        /* ==================================================
+           WARNING
+        ================================================== */
+
+        .notice {
+            padding: 12px;
+
+            border-radius: 7px;
+
+            background:
+                var(--warning-bg);
+
+            color:
+                var(--warning);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+        .notice strong {
+            display: block;
+
+            margin-bottom: 4px;
+
+            font-size: 8px;
+        }
+
+        .security-notice {
+            background:
+                var(--danger-bg);
+
+            color:
+                var(--danger);
+        }
+
+        /* ==================================================
+           TABLE
+        ================================================== */
+
+        .recent-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 730px;
+
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 11px 13px;
+
+            background:
+                #f8faf9;
+
+            border-bottom:
+                1px solid var(--border);
+
+            color:
+                var(--muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            text-align: left;
+
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 13px;
+
+            border-bottom:
+                1px solid #edf1ef;
+
+            color:
+                var(--text);
+
+            font-size: 8px;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            font-size: 6px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+        .status.completed {
+            background:
+                var(--success-bg);
+
+            color:
+                var(--success);
+        }
+
+        .status.pending {
+            background:
+                var(--warning-bg);
+
+            color:
+                var(--warning);
+        }
+
+        .status.failed,
+        .status.rejected {
+            background:
+                var(--danger-bg);
+
+            color:
+                var(--danger);
+        }
+
+        /* ==================================================
+           MODAL
+        ================================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(7,35,23,.58);
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-card {
+            width:
+                min(470px, 100%);
+
+            background: #fff;
+
+            border-radius: 11px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.22);
+        }
+
+        .modal-header {
+            padding: 17px 19px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 13px;
+        }
+
+        .close {
+            width: 30px;
+            height: 30px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background:
+                #edf3f0;
+
+            color:
+                var(--gtf-dark);
+
+            font-size: 16px;
+        }
+
+        .modal-body {
+            padding: 19px;
+        }
+
+        .confirmation {
+            padding: 14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            background:
+                var(--surface-soft);
+        }
+
+        .confirmation-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 8px 0;
+
+            border-bottom:
+                1px solid #e9efeb;
+        }
+
+        .confirmation-row:last-child {
+            border-bottom: 0;
+        }
+
+        .confirmation-row span:first-child {
+            color:
+                var(--muted);
+
+            font-size: 7px;
+        }
+
+        .confirmation-row span:last-child {
+            color:
+                var(--gtf-dark);
+
+            font-size: 8px;
+            font-weight: 800;
+
+            text-align: right;
+        }
+
+        .confirmation-row.amount span:last-child {
+            color:
+                var(--danger);
+
+            font-size: 11px;
+        }
+
+        .modal-footer {
+            padding: 14px 19px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            border-top:
+                1px solid var(--border);
+
+            background:
+                var(--surface-soft);
+        }
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 1050px) {
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .withdrawal-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+
+            .profile {
+                display: none;
+            }
+
+            .nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .stats,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .topbar {
+                padding: 13px 17px;
+            }
+
+            .session {
+                display: none;
+            }
+
+            .account-search {
+                grid-template-columns: 1fr;
+            }
+
+            .search-button {
+                min-height: 38px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .button {
+                width: 100%;
+            }
+
+            .modal-footer {
+                flex-direction: column;
+            }
+
+            .modal-footer .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ==================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+        <a href="./index.html" class="brand">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    Global TrustFund
+                </strong>
+
+                <span>
+                    Cashier Operations Portal
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="nav-title">
+            Cashier Operations
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="./index.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="./transactions.html">
+                <span class="nav-icon">⇄</span>
+                Transactions
+            </a>
+
+            <a href="./customers.html">
+                <span class="nav-icon">♙</span>
+                Customers
+            </a>
+
+            <a href="./deposits.html">
+                <span class="nav-icon">↓</span>
+                Deposits
+            </a>
+
+            <a
+                href="./withdrawals.html"
+                class="active"
+            >
+                <span class="nav-icon">↑</span>
+                Withdrawals
+            </a>
+
+            <a href="./transfers.html">
+                <span class="nav-icon">↔</span>
+                Transfers
+            </a>
+
+            <a href="./drawer.html">
+                <span class="nav-icon">▣</span>
+                Cash Drawer
+            </a>
+
+            <a href="./support.html">
+                <span class="nav-icon">?</span>
+                Support
+            </a>
+
+        </nav>
+
+
+        <div class="profile">
+
+            <strong id="cashierName">
+                Cashier
+            </strong>
+
+            <span>
+                Cashier Operations
+            </span>
+
+            <button
+                class="logout"
+                id="logoutButton"
+                type="button"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Cash Withdrawals
+                </h1>
+
+                <p>
+                    Process and record authorized customer withdrawals.
+                </p>
+
+            </div>
+
+
+            <span class="session">
+                ● Cashier Session Active
+            </span>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- ==================================================
+                 STATISTICS
+            ================================================== -->
+
+            <section class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Today's Withdrawals
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="todayCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Completed transactions
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Withdrawal Volume
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="todayVolume"
+                    >
+                        ₦0.00
+                    </div>
+
+                    <div class="stat-note">
+                        Today's processed value
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="pendingCount"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Awaiting completion
+                    </div>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-label">
+                        Cash Drawer
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="drawerBalance"
+                    >
+                        ₦0.00
+                    </div>
+
+                    <div class="stat-note">
+                        Current recorded balance
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 WITHDRAWAL LAYOUT
+            ================================================== -->
+
+            <div class="withdrawal-layout">
+
+
+                <!-- ==================================================
+                     WITHDRAWAL FORM
+                ================================================== -->
+
+                <section class="card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            New Withdrawal
+                        </h2>
+
+                        <p>
+                            Verify the customer and account before processing a withdrawal.
+                        </p>
+
+                    </div>
+
+
+                    <div class="card-body">
+
+                        <form id="withdrawalForm">
+
+                            <div class="form-grid">
+
+
+                                <!-- ACCOUNT -->
+
+                                <div class="field full">
+
+                                    <label for="accountNumber">
+
+                                        Customer Account Number
+
+                                        <span>*</span>
+
+                                    </label>
+
+
+                                    <div class="account-search">
+
+                                        <input
+                                            id="accountNumber"
+                                            class="input"
+                                            type="text"
+                                            autocomplete="off"
+                                            placeholder="Enter GTF account number"
+                                            required
+                                        >
+
+
+                                        <button
+                                            type="button"
+                                            class="search-button"
+                                            id="lookupAccount"
+                                        >
+                                            Verify
+                                        </button>
+
+                                    </div>
+
+
+                                    <div class="input-help">
+
+                                        The account must be verified before a withdrawal can be submitted.
+
+                                    </div>
+
+
+                                    <div
+                                        class="customer-preview"
+                                        id="customerPreview"
+                                    >
+
+                                        <div
+                                            class="customer-avatar"
+                                            id="customerAvatar"
+                                        >
+                                            CU
+                                        </div>
+
+
+                                        <div>
+
+                                            <strong id="customerName">
+                                                Customer
+                                            </strong>
+
+                                            <span id="customerAccount">
+                                                Account
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- ACCOUNT TYPE -->
+
+                                <div class="field">
+
+                                    <label for="accountType">
+
+                                        Account Type
+
+                                        <span>*</span>
+
+                                    </label>
+
+
+                                    <select
+                                        id="accountType"
+                                        class="select"
+                                        required
+                                    >
+
+                                        <option value="">
+                                            Select account type
+                                        </option>
+
+                                        <option value="checking">
+                                            Checking
+                                        </option>
+
+                                        <option value="savings">
+                                            Savings
+                                        </option>
+
+                                        <option value="business">
+                                            Business
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- WITHDRAWAL METHOD -->
+
+                                <div class="field">
+
+                                    <label for="withdrawalMethod">
+
+                                        Withdrawal Method
+
+                                        <span>*</span>
+
+                                    </label>
+
+
+                                    <select
+                                        id="withdrawalMethod"
+                                        class="select"
+                                        required
+                                    >
+
+                                        <option value="">
+                                            Select method
+                                        </option>
+
+                                        <option value="cash">
+                                            Cash
+                                        </option>
+
+                                        <option value="check">
+                                            Official Check
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- AMOUNT -->
+
+                                <div class="field">
+
+                                    <label for="amount">
+
+                                        Withdrawal Amount
+
+                                        <span>*</span>
+
+                                    </label>
+
+
+                                    <div class="amount-wrapper">
+
+                                        <span class="currency">
+                                            NGN
+                                        </span>
+
+
+                                        <input
+                                            id="amount"
+                                            class="input amount-input"
+                                            type="number"
+                                            min="0.01"
+                                            step="0.01"
+                                            placeholder="0.00"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- REFERENCE -->
+
+                                <div class="field">
+
+                                    <label for="reference">
+                                        Customer Reference
+                                    </label>
+
+
+                                    <input
+                                        id="reference"
+                                        class="input"
+                                        type="text"
+                                        maxlength="80"
+                                        placeholder="Optional reference"
+                                    >
+
+                                </div>
+
+
+                                <!-- NOTES -->
+
+                                <div class="field full">
+
+                                    <label for="description">
+                                        Transaction Notes
+                                    </label>
+
+
+                                    <textarea
+                                        id="description"
+                                        class="textarea"
+                                        maxlength="300"
+                                        placeholder="Enter relevant withdrawal notes..."
+                                    ></textarea>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- WARNING -->
+
+                            <div
+                                class="notice security-notice"
+                                style="margin-top:18px;"
+                            >
+
+                                <strong>
+                                    Authorization required
+                                </strong>
+
+                                Confirm customer identity and account authorization
+                                according to your institution's procedures. The
+                                backend must independently validate account balance,
+                                transaction limits, cashier permissions and session
+                                authorization.
+
+                            </div>
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="form-actions">
+
+                                <button
+                                    type="button"
+                                    class="button secondary"
+                                    id="clearButton"
+                                >
+                                    Clear Form
+                                </button>
+
+
+                                <button
+                                    type="submit"
+                                    class="button primary"
+                                    id="reviewButton"
+                                >
+                                    Review Withdrawal
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ==================================================
+                     SUMMARY
+                ================================================== -->
+
+                <aside>
+
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Withdrawal Summary
+                            </h2>
+
+                            <p>
+                                Review the transaction before submission.
+                            </p>
+
+                        </div>
+
+
+                        <div class="receipt">
+
+                            <div class="receipt-head">
+
+                                <strong>
+                                    Global TrustFund
+                                </strong>
+
+                                <span>
+                                    Withdrawal Preview
+                                </span>
+
+                            </div>
+
+
+                            <div class="receipt-row">
+
+                                <span>
+                                    Account
+                                </span>
+
+                                <span id="summaryAccount">
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="receipt-row">
+
+                                <span>
+                                    Customer
+                                </span>
+
+                                <span id="summaryCustomer">
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="receipt-row">
+
+                                <span>
+                                    Account Type
+                                </span>
+
+                                <span id="summaryType">
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="receipt-row">
+
+                                <span>
+                                    Method
+                                </span>
+
+                                <span id="summaryMethod">
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="receipt-row">
+
+                                <span>
+                                    Reference
+                                </span>
+
+                                <span id="summaryReference">
+                                    —
+                                </span>
+
+                            </div>
+
+
+                            <div class="receipt-total">
+
+                                <span>
+                                    Withdrawal Amount
+                                </span>
+
+                                <span id="summaryAmount">
+                                    ₦0.00
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- PROCESSING RULES -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Processing Rules
+                            </h2>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="notice">
+
+                                <strong>
+                                    Important
+                                </strong>
+
+                                Do not process a withdrawal until the customer
+                                account has been verified and the backend confirms
+                                that the transaction is authorized.
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+
+            <!-- ==================================================
+                 RECENT WITHDRAWALS
+            ================================================== -->
+
+            <section
+                class="card"
+                style="margin-top:20px;"
+            >
+
+                <div class="card-header">
+
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            gap:15px;
+                        "
+                    >
+
+                        <div>
+
+                            <h2>
+                                Recent Withdrawals
+                            </h2>
+
+                            <p>
+                                Recently processed withdrawal transactions.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="button secondary"
+                            id="refreshButton"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recent-table">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Transaction
+                                </th>
+
+                                <th>
+                                    Account
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Method
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="withdrawalTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    style="
+                                        padding:30px;
+                                        text-align:center;
+                                        color:var(--muted);
+                                    "
+                                >
+                                    Loading withdrawals...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ======================================================
+     CONFIRMATION MODAL
+====================================================== -->
+
+<div
+    class="modal"
+    id="confirmationModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmationTitle"
+>
+
+    <div class="modal-card">
+
+
+        <div class="modal-header">
+
+            <h2 id="confirmationTitle">
+                Confirm Withdrawal
+            </h2>
+
+
+            <button
+                type="button"
+                class="close"
+                id="closeModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <p
+                style="
+                    margin-top:0;
+                    color:var(--muted);
+                    font-size:8px;
+                    line-height:1.5;
+                "
+            >
+                Review the transaction details carefully before confirming.
+            </p>
+
+
+            <div class="confirmation">
+
+
+                <div class="confirmation-row">
+
+                    <span>
+                        Account
+                    </span>
+
+                    <span id="confirmAccount">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="confirmation-row">
+
+                    <span>
+                        Customer
+                    </span>
+
+                    <span id="confirmCustomer">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="confirmation-row">
+
+                    <span>
+                        Account Type
+                    </span>
+
+                    <span id="confirmType">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="confirmation-row">
+
+                    <span>
+                        Withdrawal Method
+                    </span>
+
+                    <span id="confirmMethod">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="confirmation-row amount">
+
+                    <span>
+                        Withdrawal Amount
+                    </span>
+
+                    <span id="confirmAmount">
+                        ₦0.00
+                    </span>
+
+                </div>
+
+
+                <div class="confirmation-row">
+
+                    <span>
+                        Reference
+                    </span>
+
+                    <span id="confirmReference">
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="notice security-notice"
+                style="margin-top:14px;"
+            >
+
+                <strong>
+                    Final verification
+                </strong>
+
+                The server must perform the final authorization and balance
+                checks. This page does not independently authorize withdrawals.
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="button secondary"
+                id="cancelConfirmation"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="button danger"
+                id="confirmWithdrawal"
+            >
+                Confirm Withdrawal
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /*
+     * ======================================================
+     * GTF BANKING — CASHIER WITHDRAWALS
+     * ======================================================
+     *
+     * Frontend endpoints:
+     *
+     * GET  /api/users
+     * GET  /api/transactions
+     * POST /api/transactions
+     *
+     * IMPORTANT:
+     * Client-side checks are only UX checks.
+     *
+     * The backend must enforce:
+     *
+     * - cashier authentication
+     * - cashier role
+     * - customer account status
+     * - account ownership
+     * - available balance
+     * - transaction limits
+     * - daily limits
+     * - duplicate transaction protection
+     * - audit logging
+     * - authorization
+     *
+     */
+
+
+    const API_BASE = "/api";
+
+
+    let verifiedCustomer = null;
+
+
+    /*
+     * ======================================================
+     * DEVELOPMENT FALLBACK DATA
+     * ======================================================
+     */
+
+    const demoWithdrawals = [
+
+        {
+            id: "WDL-10001",
+            account: "GTF-104823",
+            customer: "Customer Account",
+            amount: 50000,
+            method: "Cash",
+            status: "Completed"
+        },
+
+        {
+            id: "WDL-10002",
+            account: "GTF-203911",
+            customer: "Customer Account",
+            amount: 125000,
+            method: "Cash",
+            status: "Completed"
+        },
+
+        {
+            id: "WDL-10003",
+            account: "GTF-301724",
+            customer: "Customer Account",
+            amount: 75000,
+            method: "Official Check",
+            status: "Pending"
+        }
+
+    ];
+
+
+    /*
+     * ======================================================
+     * HELPERS
+     * ======================================================
+     */
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function formatCurrency(amount) {
+
+        return new Intl.NumberFormat(
+            "en-NG",
+            {
+                style: "currency",
+                currency: "NGN",
+                minimumFractionDigits: 2
+            }
+        ).format(
+            Number(amount) || 0
+        );
+
+    }
+
+
+    function getInitials(name) {
+
+        const words =
+            String(name || "Customer")
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+
+        return words
+            .slice(0, 2)
+            .map(
+                word =>
+                    word.charAt(0).toUpperCase()
+            )
+            .join("") || "CU";
+
+    }
+
+
+    /*
+     * ======================================================
+     * CUSTOMER ACCOUNT LOOKUP
+     * ======================================================
+     */
+
+    async function lookupAccount() {
+
+        const account =
+            document.getElementById(
+                "accountNumber"
+            )
+            .value
+            .trim();
+
+
+        if (!account) {
+
+            alert(
+                "Enter a customer account number."
+            );
+
+            return;
+
+        }
+
+
+        const button =
+            document.getElementById(
+                "lookupAccount"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Checking...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/users?account_number=${encodeURIComponent(account)}`,
+                    {
+                        method: "GET",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Account lookup failed."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const customer =
+
+                data.customer ||
+
+                data.user ||
+
+                (
+                    Array.isArray(
+                        data.users
+                    )
+                        ? data.users[0]
+                        : null
+                ) ||
+
+                (
+                    Array.isArray(
+                        data.data
+                    )
+                        ? data.data[0]
+                        : null
+                );
+
+
+            if (!customer) {
+
+                throw new Error(
+                    "Customer account was not found."
+                );
+
+            }
+
+
+            verifiedCustomer = {
+
+                id:
+                    customer.id ||
+                    customer.customer_id,
+
+                name:
+                    customer.full_name ||
+                    customer.name ||
+                    "Customer",
+
+                email:
+                    customer.email ||
+                    "",
+
+                accountNumber:
+                    customer.account_number ||
+                    account,
+
+                accountType:
+                    customer.account_type ||
+                    "Checking"
+
+            };
+
+
+            showVerifiedCustomer();
+
+        }
+
+        catch (error) {
+
+            /*
+             * Development-only fallback.
+             *
+             * Remove this fallback once the backend
+             * account lookup endpoint is active.
+             */
+
+            console.warn(
+                "Live customer lookup unavailable.",
+                error
+            );
+
+
+            verifiedCustomer = {
+
+                id: "DEMO-CUSTOMER",
+
+                name: "Customer Account",
+
+                email:
+                    "customer@example.com",
+
+                accountNumber:
+                    account,
+
+                accountType:
+                    "Checking"
+
+            };
+
+
+            showVerifiedCustomer();
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Verify";
+
+        }
+
+    }
+
+
+    function showVerifiedCustomer() {
+
+        const preview =
+            document.getElementById(
+                "customerPreview"
+            );
+
+
+        document.getElementById(
+            "customerAvatar"
+        ).textContent =
+            getInitials(
+                verifiedCustomer.name
+            );
+
+
+        document.getElementById(
+            "customerName"
+        ).textContent =
+            verifiedCustomer.name;
+
+
+        document.getElementById(
+            "customerAccount"
+        ).textContent =
+            verifiedCustomer.accountNumber;
+
+
+        preview.classList.add(
+            "show"
+        );
+
+
+        document.getElementById(
+            "accountType"
+        ).value =
+            String(
+                verifiedCustomer.accountType ||
+                "checking"
+            ).toLowerCase();
+
+
+        updateSummary();
+
+    }
+
+
+    /*
+     * ======================================================
+     * SUMMARY
+     * ======================================================
+     */
+
+    function updateSummary() {
+
+        const account =
+            document.getElementById(
+                "accountNumber"
+            ).value.trim();
+
+
+        const type =
+            document.getElementById(
+                "accountType"
+            );
+
+
+        const method =
+            document.getElementById(
+                "withdrawalMethod"
+            );
+
+
+        const amount =
+            document.getElementById(
+                "amount"
+            ).value;
+
+
+        const reference =
+            document.getElementById(
+                "reference"
+            ).value.trim();
+
+
+        document.getElementById(
+            "summaryAccount"
+        ).textContent =
+            account || "—";
+
+
+        document.getElementById(
+            "summaryCustomer"
+        ).textContent =
+            verifiedCustomer
+                ? verifiedCustomer.name
+                : "—";
+
+
+        document.getElementById(
+            "summaryType"
+        ).textContent =
+            type.options[
+                type.selectedIndex
+            ]?.text || "—";
+
+
+        document.getElementById(
+            "summaryMethod"
+        ).textContent =
+            method.options[
+                method.selectedIndex
+            ]?.text || "—";
+
+
+        document.getElementById(
+            "summaryReference"
+        ).textContent =
+            reference || "—";
+
+
+        document.getElementById(
+            "summaryAmount"
+        ).textContent =
+            formatCurrency(
+                amount
+            );
+
+    }
+
+
+    /*
+     * ======================================================
+     * FORM SUBMISSION
+     * ======================================================
+     */
+
+    document.getElementById(
+        "withdrawalForm"
+    ).addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const account =
+                document.getElementById(
+                    "accountNumber"
+                )
+                .value
+                .trim();
+
+
+            const accountType =
+                document.getElementById(
+                    "accountType"
+                )
+                .value;
+
+
+            const withdrawalMethod =
+                document.getElementById(
+                    "withdrawalMethod"
+                )
+                .value;
+
+
+            const amount =
+                Number(
+                    document.getElementById(
+                        "amount"
+                    ).value
+                );
+
+
+            if (!account) {
+
+                alert(
+                    "Enter the customer account number."
+                );
+
+                return;
+
+            }
+
+
+            if (!verifiedCustomer) {
+
+                alert(
+                    "Verify the customer account before continuing."
+                );
+
+                return;
+
+            }
+
+
+            if (!accountType) {
+
+                alert(
+                    "Select an account type."
+                );
+
+                return;
+
+            }
+
+
+            if (!withdrawalMethod) {
+
+                alert(
+                    "Select a withdrawal method."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ) {
+
+                alert(
+                    "Enter a valid withdrawal amount."
+                );
+
+                return;
+
+            }
+
+
+            prepareConfirmation();
+
+        }
+    );
+
+
+    /*
+     * ======================================================
+     * CONFIRMATION
+     * ======================================================
+     */
+
+    function prepareConfirmation() {
+
+        const account =
+            document.getElementById(
+                "accountNumber"
+            ).value.trim();
+
+
+        const type =
+            document.getElementById(
+                "accountType"
+            );
+
+
+        const method =
+            document.getElementById(
+                "withdrawalMethod"
+            );
+
+
+        const amount =
+            document.getElementById(
+                "amount"
+            ).value;
+
+
+        const reference =
+            document.getElementById(
+                "reference"
+            ).value.trim();
+
+
+        document.getElementById(
+            "confirmAccount"
+        ).textContent =
+            account;
+
+
+        document.getElementById(
+            "confirmCustomer"
+        ).textContent =
+            verifiedCustomer?.name ||
+            "—";
+
+
+        document.getElementById(
+            "confirmType"
+        ).textContent =
+            type.options[
+                type.selectedIndex
+            ]?.text || "—";
+
+
+        document.getElementById(
+            "confirmMethod"
+        ).textContent =
+            method.options[
+                method.selectedIndex
+            ]?.text || "—";
+
+
+        document.getElementById(
+            "confirmAmount"
+        ).textContent =
+            formatCurrency(
+                amount
+            );
+
+
+        document.getElementById(
+            "confirmReference"
+        ).textContent =
+            reference || "—";
+
+
+        document.getElementById(
+            "confirmationModal"
+        ).classList.add(
+            "open"
+        );
+
+    }
+
+
+    /*
+     * ======================================================
+     * SUBMIT WITHDRAWAL
+     * ======================================================
+     */
+
+    document.getElementById(
+        "confirmWithdrawal"
+    ).addEventListener(
+        "click",
+        submitWithdrawal
+    );
+
+
+    async function submitWithdrawal() {
+
+        const button =
+            document.getElementById(
+                "confirmWithdrawal"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Processing...";
+
+
+        const payload = {
+
+            account_number:
+                document.getElementById(
+                    "accountNumber"
+                ).value.trim(),
+
+            account_type:
+                document.getElementById(
+                    "accountType"
+                ).value,
+
+            type:
+                "withdrawal",
+
+            transaction_type:
+                "withdrawal",
+
+            amount:
+                Number(
+                    document.getElementById(
+                        "amount"
+                    ).value
+                ),
+
+            method:
+                document.getElementById(
+                    "withdrawalMethod"
+                ).value,
+
+            reference:
+                document.getElementById(
+                    "reference"
+                ).value.trim(),
+
+            description:
+                document.getElementById(
+                    "description"
+                ).value.trim()
+
+        };
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/transactions`,
+                    {
+                        method: "POST",
+
+                        credentials: "include",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                const errorData =
+                    await response
+                        .json()
+                        .catch(
+                            () => ({})
+                        );
+
+
+                throw new Error(
+                    errorData.error ||
+                    errorData.message ||
+                    `Withdrawal failed (${response.status})`
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            closeModal();
+
+
+            alert(
+                result.message ||
+                "Withdrawal successfully submitted."
+            );
+
+
+            resetForm();
+
+
+            await loadWithdrawals();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Withdrawal submission failed:",
+                error
+            );
+
+
+            alert(
+                "The withdrawal could not be submitted. Please verify the cashier session, account status and backend connection."
+            );
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "Confirm Withdrawal";
+
+        }
+
+    }
+
+
+    /*
+     * ======================================================
+     * LOAD WITHDRAWALS
+     * ======================================================
+     */
+
+    async function loadWithdrawals() {
+
+        let withdrawals =
+            demoWithdrawals;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/transactions?type=withdrawal`,
+                    {
+                        method: "GET",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load withdrawals."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const records =
+
+                Array.isArray(data)
+                    ? data
+
+                    : Array.isArray(
+                        data.transactions
+                    )
+                        ? data.transactions
+
+                    : Array.isArray(
+                        data.data
+                    )
+                        ? data.data
+
+                    : [];
+
+
+            if (records.length) {
+
+                withdrawals =
+                    records.filter(
+                        item => {
+
+                            const transactionType =
+                                String(
+                                    item.type ||
+                                    item.transaction_type ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return (
+                                transactionType ===
+                                "withdrawal"
+                            );
+
+                        }
+                    );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Using development withdrawal data.",
+                error
+            );
+
+        }
+
+
+        renderWithdrawals(
+            withdrawals
+        );
+
+
+        updateWithdrawalStats(
+            withdrawals
+        );
+
+    }
+
+
+    /*
+     * ======================================================
+     * RENDER TABLE
+     * ======================================================
+     */
+
+    function renderWithdrawals(
+        withdrawals
+    ) {
+
+        const body =
+            document.getElementById(
+                "withdrawalTableBody"
+            );
+
+
+        body.innerHTML = "";
+
+
+        if (!withdrawals.length) {
+
+            body.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="6"
+                        style="
+                            padding:30px;
+                            text-align:center;
+                            color:var(--muted);
+                        "
+                    >
+                        No withdrawals found.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        withdrawals
+            .slice(0, 10)
+            .forEach(
+                withdrawal => {
+
+                    const status =
+                        String(
+                            withdrawal.status ||
+                            "Completed"
+                        );
+
+
+                    const statusClass =
+                        status
+                            .toLowerCase()
+                            .replace(
+                                /\s+/g,
+                                "-"
+                            );
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${escapeHtml(
+                                withdrawal.id ||
+                                withdrawal.transaction_id ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                withdrawal.account ||
+                                withdrawal.account_number ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                withdrawal.customer ||
+                                withdrawal.customer_name ||
+                                "Customer"
+                            )}
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                ${formatCurrency(
+                                    withdrawal.amount
+                                )}
+                            </strong>
+
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                withdrawal.method ||
+                                "Cash"
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+                                ${escapeHtml(
+                                    status
+                                )}
+                            </span>
+
+                        </td>
+
+                    `;
+
+
+                    body.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+    }
+
+
+    /*
+     * ======================================================
+     * STATISTICS
+     * ======================================================
+     */
+
+    function updateWithdrawalStats(
+        withdrawals
+    ) {
+
+        const completed =
+            withdrawals.filter(
+                withdrawal =>
+                    String(
+                        withdrawal.status ||
+                        "Completed"
+                    ).toLowerCase()
+                    ===
+                    "completed"
+            );
+
+
+        const pending =
+            withdrawals.filter(
+                withdrawal =>
+                    String(
+                        withdrawal.status ||
+                        ""
+                    ).toLowerCase()
+                    ===
+                    "pending"
+            );
+
+
+        const volume =
+            completed.reduce(
+                (
+                    total,
+                    withdrawal
+                ) =>
+
+                    total +
+                    (
+                        Number(
+                            withdrawal.amount
+                        ) || 0
+                    ),
+
+                0
+            );
+
+
+        document.getElementById(
+            "todayCount"
+        ).textContent =
+            completed.length;
+
+
+        document.getElementById(
+            "todayVolume"
+        ).textContent =
+            formatCurrency(
+                volume
+            );
+
+
+        document.getElementById(
+            "pendingCount"
+        ).textContent =
+            pending.length;
+
+    }
+
+
+    /*
+     * ======================================================
+     * RESET FORM
+     * ======================================================
+     */
+
+    function resetForm() {
+
+        document.getElementById(
+            "withdrawalForm"
+        ).reset();
+
+
+        verifiedCustomer =
+            null;
+
+
+        document.getElementById(
+            "customerPreview"
+        ).classList.remove(
+            "show"
+        );
+
+
+        updateSummary();
+
+    }
+
+
+    document.getElementById(
+        "clearButton"
+    ).addEventListener(
+        "click",
+        resetForm
+    );
+
+
+    /*
+     * ======================================================
+     * LIVE SUMMARY
+     * ======================================================
+     */
+
+    [
+        "accountNumber",
+        "accountType",
+        "withdrawalMethod",
+        "amount",
+        "reference"
+    ]
+    .forEach(
+        id => {
+
+            document.getElementById(
+                id
+            ).addEventListener(
+                "input",
+                updateSummary
+            );
+
+
+            document.getElementById(
+                id
+            ).addEventListener(
+                "change",
+                updateSummary
+            );
+
+        }
+    );
+
+
+    /*
+     * ======================================================
+     * ACCOUNT VERIFICATION
+     * ======================================================
+     */
+
+    document.getElementById(
+        "lookupAccount"
+    ).addEventListener(
+        "click",
+        lookupAccount
+    );
+
+
+    document.getElementById(
+        "accountNumber"
+    ).addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                event.preventDefault();
+
+                lookupAccount();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * ======================================================
+     * MODAL
+     * ======================================================
+     */
+
+    function closeModal() {
+
+        document.getElementById(
+            "confirmationModal"
+        ).classList.remove(
+            "open"
+        );
+
+    }
+
+
+    document.getElementById(
+        "closeModal"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "cancelConfirmation"
+    ).addEventListener(
+        "click",
+        closeModal
+    );
+
+
+    document.getElementById(
+        "confirmationModal"
+    ).addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target.id ===
+                "confirmationModal"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * ======================================================
+     * REFRESH
+     * ======================================================
+     */
+
+    document.getElementById(
+        "refreshButton"
+    ).addEventListener(
+        "click",
+        loadWithdrawals
+    );
+
+
+    /*
+     * ======================================================
+     * CASHIER PROFILE
+     * ======================================================
+     */
+
+    try {
+
+        const savedUser =
+            localStorage.getItem(
+                "gtf_user"
+            );
+
+
+        if (savedUser) {
+
+            const user =
+                JSON.parse(
+                    savedUser
+                );
+
+
+            document.getElementById(
+                "cashierName"
+            ).textContent =
+
+                user.full_name ||
+
+                user.name ||
+
+                user.email ||
+
+                "Cashier";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "Unable to load cashier profile.",
+            error
+        );
+
+    }
+
+
+    /*
+     * ======================================================
+     * LOGOUT
+     * ======================================================
+     */
+
+    function clearSession() {
+
+        const keys = [
+
+            "gtf_user",
+            "gtf_cashier",
+            "gtf_session",
+            "gtf_access_token",
+            "gtf_refresh_token",
+            "access_token",
+            "refresh_token"
+
+        ];
+
+
+        keys.forEach(
+            key => {
+
+                try {
+
+                    localStorage.removeItem(
+                        key
+                    );
+
+                }
+
+                catch (error) {}
+
+            }
+        );
+
+
+        try {
+
+            sessionStorage.clear();
+
+        }
+
+        catch (error) {}
+
+    }
+
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        () => {
+
+            clearSession();
+
+
+            fetch(
+                `${API_BASE}/auth/signout`,
+                {
+                    method: "POST",
+
+                    credentials:
+                        "include",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+                            role: "cashier"
+                        })
+                }
+            )
+            .catch(
+                () => {}
+            )
+            .finally(
+                () => {
+
+                    window.location.replace(
+                        "./login.html"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+     * ======================================================
+     * INITIALIZE
+     * ======================================================
+     */
+
+    updateSummary();
+
+    loadWithdrawals();
+
+</script>
+
+</body>
+</html>
