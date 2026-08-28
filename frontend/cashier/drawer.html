@@ -1,0 +1,3623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cash Drawer | Cashier | Global TrustFund</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        :root {
+            --gtf-green: #0b5d3b;
+            --gtf-dark: #073d28;
+            --gtf-light: #16865a;
+            --gtf-gold: #c9962b;
+
+            --background: #f4f8f6;
+            --surface: #ffffff;
+            --surface-soft: #f8fbf9;
+            --border: #dce7e1;
+
+            --text: #18352a;
+            --muted: #718078;
+
+            --success: #19734b;
+            --success-bg: #eaf7ef;
+
+            --warning: #946b17;
+            --warning-bg: #fff7df;
+
+            --danger: #a33f3f;
+            --danger-bg: #fff0f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 245px minmax(0, 1fr);
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+
+            padding: 22px 16px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--gtf-dark),
+                    #052e1f
+                );
+
+            color: #fff;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 5px 8px 22px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.12);
+
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 43px;
+            height: 43px;
+            object-fit: contain;
+        }
+
+        .brand-text strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .brand-text span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .nav-title {
+            margin: 23px 9px 9px;
+            color: rgba(255,255,255,.42);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: grid;
+            gap: 5px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            min-height: 38px;
+            padding: 0 11px;
+
+            border-radius: 7px;
+
+            color: rgba(255,255,255,.72);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition:
+                background .15s ease,
+                color .15s ease;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(255,255,255,.10);
+            color: #fff;
+        }
+
+        .nav-icon {
+            width: 18px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .profile {
+            margin-top: 30px;
+            padding: 13px;
+
+            border:
+                1px solid rgba(255,255,255,.10);
+
+            border-radius: 9px;
+
+            background: rgba(255,255,255,.05);
+        }
+
+        .profile strong {
+            display: block;
+            font-size: 9px;
+        }
+
+        .profile span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255,255,255,.55);
+            font-size: 7px;
+        }
+
+        .logout {
+            width: 100%;
+            min-height: 30px;
+            margin-top: 10px;
+
+            border:
+                1px solid rgba(255,255,255,.15);
+
+            border-radius: 6px;
+
+            background: transparent;
+            color: rgba(255,255,255,.75);
+
+            font-size: 8px;
+        }
+
+        /* MAIN */
+
+        .main {
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 68px;
+
+            padding: 14px 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            background: #fff;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .topbar h1 {
+            margin: 0;
+            color: var(--gtf-dark);
+            font-size: 20px;
+        }
+
+        .topbar p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 8px;
+        }
+
+        .session {
+            padding: 7px 10px;
+
+            border-radius: 20px;
+
+            background: var(--success-bg);
+            color: var(--success);
+
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        .content {
+            padding: 27px;
+        }
+
+        /* STATUS */
+
+        .drawer-status {
+            display: grid;
+            grid-template-columns: 1.2fr repeat(3, 1fr);
+            gap: 14px;
+
+            margin-bottom: 20px;
+        }
+
+        .status-card {
+            padding: 17px;
+
+            background: #fff;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+        }
+
+        .status-card.primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gtf-dark),
+                    var(--gtf-green)
+                );
+
+            color: #fff;
+        }
+
+        .status-label {
+            color: var(--muted);
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+
+        .primary .status-label {
+            color: rgba(255,255,255,.65);
+        }
+
+        .status-value {
+            margin-top: 8px;
+
+            color: var(--gtf-dark);
+
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .primary .status-value {
+            color: #fff;
+        }
+
+        .status-note {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 7px;
+        }
+
+        .primary .status-note {
+            color: rgba(255,255,255,.65);
+        }
+
+        /* GRID */
+
+        .workspace {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.25fr)
+                minmax(290px, .75fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .card {
+            overflow: hidden;
+
+            background: #fff;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 11px;
+        }
+
+        .card + .card {
+            margin-top: 20px;
+        }
+
+        .card-header {
+            padding: 17px 18px;
+
+            border-bottom:
+                1px solid var(--border);
+        }
+
+        .card-header h2 {
+            margin: 0;
+            color: var(--gtf-dark);
+            font-size: 13px;
+        }
+
+        .card-header p {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 7px;
+        }
+
+        .card-body {
+            padding: 19px;
+        }
+
+        /* FORM */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: var(--gtf-dark);
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .input,
+        .select,
+        .textarea {
+            width: 100%;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #fff;
+            color: var(--text);
+
+            font-size: 9px;
+        }
+
+        .input,
+        .select {
+            min-height: 39px;
+            padding: 0 11px;
+        }
+
+        .textarea {
+            min-height: 80px;
+            padding: 10px 11px;
+            resize: vertical;
+        }
+
+        .input:focus,
+        .select:focus,
+        .textarea:focus {
+            border-color: var(--gtf-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(22,134,90,.08);
+        }
+
+        .button {
+            min-height: 39px;
+
+            padding: 0 16px;
+
+            border: 0;
+            border-radius: 6px;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .button.primary {
+            background: var(--gtf-green);
+            color: #fff;
+        }
+
+        .button.secondary {
+            background: #edf3f0;
+            color: var(--gtf-dark);
+        }
+
+        .button.warning {
+            background: var(--warning);
+            color: #fff;
+        }
+
+        .button.danger {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: .55;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+
+            margin-top: 19px;
+            padding-top: 16px;
+
+            border-top:
+                1px solid var(--border);
+        }
+
+        /* DRAWER STATE */
+
+        .drawer-state {
+            padding: 15px;
+
+            border-radius: 8px;
+
+            background: var(--surface-soft);
+
+            border:
+                1px solid var(--border);
+        }
+
+        .state-line {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .state-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--danger);
+        }
+
+        .state-dot.open {
+            background: var(--success);
+        }
+
+        .state-line strong {
+            color: var(--gtf-dark);
+            font-size: 9px;
+        }
+
+        .state-meta {
+            margin-top: 9px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .state-meta div {
+            padding: 9px;
+
+            border-radius: 6px;
+            background: #fff;
+
+            border:
+                1px solid var(--border);
+        }
+
+        .state-meta span {
+            display: block;
+            color: var(--muted);
+            font-size: 6px;
+            text-transform: uppercase;
+        }
+
+        .state-meta strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--gtf-dark);
+            font-size: 8px;
+        }
+
+        /* DENOMINATIONS */
+
+        .denomination {
+            display: grid;
+            grid-template-columns: 70px 1fr 110px;
+            align-items: center;
+            gap: 10px;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #edf1ef;
+        }
+
+        .denomination:last-child {
+            border-bottom: 0;
+        }
+
+        .denomination-value {
+            color: var(--gtf-dark);
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .denomination input {
+            min-height: 34px;
+        }
+
+        .denomination-total {
+            color: var(--gtf-green);
+            font-size: 8px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        .count-total {
+            margin-top: 13px;
+            padding-top: 13px;
+
+            display: flex;
+            justify-content: space-between;
+
+            border-top:
+                2px solid var(--border);
+        }
+
+        .count-total strong:first-child {
+            color: var(--gtf-dark);
+            font-size: 9px;
+        }
+
+        .count-total strong:last-child {
+            color: var(--gtf-green);
+            font-size: 13px;
+        }
+
+        /* RECONCILIATION */
+
+        .reconcile-box {
+            padding: 15px;
+
+            border-radius: 8px;
+
+            background: var(--surface-soft);
+
+            border:
+                1px solid var(--border);
+        }
+
+        .reconcile-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #e8efeb;
+        }
+
+        .reconcile-row span:first-child {
+            color: var(--muted);
+            font-size: 7px;
+        }
+
+        .reconcile-row span:last-child {
+            color: var(--gtf-dark);
+            font-size: 8px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        .reconcile-row.difference span:last-child {
+            color: var(--danger);
+        }
+
+        .reconcile-row.balanced span:last-child {
+            color: var(--success);
+        }
+
+        /* ALERT */
+
+        .notice {
+            padding: 12px;
+
+            border-radius: 7px;
+
+            background: var(--warning-bg);
+            color: var(--warning);
+
+            font-size: 7px;
+            line-height: 1.5;
+        }
+
+        .notice strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 8px;
+        }
+
+        .notice.security {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        /* HISTORY */
+
+        .history {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 760px;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 11px 13px;
+
+            background: #f8faf9;
+
+            border-bottom:
+                1px solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 13px;
+
+            border-bottom:
+                1px solid #edf1ef;
+
+            color: var(--text);
+
+            font-size: 8px;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            font-size: 6px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .status.open {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .status.closed {
+            background: #edf3f0;
+            color: var(--muted);
+        }
+
+        .status.discrepancy {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1050px) {
+            .drawer-status {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .app {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                height: auto;
+            }
+
+            .profile {
+                display: none;
+            }
+
+            .nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content {
+                padding: 17px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .drawer-status,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .button {
+                width: 100%;
+            }
+
+            .denomination {
+                grid-template-columns:
+                    60px 1fr;
+            }
+
+            .denomination-total {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .state-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 13px 17px;
+            }
+
+            .session {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a href="./index.html" class="brand">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
+            >
+
+            <div class="brand-text">
+
+                <strong>
+                    Global TrustFund
+                </strong>
+
+                <span>
+                    Cashier Operations Portal
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="nav-title">
+            Cashier Operations
+        </div>
+
+
+        <nav class="nav">
+
+            <a href="./index.html">
+                <span class="nav-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a href="./transactions.html">
+                <span class="nav-icon">⇄</span>
+                Transactions
+            </a>
+
+            <a href="./customers.html">
+                <span class="nav-icon">♙</span>
+                Customers
+            </a>
+
+            <a href="./deposits.html">
+                <span class="nav-icon">↓</span>
+                Deposits
+            </a>
+
+            <a href="./withdrawals.html">
+                <span class="nav-icon">↑</span>
+                Withdrawals
+            </a>
+
+            <a href="./transfers.html">
+                <span class="nav-icon">↔</span>
+                Transfers
+            </a>
+
+            <a
+                href="./drawer.html"
+                class="active"
+            >
+                <span class="nav-icon">▣</span>
+                Cash Drawer
+            </a>
+
+            <a href="./support.html">
+                <span class="nav-icon">?</span>
+                Support
+            </a>
+
+        </nav>
+
+
+        <div class="profile">
+
+            <strong id="cashierName">
+                Cashier
+            </strong>
+
+            <span>
+                Cashier Operations
+            </span>
+
+            <button
+                class="logout"
+                id="logoutButton"
+                type="button"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Cash Drawer
+                </h1>
+
+                <p>
+                    Manage cashier drawer sessions and reconcile physical cash.
+                </p>
+
+            </div>
+
+
+            <span class="session">
+                ● Cashier Session Active
+            </span>
+
+        </header>
+
+
+        <section class="content">
+
+            <!-- STATUS -->
+
+            <section class="drawer-status">
+
+                <div class="status-card primary">
+
+                    <div class="status-label">
+                        Drawer Status
+                    </div>
+
+                    <div
+                        class="status-value"
+                        id="drawerStatus"
+                    >
+                        Closed
+                    </div>
+
+                    <div
+                        class="status-note"
+                        id="drawerStatusNote"
+                    >
+                        No active drawer session
+                    </div>
+
+                </div>
+
+
+                <div class="status-card">
+
+                    <div class="status-label">
+                        Opening Float
+                    </div>
+
+                    <div
+                        class="status-value"
+                        id="openingFloat"
+                    >
+                        ₦0.00
+                    </div>
+
+                    <div class="status-note">
+                        Starting cash
+                    </div>
+
+                </div>
+
+
+                <div class="status-card">
+
+                    <div class="status-label">
+                        Expected Cash
+                    </div>
+
+                    <div
+                        class="status-value"
+                        id="expectedCash"
+                    >
+                        ₦0.00
+                    </div>
+
+                    <div class="status-note">
+                        System calculated
+                    </div>
+
+                </div>
+
+
+                <div class="status-card">
+
+                    <div class="status-label">
+                        Physical Cash
+                    </div>
+
+                    <div
+                        class="status-value"
+                        id="physicalCash"
+                    >
+                        ₦0.00
+                    </div>
+
+                    <div class="status-note">
+                        Counted amount
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="workspace">
+
+                <!-- LEFT -->
+
+                <div>
+
+
+                    <!-- SESSION MANAGEMENT -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Drawer Session
+                            </h2>
+
+                            <p>
+                                Open a drawer at the beginning of a cashier shift
+                                and close it after reconciliation.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div
+                                class="drawer-state"
+                                style="margin-bottom:18px;"
+                            >
+
+                                <div class="state-line">
+
+                                    <span
+                                        class="state-dot"
+                                        id="stateDot"
+                                    ></span>
+
+                                    <strong id="stateText">
+                                        Drawer is currently closed
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="state-meta">
+
+                                    <div>
+
+                                        <span>
+                                            Session ID
+                                        </span>
+
+                                        <strong id="sessionId">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <span>
+                                            Opened At
+                                        </span>
+
+                                        <strong id="openedAt">
+                                            —
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <form id="drawerForm">
+
+                                <div class="form-grid">
+
+
+                                    <div class="field">
+
+                                        <label for="openingAmount">
+                                            Opening Cash
+                                        </label>
+
+                                        <input
+                                            id="openingAmount"
+                                            class="input"
+                                            type="number"
+                                            min="0"
+                                            step="0.01"
+                                            placeholder="0.00"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="field">
+
+                                        <label for="branch">
+                                            Branch
+                                        </label>
+
+                                        <select
+                                            id="branch"
+                                            class="select"
+                                        >
+
+                                            <option value="">
+                                                Select branch
+                                            </option>
+
+                                            <option value="head-office">
+                                                Head Office
+                                            </option>
+
+                                            <option value="lagos">
+                                                Lagos Branch
+                                            </option>
+
+                                            <option value="abuja">
+                                                Abuja Branch
+                                            </option>
+
+                                            <option value="port-harcourt">
+                                                Port Harcourt Branch
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="field full">
+
+                                        <label for="openingNotes">
+                                            Session Notes
+                                        </label>
+
+                                        <textarea
+                                            id="openingNotes"
+                                            class="textarea"
+                                            placeholder="Enter opening or reconciliation notes..."
+                                        ></textarea>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="resetDrawer"
+                                    >
+                                        Reset
+                                    </button>
+
+
+                                    <button
+                                        type="submit"
+                                        class="button primary"
+                                        id="openDrawerButton"
+                                    >
+                                        Open Drawer
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- DENOMINATION COUNT -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Physical Cash Count
+                            </h2>
+
+                            <p>
+                                Enter the number of notes and coins physically
+                                present in the drawer.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div id="denominationList">
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦1,000
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="1000"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦500
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="500"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦200
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="200"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦100
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="100"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦50
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="50"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦20
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="20"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦10
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="10"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦5
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="5"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+
+                                <div class="denomination">
+
+                                    <div class="denomination-value">
+                                        ₦1
+                                    </div>
+
+                                    <input
+                                        class="input denomination-count"
+                                        type="number"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        data-value="1"
+                                    >
+
+                                    <div class="denomination-total">
+                                        ₦0.00
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="count-total">
+
+                                <strong>
+                                    Physical Cash Total
+                                </strong>
+
+                                <strong id="countTotal">
+                                    ₦0.00
+                                </strong>
+
+                            </div>
+
+
+                            <div
+                                class="form-actions"
+                                style="margin-top:14px;"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="button secondary"
+                                    id="clearCount"
+                                >
+                                    Clear Count
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="button primary"
+                                    id="reconcileButton"
+                                >
+                                    Reconcile Drawer
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <aside>
+
+
+                    <!-- RECONCILIATION -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Reconciliation
+                            </h2>
+
+                            <p>
+                                Compare system expected cash with physical cash.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="reconcile-box">
+
+                                <div class="reconcile-row">
+
+                                    <span>
+                                        Opening Float
+                                    </span>
+
+                                    <span id="reconcileOpening">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+
+                                <div class="reconcile-row">
+
+                                    <span>
+                                        Cash Deposits
+                                    </span>
+
+                                    <span id="cashDeposits">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+
+                                <div class="reconcile-row">
+
+                                    <span>
+                                        Cash Withdrawals
+                                    </span>
+
+                                    <span id="cashWithdrawals">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+
+                                <div class="reconcile-row">
+
+                                    <span>
+                                        Cash Adjustments
+                                    </span>
+
+                                    <span id="cashAdjustments">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+
+                                <div class="reconcile-row">
+
+                                    <span>
+                                        Expected Cash
+                                    </span>
+
+                                    <span id="reconcileExpected">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+
+                                <div class="reconcile-row">
+
+                                    <span>
+                                        Physical Cash
+                                    </span>
+
+                                    <span id="reconcilePhysical">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="reconcile-row difference"
+                                    id="differenceRow"
+                                >
+
+                                    <span>
+                                        Difference
+                                    </span>
+
+                                    <span id="reconcileDifference">
+                                        ₦0.00
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                class="notice"
+                                style="margin-top:14px;"
+                                id="reconcileMessage"
+                            >
+
+                                <strong>
+                                    Reconciliation required
+                                </strong>
+
+                                Count the physical cash and reconcile the
+                                drawer before closing the session.
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- CLOSE DRAWER -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Close Drawer
+                            </h2>
+
+                            <p>
+                                Close the active cashier drawer after completing
+                                reconciliation.
+                            </p>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div
+                                class="notice security"
+                                style="margin-bottom:14px;"
+                            >
+
+                                <strong>
+                                    End-of-shift control
+                                </strong>
+
+                                Closing a drawer should only be performed after
+                                all transactions have been posted and physical
+                                cash has been counted.
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="button danger"
+                                id="closeDrawerButton"
+                                style="width:100%;"
+                                disabled
+                            >
+                                Close Drawer Session
+                            </button>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- SECURITY -->
+
+                    <section class="card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Cashier Controls
+                            </h2>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <div class="notice">
+
+                                <strong>
+                                    Backend authorization
+                                </strong>
+
+                                Drawer balances, transaction totals,
+                                reconciliation differences and cashier
+                                permissions must be independently validated by
+                                the backend.
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+
+            <!-- HISTORY -->
+
+            <section
+                class="card"
+                style="margin-top:20px;"
+            >
+
+                <div class="card-header">
+
+                    <div
+                        style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:space-between;
+                            gap:15px;
+                        "
+                    >
+
+                        <div>
+
+                            <h2>
+                                Drawer Session History
+                            </h2>
+
+                            <p>
+                                Recent cashier drawer sessions and reconciliation
+                                results.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="button secondary"
+                            id="refreshHistory"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="history">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Session
+                                </th>
+
+                                <th>
+                                    Cashier
+                                </th>
+
+                                <th>
+                                    Opened
+                                </th>
+
+                                <th>
+                                    Closed
+                                </th>
+
+                                <th>
+                                    Opening
+                                </th>
+
+                                <th>
+                                    Closing
+                                </th>
+
+                                <th>
+                                    Difference
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="8"
+                                    style="
+                                        padding:30px;
+                                        text-align:center;
+                                        color:var(--muted);
+                                    "
+                                >
+                                    Loading drawer history...
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /*
+     * ============================================================
+     * GLOBAL TRUSTFUND — CASHIER DRAWER
+     * ============================================================
+     *
+     * Expected API:
+     *
+     * GET  /api/drawer
+     * GET  /api/drawer/current
+     * POST /api/drawer/open
+     * POST /api/drawer/reconcile
+     * POST /api/drawer/close
+     *
+     * If these endpoints are not yet implemented, this page uses
+     * local development state so the UI can still be tested.
+     *
+     * Financial authorization and final calculations must always
+     * happen on the backend.
+     */
+
+    const API_BASE = "/api";
+
+
+    let drawer = {
+        open: false,
+        sessionId: null,
+        openingAmount: 0,
+        expectedCash: 0,
+        openedAt: null,
+        branch: null
+    };
+
+
+    let cashTotals = {
+        deposits: 0,
+        withdrawals: 0,
+        adjustments: 0
+    };
+
+
+    const demoHistory = [
+        {
+            session: "DRW-10008",
+            cashier: "Cashier",
+            opened: "2026-08-27 08:02",
+            closed: "2026-08-27 17:05",
+            opening: 100000,
+            closing: 128500,
+            difference: 0,
+            status: "Closed"
+        },
+        {
+            session: "DRW-10007",
+            cashier: "Cashier",
+            opened: "2026-08-26 08:06",
+            closed: "2026-08-26 17:11",
+            opening: 100000,
+            closing: 101250,
+            difference: 0,
+            status: "Closed"
+        }
+    ];
+
+
+    /* ------------------------------------------------------------
+       HELPERS
+    ------------------------------------------------------------ */
+
+    function formatCurrency(value) {
+
+        return new Intl.NumberFormat(
+            "en-NG",
+            {
+                style: "currency",
+                currency: "NGN",
+                minimumFractionDigits: 2
+            }
+        ).format(
+            Number(value) || 0
+        );
+
+    }
+
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function generateSessionId() {
+
+        return (
+            "DRW-" +
+            Date.now()
+                .toString()
+                .slice(-8)
+        );
+
+    }
+
+
+    /* ------------------------------------------------------------
+       DENOMINATION COUNT
+    ------------------------------------------------------------ */
+
+    function calculatePhysicalCash() {
+
+        let total = 0;
+
+
+        document
+            .querySelectorAll(
+                ".denomination"
+            )
+            .forEach(
+                row => {
+
+                    const input =
+                        row.querySelector(
+                            ".denomination-count"
+                        );
+
+
+                    const totalElement =
+                        row.querySelector(
+                            ".denomination-total"
+                        );
+
+
+                    const denomination =
+                        Number(
+                            input.dataset.value
+                        );
+
+
+                    const count =
+                        Math.max(
+                            0,
+                            Number(
+                                input.value
+                            ) || 0
+                        );
+
+
+                    const lineTotal =
+                        denomination *
+                        count;
+
+
+                    total += lineTotal;
+
+
+                    totalElement.textContent =
+                        formatCurrency(
+                            lineTotal
+                        );
+
+                }
+            );
+
+
+        document.getElementById(
+            "countTotal"
+        ).textContent =
+            formatCurrency(
+                total
+            );
+
+
+        document.getElementById(
+            "physicalCash"
+        ).textContent =
+            formatCurrency(
+                total
+            );
+
+
+        updateReconciliation(
+            total
+        );
+
+
+        return total;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".denomination-count"
+        )
+        .forEach(
+            input => {
+
+                input.addEventListener(
+                    "input",
+                    calculatePhysicalCash
+                );
+
+            }
+        );
+
+
+    document.getElementById(
+        "clearCount"
+    ).addEventListener(
+        "click",
+        () => {
+
+            document
+                .querySelectorAll(
+                    ".denomination-count"
+                )
+                .forEach(
+                    input => {
+                        input.value = 0;
+                    }
+                );
+
+
+            calculatePhysicalCash();
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       RECONCILIATION
+    ------------------------------------------------------------ */
+
+    function calculateExpectedCash() {
+
+        return (
+
+            Number(
+                drawer.openingAmount
+            ) || 0
+
+        ) +
+
+        (
+
+            Number(
+                cashTotals.deposits
+            ) || 0
+
+        ) -
+
+        (
+
+            Number(
+                cashTotals.withdrawals
+            ) || 0
+
+        ) +
+
+        (
+
+            Number(
+                cashTotals.adjustments
+            ) || 0
+
+        );
+
+    }
+
+
+    function updateReconciliation(
+        physicalAmount
+    ) {
+
+        const expected =
+            calculateExpectedCash();
+
+
+        const difference =
+            Number(
+                physicalAmount
+            ) -
+            expected;
+
+
+        document.getElementById(
+            "openingFloat"
+        ).textContent =
+            formatCurrency(
+                drawer.openingAmount
+            );
+
+
+        document.getElementById(
+            "expectedCash"
+        ).textContent =
+            formatCurrency(
+                expected
+            );
+
+
+        document.getElementById(
+            "reconcileOpening"
+        ).textContent =
+            formatCurrency(
+                drawer.openingAmount
+            );
+
+
+        document.getElementById(
+            "cashDeposits"
+        ).textContent =
+            formatCurrency(
+                cashTotals.deposits
+            );
+
+
+        document.getElementById(
+            "cashWithdrawals"
+        ).textContent =
+            formatCurrency(
+                cashTotals.withdrawals
+            );
+
+
+        document.getElementById(
+            "cashAdjustments"
+        ).textContent =
+            formatCurrency(
+                cashTotals.adjustments
+            );
+
+
+        document.getElementById(
+            "reconcileExpected"
+        ).textContent =
+            formatCurrency(
+                expected
+            );
+
+
+        document.getElementById(
+            "reconcilePhysical"
+        ).textContent =
+            formatCurrency(
+                physicalAmount
+            );
+
+
+        document.getElementById(
+            "reconcileDifference"
+        ).textContent =
+            formatCurrency(
+                difference
+            );
+
+
+        const differenceRow =
+            document.getElementById(
+                "differenceRow"
+            );
+
+
+        const message =
+            document.getElementById(
+                "reconcileMessage"
+            );
+
+
+        if (
+            Math.abs(
+                difference
+            ) < 0.01
+        ) {
+
+            differenceRow.className =
+                "reconcile-row balanced";
+
+
+            message.className =
+                "notice";
+
+
+            message.innerHTML = `
+
+                <strong>
+                    Drawer balanced
+                </strong>
+
+                Physical cash matches the system expected cash.
+
+            `;
+
+        }
+
+        else {
+
+            differenceRow.className =
+                "reconcile-row difference";
+
+
+            message.className =
+                "notice security";
+
+
+            message.innerHTML = `
+
+                <strong>
+                    Reconciliation difference
+                </strong>
+
+                Physical cash differs from the expected balance by
+                ${escapeHtml(
+                    formatCurrency(
+                        Math.abs(
+                            difference
+                        )
+                    )
+                )}.
+
+            `;
+
+        }
+
+    }
+
+
+    /* ------------------------------------------------------------
+       DRAWER UI
+    ------------------------------------------------------------ */
+
+    function updateDrawerUI() {
+
+        const status =
+            document.getElementById(
+                "drawerStatus"
+            );
+
+
+        const note =
+            document.getElementById(
+                "drawerStatusNote"
+            );
+
+
+        const dot =
+            document.getElementById(
+                "stateDot"
+            );
+
+
+        const stateText =
+            document.getElementById(
+                "stateText"
+            );
+
+
+        const sessionId =
+            document.getElementById(
+                "sessionId"
+            );
+
+
+        const openedAt =
+            document.getElementById(
+                "openedAt"
+            );
+
+
+        const openButton =
+            document.getElementById(
+                "openDrawerButton"
+            );
+
+
+        const closeButton =
+            document.getElementById(
+                "closeDrawerButton"
+            );
+
+
+        if (drawer.open) {
+
+            status.textContent =
+                "Open";
+
+
+            note.textContent =
+                "Active drawer session";
+
+
+            dot.classList.add(
+                "open"
+            );
+
+
+            stateText.textContent =
+                "Drawer is currently open";
+
+
+            sessionId.textContent =
+                drawer.sessionId ||
+                "—";
+
+
+            openedAt.textContent =
+                drawer.openedAt ||
+                "—";
+
+
+            openButton.disabled =
+                true;
+
+
+            closeButton.disabled =
+                false;
+
+        }
+
+        else {
+
+            status.textContent =
+                "Closed";
+
+
+            note.textContent =
+                "No active drawer session";
+
+
+            dot.classList.remove(
+                "open"
+            );
+
+
+            stateText.textContent =
+                "Drawer is currently closed";
+
+
+            sessionId.textContent =
+                "—";
+
+
+            openedAt.textContent =
+                "—";
+
+
+            openButton.disabled =
+                false;
+
+
+            closeButton.disabled =
+                true;
+
+        }
+
+
+        updateReconciliation(
+            calculatePhysicalCash()
+        );
+
+    }
+
+
+    /* ------------------------------------------------------------
+       OPEN DRAWER
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "drawerForm"
+    ).addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            if (drawer.open) {
+
+                alert(
+                    "A drawer session is already open."
+                );
+
+                return;
+
+            }
+
+
+            const amount =
+                Number(
+                    document.getElementById(
+                        "openingAmount"
+                    ).value
+                );
+
+
+            const branch =
+                document.getElementById(
+                    "branch"
+                ).value;
+
+
+            const notes =
+                document.getElementById(
+                    "openingNotes"
+                ).value.trim();
+
+
+            if (
+                !Number.isFinite(
+                    amount
+                ) ||
+                amount < 0
+            ) {
+
+                alert(
+                    "Enter a valid opening cash amount."
+                );
+
+                return;
+
+            }
+
+
+            if (!branch) {
+
+                alert(
+                    "Select the branch."
+                );
+
+                return;
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "openDrawerButton"
+                );
+
+
+            button.disabled = true;
+            button.textContent =
+                "Opening...";
+
+
+            const payload = {
+
+                opening_amount:
+                    amount,
+
+                branch:
+                    branch,
+
+                notes:
+                    notes
+
+            };
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/drawer/open`,
+                        {
+                            method: "POST",
+
+                            credentials:
+                                "include",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    payload
+                                )
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Drawer API unavailable."
+                    );
+
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                const remoteDrawer =
+                    data.drawer ||
+                    data.data ||
+                    data;
+
+
+                drawer = {
+
+                    open: true,
+
+                    sessionId:
+                        remoteDrawer.id ||
+                        remoteDrawer.session_id ||
+                        generateSessionId(),
+
+                    openingAmount:
+                        Number(
+                            remoteDrawer.opening_amount ??
+                            amount
+                        ),
+
+                    expectedCash:
+                        Number(
+                            remoteDrawer.expected_cash ??
+                            amount
+                        ),
+
+                    openedAt:
+                        remoteDrawer.opened_at ||
+                        new Date().toLocaleString(),
+
+                    branch:
+                        remoteDrawer.branch ||
+                        branch
+
+                };
+
+
+                localStorage.setItem(
+                    "gtf_drawer",
+                    JSON.stringify(
+                        drawer
+                    )
+                );
+
+
+                alert(
+                    "Drawer session opened successfully."
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Using local development drawer state.",
+                    error
+                );
+
+
+                drawer = {
+
+                    open: true,
+
+                    sessionId:
+                        generateSessionId(),
+
+                    openingAmount:
+                        amount,
+
+                    expectedCash:
+                        amount,
+
+                    openedAt:
+                        new Date().toLocaleString(),
+
+                    branch:
+                        branch
+
+                };
+
+
+                localStorage.setItem(
+                    "gtf_drawer",
+                    JSON.stringify(
+                        drawer
+                    )
+                );
+
+
+                alert(
+                    "Development mode: drawer session opened locally."
+                );
+
+            }
+
+            finally {
+
+                button.disabled =
+                    drawer.open;
+
+
+                button.textContent =
+                    "Open Drawer";
+
+
+                updateDrawerUI();
+
+            }
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       RECONCILE
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "reconcileButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            if (!drawer.open) {
+
+                alert(
+                    "Open a drawer session first."
+                );
+
+                return;
+
+            }
+
+
+            const physical =
+                calculatePhysicalCash();
+
+
+            const expected =
+                calculateExpectedCash();
+
+
+            const difference =
+                physical -
+                expected;
+
+
+            if (
+                Math.abs(
+                    difference
+                ) >= 0.01
+            ) {
+
+                const proceed =
+                    confirm(
+                        "The drawer has a reconciliation difference. Continue?"
+                    );
+
+
+                if (!proceed) {
+
+                    return;
+
+                }
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/drawer/reconcile`,
+                        {
+                            method: "POST",
+
+                            credentials:
+                                "include",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    session_id:
+                                        drawer.sessionId,
+
+                                    physical_cash:
+                                        physical,
+
+                                    expected_cash:
+                                        expected,
+
+                                    difference:
+                                        difference
+
+                                })
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Reconciliation API unavailable."
+                    );
+
+                }
+
+
+                alert(
+                    "Drawer reconciliation submitted."
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Reconciliation endpoint unavailable.",
+                    error
+                );
+
+
+                alert(
+                    "Development mode: reconciliation calculated locally."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       CLOSE DRAWER
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "closeDrawerButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            if (!drawer.open) {
+
+                return;
+
+            }
+
+
+            const physical =
+                calculatePhysicalCash();
+
+
+            const expected =
+                calculateExpectedCash();
+
+
+            const difference =
+                physical -
+                expected;
+
+
+            const confirmation =
+                confirm(
+                    `Close drawer session?\n\nExpected: ${formatCurrency(expected)}\nPhysical: ${formatCurrency(physical)}\nDifference: ${formatCurrency(difference)}`
+                );
+
+
+            if (!confirmation) {
+
+                return;
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "closeDrawerButton"
+                );
+
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "Closing...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/drawer/close`,
+                        {
+                            method: "POST",
+
+                            credentials:
+                                "include",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    session_id:
+                                        drawer.sessionId,
+
+                                    physical_cash:
+                                        physical,
+
+                                    expected_cash:
+                                        expected,
+
+                                    difference:
+                                        difference
+
+                                })
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Close drawer API unavailable."
+                    );
+
+                }
+
+
+                await response.json()
+                    .catch(
+                        () => ({})
+                    );
+
+
+                finishClosingDrawer(
+                    physical,
+                    difference
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Using local drawer close state.",
+                    error
+                );
+
+
+                finishClosingDrawer(
+                    physical,
+                    difference
+                );
+
+            }
+
+        }
+    );
+
+
+    function finishClosingDrawer(
+        physical,
+        difference
+    ) {
+
+        const history =
+            JSON.parse(
+                localStorage.getItem(
+                    "gtf_drawer_history"
+                ) ||
+                "[]"
+            );
+
+
+        history.unshift({
+
+            session:
+                drawer.sessionId,
+
+            cashier:
+                getCashierName(),
+
+            opened:
+                drawer.openedAt,
+
+            closed:
+                new Date()
+                    .toLocaleString(),
+
+            opening:
+                drawer.openingAmount,
+
+            closing:
+                physical,
+
+            difference:
+                difference,
+
+            status:
+                Math.abs(
+                    difference
+                ) < 0.01
+                    ? "Closed"
+                    : "Discrepancy"
+
+        });
+
+
+        localStorage.setItem(
+            "gtf_drawer_history",
+            JSON.stringify(
+                history
+            )
+        );
+
+
+        drawer = {
+
+            open: false,
+
+            sessionId: null,
+
+            openingAmount: 0,
+
+            expectedCash: 0,
+
+            openedAt: null,
+
+            branch: null
+
+        };
+
+
+        cashTotals = {
+
+            deposits: 0,
+
+            withdrawals: 0,
+
+            adjustments: 0
+
+        };
+
+
+        localStorage.removeItem(
+            "gtf_drawer"
+        );
+
+
+        clearPhysicalCount();
+
+
+        alert(
+            Math.abs(
+                difference
+            ) < 0.01
+                ? "Drawer closed and balanced."
+                : "Drawer closed with a recorded discrepancy."
+        );
+
+
+        updateDrawerUI();
+
+        loadHistory();
+
+    }
+
+
+    /* ------------------------------------------------------------
+       RESET
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "resetDrawer"
+    ).addEventListener(
+        "click",
+        () => {
+
+            document.getElementById(
+                "drawerForm"
+            ).reset();
+
+        }
+    );
+
+
+    function clearPhysicalCount() {
+
+        document
+            .querySelectorAll(
+                ".denomination-count"
+            )
+            .forEach(
+                input => {
+                    input.value = 0;
+                }
+            );
+
+
+        calculatePhysicalCash();
+
+    }
+
+
+    /* ------------------------------------------------------------
+       LOAD CURRENT DRAWER
+    ------------------------------------------------------------ */
+
+    async function loadCurrentDrawer() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/drawer/current`,
+                    {
+                        method: "GET",
+
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Current drawer unavailable."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const remote =
+                data.drawer ||
+                data.data ||
+                data;
+
+
+            if (
+                remote &&
+                (
+                    remote.id ||
+                    remote.session_id
+                )
+            ) {
+
+                drawer = {
+
+                    open:
+                        remote.status === "open" ||
+                        remote.is_open === true ||
+                        true,
+
+                    sessionId:
+                        remote.id ||
+                        remote.session_id,
+
+                    openingAmount:
+                        Number(
+                            remote.opening_amount
+                        ) || 0,
+
+                    expectedCash:
+                        Number(
+                            remote.expected_cash
+                        ) || 0,
+
+                    openedAt:
+                        remote.opened_at ||
+                        "—",
+
+                    branch:
+                        remote.branch ||
+                        null
+
+                };
+
+
+                updateDrawerUI();
+
+                return;
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Current drawer API unavailable.",
+                error
+            );
+
+        }
+
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    "gtf_drawer"
+                );
+
+
+            if (saved) {
+
+                const localDrawer =
+                    JSON.parse(
+                        saved
+                    );
+
+
+                if (
+                    localDrawer &&
+                    localDrawer.open
+                ) {
+
+                    drawer =
+                        localDrawer;
+
+                }
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Unable to load local drawer state.",
+                error
+            );
+
+        }
+
+
+        updateDrawerUI();
+
+    }
+
+
+    /* ------------------------------------------------------------
+       HISTORY
+    ------------------------------------------------------------ */
+
+    async function loadHistory() {
+
+        let records =
+            [];
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/drawer`,
+                    {
+                        method: "GET",
+
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "History API unavailable."
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            records =
+
+                Array.isArray(data)
+                    ? data
+
+                    : Array.isArray(
+                        data.drawers
+                    )
+                        ? data.drawers
+
+                    : Array.isArray(
+                        data.data
+                    )
+                        ? data.data
+
+                    : [];
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Using local/demo drawer history.",
+                error
+            );
+
+
+            const localHistory =
+                JSON.parse(
+                    localStorage.getItem(
+                        "gtf_drawer_history"
+                    ) ||
+                    "[]"
+                );
+
+
+            records =
+                localHistory.length
+                    ? localHistory
+                    : demoHistory;
+
+        }
+
+
+        renderHistory(
+            records
+        );
+
+    }
+
+
+    function renderHistory(
+        records
+    ) {
+
+        const body =
+            document.getElementById(
+                "historyBody"
+            );
+
+
+        body.innerHTML = "";
+
+
+        if (!records.length) {
+
+            body.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        style="
+                            padding:30px;
+                            text-align:center;
+                            color:var(--muted);
+                        "
+                    >
+                        No drawer sessions found.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        records
+            .slice(0, 15)
+            .forEach(
+                record => {
+
+                    const difference =
+                        Number(
+                            record.difference
+                        ) || 0;
+
+
+                    const status =
+                        record.status ||
+                        (
+                            Math.abs(
+                                difference
+                            ) < 0.01
+                                ? "Closed"
+                                : "Discrepancy"
+                        );
+
+
+                    const statusClass =
+                        status
+                            .toLowerCase()
+                            .replace(
+                                /\s+/g,
+                                "-"
+                            );
+
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    row.innerHTML = `
+
+                        <td>
+                            ${escapeHtml(
+                                record.session ||
+                                record.id ||
+                                record.session_id ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                record.cashier ||
+                                "Cashier"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                record.opened ||
+                                record.opened_at ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                record.closed ||
+                                record.closed_at ||
+                                "—"
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatCurrency(
+                                record.opening ||
+                                record.opening_amount ||
+                                0
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatCurrency(
+                                record.closing ||
+                                record.closing_amount ||
+                                record.physical_cash ||
+                                0
+                            )}
+                        </td>
+
+                        <td>
+                            ${formatCurrency(
+                                difference
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+                                ${escapeHtml(
+                                    status
+                                )}
+                            </span>
+
+                        </td>
+
+                    `;
+
+
+                    body.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+    }
+
+
+    document.getElementById(
+        "refreshHistory"
+    ).addEventListener(
+        "click",
+        loadHistory
+    );
+
+
+    /* ------------------------------------------------------------
+       CASHIER PROFILE
+    ------------------------------------------------------------ */
+
+    function getCashierName() {
+
+        try {
+
+            const saved =
+                localStorage.getItem(
+                    "gtf_user"
+                );
+
+
+            if (saved) {
+
+                const user =
+                    JSON.parse(
+                        saved
+                    );
+
+
+                return (
+
+                    user.full_name ||
+
+                    user.name ||
+
+                    user.email ||
+
+                    "Cashier"
+
+                );
+
+            }
+
+        }
+
+        catch (error) {}
+
+
+        return "Cashier";
+
+    }
+
+
+    document.getElementById(
+        "cashierName"
+    ).textContent =
+        getCashierName();
+
+
+    /* ------------------------------------------------------------
+       LOGOUT
+    ------------------------------------------------------------ */
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                await fetch(
+                    `${API_BASE}/auth/signout`,
+                    {
+                        method: "POST",
+
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                role: "cashier"
+                            })
+                    }
+                );
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "Signout API unavailable.",
+                    error
+                );
+
+            }
+
+
+            [
+                "gtf_user",
+                "gtf_cashier",
+                "gtf_session",
+                "gtf_access_token",
+                "gtf_refresh_token",
+                "access_token",
+                "refresh_token"
+            ]
+            .forEach(
+                key => {
+
+                    localStorage.removeItem(
+                        key
+                    );
+
+                }
+            );
+
+
+            sessionStorage.clear();
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+        }
+    );
+
+
+    /* ------------------------------------------------------------
+       INITIALIZE
+    ------------------------------------------------------------ */
+
+    calculatePhysicalCash();
+
+    loadCurrentDrawer();
+
+    loadHistory();
+
+</script>
+
+</body>
+</html>
