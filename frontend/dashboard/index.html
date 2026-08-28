@@ -1,1929 +1,1134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="GTF Banking customer dashboard"
-  >
+    <meta charset="UTF-8">
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <title>Dashboard | GTF Banking</title>
+    <meta
+        name="description"
+        content="Global TrustFund customer banking dashboard."
+    >
 
-  <link rel="stylesheet" href="../css/style.css">
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-blue-dark: #0d477c;
-      --gtf-gold: #c9962b;
-      --gtf-bg: #f4f7fa;
-      --gtf-card: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #d9e1e8;
-      --gtf-success: #16794c;
-      --gtf-success-bg: #eaf8f0;
-      --gtf-warning: #946200;
-      --gtf-warning-bg: #fff7df;
-      --gtf-danger: #b42318;
-      --gtf-danger-bg: #fff0ee;
-      --gtf-shadow: 0 4px 18px rgba(11, 42, 74, .06);
-    }
+    <title>
+        Dashboard | Global TrustFund
+    </title>
 
-    * {
-      box-sizing: border-box;
-    }
 
-    body {
-      margin: 0;
-      background: var(--gtf-bg);
-      color: var(--gtf-text);
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .dashboard-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      min-height: 70px;
-      background: var(--gtf-navy);
-      color: #fff;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
-    }
-
-    .header-inner {
-      width: min(1500px, 100%);
-      min-height: 70px;
-      margin: 0 auto;
-      padding: 11px 22px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 190px;
-    }
-
-    .brand-logo {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .brand-name {
-      display: block;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .brand-subtitle {
-      display: block;
-      margin-top: 2px;
-      color: #cbd9e6;
-      font-size: .67rem;
-    }
-
-    .header-center {
-      color: #dce7ef;
-      font-size: .76rem;
-      font-weight: 600;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header-button {
-      min-height: 35px;
-      padding: 7px 11px;
-      border: 1px solid rgba(255,255,255,.25);
-      border-radius: 6px;
-      background: transparent;
-      color: #fff;
-      font-size: .68rem;
-      font-weight: 700;
-    }
-
-    .header-button:hover {
-      background: rgba(255,255,255,.1);
-    }
-
-    .dashboard-layout {
-      width: min(1500px, 100%);
-      min-height: calc(100vh - 70px);
-      margin: 0 auto;
-
-      display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
-    }
-
-    .sidebar {
-      background: #fff;
-      border-right: 1px solid var(--gtf-border);
-      padding: 22px 13px;
-    }
-
-    .sidebar-title {
-      margin: 0 10px 11px;
-      color: var(--gtf-muted);
-      font-size: .65rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .navigation {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .navigation a {
-      padding: 10px 12px;
-      border-radius: 6px;
-      color: var(--gtf-text);
-      font-size: .76rem;
-      font-weight: 600;
-    }
-
-    .navigation a:hover,
-    .navigation a.active {
-      background: #eaf3fb;
-      color: var(--gtf-blue);
-    }
-
-    .main {
-      min-width: 0;
-      padding: 28px;
-    }
-
-    .welcome {
-      margin-bottom: 21px;
-
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .welcome h1 {
-      margin: 0 0 5px;
-      color: var(--gtf-navy);
-      font-size: 1.75rem;
-    }
-
-    .welcome p {
-      margin: 0;
-      color: var(--gtf-muted);
-      font-size: .78rem;
-      line-height: 1.5;
-    }
-
-    .account-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 10px;
-      border: 1px solid #b9dec9;
-      border-radius: 999px;
-      background: var(--gtf-success-bg);
-      color: var(--gtf-success);
-      font-size: .64rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .alert {
-      display: none;
-      margin-bottom: 18px;
-      padding: 11px 13px;
-      border-radius: 7px;
-      font-size: .7rem;
-      line-height: 1.45;
-    }
-
-    .alert.show {
-      display: block;
-    }
-
-    .alert-success {
-      border: 1px solid #b9dec9;
-      background: var(--gtf-success-bg);
-      color: var(--gtf-success);
-    }
-
-    .alert-error {
-      border: 1px solid #efc1bc;
-      background: var(--gtf-danger-bg);
-      color: var(--gtf-danger);
-    }
-
-    .balance-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .balance-card {
-      padding: 18px;
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-      background: var(--gtf-card);
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .balance-label {
-      color: var(--gtf-muted);
-      font-size: .66rem;
-      font-weight: 700;
-    }
-
-    .balance-value {
-      margin-top: 7px;
-      color: var(--gtf-navy);
-      font-size: 1.35rem;
-      font-weight: 700;
-      word-break: break-word;
-    }
-
-    .balance-note {
-      margin-top: 5px;
-      color: var(--gtf-muted);
-      font-size: .61rem;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr);
-      gap: 20px;
-    }
-
-    .column {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .card {
-      overflow: hidden;
-      border: 1px solid var(--gtf-border);
-      border-radius: 9px;
-      background: #fff;
-      box-shadow: var(--gtf-shadow);
-    }
-
-    .card-header {
-      padding: 17px 20px;
-      border-bottom: 1px solid #e5eaee;
-    }
-
-    .card-header h2 {
-      margin: 0 0 4px;
-      color: var(--gtf-navy);
-      font-size: .98rem;
-    }
-
-    .card-header p {
-      margin: 0;
-      color: var(--gtf-muted);
-      font-size: .68rem;
-    }
-
-    .card-body {
-      padding: 20px;
-    }
-
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .action {
-      padding: 14px;
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-      background: #fff;
-      color: var(--gtf-text);
-    }
-
-    .action:hover {
-      border-color: #b7cfe1;
-      background: #f7fbfe;
-    }
-
-    .action-title {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--gtf-blue);
-      font-size: .73rem;
-      font-weight: 700;
-    }
-
-    .action-description {
-      display: block;
-      color: var(--gtf-muted);
-      font-size: .62rem;
-      line-height: 1.4;
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      min-width: 600px;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      padding: 11px 10px;
-      border-bottom: 1px solid #edf1f4;
-      text-align: left;
-      font-size: .68rem;
-    }
-
-    th {
-      background: #fafbfd;
-      color: var(--gtf-muted);
-      font-size: .61rem;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-
-    td {
-      color: var(--gtf-text);
-    }
-
-    .transaction-status {
-      display: inline-block;
-      padding: 4px 7px;
-      border-radius: 999px;
-      font-size: .58rem;
-      font-weight: 700;
-    }
-
-    .completed {
-      background: var(--gtf-success-bg);
-      color: var(--gtf-success);
-    }
-
-    .pending {
-      background: var(--gtf-warning-bg);
-      color: var(--gtf-warning);
-    }
-
-    .failed {
-      background: var(--gtf-danger-bg);
-      color: var(--gtf-danger);
-    }
-
-    .account-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .account-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #edf1f4;
-    }
-
-    .account-row:last-child {
-      border-bottom: 0;
-    }
-
-    .account-name {
-      color: var(--gtf-text);
-      font-size: .7rem;
-      font-weight: 700;
-    }
-
-    .account-number {
-      margin-top: 3px;
-      color: var(--gtf-muted);
-      font-size: .61rem;
-    }
-
-    .account-amount {
-      color: var(--gtf-navy);
-      font-size: .7rem;
-      font-weight: 700;
-      text-align: right;
-    }
-
-    .profile-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .profile-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 10px 0;
-      border-bottom: 1px solid #edf1f4;
-    }
-
-    .profile-row:last-child {
-      border-bottom: 0;
-    }
-
-    .profile-label {
-      color: var(--gtf-muted);
-      font-size: .65rem;
-    }
-
-    .profile-value {
-      color: var(--gtf-text);
-      font-size: .67rem;
-      font-weight: 700;
-      text-align: right;
-      word-break: break-word;
-    }
-
-    .notice {
-      padding: 13px;
-      border: 1px solid #d5e4f0;
-      border-radius: 7px;
-      background: #f3f8fc;
-    }
-
-    .notice strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--gtf-navy);
-      font-size: .69rem;
-    }
-
-    .notice p {
-      margin: 0;
-      color: var(--gtf-muted);
-      font-size: .62rem;
-      line-height: 1.5;
-    }
-
-    .footer {
-      padding: 25px 0 5px;
-      color: var(--gtf-muted);
-      text-align: center;
-      font-size: .63rem;
-    }
-
-    @media (max-width: 1100px) {
-      .balance-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 800px) {
-      .dashboard-layout {
-        display: block;
-      }
-
-      .sidebar {
-        border-right: 0;
-        border-bottom: 1px solid var(--gtf-border);
-        padding: 12px;
-      }
-
-      .navigation {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .main {
-        padding: 20px 14px;
-      }
-
-      .header-center {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .balance-grid,
-      .quick-actions {
-        grid-template-columns: 1fr;
-      }
-
-      .welcome {
-        display: block;
-      }
-
-      .account-status {
-        margin-top: 12px;
-      }
-
-      .brand {
-        min-width: 0;
-      }
-
-      .header-actions .header-button:first-child {
-        display: none;
-      }
-    }
-  </style>
 </head>
+
 
 <body>
 
-<header class="dashboard-header">
 
-  <div class="header-inner">
+    <!-- =====================================================
+         DASHBOARD APP
+         ===================================================== -->
 
-    <a href="../index.html" class="brand">
-
-      <img
-        src="../assets/gtf-logo.svg"
-        alt="GTF Banking"
-        class="brand-logo"
-        width="43"
-        height="43"
-      >
-
-      <span>
-        <span class="brand-name">GTF Banking</span>
-        <span class="brand-subtitle">Global TrustFund</span>
-      </span>
-
-    </a>
-
-    <div class="header-center">
-      Customer Dashboard
-    </div>
-
-    <div class="header-actions">
-
-      <button
-        id="refreshButton"
-        type="button"
-        class="header-button"
-      >
-        Refresh
-      </button>
-
-      <button
-        id="logoutButton"
-        type="button"
-        class="header-button"
-      >
-        Sign Out
-      </button>
-
-    </div>
-
-  </div>
-
-</header>
+    <div class="dashboard-app">
 
 
-<div class="dashboard-layout">
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
 
-  <aside class="sidebar">
-
-    <div class="sidebar-title">
-      Banking
-    </div>
-
-    <nav class="navigation">
-
-      <a
-        href="index.html"
-        class="active"
-        aria-current="page"
-      >
-        Dashboard
-      </a>
-
-      <a href="accounts.html">
-        Accounts
-      </a>
-
-      <a href="transactions.html">
-        Transactions
-      </a>
-
-      <a href="cards.html">
-        Cards
-      </a>
-
-      <a href="profile.html">
-        Profile
-      </a>
-
-      <a href="support.html">
-        Support
-      </a>
-
-      <a href="../index.html">
-        Main Website
-      </a>
-
-    </nav>
-
-  </aside>
-
-
-  <main class="main">
-
-    <section class="welcome">
-
-      <div>
-
-        <h1 id="welcomeName">
-          Welcome
-        </h1>
-
-        <p>
-          Review your accounts, balances and recent
-          banking activity.
-        </p>
-
-      </div>
-
-      <span
-        id="accountStatus"
-        class="account-status"
-      >
-        ● Account Active
-      </span>
-
-    </section>
-
-
-    <div
-      id="successAlert"
-      class="alert alert-success"
-      role="status"
-      aria-live="polite"
-    ></div>
-
-    <div
-      id="errorAlert"
-      class="alert alert-error"
-      role="alert"
-      aria-live="assertive"
-    ></div>
-
-
-    <!-- BALANCES -->
-
-    <section class="balance-grid">
-
-      <article class="balance-card">
-
-        <div class="balance-label">
-          Total Balance
-        </div>
-
-        <div
-          id="totalBalance"
-          class="balance-value"
+        <aside
+            class="dashboard-sidebar"
+            id="dashboardSidebar"
         >
-          —
-        </div>
-
-        <div class="balance-note">
-          Across available accounts
-        </div>
-
-      </article>
 
 
-      <article class="balance-card">
+            <div class="dashboard-brand">
 
-        <div class="balance-label">
-          Available Balance
-        </div>
+                <a
+                    href="../index.html"
+                    class="brand"
+                    aria-label="Global TrustFund home"
+                >
 
-        <div
-          id="availableBalance"
-          class="balance-value"
-        >
-          —
-        </div>
+                    <img
+                        src="../assets/gtf-logo.svg"
+                        alt="Global TrustFund logo"
+                        class="brand-logo"
+                    >
 
-        <div class="balance-note">
-          Available for eligible activity
-        </div>
+                    <span class="brand-text">
 
-      </article>
+                        <strong>
+                            Global TrustFund
+                        </strong>
 
+                        <small>
+                            Banking
+                        </small>
 
-      <article class="balance-card">
+                    </span>
 
-        <div class="balance-label">
-          Accounts
-        </div>
-
-        <div
-          id="accountCount"
-          class="balance-value"
-        >
-          —
-        </div>
-
-        <div class="balance-note">
-          Active customer accounts
-        </div>
-
-      </article>
-
-
-      <article class="balance-card">
-
-        <div class="balance-label">
-          Recent Transactions
-        </div>
-
-        <div
-          id="transactionCount"
-          class="balance-value"
-        >
-          —
-        </div>
-
-        <div class="balance-note">
-          Loaded from your account
-        </div>
-
-      </article>
-
-    </section>
-
-
-    <div class="content-grid">
-
-      <div class="column">
-
-        <!-- QUICK ACTIONS -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Quick Actions
-            </h2>
-
-            <p>
-              Access common account services.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="quick-actions">
-
-              <a
-                class="action"
-                href="accounts.html"
-              >
-                <span class="action-title">
-                  View Accounts
-                </span>
-
-                <span class="action-description">
-                  Review account balances and details.
-                </span>
-              </a>
-
-
-              <a
-                class="action"
-                href="transactions.html"
-              >
-                <span class="action-title">
-                  Transactions
-                </span>
-
-                <span class="action-description">
-                  Review your recent account activity.
-                </span>
-              </a>
-
-
-              <a
-                class="action"
-                href="cards.html"
-              >
-                <span class="action-title">
-                  Cards
-                </span>
-
-                <span class="action-description">
-                  View available card information.
-                </span>
-              </a>
+                </a>
 
             </div>
 
-          </div>
-
-        </section>
 
 
-        <!-- RECENT TRANSACTIONS -->
+            <!-- USER SUMMARY -->
 
-        <section class="card">
+            <div class="dashboard-user">
 
-          <div class="card-header">
-
-            <h2>
-              Recent Transactions
-            </h2>
-
-            <p>
-              Recent activity associated with your account.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="table-wrap">
-
-              <table>
-
-                <thead>
-
-                  <tr>
-                    <th>Reference</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                  </tr>
-
-                </thead>
-
-                <tbody id="transactionsBody">
-
-                  <tr>
-                    <td colspan="5">
-                      Loading transactions...
-                    </td>
-                  </tr>
-
-                </tbody>
-
-              </table>
-
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- SECURITY -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Account Security
-            </h2>
-
-            <p>
-              Protect your account and login information.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="notice">
-
-              <strong>
-                Keep your credentials private
-              </strong>
-
-              <p>
-                Never share your password, PIN, one-time
-                authentication code, or other security
-                credentials with anyone. GTF Banking
-                support should not require these secrets
-                through a normal support request.
-              </p>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      </div>
-
-
-      <div class="column">
-
-        <!-- ACCOUNTS -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Your Accounts
-            </h2>
-
-            <p>
-              Accounts available to this customer profile.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <ul
-              id="accountsList"
-              class="account-list"
-            >
-
-              <li class="account-row">
+                <div
+                    class="dashboard-avatar"
+                    id="dashboardAvatar"
+                >
+                    U
+                </div>
 
                 <div>
-                  <div class="account-name">
-                    Loading...
-                  </div>
 
-                  <div class="account-number">
-                    —
-                  </div>
+                    <strong id="dashboardUserName">
+                        Customer
+                    </strong>
+
+                    <small id="dashboardUserEmail">
+                        Loading...
+                    </small>
+
                 </div>
-
-                <div class="account-amount">
-                  —
-                </div>
-
-              </li>
-
-            </ul>
-
-          </div>
-
-        </section>
-
-
-        <!-- PROFILE -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Profile
-            </h2>
-
-            <p>
-              Basic information associated with your profile.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <ul class="profile-list">
-
-              <li class="profile-row">
-
-                <span class="profile-label">
-                  Name
-                </span>
-
-                <span
-                  id="profileName"
-                  class="profile-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-
-              <li class="profile-row">
-
-                <span class="profile-label">
-                  Email
-                </span>
-
-                <span
-                  id="profileEmail"
-                  class="profile-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-
-              <li class="profile-row">
-
-                <span class="profile-label">
-                  Customer ID
-                </span>
-
-                <span
-                  id="profileId"
-                  class="profile-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-
-              <li class="profile-row">
-
-                <span class="profile-label">
-                  Status
-                </span>
-
-                <span
-                  id="profileStatus"
-                  class="profile-value"
-                >
-                  —
-                </span>
-
-              </li>
-
-            </ul>
-
-          </div>
-
-        </section>
-
-
-        <!-- SUPPORT -->
-
-        <section class="card">
-
-          <div class="card-header">
-
-            <h2>
-              Need Help?
-            </h2>
-
-            <p>
-              Get assistance with your account.
-            </p>
-
-          </div>
-
-          <div class="card-body">
-
-            <div class="notice">
-
-              <strong>
-                Customer Support
-              </strong>
-
-              <p>
-                If you need assistance with your account,
-                transactions or security, visit the support
-                center.
-              </p>
 
             </div>
 
-            <div style="margin-top:12px;">
 
-              <a
-                href="support.html"
-                class="action"
-                style="display:block;"
-              >
 
-                <span class="action-title">
-                  Open Support
-                </span>
+            <!-- NAVIGATION -->
 
-                <span class="action-description">
-                  Submit a support request.
-                </span>
+            <nav
+                class="dashboard-nav"
+                aria-label="Dashboard navigation"
+            >
 
-              </a>
+                <a
+                    href="./index.html"
+                    class="dashboard-nav-link active"
+                >
+
+                    <span class="nav-icon">
+                        ▦
+                    </span>
+
+                    <span>
+                        Overview
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="./accounts.html"
+                    class="dashboard-nav-link"
+                >
+
+                    <span class="nav-icon">
+                        $
+                    </span>
+
+                    <span>
+                        Accounts
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="./transactions.html"
+                    class="dashboard-nav-link"
+                >
+
+                    <span class="nav-icon">
+                        ↕
+                    </span>
+
+                    <span>
+                        Transactions
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="./transfers.html"
+                    class="dashboard-nav-link"
+                >
+
+                    <span class="nav-icon">
+                        →
+                    </span>
+
+                    <span>
+                        Transfers
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="./profile.html"
+                    class="dashboard-nav-link"
+                >
+
+                    <span class="nav-icon">
+                        ◉
+                    </span>
+
+                    <span>
+                        Profile
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="./support.html"
+                    class="dashboard-nav-link"
+                >
+
+                    <span class="nav-icon">
+                        ?
+                    </span>
+
+                    <span>
+                        Support
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+
+            <!-- SIDEBAR BOTTOM -->
+
+            <div class="dashboard-sidebar-bottom">
+
+                <a
+                    href="../pages/security.html"
+                    class="dashboard-nav-link"
+                >
+
+                    <span class="nav-icon">
+                        ✓
+                    </span>
+
+                    <span>
+                        Security
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="../signout.html"
+                    class="dashboard-nav-link dashboard-signout"
+                    id="sidebarSignout"
+                >
+
+                    <span class="nav-icon">
+                        ↪
+                    </span>
+
+                    <span>
+                        Sign Out
+                    </span>
+
+                </a>
 
             </div>
 
-          </div>
+        </aside>
 
-        </section>
 
-      </div>
+
+        <!-- =================================================
+             MAIN AREA
+             ================================================= -->
+
+        <div class="dashboard-main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="dashboard-topbar">
+
+
+                <button
+                    id="dashboardMenuButton"
+                    class="dashboard-menu-button"
+                    type="button"
+                    aria-label="Open dashboard navigation"
+                    aria-expanded="false"
+                    aria-controls="dashboardSidebar"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+
+                <div class="dashboard-topbar-title">
+
+                    <span>
+                        Customer Portal
+                    </span>
+
+                    <strong>
+                        Account Overview
+                    </strong>
+
+                </div>
+
+
+                <div class="dashboard-topbar-actions">
+
+
+                    <button
+                        type="button"
+                        class="dashboard-icon-button"
+                        id="notificationButton"
+                        aria-label="Notifications"
+                    >
+                        !
+                    </button>
+
+
+                    <a
+                        href="./profile.html"
+                        class="dashboard-top-profile"
+                    >
+
+                        <span
+                            class="dashboard-mini-avatar"
+                            id="topAvatar"
+                        >
+                            U
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- CONTENT -->
+
+            <main class="dashboard-content">
+
+
+                <!-- WELCOME -->
+
+                <section class="dashboard-welcome">
+
+
+                    <div>
+
+                        <span class="dashboard-eyebrow">
+                            GLOBAL TRUSTFUND
+                        </span>
+
+
+                        <h1>
+                            Welcome back,
+                            <span id="welcomeName">
+                                Customer
+                            </span>
+                        </h1>
+
+
+                        <p>
+                            Here's an overview of your banking
+                            activity and account information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="dashboard-date">
+
+                        <span>
+                            Today
+                        </span>
+
+                        <strong id="currentDate">
+                            —
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- STATUS NOTICE -->
+
+                <section
+                    class="dashboard-notice"
+                    id="accountStatusNotice"
+                    hidden
+                >
+
+                    <div class="dashboard-notice-icon">
+                        !
+                    </div>
+
+                    <div>
+
+                        <strong id="statusNoticeTitle">
+                            Account status
+                        </strong>
+
+                        <p id="statusNoticeText">
+                            Your account information is being
+                            processed.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- BALANCE CARDS -->
+
+                <section class="dashboard-stat-grid">
+
+
+                    <article class="dashboard-stat-card primary">
+
+                        <div class="dashboard-stat-top">
+
+                            <span>
+                                Available Balance
+                            </span>
+
+                            <span class="dashboard-stat-icon">
+                                $
+                            </span>
+
+                        </div>
+
+
+                        <strong
+                            id="availableBalance"
+                            class="dashboard-balance"
+                        >
+                            ₦0.00
+                        </strong>
+
+
+                        <small>
+                            Available account balance
+                        </small>
+
+                    </article>
+
+
+
+                    <article class="dashboard-stat-card">
+
+                        <div class="dashboard-stat-top">
+
+                            <span>
+                                Total Accounts
+                            </span>
+
+                            <span class="dashboard-stat-icon">
+                                #
+                            </span>
+
+                        </div>
+
+
+                        <strong id="accountCount">
+                            0
+                        </strong>
+
+
+                        <small>
+                            Active accounts
+                        </small>
+
+                    </article>
+
+
+
+                    <article class="dashboard-stat-card">
+
+                        <div class="dashboard-stat-top">
+
+                            <span>
+                                Recent Transactions
+                            </span>
+
+                            <span class="dashboard-stat-icon">
+                                ↕
+                            </span>
+
+                        </div>
+
+
+                        <strong id="transactionCount">
+                            0
+                        </strong>
+
+
+                        <small>
+                            Recent activity
+                        </small>
+
+                    </article>
+
+
+
+                    <article class="dashboard-stat-card">
+
+                        <div class="dashboard-stat-top">
+
+                            <span>
+                                Account Status
+                            </span>
+
+                            <span class="dashboard-stat-icon">
+                                ✓
+                            </span>
+
+                        </div>
+
+
+                        <strong
+                            id="accountStatus"
+                            class="status-value"
+                        >
+                            Pending
+                        </strong>
+
+
+                        <small>
+                            Current application status
+                        </small>
+
+                    </article>
+
+                </section>
+
+
+
+                <!-- MAIN GRID -->
+
+                <section class="dashboard-grid">
+
+
+                    <!-- ACCOUNTS -->
+
+                    <article class="dashboard-panel">
+
+
+                        <div class="dashboard-panel-header">
+
+                            <div>
+
+                                <span class="dashboard-panel-label">
+                                    ACCOUNTS
+                                </span>
+
+                                <h2>
+                                    Your accounts
+                                </h2>
+
+                            </div>
+
+
+                            <a
+                                href="./accounts.html"
+                                class="dashboard-link"
+                            >
+                                View all →
+                            </a>
+
+                        </div>
+
+
+                        <div
+                            id="dashboardAccounts"
+                            class="dashboard-account-list"
+                        >
+
+
+                            <div class="dashboard-empty">
+
+                                <span class="dashboard-empty-icon">
+                                    $
+                                </span>
+
+                                <strong>
+                                    Loading accounts
+                                </strong>
+
+                                <p>
+                                    Your account information will
+                                    appear here.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- QUICK ACTIONS -->
+
+                    <article class="dashboard-panel">
+
+
+                        <div class="dashboard-panel-header">
+
+                            <div>
+
+                                <span class="dashboard-panel-label">
+                                    QUICK ACTIONS
+                                </span>
+
+                                <h2>
+                                    Banking shortcuts
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="dashboard-action-grid">
+
+
+                            <a
+                                href="./transfers.html"
+                                class="dashboard-action"
+                            >
+
+                                <span>
+                                    →
+                                </span>
+
+                                <strong>
+                                    Transfer
+                                </strong>
+
+                                <small>
+                                    Move funds
+                                </small>
+
+                            </a>
+
+
+
+                            <a
+                                href="./transactions.html"
+                                class="dashboard-action"
+                            >
+
+                                <span>
+                                    ↕
+                                </span>
+
+                                <strong>
+                                    Transactions
+                                </strong>
+
+                                <small>
+                                    View activity
+                                </small>
+
+                            </a>
+
+
+
+                            <a
+                                href="./profile.html"
+                                class="dashboard-action"
+                            >
+
+                                <span>
+                                    ◉
+                                </span>
+
+                                <strong>
+                                    Profile
+                                </strong>
+
+                                <small>
+                                    Manage details
+                                </small>
+
+                            </a>
+
+
+
+                            <a
+                                href="./support.html"
+                                class="dashboard-action"
+                            >
+
+                                <span>
+                                    ?
+                                </span>
+
+                                <strong>
+                                    Support
+                                </strong>
+
+                                <small>
+                                    Get assistance
+                                </small>
+
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </section>
+
+
+
+                <!-- TRANSACTIONS -->
+
+                <section class="dashboard-panel">
+
+
+                    <div class="dashboard-panel-header">
+
+                        <div>
+
+                            <span class="dashboard-panel-label">
+                                ACTIVITY
+                            </span>
+
+                            <h2>
+                                Recent transactions
+                            </h2>
+
+                        </div>
+
+
+                        <a
+                            href="./transactions.html"
+                            class="dashboard-link"
+                        >
+                            View all →
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        id="recentTransactions"
+                        class="dashboard-transactions"
+                    >
+
+
+                        <div class="dashboard-empty">
+
+                            <span class="dashboard-empty-icon">
+                                ↕
+                            </span>
+
+                            <strong>
+                                Loading transactions
+                            </strong>
+
+                            <p>
+                                Recent account activity will
+                                appear here.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- SECURITY CARD -->
+
+                <section class="dashboard-security-card">
+
+
+                    <div class="dashboard-security-icon">
+                        ✓
+                    </div>
+
+
+                    <div class="dashboard-security-content">
+
+                        <span>
+                            ACCOUNT SECURITY
+                        </span>
+
+
+                        <h2>
+                            Keep your account protected
+                        </h2>
+
+
+                        <p>
+
+                            Never share your password,
+                            PIN or verification codes.
+                            Contact support if you notice
+                            suspicious activity.
+
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="../pages/security.html"
+                        class="button button-light"
+                    >
+                        Security Center
+                    </a>
+
+                </section>
+
+
+            </main>
+
+
+
+            <!-- FOOTER -->
+
+            <footer class="dashboard-footer">
+
+                <span>
+                    ©
+                    <span id="dashboardYear"></span>
+                    Global TrustFund.
+                    All rights reserved.
+                </span>
+
+
+                <div>
+
+                    <a href="../pages/privacy.html">
+                        Privacy
+                    </a>
+
+                    <a href="../pages/contact.html">
+                        Contact
+                    </a>
+
+                    <a href="./support.html">
+                        Support
+                    </a>
+
+                </div>
+
+            </footer>
+
+        </div>
 
     </div>
 
 
-    <footer class="footer">
-      GTF Banking · Customer Dashboard
-    </footer>
 
-  </main>
+    <!-- =====================================================
+         DASHBOARD SCRIPT
+         ===================================================== -->
 
-</div>
+    <script src="../js/app.js"></script>
 
 
-<script src="../js/app.js" defer></script>
+    <script src="../js/supabase.js"></script>
 
 
-<script>
-"use strict";
+    <script src="../js/auth.js"></script>
 
-const state = {
-  user: null,
-  accounts: [],
-  transactions: []
-};
 
+    <script>
 
-const $ = id =>
-  document.getElementById(id);
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
 
 
-/* -----------------------------
-   ALERTS
------------------------------ */
+                /* =============================================
+                   DATE
+                   ============================================= */
 
-function clearAlerts() {
+                const dateElement =
+                    document.getElementById("currentDate");
 
-  $("successAlert")
-    .classList
-    .remove("show");
+                const yearElement =
+                    document.getElementById("dashboardYear");
 
-  $("errorAlert")
-    .classList
-    .remove("show");
 
-  $("successAlert")
-    .textContent = "";
+                const now =
+                    new Date();
 
-  $("errorAlert")
-    .textContent = "";
-}
 
+                if (dateElement) {
 
-function showSuccess(message) {
+                    dateElement.textContent =
+                        now.toLocaleDateString(
+                            undefined,
+                            {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric"
+                            }
+                        );
 
-  $("errorAlert")
-    .classList
-    .remove("show");
+                }
 
-  $("successAlert")
-    .textContent = message;
 
-  $("successAlert")
-    .classList
-    .add("show");
-}
+                if (yearElement) {
+                    yearElement.textContent =
+                        now.getFullYear();
+                }
 
 
-function showError(message) {
 
-  $("successAlert")
-    .classList
-    .remove("show");
+                /* =============================================
+                   MOBILE SIDEBAR
+                   ============================================= */
 
-  $("errorAlert")
-    .textContent = message;
+                const menuButton =
+                    document.getElementById(
+                        "dashboardMenuButton"
+                    );
 
-  $("errorAlert")
-    .classList
-    .add("show");
-}
+                const sidebar =
+                    document.getElementById(
+                        "dashboardSidebar"
+                    );
 
 
-/* -----------------------------
-   API
------------------------------ */
+                if (menuButton && sidebar) {
 
-async function apiRequest(
-  url,
-  options = {}
-) {
+                    menuButton.addEventListener(
+                        "click",
+                        function () {
 
-  const response =
-    await fetch(
-      url,
-      {
-        credentials: "include",
+                            const open =
+                                sidebar.classList.toggle(
+                                    "open"
+                                );
 
-        headers: {
-          "Accept":
-            "application/json",
+                            menuButton.setAttribute(
+                                "aria-expanded",
+                                String(open)
+                            );
 
-          "Content-Type":
-            "application/json",
+                        }
+                    );
 
-          ...(options.headers || {})
-        },
+                }
 
-        ...options
-      }
-    );
 
 
-  let data = null;
+                /* =============================================
+                   LOAD USER
+                   ============================================= */
 
-  try {
+                let user = null;
 
-    data =
-      await response.json();
 
-  } catch {
+                try {
 
-    data = null;
-  }
+                    if (
+                        typeof window.getCurrentUser ===
+                        "function"
+                    ) {
 
+                        user =
+                            await window.getCurrentUser();
 
-  if (!response.ok) {
+                    }
 
-    const error =
-      new Error(
-        data?.message ||
-        data?.error ||
-        `Request failed (${response.status})`
-      );
+                } catch (error) {
 
-    error.status =
-      response.status;
+                    console.warn(
+                        "Unable to load authenticated user.",
+                        error
+                    );
 
-    throw error;
-  }
+                }
 
 
-  return data;
-}
 
+                if (user) {
 
-/* -----------------------------
-   SESSION
------------------------------ */
+                    const metadata =
+                        user.user_metadata || {};
 
-async function loadUser() {
 
-  const data =
-    await apiRequest(
-      "/api/auth/me"
-    );
+                    const fullName =
+                        metadata.full_name ||
+                        metadata.name ||
+                        user.email ||
+                        "Customer";
 
 
-  const user =
-    data?.user ||
-    data?.data ||
-    data;
+                    const firstName =
+                        fullName
+                            .split(" ")[0] ||
+                        "Customer";
 
 
-  state.user =
-    user;
+                    const initials =
+                        fullName
+                            .split(/\s+/)
+                            .filter(Boolean)
+                            .slice(0, 2)
+                            .map(
+                                part =>
+                                    part
+                                        .charAt(0)
+                                        .toUpperCase()
+                            )
+                            .join("") ||
+                        "U";
 
 
-  const name =
-    user?.full_name ||
-    user?.fullName ||
-    user?.name ||
-    "Customer";
+                    const nameElement =
+                        document.getElementById(
+                            "dashboardUserName"
+                        );
 
 
-  $("welcomeName")
-    .textContent =
-    `Welcome, ${name}`;
+                    const emailElement =
+                        document.getElementById(
+                            "dashboardUserEmail"
+                        );
 
 
-  $("profileName")
-    .textContent =
-    name;
+                    const welcomeElement =
+                        document.getElementById(
+                            "welcomeName"
+                        );
 
 
-  $("profileEmail")
-    .textContent =
-    user?.email ||
-    "—";
+                    const avatarElement =
+                        document.getElementById(
+                            "dashboardAvatar"
+                        );
 
 
-  $("profileId")
-    .textContent =
-    user?.id ||
-    user?.customer_id ||
-    user?.customerId ||
-    "—";
+                    const topAvatar =
+                        document.getElementById(
+                            "topAvatar"
+                        );
 
 
-  $("profileStatus")
-    .textContent =
-    user?.status ||
-    "Active";
+                    if (nameElement) {
+                        nameElement.textContent =
+                            fullName;
+                    }
 
 
-  const status =
-    String(
-      user?.status ||
-      "active"
-    )
-    .toLowerCase();
+                    if (emailElement) {
+                        emailElement.textContent =
+                            user.email || "";
+                    }
 
 
-  if (
-    [
-      "active",
-      "approved",
-      "verified"
-    ].includes(status)
-  ) {
+                    if (welcomeElement) {
+                        welcomeElement.textContent =
+                            firstName;
+                    }
 
-    $("accountStatus")
-      .textContent =
-      "● Account Active";
 
-  } else {
+                    if (avatarElement) {
+                        avatarElement.textContent =
+                            initials;
+                    }
 
-    $("accountStatus")
-      .textContent =
-      `● ${user?.status || "Account Status"}`;
-  }
-}
 
+                    if (topAvatar) {
+                        topAvatar.textContent =
+                            initials;
+                    }
 
-/* -----------------------------
-   ACCOUNTS
------------------------------ */
+                }
 
-async function loadAccounts() {
 
-  const data =
-    await apiRequest(
-      "/api/accounts"
-    );
 
+                /* =============================================
+                   AUTH GUARD
+                   ============================================= */
 
-  const accounts =
-    data?.accounts ||
-    data?.data ||
-    [];
+                try {
 
+                    if (
+                        typeof window.requireAuth ===
+                        "function"
+                    ) {
 
-  state.accounts =
-    Array.isArray(accounts)
-      ? accounts
-      : [];
+                        await window.requireAuth();
 
+                    }
 
-  $("accountCount")
-    .textContent =
-    String(
-      state.accounts.length
-    );
+                } catch (error) {
 
+                    console.warn(
+                        "Authentication guard unavailable.",
+                        error
+                    );
 
-  renderAccounts();
+                }
 
-  calculateBalances();
-}
 
 
-function renderAccounts() {
+                /* =============================================
+                   PLACEHOLDER DASHBOARD DATA
+                   ============================================= */
 
-  const list =
-    $("accountsList");
+                /*
+                 * The dashboard is intentionally connected to
+                 * the existing authentication layer first.
+                 *
+                 * Account and transaction values should be
+                 * populated from the approved backend/API once
+                 * the corresponding database endpoints are active.
+                 */
 
-
-  if (
-    !state.accounts.length
-  ) {
-
-    list.innerHTML = `
-      <li class="account-row">
-        <div>
-          <div class="account-name">
-            No active accounts
-          </div>
-          <div class="account-number">
-            Account information unavailable
-          </div>
-        </div>
-        <div class="account-amount">
-          —
-        </div>
-      </li>
-    `;
-
-    return;
-  }
-
-
-  list.innerHTML =
-    state.accounts
-      .map(account => {
-
-        const name =
-          account.name ||
-          account.account_type ||
-          account.accountType ||
-          "Bank Account";
-
-
-        const number =
-          account.account_number ||
-          account.accountNumber ||
-          account.masked_number ||
-          "—";
-
-
-        const amount =
-          account.balance ??
-          account.available_balance ??
-          account.availableBalance ??
-          "—";
-
-
-        const currency =
-          account.currency ||
-          "";
-
-
-        return `
-          <li class="account-row">
-
-            <div>
-
-              <div class="account-name">
-                ${escapeHtml(name)}
-              </div>
-
-              <div class="account-number">
-                ${escapeHtml(String(number))}
-              </div>
-
-            </div>
-
-            <div class="account-amount">
-              ${escapeHtml(String(amount))}
-              ${escapeHtml(currency)}
-            </div>
-
-          </li>
-        `;
-
-      })
-      .join("");
-}
-
-
-/* -----------------------------
-   BALANCES
------------------------------ */
-
-function calculateBalances() {
-
-  let total = 0;
-  let available = 0;
-
-
-  state.accounts
-    .forEach(account => {
-
-      const balance =
-        Number(
-          account.balance || 0
-        );
-
-
-      const availableBalance =
-        Number(
-          account.available_balance ??
-          account.availableBalance ??
-          account.balance ??
-          0
-        );
-
-
-      if (
-        Number.isFinite(balance)
-      ) {
-
-        total += balance;
-      }
-
-
-      if (
-        Number.isFinite(availableBalance)
-      ) {
-
-        available +=
-          availableBalance;
-      }
-
-    });
-
-
-  $("totalBalance")
-    .textContent =
-    formatNumber(total);
-
-
-  $("availableBalance")
-    .textContent =
-    formatNumber(available);
-}
-
-
-/* -----------------------------
-   TRANSACTIONS
------------------------------ */
-
-async function loadTransactions() {
-
-  const data =
-    await apiRequest(
-      "/api/transactions?limit=10"
-    );
-
-
-  const transactions =
-    data?.transactions ||
-    data?.data ||
-    [];
-
-
-  state.transactions =
-    Array.isArray(transactions)
-      ? transactions
-      : [];
-
-
-  $("transactionCount")
-    .textContent =
-    String(
-      state.transactions.length
-    );
-
-
-  renderTransactions();
-}
-
-
-function renderTransactions() {
-
-  const body =
-    $("transactionsBody");
-
-
-  if (
-    !state.transactions.length
-  ) {
-
-    body.innerHTML = `
-      <tr>
-        <td colspan="5">
-          No recent transactions.
-        </td>
-      </tr>
-    `;
-
-    return;
-  }
-
-
-  body.innerHTML =
-    state.transactions
-      .map(transaction => {
-
-        const status =
-          String(
-            transaction.status ||
-            "pending"
-          )
-          .toLowerCase();
-
-
-        let statusClass =
-          "pending";
-
-
-        if (
-          [
-            "completed",
-            "complete",
-            "success",
-            "successful"
-          ].includes(status)
-        ) {
-
-          statusClass =
-            "completed";
-
-        } else if (
-          [
-            "failed",
-            "rejected",
-            "cancelled"
-          ].includes(status)
-        ) {
-
-          statusClass =
-            "failed";
-        }
-
-
-        const reference =
-          transaction.reference ||
-          transaction.id ||
-          "—";
-
-
-        const description =
-          transaction.description ||
-          transaction.type ||
-          "Transaction";
-
-
-        const amount =
-          transaction.amount ??
-          "—";
-
-
-        const currency =
-          transaction.currency ||
-          "";
-
-
-        const date =
-          transaction.created_at ||
-          transaction.createdAt;
-
-
-        const formattedDate =
-          date
-            ? new Date(date)
-                .toLocaleDateString()
-            : "—";
-
-
-        return `
-          <tr>
-
-            <td>
-              ${escapeHtml(
-                String(reference)
-              )}
-            </td>
-
-            <td>
-              ${escapeHtml(
-                String(description)
-              )}
-            </td>
-
-            <td>
-              ${escapeHtml(
-                String(amount)
-              )}
-              ${escapeHtml(
-                currency
-              )}
-            </td>
-
-            <td>
-
-              <span
-                class="transaction-status ${statusClass}"
-              >
-                ${escapeHtml(
-                  transaction.status ||
-                  "Pending"
-                )}
-              </span>
-
-            </td>
-
-            <td>
-              ${escapeHtml(
-                formattedDate
-              )}
-            </td>
-
-          </tr>
-        `;
-
-      })
-      .join("");
-}
-
-
-/* -----------------------------
-   NUMBER FORMAT
------------------------------ */
-
-function formatNumber(value) {
-
-  if (
-    !Number.isFinite(value)
-  ) {
-
-    return "—";
-  }
-
-
-  return new Intl.NumberFormat(
-    undefined,
-    {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }
-  ).format(value);
-}
-
-
-/* -----------------------------
-   HTML SAFETY
------------------------------ */
-
-function escapeHtml(value) {
-
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-
-/* -----------------------------
-   REFRESH
------------------------------ */
-
-$("refreshButton")
-  .addEventListener(
-    "click",
-    async () => {
-
-      clearAlerts();
-
-      try {
-
-        await Promise.all([
-          loadUser(),
-          loadAccounts(),
-          loadTransactions()
-        ]);
-
-
-        showSuccess(
-          "Dashboard refreshed successfully."
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "Dashboard refresh failed:",
-          error
-        );
-
-
-        showError(
-          error.message ||
-          "Unable to refresh dashboard."
-        );
-      }
-    }
-  );
-
-
-/* -----------------------------
-   LOGOUT
------------------------------ */
-
-$("logoutButton")
-  .addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        await fetch(
-          "/api/auth/logout",
-          {
-            method: "POST",
-
-            credentials: "include",
-
-            headers: {
-              "Accept":
-                "application/json"
             }
-          }
         );
 
-      } catch (error) {
+    </script>
 
-        console.warn(
-          "Logout request failed:",
-          error
-        );
-
-      } finally {
-
-        window.location.href =
-          "../login.html";
-      }
-    }
-  );
-
-
-/* -----------------------------
-   INITIALIZE
------------------------------ */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  async () => {
-
-    try {
-
-      await loadUser();
-
-      await Promise.all([
-        loadAccounts(),
-        loadTransactions()
-      ]);
-
-    } catch (error) {
-
-      console.error(
-        "Dashboard initialization failed:",
-        error
-      );
-
-
-      if (
-        error.status === 401 ||
-        error.status === 403
-      ) {
-
-        window.location.href =
-          "../login.html";
-
-        return;
-      }
-
-
-      showError(
-        error.message ||
-        "Unable to load your dashboard."
-      );
-    }
-
-  }
-);
-</script>
 
 </body>
+
 </html>
