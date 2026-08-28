@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Global TrustFund customer banking portal."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>Customer Portal | Global TrustFund</title>
+
+    <!-- Global Styles -->
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
+
+    <!-- Global Application Scripts -->
+    <script
+        src="../js/app.js"
+        defer
+    ></script>
+
+    <script
+        src="../js/auth.js"
+        defer
+    ></script>
+
+    <script
+        src="../js/role-guard.js"
+        defer
+    ></script>
+</head>
+
+<body class="dashboard-page">
+
+    <!-- =====================================================
+         CUSTOMER DASHBOARD
+         ===================================================== -->
+
+    <div class="dashboard-layout">
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside
+            class="dashboard-sidebar"
+            id="customerSidebar"
+            aria-label="Customer navigation"
+        >
+
+            <!-- Brand -->
+
+            <a
+                href="index.html"
+                class="brand"
+                aria-label="Global TrustFund Customer Portal"
+            >
+
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund"
+                    class="brand-logo"
+                >
+
+                <span class="brand-text">
+
+                    <strong>
+                        GLOBAL TRUSTFUND
+                    </strong>
+
+                    <small>
+                        CUSTOMER BANKING
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav class="sidebar-navigation">
+
+                <div class="sidebar-section-title">
+                    Banking
+                </div>
+
+                <a
+                    href="index.html"
+                    class="sidebar-link active"
+                    aria-current="page"
+                >
+
+                    <span class="sidebar-icon">
+                        ⌂
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="accounts.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ▣
+                    </span>
+
+                    <span>
+                        My Accounts
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="transactions.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ⇄
+                    </span>
+
+                    <span>
+                        Transactions
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="transfers.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        →
+                    </span>
+
+                    <span>
+                        Transfers
+                    </span>
+
+                </a>
+
+
+                <div class="sidebar-section-title">
+                    Account
+                </div>
+
+
+                <a
+                    href="profile.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ◉
+                    </span>
+
+                    <span>
+                        My Profile
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="verification.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ✓
+                    </span>
+
+                    <span>
+                        Verification
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="documents.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ▤
+                    </span>
+
+                    <span>
+                        Documents
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="notifications.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ♢
+                    </span>
+
+                    <span>
+                        Notifications
+                    </span>
+
+                </a>
+
+
+                <div class="sidebar-section-title">
+                    Security & Help
+                </div>
+
+
+                <a
+                    href="security.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ◈
+                    </span>
+
+                    <span>
+                        Security
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="support.html"
+                    class="sidebar-link"
+                >
+
+                    <span class="sidebar-icon">
+                        ?
+                    </span>
+
+                    <span>
+                        Support
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- Sidebar Footer -->
+
+            <div class="sidebar-footer">
+
+                <a
+                    href="signout.html"
+                    class="sidebar-link"
+                    id="customerSignOut"
+                >
+
+                    <span class="sidebar-icon">
+                        ↪
+                    </span>
+
+                    <span>
+                        Sign Out
+                    </span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN AREA
+             ================================================= -->
+
+        <main class="dashboard-main">
+
+            <!-- =============================================
+                 HEADER
+                 ============================================= -->
+
+            <header class="dashboard-header">
+
+                <div class="dashboard-header-title">
+
+                    <h1>
+                        Customer Dashboard
+                    </h1>
+
+                    <p>
+                        Secure online banking with Global TrustFund
+                    </p>
+
+                </div>
+
+
+                <div class="dashboard-header-actions">
+
+                    <!-- Notifications -->
+
+                    <a
+                        href="notifications.html"
+                        class="button button-outline button-small"
+                        aria-label="View notifications"
+                    >
+                        Notifications
+                    </a>
+
+
+                    <!-- User -->
+
+                    <div class="dashboard-user">
+
+                        <div
+                            class="user-avatar"
+                            id="customerAvatar"
+                            aria-hidden="true"
+                        >
+                            C
+                        </div>
+
+                        <div class="user-info">
+
+                            <strong id="customerName">
+                                Customer
+                            </strong>
+
+                            <small id="customerRole">
+                                Customer Account
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =============================================
+                 DASHBOARD CONTENT
+                 ============================================= -->
+
+            <div class="dashboard-content">
+
+                <!-- Welcome -->
+
+                <section class="dashboard-welcome">
+
+                    <h2 id="welcomeMessage">
+                        Welcome back
+                    </h2>
+
+                    <p>
+                        Here's an overview of your Global TrustFund account.
+                    </p>
+
+                </section>
+
+
+                <!-- =========================================
+                     ACCOUNT STATUS
+                     ========================================= -->
+
+                <div
+                    id="accountStatusAlert"
+                    class="alert alert-info mb-3"
+                    role="status"
+                >
+
+                    <strong>
+                        Account Status:
+                    </strong>
+
+                    <span id="accountStatus">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <!-- =========================================
+                     STATISTICS
+                     ========================================= -->
+
+                <section
+                    class="stats-grid"
+                    aria-label="Account summary"
+                >
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Total Balance
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="totalBalance"
+                        >
+                            ₦0.00
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Across your accounts
+                        </span>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Available Balance
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="availableBalance"
+                        >
+                            ₦0.00
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Available to use
+                        </span>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Accounts
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="accountCount"
+                        >
+                            0
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Active accounts
+                        </span>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <span class="stat-card-label">
+                            Pending
+                        </span>
+
+                        <strong
+                            class="stat-card-value"
+                            id="pendingCount"
+                        >
+                            0
+                        </strong>
+
+                        <span class="stat-card-meta">
+                            Pending transactions
+                        </span>
+
+                    </article>
+
+                </section>
+
+
+                <!-- =========================================
+                     MAIN DASHBOARD GRID
+                     ========================================= -->
+
+                <div class="dashboard-grid">
+
+                    <!-- =====================================
+                         ACCOUNTS
+                         ===================================== -->
+
+                    <section class="card">
+
+                        <div
+                            class="chart-header"
+                        >
+
+                            <div>
+
+                                <h3>
+                                    My Accounts
+                                </h3>
+
+                                <p
+                                    class="text-muted"
+                                    style="font-size:7px;margin:4px 0 0;"
+                                >
+                                    Your active banking accounts
+                                </p>
+
+                            </div>
+
+                            <a
+                                href="accounts.html"
+                                class="button button-outline button-small"
+                            >
+                                View All
+                            </a>
+
+                        </div>
+
+
+                        <div
+                            class="account-grid"
+                            id="accountList"
+                        >
+
+                            <!-- Account 1 -->
+
+                            <article class="account-card">
+
+                                <span class="account-card-type">
+                                    Checking Account
+                                </span>
+
+                                <div class="account-card-name">
+                                    Global TrustFund Checking
+                                </div>
+
+                                <div
+                                    class="account-card-balance"
+                                    data-account-balance
+                                >
+                                    ₦0.00
+                                </div>
+
+                                <div
+                                    class="account-card-number"
+                                    data-account-number
+                                >
+                                    Account ending •••• 0000
+                                </div>
+
+                            </article>
+
+
+                            <!-- Account 2 -->
+
+                            <article class="account-card">
+
+                                <span class="account-card-type">
+                                    Savings Account
+                                </span>
+
+                                <div class="account-card-name">
+                                    Global TrustFund Savings
+                                </div>
+
+                                <div
+                                    class="account-card-balance"
+                                    data-savings-balance
+                                >
+                                    ₦0.00
+                                </div>
+
+                                <div
+                                    class="account-card-number"
+                                    data-savings-number
+                                >
+                                    Account ending •••• 0000
+                                </div>
+
+                            </article>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =====================================
+                         QUICK ACTIONS
+                         ===================================== -->
+
+                    <section class="card">
+
+                        <div class="chart-header">
+
+                            <h3>
+                                Quick Actions
+                            </h3>
+
+                        </div>
+
+
+                        <div
+                            class="management-layout"
+                            style="grid-template-columns:1fr 1fr;"
+                        >
+
+                            <a
+                                href="transfers.html"
+                                class="management-card"
+                                style="text-decoration:none;"
+                            >
+
+                                <h3>
+                                    Transfer
+                                </h3>
+
+                                <div class="management-card-value">
+                                    →
+                                </div>
+
+                                <p>
+                                    Send money securely.
+                                </p>
+
+                            </a>
+
+
+                            <a
+                                href="transactions.html"
+                                class="management-card"
+                                style="text-decoration:none;"
+                            >
+
+                                <h3>
+                                    Transactions
+                                </h3>
+
+                                <div class="management-card-value">
+                                    ⇄
+                                </div>
+
+                                <p>
+                                    View account activity.
+                                </p>
+
+                            </a>
+
+
+                            <a
+                                href="profile.html"
+                                class="management-card"
+                                style="text-decoration:none;"
+                            >
+
+                                <h3>
+                                    Profile
+                                </h3>
+
+                                <div class="management-card-value">
+                                    ◉
+                                </div>
+
+                                <p>
+                                    Manage your information.
+                                </p>
+
+                            </a>
+
+
+                            <a
+                                href="support.html"
+                                class="management-card"
+                                style="text-decoration:none;"
+                            >
+
+                                <h3>
+                                    Support
+                                </h3>
+
+                                <div class="management-card-value">
+                                    ?
+                                </div>
+
+                                <p>
+                                    Get customer assistance.
+                                </p>
+
+                            </a>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =========================================
+                     RECENT TRANSACTIONS
+                     ========================================= -->
+
+                <section class="card mt-3">
+
+                    <div class="chart-header">
+
+                        <div>
+
+                            <h3>
+                                Recent Transactions
+                            </h3>
+
+                            <p
+                                class="text-muted"
+                                style="font-size:7px;margin:4px 0 0;"
+                            >
+                                Latest activity on your accounts
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="transactions.html"
+                            class="button button-outline button-small"
+                        >
+                            View Transactions
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="transaction-list"
+                        id="recentTransactions"
+                    >
+
+                        <!-- Transaction -->
+
+                        <div class="transaction-item">
+
+                            <div class="transaction-left">
+
+                                <div class="transaction-icon">
+                                    ↓
+                                </div>
+
+                                <div class="transaction-details">
+
+                                    <strong>
+                                        Account Activity
+                                    </strong>
+
+                                    <span>
+                                        No recent transactions
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <span class="transaction-amount credit">
+                                —
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================================
+                     SECURITY & VERIFICATION
+                     ========================================= -->
+
+                <div class="dashboard-grid-three mt-3">
+
+                    <section class="card">
+
+                        <h3>
+                            Verification
+                        </h3>
+
+                        <p>
+                            Keep your customer verification information
+                            up to date.
+                        </p>
+
+                        <div class="mt-2">
+
+                            <span
+                                class="badge badge-success"
+                                id="verificationStatus"
+                            >
+                                Verified
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="verification.html"
+                            class="button button-outline button-small mt-2"
+                        >
+                            View Status
+                        </a>
+
+                    </section>
+
+
+                    <section class="card">
+
+                        <h3>
+                            Account Security
+                        </h3>
+
+                        <p>
+                            Review your security settings and account
+                            activity.
+                        </p>
+
+                        <div class="mt-2">
+
+                            <span class="badge badge-success">
+                                Protected
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="security.html"
+                            class="button button-outline button-small mt-2"
+                        >
+                            Security Center
+                        </a>
+
+                    </section>
+
+
+                    <section class="card">
+
+                        <h3>
+                            Customer Support
+                        </h3>
+
+                        <p>
+                            Need assistance with your account?
+                        </p>
+
+                        <div class="mt-2">
+
+                            <span class="badge badge-info">
+                                Available
+                            </span>
+
+                        </div>
+
+                        <a
+                            href="support.html"
+                            class="button button-outline button-small mt-2"
+                        >
+                            Contact Support
+                        </a>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =========================================
+                     IMPORTANT NOTICE
+                     ========================================= -->
+
+                <section class="alert alert-warning mt-3">
+
+                    <strong>
+                        Security Notice:
+                    </strong>
+
+                    Never share your password, PIN, verification codes,
+                    or other security credentials with anyone.
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE SIDEBAR BUTTON
+         ===================================================== -->
+
+    <button
+        type="button"
+        class="mobile-menu-button"
+        id="customerMenuButton"
+        aria-label="Open customer navigation"
+        aria-controls="customerSidebar"
+        aria-expanded="false"
+        style="
+            position:fixed;
+            left:15px;
+            bottom:15px;
+            z-index:200;
+            background:#ffffff;
+        "
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <!-- =====================================================
+         PAGE SCRIPT
+         ===================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const sidebar =
+                document.getElementById("customerSidebar");
+
+            const menuButton =
+                document.getElementById("customerMenuButton");
+
+            const customerName =
+                document.getElementById("customerName");
+
+            const customerAvatar =
+                document.getElementById("customerAvatar");
+
+            const welcomeMessage =
+                document.getElementById("welcomeMessage");
+
+
+            /*
+             * Mobile navigation
+             */
+
+            if (menuButton && sidebar) {
+
+                menuButton.addEventListener("click", function () {
+
+                    const isOpen =
+                        sidebar.classList.toggle("open");
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        String(isOpen)
+                    );
+
+                });
+
+            }
+
+
+            /*
+             * Basic customer display helper.
+             *
+             * The authentication layer can replace these
+             * values when the authenticated customer is loaded.
+             */
+
+            function loadCustomerDisplay() {
+
+                let customer = null;
+
+                try {
+
+                    const storedCustomer =
+                        localStorage.getItem("gtf_customer");
+
+                    if (storedCustomer) {
+
+                        customer =
+                            JSON.parse(storedCustomer);
+
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Unable to load customer profile.",
+                        error
+                    );
+
+                }
+
+
+                if (!customer) {
+                    return;
+                }
+
+
+                const name =
+                    customer.full_name ||
+                    customer.name ||
+                    customer.first_name ||
+                    customer.email ||
+                    "Customer";
+
+
+                if (customerName) {
+
+                    customerName.textContent =
+                        name;
+
+                }
+
+
+                if (welcomeMessage) {
+
+                    welcomeMessage.textContent =
+                        "Welcome back, " + name;
+
+                }
+
+
+                if (customerAvatar) {
+
+                    customerAvatar.textContent =
+                        name
+                            .trim()
+                            .charAt(0)
+                            .toUpperCase();
+
+                }
+
+            }
+
+
+            loadCustomerDisplay();
+
+
+            /*
+             * Close mobile navigation after selecting
+             * a navigation link.
+             */
+
+            document
+                .querySelectorAll(".sidebar-link")
+                .forEach(function (link) {
+
+                    link.addEventListener("click", function () {
+
+                        if (
+                            window.innerWidth <= 850 &&
+                            sidebar
+                        ) {
+
+                            sidebar.classList.remove(
+                                "open"
+                            );
+
+                            if (menuButton) {
+
+                                menuButton.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            }
+
+                        }
+
+                    });
+
+                });
+
+        });
+
+    </script>
+
+</body>
+</html>
