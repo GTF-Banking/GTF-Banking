@@ -1,869 +1,1197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="GTF Banking secure administration login."
-  >
-
-  <meta
-    name="theme-color"
-    content="#0b2a4a"
-  >
-
-  <title>Administration Login | GTF Banking</title>
-
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
-
-  <style>
-    :root {
-      --navy: #0b2a4a;
-      --blue: #145da0;
-      --blue-dark: #0a477d;
-      --background: #f4f7fa;
-      --white: #ffffff;
-      --text: #172b3a;
-      --muted: #66788a;
-      --border: #d8e1e9;
-      --danger: #b42318;
-      --success: #16794c;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      min-height: 100%;
-      margin: 0;
-    }
-
-    body {
-      background: var(--background);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    .page {
-      min-height: 100vh;
-
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ================================================
-       HEADER
-       ================================================= */
-
-    .header {
-      background: var(--navy);
-      color: #fff;
-    }
-
-    .header-inner {
-      width: min(1100px, 100%);
-      min-height: 72px;
-
-      margin: 0 auto;
-      padding: 14px 22px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-    }
 
-    .brand-name {
-      display: block;
+    <meta charset="UTF-8">
 
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    .brand-subtitle {
-      display: block;
+    <meta
+        name="description"
+        content="Global TrustFund Administrator Sign In"
+    >
 
-      margin-top: 2px;
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-      color: #c8d7e4;
-      font-size: .72rem;
-    }
+    <title>
+        Admin Sign In | Global TrustFund
+    </title>
 
-    .back-link {
-      color: #fff;
-      text-decoration: none;
-      font-size: .85rem;
-    }
 
-    .back-link:hover {
-      text-decoration: underline;
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    /* ================================================
-       MAIN
-       ================================================= */
 
-    .main {
-      flex: 1;
+    <style>
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        /* =====================================================
+           GLOBAL TRUSTFUND ADMIN LOGIN
+           ===================================================== */
 
-      padding: 40px 18px;
-    }
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-green-dark: #092f24;
+            --gtf-green-light: #176b48;
+            --gtf-gold: #c9962b;
 
-    .login-wrapper {
-      width: min(450px, 100%);
-    }
+            --gtf-bg: #f4f8f6;
+            --gtf-card: #ffffff;
+            --gtf-border: #dfe8e3;
 
-    .login-card {
-      background: var(--white);
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
 
-      border: 1px solid var(--border);
-      border-radius: 10px;
+            --gtf-error-bg: #f9eded;
+            --gtf-error-text: #8b4444;
 
-      padding: 32px;
+            --gtf-success-bg: #eaf5ee;
+            --gtf-success-text: #176b48;
+        }
 
-      box-shadow:
-        0 8px 30px rgba(11, 42, 74, .07);
-    }
 
-    .login-heading {
-      margin-bottom: 26px;
-      text-align: center;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .login-heading h1 {
-      margin: 0 0 8px;
 
-      color: var(--navy);
-      font-size: 1.65rem;
-    }
+        html {
+            min-height: 100%;
+        }
 
-    .login-heading p {
-      margin: 0;
 
-      color: var(--muted);
-      font-size: .86rem;
-    }
+        body {
+            margin: 0;
+            min-height: 100vh;
 
-    /* ================================================
-       SECURITY NOTICE
-       ================================================= */
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(23, 107, 72, .08),
+                    transparent 35%
+                ),
+                var(--gtf-bg);
 
-    .security-notice {
-      margin-bottom: 22px;
-      padding: 12px 14px;
+            color: var(--gtf-text);
 
-      background: #eef5fb;
-      border: 1px solid #c9dbea;
-      border-radius: 7px;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
 
-      color: #31536e;
-      font-size: .78rem;
-      line-height: 1.5;
-    }
 
-    .security-notice strong {
-      display: block;
-      margin-bottom: 3px;
+        a {
+            color: inherit;
+        }
 
-      color: var(--navy);
-    }
 
-    /* ================================================
-       ALERTS
-       ================================================= */
+        button,
+        input {
+            font: inherit;
+        }
 
-    .alert {
-      display: none;
 
-      margin-bottom: 18px;
-      padding: 12px 14px;
+        /* =====================================================
+           PAGE
+           ===================================================== */
 
-      border-radius: 7px;
+        .admin-login-page {
+            min-height: 100vh;
 
-      font-size: .82rem;
-    }
+            display: flex;
+            flex-direction: column;
+        }
 
-    .alert.visible {
-      display: block;
-    }
 
-    .alert.error {
-      background: #fff0ee;
-      border: 1px solid #efc1bc;
-      color: var(--danger);
-    }
+        /* =====================================================
+           HEADER
+           ===================================================== */
 
-    .alert.success {
-      background: #eaf8f0;
-      border: 1px solid #b9dec9;
-      color: var(--success);
-    }
+        .admin-login-header {
+            padding: 18px 30px;
 
-    /* ================================================
-       FORM
-       ================================================= */
+            background: #ffffff;
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
 
-    .form-group label {
-      display: block;
 
-      margin-bottom: 7px;
+        .admin-login-header-inner {
+            width: 100%;
+            max-width: 1180px;
 
-      color: var(--text);
-      font-size: .8rem;
-      font-weight: 700;
-    }
+            margin: 0 auto;
 
-    .input-wrapper {
-      position: relative;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    .form-group input {
-      width: 100%;
+            gap: 20px;
+        }
 
-      padding: 11px 12px;
 
-      background: #fff;
+        /* =====================================================
+           EXISTING GTF LOGO
+           ===================================================== */
 
-      border: 1px solid var(--border);
-      border-radius: 6px;
+        .brand {
+            display: inline-flex;
+            align-items: center;
 
-      color: var(--text);
+            gap: 10px;
 
-      outline: none;
-    }
+            color: var(--gtf-green);
 
-    .form-group input:focus {
-      border-color: var(--blue);
+            text-decoration: none;
+        }
 
-      box-shadow:
-        0 0 0 3px rgba(20, 93, 160, .1);
-    }
 
-    .form-group input[aria-invalid="true"] {
-      border-color: var(--danger);
-    }
+        .brand-logo {
+            width: 48px;
+            height: 48px;
 
-    .password-input {
-      padding-right: 78px !important;
-    }
+            display: block;
 
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 9px;
+            object-fit: contain;
+        }
 
-      transform: translateY(-50%);
 
-      border: 0;
-      background: transparent;
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-      color: var(--blue);
 
-      font-size: .75rem;
-      font-weight: 700;
-    }
+        .brand-text strong {
+            display: block;
 
-    .toggle-password:hover {
-      text-decoration: underline;
-    }
+            color: var(--gtf-green);
 
-    .form-help {
-      display: block;
+            font-size: 14px;
+            line-height: 1.2;
 
-      margin-top: 5px;
+            font-weight: 800;
+        }
 
-      color: var(--muted);
-      font-size: .7rem;
-    }
 
-    .form-options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        .brand-text small {
+            display: block;
 
-      margin-bottom: 20px;
+            margin-top: 3px;
 
-      gap: 10px;
-    }
+            color: var(--gtf-muted);
 
-    .remember {
-      display: flex;
-      align-items: center;
-      gap: 7px;
+            font-size: 9px;
+            line-height: 1;
 
-      color: var(--muted);
-      font-size: .76rem;
-    }
+            font-weight: 600;
+        }
 
-    .remember input {
-      width: auto;
-    }
 
-    .forgot-link {
-      color: var(--blue);
-      text-decoration: none;
-      font-size: .76rem;
-    }
+        .return-home {
+            color: var(--gtf-green);
 
-    .forgot-link:hover {
-      text-decoration: underline;
-    }
+            font-size: 8px;
 
-    .login-button {
-      width: 100%;
+            font-weight: 700;
 
-      padding: 12px 15px;
+            text-decoration: none;
+        }
 
-      border: 0;
-      border-radius: 6px;
 
-      background: var(--blue);
-      color: #fff;
+        .return-home:hover {
+            text-decoration: underline;
+        }
 
-      font-weight: 700;
 
-      transition:
-        background .15s ease,
-        opacity .15s ease;
-    }
+        /* =====================================================
+           MAIN
+           ===================================================== */
 
-    .login-button:hover {
-      background: var(--blue-dark);
-    }
+        .admin-login-main {
+            flex: 1;
 
-    .login-button:disabled {
-      cursor: not-allowed;
-      opacity: .65;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    /* ================================================
-       FOOTER
-       ================================================= */
+            padding: 45px 20px 60px;
+        }
 
-    .footer {
-      padding: 20px;
 
-      border-top: 1px solid var(--border);
+        .admin-login-container {
+            width: 100%;
+            max-width: 450px;
+        }
 
-      background: #fff;
 
-      text-align: center;
+        /* =====================================================
+           HEADING
+           ===================================================== */
 
-      color: var(--muted);
-      font-size: .72rem;
-    }
+        .login-heading {
+            margin-bottom: 24px;
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+            text-align: center;
+        }
 
-      gap: 14px;
 
-      margin-bottom: 8px;
-    }
+        .security-label {
+            display: inline-flex;
+            align-items: center;
 
-    .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-    }
+            min-height: 24px;
 
-    .footer-links a:hover {
-      color: var(--blue);
-      text-decoration: underline;
-    }
+            padding: 0 10px;
 
-    /* ================================================
-       LOADING
-       ================================================= */
+            border-radius: 20px;
 
-    .button-loading {
-      display: inline-flex;
+            background: #eaf3ee;
 
-      align-items: center;
-      justify-content: center;
+            color: var(--gtf-green-light);
 
-      gap: 8px;
-    }
+            font-size: 7px;
 
-    .spinner {
-      width: 15px;
-      height: 15px;
+            font-weight: 800;
 
-      border: 2px solid rgba(255,255,255,.45);
-      border-top-color: #fff;
+            letter-spacing: 1px;
 
-      border-radius: 50%;
+            text-transform: uppercase;
+        }
 
-      animation: spin .7s linear infinite;
-    }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+        .login-heading h1 {
+            margin: 15px 0 0;
 
-    /* ================================================
-       MOBILE
-       ================================================= */
+            color: var(--gtf-green);
 
-    @media (max-width: 600px) {
+            font-size: 30px;
+            line-height: 1.2;
+        }
 
-      .header-inner {
-        padding: 13px 15px;
-      }
 
-      .back-link {
-        display: none;
-      }
+        .login-heading p {
+            max-width: 360px;
 
-      .main {
-        padding: 25px 14px;
-      }
+            margin: 10px auto 0;
 
-      .login-card {
-        padding: 25px 20px;
-      }
+            color: var(--gtf-muted);
 
-      .login-heading h1 {
-        font-size: 1.45rem;
-      }
+            font-size: 8px;
 
-    }
-  </style>
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           LOGIN CARD
+           ===================================================== */
+
+        .admin-login-card {
+            padding: 30px;
+
+            background: var(--gtf-card);
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 18px 45px
+                rgba(11, 61, 46, .08);
+        }
+
+
+        .card-title {
+            margin-bottom: 22px;
+        }
+
+
+        .card-title h2 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 18px;
+        }
+
+
+        .card-title p {
+            margin: 6px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           FORM
+           ===================================================== */
+
+        .admin-login-form {
+            display: grid;
+
+            gap: 17px;
+        }
+
+
+        .form-group {
+            display: grid;
+
+            gap: 6px;
+        }
+
+
+        .form-group label {
+            color: var(--gtf-text);
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+
+        .required {
+            color: #a04b4b;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-wrapper input {
+            width: 100%;
+
+            min-height: 45px;
+
+            padding:
+                0 12px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 7px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: var(--gtf-text);
+
+            font-size: 9px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .input-wrapper input:focus {
+            border-color:
+                var(--gtf-green-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23, 107, 72, .09);
+        }
+
+
+        .input-wrapper input::placeholder {
+            color: #a1aaa6;
+        }
+
+
+        /* =====================================================
+           PASSWORD
+           ===================================================== */
+
+        .password-wrapper input {
+            padding-right: 65px;
+        }
+
+
+        .password-toggle {
+            position: absolute;
+
+            top: 50%;
+            right: 10px;
+
+            transform:
+                translateY(-50%);
+
+            border: 0;
+
+            background: transparent;
+
+            color: var(--gtf-green-light);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+
+        .password-toggle:hover {
+            color: var(--gtf-green);
+        }
+
+
+        /* =====================================================
+           OPTIONS
+           ===================================================== */
+
+        .login-options {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .remember-label {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+
+            cursor: pointer;
+        }
+
+
+        .remember-label input {
+            width: 13px;
+            height: 13px;
+
+            margin: 0;
+
+            accent-color:
+                var(--gtf-green);
+        }
+
+
+        .forgot-link {
+            color: var(--gtf-green-light);
+
+            font-size: 7px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           STATUS
+           ===================================================== */
+
+        .form-status {
+            display: none;
+
+            padding: 11px 12px;
+
+            border-radius: 7px;
+
+            font-size: 8px;
+
+            line-height: 1.5;
+        }
+
+
+        .form-status.error {
+            display: block;
+
+            background:
+                var(--gtf-error-bg);
+
+            color:
+                var(--gtf-error-text);
+        }
+
+
+        .form-status.success {
+            display: block;
+
+            background:
+                var(--gtf-success-bg);
+
+            color:
+                var(--gtf-success-text);
+        }
+
+
+        /* =====================================================
+           SUBMIT BUTTON
+           ===================================================== */
+
+        .login-button {
+            width: 100%;
+
+            min-height: 46px;
+
+            border:
+                1px solid var(--gtf-green);
+
+            border-radius: 7px;
+
+            background:
+                var(--gtf-green);
+
+            color: #ffffff;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                transform .1s ease;
+        }
+
+
+        .login-button:hover:not(:disabled) {
+            background:
+                var(--gtf-green-dark);
+        }
+
+
+        .login-button:active:not(:disabled) {
+            transform:
+                translateY(1px);
+        }
+
+
+        .login-button:disabled {
+            opacity: .65;
+
+            cursor: not-allowed;
+        }
+
+
+        .button-content {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+        }
+
+
+        .loading-spinner {
+            width: 13px;
+            height: 13px;
+
+            border:
+                2px solid
+                rgba(255, 255, 255, .35);
+
+            border-top-color:
+                #ffffff;
+
+            border-radius: 50%;
+
+            animation:
+                spin .7s linear infinite;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        /* =====================================================
+           SECURITY NOTICE
+           ===================================================== */
+
+        .security-notice {
+            margin-top: 20px;
+
+            padding: 13px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 8px;
+
+            background:
+                #fbfdfc;
+        }
+
+
+        .security-notice strong {
+            display: block;
+
+            color: var(--gtf-green);
+
+            font-size: 8px;
+        }
+
+
+        .security-notice p {
+            margin: 5px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           RETURN LINKS
+           ===================================================== */
+
+        .login-links {
+            margin-top: 20px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid var(--gtf-border);
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 16px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .login-links a {
+            color: var(--gtf-green-light);
+
+            font-size: 7px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+        }
+
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .admin-login-footer {
+            padding:
+                17px 25px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+
+        .admin-login-footer-inner {
+            width: 100%;
+            max-width: 1180px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .admin-login-header {
+                padding:
+                    14px 15px;
+            }
+
+
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+
+
+            .brand-text strong {
+                font-size: 12px;
+            }
+
+
+            .brand-text small {
+                font-size: 8px;
+            }
+
+
+            .return-home {
+                font-size: 7px;
+            }
+
+
+            .admin-login-main {
+                padding:
+                    30px 14px 45px;
+            }
+
+
+            .login-heading h1 {
+                font-size: 26px;
+            }
+
+
+            .admin-login-card {
+                padding:
+                    22px 17px;
+            }
+
+
+            .admin-login-footer {
+                padding:
+                    15px;
+            }
+
+
+            .admin-login-footer-inner {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <div class="page">
 
-    <!-- =================================================
+<div class="admin-login-page">
+
+
+    <!-- =====================================================
          HEADER
-         ================================================= -->
+         ===================================================== -->
 
-    <header class="header">
+    <header class="admin-login-header">
 
-      <div class="header-inner">
+        <div class="admin-login-header-inner">
 
-        <a
-          href="../index.html"
-          class="brand"
-          aria-label="GTF Banking"
-        >
 
-          <img
-            src="../assets/gtf-logo.svg"
-            alt="GTF Banking"
-            class="brand-logo"
-            onerror="this.style.display='none'"
-          >
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
+            >
 
-          <span>
+                <img
+                    src="../assets/gtf-logo.svg"
+                    class="brand-logo"
+                    alt="Global TrustFund logo"
+                >
 
-            <span class="brand-name">
-              GTF Banking
-            </span>
 
-            <span class="brand-subtitle">
-              Secure Administration
-            </span>
+                <span class="brand-text">
 
-          </span>
+                    <strong>
+                        Global TrustFund
+                    </strong>
 
-        </a>
+                    <small>
+                        Digital Banking
+                    </small>
 
-        <a
-          href="../index.html"
-          class="back-link"
-        >
-          Return to Website
-        </a>
+                </span>
 
-      </div>
+            </a>
+
+
+            <a
+                href="../index.html"
+                class="return-home"
+            >
+                ← Return to website
+            </a>
+
+
+        </div>
 
     </header>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          MAIN
-         ================================================= -->
+         ===================================================== -->
 
-    <main class="main">
-
-      <div class="login-wrapper">
-
-        <section class="login-card">
-
-          <div class="login-heading">
-
-            <h1>
-              Administration Login
-            </h1>
-
-            <p>
-              Sign in to access the GTF Banking
-              administration portal.
-            </p>
-
-          </div>
+    <main class="admin-login-main">
 
 
-          <!-- SECURITY NOTICE -->
-
-          <div class="security-notice">
-
-            <strong>
-              Authorized access only
-            </strong>
-
-            This area is restricted to authorized
-            GTF Banking personnel. Access attempts
-            may be recorded in the security audit log.
-
-          </div>
+        <div class="admin-login-container">
 
 
-          <!-- ALERT -->
+            <!-- =================================================
+                 HEADING
+                 ================================================= -->
 
-          <div
-            id="errorAlert"
-            class="alert error"
-            role="alert"
-            aria-live="assertive"
-          ></div>
+            <div class="login-heading">
 
-
-          <div
-            id="successAlert"
-            class="alert success"
-            role="status"
-            aria-live="polite"
-          ></div>
-
-
-          <!-- =================================================
-               LOGIN FORM
-               ================================================= -->
-
-          <form
-            id="adminLoginForm"
-            novalidate
-          >
-
-            <!-- EMAIL -->
-
-            <div class="form-group">
-
-              <label for="email">
-                Administrator Email
-              </label>
-
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autocomplete="username"
-                inputmode="email"
-                placeholder="admin@example.com"
-                required
-                maxlength="254"
-                aria-describedby="emailHelp"
-              >
-
-              <small
-                id="emailHelp"
-                class="form-help"
-              >
-                Use the administrator account assigned
-                to you.
-              </small>
-
-            </div>
-
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-              <label for="password">
-                Password
-              </label>
-
-              <div class="input-wrapper">
-
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  class="password-input"
-                  autocomplete="current-password"
-                  placeholder="Enter your password"
-                  required
-                  maxlength="128"
-                >
-
-                <button
-                  id="togglePassword"
-                  class="toggle-password"
-                  type="button"
-                  aria-label="Show password"
-                  aria-pressed="false"
-                >
-                  Show
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <!-- OPTIONS -->
-
-            <div class="form-options">
-
-              <label class="remember">
-
-                <input
-                  id="remember"
-                  name="remember"
-                  type="checkbox"
-                >
-
-                <span>
-                  Keep me signed in
+                <span class="security-label">
+                    Secure Administration
                 </span>
 
-              </label>
+
+                <h1>
+                    Administrator Sign In
+                </h1>
 
 
-              <a
-                href="#"
-                id="forgotPassword"
-                class="forgot-link"
-              >
-                Forgot password?
-              </a>
+                <p>
+                    Authorized personnel can sign in to access
+                    the Global TrustFund administrative portal.
+                </p>
 
             </div>
 
 
-            <!-- SUBMIT -->
+            <!-- =================================================
+                 LOGIN CARD
+                 ================================================= -->
 
-            <button
-              id="loginButton"
-              class="login-button"
-              type="submit"
-            >
-              Sign In
-            </button>
+            <section class="admin-login-card">
 
-          </form>
 
-        </section>
+                <div class="card-title">
 
-      </div>
+                    <h2>
+                        Admin Portal
+                    </h2>
+
+
+                    <p>
+                        Enter your administrator credentials
+                        to continue.
+                    </p>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div
+                    id="formStatus"
+                    class="form-status"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- FORM -->
+
+                <form
+                    id="adminLoginForm"
+                    class="admin-login-form"
+                    novalidate
+                >
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Administrator Email
+                            <span class="required">*</span>
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="admin@example.com"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                            <span class="required">*</span>
+                        </label>
+
+
+                        <div
+                            class="input-wrapper password-wrapper"
+                        >
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                minlength="8"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="login-options">
+
+                        <label class="remember-label">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                                name="remember"
+                            >
+
+                            <span>
+                                Remember this device
+                            </span>
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            class="forgot-link"
+                            id="forgotPassword"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+
+                        <span class="button-content">
+
+                            <span id="buttonText">
+                                Sign In to Admin Portal
+                            </span>
+
+                            <span
+                                id="loadingSpinner"
+                                class="loading-spinner"
+                                hidden
+                            ></span>
+
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- SECURITY NOTICE -->
+
+                <div class="security-notice">
+
+                    <strong>
+                        🔒 Protected administrative access
+                    </strong>
+
+
+                    <p>
+                        This area is intended for authorized
+                        Global TrustFund administrators only.
+                        Access should be protected by the
+                        application's authentication and
+                        role-authorization system.
+                    </p>
+
+                </div>
+
+
+                <!-- LINKS -->
+
+                <div class="login-links">
+
+                    <a href="../login.html">
+                        Customer Sign In
+                    </a>
+
+
+                    <a href="../contact.html">
+                        Contact Support
+                    </a>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
 
     </main>
 
 
-    <!-- =================================================
+    <!-- =====================================================
          FOOTER
-         ================================================= -->
+         ===================================================== -->
 
-    <footer class="footer">
+    <footer class="admin-login-footer">
 
-      <div class="footer-links">
+        <div class="admin-login-footer-inner">
 
-        <a href="../privacy.html">
-          Privacy
-        </a>
+            <span>
+                © 2026 Global TrustFund.
+            </span>
 
-        <a href="../security.html">
-          Security
-        </a>
 
-        <a href="../support.html">
-          Support
-        </a>
+            <span>
+                Secure Administrative Portal
+            </span>
 
-        <a href="../contact.html">
-          Contact
-        </a>
-
-      </div>
-
-      <div>
-        © <span id="year"></span> GTF Banking.
-        All rights reserved.
-      </div>
+        </div>
 
     </footer>
 
-  </div>
+
+</div>
 
 
-  <!-- =====================================================
-       APPLICATION SCRIPT
-       ===================================================== -->
-
-  <script
-    src="../js/app.js"
-    defer
-  ></script>
-
-
-  <script>
-    "use strict";
-
+<script>
 
     /* =====================================================
-       ELEMENTS
+       ADMIN LOGIN
        ===================================================== */
 
-    const form =
-      document.getElementById(
-        "adminLoginForm"
-      );
+    const loginForm =
+        document.getElementById("adminLoginForm");
 
     const emailInput =
-      document.getElementById(
-        "email"
-      );
+        document.getElementById("email");
 
     const passwordInput =
-      document.getElementById(
-        "password"
-      );
+        document.getElementById("password");
 
-    const rememberInput =
-      document.getElementById(
-        "remember"
-      );
+    const passwordToggle =
+        document.getElementById("passwordToggle");
 
     const loginButton =
-      document.getElementById(
-        "loginButton"
-      );
+        document.getElementById("loginButton");
 
-    const togglePassword =
-      document.getElementById(
-        "togglePassword"
-      );
+    const buttonText =
+        document.getElementById("buttonText");
 
-    const errorAlert =
-      document.getElementById(
-        "errorAlert"
-      );
+    const loadingSpinner =
+        document.getElementById("loadingSpinner");
 
-    const successAlert =
-      document.getElementById(
-        "successAlert"
-      );
+    const formStatus =
+        document.getElementById("formStatus");
 
 
     /* =====================================================
-       YEAR
+       STATUS MESSAGE
        ===================================================== */
 
-    document.getElementById(
-      "year"
-    ).textContent =
-      new Date().getFullYear();
+    function showStatus(message, type) {
 
+        formStatus.textContent = message;
 
-    /* =====================================================
-       ALERTS
-       ===================================================== */
-
-    function showError(message) {
-
-      successAlert.classList.remove(
-        "visible"
-      );
-
-      errorAlert.textContent =
-        message ||
-        "Unable to sign in.";
-
-      errorAlert.classList.add(
-        "visible"
-      );
+        formStatus.className =
+            "form-status " + type;
 
     }
 
 
-    function showSuccess(message) {
+    function clearStatus() {
 
-      errorAlert.classList.remove(
-        "visible"
-      );
+        formStatus.textContent = "";
 
-      successAlert.textContent =
-        message ||
-        "Authentication successful.";
-
-      successAlert.classList.add(
-        "visible"
-      );
-
-    }
-
-
-    function clearAlerts() {
-
-      errorAlert.classList.remove(
-        "visible"
-      );
-
-      successAlert.classList.remove(
-        "visible"
-      );
-
-      errorAlert.textContent =
-        "";
-
-      successAlert.textContent =
-        "";
+        formStatus.className =
+            "form-status";
 
     }
 
@@ -872,42 +1200,56 @@
        PASSWORD VISIBILITY
        ===================================================== */
 
-    togglePassword.addEventListener(
-      "click",
-      () => {
+    passwordToggle.addEventListener(
+        "click",
+        function() {
 
-        const showing =
-          passwordInput.type ===
-          "text";
-
-
-        passwordInput.type =
-          showing
-            ? "password"
-            : "text";
+            const isPassword =
+                passwordInput.type === "password";
 
 
-        togglePassword.textContent =
-          showing
-            ? "Show"
-            : "Hide";
+            passwordInput.type =
+                isPassword
+                    ? "text"
+                    : "password";
 
 
-        togglePassword.setAttribute(
-          "aria-label",
-          showing
-            ? "Show password"
-            : "Hide password"
-        );
+            passwordToggle.textContent =
+                isPassword
+                    ? "Hide"
+                    : "Show";
 
 
-        togglePassword.setAttribute(
-          "aria-pressed",
-          String(!showing)
-        );
+            passwordToggle.setAttribute(
+                "aria-label",
+                isPassword
+                    ? "Hide password"
+                    : "Show password"
+            );
 
-      }
+        }
     );
+
+
+    /* =====================================================
+       LOADING STATE
+       ===================================================== */
+
+    function setLoading(isLoading) {
+
+        loginButton.disabled =
+            isLoading;
+
+        loadingSpinner.hidden =
+            !isLoading;
+
+
+        buttonText.textContent =
+            isLoading
+                ? "Signing in..."
+                : "Sign In to Admin Portal";
+
+    }
 
 
     /* =====================================================
@@ -916,220 +1258,132 @@
 
     function validateForm() {
 
-      const email =
-        emailInput.value.trim();
+        const email =
+            emailInput.value.trim();
 
-      const password =
-        passwordInput.value;
-
-
-      if (!email) {
-
-        emailInput.setAttribute(
-          "aria-invalid",
-          "true"
-        );
-
-        showError(
-          "Enter your administrator email address."
-        );
-
-        emailInput.focus();
-
-        return false;
-
-      }
+        const password =
+            passwordInput.value;
 
 
-      if (
-        !emailInput.validity.valid
-      ) {
+        if (!email) {
 
-        emailInput.setAttribute(
-          "aria-invalid",
-          "true"
-        );
+            showStatus(
+                "Please enter your administrator email.",
+                "error"
+            );
 
-        showError(
-          "Enter a valid email address."
-        );
+            emailInput.focus();
 
-        emailInput.focus();
-
-        return false;
-
-      }
+            return false;
+        }
 
 
-      emailInput.setAttribute(
-        "aria-invalid",
-        "false"
-      );
+        if (!emailInput.checkValidity()) {
+
+            showStatus(
+                "Please enter a valid email address.",
+                "error"
+            );
+
+            emailInput.focus();
+
+            return false;
+        }
 
 
-      if (!password) {
+        if (!password) {
 
-        passwordInput.setAttribute(
-          "aria-invalid",
-          "true"
-        );
+            showStatus(
+                "Please enter your administrator password.",
+                "error"
+            );
 
-        showError(
-          "Enter your administrator password."
-        );
+            passwordInput.focus();
 
-        passwordInput.focus();
-
-        return false;
-
-      }
+            return false;
+        }
 
 
-      passwordInput.setAttribute(
-        "aria-invalid",
-        "false"
-      );
+        if (password.length < 8) {
+
+            showStatus(
+                "Your password must contain at least 8 characters.",
+                "error"
+            );
+
+            passwordInput.focus();
+
+            return false;
+        }
 
 
-      return true;
+        return true;
 
     }
 
 
     /* =====================================================
-       BUTTON STATE
+       LOGIN REQUEST
        ===================================================== */
 
-    function setLoading(
-      loading
-    ) {
+    async function authenticateAdmin(email, password) {
 
-      loginButton.disabled =
-        loading;
+        /*
+         * The existing backend uses the /api/auth route.
+         *
+         * Keep this endpoint centralized here so the frontend
+         * can be connected to the actual authentication
+         * implementation without changing the page layout.
+         */
 
+        const response =
+            await fetch("../api/auth/login", {
 
-      if (loading) {
+                method: "POST",
 
-        loginButton.innerHTML = `
-          <span class="button-loading">
-            <span
-              class="spinner"
-              aria-hidden="true"
-            ></span>
-            Signing in...
-          </span>
-        `;
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
 
-      } else {
+                credentials: "include",
 
-        loginButton.textContent =
-          "Sign In";
+                body: JSON.stringify({
+                    email,
+                    password,
+                    role: "admin"
+                })
 
-      }
-
-    }
-
-
-    /* =====================================================
-       ADMIN AUTHENTICATION
-       ===================================================== */
-
-    async function authenticateAdmin() {
-
-      const email =
-        emailInput.value.trim();
-
-      const password =
-        passwordInput.value;
-
-      const remember =
-        rememberInput.checked;
+            });
 
 
-      /*
-       * The actual authentication must happen on
-       * the backend/Supabase Auth layer.
-       *
-       * Never put administrator passwords,
-       * Supabase service-role keys, or other
-       * privileged secrets in this HTML file.
-       */
+        let data = null;
 
 
-      if (
-        typeof window.gtfAdminLogin ===
-        "function"
-      ) {
+        try {
 
-        return await window.gtfAdminLogin({
-          email,
-          password,
-          remember
-        });
+            data =
+                await response.json();
 
-      }
+        } catch (error) {
+
+            data = null;
+
+        }
 
 
-      /*
-       * Fallback API request.
-       *
-       * Your backend should expose the admin
-       * authentication endpoint and validate:
-       *
-       * 1. Credentials
-       * 2. Account status
-       * 3. Administrator role
-       * 4. Session/token
-       * 5. Security/audit requirements
-       */
+        if (!response.ok) {
 
-      const response =
-        await fetch(
-          "/api/auth/admin/login",
-          {
-            method: "POST",
+            throw new Error(
+                data?.error ||
+                data?.message ||
+                "Administrator authentication failed."
+            );
 
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            credentials: "include",
-
-            body: JSON.stringify({
-              email,
-              password,
-              remember
-            })
-          }
-        );
+        }
 
 
-      let result = null;
-
-      try {
-
-        result =
-          await response.json();
-
-      } catch {
-
-        result = null;
-
-      }
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          result?.message ||
-          "Administrator authentication failed."
-        );
-
-      }
-
-
-      return result;
+        return data;
 
     }
 
@@ -1138,88 +1392,97 @@
        FORM SUBMISSION
        ===================================================== */
 
-    form.addEventListener(
-      "submit",
-      async event => {
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        clearAlerts();
+            clearStatus();
 
 
-        if (
-          !validateForm()
-        ) {
+            if (!validateForm()) {
+                return;
+            }
 
-          return;
+
+            const email =
+                emailInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+
+            setLoading(true);
+
+
+            try {
+
+                const result =
+                    await authenticateAdmin(
+                        email,
+                        password
+                    );
+
+
+                /*
+                 * The backend should return an authenticated
+                 * administrator session/token.
+                 *
+                 * Do not place passwords in localStorage.
+                 */
+
+
+                if (
+                    result &&
+                    result.token
+                ) {
+
+                    sessionStorage.setItem(
+                        "gtf_admin_token",
+                        result.token
+                    );
+
+                }
+
+
+                showStatus(
+                    "Administrator authentication successful. Redirecting...",
+                    "success"
+                );
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "./index.html";
+
+                    },
+                    700
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Admin login error:",
+                    error
+                );
+
+
+                showStatus(
+                    error.message ||
+                    "Unable to sign in. Please check your credentials and try again.",
+                    "error"
+                );
+
+
+                setLoading(false);
+
+            }
 
         }
-
-
-        setLoading(true);
-
-
-        try {
-
-          const result =
-            await authenticateAdmin();
-
-
-          if (
-            !result ||
-            result.success === false
-          ) {
-
-            throw new Error(
-              result?.message ||
-              "Administrator authentication failed."
-            );
-
-          }
-
-
-          /*
-           * The backend should establish the secure
-           * authenticated session. Do not trust a
-           * role supplied only by the browser.
-           */
-
-
-          showSuccess(
-            "Authentication successful. Redirecting..."
-          );
-
-
-          window.setTimeout(
-            () => {
-
-              window.location.href =
-                "index.html";
-
-            },
-            500
-          );
-
-
-        } catch (error) {
-
-          console.error(
-            "Admin login error:",
-            error
-          );
-
-
-          showError(
-            error.message ||
-            "Unable to sign in. Please check your credentials."
-          );
-
-
-          setLoading(false);
-
-        }
-
-      }
     );
 
 
@@ -1228,175 +1491,60 @@
        ===================================================== */
 
     document
-      .getElementById(
-        "forgotPassword"
-      )
-      .addEventListener(
-        "click",
-        async event => {
+        .getElementById("forgotPassword")
+        .addEventListener(
+            "click",
+            function(event) {
 
-          event.preventDefault();
+                event.preventDefault();
 
 
-          const email =
-            emailInput.value.trim();
-
-
-          if (!email) {
-
-            showError(
-              "Enter your administrator email first."
-            );
-
-            emailInput.focus();
-
-            return;
-
-          }
-
-
-          if (
-            !emailInput.validity.valid
-          ) {
-
-            showError(
-              "Enter a valid administrator email address."
-            );
-
-            emailInput.focus();
-
-            return;
-
-          }
-
-
-          try {
-
-            if (
-              typeof window.gtfAdminPasswordReset ===
-              "function"
-            ) {
-
-              await window.gtfAdminPasswordReset(
-                email
-              );
-
-            } else {
-
-              const response =
-                await fetch(
-                  "/api/auth/admin/password-reset",
-                  {
-                    method: "POST",
-
-                    headers: {
-                      "Content-Type":
-                        "application/json"
-                    },
-
-                    body: JSON.stringify({
-                      email
-                    })
-                  }
+                showStatus(
+                    "Please contact your authorized system administrator or support team to begin the password recovery process.",
+                    "error"
                 );
-
-
-              if (!response.ok) {
-
-                /*
-                 * Do not reveal whether an
-                 * administrator account exists.
-                 */
-
-                throw new Error(
-                  "Unable to process the password reset request."
-                );
-
-              }
 
             }
-
-
-            showSuccess(
-              "If the account is eligible, password-reset instructions will be sent through the configured secure channel."
-            );
-
-
-          } catch (error) {
-
-            console.error(
-              "Password reset error:",
-              error
-            );
-
-
-            showError(
-              "The password reset request could not be processed."
-            );
-
-          }
-
-        }
-      );
+        );
 
 
     /* =====================================================
-       INPUT STATE
+       REMEMBER DEVICE
        ===================================================== */
 
-    emailInput.addEventListener(
-      "input",
-      () => {
+    document
+        .getElementById("remember")
+        .addEventListener(
+            "change",
+            function() {
 
-        emailInput.removeAttribute(
-          "aria-invalid"
+                /*
+                 * Deliberately do not store the password.
+                 *
+                 * A production implementation should use
+                 * secure, server-managed session persistence.
+                 */
+
+            }
         );
-
-        errorAlert.classList.remove(
-          "visible"
-        );
-
-      }
-    );
-
-
-    passwordInput.addEventListener(
-      "input",
-      () => {
-
-        passwordInput.removeAttribute(
-          "aria-invalid"
-        );
-
-        errorAlert.classList.remove(
-          "visible"
-        );
-
-      }
-    );
 
 
     /* =====================================================
-       PREVENT BROWSER FROM RESTORING PASSWORD
+       INITIAL FOCUS
        ===================================================== */
 
     window.addEventListener(
-      "pageshow",
-      event => {
+        "DOMContentLoaded",
+        function() {
 
-        if (
-          event.persisted
-        ) {
-
-          passwordInput.value =
-            "";
+            emailInput.focus();
 
         }
-
-      }
     );
 
-  </script>
+</script>
+
 
 </body>
+
 </html>
