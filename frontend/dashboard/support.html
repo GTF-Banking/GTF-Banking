@@ -12,7 +12,7 @@
 
     <meta
         name="description"
-        content="Global TrustFund customer support center."
+        content="Global TrustFund customer support."
     >
 
     <meta
@@ -38,10 +38,7 @@
             --gtf-border: #dfe8e3;
             --gtf-text: #18372c;
             --gtf-muted: #7c8983;
-            --gtf-error: #8b4444;
-            --gtf-error-bg: #f9eded;
-            --gtf-success: #176b48;
-            --gtf-success-bg: #eaf5ee;
+            --gtf-danger: #8b4444;
         }
 
         * {
@@ -50,6 +47,7 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             background: var(--gtf-bg);
             color: var(--gtf-text);
             font-family: Arial, Helvetica, sans-serif;
@@ -59,74 +57,234 @@
             min-height: 100vh;
         }
 
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .dashboard-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .dashboard-header-inner {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 74px;
+            margin: 0 auto;
+            padding: 12px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gtf-green);
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 45px;
+            height: 45px;
+            display: block;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text strong {
+            color: var(--gtf-green);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .brand-text small {
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 9px;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .dashboard-nav a {
+            color: var(--gtf-muted);
+            font-size: 8px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .dashboard-nav a:hover,
+        .dashboard-nav a.active {
+            color: var(--gtf-green);
+        }
+
+        .signout-link {
+            padding: 8px 11px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+        }
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
         .support-main {
             width: 100%;
-            max-width: 1120px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 38px 20px 60px;
+            padding: 35px 20px 55px;
         }
 
-        .support-header {
-            margin-bottom: 28px;
+        .page-heading {
+            margin-bottom: 27px;
         }
 
-        .support-eyebrow {
+        .eyebrow {
             color: var(--gtf-light);
             font-size: 8px;
             font-weight: 800;
             letter-spacing: 1.2px;
         }
 
-        .support-header h1 {
-            margin: 6px 0 8px;
+        .page-heading h1 {
+            margin: 7px 0 6px;
             color: var(--gtf-green);
-            font-size: 31px;
+            font-size: 30px;
         }
 
-        .support-header p {
-            max-width: 680px;
+        .page-heading p {
+            max-width: 700px;
             margin: 0;
             color: var(--gtf-muted);
-            font-size: 10px;
+            font-size: 9px;
             line-height: 1.7;
         }
 
+        /* =====================================================
+           SUPPORT CARDS
+           ===================================================== */
+
         .support-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) 300px;
-            gap: 24px;
-            align-items: start;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
         }
 
         .support-card {
-            padding: 28px;
+            padding: 22px;
+
             background: #ffffff;
+
             border: 1px solid var(--gtf-border);
-            border-radius: 14px;
-            box-shadow: 0 12px 35px rgba(11, 61, 46, .06);
+            border-radius: 13px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(11,61,46,.05);
+        }
+
+        .support-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 13px;
+
+            border-radius: 9px;
+
+            background: var(--gtf-soft);
+            color: var(--gtf-green);
+
+            font-size: 16px;
+            font-weight: 800;
         }
 
         .support-card h2 {
-            margin: 0 0 6px;
+            margin: 0;
             color: var(--gtf-green);
-            font-size: 20px;
+            font-size: 14px;
         }
 
-        .support-card-intro {
-            margin: 0 0 23px;
+        .support-card p {
+            margin: 7px 0 13px;
+            color: var(--gtf-muted);
+            font-size: 8px;
+            line-height: 1.7;
+        }
+
+        .support-card a {
+            color: var(--gtf-light);
+            font-size: 8px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .support-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+           CONTENT LAYOUT
+           ===================================================== */
+
+        .support-content {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .support-form-card,
+        .faq-card {
+            padding: 27px;
+
+            background: #ffffff;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 14px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(11,61,46,.06);
+        }
+
+        .card-header {
+            margin-bottom: 21px;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            color: var(--gtf-green);
+            font-size: 19px;
+        }
+
+        .card-header p {
+            margin: 6px 0 0;
             color: var(--gtf-muted);
             font-size: 8px;
             line-height: 1.6;
         }
 
+        /* =====================================================
+           FORM
+           ===================================================== */
+
         .support-form {
             display: grid;
-            gap: 17px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
 
@@ -135,37 +293,42 @@
             gap: 6px;
         }
 
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
         .form-group label {
             color: var(--gtf-text);
             font-size: 8px;
             font-weight: 700;
         }
 
-        .required {
-            color: var(--gtf-error);
-        }
-
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            min-height: 43px;
-            padding: 10px 12px;
+
+            padding: 11px;
+
             border: 1px solid var(--gtf-border);
             border-radius: 7px;
+
             outline: none;
+
             background: #ffffff;
             color: var(--gtf-text);
+
             font-family: inherit;
             font-size: 9px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .form-group input,
+        .form-group select {
+            min-height: 42px;
         }
 
         .form-group textarea {
-            min-height: 125px;
+            min-height: 120px;
             resize: vertical;
         }
 
@@ -173,129 +336,102 @@
         .form-group select:focus,
         .form-group textarea:focus {
             border-color: var(--gtf-light);
-            box-shadow: 0 0 0 3px rgba(23,107,72,.09);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.08);
         }
 
-        .support-button {
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #a1aaa6;
+        }
+
+        .submit-button {
             width: 100%;
-            min-height: 45px;
+            min-height: 44px;
+
             border: 1px solid var(--gtf-green);
             border-radius: 7px;
+
             background: var(--gtf-green);
             color: #ffffff;
+
             font-family: inherit;
             font-size: 9px;
             font-weight: 700;
+
             cursor: pointer;
         }
 
-        .support-button:hover:not(:disabled) {
+        .submit-button:hover:not(:disabled) {
             background: var(--gtf-dark);
         }
 
-        .support-button:disabled {
-            opacity: .6;
+        .submit-button:disabled {
+            opacity: .65;
             cursor: not-allowed;
         }
 
-        .status-message {
+        .form-status {
             display: none;
-            padding: 11px 12px;
+
+            padding: 11px;
+
             border-radius: 7px;
+
             font-size: 8px;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        .status-message.success {
+        .form-status.success {
             display: block;
-            background: var(--gtf-success-bg);
-            color: var(--gtf-success);
+            background: #eaf5ee;
+            color: #176b48;
         }
 
-        .status-message.error {
+        .form-status.error {
             display: block;
-            background: var(--gtf-error-bg);
-            color: var(--gtf-error);
+            background: #f9eded;
+            color: var(--gtf-danger);
         }
 
         /* =====================================================
-           SUPPORT OPTIONS
+           FAQ
            ===================================================== */
-
-        .support-side {
-            display: grid;
-            gap: 18px;
-        }
-
-        .contact-card {
-            padding: 22px;
-            background: #ffffff;
-            border: 1px solid var(--gtf-border);
-            border-radius: 14px;
-        }
-
-        .contact-icon {
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 14px;
-            border-radius: 10px;
-            background: var(--gtf-soft);
-            color: var(--gtf-green);
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        .contact-card h2 {
-            margin: 0 0 7px;
-            color: var(--gtf-green);
-            font-size: 16px;
-        }
-
-        .contact-card p {
-            margin: 0;
-            color: var(--gtf-muted);
-            font-size: 8px;
-            line-height: 1.7;
-        }
-
-        .contact-card a {
-            display: inline-block;
-            margin-top: 13px;
-            color: var(--gtf-light);
-            font-size: 8px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .contact-card a:hover {
-            text-decoration: underline;
-        }
 
         .faq-list {
             display: grid;
-            gap: 8px;
-            margin-top: 18px;
+            gap: 9px;
         }
 
         .faq-item {
             border: 1px solid var(--gtf-border);
-            border-radius: 7px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
         .faq-question {
             width: 100%;
-            padding: 11px;
+
+            padding: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
             border: 0;
+
             background: #ffffff;
             color: var(--gtf-text);
+
+            text-align: left;
+
             font-family: inherit;
             font-size: 8px;
             font-weight: 700;
-            text-align: left;
+
             cursor: pointer;
         }
 
@@ -303,50 +439,143 @@
             background: var(--gtf-soft);
         }
 
+        .faq-arrow {
+            color: var(--gtf-green);
+            font-size: 10px;
+            transition: transform .2s ease;
+        }
+
         .faq-answer {
             display: none;
-            padding: 0 11px 11px;
+
+            padding: 0 12px 12px;
+
             color: var(--gtf-muted);
+
             font-size: 7px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .faq-item.open .faq-answer {
             display: block;
         }
 
-        .faq-item.open .faq-question {
-            color: var(--gtf-green);
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
         }
 
-        @media (max-width: 850px) {
+        /* =====================================================
+           SECURITY NOTICE
+           ===================================================== */
+
+        .security-notice {
+            margin-top: 22px;
+            padding: 18px;
+
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+
+            background: var(--gtf-soft);
+            border: 1px solid var(--gtf-border);
+            border-radius: 11px;
+        }
+
+        .security-notice-icon {
+            flex: 0 0 auto;
+
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--gtf-green);
+            color: #ffffff;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .security-notice h3 {
+            margin: 0 0 5px;
+            color: var(--gtf-green);
+            font-size: 10px;
+        }
+
+        .security-notice p {
+            margin: 0;
+            color: var(--gtf-muted);
+            font-size: 7px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .dashboard-footer {
+            padding: 18px 20px;
+
+            background: #ffffff;
+            border-top: 1px solid var(--gtf-border);
+        }
+
+        .dashboard-footer-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
+
+        @media (max-width: 900px) {
 
             .support-grid {
                 grid-template-columns: 1fr;
             }
 
-        }
-
-        @media (max-width: 600px) {
-
-            .support-main {
-                padding: 25px 13px 45px;
-            }
-
-            .support-header h1 {
-                font-size: 27px;
-            }
-
-            .support-card {
-                padding: 21px 17px;
-            }
-
-            .form-grid {
+            .support-content {
                 grid-template-columns: 1fr;
             }
 
-            .form-group.full {
-                grid-column: auto;
+        }
+
+        @media (max-width: 700px) {
+
+            .dashboard-nav {
+                display: none;
+            }
+
+            .support-main {
+                padding: 25px 13px 40px;
+            }
+
+            .page-heading h1 {
+                font-size: 26px;
+            }
+
+            .support-form-card,
+            .faq-card {
+                padding: 20px 17px;
+            }
+
+            .dashboard-footer-inner {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
             }
 
         }
@@ -365,9 +594,9 @@
          HEADER
          ===================================================== -->
 
-    <header class="site-header">
+    <header class="dashboard-header">
 
-        <div class="container nav-container">
+        <div class="dashboard-header-inner">
 
             <a
                 href="../index.html"
@@ -396,25 +625,9 @@
             </a>
 
 
-            <button
-                id="mobileMenuButton"
-                class="mobile-menu-button"
-                type="button"
-                aria-label="Open navigation"
-                aria-expanded="false"
-            >
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </button>
-
-
             <nav
-                id="mainNavigation"
-                class="main-navigation"
-                aria-label="Main navigation"
+                class="dashboard-nav"
+                aria-label="Dashboard navigation"
             >
 
                 <a href="./index.html">
@@ -444,16 +657,12 @@
                     Support
                 </a>
 
-                <div class="nav-actions">
-
-                    <a
-                        href="../signout.html"
-                        class="button button-outline"
-                    >
-                        Sign Out
-                    </a>
-
-                </div>
+                <a
+                    href="./signout.html"
+                    class="signout-link"
+                >
+                    Sign Out
+                </a>
 
             </nav>
 
@@ -469,10 +678,10 @@
     <main class="support-main">
 
 
-        <header class="support-header">
+        <section class="page-heading">
 
-            <span class="support-eyebrow">
-                CUSTOMER SERVICE
+            <span class="eyebrow">
+                CUSTOMER SUPPORT
             </span>
 
             <h1>
@@ -480,320 +689,402 @@
             </h1>
 
             <p>
-                Contact support about your Global TrustFund
-                account, profile, transactions, or other
-                banking questions.
+                Find answers to common questions or send a
+                support request to the Global TrustFund team.
             </p>
 
-        </header>
+        </section>
 
 
-        <div class="support-grid">
+        <!-- =================================================
+             SUPPORT OPTIONS
+             ================================================= -->
+
+        <section class="support-grid">
 
 
-            <!-- =================================================
-                 CONTACT FORM
-                 ================================================= -->
+            <article class="support-card">
 
-            <section class="support-card">
+                <div class="support-icon">
+                    ?
+                </div>
 
                 <h2>
-                    Contact support
+                    Help Center
                 </h2>
 
-                <p class="support-card-intro">
-                    Send a support request and provide enough
-                    information for the support team to understand
-                    your question.
+                <p>
+                    Browse common questions and information
+                    about your banking dashboard.
                 </p>
+
+                <a href="#faq">
+                    View FAQs →
+                </a>
+
+            </article>
+
+
+            <article class="support-card">
+
+                <div class="support-icon">
+                    @
+                </div>
+
+                <h2>
+                    Send a message
+                </h2>
+
+                <p>
+                    Submit a support request using the secure
+                    form on this page.
+                </p>
+
+                <a href="#contact">
+                    Contact support →
+                </a>
+
+            </article>
+
+
+            <article class="support-card">
+
+                <div class="support-icon">
+                    !
+                </div>
+
+                <h2>
+                    Security
+                </h2>
+
+                <p>
+                    Never share your password, authentication
+                    codes, or other sensitive credentials.
+                </p>
+
+                <a href="#security">
+                    Security guidance →
+                </a>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             FORM + FAQ
+             ================================================= -->
+
+        <div class="support-content">
+
+
+            <!-- CONTACT FORM -->
+
+            <section
+                id="contact"
+                class="support-form-card"
+            >
+
+                <div class="card-header">
+
+                    <h2>
+                        Contact support
+                    </h2>
+
+                    <p>
+                        Tell us what you need help with.
+                        Do not include passwords or authentication codes.
+                    </p>
+
+                </div>
 
 
                 <form
                     id="supportForm"
                     class="support-form"
-                    novalidate
                 >
 
-                    <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="subject">
+                            Subject
+                        </label>
+
+                        <input
+                            id="subject"
+                            name="subject"
+                            type="text"
+                            maxlength="120"
+                            required
+                            placeholder="What do you need help with?"
+                        >
+
+                    </div>
 
 
-                        <div class="form-group">
+                    <div class="form-group">
 
-                            <label for="supportName">
-                                Name
-                                <span class="required">*</span>
-                            </label>
+                        <label for="category">
+                            Category
+                        </label>
 
-                            <input
-                                id="supportName"
-                                name="name"
-                                type="text"
-                                placeholder="Your name"
-                                autocomplete="name"
-                                required
-                            >
+                        <select
+                            id="category"
+                            name="category"
+                            required
+                        >
 
-                        </div>
+                            <option value="">
+                                Select a category
+                            </option>
 
+                            <option value="account">
+                                Account
+                            </option>
 
-                        <div class="form-group">
+                            <option value="profile">
+                                Profile
+                            </option>
 
-                            <label for="supportEmail">
-                                Email
-                                <span class="required">*</span>
-                            </label>
+                            <option value="transactions">
+                                Transactions
+                            </option>
 
-                            <input
-                                id="supportEmail"
-                                name="email"
-                                type="email"
-                                placeholder="Your email"
-                                autocomplete="email"
-                                required
-                            >
+                            <option value="transfers">
+                                Transfers
+                            </option>
 
-                        </div>
+                            <option value="security">
+                                Security
+                            </option>
 
+                            <option value="technical">
+                                Technical issue
+                            </option>
 
-                        <div class="form-group">
+                            <option value="other">
+                                Other
+                            </option>
 
-                            <label for="supportCategory">
-                                Topic
-                                <span class="required">*</span>
-                            </label>
+                        </select>
 
-                            <select
-                                id="supportCategory"
-                                name="category"
-                                required
-                            >
-
-                                <option value="">
-                                    Select a topic
-                                </option>
-
-                                <option value="account">
-                                    Account
-                                </option>
-
-                                <option value="transactions">
-                                    Transactions
-                                </option>
-
-                                <option value="transfers">
-                                    Transfers
-                                </option>
-
-                                <option value="profile">
-                                    Profile
-                                </option>
-
-                                <option value="security">
-                                    Security
-                                </option>
-
-                                <option value="other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
+                    </div>
 
 
-                        <div class="form-group">
+                    <div class="form-group">
 
-                            <label for="supportSubject">
-                                Subject
-                                <span class="required">*</span>
-                            </label>
+                        <label for="message">
+                            Message
+                        </label>
 
-                            <input
-                                id="supportSubject"
-                                name="subject"
-                                type="text"
-                                placeholder="Brief subject"
-                                maxlength="150"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group full">
-
-                            <label for="supportMessage">
-                                Message
-                                <span class="required">*</span>
-                            </label>
-
-                            <textarea
-                                id="supportMessage"
-                                name="message"
-                                placeholder="Describe how we can help..."
-                                maxlength="2000"
-                                required
-                            ></textarea>
-
-                        </div>
+                        <textarea
+                            id="message"
+                            name="message"
+                            maxlength="2000"
+                            required
+                            placeholder="Describe the issue or question..."
+                        ></textarea>
 
                     </div>
 
 
                     <div
-                        id="supportStatus"
-                        class="status-message"
+                        id="formStatus"
+                        class="form-status"
                         role="status"
                         aria-live="polite"
                     ></div>
 
 
                     <button
-                        id="supportButton"
+                        id="submitButton"
+                        class="submit-button"
                         type="submit"
-                        class="support-button"
                     >
-                        Send support request
+                        Send Support Request
                     </button>
+
 
                 </form>
 
             </section>
 
 
-            <!-- =================================================
-                 SIDE PANEL
-                 ================================================= -->
+            <!-- FAQ -->
 
-            <aside class="support-side">
+            <section
+                id="faq"
+                class="faq-card"
+            >
 
-
-                <section class="contact-card">
-
-                    <div class="contact-icon">
-                        ?
-                    </div>
-
-                    <h2>
-                        Support center
-                    </h2>
-
-                    <p>
-                        For account-specific questions, use the
-                        support form so your request can be
-                        associated with your authenticated session.
-                    </p>
-
-                </section>
-
-
-                <section class="contact-card">
-
-                    <div class="contact-icon">
-                        !
-                    </div>
-
-                    <h2>
-                        Security concern?
-                    </h2>
-
-                    <p>
-                        If you notice unfamiliar account activity,
-                        do not share passwords or verification
-                        codes. Contact the authorized support
-                        channel immediately.
-                    </p>
-
-                </section>
-
-
-                <section class="contact-card">
+                <div class="card-header">
 
                     <h2>
                         Frequently asked questions
                     </h2>
 
-                    <div class="faq-list">
+                    <p>
+                        Quick answers to common dashboard questions.
+                    </p>
+
+                </div>
 
 
-                        <div class="faq-item">
-
-                            <button
-                                type="button"
-                                class="faq-question"
-                            >
-                                How do I view my transactions?
-                            </button>
-
-                            <div class="faq-answer">
-                                Open the Transactions section from
-                                your dashboard to review available
-                                transaction records.
-                            </div>
-
-                        </div>
+                <div class="faq-list">
 
 
-                        <div class="faq-item">
+                    <div class="faq-item">
 
-                            <button
-                                type="button"
-                                class="faq-question"
-                            >
+                        <button
+                            class="faq-question"
+                            type="button"
+                        >
+
+                            <span>
                                 How do I update my profile?
-                            </button>
+                            </span>
 
-                            <div class="faq-answer">
-                                Open Profile from the dashboard and
-                                update the editable information.
-                            </div>
+                            <span class="faq-arrow">
+                                ▼
+                            </span>
 
-                        </div>
+                        </button>
 
+                        <div class="faq-answer">
 
-                        <div class="faq-item">
-
-                            <button
-                                type="button"
-                                class="faq-question"
-                            >
-                                How do I submit a transfer?
-                            </button>
-
-                            <div class="faq-answer">
-                                Open Transfers, enter the required
-                                details, and submit a request through
-                                the authorized transfer workflow.
-                            </div>
-
-                        </div>
-
-
-                        <div class="faq-item">
-
-                            <button
-                                type="button"
-                                class="faq-question"
-                            >
-                                I forgot my password. What should I do?
-                            </button>
-
-                            <div class="faq-answer">
-                                Return to the sign-in page and use
-                                the available password recovery
-                                option if it is enabled for your
-                                account.
-                            </div>
+                            Open the Profile page from your dashboard,
+                            update the available information, and select
+                            Save Changes.
 
                         </div>
 
                     </div>
 
-                </section>
 
-            </aside>
+                    <div class="faq-item">
+
+                        <button
+                            class="faq-question"
+                            type="button"
+                        >
+
+                            <span>
+                                Where can I view transactions?
+                            </span>
+
+                            <span class="faq-arrow">
+                                ▼
+                            </span>
+
+                        </button>
+
+                        <div class="faq-answer">
+
+                            Open Transactions from the dashboard
+                            navigation to review available account
+                            transaction information.
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button
+                            class="faq-question"
+                            type="button"
+                        >
+
+                            <span>
+                                How do I sign out?
+                            </span>
+
+                            <span class="faq-arrow">
+                                ▼
+                            </span>
+
+                        </button>
+
+                        <div class="faq-answer">
+
+                            Select Sign Out from the dashboard
+                            navigation. The sign-out page will
+                            handle the authentication session.
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="faq-item">
+
+                        <button
+                            class="faq-question"
+                            type="button"
+                        >
+
+                            <span>
+                                What information should I send support?
+                            </span>
+
+                            <span class="faq-arrow">
+                                ▼
+                            </span>
+
+                        </button>
+
+                        <div class="faq-answer">
+
+                            Include a clear description of the issue
+                            and relevant non-sensitive information.
+                            Never send passwords, authentication codes,
+                            or private security credentials.
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
 
         </div>
+
+
+        <!-- =================================================
+             SECURITY NOTICE
+             ================================================= -->
+
+        <section
+            id="security"
+            class="security-notice"
+        >
+
+            <div class="security-notice-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h3>
+                    Protect your account
+                </h3>
+
+                <p>
+                    Global TrustFund support will not ask you to
+                    provide your password or one-time authentication
+                    code through this form. If you receive a suspicious
+                    request, stop and verify the request through an
+                    official support channel.
+
+                </p>
+
+            </div>
+
+        </section>
 
     </main>
 
@@ -802,9 +1093,9 @@
          FOOTER
          ===================================================== -->
 
-    <footer class="site-footer">
+    <footer class="dashboard-footer">
 
-        <div class="container footer-bottom">
+        <div class="dashboard-footer-inner">
 
             <span>
                 ©
@@ -824,9 +1115,9 @@
 </div>
 
 
-<!-- =====================================================
-     SCRIPTS
-     ===================================================== -->
+<!-- =========================================================
+     EXISTING JAVASCRIPT
+     ========================================================= -->
 
 <script src="../js/app.js"></script>
 <script src="../js/supabase.js"></script>
@@ -846,8 +1137,9 @@
 
 
             /*
-             * Use the existing authentication guard
-             * when available.
+             * Authentication guard.
+             * If auth.js provides requireAuth(),
+             * use it before allowing dashboard access.
              */
 
             try {
@@ -864,121 +1156,92 @@
             } catch (error) {
 
                 console.warn(
-                    "Authentication guard unavailable.",
+                    "Authentication guard:",
                     error
                 );
 
             }
 
 
-            await loadAuthenticatedUser();
+            setupFaq();
 
             setupSupportForm();
-
-            setupFaq();
 
         }
     );
 
 
-    async function loadAuthenticatedUser() {
+    /* =====================================================
+       FAQ
+       ===================================================== */
 
-        try {
+    function setupFaq() {
 
-            let user = null;
-
-
-            if (
-                typeof window.getCurrentUser ===
-                "function"
-            ) {
-
-                user =
-                    await window.getCurrentUser();
-
-            }
-
-
-            if (
-                !user &&
-                window.supabaseClient &&
-                window.supabaseClient.auth
-            ) {
-
-                const result =
-                    await window.supabaseClient.auth
-                        .getUser();
-
-                user =
-                    result.data?.user || null;
-
-            }
-
-
-            if (!user) {
-                return;
-            }
-
-
-            const email =
-                document.getElementById(
-                    "supportEmail"
-                );
-
-
-            if (
-                email &&
-                user.email
-            ) {
-
-                email.value =
-                    user.email;
-
-            }
-
-
-            const name =
-                document.getElementById(
-                    "supportName"
-                );
-
-
-            const metadata =
-                user.user_metadata || {};
-
-
-            const fullName =
-                metadata.full_name ||
-                metadata.name ||
-                [
-                    metadata.first_name,
-                    metadata.last_name
-                ]
-                    .filter(Boolean)
-                    .join(" ");
-
-
-            if (
-                name &&
-                fullName
-            ) {
-
-                name.value =
-                    fullName;
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Unable to load authenticated user.",
-                error
+        const questions =
+            document.querySelectorAll(
+                ".faq-question"
             );
 
-        }
+
+        questions.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const item =
+                            button.closest(
+                                ".faq-item"
+                            );
+
+
+                        if (!item) {
+                            return;
+                        }
+
+
+                        const currentlyOpen =
+                            item.classList.contains(
+                                "open"
+                            );
+
+
+                        document
+                            .querySelectorAll(
+                                ".faq-item.open"
+                            )
+                            .forEach(
+                                function (openItem) {
+
+                                    openItem.classList.remove(
+                                        "open"
+                                    );
+
+                                }
+                            );
+
+
+                        if (!currentlyOpen) {
+
+                            item.classList.add(
+                                "open"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
 
     }
 
+
+    /* =====================================================
+       SUPPORT FORM
+       ===================================================== */
 
     function setupSupportForm() {
 
@@ -995,41 +1258,44 @@
                 event.preventDefault();
 
 
-                const name =
-                    document.getElementById(
-                        "supportName"
-                    ).value.trim();
-
-
-                const email =
-                    document.getElementById(
-                        "supportEmail"
-                    ).value.trim();
-
-
-                const category =
-                    document.getElementById(
-                        "supportCategory"
-                    ).value;
+                clearStatus();
 
 
                 const subject =
-                    document.getElementById(
-                        "supportSubject"
-                    ).value.trim();
+                    document
+                        .getElementById(
+                            "subject"
+                        )
+                        .value
+                        .trim();
+
+
+                const category =
+                    document
+                        .getElementById(
+                            "category"
+                        )
+                        .value;
 
 
                 const message =
-                    document.getElementById(
-                        "supportMessage"
-                    ).value.trim();
+                    document
+                        .getElementById(
+                            "message"
+                        )
+                        .value
+                        .trim();
 
 
-                if (!name) {
+                if (
+                    !subject ||
+                    !category ||
+                    !message
+                ) {
 
                     showStatus(
-                        "Please enter your name.",
-                        "error"
+                        "error",
+                        "Please complete all support fields."
                     );
 
                     return;
@@ -1038,49 +1304,12 @@
 
 
                 if (
-                    !email ||
-                    !isValidEmail(email)
+                    message.length < 10
                 ) {
 
                     showStatus(
-                        "Please enter a valid email address.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                if (!category) {
-
-                    showStatus(
-                        "Please select a support topic.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                if (!subject) {
-
-                    showStatus(
-                        "Please enter a subject.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                if (!message) {
-
-                    showStatus(
-                        "Please enter your message.",
-                        "error"
+                        "error",
+                        "Please provide a little more detail about the issue."
                     );
 
                     return;
@@ -1090,7 +1319,7 @@
 
                 const button =
                     document.getElementById(
-                        "supportButton"
+                        "submitButton"
                     );
 
 
@@ -1101,64 +1330,71 @@
 
                 try {
 
-                    /*
-                     * Use the existing application support
-                     * function when available.
-                     */
+                    const response =
+                        await fetch(
+                            "../api/support",
+                            {
+                                method: "POST",
 
-                    if (
-                        typeof window.createSupportRequest !==
-                        "function"
-                    ) {
+                                credentials: "include",
 
-                        throw new Error(
-                            "Support service is not connected yet."
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        subject:
+                                            subject,
+
+                                        category:
+                                            category,
+
+                                        message:
+                                            message
+                                    })
+                            }
                         );
+
+
+                    let result = null;
+
+
+                    try {
+
+                        result =
+                            await response.json();
+
+                    } catch (_) {
+
+                        result = null;
 
                     }
 
 
-                    const result =
-                        await window.createSupportRequest({
-
-                            name:
-                                name,
-
-                            email:
-                                email,
-
-                            category:
-                                category,
-
-                            subject:
-                                subject,
-
-                            message:
-                                message
-
-                        });
-
-
-                    if (
-                        result &&
-                        result.success === false
-                    ) {
+                    if (!response.ok) {
 
                         throw new Error(
-                            result.error ||
-                            "Support request could not be submitted."
+                            result?.error ||
+                            result?.message ||
+                            "Unable to send your support request."
                         );
 
                     }
-
-
-                    showStatus(
-                        "Your support request has been submitted successfully.",
-                        "success"
-                    );
 
 
                     form.reset();
+
+
+                    showStatus(
+                        "success",
+                        result?.message ||
+                        "Your support request has been submitted successfully."
+                    );
 
 
                 } catch (error) {
@@ -1169,19 +1405,24 @@
                     );
 
 
+                    /*
+                     * If the support endpoint has not
+                     * been created yet, show a useful
+                     * message rather than pretending
+                     * the request was submitted.
+                     */
+
                     showStatus(
+                        "error",
                         error.message ||
-                        "Unable to submit your support request.",
-                        "error"
+                        "We could not submit your request. Please try again."
                     );
 
                 } finally {
 
-                    button.disabled =
-                        false;
-
+                    button.disabled = false;
                     button.textContent =
-                        "Send support request";
+                        "Send Support Request";
 
                 }
 
@@ -1191,77 +1432,46 @@
     }
 
 
-    function setupFaq() {
-
-        const questions =
-            document.querySelectorAll(
-                ".faq-question"
-            );
-
-
-        questions.forEach(
-            function (question) {
-
-                question.addEventListener(
-                    "click",
-                    function () {
-
-                        const item =
-                            question.closest(
-                                ".faq-item"
-                            );
-
-
-                        item.classList.toggle(
-                            "open"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    function isValidEmail(email) {
-
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            .test(email);
-
-    }
-
+    /* =====================================================
+       STATUS
+       ===================================================== */
 
     function showStatus(
-        message,
-        type
+        type,
+        message
     ) {
 
         const status =
             document.getElementById(
-                "supportStatus"
+                "formStatus"
             );
 
 
-        if (!message) {
-
-            status.textContent = "";
-            status.className =
-                "status-message";
-
-            return;
-
-        }
+        status.className =
+            "form-status " +
+            type;
 
 
         status.textContent =
             message;
 
+    }
+
+
+    function clearStatus() {
+
+        const status =
+            document.getElementById(
+                "formStatus"
+            );
+
 
         status.className =
-            "status-message " +
-            type;
+            "form-status";
+
+
+        status.textContent =
+            "";
 
     }
 
