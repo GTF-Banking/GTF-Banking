@@ -1,951 +1,1466 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="GTF Banking customer support and assistance"
-  >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <meta name="theme-color" content="#0b2a4a">
+    <meta
+        name="description"
+        content="Manage your Global TrustFund banking profile."
+    >
 
-  <title>Support | GTF Banking</title>
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <link rel="stylesheet" href="../css/style.css">
+    <title>Profile | Global TrustFund</title>
 
-  <style>
-    .support-page {
-      min-height: calc(100vh - 70px);
-      background: #f5f7fa;
-      padding: 32px 20px 50px;
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    .support-container {
-      width: min(1100px, 100%);
-      margin: 0 auto;
-    }
+    <style>
 
-    .support-hero {
-      background: #0b2a4a;
-      color: #fff;
-      border-radius: 12px;
-      padding: 34px;
-      margin-bottom: 22px;
-    }
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-dark: #092f24;
+            --gtf-light: #176b48;
+            --gtf-bg: #f4f8f6;
+            --gtf-soft: #eaf3ee;
+            --gtf-border: #dfe8e3;
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
+            --gtf-error: #8b4444;
+            --gtf-error-bg: #f9eded;
+            --gtf-success: #176b48;
+            --gtf-success-bg: #eaf5ee;
+        }
 
-    .support-hero h1 {
-      margin: 0 0 8px;
-      font-size: 1.9rem;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .support-hero p {
-      max-width: 720px;
-      margin: 0;
-      color: #d9e5ef;
-      line-height: 1.6;
-      font-size: .85rem;
-    }
+        body {
+            margin: 0;
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    .support-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 22px;
-    }
+        .profile-page {
+            min-height: 100vh;
+        }
 
-    .support-card {
-      background: #fff;
-      border: 1px solid #d9e1e8;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 18px rgba(11, 42, 74, .06);
-    }
+        .profile-main {
+            width: 100%;
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 38px 20px 60px;
+        }
 
-    .support-card h2 {
-      margin: 0 0 7px;
-      color: #0b2a4a;
-      font-size: 1rem;
-    }
+        .profile-header {
+            margin-bottom: 28px;
+        }
 
-    .support-card p {
-      margin: 0;
-      color: #66788a;
-      font-size: .74rem;
-      line-height: 1.55;
-    }
+        .profile-eyebrow {
+            color: var(--gtf-light);
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+        }
 
-    .support-icon {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 13px;
-      border-radius: 8px;
-      background: #eaf3fb;
-      color: #145da0;
-      font-size: .9rem;
-      font-weight: 700;
-    }
+        .profile-header h1 {
+            margin: 6px 0 8px;
+            color: var(--gtf-green);
+            font-size: 31px;
+        }
 
-    .support-main {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(260px, .6fr);
-      gap: 20px;
-    }
+        .profile-header p {
+            margin: 0;
+            max-width: 650px;
+            color: var(--gtf-muted);
+            font-size: 10px;
+            line-height: 1.7;
+        }
 
-    .panel {
-      background: #fff;
-      border: 1px solid #d9e1e8;
-      border-radius: 10px;
-      box-shadow: 0 4px 18px rgba(11, 42, 74, .06);
-      overflow: hidden;
-    }
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
 
-    .panel-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #e3e8ed;
-    }
+        .profile-sidebar {
+            display: grid;
+            gap: 18px;
+        }
 
-    .panel-header h2 {
-      margin: 0 0 4px;
-      color: #0b2a4a;
-      font-size: 1rem;
-    }
+        .profile-card {
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid var(--gtf-border);
+            border-radius: 14px;
+            box-shadow: 0 12px 35px rgba(11, 61, 46, .06);
+        }
 
-    .panel-header p {
-      margin: 0;
-      color: #66788a;
-      font-size: .7rem;
-    }
+        .profile-avatar {
+            width: 68px;
+            height: 68px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--gtf-green);
+            color: #ffffff;
+            font-size: 21px;
+            font-weight: 800;
+        }
 
-    .panel-body {
-      padding: 20px;
-    }
+        .profile-card h2 {
+            margin: 0 0 5px;
+            color: var(--gtf-green);
+            font-size: 17px;
+        }
 
-    .alert {
-      display: none;
-      margin-bottom: 16px;
-      padding: 11px 13px;
-      border-radius: 7px;
-      font-size: .72rem;
-      line-height: 1.5;
-    }
+        .profile-email {
+            margin: 0;
+            color: var(--gtf-muted);
+            font-size: 8px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
 
-    .alert.show {
-      display: block;
-    }
+        .account-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 13px;
+            padding: 6px 9px;
+            border-radius: 20px;
+            background: var(--gtf-success-bg);
+            color: var(--gtf-success);
+            font-size: 7px;
+            font-weight: 700;
+        }
 
-    .alert-success {
-      background: #eaf8f0;
-      border: 1px solid #b9dec9;
-      color: #16794c;
-    }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gtf-success);
+        }
 
-    .alert-error {
-      background: #fff0ee;
-      border: 1px solid #efc1bc;
-      color: #b42318;
-    }
+        .profile-nav {
+            display: grid;
+            gap: 5px;
+        }
 
-    .form-group {
-      margin-bottom: 15px;
-    }
+        .profile-nav a {
+            display: block;
+            padding: 10px 11px;
+            border-radius: 7px;
+            color: var(--gtf-muted);
+            font-size: 8px;
+            font-weight: 700;
+            text-decoration: none;
+        }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      color: #172b3a;
-      font-size: .73rem;
-      font-weight: 700;
-    }
+        .profile-nav a:hover,
+        .profile-nav a.active {
+            background: var(--gtf-soft);
+            color: var(--gtf-green);
+        }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid #d8e1e9;
-      border-radius: 7px;
-      padding: 10px;
-      background: #fff;
-      color: #172b3a;
-      font: inherit;
-      outline: none;
-    }
+        .security-card {
+            background: var(--gtf-green);
+            color: #ffffff;
+            border: 0;
+        }
 
-    .form-group input,
-    .form-group select {
-      min-height: 42px;
-    }
+        .security-card h2 {
+            color: #ffffff;
+        }
 
-    .form-group textarea {
-      min-height: 125px;
-      resize: vertical;
-    }
+        .security-card p {
+            margin: 0;
+            color: rgba(255,255,255,.72);
+            font-size: 8px;
+            line-height: 1.7;
+        }
 
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: #145da0;
-      box-shadow: 0 0 0 3px rgba(20, 93, 160, .1);
-    }
+        .profile-content {
+            display: grid;
+            gap: 20px;
+        }
 
-    .form-help {
-      margin-top: 5px;
-      color: #66788a;
-      font-size: .62rem;
-    }
+        .section-card {
+            padding: 28px;
+            background: #ffffff;
+            border: 1px solid var(--gtf-border);
+            border-radius: 14px;
+            box-shadow: 0 12px 35px rgba(11, 61, 46, .06);
+        }
 
-    .submit-button {
-      width: 100%;
-      min-height: 43px;
-      border: 1px solid #145da0;
-      border-radius: 7px;
-      background: #145da0;
-      color: #fff;
-      font-size: .76rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
+        .section-header {
+            margin-bottom: 22px;
+        }
 
-    .submit-button:hover {
-      background: #0d477c;
-    }
+        .section-header h2 {
+            margin: 0 0 6px;
+            color: var(--gtf-green);
+            font-size: 19px;
+        }
 
-    .submit-button:disabled {
-      opacity: .65;
-      cursor: not-allowed;
-    }
+        .section-header p {
+            margin: 0;
+            color: var(--gtf-muted);
+            font-size: 8px;
+            line-height: 1.6;
+        }
 
-    .contact-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+        .profile-form {
+            display: grid;
+            gap: 17px;
+        }
 
-    .contact-item {
-      padding: 13px 0;
-      border-bottom: 1px solid #edf1f4;
-    }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-    .contact-item:last-child {
-      border-bottom: 0;
-    }
+        .form-group {
+            display: grid;
+            gap: 6px;
+        }
 
-    .contact-label {
-      display: block;
-      margin-bottom: 4px;
-      color: #66788a;
-      font-size: .64rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
 
-    .contact-value {
-      color: #172b3a;
-      font-size: .74rem;
-      font-weight: 600;
-      word-break: break-word;
-    }
+        .form-group label {
+            color: var(--gtf-text);
+            font-size: 8px;
+            font-weight: 700;
+        }
 
-    .contact-value a {
-      color: #145da0;
-    }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            min-height: 43px;
+            padding: 10px 12px;
+            border: 1px solid var(--gtf-border);
+            border-radius: 7px;
+            outline: none;
+            background: #ffffff;
+            color: var(--gtf-text);
+            font-family: inherit;
+            font-size: 9px;
+        }
 
-    .faq {
-      margin-top: 20px;
-    }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--gtf-light);
+            box-shadow: 0 0 0 3px rgba(23,107,72,.09);
+        }
 
-    .faq details {
-      border-bottom: 1px solid #e3e8ed;
-      padding: 12px 0;
-    }
+        .form-group input:disabled {
+            background: #f3f6f4;
+            color: #89958f;
+            cursor: not-allowed;
+        }
 
-    .faq details:last-child {
-      border-bottom: 0;
-    }
+        .field-help {
+            color: var(--gtf-muted);
+            font-size: 7px;
+            line-height: 1.5;
+        }
 
-    .faq summary {
-      cursor: pointer;
-      color: #172b3a;
-      font-size: .74rem;
-      font-weight: 700;
-    }
+        .button-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding-top: 5px;
+        }
 
-    .faq p {
-      margin: 9px 0 0;
-      color: #66788a;
-      font-size: .68rem;
-      line-height: 1.55;
-    }
+        .profile-button {
+            min-height: 42px;
+            padding: 0 18px;
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
 
-    .security-note {
-      margin-top: 18px;
-      padding: 13px;
-      border: 1px solid #d5e4f0;
-      border-radius: 7px;
-      background: #f3f8fc;
-    }
+        .profile-button.primary {
+            border: 1px solid var(--gtf-green);
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
 
-    .security-note strong {
-      display: block;
-      margin-bottom: 5px;
-      color: #0b2a4a;
-      font-size: .7rem;
-    }
+        .profile-button.primary:hover:not(:disabled) {
+            background: var(--gtf-dark);
+        }
 
-    .security-note p {
-      margin: 0;
-      color: #66788a;
-      font-size: .64rem;
-      line-height: 1.5;
-    }
+        .profile-button.secondary {
+            border: 1px solid var(--gtf-border);
+            background: #ffffff;
+            color: var(--gtf-green);
+        }
 
-    .footer {
-      margin-top: 28px;
-      color: #66788a;
-      text-align: center;
-      font-size: .65rem;
-    }
+        .profile-button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
 
-    @media (max-width: 850px) {
-      .support-grid {
-        grid-template-columns: 1fr;
-      }
+        .status-message {
+            display: none;
+            padding: 11px 12px;
+            border-radius: 7px;
+            font-size: 8px;
+            line-height: 1.6;
+        }
 
-      .support-main {
-        grid-template-columns: 1fr;
-      }
-    }
+        .status-message.success {
+            display: block;
+            background: var(--gtf-success-bg);
+            color: var(--gtf-success);
+        }
 
-    @media (max-width: 600px) {
-      .support-page {
-        padding: 20px 12px 40px;
-      }
+        .status-message.error {
+            display: block;
+            background: var(--gtf-error-bg);
+            color: var(--gtf-error);
+        }
 
-      .support-hero {
-        padding: 25px 20px;
-      }
+        .security-list {
+            display: grid;
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
 
-      .support-hero h1 {
-        font-size: 1.55rem;
-      }
-    }
-  </style>
+        .security-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            color: var(--gtf-muted);
+            font-size: 8px;
+            line-height: 1.6;
+        }
+
+        .security-list strong {
+            color: var(--gtf-text);
+        }
+
+        .security-check {
+            color: var(--gtf-light);
+            font-weight: 800;
+        }
+
+        @media (max-width: 850px) {
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .security-card {
+                grid-column: 1 / -1;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-main {
+                padding: 25px 13px 45px;
+            }
+
+            .profile-header h1 {
+                font-size: 27px;
+            }
+
+            .profile-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .section-card {
+                padding: 21px 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .profile-button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-  <!-- Shared navigation can be inserted here if your app.js
-       provides a common navigation component. -->
+<div class="profile-page">
 
-  <main class="support-page">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <div class="support-container">
+    <header class="site-header">
 
-      <section class="support-hero">
-        <h1>How can we help?</h1>
+        <div class="container nav-container">
 
-        <p>
-          Welcome to GTF Banking Support. Find answers to
-          common questions or submit a support request to
-          the appropriate banking support team.
-        </p>
-      </section>
-
-
-      <!-- SUPPORT OPTIONS -->
-
-      <section class="support-grid">
-
-        <article class="support-card">
-
-          <div class="support-icon">?</div>
-
-          <h2>Account Assistance</h2>
-
-          <p>
-            Get help with account access, profile
-            information, account services, and general
-            customer questions.
-          </p>
-
-        </article>
-
-
-        <article class="support-card">
-
-          <div class="support-icon">T</div>
-
-          <h2>Transaction Support</h2>
-
-          <p>
-            Request assistance with transactions,
-            transfers, deposits, withdrawals, or
-            transaction status questions.
-          </p>
-
-        </article>
-
-
-        <article class="support-card">
-
-          <div class="support-icon">S</div>
-
-          <h2>Security Support</h2>
-
-          <p>
-            Report suspicious account activity or
-            request assistance with account-security
-            concerns.
-          </p>
-
-        </article>
-
-      </section>
-
-
-      <div class="support-main">
-
-        <!-- CONTACT FORM -->
-
-        <section class="panel">
-
-          <div class="panel-header">
-
-            <h2>Contact Support</h2>
-
-            <p>
-              Submit your request using the form below.
-            </p>
-
-          </div>
-
-          <div class="panel-body">
-
-            <div
-              id="successAlert"
-              class="alert alert-success"
-              role="status"
-              aria-live="polite"
-            ></div>
-
-            <div
-              id="errorAlert"
-              class="alert alert-error"
-              role="alert"
-              aria-live="assertive"
-            ></div>
-
-
-            <form
-              id="supportForm"
-              novalidate
+            <a
+                href="../index.html"
+                class="brand"
+                aria-label="Global TrustFund home"
             >
 
-              <div class="form-group">
-
-                <label for="subject">
-                  Subject
-                </label>
-
-                <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  maxlength="150"
-                  placeholder="Briefly describe your issue"
-                  required
+                <img
+                    src="../assets/gtf-logo.svg"
+                    alt="Global TrustFund logo"
+                    class="brand-logo"
                 >
 
-              </div>
+                <span class="brand-text">
+                    <strong>Global TrustFund</strong>
+                    <small>Banking</small>
+                </span>
 
+            </a>
 
-              <div class="form-group">
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-                <label for="category">
-                  Support Category
-                </label>
+            <nav
+                id="mainNavigation"
+                class="main-navigation"
+                aria-label="Main navigation"
+            >
 
-                <select
-                  id="category"
-                  name="category"
-                  required
+                <a href="./index.html">
+                    Dashboard
+                </a>
+
+                <a href="./accounts.html">
+                    Accounts
+                </a>
+
+                <a href="./transactions.html">
+                    Transactions
+                </a>
+
+                <a href="./transfers.html">
+                    Transfers
+                </a>
+
+                <a
+                    href="./profile.html"
+                    class="active"
                 >
+                    Profile
+                </a>
 
-                  <option value="">
-                    Select a category
-                  </option>
+                <a href="./support.html">
+                    Support
+                </a>
 
-                  <option value="account">
-                    Account
-                  </option>
+                <div class="nav-actions">
 
-                  <option value="transaction">
-                    Transaction
-                  </option>
+                    <a
+                        href="../signout.html"
+                        class="button button-outline"
+                    >
+                        Sign Out
+                    </a>
 
-                  <option value="card">
-                    Card
-                  </option>
-
-                  <option value="transfer">
-                    Transfer
-                  </option>
-
-                  <option value="security">
-                    Security
-                  </option>
-
-                  <option value="technical">
-                    Technical Issue
-                  </option>
-
-                  <option value="other">
-                    Other
-                  </option>
-
-                </select>
-
-              </div>
-
-
-              <div class="form-group">
-
-                <label for="message">
-                  Message
-                </label>
-
-                <textarea
-                  id="message"
-                  name="message"
-                  maxlength="2000"
-                  placeholder="Describe how we can help..."
-                  required
-                ></textarea>
-
-                <div class="form-help">
-                  Do not include your password, PIN, one-time
-                  code, full card security code, or other
-                  authentication credentials.
                 </div>
 
-              </div>
+            </nav>
+
+        </div>
+
+    </header>
 
 
-              <button
-                id="submitButton"
-                type="submit"
-                class="submit-button"
-              >
-                Submit Support Request
-              </button>
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
 
-            </form>
+    <main class="profile-main">
 
-          </div>
+        <header class="profile-header">
 
-        </section>
+            <span class="profile-eyebrow">
+                ACCOUNT SETTINGS
+            </span>
+
+            <h1>
+                My profile
+            </h1>
+
+            <p>
+                Review and manage the personal information
+                associated with your Global TrustFund profile.
+            </p>
+
+        </header>
 
 
-        <!-- SUPPORT INFORMATION -->
+        <div class="profile-layout">
 
-        <aside>
 
-          <section class="panel">
+            <!-- =================================================
+                 SIDEBAR
+                 ================================================= -->
 
-            <div class="panel-header">
+            <aside class="profile-sidebar">
 
-              <h2>Support Information</h2>
+                <section class="profile-card">
 
-              <p>
-                General support channels.
-              </p>
+                    <div
+                        id="profileAvatar"
+                        class="profile-avatar"
+                    >
+                        G
+                    </div>
+
+                    <h2 id="profileName">
+                        Customer
+                    </h2>
+
+                    <p
+                        id="profileEmail"
+                        class="profile-email"
+                    >
+                        Loading account information...
+                    </p>
+
+                    <div class="account-status">
+
+                        <span class="status-dot"></span>
+
+                        Account profile
+
+                    </div>
+
+                </section>
+
+
+                <section class="profile-card">
+
+                    <nav
+                        class="profile-nav"
+                        aria-label="Profile navigation"
+                    >
+
+                        <a
+                            href="#personal"
+                            class="active"
+                        >
+                            Personal information
+                        </a>
+
+                        <a href="#security">
+                            Security
+                        </a>
+
+                        <a href="./accounts.html">
+                            My accounts
+                        </a>
+
+                        <a href="./transactions.html">
+                            Transactions
+                        </a>
+
+                    </nav>
+
+                </section>
+
+
+                <section
+                    id="security"
+                    class="profile-card security-card"
+                >
+
+                    <h2>
+                        Stay secure
+                    </h2>
+
+                    <p>
+                        Keep your account information accurate
+                        and never share your password or
+                        verification codes with anyone.
+                    </p>
+
+                </section>
+
+            </aside>
+
+
+            <!-- =================================================
+                 CONTENT
+                 ================================================= -->
+
+            <div class="profile-content">
+
+
+                <!-- PERSONAL INFORMATION -->
+
+                <section
+                    id="personal"
+                    class="section-card"
+                >
+
+                    <div class="section-header">
+
+                        <h2>
+                            Personal information
+                        </h2>
+
+                        <p>
+                            Update the profile information that
+                            is editable by your account.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        id="profileForm"
+                        class="profile-form"
+                        novalidate
+                    >
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label for="firstName">
+                                    First name
+                                </label>
+
+                                <input
+                                    id="firstName"
+                                    name="firstName"
+                                    type="text"
+                                    autocomplete="given-name"
+                                    placeholder="First name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="lastName">
+                                    Last name
+                                </label>
+
+                                <input
+                                    id="lastName"
+                                    name="lastName"
+                                    type="text"
+                                    autocomplete="family-name"
+                                    placeholder="Last name"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="email">
+                                    Email address
+                                </label>
+
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    autocomplete="email"
+                                    disabled
+                                >
+
+                                <span class="field-help">
+                                    Your authentication email is
+                                    managed by the secure account
+                                    system.
+                                </span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="phone">
+                                    Phone number
+                                </label>
+
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    autocomplete="tel"
+                                    placeholder="Phone number"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label for="address">
+                                    Address
+                                </label>
+
+                                <input
+                                    id="address"
+                                    name="address"
+                                    type="text"
+                                    autocomplete="street-address"
+                                    placeholder="Street address"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="city">
+                                    City
+                                </label>
+
+                                <input
+                                    id="city"
+                                    name="city"
+                                    type="text"
+                                    autocomplete="address-level2"
+                                    placeholder="City"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="country">
+                                    Country
+                                </label>
+
+                                <select
+                                    id="country"
+                                    name="country"
+                                    autocomplete="country-name"
+                                >
+
+                                    <option value="">
+                                        Select country
+                                    </option>
+
+                                    <option value="NG">
+                                        Nigeria
+                                    </option>
+
+                                    <option value="US">
+                                        United States
+                                    </option>
+
+                                    <option value="GB">
+                                        United Kingdom
+                                    </option>
+
+                                    <option value="CA">
+                                        Canada
+                                    </option>
+
+                                    <option value="GH">
+                                        Ghana
+                                    </option>
+
+                                    <option value="KE">
+                                        Kenya
+                                    </option>
+
+                                    <option value="ZA">
+                                        South Africa
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="profileStatus"
+                            class="status-message"
+                            role="status"
+                            aria-live="polite"
+                        ></div>
+
+
+                        <div class="button-row">
+
+                            <button
+                                type="button"
+                                id="resetProfileButton"
+                                class="profile-button secondary"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                id="saveProfileButton"
+                                class="profile-button primary"
+                            >
+                                Save changes
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+
+                <!-- SECURITY -->
+
+                <section class="section-card">
+
+                    <div class="section-header">
+
+                        <h2>
+                            Security
+                        </h2>
+
+                        <p>
+                            Basic security reminders for your
+                            Global TrustFund account.
+                        </p>
+
+                    </div>
+
+
+                    <ul class="security-list">
+
+                        <li>
+                            <span class="security-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                <strong>
+                                    Protect your password.
+                                </strong>
+                                Never share your password with
+                                another person.
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="security-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                <strong>
+                                    Verify account activity.
+                                </strong>
+                                Review transactions regularly and
+                                report anything unfamiliar.
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="security-check">
+                                ✓
+                            </span>
+
+                            <span>
+                                <strong>
+                                    Keep your information current.
+                                </strong>
+                                Contact authorized support when
+                                account information requires
+                                verification.
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </section>
 
             </div>
 
-            <div class="panel-body">
+        </div>
 
-              <ul class="contact-list">
+    </main>
 
-                <li class="contact-item">
 
-                  <span class="contact-label">
-                    Support
-                  </span>
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
 
-                  <span class="contact-value">
-                    Use the support request form
-                    for account assistance.
-                  </span>
+    <footer class="site-footer">
 
-                </li>
+        <div class="container footer-bottom">
 
+            <span>
+                ©
+                <span id="currentYear"></span>
+                Global TrustFund.
+                All rights reserved.
+            </span>
 
-                <li class="contact-item">
+            <span>
+                Secure digital banking platform
+            </span>
 
-                  <span class="contact-label">
-                    Account
-                  </span>
+        </div>
 
-                  <span class="contact-value">
-                    Sign in to your account for
-                    account-specific assistance.
-                  </span>
+    </footer>
 
-                </li>
+</div>
 
 
-                <li class="contact-item">
+<!-- =====================================================
+     SCRIPTS
+     ===================================================== -->
 
-                  <span class="contact-label">
-                    Security
-                  </span>
+<script src="../js/app.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/auth.js"></script>
 
-                  <span class="contact-value">
-                    Report suspicious activity
-                    through an authorized support
-                    channel.
-                  </span>
+<script>
 
-                </li>
+    let originalProfile = {};
 
-              </ul>
 
+    document.addEventListener(
+        "DOMContentLoaded",
+        async function () {
 
-              <div class="security-note">
+            document.getElementById(
+                "currentYear"
+            ).textContent =
+                new Date().getFullYear();
 
-                <strong>
-                  Protect your information
-                </strong>
 
-                <p>
-                  GTF Banking support will not need your
-                  password, PIN, or one-time authentication
-                  code to process a normal support request.
-                </p>
+            try {
 
-              </div>
+                if (
+                    typeof window.requireAuth ===
+                    "function"
+                ) {
+                    await window.requireAuth();
+                }
 
-            </div>
+            } catch (error) {
 
-          </section>
+                console.warn(
+                    "Authentication guard unavailable.",
+                    error
+                );
 
+            }
 
-          <!-- FAQ -->
 
-          <section class="panel faq">
+            await loadProfile();
 
-            <div class="panel-header">
+            setupProfileForm();
 
-              <h2>Frequently Asked Questions</h2>
-
-              <p>
-                Common support topics.
-              </p>
-
-            </div>
-
-            <div class="panel-body">
-
-              <details>
-
-                <summary>
-                  I cannot sign in. What should I do?
-                </summary>
-
-                <p>
-                  Verify that you are using the correct
-                  sign-in information. If the problem
-                  continues, submit a support request.
-                </p>
-
-              </details>
-
-
-              <details>
-
-                <summary>
-                  How can I check a transaction?
-                </summary>
-
-                <p>
-                  Open your account transaction history
-                  and review the transaction status and
-                  available reference information.
-                </p>
-
-              </details>
-
-
-              <details>
-
-                <summary>
-                  What should I do about suspicious activity?
-                </summary>
-
-                <p>
-                  Contact the appropriate authorized
-                  banking support channel as soon as
-                  possible and avoid sharing sensitive
-                  authentication information.
-                </p>
-
-              </details>
-
-
-              <details>
-
-                <summary>
-                  Can I update my account information?
-                </summary>
-
-                <p>
-                  Account information that can be changed
-                  by customers should be updated through
-                  the appropriate authenticated account
-                  settings.
-                </p>
-
-              </details>
-
-            </div>
-
-          </section>
-
-        </aside>
-
-      </div>
-
-
-      <footer class="footer">
-        GTF Banking · Customer Support
-      </footer>
-
-    </div>
-
-  </main>
-
-
-  <script>
-    "use strict";
-
-    const form =
-      document.getElementById("supportForm");
-
-    const submitButton =
-      document.getElementById("submitButton");
-
-    const successAlert =
-      document.getElementById("successAlert");
-
-    const errorAlert =
-      document.getElementById("errorAlert");
-
-
-    function clearAlerts() {
-
-      successAlert.classList.remove("show");
-      errorAlert.classList.remove("show");
-
-      successAlert.textContent = "";
-      errorAlert.textContent = "";
-    }
-
-
-    function showSuccess(message) {
-
-      errorAlert.classList.remove("show");
-
-      successAlert.textContent =
-        message;
-
-      successAlert.classList.add("show");
-    }
-
-
-    function showError(message) {
-
-      successAlert.classList.remove("show");
-
-      errorAlert.textContent =
-        message;
-
-      errorAlert.classList.add("show");
-    }
-
-
-    async function submitSupportRequest(payload) {
-
-      const response =
-        await fetch(
-          "/api/support",
-          {
-            method: "POST",
-
-            credentials: "include",
-
-            headers: {
-              "Accept":
-                "application/json",
-
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify(payload)
-          }
-        );
-
-
-      let data = null;
-
-      try {
-        data =
-          await response.json();
-      } catch {
-        data = null;
-      }
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          data?.message ||
-          data?.error ||
-          "Unable to submit the support request."
-        );
-      }
-
-
-      return data;
-    }
-
-
-    form.addEventListener(
-      "submit",
-      async event => {
-
-        event.preventDefault();
-
-        clearAlerts();
-
-
-        const subject =
-          document
-            .getElementById("subject")
-            .value
-            .trim();
-
-        const category =
-          document
-            .getElementById("category")
-            .value;
-
-        const message =
-          document
-            .getElementById("message")
-            .value
-            .trim();
-
-
-        if (!subject) {
-
-          showError(
-            "Please enter a subject."
-          );
-
-          return;
         }
+    );
 
 
-        if (!category) {
+    async function loadProfile() {
 
-          showError(
-            "Please select a support category."
-          );
-
-          return;
-        }
-
-
-        if (!message) {
-
-          showError(
-            "Please enter your support message."
-          );
-
-          return;
-        }
-
-
-        if (message.length < 10) {
-
-          showError(
-            "Please provide a little more information about your request."
-          );
-
-          return;
-        }
-
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "Submitting...";
+        let user = null;
+        let profile = null;
 
 
         try {
 
-          await submitSupportRequest({
+            /*
+             * Supports the existing Supabase helper
+             * if it is already exposed by auth.js.
+             */
 
-            subject,
+            if (
+                typeof window.getCurrentUser ===
+                "function"
+            ) {
 
-            category,
+                user =
+                    await window.getCurrentUser();
 
-            message
-
-          });
-
-
-          form.reset();
+            }
 
 
-          showSuccess(
-            "Your support request has been submitted successfully."
-          );
+            /*
+             * Also supports a Supabase client exposed
+             * as window.supabaseClient.
+             */
+
+            if (
+                !user &&
+                window.supabaseClient &&
+                window.supabaseClient.auth
+            ) {
+
+                const result =
+                    await window.supabaseClient.auth
+                        .getUser();
+
+                user =
+                    result.data?.user || null;
+
+            }
+
+
+            if (!user) {
+
+                renderProfile(
+                    {},
+                    null
+                );
+
+                return;
+
+            }
+
+
+            if (
+                typeof window.getUserProfile ===
+                "function"
+            ) {
+
+                profile =
+                    await window.getUserProfile(
+                        user.id
+                    );
+
+            }
+
+
+            const combined = {
+
+                ...(profile || {}),
+
+                email:
+                    user.email ||
+                    profile?.email ||
+                    ""
+
+            };
+
+
+            originalProfile =
+                combined;
+
+
+            renderProfile(
+                combined,
+                user
+            );
 
 
         } catch (error) {
 
-          console.error(
-            "Support request error:",
-            error
-          );
+            console.error(
+                "Profile loading error:",
+                error
+            );
+
+            showStatus(
+                "Unable to load your profile information.",
+                "error"
+            );
+
+        }
+
+    }
 
 
-          showError(
-            error.message ||
-            "Unable to submit your request. Please try again."
-          );
+    function renderProfile(
+        profile,
+        user
+    ) {
 
+        const firstName =
+            profile.first_name ||
+            profile.firstName ||
+            "";
+
+
+        const lastName =
+            profile.last_name ||
+            profile.lastName ||
+            "";
+
+
+        const fullName =
+            `${firstName} ${lastName}`
+                .trim() ||
+            profile.full_name ||
+            "Customer";
+
+
+        document.getElementById(
+            "firstName"
+        ).value =
+            firstName;
+
+
+        document.getElementById(
+            "lastName"
+        ).value =
+            lastName;
+
+
+        document.getElementById(
+            "email"
+        ).value =
+            profile.email ||
+            user?.email ||
+            "";
+
+
+        document.getElementById(
+            "phone"
+        ).value =
+            profile.phone ||
+            "";
+
+
+        document.getElementById(
+            "address"
+        ).value =
+            profile.address ||
+            "";
+
+
+        document.getElementById(
+            "city"
+        ).value =
+            profile.city ||
+            "";
+
+
+        document.getElementById(
+            "country"
+        ).value =
+            profile.country ||
+            "";
+
+
+        document.getElementById(
+            "profileName"
+        ).textContent =
+            fullName;
+
+
+        document.getElementById(
+            "profileEmail"
+        ).textContent =
+            profile.email ||
+            user?.email ||
+            "Account email";
+
+
+        const initials =
+            getInitials(
+                fullName
+            );
+
+
+        document.getElementById(
+            "profileAvatar"
+        ).textContent =
+            initials;
+
+    }
+
+
+    function getInitials(name) {
+
+        const parts =
+            String(name)
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+
+        if (!parts.length) {
+            return "G";
+        }
+
+
+        if (parts.length === 1) {
+            return parts[0]
+                .charAt(0)
+                .toUpperCase();
+        }
+
+
+        return (
+            parts[0].charAt(0) +
+            parts[parts.length - 1].charAt(0)
+        ).toUpperCase();
+
+    }
+
+
+    function setupProfileForm() {
+
+        const form =
+            document.getElementById(
+                "profileForm"
+            );
+
+
+        const resetButton =
+            document.getElementById(
+                "resetProfileButton"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                await saveProfile();
+
+            }
+        );
+
+
+        resetButton.addEventListener(
+            "click",
+            function () {
+
+                renderProfile(
+                    originalProfile,
+                    null
+                );
+
+                showStatus(
+                    "",
+                    ""
+                );
+
+            }
+        );
+
+    }
+
+
+    async function saveProfile() {
+
+        const button =
+            document.getElementById(
+                "saveProfileButton"
+            );
+
+
+        const data = {
+
+            first_name:
+                document.getElementById(
+                    "firstName"
+                ).value.trim(),
+
+            last_name:
+                document.getElementById(
+                    "lastName"
+                ).value.trim(),
+
+            phone:
+                document.getElementById(
+                    "phone"
+                ).value.trim(),
+
+            address:
+                document.getElementById(
+                    "address"
+                ).value.trim(),
+
+            city:
+                document.getElementById(
+                    "city"
+                ).value.trim(),
+
+            country:
+                document.getElementById(
+                    "country"
+                ).value
+
+        };
+
+
+        button.disabled = true;
+        button.textContent =
+            "Saving...";
+
+
+        try {
+
+            /*
+             * Use the project's existing profile
+             * update function when available.
+             */
+
+            if (
+                typeof window.updateUserProfile !==
+                "function"
+            ) {
+
+                throw new Error(
+                    "Profile update service is not connected yet."
+                );
+
+            }
+
+
+            const result =
+                await window.updateUserProfile(
+                    data
+                );
+
+
+            if (
+                result &&
+                result.success === false
+            ) {
+
+                throw new Error(
+                    result.error ||
+                    "Profile update failed."
+                );
+
+            }
+
+
+            originalProfile = {
+                ...originalProfile,
+                ...data
+            };
+
+
+            renderProfile(
+                originalProfile,
+                null
+            );
+
+
+            showStatus(
+                "Your profile has been updated successfully.",
+                "success"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Profile update error:",
+                error
+            );
+
+
+            showStatus(
+                error.message ||
+                "Unable to update your profile.",
+                "error"
+            );
 
         } finally {
 
-          submitButton.disabled =
-            false;
+            button.disabled =
+                false;
 
-          submitButton.textContent =
-            "Submit Support Request";
+            button.textContent =
+                "Save changes";
+
         }
 
-      }
-    );
-  </script>
+    }
+
+
+    function showStatus(
+        message,
+        type
+    ) {
+
+        const status =
+            document.getElementById(
+                "profileStatus"
+            );
+
+
+        if (!message) {
+
+            status.textContent = "";
+            status.className =
+                "status-message";
+
+            return;
+
+        }
+
+
+        status.textContent =
+            message;
+
+
+        status.className =
+            "status-message " +
+            type;
+
+    }
+
+</script>
 
 </body>
+
 </html>
