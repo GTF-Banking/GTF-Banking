@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signing Out | Manager Portal | Global TrustFund</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f4f8f6;
+            color: #18352a;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .logout-card {
+            width: min(430px, calc(100% - 32px));
+            padding: 34px;
+            border: 1px solid #dce7e1;
+            border-radius: 14px;
+            background: #fff;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #073d28;
+            font-size: 22px;
+        }
+
+        p {
+            margin: 10px 0 0;
+            color: #718078;
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            margin: 24px auto;
+            border: 3px solid #dce7e1;
+            border-top-color: #0b5d3b;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+
+        .status {
+            color: #0b5d3b;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .fallback {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .fallback a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 0 18px;
+            border-radius: 7px;
+            background: #0b5d3b;
+            color: #fff;
+            font-size: 8px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .security-note {
+            margin-top: 22px;
+            padding-top: 15px;
+            border-top: 1px solid #e5ece8;
+            color: #718078;
+            font-size: 7px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="logout-card">
+
+        <img
+            src="../assets/gtf-logo.svg"
+            alt="Global TrustFund"
+            class="logo"
+        >
+
+        <h1>
+            Signing Out
+        </h1>
+
+        <p>
+            Your Manager Portal session is being securely closed.
+        </p>
+
+        <div
+            class="spinner"
+            aria-hidden="true"
+        ></div>
+
+        <div
+            class="status"
+            id="status"
+        >
+            Ending session...
+        </div>
+
+        <div
+            class="fallback"
+            id="fallback"
+        >
+            <a href="./login.html">
+                Return to Manager Login
+            </a>
+        </div>
+
+        <div class="security-note">
+            For your security, always sign out when using a shared or public device.
+        </div>
+
+    </main>
+
+<script>
+
+    const API_BASE = "/api";
+
+
+    async function signOut() {
+
+        const status =
+            document.getElementById("status");
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/auth/signout`,
+                    {
+                        method: "POST",
+                        credentials: "include",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                console.warn(
+                    "Sign-out endpoint returned:",
+                    response.status
+                );
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Sign-out request failed:",
+                error
+            );
+
+        }
+
+
+        /*
+         * Clear client-side authentication data.
+         * The server remains responsible for invalidating
+         * the authenticated session/token.
+         */
+
+        const keysToRemove = [
+
+            "gtf_user",
+            "gtf_manager",
+            "gtf_session",
+
+            "gtf_access_token",
+            "gtf_refresh_token",
+
+            "access_token",
+            "refresh_token",
+
+            "supabase.auth.token"
+
+        ];
+
+
+        keysToRemove.forEach(
+            key => {
+                localStorage.removeItem(key);
+                sessionStorage.removeItem(key);
+            }
+        );
+
+
+        /*
+         * Remove any application-specific cached
+         * manager data without touching unrelated
+         * browser storage.
+         */
+
+        [
+            "gtf_preferences",
+            "gtf_notification_preferences"
+        ].forEach(
+            key =>
+                localStorage.removeItem(key)
+        );
+
+
+        status.textContent =
+            "You have been securely signed out.";
+
+
+        setTimeout(
+            () => {
+
+                window.location.replace(
+                    "./login.html"
+                );
+
+            },
+            900
+        );
+
+
+        setTimeout(
+            () => {
+
+                document.getElementById(
+                    "fallback"
+                ).style.display = "block";
+
+            },
+            2500
+        );
+
+    }
+
+
+    /*
+     * Prevent the page from remaining in
+     * browser history after sign-out.
+     */
+
+    history.replaceState(
+        null,
+        "",
+        window.location.href
+    );
+
+
+    window.addEventListener(
+        "pageshow",
+        event => {
+
+            if (event.persisted) {
+
+                window.location.reload();
+
+            }
+
+        }
+    );
+
+
+    signOut();
+
+</script>
+
+</body>
+</html>
