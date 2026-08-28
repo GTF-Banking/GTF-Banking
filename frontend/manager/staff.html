@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Staff Management | Manager Portal | Global TrustFund</title>
 
     <link rel="stylesheet" href="../css/styles.css">
 
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         :root {
             --green: #0b5d3b;
             --dark: #073d28;
             --gold: #c9962b;
             --bg: #f4f8f6;
-            --surface: #fff;
+            --surface: #ffffff;
             --border: #dce7e1;
             --text: #18352a;
             --muted: #718078;
             --success: #19734b;
             --warning: #946b17;
             --danger: #a33f3f;
+            --info: #28658f;
         }
 
         body {
@@ -31,8 +35,15 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        button, input, select { font: inherit; }
-        button { cursor: pointer; }
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
 
         .app {
             min-height: 100vh;
@@ -40,13 +51,19 @@
             grid-template-columns: 245px minmax(0, 1fr);
         }
 
+        /* SIDEBAR */
+
         .sidebar {
             position: sticky;
             top: 0;
             height: 100vh;
             overflow-y: auto;
             padding: 22px 16px;
-            background: linear-gradient(180deg, var(--dark), #052e1f);
+            background: linear-gradient(
+                180deg,
+                var(--dark),
+                #052e1f
+            );
             color: #fff;
         }
 
@@ -148,7 +165,11 @@
             font-size: 8px;
         }
 
-        .main { min-width: 0; }
+        /* MAIN */
+
+        .main {
+            min-width: 0;
+        }
 
         .topbar {
             min-height: 68px;
@@ -182,7 +203,9 @@
             font-weight: 800;
         }
 
-        .content { padding: 27px; }
+        .content {
+            padding: 27px;
+        }
 
         .page-header {
             display: flex;
@@ -229,24 +252,26 @@
             color: var(--green);
         }
 
+        /* STATISTICS */
+
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .stat {
-            padding: 17px;
-            background: #fff;
+            padding: 16px;
             border: 1px solid var(--border);
             border-radius: 10px;
+            background: #fff;
         }
 
         .stat-label {
             color: var(--muted);
             font-size: 7px;
-            font-weight: 800;
+            font-weight: 700;
             text-transform: uppercase;
         }
 
@@ -257,50 +282,20 @@
             font-weight: 800;
         }
 
-        .toolbar-card {
-            padding: 16px;
-            margin-bottom: 16px;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 10px;
+        .stat-note {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 6px;
         }
 
-        .filters {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr auto;
-            gap: 10px;
-            align-items: end;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            color: var(--dark);
-            font-size: 7px;
-            font-weight: 800;
-        }
-
-        input, select {
-            width: 100%;
-            height: 39px;
-            padding: 0 10px;
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            background: #fff;
-            color: var(--text);
-            outline: none;
-            font-size: 8px;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--green);
-        }
+        /* CARD */
 
         .card {
+            margin-bottom: 18px;
             overflow: hidden;
-            background: #fff;
             border: 1px solid var(--border);
             border-radius: 11px;
+            background: #fff;
         }
 
         .card-header {
@@ -320,7 +315,47 @@
             font-size: 7px;
         }
 
-        .table-wrap { overflow-x: auto; }
+        /* FILTERS */
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 10px;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--dark);
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+        input,
+        select {
+            width: 100%;
+            height: 39px;
+            padding: 0 10px;
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            background: #fff;
+            color: var(--text);
+            outline: none;
+            font-size: 8px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--green);
+        }
+
+        /* TABLE */
+
+        .table-wrap {
+            overflow-x: auto;
+        }
 
         table {
             width: 100%;
@@ -355,19 +390,24 @@
             font-size: 6px;
         }
 
+        .staff-cell {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
         .avatar {
-            width: 29px;
-            height: 29px;
-            display: inline-flex;
+            width: 32px;
+            height: 32px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 8px;
+            flex: 0 0 32px;
             border-radius: 50%;
             background: #eaf7ef;
             color: var(--green);
-            font-size: 8px;
+            font-size: 9px;
             font-weight: 800;
-            vertical-align: middle;
         }
 
         .badge {
@@ -378,28 +418,44 @@
             font-weight: 800;
         }
 
-        .active-badge {
+        .active {
             background: #eaf7ef;
             color: var(--success);
         }
 
-        .inactive-badge {
+        .inactive {
+            background: #f1f3f2;
+            color: var(--muted);
+        }
+
+        .suspended {
             background: #fceeee;
             color: var(--danger);
         }
 
-        .role-badge {
-            background: #f4f0e5;
+        .manager {
+            background: #eeeafa;
+            color: #59449a;
+        }
+
+        .cashier {
+            background: #eaf3fb;
+            color: var(--info);
+        }
+
+        .support {
+            background: #fff6dc;
             color: var(--warning);
         }
 
         .actions {
             display: flex;
             gap: 5px;
+            flex-wrap: wrap;
         }
 
         .action {
-            min-height: 28px;
+            min-height: 27px;
             padding: 0 8px;
             border: 1px solid var(--border);
             border-radius: 6px;
@@ -413,13 +469,14 @@
             color: var(--danger);
         }
 
-        .empty,
-        .loading {
+        .empty {
             padding: 35px;
             text-align: center;
             color: var(--muted);
             font-size: 8px;
         }
+
+        /* MODAL */
 
         .modal {
             position: fixed;
@@ -432,23 +489,23 @@
             background: rgba(0,0,0,.45);
         }
 
-        .modal.open { display: flex; }
+        .modal.open {
+            display: flex;
+        }
 
         .modal-box {
-            width: min(520px, 100%);
+            width: min(650px, 100%);
             max-height: 90vh;
             overflow-y: auto;
             padding: 22px;
             border-radius: 12px;
             background: #fff;
-            box-shadow: 0 20px 50px rgba(0,0,0,.2);
         }
 
         .modal-header {
             display: flex;
-            justify-content: space-between;
-            gap: 15px;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 18px;
         }
 
@@ -462,25 +519,44 @@
             border: 0;
             background: transparent;
             color: var(--muted);
-            font-size: 17px;
+            font-size: 18px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 14px;
         }
 
-        .form-group.full { grid-column: 1 / -1; }
+        .form-group {
+            margin-bottom: 14px;
+        }
 
-        .modal-footer {
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .form-actions {
             display: flex;
             justify-content: flex-end;
             gap: 8px;
-            margin-top: 20px;
+            margin-top: 18px;
         }
 
-        @media (max-width: 1050px) {
+        /* NOTICE */
+
+        .notice {
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border: 1px solid #dbe9e1;
+            border-radius: 9px;
+            background: #f1f8f4;
+            color: var(--green);
+            font-size: 7px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1100px) {
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -500,24 +576,30 @@
                 height: auto;
             }
 
-            .profile { display: none; }
+            .profile {
+                display: none;
+            }
 
             .nav {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .content { padding: 17px; }
-        }
+            .content {
+                padding: 17px;
+            }
 
-        @media (max-width: 550px) {
-            .stats,
-            .filters,
             .form-grid {
                 grid-template-columns: 1fr;
             }
 
-            .form-group.full {
+            .full {
                 grid-column: auto;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .stats {
+                grid-template-columns: 1fr;
             }
 
             .page-header {
@@ -532,6 +614,10 @@
             .toolbar button {
                 flex: 1;
             }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -540,18 +626,27 @@
 
 <div class="app">
 
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
 
         <a href="./index.html" class="brand">
-            <img src="../assets/gtf-logo.svg" alt="Global TrustFund">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund"
+            >
 
             <div>
                 <strong>Global TrustFund</strong>
                 <span>Manager Operations Portal</span>
             </div>
+
         </a>
 
-        <div class="nav-title">Manager Operations</div>
+        <div class="nav-title">
+            Manager Operations
+        </div>
 
         <nav class="nav">
 
@@ -580,11 +675,6 @@
                 Approvals
             </a>
 
-            <a href="./reports.html">
-                <span class="nav-icon">▤</span>
-                Reports
-            </a>
-
             <a href="./staff.html" class="active">
                 <span class="nav-icon">♟</span>
                 Staff
@@ -595,6 +685,11 @@
                 Compliance
             </a>
 
+            <a href="./reports.html">
+                <span class="nav-icon">▤</span>
+                Reports
+            </a>
+
             <a href="./support.html">
                 <span class="nav-icon">?</span>
                 Support
@@ -603,8 +698,14 @@
         </nav>
 
         <div class="profile">
-            <strong id="managerName">Manager</strong>
-            <span>Branch / Operations Manager</span>
+
+            <strong id="managerName">
+                Manager
+            </strong>
+
+            <span>
+                Branch / Operations Manager
+            </span>
 
             <button
                 type="button"
@@ -613,20 +714,28 @@
             >
                 Sign Out
             </button>
+
         </div>
 
     </aside>
 
+
+    <!-- MAIN -->
 
     <main class="main">
 
         <header class="topbar">
 
             <div>
-                <h1>Staff Management</h1>
+
+                <h1>
+                    Staff Management
+                </h1>
+
                 <p>
-                    Manage branch staff accounts, roles and access status.
+                    Monitor branch staff and operational access.
                 </p>
+
             </div>
 
             <span class="session">
@@ -641,11 +750,15 @@
             <div class="page-header">
 
                 <div>
-                    <h2>Branch Staff</h2>
+
+                    <h2>
+                        Staff Directory
+                    </h2>
 
                     <p>
-                        Review authorized employees assigned to your branch.
+                        View staff assigned to your authorized branch or operational scope.
                     </p>
+
                 </div>
 
                 <div class="toolbar">
@@ -671,73 +784,210 @@
             </div>
 
 
+            <div class="notice">
+                Staff permissions and sensitive account-access changes should follow
+                your organization's authorization and approval policies.
+            </div>
+
+
+            <!-- STATISTICS -->
+
             <section class="stats">
 
-                <div class="stat">
-                    <div class="stat-label">Total Staff</div>
-                    <div class="stat-value" id="totalStaff">—</div>
-                </div>
+                <article class="stat">
 
-                <div class="stat">
-                    <div class="stat-label">Active Staff</div>
-                    <div class="stat-value" id="activeStaff">—</div>
-                </div>
+                    <div class="stat-label">
+                        Total Staff
+                    </div>
 
-                <div class="stat">
-                    <div class="stat-label">Cashiers</div>
-                    <div class="stat-value" id="cashierCount">—</div>
-                </div>
+                    <div
+                        class="stat-value"
+                        id="totalStaff"
+                    >
+                        0
+                    </div>
 
-                <div class="stat">
-                    <div class="stat-label">Managers</div>
-                    <div class="stat-value" id="managerCount">—</div>
-                </div>
+                    <div class="stat-note">
+                        Staff records in current scope
+                    </div>
+
+                </article>
+
+
+                <article class="stat">
+
+                    <div class="stat-label">
+                        Active
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="activeStaff"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Currently active
+                    </div>
+
+                </article>
+
+
+                <article class="stat">
+
+                    <div class="stat-label">
+                        Cashiers
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="cashierStaff"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Cash operations staff
+                    </div>
+
+                </article>
+
+
+                <article class="stat">
+
+                    <div class="stat-label">
+                        Inactive
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="inactiveStaff"
+                    >
+                        0
+                    </div>
+
+                    <div class="stat-note">
+                        Inactive or suspended
+                    </div>
+
+                </article>
 
             </section>
 
 
-            <section class="toolbar-card">
+            <!-- STAFF TABLE -->
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <h3>
+                        Staff Records
+                    </h3>
+
+                    <p>
+                        Search and filter authorized staff records.
+                    </p>
+
+                </div>
+
 
                 <div class="filters">
 
                     <div>
+
                         <label for="search">
-                            Search Staff
+                            Search
                         </label>
 
                         <input
-                            id="search"
                             type="search"
-                            placeholder="Name, email or employee ID..."
+                            id="search"
+                            placeholder="Name, email or staff ID..."
                         >
+
                     </div>
 
+
                     <div>
+
                         <label for="roleFilter">
                             Role
                         </label>
 
                         <select id="roleFilter">
-                            <option value="">All Roles</option>
-                            <option value="manager">Manager</option>
-                            <option value="cashier">Cashier</option>
-                            <option value="teller">Teller</option>
-                            <option value="support">Support</option>
-                            <option value="compliance">Compliance</option>
+
+                            <option value="">
+                                All Roles
+                            </option>
+
+                            <option value="manager">
+                                Manager
+                            </option>
+
+                            <option value="cashier">
+                                Cashier
+                            </option>
+
+                            <option value="support">
+                                Support
+                            </option>
+
+                            <option value="staff">
+                                Staff
+                            </option>
+
                         </select>
+
                     </div>
 
+
                     <div>
+
                         <label for="statusFilter">
                             Status
                         </label>
 
                         <select id="statusFilter">
-                            <option value="">All Statuses</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+
+                            <option value="">
+                                All Statuses
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                            <option value="suspended">
+                                Suspended
+                            </option>
+
                         </select>
+
                     </div>
+
+
+                    <div>
+
+                        <label for="branchFilter">
+                            Branch
+                        </label>
+
+                        <select id="branchFilter">
+
+                            <option value="">
+                                All Branches
+                            </option>
+
+                        </select>
+
+                    </div>
+
 
                     <button
                         type="button"
@@ -749,20 +999,6 @@
 
                 </div>
 
-            </section>
-
-
-            <section class="card">
-
-                <div class="card-header">
-
-                    <h3>Staff Directory</h3>
-
-                    <p>
-                        Authorized personnel and their current access status.
-                    </p>
-
-                </div>
 
                 <div class="table-wrap">
 
@@ -771,12 +1007,11 @@
                         <thead>
 
                             <tr>
-                                <th>Employee</th>
-                                <th>Employee ID</th>
+                                <th>Staff</th>
                                 <th>Role</th>
-                                <th>Department</th>
+                                <th>Branch</th>
                                 <th>Status</th>
-                                <th>Last Login</th>
+                                <th>Last Activity</th>
                                 <th>Actions</th>
                             </tr>
 
@@ -785,12 +1020,14 @@
                         <tbody id="staffTable">
 
                             <tr>
+
                                 <td
-                                    colspan="7"
-                                    class="loading"
+                                    colspan="6"
+                                    class="empty"
                                 >
-                                    Loading staff...
+                                    Loading staff records...
                                 </td>
+
                             </tr>
 
                         </tbody>
@@ -808,12 +1045,11 @@
 </div>
 
 
-<!-- ADD / EDIT STAFF MODAL -->
+<!-- STAFF MODAL -->
 
 <div
     class="modal"
     id="staffModal"
-    aria-hidden="true"
 >
 
     <div class="modal-box">
@@ -821,14 +1057,13 @@
         <div class="modal-header">
 
             <h3 id="modalTitle">
-                Add Staff Member
+                Add Staff
             </h3>
 
             <button
                 type="button"
                 class="close"
                 id="closeModal"
-                aria-label="Close"
             >
                 ×
             </button>
@@ -853,23 +1088,9 @@
 
                     <input
                         id="fullName"
-                        type="text"
                         required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="employeeId">
-                        Employee ID
-                    </label>
-
-                    <input
-                        id="employeeId"
-                        type="text"
-                        required
+                        maxlength="100"
+                        placeholder="Staff member name"
                     >
 
                 </div>
@@ -885,6 +1106,8 @@
                         id="email"
                         type="email"
                         required
+                        maxlength="150"
+                        placeholder="staff@example.com"
                     >
 
                 </div>
@@ -898,7 +1121,8 @@
 
                     <input
                         id="phone"
-                        type="tel"
+                        maxlength="30"
+                        placeholder="Phone number"
                     >
 
                 </div>
@@ -912,28 +1136,20 @@
 
                     <select id="role" required>
 
-                        <option value="">
-                            Select role
-                        </option>
-
-                        <option value="manager">
-                            Manager
-                        </option>
-
                         <option value="cashier">
                             Cashier
-                        </option>
-
-                        <option value="teller">
-                            Teller
                         </option>
 
                         <option value="support">
                             Support
                         </option>
 
-                        <option value="compliance">
-                            Compliance
+                        <option value="staff">
+                            Staff
+                        </option>
+
+                        <option value="manager">
+                            Manager
                         </option>
 
                     </select>
@@ -943,40 +1159,27 @@
 
                 <div class="form-group">
 
-                    <label for="department">
-                        Department
+                    <label for="branch">
+                        Branch
                     </label>
 
-                    <select id="department">
-
-                        <option value="Operations">
-                            Operations
-                        </option>
-
-                        <option value="Cash Operations">
-                            Cash Operations
-                        </option>
-
-                        <option value="Customer Service">
-                            Customer Service
-                        </option>
-
-                        <option value="Compliance">
-                            Compliance
-                        </option>
-
-                    </select>
+                    <input
+                        id="branch"
+                        required
+                        maxlength="100"
+                        placeholder="Branch name"
+                    >
 
                 </div>
 
 
-                <div class="form-group full">
+                <div class="form-group">
 
-                    <label for="status">
-                        Account Status
+                    <label for="staffStatus">
+                        Status
                     </label>
 
-                    <select id="status">
+                    <select id="staffStatus">
 
                         <option value="active">
                             Active
@@ -986,6 +1189,10 @@
                             Inactive
                         </option>
 
+                        <option value="suspended">
+                            Suspended
+                        </option>
+
                     </select>
 
                 </div>
@@ -993,7 +1200,7 @@
             </div>
 
 
-            <div class="modal-footer">
+            <div class="form-actions">
 
                 <button
                     type="button"
@@ -1024,43 +1231,49 @@
     const API_BASE = "/api";
 
     let staffRecords = [];
-    let editingStaffId = null;
 
-
-    /* ---------------------------------------------------------
-       API REQUEST
-    --------------------------------------------------------- */
 
     async function apiRequest(
         endpoint,
         options = {}
     ) {
 
-        const response = await fetch(
-            `${API_BASE}${endpoint}`,
-            {
-                method: options.method || "GET",
+        const response =
+            await fetch(
+                `${API_BASE}${endpoint}`,
+                {
+                    method:
+                        options.method || "GET",
 
-                credentials: "include",
+                    credentials:
+                        "include",
 
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    ...(options.headers || {})
-                },
+                    headers: {
+                        "Accept":
+                            "application/json",
 
-                body:
-                    options.body
-                        ? JSON.stringify(options.body)
-                        : undefined
-            }
-        );
+                        "Content-Type":
+                            "application/json",
+
+                        ...(options.headers || {})
+                    },
+
+                    body:
+                        options.body
+                            ? JSON.stringify(
+                                options.body
+                            )
+                            : undefined
+                }
+            );
 
 
         const data =
             await response
                 .json()
-                .catch(() => ({}));
+                .catch(
+                    () => ({})
+                );
 
 
         if (!response.ok) {
@@ -1079,37 +1292,68 @@
     }
 
 
-    /* ---------------------------------------------------------
-       HELPERS
-    --------------------------------------------------------- */
+    function escapeHtml(
+        value
+    ) {
 
-    function escapeHtml(value) {
-
-        return String(value ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+        return String(
+            value ?? ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
 
     }
 
 
-    function getArray(data) {
+    function getArray(
+        data
+    ) {
 
-        if (Array.isArray(data)) {
+        if (
+            Array.isArray(data)
+        ) {
             return data;
         }
 
-        if (Array.isArray(data?.staff)) {
+        if (
+            Array.isArray(
+                data?.staff
+            )
+        ) {
             return data.staff;
         }
 
-        if (Array.isArray(data?.employees)) {
-            return data.employees;
+        if (
+            Array.isArray(
+                data?.users
+            )
+        ) {
+            return data.users;
         }
 
-        if (Array.isArray(data?.data)) {
+        if (
+            Array.isArray(
+                data?.data
+            )
+        ) {
             return data.data;
         }
 
@@ -1118,30 +1362,56 @@
     }
 
 
-    function initials(name) {
+    function normalizeRole(
+        role
+    ) {
 
-        return String(name || "Staff")
-            .split(/\s+/)
-            .filter(Boolean)
-            .slice(0, 2)
-            .map(word => word[0])
-            .join("")
-            .toUpperCase();
+        return String(
+            role ||
+            "staff"
+        )
+            .toLowerCase()
+            .replace(
+                /[\s_-]+/g,
+                ""
+            );
 
     }
 
 
-    function formatDate(value) {
+    function normalizeStatus(
+        status
+    ) {
+
+        return String(
+            status ||
+            "active"
+        )
+            .toLowerCase();
+
+    }
+
+
+    function formatDate(
+        value
+    ) {
 
         if (!value) {
-            return "Never";
-        }
-
-        const date = new Date(value);
-
-        if (Number.isNaN(date.getTime())) {
             return "—";
         }
+
+        const date =
+            new Date(value);
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+            return "—";
+        }
+
 
         return date.toLocaleDateString(
             "en-NG",
@@ -1155,9 +1425,31 @@
     }
 
 
-    /* ---------------------------------------------------------
-       LOAD STAFF
-    --------------------------------------------------------- */
+    function initials(
+        name
+    ) {
+
+        const parts =
+            String(
+                name ||
+                "Staff"
+            )
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2);
+
+
+        return parts
+            .map(
+                part =>
+                    part
+                        .charAt(0)
+                        .toUpperCase()
+            )
+            .join("");
+
+    }
+
 
     async function loadStaff() {
 
@@ -1170,12 +1462,14 @@
         table.innerHTML = `
 
             <tr>
+
                 <td
-                    colspan="7"
-                    class="loading"
+                    colspan="6"
+                    class="empty"
                 >
-                    Loading staff...
+                    Loading staff records...
                 </td>
+
             </tr>
 
         `;
@@ -1193,12 +1487,11 @@
                 getArray(data);
 
 
+            populateBranches();
+
+            updateStats();
+
             renderStaff(
-                staffRecords
-            );
-
-
-            updateStats(
                 staffRecords
             );
 
@@ -1207,6 +1500,7 @@
         catch (error) {
 
             console.error(
+                "Unable to load staff:",
                 error
             );
 
@@ -1214,29 +1508,168 @@
             staffRecords = [];
 
 
+            updateStats();
+
             table.innerHTML = `
 
                 <tr>
+
                     <td
-                        colspan="7"
+                        colspan="6"
                         class="empty"
                     >
-                        Staff data is currently unavailable.
+                        Staff records are currently unavailable.
                     </td>
+
                 </tr>
 
             `;
-
-            updateStats([]);
 
         }
 
     }
 
 
-    /* ---------------------------------------------------------
-       RENDER STAFF
-    --------------------------------------------------------- */
+    function populateBranches() {
+
+        const select =
+            document.getElementById(
+                "branchFilter"
+            );
+
+
+        const current =
+            select.value;
+
+
+        const branches =
+            [
+                ...new Set(
+                    staffRecords
+                        .map(
+                            staff =>
+                                staff.branch_name ||
+                                staff.branch ||
+                                staff.location
+                        )
+                        .filter(Boolean)
+                )
+            ]
+                .sort();
+
+
+        select.innerHTML = `
+
+            <option value="">
+                All Branches
+            </option>
+
+        `;
+
+
+        branches.forEach(
+            branch => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    branch;
+
+                option.textContent =
+                    branch;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        if (
+            branches.includes(current)
+        ) {
+            select.value =
+                current;
+        }
+
+    }
+
+
+    function updateStats() {
+
+        const total =
+            staffRecords.length;
+
+
+        const active =
+            staffRecords.filter(
+                staff =>
+                    normalizeStatus(
+                        staff.status
+                    ) ===
+                    "active"
+            ).length;
+
+
+        const cashiers =
+            staffRecords.filter(
+                staff =>
+                    normalizeRole(
+                        staff.role
+                    ) ===
+                    "cashier"
+            ).length;
+
+
+        const inactive =
+            staffRecords.filter(
+                staff => {
+
+                    const status =
+                        normalizeStatus(
+                            staff.status
+                        );
+
+                    return (
+                        status === "inactive" ||
+                        status === "suspended"
+                    );
+
+                }
+            ).length;
+
+
+        document.getElementById(
+            "totalStaff"
+        ).textContent =
+            total;
+
+
+        document.getElementById(
+            "activeStaff"
+        ).textContent =
+            active;
+
+
+        document.getElementById(
+            "cashierStaff"
+        ).textContent =
+            cashiers;
+
+
+        document.getElementById(
+            "inactiveStaff"
+        ).textContent =
+            inactive;
+
+    }
+
 
     function renderStaff(
         records
@@ -1253,12 +1686,14 @@
             table.innerHTML = `
 
                 <tr>
+
                     <td
-                        colspan="7"
+                        colspan="6"
                         class="empty"
                     >
-                        No staff members found.
+                        No staff records found.
                     </td>
+
                 </tr>
 
             `;
@@ -1273,26 +1708,53 @@
                 .map(
                     staff => {
 
+                        const id =
+                            staff.id ||
+                            staff.staff_id ||
+                            "";
+
+
                         const name =
                             staff.full_name ||
                             staff.name ||
                             "Unnamed Staff";
 
 
+                        const email =
+                            staff.email ||
+                            "No email";
+
+
                         const role =
-                            staff.role ||
-                            "—";
+                            normalizeRole(
+                                staff.role
+                            );
+
+
+                        const displayRole =
+                            role.charAt(0)
+                                .toUpperCase() +
+                            role.slice(1);
 
 
                         const status =
-                            String(
-                                staff.status ||
-                                "active"
-                            ).toLowerCase();
+                            normalizeStatus(
+                                staff.status
+                            );
 
 
-                        const active =
-                            status === "active";
+                        const branch =
+                            staff.branch_name ||
+                            staff.branch ||
+                            staff.location ||
+                            "—";
+
+
+                        const lastActivity =
+                            staff.last_activity ||
+                            staff.last_activity_at ||
+                            staff.last_login_at ||
+                            staff.updated_at;
 
 
                         return `
@@ -1301,41 +1763,59 @@
 
                                 <td>
 
-                                    <span class="avatar">
-                                        ${escapeHtml(
-                                            initials(name)
-                                        )}
-                                    </span>
+                                    <div class="staff-cell">
 
-                                    <strong
-                                        style="display:inline;"
+                                        <div class="avatar">
+                                            ${escapeHtml(
+                                                initials(
+                                                    name
+                                                )
+                                            )}
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                ${escapeHtml(
+                                                    name
+                                                )}
+                                            </strong>
+
+                                            <small>
+                                                ${escapeHtml(
+                                                    email
+                                                )}
+                                            </small>
+
+                                            ${
+                                                id
+                                                    ? `
+                                                        <small>
+                                                            ID: ${escapeHtml(
+                                                                id
+                                                            )}
+                                                        </small>
+                                                      `
+                                                    : ""
+                                            }
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="badge ${escapeHtml(
+                                            role
+                                        )}"
                                     >
-                                        ${escapeHtml(name)}
-                                    </strong>
-
-                                    <small>
                                         ${escapeHtml(
-                                            staff.email ||
-                                            ""
+                                            displayRole
                                         )}
-                                    </small>
-
-                                </td>
-
-
-                                <td>
-                                    ${escapeHtml(
-                                        staff.employee_id ||
-                                        staff.employeeId ||
-                                        "—"
-                                    )}
-                                </td>
-
-
-                                <td>
-
-                                    <span class="badge role-badge">
-                                        ${escapeHtml(role)}
                                     </span>
 
                                 </td>
@@ -1343,24 +1823,21 @@
 
                                 <td>
                                     ${escapeHtml(
-                                        staff.department ||
-                                        "Operations"
+                                        branch
                                     )}
                                 </td>
 
 
                                 <td>
 
-                                    <span class="badge ${
-                                        active
-                                            ? "active-badge"
-                                            : "inactive-badge"
-                                    }">
-                                        ${
-                                            active
-                                                ? "Active"
-                                                : "Inactive"
-                                        }
+                                    <span
+                                        class="badge ${escapeHtml(
+                                            status
+                                        )}"
+                                    >
+                                        ${escapeHtml(
+                                            status
+                                        )}
                                     </span>
 
                                 </td>
@@ -1369,8 +1846,7 @@
                                 <td>
                                     ${escapeHtml(
                                         formatDate(
-                                            staff.last_login ||
-                                            staff.lastLogin
+                                            lastActivity
                                         )
                                     )}
                                 </td>
@@ -1383,32 +1859,52 @@
                                         <button
                                             type="button"
                                             class="action"
+                                            data-action="view"
+                                            data-id="${escapeHtml(
+                                                id
+                                            )}"
+                                        >
+                                            View
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="action"
                                             data-action="edit"
                                             data-id="${escapeHtml(
-                                                staff.id
+                                                id
                                             )}"
                                         >
                                             Edit
                                         </button>
 
-                                        <button
-                                            type="button"
-                                            class="action ${
-                                                active
-                                                    ? "danger"
-                                                    : ""
-                                            }"
-                                            data-action="toggle"
-                                            data-id="${escapeHtml(
-                                                staff.id
-                                            )}"
-                                        >
-                                            ${
-                                                active
-                                                    ? "Deactivate"
-                                                    : "Activate"
-                                            }
-                                        </button>
+                                        ${
+                                            status === "active"
+                                                ? `
+                                                    <button
+                                                        type="button"
+                                                        class="action danger"
+                                                        data-action="deactivate"
+                                                        data-id="${escapeHtml(
+                                                            id
+                                                        )}"
+                                                    >
+                                                        Deactivate
+                                                    </button>
+                                                  `
+                                                : `
+                                                    <button
+                                                        type="button"
+                                                        class="action"
+                                                        data-action="activate"
+                                                        data-id="${escapeHtml(
+                                                            id
+                                                        )}"
+                                                    >
+                                                        Activate
+                                                    </button>
+                                                  `
+                                        }
 
                                     </div>
 
@@ -1425,87 +1921,13 @@
     }
 
 
-    /* ---------------------------------------------------------
-       STATS
-    --------------------------------------------------------- */
-
-    function updateStats(
-        records
-    ) {
-
-        const total =
-            records.length;
-
-
-        const active =
-            records.filter(
-                staff =>
-                    String(
-                        staff.status ||
-                        "active"
-                    ).toLowerCase() ===
-                    "active"
-            ).length;
-
-
-        const cashiers =
-            records.filter(
-                staff =>
-                    String(
-                        staff.role ||
-                        ""
-                    ).toLowerCase() ===
-                    "cashier"
-            ).length;
-
-
-        const managers =
-            records.filter(
-                staff =>
-                    String(
-                        staff.role ||
-                        ""
-                    ).toLowerCase() ===
-                    "manager"
-            ).length;
-
-
-        document.getElementById(
-            "totalStaff"
-        ).textContent =
-            total.toLocaleString();
-
-
-        document.getElementById(
-            "activeStaff"
-        ).textContent =
-            active.toLocaleString();
-
-
-        document.getElementById(
-            "cashierCount"
-        ).textContent =
-            cashiers.toLocaleString();
-
-
-        document.getElementById(
-            "managerCount"
-        ).textContent =
-            managers.toLocaleString();
-
-    }
-
-
-    /* ---------------------------------------------------------
-       FILTERS
-    --------------------------------------------------------- */
-
     function applyFilters() {
 
         const search =
             document.getElementById(
                 "search"
-            ).value
+            )
+                .value
                 .trim()
                 .toLowerCase();
 
@@ -1513,14 +1935,24 @@
         const role =
             document.getElementById(
                 "roleFilter"
-            ).value
+            )
+                .value
                 .toLowerCase();
 
 
         const status =
             document.getElementById(
                 "statusFilter"
-            ).value
+            )
+                .value
+                .toLowerCase();
+
+
+        const branch =
+            document.getElementById(
+                "branchFilter"
+            )
+                .value
                 .toLowerCase();
 
 
@@ -1533,59 +1965,79 @@
                             staff.full_name ||
                             staff.name ||
                             ""
-                        ).toLowerCase();
+                        )
+                            .toLowerCase();
 
 
                     const email =
                         String(
                             staff.email ||
                             ""
-                        ).toLowerCase();
+                        )
+                            .toLowerCase();
 
 
-                    const employeeId =
+                    const id =
                         String(
-                            staff.employee_id ||
-                            staff.employeeId ||
+                            staff.id ||
+                            staff.staff_id ||
                             ""
-                        ).toLowerCase();
+                        )
+                            .toLowerCase();
 
 
-                    const staffRole =
+                    const itemRole =
+                        normalizeRole(
+                            staff.role
+                        );
+
+
+                    const itemStatus =
+                        normalizeStatus(
+                            staff.status
+                        );
+
+
+                    const itemBranch =
                         String(
-                            staff.role ||
+                            staff.branch_name ||
+                            staff.branch ||
+                            staff.location ||
                             ""
-                        ).toLowerCase();
-
-
-                    const staffStatus =
-                        String(
-                            staff.status ||
-                            "active"
-                        ).toLowerCase();
-
-
-                    const matchesSearch =
-                        !search ||
-                        name.includes(search) ||
-                        email.includes(search) ||
-                        employeeId.includes(search);
-
-
-                    const matchesRole =
-                        !role ||
-                        staffRole === role;
-
-
-                    const matchesStatus =
-                        !status ||
-                        staffStatus === status;
+                        )
+                            .toLowerCase();
 
 
                     return (
-                        matchesSearch &&
-                        matchesRole &&
-                        matchesStatus
+
+                        (
+                            !search ||
+                            name.includes(search) ||
+                            email.includes(search) ||
+                            id.includes(search)
+                        )
+
+                        &&
+
+                        (
+                            !role ||
+                            itemRole === role
+                        )
+
+                        &&
+
+                        (
+                            !status ||
+                            itemStatus === status
+                        )
+
+                        &&
+
+                        (
+                            !branch ||
+                            itemBranch === branch
+                        )
+
                     );
 
                 }
@@ -1624,6 +2076,14 @@
 
 
     document.getElementById(
+        "branchFilter"
+    ).addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+    document.getElementById(
         "clearFilters"
     ).addEventListener(
         "click",
@@ -1641,6 +2101,10 @@
                 "statusFilter"
             ).value = "";
 
+            document.getElementById(
+                "branchFilter"
+            ).value = "";
+
             renderStaff(
                 staffRecords
             );
@@ -1649,9 +2113,7 @@
     );
 
 
-    /* ---------------------------------------------------------
-       MODAL
-    --------------------------------------------------------- */
+    /* MODAL */
 
     const modal =
         document.getElementById(
@@ -1663,47 +2125,34 @@
         staff = null
     ) {
 
-        modal.classList.add(
-            "open"
-        );
+        document.getElementById(
+            "staffForm"
+        ).reset();
 
-        modal.setAttribute(
-            "aria-hidden",
-            "false"
-        );
+
+        document.getElementById(
+            "staffId"
+        ).value =
+            staff?.id ||
+            staff?.staff_id ||
+            "";
+
+
+        document.getElementById(
+            "modalTitle"
+        ).textContent =
+            staff
+                ? "Edit Staff"
+                : "Add Staff";
 
 
         if (staff) {
-
-            editingStaffId =
-                staff.id;
-
-
-            document.getElementById(
-                "modalTitle"
-            ).textContent =
-                "Edit Staff Member";
-
-
-            document.getElementById(
-                "staffId"
-            ).value =
-                staff.id || "";
-
 
             document.getElementById(
                 "fullName"
             ).value =
                 staff.full_name ||
                 staff.name ||
-                "";
-
-
-            document.getElementById(
-                "employeeId"
-            ).value =
-                staff.employee_id ||
-                staff.employeeId ||
                 "";
 
 
@@ -1718,50 +2167,39 @@
                 "phone"
             ).value =
                 staff.phone ||
+                staff.phone_number ||
                 "";
 
 
             document.getElementById(
                 "role"
             ).value =
-                staff.role ||
+                normalizeRole(
+                    staff.role
+                );
+
+
+            document.getElementById(
+                "branch"
+            ).value =
+                staff.branch_name ||
+                staff.branch ||
                 "";
 
 
             document.getElementById(
-                "department"
+                "staffStatus"
             ).value =
-                staff.department ||
-                "Operations";
-
-
-            document.getElementById(
-                "status"
-            ).value =
-                staff.status ||
-                "active";
+                normalizeStatus(
+                    staff.status
+                );
 
         }
 
-        else {
 
-            editingStaffId = null;
-
-            document.getElementById(
-                "modalTitle"
-            ).textContent =
-                "Add Staff Member";
-
-            document.getElementById(
-                "staffForm"
-            ).reset();
-
-            document.getElementById(
-                "status"
-            ).value =
-                "active";
-
-        }
+        modal.classList.add(
+            "open"
+        );
 
     }
 
@@ -1771,13 +2209,6 @@
         modal.classList.remove(
             "open"
         );
-
-        modal.setAttribute(
-            "aria-hidden",
-            "true"
-        );
-
-        editingStaffId = null;
 
     }
 
@@ -1820,9 +2251,106 @@
     );
 
 
-    /* ---------------------------------------------------------
-       EDIT / TOGGLE
-    --------------------------------------------------------- */
+    /* SAVE STAFF */
+
+    document.getElementById(
+        "staffForm"
+    ).addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const id =
+                document.getElementById(
+                    "staffId"
+                ).value;
+
+
+            const body = {
+
+                full_name:
+                    document.getElementById(
+                        "fullName"
+                    ).value.trim(),
+
+                email:
+                    document.getElementById(
+                        "email"
+                    ).value.trim(),
+
+                phone:
+                    document.getElementById(
+                        "phone"
+                    ).value.trim(),
+
+                role:
+                    document.getElementById(
+                        "role"
+                    ).value,
+
+                branch:
+                    document.getElementById(
+                        "branch"
+                    ).value.trim(),
+
+                status:
+                    document.getElementById(
+                        "staffStatus"
+                    ).value
+
+            };
+
+
+            try {
+
+                await apiRequest(
+                    id
+                        ? `/staff/${encodeURIComponent(id)}`
+                        : "/staff",
+                    {
+                        method:
+                            id
+                                ? "PATCH"
+                                : "POST",
+
+                        body
+                    }
+                );
+
+
+                closeModal();
+
+                await loadStaff();
+
+                alert(
+                    id
+                        ? "Staff record updated."
+                        : "Staff record created."
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "Unable to save staff record."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* TABLE ACTIONS */
 
     document.getElementById(
         "staffTable"
@@ -1848,7 +2376,10 @@
             const staff =
                 staffRecords.find(
                     item =>
-                        String(item.id) ===
+                        String(
+                            item.id ||
+                            item.staff_id
+                        ) ===
                         String(id)
                 );
 
@@ -1862,7 +2393,55 @@
                 button.dataset.action;
 
 
-            if (action === "edit") {
+            if (
+                action === "view"
+            ) {
+
+                const name =
+                    staff.full_name ||
+                    staff.name ||
+                    "Staff";
+
+
+                const email =
+                    staff.email ||
+                    "—";
+
+
+                const role =
+                    staff.role ||
+                    "—";
+
+
+                const branch =
+                    staff.branch_name ||
+                    staff.branch ||
+                    "—";
+
+
+                const status =
+                    staff.status ||
+                    "—";
+
+
+                alert(
+                    `Staff Profile\n\n` +
+                    `Name: ${name}\n` +
+                    `Email: ${email}\n` +
+                    `Role: ${role}\n` +
+                    `Branch: ${branch}\n` +
+                    `Status: ${status}`
+                );
+
+
+                return;
+
+            }
+
+
+            if (
+                action === "edit"
+            ) {
 
                 openModal(
                     staff
@@ -1873,25 +2452,26 @@
             }
 
 
-            if (action === "toggle") {
+            if (
+                action === "activate" ||
+                action === "deactivate"
+            ) {
 
-                const active =
-                    String(
-                        staff.status ||
-                        "active"
-                    ).toLowerCase() ===
-                    "active";
+                const newStatus =
+                    action === "activate"
+                        ? "active"
+                        : "inactive";
 
 
-                const nextStatus =
-                    active
-                        ? "inactive"
-                        : "active";
+                const confirmation =
+                    action === "activate"
+                        ? "Activate this staff member?"
+                        : "Deactivate this staff member?";
 
 
                 if (
                     !window.confirm(
-                        `${active ? "Deactivate" : "Activate"} this staff account?`
+                        confirmation
                     )
                 ) {
                     return;
@@ -1907,7 +2487,7 @@
 
                             body: {
                                 status:
-                                    nextStatus
+                                    newStatus
                             }
                         }
                     );
@@ -1923,7 +2503,9 @@
                         error
                     );
 
+
                     alert(
+                        error.message ||
                         "Unable to update staff status."
                     );
 
@@ -1935,114 +2517,7 @@
     );
 
 
-    /* ---------------------------------------------------------
-       SAVE STAFF
-    --------------------------------------------------------- */
-
-    document.getElementById(
-        "staffForm"
-    ).addEventListener(
-        "submit",
-        async event => {
-
-            event.preventDefault();
-
-
-            const payload = {
-
-                full_name:
-                    document.getElementById(
-                        "fullName"
-                    ).value.trim(),
-
-                employee_id:
-                    document.getElementById(
-                        "employeeId"
-                    ).value.trim(),
-
-                email:
-                    document.getElementById(
-                        "email"
-                    ).value.trim(),
-
-                phone:
-                    document.getElementById(
-                        "phone"
-                    ).value.trim(),
-
-                role:
-                    document.getElementById(
-                        "role"
-                    ).value,
-
-                department:
-                    document.getElementById(
-                        "department"
-                    ).value,
-
-                status:
-                    document.getElementById(
-                        "status"
-                    ).value
-
-            };
-
-
-            try {
-
-                if (editingStaffId) {
-
-                    await apiRequest(
-                        `/staff/${encodeURIComponent(
-                            editingStaffId
-                        )}`,
-                        {
-                            method: "PATCH",
-                            body: payload
-                        }
-                    );
-
-                }
-
-                else {
-
-                    await apiRequest(
-                        "/staff",
-                        {
-                            method: "POST",
-                            body: payload
-                        }
-                    );
-
-                }
-
-
-                closeModal();
-
-                await loadStaff();
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    error
-                );
-
-                alert(
-                    error.message ||
-                    "Unable to save staff member."
-                );
-
-            }
-
-        }
-    );
-
-
-    /* ---------------------------------------------------------
-       REFRESH
-    --------------------------------------------------------- */
+    /* REFRESH */
 
     document.getElementById(
         "refreshButton"
@@ -2052,9 +2527,7 @@
     );
 
 
-    /* ---------------------------------------------------------
-       MANAGER PROFILE
-    --------------------------------------------------------- */
+    /* MANAGER PROFILE */
 
     try {
 
@@ -2067,7 +2540,9 @@
         if (raw) {
 
             const user =
-                JSON.parse(raw);
+                JSON.parse(
+                    raw
+                );
 
 
             document.getElementById(
@@ -2083,15 +2558,11 @@
     }
 
     catch {
-
-        /* Ignore invalid local profile data. */
-
+        /* Ignore invalid profile data. */
     }
 
 
-    /* ---------------------------------------------------------
-       LOGOUT
-    --------------------------------------------------------- */
+    /* LOGOUT */
 
     document.getElementById(
         "logoutButton"
@@ -2147,9 +2618,7 @@
     );
 
 
-    /* ---------------------------------------------------------
-       INITIALIZE
-    --------------------------------------------------------- */
+    /* INITIAL LOAD */
 
     loadStaff();
 
