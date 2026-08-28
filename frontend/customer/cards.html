@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cards | Global TrustFund</title>
+
+    <meta
+        name="description"
+        content="Manage your Global TrustFund debit and payment cards."
+    >
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="dashboard-page">
+
+<div class="dashboard-layout">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="dashboard-sidebar">
+
+        <a href="dashboard.html" class="brand">
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund"
+                class="brand-logo"
+            >
+
+            <span class="brand-text">
+                <strong>GLOBAL TRUSTFUND</strong>
+                <small>SECURE BANKING</small>
+            </span>
+
+        </a>
+
+
+        <nav
+            class="sidebar-navigation"
+            aria-label="Customer navigation"
+        >
+
+            <span class="sidebar-section-title">
+                Banking
+            </span>
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">⌂</span>
+                Dashboard
+            </a>
+
+            <a
+                href="accounts.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">▣</span>
+                Accounts
+            </a>
+
+            <a
+                href="transfers.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">⇄</span>
+                Transfers
+            </a>
+
+            <a
+                href="payments.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">$</span>
+                Payments
+            </a>
+
+            <a
+                href="transactions.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">↔</span>
+                Transactions
+            </a>
+
+            <a
+                href="cards.html"
+                class="sidebar-link active"
+                aria-current="page"
+            >
+                <span class="sidebar-icon">▤</span>
+                Cards
+            </a>
+
+
+            <span class="sidebar-section-title">
+                Account
+            </span>
+
+            <a
+                href="profile.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">◉</span>
+                Profile
+            </a>
+
+            <a
+                href="support.html"
+                class="sidebar-link"
+            >
+                <span class="sidebar-icon">?</span>
+                Support
+            </a>
+
+
+            <div class="sidebar-footer">
+
+                <a
+                    href="signout.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">↪</span>
+                    Sign Out
+                </a>
+
+            </div>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="dashboard-header">
+
+            <div class="dashboard-header-title">
+
+                <h1>
+                    Cards
+                </h1>
+
+                <p>
+                    View and manage your banking cards
+                </p>
+
+            </div>
+
+
+            <div class="dashboard-header-actions">
+
+                <a
+                    href="dashboard.html"
+                    class="button button-outline button-small"
+                >
+                    Dashboard
+                </a>
+
+
+                <div class="dashboard-user">
+
+                    <div
+                        class="user-avatar"
+                        id="userAvatar"
+                        aria-hidden="true"
+                    >
+                        U
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong id="userName">
+                            Customer
+                        </strong>
+
+                        <small>
+                            Customer Account
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD CONTENT
+        ================================================== -->
+
+        <div class="dashboard-content">
+
+
+            <section class="dashboard-welcome">
+
+                <h2>
+                    Your Cards
+                </h2>
+
+                <p>
+                    Manage your Global TrustFund cards and review
+                    their current status.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 CARD STATISTICS
+            ================================================== -->
+
+            <section
+                class="stats-grid"
+                aria-label="Card statistics"
+            >
+
+                <article class="stat-card">
+
+                    <span class="stat-card-label">
+                        Total Cards
+                    </span>
+
+                    <strong
+                        class="stat-card-value"
+                        id="totalCards"
+                    >
+                        0
+                    </strong>
+
+                    <span class="stat-card-meta">
+                        Cards associated with your profile
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-card-label">
+                        Active
+                    </span>
+
+                    <strong
+                        class="stat-card-value text-success"
+                        id="activeCards"
+                    >
+                        0
+                    </strong>
+
+                    <span class="stat-card-meta">
+                        Cards currently active
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-card-label">
+                        Pending
+                    </span>
+
+                    <strong
+                        class="stat-card-value text-warning"
+                        id="pendingCards"
+                    >
+                        0
+                    </strong>
+
+                    <span class="stat-card-meta">
+                        Cards awaiting activation
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-card-label">
+                        Blocked
+                    </span>
+
+                    <strong
+                        class="stat-card-value text-danger"
+                        id="blockedCards"
+                    >
+                        0
+                    </strong>
+
+                    <span class="stat-card-meta">
+                        Cards requiring attention
+                    </span>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 ALERT
+            ================================================== -->
+
+            <div
+                id="cardAlert"
+                class="alert alert-info d-none mb-3"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- =================================================
+                 CARDS
+            ================================================== -->
+
+            <section class="card">
+
+                <div
+                    class="d-flex align-center justify-between mb-3"
+                >
+
+                    <div>
+
+                        <h2>
+                            My Cards
+                        </h2>
+
+                        <p>
+                            Select a card to view available management
+                            options.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="button button-primary button-small"
+                        id="refreshCards"
+                    >
+                        Refresh
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="cardsGrid"
+                    class="account-grid"
+                >
+
+                    <!-- Cards inserted by JavaScript -->
+
+                    <div class="empty-state">
+
+                        <div
+                            class="empty-state-icon"
+                            aria-hidden="true"
+                        >
+                            ▤
+                        </div>
+
+                        <h3>
+                            Loading cards
+                        </h3>
+
+                        <p>
+                            Your card information is being loaded.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CARD MANAGEMENT
+            ================================================== -->
+
+            <section
+                class="card mt-3"
+                id="cardManagement"
+                hidden
+            >
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <h2>
+                            Card Management
+                        </h2>
+
+                        <p>
+                            Manage the selected card.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="modal-close"
+                        id="closeManagement"
+                        aria-label="Close card management"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="selectedCardInfo"
+                    class="mb-3"
+                ></div>
+
+
+                <div class="management-layout">
+
+                    <article class="management-card">
+
+                        <h3>
+                            Card Status
+                        </h3>
+
+                        <div
+                            id="managementStatus"
+                            class="management-card-value"
+                        >
+                            —
+                        </div>
+
+                        <p>
+                            Current card availability.
+                        </p>
+
+                    </article>
+
+
+                    <article class="management-card">
+
+                        <h3>
+                            Card Type
+                        </h3>
+
+                        <div
+                            id="managementType"
+                            class="management-card-value"
+                        >
+                            —
+                        </div>
+
+                        <p>
+                            Card category.
+                        </p>
+
+                    </article>
+
+
+                    <article class="management-card">
+
+                        <h3>
+                            Last Four
+                        </h3>
+
+                        <div
+                            id="managementLastFour"
+                            class="management-card-value"
+                        >
+                            —
+                        </div>
+
+                        <p>
+                            Card ending digits.
+                        </p>
+
+                    </article>
+
+
+                    <article class="management-card">
+
+                        <h3>
+                            Expiration
+                        </h3>
+
+                        <div
+                            id="managementExpiry"
+                            class="management-card-value"
+                        >
+                            —
+                        </div>
+
+                        <p>
+                            Card expiration date.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <div class="divider"></div>
+
+
+                <div class="hero-actions">
+
+                    <button
+                        type="button"
+                        class="button button-primary"
+                        id="activateCard"
+                    >
+                        Activate Card
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-outline"
+                        id="freezeCard"
+                    >
+                        Freeze Card
+                    </button>
+
+                    <button
+                        type="button"
+                        class="button button-outline"
+                        id="unfreezeCard"
+                    >
+                        Unfreeze Card
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SECURITY
+            ================================================== -->
+
+            <section class="security-panel mt-3">
+
+                <div class="security-panel-inner">
+
+                    <div
+                        class="security-icon"
+                        aria-hidden="true"
+                    >
+                        ✓
+                    </div>
+
+                    <h3>
+                        Keep Your Card Secure
+                    </h3>
+
+                    <p>
+                        Never share your full card number, PIN,
+                        password, or authentication codes with
+                        anyone. Contact Global TrustFund support
+                        if you notice suspicious card activity.
+                    </p>
+
+                    <a
+                        href="support.html"
+                        class="text-link"
+                    >
+                        Contact Support
+                    </a>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const state = {
+        cards: [],
+        selectedCard: null
+    };
+
+
+    const elements = {
+
+        cardsGrid:
+            document.getElementById("cardsGrid"),
+
+        alert:
+            document.getElementById("cardAlert"),
+
+        refresh:
+            document.getElementById("refreshCards"),
+
+        management:
+            document.getElementById("cardManagement"),
+
+        selectedInfo:
+            document.getElementById("selectedCardInfo"),
+
+        status:
+            document.getElementById("managementStatus"),
+
+        type:
+            document.getElementById("managementType"),
+
+        lastFour:
+            document.getElementById("managementLastFour"),
+
+        expiry:
+            document.getElementById("managementExpiry"),
+
+        activate:
+            document.getElementById("activateCard"),
+
+        freeze:
+            document.getElementById("freezeCard"),
+
+        unfreeze:
+            document.getElementById("unfreezeCard"),
+
+        close:
+            document.getElementById("closeManagement")
+
+    };
+
+
+    function escapeHtml(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    function showAlert(message, type = "info") {
+
+        elements.alert.className =
+            `alert alert-${type}`;
+
+        elements.alert.textContent =
+            message;
+
+        elements.alert.classList.remove(
+            "d-none"
+        );
+
+    }
+
+
+    function normalizeCard(card) {
+
+        const rawNumber =
+            card.card_number ||
+            card.number ||
+            "";
+
+        let lastFour =
+            card.last_four ||
+            card.last4 ||
+            "";
+
+        if (
+            !lastFour &&
+            rawNumber
+        ) {
+
+            lastFour =
+                String(rawNumber)
+                    .slice(-4);
+
+        }
+
+
+        return {
+
+            id:
+                card.id ||
+                card.card_id ||
+                crypto.randomUUID(),
+
+            type:
+                card.card_type ||
+                card.type ||
+                "Debit Card",
+
+            name:
+                card.card_name ||
+                card.name ||
+                "Global TrustFund Card",
+
+            lastFour:
+                lastFour ||
+                "••••",
+
+            status:
+                String(
+                    card.status ||
+                    "pending"
+                ).toLowerCase(),
+
+            expiry:
+                card.expiry_date ||
+                card.expiration_date ||
+                card.expiry ||
+                "—",
+
+            account:
+                card.account_number ||
+                card.account ||
+                "—",
+
+            raw:
+                card
+
+        };
+
+    }
+
+
+    async function loadCustomer() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/users/me",
+                    {
+                        credentials:
+                            "include"
+                    }
+                );
+
+            if (!response.ok) {
+                return;
+            }
+
+
+            const result =
+                await response.json();
+
+
+            const user =
+                result.user ||
+                result.data ||
+                result;
+
+
+            const name =
+                user.full_name ||
+                user.name ||
+                user.first_name ||
+                "Customer";
+
+
+            document.getElementById(
+                "userName"
+            ).textContent =
+                name;
+
+
+            document.getElementById(
+                "userAvatar"
+            ).textContent =
+                name
+                    .trim()
+                    .charAt(0)
+                    .toUpperCase();
+
+        } catch (error) {
+
+            console.warn(
+                "Customer information unavailable."
+            );
+
+        }
+
+    }
+
+
+    async function loadCards() {
+
+        elements.refresh.disabled =
+            true;
+
+        elements.refresh.textContent =
+            "Loading...";
+
+
+        try {
+
+            /*
+             * Expected backend endpoint:
+             *
+             * GET /api/cards
+             *
+             * The backend should return either:
+             *
+             * [
+             *   {...}
+             * ]
+             *
+             * or:
+             *
+             * {
+             *   cards: [...]
+             * }
+             */
+
+            const response =
+                await fetch(
+                    "/api/cards",
+                    {
+                        credentials:
+                            "include"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load cards."
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            const cards =
+                Array.isArray(result)
+                    ? result
+                    : (
+                        result.cards ||
+                        result.data ||
+                        []
+                    );
+
+
+            state.cards =
+                cards.map(
+                    normalizeCard
+                );
+
+
+            updateStatistics();
+
+            renderCards();
+
+
+            showAlert(
+                `${state.cards.length} card(s) loaded.`,
+                "success"
+            );
+
+        } catch (error) {
+
+            state.cards = [];
+
+            updateStatistics();
+
+            renderCards();
+
+
+            showAlert(
+                error.message ||
+                "Card information is currently unavailable.",
+                "danger"
+            );
+
+        } finally {
+
+            elements.refresh.disabled =
+                false;
+
+            elements.refresh.textContent =
+                "Refresh";
+
+        }
+
+    }
+
+
+    function updateStatistics() {
+
+        const total =
+            state.cards.length;
+
+
+        const active =
+            state.cards.filter(
+                card =>
+                    card.status ===
+                    "active"
+            ).length;
+
+
+        const pending =
+            state.cards.filter(
+                card =>
+                    card.status ===
+                    "pending"
+            ).length;
+
+
+        const blocked =
+            state.cards.filter(
+                card =>
+                    card.status ===
+                        "blocked" ||
+                    card.status ===
+                        "frozen"
+            ).length;
+
+
+        document.getElementById(
+            "totalCards"
+        ).textContent =
+            total;
+
+
+        document.getElementById(
+            "activeCards"
+        ).textContent =
+            active;
+
+
+        document.getElementById(
+            "pendingCards"
+        ).textContent =
+            pending;
+
+
+        document.getElementById(
+            "blockedCards"
+        ).textContent =
+            blocked;
+
+    }
+
+
+    function getBadgeClass(status) {
+
+        switch (status) {
+
+            case "active":
+                return "badge-success";
+
+            case "pending":
+                return "badge-warning";
+
+            case "blocked":
+            case "frozen":
+                return "badge-danger";
+
+            default:
+                return "badge-neutral";
+
+        }
+
+    }
+
+
+    function renderCards() {
+
+        if (!state.cards.length) {
+
+            elements.cardsGrid.innerHTML = `
+
+                <div class="empty-state">
+
+                    <div
+                        class="empty-state-icon"
+                        aria-hidden="true"
+                    >
+                        ▤
+                    </div>
+
+                    <h3>
+                        No cards available
+                    </h3>
+
+                    <p>
+                        There are currently no cards
+                        associated with your account.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        elements.cardsGrid.innerHTML =
+            state.cards
+                .map(
+                    card => {
+
+                        const badge =
+                            getBadgeClass(
+                                card.status
+                            );
+
+
+                        return `
+
+                            <article
+                                class="account-card"
+                                data-card-id="${escapeHtml(
+                                    card.id
+                                )}"
+                                tabindex="0"
+                                role="button"
+                                aria-label="Manage ${escapeHtml(
+                                    card.name
+                                )}"
+                            >
+
+                                <div
+                                    class="account-card-type"
+                                >
+                                    ${escapeHtml(
+                                        card.type
+                                    )}
+                                </div>
+
+
+                                <div
+                                    class="account-card-name"
+                                >
+                                    ${escapeHtml(
+                                        card.name
+                                    )}
+                                </div>
+
+
+                                <div
+                                    class="account-card-balance"
+                                >
+                                    •••• ${escapeHtml(
+                                        card.lastFour
+                                    )}
+                                </div>
+
+
+                                <div
+                                    class="account-card-number"
+                                >
+                                    ${escapeHtml(
+                                        card.account
+                                    )}
+                                </div>
+
+
+                                <div
+                                    style="
+                                        position:relative;
+                                        z-index:2;
+                                        margin-top:12px;
+                                    "
+                                >
+
+                                    <span
+                                        class="badge ${badge}"
+                                    >
+                                        ${escapeHtml(
+                                            card.status
+                                        )}
+                                    </span>
+
+                                </div>
+
+                            </article>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+    }
+
+
+    function openManagement(card) {
+
+        state.selectedCard =
+            card;
+
+
+        elements.selectedInfo.innerHTML = `
+
+            <div class="alert alert-info">
+
+                Managing
+                <strong>
+                    ${escapeHtml(
+                        card.name
+                    )}
+                </strong>
+                ending in
+                <strong>
+                    ${escapeHtml(
+                        card.lastFour
+                    )}
+                </strong>.
+
+            </div>
+
+        `;
+
+
+        elements.status.textContent =
+            card.status;
+
+
+        elements.type.textContent =
+            card.type;
+
+
+        elements.lastFour.textContent =
+            `•••• ${card.lastFour}`;
+
+
+        elements.expiry.textContent =
+            card.expiry;
+
+
+        elements.management.hidden =
+            false;
+
+
+        elements.management.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+        updateManagementButtons();
+
+    }
+
+
+    function updateManagementButtons() {
+
+        if (
+            !state.selectedCard
+        ) {
+            return;
+        }
+
+
+        const status =
+            state.selectedCard.status;
+
+
+        elements.activate.style.display =
+            status === "pending"
+                ? "inline-flex"
+                : "none";
+
+
+        elements.freeze.style.display =
+            status === "active"
+                ? "inline-flex"
+                : "none";
+
+
+        elements.unfreeze.style.display =
+            (
+                status === "frozen" ||
+                status === "blocked"
+            )
+                ? "inline-flex"
+                : "none";
+
+    }
+
+
+    async function updateCardStatus(
+        action
+    ) {
+
+        if (
+            !state.selectedCard
+        ) {
+            return;
+        }
+
+
+        const card =
+            state.selectedCard;
+
+
+        let endpoint =
+            `/api/cards/${encodeURIComponent(
+                card.id
+            )}`;
+
+
+        let method =
+            "PATCH";
+
+
+        let body;
+
+
+        if (
+            action === "activate"
+        ) {
+
+            body = {
+                status: "active"
+            };
+
+        }
+
+
+        if (
+            action === "freeze"
+        ) {
+
+            body = {
+                status: "frozen"
+            };
+
+        }
+
+
+        if (
+            action === "unfreeze"
+        ) {
+
+            body = {
+                status: "active"
+            };
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    endpoint,
+                    {
+                        method,
+                        credentials:
+                            "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                body
+                            )
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to update card status."
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            const updated =
+                normalizeCard(
+                    result.card ||
+                    result.data ||
+                    result
+                );
+
+
+            const index =
+                state.cards.findIndex(
+                    item =>
+                        String(
+                            item.id
+                        ) ===
+                        String(
+                            card.id
+                        )
+                );
+
+
+            if (
+                index !== -1
+            ) {
+
+                state.cards[index] =
+                    {
+                        ...state.cards[index],
+                        ...updated
+                    };
+
+                state.selectedCard =
+                    state.cards[index];
+
+            }
+
+
+            updateStatistics();
+
+            renderCards();
+
+            openManagement(
+                state.selectedCard
+            );
+
+
+            showAlert(
+                "Card status updated successfully.",
+                "success"
+            );
+
+        } catch (error) {
+
+            showAlert(
+                error.message ||
+                "Unable to update card.",
+                "danger"
+            );
+
+        }
+
+    }
+
+
+    elements.cardsGrid.addEventListener(
+        "click",
+        event => {
+
+            const cardElement =
+                event.target.closest(
+                    "[data-card-id]"
+                );
+
+
+            if (!cardElement) {
+                return;
+            }
+
+
+            const card =
+                state.cards.find(
+                    item =>
+                        String(
+                            item.id
+                        ) ===
+                        String(
+                            cardElement.dataset
+                                .cardId
+                        )
+                );
+
+
+            if (card) {
+
+                openManagement(
+                    card
+                );
+
+            }
+
+        }
+    );
+
+
+    elements.cardsGrid.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key !== "Enter" &&
+                event.key !== " "
+            ) {
+                return;
+            }
+
+
+            const cardElement =
+                event.target.closest(
+                    "[data-card-id]"
+                );
+
+
+            if (!cardElement) {
+                return;
+            }
+
+
+            event.preventDefault();
+
+
+            const card =
+                state.cards.find(
+                    item =>
+                        String(
+                            item.id
+                        ) ===
+                        String(
+                            cardElement.dataset
+                                .cardId
+                        )
+                );
+
+
+            if (card) {
+
+                openManagement(
+                    card
+                );
+
+            }
+
+        }
+    );
+
+
+    elements.activate.addEventListener(
+        "click",
+        () =>
+            updateCardStatus(
+                "activate"
+            )
+    );
+
+
+    elements.freeze.addEventListener(
+        "click",
+        () =>
+            updateCardStatus(
+                "freeze"
+            )
+    );
+
+
+    elements.unfreeze.addEventListener(
+        "click",
+        () =>
+            updateCardStatus(
+                "unfreeze"
+            )
+    );
+
+
+    elements.close.addEventListener(
+        "click",
+        () => {
+
+            elements.management.hidden =
+                true;
+
+            state.selectedCard =
+                null;
+
+        }
+    );
+
+
+    elements.refresh.addEventListener(
+        "click",
+        loadCards
+    );
+
+
+    loadCustomer();
+
+    loadCards();
+
+});
+
+</script>
+
+</body>
+</html>
