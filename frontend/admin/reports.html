@@ -1,2687 +1,2352 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="GTF Banking administration reports"
-  >
 
-  <meta
-    name="theme-color"
-    content="#0b2a4a"
-  >
+    <meta charset="UTF-8">
 
-  <title>Reports | GTF Banking Admin</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <meta
+        name="description"
+        content="Global TrustFund Admin - Banking Reports"
+    >
 
-  <style>
-    :root {
-      --navy: #0b2a4a;
-      --navy-dark: #071d34;
-      --blue: #145da0;
-      --blue-dark: #0d477c;
-      --blue-light: #eaf3fb;
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-      --background: #f4f7fa;
-      --surface: #ffffff;
+    <title>
+        Reports | Global TrustFund Admin
+    </title>
 
-      --text: #172b3a;
-      --muted: #66788a;
 
-      --border: #d8e1e9;
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-      --success: #16794c;
-      --success-bg: #eaf8f0;
 
-      --warning: #946200;
-      --warning-bg: #fff7df;
+    <style>
 
-      --danger: #b42318;
-      --danger-bg: #fff0ee;
+        /* =====================================================
+           GLOBAL TRUSTFUND ADMIN REPORTS
+           ===================================================== */
 
-      --shadow:
-        0 5px 20px rgba(11, 42, 74, 0.06);
-    }
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-green-dark: #092f24;
+            --gtf-green-light: #176b48;
+            --gtf-gold: #c9962b;
 
-    * {
-      box-sizing: border-box;
-    }
+            --gtf-bg: #f4f8f6;
+            --gtf-card: #ffffff;
+            --gtf-border: #dfe8e3;
 
-    html {
-      scroll-behavior: smooth;
-    }
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
 
-    body {
-      margin: 0;
+            --success-bg: #eaf5ee;
+            --success-text: #176b48;
 
-      background: var(--background);
-      color: var(--text);
+            --warning-bg: #fff7df;
+            --warning-text: #85691c;
 
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+            --danger-bg: #f9eded;
+            --danger-text: #8b4444;
+        }
 
-      line-height: 1.5;
-    }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    button {
-      cursor: pointer;
-    }
 
-    a {
-      color: inherit;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
 
-    /* ==========================================
-       HEADER
-       ========================================== */
 
-    .admin-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
+        body {
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
 
-      background: var(--navy);
-      color: #ffffff;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
 
-      box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.08);
-    }
 
-    .header-inner {
-      width: min(1500px, 100%);
+        button,
+        input,
+        select {
+            font: inherit;
+        }
 
-      min-height: 70px;
 
-      margin: 0 auto;
-      padding: 12px 22px;
+        /* =====================================================
+           PAGE
+           ===================================================== */
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+        .admin-page {
+            min-height: 100vh;
 
-      gap: 20px;
-    }
+            display: flex;
+            flex-direction: column;
+        }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
 
-      color: #ffffff;
-      text-decoration: none;
+        /* =====================================================
+           HEADER
+           ===================================================== */
 
-      min-width: 190px;
-    }
+        .admin-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
+            background: #ffffff;
 
-      object-fit: contain;
-    }
+            border-bottom:
+                1px solid var(--gtf-border);
 
-    .brand-name {
-      display: block;
+            box-shadow:
+                0 4px 18px
+                rgba(11, 61, 46, .05);
+        }
 
-      font-size: 1.08rem;
-      font-weight: 700;
-    }
 
-    .brand-subtitle {
-      display: block;
+        .admin-header-inner {
+            width: 100%;
+            max-width: 1440px;
 
-      margin-top: 1px;
+            min-height: 72px;
 
-      color: #cbd9e6;
+            margin: 0 auto;
+            padding: 12px 25px;
 
-      font-size: 0.7rem;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    .header-center {
-      color: #d9e5ef;
+            gap: 20px;
+        }
 
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        /* =====================================================
+           BRAND
+           ===================================================== */
 
-    .header-button {
-      padding: 9px 13px;
+        .brand {
+            display: inline-flex;
+            align-items: center;
 
-      border: 1px solid
-        rgba(255, 255, 255, 0.28);
+            gap: 10px;
 
-      border-radius: 6px;
+            color: var(--gtf-green);
 
-      background: transparent;
-      color: #ffffff;
+            text-decoration: none;
 
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
+            flex-shrink: 0;
+        }
 
-    .header-button:hover {
-      background:
-        rgba(255, 255, 255, 0.1);
-    }
 
-    /* ==========================================
-       LAYOUT
-       ========================================== */
+        .brand-logo {
+            width: 45px;
+            height: 45px;
 
-    .admin-layout {
-      width: min(1500px, 100%);
+            display: block;
 
-      min-height:
-        calc(100vh - 70px);
+            object-fit: contain;
+        }
 
-      margin: 0 auto;
 
-      display: grid;
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-      grid-template-columns:
-        230px minmax(0, 1fr);
-    }
 
-    /* ==========================================
-       SIDEBAR
-       ========================================== */
+        .brand-text strong {
+            display: block;
 
-    .sidebar {
-      background: var(--surface);
+            color: var(--gtf-green);
 
-      border-right:
-        1px solid var(--border);
+            font-size: 14px;
+            line-height: 1.2;
 
-      padding: 22px 14px;
-    }
+            font-weight: 800;
+        }
 
-    .sidebar-title {
-      margin:
-        0 10px 12px;
 
-      color: var(--muted);
+        .brand-text small {
+            display: block;
 
-      font-size: 0.7rem;
-      font-weight: 700;
+            margin-top: 3px;
 
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
+            color: var(--gtf-muted);
 
-    .sidebar-nav {
-      display: flex;
-      flex-direction: column;
+            font-size: 9px;
+            line-height: 1;
 
-      gap: 4px;
-    }
+            font-weight: 600;
+        }
 
-    .sidebar-nav a {
-      display: block;
 
-      padding:
-        10px 12px;
+        /* =====================================================
+           HEADER RIGHT
+           ===================================================== */
 
-      border-radius: 6px;
+        .admin-header-right {
+            display: flex;
+            align-items: center;
 
-      color: var(--text);
+            gap: 14px;
+        }
 
-      text-decoration: none;
 
-      font-size: 0.84rem;
-      font-weight: 600;
-    }
+        .admin-label {
+            display: flex;
+            flex-direction: column;
 
-    .sidebar-nav a:hover {
-      background: #f2f6f9;
-      color: var(--blue);
-    }
+            text-align: right;
+        }
 
-    .sidebar-nav a.active {
-      background: var(--blue-light);
-      color: var(--blue);
-    }
 
-    /* ==========================================
-       MAIN
-       ========================================== */
+        .admin-label strong {
+            color: var(--gtf-text);
 
-    .main-content {
-      min-width: 0;
+            font-size: 9px;
+        }
 
-      padding: 28px;
-    }
 
-    .page-header {
-      margin-bottom: 22px;
+        .admin-label span {
+            margin-top: 3px;
 
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+            color: var(--gtf-muted);
 
-      gap: 20px;
-    }
+            font-size: 7px;
+        }
 
-    .page-header h1 {
-      margin: 0 0 5px;
 
-      color: var(--navy);
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
 
-      font-size: 1.8rem;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .page-header p {
-      margin: 0;
+            border-radius: 50%;
 
-      color: var(--muted);
+            background:
+                var(--gtf-green);
 
-      font-size: 0.86rem;
-    }
+            color: #ffffff;
 
-    .page-actions {
-      display: flex;
-      gap: 8px;
-    }
+            font-size: 9px;
+            font-weight: 800;
+        }
 
-    /* ==========================================
-       BUTTONS
-       ========================================== */
 
-    .button {
-      min-height: 40px;
+        .logout-button {
+            min-height: 32px;
 
-      padding:
-        9px 15px;
+            padding:
+                0 11px;
 
-      border-radius: 6px;
+            border:
+                1px solid var(--gtf-border);
 
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
+            border-radius: 6px;
 
-    .button-primary {
-      border: 1px solid var(--blue);
+            background: #ffffff;
 
-      background: var(--blue);
-      color: #ffffff;
-    }
+            color: var(--gtf-green);
 
-    .button-primary:hover {
-      background: var(--blue-dark);
-    }
+            font-size: 7px;
 
-    .button-secondary {
-      border: 1px solid var(--border);
+            font-weight: 700;
 
-      background: #ffffff;
-      color: var(--text);
-    }
+            cursor: pointer;
+        }
 
-    .button-secondary:hover {
-      background: #f7f9fb;
-    }
 
-    .button:disabled {
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
+        .logout-button:hover {
+            background: var(--gtf-bg);
+        }
 
-    /* ==========================================
-       ALERTS
-       ========================================== */
 
-    .alert {
-      display: none;
+        /* =====================================================
+           BODY
+           ===================================================== */
 
-      margin-bottom: 20px;
+        .admin-body {
+            width: 100%;
+            max-width: 1440px;
 
-      padding: 12px 15px;
+            margin: 0 auto;
 
-      border-radius: 7px;
+            padding: 25px;
 
-      font-size: 0.8rem;
-    }
+            display: grid;
 
-    .alert.show {
-      display: block;
-    }
+            grid-template-columns:
+                220px minmax(0, 1fr);
 
-    .alert-error {
-      border:
-        1px solid #efc1bc;
+            gap: 25px;
 
-      background:
-        var(--danger-bg);
+            flex: 1;
+        }
 
-      color:
-        var(--danger);
-    }
 
-    .alert-success {
-      border:
-        1px solid #b9dec9;
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
 
-      background:
-        var(--success-bg);
+        .admin-sidebar {
+            height: fit-content;
 
-      color:
-        var(--success);
-    }
+            position: sticky;
+            top: 97px;
 
-    /* ==========================================
-       FILTER CARD
-       ========================================== */
+            padding: 15px;
 
-    .filter-card {
-      margin-bottom: 20px;
+            background: #ffffff;
 
-      overflow: hidden;
+            border:
+                1px solid var(--gtf-border);
 
-      background: var(--surface);
+            border-radius: 12px;
+        }
 
-      border:
-        1px solid var(--border);
 
-      border-radius: 9px;
+        .sidebar-title {
+            padding:
+                8px 10px 12px;
 
-      box-shadow: var(--shadow);
-    }
+            color: var(--gtf-muted);
 
-    .card-header {
-      padding:
-        17px 20px;
+            font-size: 7px;
 
-      border-bottom:
-        1px solid var(--border);
-    }
+            font-weight: 800;
 
-    .card-header h2 {
-      margin: 0 0 4px;
+            letter-spacing: 1px;
 
-      color: var(--navy);
+            text-transform: uppercase;
+        }
 
-      font-size: 1rem;
-    }
 
-    .card-header p {
-      margin: 0;
+        .sidebar-nav {
+            display: grid;
 
-      color: var(--muted);
+            gap: 4px;
+        }
 
-      font-size: 0.76rem;
-    }
 
-    .filter-form {
-      padding: 18px 20px;
+        .sidebar-nav a {
+            min-height: 38px;
 
-      display: grid;
+            padding:
+                0 10px;
 
-      grid-template-columns:
-        1.2fr 1fr 1fr auto;
+            display: flex;
+            align-items: center;
 
-      align-items: end;
+            border-radius: 7px;
 
-      gap: 12px;
-    }
+            color: var(--gtf-muted);
 
-    .form-field label {
-      display: block;
+            text-decoration: none;
 
-      margin-bottom: 6px;
+            font-size: 8px;
 
-      color: var(--text);
+            font-weight: 700;
+        }
 
-      font-size: 0.74rem;
-      font-weight: 700;
-    }
 
-    .form-field input,
-    .form-field select {
-      width: 100%;
+        .sidebar-nav a:hover {
+            background: var(--gtf-bg);
 
-      height: 40px;
+            color: var(--gtf-green);
+        }
 
-      padding:
-        8px 10px;
 
-      border:
-        1px solid var(--border);
+        .sidebar-nav a.active {
+            background:
+                var(--gtf-green);
 
-      border-radius: 6px;
+            color: #ffffff;
+        }
 
-      background: #ffffff;
-      color: var(--text);
 
-      outline: none;
-    }
+        .nav-icon {
+            width: 22px;
 
-    .form-field input:focus,
-    .form-field select:focus {
-      border-color: var(--blue);
+            flex: 0 0 22px;
 
-      box-shadow:
-        0 0 0 3px
-        rgba(20, 93, 160, 0.1);
-    }
+            font-size: 11px;
+        }
 
-    /* ==========================================
-       METRICS
-       ========================================== */
 
-    .metrics-grid {
-      display: grid;
+        /* =====================================================
+           MAIN
+           ===================================================== */
 
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        .admin-main {
+            min-width: 0;
+        }
 
-      gap: 15px;
 
-      margin-bottom: 20px;
-    }
+        .page-heading {
+            margin-bottom: 22px;
 
-    .metric-card {
-      padding: 19px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
 
-      background: var(--surface);
+            gap: 20px;
+        }
 
-      border:
-        1px solid var(--border);
 
-      border-radius: 9px;
+        .page-heading h1 {
+            margin: 0;
 
-      box-shadow: var(--shadow);
-    }
+            color:
+                var(--gtf-green);
 
-    .metric-label {
-      margin-bottom: 7px;
+            font-size: 26px;
 
-      color: var(--muted);
+            line-height: 1.2;
+        }
 
-      font-size: 0.73rem;
-      font-weight: 700;
-    }
 
-    .metric-value {
-      color: var(--navy);
+        .page-heading p {
+            margin: 7px 0 0;
 
-      font-size: 1.5rem;
-      font-weight: 700;
+            color:
+                var(--gtf-muted);
 
-      word-break: break-word;
-    }
+            font-size: 8px;
 
-    .metric-description {
-      margin-top: 5px;
+            line-height: 1.6;
+        }
 
-      color: var(--muted);
 
-      font-size: 0.68rem;
-    }
+        .heading-actions {
+            display: flex;
 
-    /* ==========================================
-       REPORT GRID
-       ========================================== */
+            gap: 8px;
 
-    .report-grid {
-      display: grid;
+            flex-wrap: wrap;
+        }
 
-      grid-template-columns:
-        minmax(0, 1.3fr)
-        minmax(300px, 0.7fr);
 
-      gap: 20px;
+        .button {
+            min-height: 36px;
 
-      margin-bottom: 20px;
-    }
+            padding:
+                0 13px;
 
-    .panel {
-      overflow: hidden;
+            border:
+                1px solid var(--gtf-border);
 
-      background: var(--surface);
+            border-radius: 6px;
 
-      border:
-        1px solid var(--border);
+            background: #ffffff;
 
-      border-radius: 9px;
+            color:
+                var(--gtf-green);
 
-      box-shadow: var(--shadow);
-    }
+            font-size: 8px;
 
-    .panel-body {
-      padding: 20px;
-    }
+            font-weight: 700;
 
-    /* ==========================================
-       CHART
-       ========================================== */
+            cursor: pointer;
+        }
 
-    .chart-wrapper {
-      min-height: 290px;
 
-      display: flex;
-      align-items: flex-end;
+        .button:hover {
+            background:
+                var(--gtf-bg);
+        }
 
-      gap: 8px;
 
-      padding:
-        20px 5px 5px;
+        .button-primary {
+            background:
+                var(--gtf-green);
 
-      border-bottom:
-        1px solid #edf1f4;
-    }
+            border-color:
+                var(--gtf-green);
 
-    .chart-column {
-      flex: 1;
+            color: #ffffff;
+        }
 
-      min-width: 0;
 
-      display: flex;
-      flex-direction: column;
+        .button-primary:hover {
+            background:
+                var(--gtf-green-dark);
+        }
 
-      justify-content: flex-end;
-      align-items: center;
 
-      gap: 6px;
-    }
+        /* =====================================================
+           FILTER CARD
+           ===================================================== */
 
-    .chart-value {
-      color: var(--muted);
+        .filter-card {
+            margin-bottom: 18px;
 
-      font-size: 0.64rem;
+            padding: 18px 20px;
 
-      white-space: nowrap;
-    }
+            background: #ffffff;
 
-    .chart-bar {
-      width: 100%;
-      max-width: 44px;
+            border:
+                1px solid var(--gtf-border);
 
-      min-height: 3px;
+            border-radius: 12px;
+        }
 
-      background: var(--blue);
 
-      border-radius:
-        5px 5px 0 0;
-    }
+        .filter-card h2 {
+            margin: 0 0 13px;
 
-    .chart-label {
-      color: var(--muted);
+            color:
+                var(--gtf-green);
 
-      font-size: 0.62rem;
+            font-size: 13px;
+        }
 
-      white-space: nowrap;
 
-      overflow: hidden;
-      text-overflow: ellipsis;
+        .filter-grid {
+            display: grid;
 
-      max-width: 100%;
-    }
+            grid-template-columns:
+                1fr 1fr 1fr 1fr auto;
 
-    /* ==========================================
-       BREAKDOWN
-       ========================================== */
+            gap: 10px;
+        }
 
-    .breakdown-list {
-      list-style: none;
 
-      margin: 0;
-      padding: 0;
-    }
+        .filter-group {
+            display: grid;
 
-    .breakdown-row {
-      display: flex;
+            gap: 5px;
+        }
 
-      align-items: center;
-      justify-content: space-between;
 
-      gap: 15px;
+        .filter-group label {
+            color:
+                var(--gtf-muted);
 
-      padding:
-        12px 0;
+            font-size: 7px;
 
-      border-bottom:
-        1px solid #edf1f4;
-    }
+            font-weight: 800;
 
-    .breakdown-row:last-child {
-      border-bottom: 0;
-    }
+            text-transform: uppercase;
+        }
 
-    .breakdown-name {
-      color: var(--text);
 
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
 
-    .breakdown-value {
-      color: var(--navy);
+            min-height: 37px;
 
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
+            padding:
+                0 9px;
 
-    /* ==========================================
-       TABLE
-       ========================================== */
+            border:
+                1px solid var(--gtf-border);
 
-    .table-panel {
-      margin-bottom: 20px;
-    }
+            border-radius: 6px;
 
-    .table-wrapper {
-      width: 100%;
+            outline: none;
 
-      overflow-x: auto;
-    }
+            background: #ffffff;
 
-    table {
-      width: 100%;
+            color:
+                var(--gtf-text);
 
-      min-width: 760px;
+            font-size: 8px;
+        }
 
-      border-collapse: collapse;
-    }
 
-    th,
-    td {
-      padding:
-        12px 15px;
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color:
+                var(--gtf-green-light);
 
-      text-align: left;
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.08);
+        }
 
-      border-bottom:
-        1px solid #edf1f4;
-    }
 
-    th {
-      background: #f8fafc;
+        .filter-submit {
+            align-self: end;
 
-      color: var(--muted);
+            min-height: 37px;
 
-      font-size: 0.68rem;
-      font-weight: 700;
+            padding:
+                0 15px;
 
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
+            border:
+                1px solid var(--gtf-green);
 
-    td {
-      color: var(--text);
+            border-radius: 6px;
 
-      font-size: 0.77rem;
-    }
+            background:
+                var(--gtf-green);
 
-    .status {
-      display: inline-block;
+            color: #ffffff;
 
-      padding:
-        4px 9px;
+            font-size: 8px;
 
-      border-radius: 999px;
+            font-weight: 700;
 
-      font-size: 0.65rem;
-      font-weight: 700;
-    }
+            cursor: pointer;
+        }
 
-    .status-success {
-      background:
-        var(--success-bg);
 
-      color:
-        var(--success);
-    }
+        /* =====================================================
+           REPORT CARDS
+           ===================================================== */
 
-    .status-pending {
-      background:
-        var(--warning-bg);
+        .report-grid {
+            display: grid;
 
-      color:
-        var(--warning);
-    }
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
 
-    .status-failed {
-      background:
-        var(--danger-bg);
+            gap: 14px;
 
-      color:
-        var(--danger);
-    }
+            margin-bottom: 18px;
+        }
 
-    /* ==========================================
-       EMPTY / LOADING
-       ========================================== */
 
-    .empty-state {
-      padding: 35px 20px;
+        .report-card {
+            padding: 18px;
 
-      color: var(--muted);
+            background: #ffffff;
 
-      text-align: center;
+            border:
+                1px solid var(--gtf-border);
 
-      font-size: 0.8rem;
-    }
+            border-radius: 10px;
+        }
 
-    .loading {
-      opacity: 0.65;
 
-      pointer-events: none;
-    }
+        .report-label {
+            color:
+                var(--gtf-muted);
 
-    /* ==========================================
-       FOOTER
-       ========================================== */
+            font-size: 7px;
 
-    .page-footer {
-      padding: 20px;
+            font-weight: 800;
 
-      color: var(--muted);
+            letter-spacing: .5px;
 
-      text-align: center;
+            text-transform: uppercase;
+        }
 
-      font-size: 0.7rem;
-    }
 
-    /* ==========================================
-       RESPONSIVE
-       ========================================== */
+        .report-value {
+            margin-top: 8px;
 
-    @media (max-width: 1100px) {
+            color:
+                var(--gtf-green);
 
-      .metrics-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
+            font-size: 21px;
 
-      .filter-form {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
+            font-weight: 800;
+        }
 
-      .report-grid {
-        grid-template-columns: 1fr;
-      }
-    }
 
-    @media (max-width: 800px) {
+        .report-change {
+            margin-top: 6px;
 
-      .admin-layout {
-        display: block;
-      }
+            font-size: 7px;
 
-      .sidebar {
-        border-right: 0;
+            font-weight: 700;
+        }
 
-        border-bottom:
-          1px solid var(--border);
 
-        padding: 12px;
-      }
+        .positive {
+            color:
+                var(--success-text);
+        }
 
-      .sidebar-nav {
-        display: grid;
 
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
+        .negative {
+            color:
+                var(--danger-text);
+        }
 
-      .main-content {
-        padding: 20px 14px;
-      }
 
-      .header-center {
-        display: none;
-      }
-    }
+        .neutral {
+            color:
+                var(--gtf-muted);
+        }
 
-    @media (max-width: 560px) {
 
-      .header-inner {
-        padding:
-          11px 14px;
-      }
+        /* =====================================================
+           REPORT SECTION
+           ===================================================== */
 
-      .brand {
-        min-width: 0;
-      }
+        .report-section {
+            margin-bottom: 18px;
 
-      .header-actions {
-        gap: 5px;
-      }
+            background: #ffffff;
 
-      .header-button {
-        padding:
-          8px 9px;
-      }
+            border:
+                1px solid var(--gtf-border);
 
-      .page-header {
-        flex-direction: column;
-      }
+            border-radius: 12px;
 
-      .page-actions {
-        width: 100%;
-      }
+            overflow: hidden;
+        }
 
-      .page-actions .button {
-        flex: 1;
-      }
 
-      .metrics-grid {
-        grid-template-columns: 1fr;
-      }
+        .section-header {
+            padding:
+                17px 20px;
 
-      .filter-form {
-        grid-template-columns: 1fr;
-      }
+            display: flex;
 
-      .sidebar-nav {
-        grid-template-columns: 1fr;
-      }
-    }
+            align-items: center;
+            justify-content: space-between;
 
-    /* ==========================================
-       PRINT
-       ========================================== */
+            gap: 15px;
 
-    @media print {
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
 
-      .admin-header,
-      .sidebar,
-      .page-actions,
-      .filter-card,
-      .alert {
-        display: none !important;
-      }
 
-      .admin-layout {
-        display: block;
-      }
+        .section-header h2 {
+            margin: 0;
 
-      .main-content {
-        padding: 0;
-      }
+            color:
+                var(--gtf-green);
 
-      body {
-        background: #ffffff;
-      }
+            font-size: 13px;
+        }
 
-      .panel,
-      .metric-card {
-        box-shadow: none;
 
-        break-inside: avoid;
-      }
+        .section-header p {
+            margin: 4px 0 0;
 
-      .page-footer {
-        display: none;
-      }
-    }
-  </style>
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           BAR REPORT
+           ===================================================== */
+
+        .chart-container {
+            padding:
+                25px 20px;
+        }
+
+
+        .bar-chart {
+            height: 220px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 15px;
+
+            padding:
+                0 5px;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
+
+
+        .bar-column {
+            height: 100%;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: flex-end;
+            justify-content: center;
+
+            position: relative;
+        }
+
+
+        .bar {
+            width: min(45px, 65%);
+
+            min-height: 4px;
+
+            background:
+                var(--gtf-green);
+
+            border-radius:
+                5px 5px 0 0;
+
+            transition:
+                height .3s ease;
+        }
+
+
+        .bar:hover {
+            background:
+                var(--gtf-green-light);
+        }
+
+
+        .bar-label {
+            position: absolute;
+
+            bottom: -19px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+
+        .bar-value {
+            position: absolute;
+
+            bottom: calc(var(--bar-height) + 6px);
+
+            color:
+                var(--gtf-green);
+
+            font-size: 6px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           DATA TABLE
+           ===================================================== */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+
+        .report-table {
+            width: 100%;
+
+            min-width: 650px;
+
+            border-collapse: collapse;
+        }
+
+
+        .report-table th {
+            padding:
+                12px 15px;
+
+            background:
+                #f7faf8;
+
+            color:
+                var(--gtf-muted);
+
+            border-bottom:
+                1px solid var(--gtf-border);
+
+            text-align: left;
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .report-table td {
+            padding:
+                12px 15px;
+
+            border-bottom:
+                1px solid #edf2ef;
+
+            color:
+                var(--gtf-text);
+
+            font-size: 8px;
+        }
+
+
+        .report-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+
+        .amount {
+            font-weight: 800;
+
+            color:
+                var(--gtf-green);
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .admin-footer {
+            padding:
+                16px 25px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+
+        .admin-footer-inner {
+            width: 100%;
+            max-width: 1440px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .filter-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .filter-submit {
+                align-self: center;
+            }
+
+
+            .report-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 850px) {
+
+            .admin-body {
+                grid-template-columns: 1fr;
+            }
+
+
+            .admin-sidebar {
+                position: static;
+            }
+
+
+            .sidebar-nav {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .admin-header-inner {
+                padding:
+                    10px 14px;
+            }
+
+
+            .admin-label {
+                display: none;
+            }
+
+
+            .admin-body {
+                padding:
+                    15px;
+            }
+
+
+            .sidebar-nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .page-heading {
+                flex-direction: column;
+            }
+
+
+            .page-heading h1 {
+                font-size: 22px;
+            }
+
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .bar-chart {
+                gap: 7px;
+            }
+
+
+            .admin-footer-inner {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-  <!-- ====================================================
-       ADMIN HEADER
-       ===================================================== -->
 
-  <header class="admin-header">
-
-    <div class="header-inner">
-
-      <a
-        href="index.html"
-        class="brand"
-        aria-label="GTF Banking Administration"
-      >
-
-        <img
-          src="../assets/gtf-logo.svg"
-          alt="GTF Banking"
-          class="brand-logo"
-          onerror="this.style.display='none'"
-        >
-
-        <span>
-          <span class="brand-name">
-            GTF Banking
-          </span>
-
-          <span class="brand-subtitle">
-            Administration Portal
-          </span>
-        </span>
-
-      </a>
-
-      <div class="header-center">
-        Reports
-      </div>
-
-      <div class="header-actions">
-
-        <button
-          id="dashboardButton"
-          type="button"
-          class="header-button"
-        >
-          Dashboard
-        </button>
-
-        <button
-          id="logoutButton"
-          type="button"
-          class="header-button"
-        >
-          Sign Out
-        </button>
-
-      </div>
-
-    </div>
-
-  </header>
+<div class="admin-page">
 
 
-  <!-- ====================================================
-       ADMIN LAYOUT
-       ===================================================== -->
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-  <div class="admin-layout">
+    <header class="admin-header">
 
-    <!-- ==================================================
-         SIDEBAR
-         =================================================== -->
-
-    <aside class="sidebar">
-
-      <div class="sidebar-title">
-        Administration
-      </div>
-
-      <nav class="sidebar-nav">
-
-        <a href="index.html">
-          Dashboard
-        </a>
-
-        <a href="customers.html">
-          Customers
-        </a>
-
-        <a href="accounts.html">
-          Accounts
-        </a>
-
-        <a href="transactions.html">
-          Transactions
-        </a>
-
-        <a href="audit.html">
-          Audit
-        </a>
-
-        <a href="compliance.html">
-          Compliance
-        </a>
-
-        <a
-          href="reports.html"
-          class="active"
-          aria-current="page"
-        >
-          Reports
-        </a>
-
-      </nav>
-
-    </aside>
+        <div class="admin-header-inner">
 
 
-    <!-- ==================================================
-         MAIN
-         =================================================== -->
-
-    <main class="main-content">
-
-      <section class="page-header">
-
-        <div>
-
-          <h1>
-            Reports
-          </h1>
-
-          <p>
-            Review authorized banking,
-            customer, account and transaction
-            reporting information.
-          </p>
-
-        </div>
-
-        <div class="page-actions">
-
-          <button
-            id="printButton"
-            type="button"
-            class="button button-secondary"
-          >
-            Print
-          </button>
-
-          <button
-            id="refreshButton"
-            type="button"
-            class="button button-primary"
-          >
-            Refresh
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- ==================================================
-           ALERTS
-           =================================================== -->
-
-      <div
-        id="errorAlert"
-        class="alert alert-error"
-        role="alert"
-        aria-live="assertive"
-      ></div>
-
-      <div
-        id="successAlert"
-        class="alert alert-success"
-        role="status"
-        aria-live="polite"
-      ></div>
-
-
-      <!-- ==================================================
-           FILTERS
-           =================================================== -->
-
-      <section class="filter-card">
-
-        <div class="card-header">
-
-          <h2>
-            Report Parameters
-          </h2>
-
-          <p>
-            Choose the report and reporting period.
-          </p>
-
-        </div>
-
-        <form
-          id="reportForm"
-          class="filter-form"
-        >
-
-          <div class="form-field">
-
-            <label for="reportType">
-              Report Type
-            </label>
-
-            <select
-              id="reportType"
-              name="reportType"
+            <a
+                href="./index.html"
+                class="brand"
+                aria-label="Global TrustFund Admin"
             >
 
-              <option value="overview">
-                Banking Overview
-              </option>
-
-              <option value="customers">
-                Customer Report
-              </option>
-
-              <option value="accounts">
-                Account Report
-              </option>
-
-              <option value="transactions">
-                Transaction Report
-              </option>
-
-              <option value="compliance">
-                Compliance Report
-              </option>
-
-              <option value="audit">
-                Audit Report
-              </option>
-
-            </select>
-
-          </div>
+                <img
+                    src="../assets/gtf-logo.svg"
+                    class="brand-logo"
+                    alt="Global TrustFund logo"
+                >
 
 
-          <div class="form-field">
+                <span class="brand-text">
 
-            <label for="startDate">
-              Start Date
-            </label>
+                    <strong>
+                        Global TrustFund
+                    </strong>
 
-            <input
-              id="startDate"
-              name="startDate"
-              type="date"
-              required
-            >
+                    <small>
+                        Administration
+                    </small>
 
-          </div>
+                </span>
 
-
-          <div class="form-field">
-
-            <label for="endDate">
-              End Date
-            </label>
-
-            <input
-              id="endDate"
-              name="endDate"
-              type="date"
-              required
-            >
-
-          </div>
+            </a>
 
 
-          <button
-            id="generateButton"
-            type="submit"
-            class="button button-primary"
-          >
-            Generate
-          </button>
+            <div class="admin-header-right">
 
-        </form>
+                <div class="admin-label">
 
-      </section>
+                    <strong>
+                        Administrator
+                    </strong>
 
+                    <span>
+                        Reports
+                    </span>
 
-      <!-- ==================================================
-           METRICS
-           =================================================== -->
-
-      <section
-        class="metrics-grid"
-        aria-label="Report metrics"
-      >
-
-        <article class="metric-card">
-
-          <div class="metric-label">
-            Customers
-          </div>
-
-          <div
-            id="customerMetric"
-            class="metric-value"
-          >
-            —
-          </div>
-
-          <div class="metric-description">
-            Customers included in report
-          </div>
-
-        </article>
+                </div>
 
 
-        <article class="metric-card">
-
-          <div class="metric-label">
-            Accounts
-          </div>
-
-          <div
-            id="accountMetric"
-            class="metric-value"
-          >
-            —
-          </div>
-
-          <div class="metric-description">
-            Accounts included in report
-          </div>
-
-        </article>
+                <div class="admin-avatar">
+                    AD
+                </div>
 
 
-        <article class="metric-card">
-
-          <div class="metric-label">
-            Transactions
-          </div>
-
-          <div
-            id="transactionMetric"
-            class="metric-value"
-          >
-            —
-          </div>
-
-          <div class="metric-description">
-            Transactions in selected period
-          </div>
-
-        </article>
-
-
-        <article class="metric-card">
-
-          <div class="metric-label">
-            Pending Reviews
-          </div>
-
-          <div
-            id="reviewMetric"
-            class="metric-value"
-          >
-            —
-          </div>
-
-          <div class="metric-description">
-            Items requiring attention
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- ==================================================
-           CHART + BREAKDOWN
-           =================================================== -->
-
-      <section class="report-grid">
-
-        <!-- ACTIVITY -->
-
-        <article class="panel">
-
-          <div class="card-header">
-
-            <h2>
-              Transaction Activity
-            </h2>
-
-            <p>
-              Activity returned by the reporting API.
-            </p>
-
-          </div>
-
-          <div class="panel-body">
-
-            <div
-              id="activityChart"
-              class="chart-wrapper"
-              aria-label="Transaction activity"
-            >
-
-              <div class="empty-state">
-                No report loaded.
-              </div>
+                <button
+                    type="button"
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    Sign Out
+                </button>
 
             </div>
 
-          </div>
+        </div>
 
-        </article>
+    </header>
 
 
-        <!-- BREAKDOWN -->
+    <!-- =====================================================
+         BODY
+         ===================================================== -->
 
-        <article class="panel">
+    <div class="admin-body">
 
-          <div class="card-header">
 
-            <h2>
-              Account Breakdown
-            </h2>
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
 
-            <p>
-              Account categories returned by the API.
-            </p>
+        <aside class="admin-sidebar">
 
-          </div>
+            <div class="sidebar-title">
+                Administration
+            </div>
 
-          <div class="panel-body">
 
-            <ul
-              id="breakdownList"
-              class="breakdown-list"
+            <nav
+                class="sidebar-nav"
+                aria-label="Admin navigation"
             >
 
-              <li class="empty-state">
-                No report loaded.
-              </li>
+                <a href="./index.html">
 
-            </ul>
+                    <span class="nav-icon">
+                        ⌂
+                    </span>
 
-          </div>
+                    Dashboard
 
-        </article>
-
-      </section>
+                </a>
 
 
-      <!-- ==================================================
-           TRANSACTION TABLE
-           =================================================== -->
+                <a href="./customers.html">
 
-      <section class="panel table-panel">
+                    <span class="nav-icon">
+                        ◉
+                    </span>
 
-        <div class="card-header">
+                    Customers
 
-          <h2>
-            Report Activity
-          </h2>
+                </a>
 
-          <p>
-            Recent activity included in the selected report.
-          </p>
 
-        </div>
+                <a href="./accounts.html">
 
-        <div class="table-wrapper">
+                    <span class="nav-icon">
+                        ▣
+                    </span>
 
-          <table>
+                    Accounts
 
-            <thead>
+                </a>
 
-              <tr>
 
-                <th>
-                  Reference
-                </th>
+                <a href="./transactions.html">
 
-                <th>
-                  Type
-                </th>
+                    <span class="nav-icon">
+                        ⇄
+                    </span>
 
-                <th>
-                  Amount
-                </th>
+                    Transactions
 
-                <th>
-                  Status
-                </th>
+                </a>
 
-                <th>
-                  Date
-                </th>
 
-              </tr>
-
-            </thead>
-
-            <tbody id="reportTableBody">
-
-              <tr>
-
-                <td
-                  colspan="5"
-                  class="empty-state"
+                <a
+                    href="./reports.html"
+                    class="active"
+                    aria-current="page"
                 >
-                  No report loaded.
-                </td>
 
-              </tr>
+                    <span class="nav-icon">
+                        ▤
+                    </span>
 
-            </tbody>
+                    Reports
 
-          </table>
+                </a>
+
+
+                <a href="./compliance.html">
+
+                    <span class="nav-icon">
+                        ✓
+                    </span>
+
+                    Compliance
+
+                </a>
+
+
+                <a href="./audit.html">
+
+                    <span class="nav-icon">
+                        ◌
+                    </span>
+
+                    Audit
+
+                </a>
+
+
+                <a href="./settings.html">
+
+                    <span class="nav-icon">
+                        ⚙
+                    </span>
+
+                    Settings
+
+                </a>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+             ================================================= -->
+
+        <main class="admin-main">
+
+
+            <!-- PAGE HEADING -->
+
+            <section class="page-heading">
+
+                <div>
+
+                    <h1>
+                        Banking Reports
+                    </h1>
+
+                    <p>
+                        Review operational, customer, account,
+                        and transaction reporting information.
+                    </p>
+
+                </div>
+
+
+                <div class="heading-actions">
+
+                    <button
+                        type="button"
+                        class="button"
+                        id="refreshButton"
+                    >
+                        Refresh
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="button button-primary"
+                        id="exportButton"
+                    >
+                        Export Report
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FILTERS
+                 ================================================= -->
+
+            <section class="filter-card">
+
+                <h2>
+                    Report Filters
+                </h2>
+
+
+                <form
+                    id="reportFilterForm"
+                    class="filter-grid"
+                >
+
+
+                    <div class="filter-group">
+
+                        <label for="reportType">
+                            Report Type
+                        </label>
+
+
+                        <select id="reportType">
+
+                            <option value="overview">
+                                Overview
+                            </option>
+
+                            <option value="transactions">
+                                Transactions
+                            </option>
+
+                            <option value="customers">
+                                Customers
+                            </option>
+
+                            <option value="accounts">
+                                Accounts
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="startDate">
+                            Start Date
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="startDate"
+                        >
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="endDate">
+                            End Date
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="endDate"
+                        >
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+
+                        <select id="status">
+
+                            <option value="">
+                                All Statuses
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="failed">
+                                Failed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="filter-submit"
+                    >
+                        Generate
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================================
+                 KPI CARDS
+                 ================================================= -->
+
+            <section class="report-grid">
+
+
+                <article class="report-card">
+
+                    <div class="report-label">
+                        Total Transaction Volume
+                    </div>
+
+
+                    <div
+                        class="report-value"
+                        id="transactionVolume"
+                    >
+                        ₦0
+                    </div>
+
+
+                    <div
+                        class="report-change positive"
+                        id="volumeChange"
+                    >
+                        Report period
+                    </div>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-label">
+                        Transactions
+                    </div>
+
+
+                    <div
+                        class="report-value"
+                        id="transactionCount"
+                    >
+                        0
+                    </div>
+
+
+                    <div
+                        class="report-change neutral"
+                    >
+                        Processed records
+                    </div>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-label">
+                        New Customers
+                    </div>
+
+
+                    <div
+                        class="report-value"
+                        id="newCustomers"
+                    >
+                        0
+                    </div>
+
+
+                    <div
+                        class="report-change positive"
+                    >
+                        New registrations
+                    </div>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-label">
+                        Active Accounts
+                    </div>
+
+
+                    <div
+                        class="report-value"
+                        id="activeAccounts"
+                    >
+                        0
+                    </div>
+
+
+                    <div
+                        class="report-change neutral"
+                    >
+                        Current accounts
+                    </div>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-label">
+                        Pending Reviews
+                    </div>
+
+
+                    <div
+                        class="report-value"
+                        id="pendingReviews"
+                    >
+                        0
+                    </div>
+
+
+                    <div
+                        class="report-change neutral"
+                    >
+                        Awaiting action
+                    </div>
+
+                </article>
+
+
+                <article class="report-card">
+
+                    <div class="report-label">
+                        Failed Transactions
+                    </div>
+
+
+                    <div
+                        class="report-value"
+                        id="failedTransactions"
+                    >
+                        0
+                    </div>
+
+
+                    <div
+                        class="report-change negative"
+                    >
+                        Requires monitoring
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 ACTIVITY CHART
+                 ================================================= -->
+
+            <section class="report-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Transaction Activity
+                        </h2>
+
+                        <p>
+                            Transaction volume across the selected
+                            reporting period.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <div
+                        class="bar-chart"
+                        id="barChart"
+                    >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 TRANSACTION REPORT
+                 ================================================= -->
+
+            <section class="report-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Transaction Summary
+                        </h2>
+
+                        <p>
+                            Summary of recent banking activity.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="report-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Transaction Type
+                                </th>
+
+                                <th>
+                                    Transactions
+                                </th>
+
+                                <th>
+                                    Volume
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="reportTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="admin-footer">
+
+        <div class="admin-footer-inner">
+
+            <span>
+                © 2026 Global TrustFund. Administrative Portal.
+            </span>
+
+
+            <span>
+                Banking Reports
+            </span>
 
         </div>
 
-      </section>
+    </footer>
 
 
-      <footer class="page-footer">
-
-        GTF Banking Administration —
-        Reports
-
-      </footer>
-
-    </main>
-
-  </div>
+</div>
 
 
-  <!-- ====================================================
-       APPLICATION SCRIPT
-       ===================================================== -->
+<script>
 
-  <script
-    src="../js/app.js"
-    defer
-  ></script>
-
-
-  <script>
-    "use strict";
-
-
-    /* ====================================================
-       STATE
+    /* =====================================================
+       REPORT DATA
        ===================================================== */
 
-    const state = {
-      reportType: "overview",
-      startDate: "",
-      endDate: "",
-      report: null
-    };
+    const reportData = [
+
+        {
+            date: "2026-08-21",
+            type: "Transfers",
+            transactions: 24,
+            volume: 1845000,
+            status: "Completed"
+        },
+
+        {
+            date: "2026-08-22",
+            type: "Deposits",
+            transactions: 18,
+            volume: 925000,
+            status: "Completed"
+        },
+
+        {
+            date: "2026-08-23",
+            type: "Withdrawals",
+            transactions: 12,
+            volume: 418000,
+            status: "Completed"
+        },
+
+        {
+            date: "2026-08-24",
+            type: "Transfers",
+            transactions: 31,
+            volume: 2150000,
+            status: "Completed"
+        },
+
+        {
+            date: "2026-08-25",
+            type: "Payments",
+            transactions: 17,
+            volume: 735000,
+            status: "Pending"
+        },
+
+        {
+            date: "2026-08-26",
+            type: "Transfers",
+            transactions: 27,
+            volume: 1965000,
+            status: "Completed"
+        }
+
+    ];
 
 
-    /* ====================================================
-       DOM
+    /* =====================================================
+       ELEMENTS
        ===================================================== */
 
-    const elements = {
-
-      form:
+    const reportTableBody =
         document.getElementById(
-          "reportForm"
-        ),
+            "reportTableBody"
+        );
 
-      reportType:
+
+    const barChart =
         document.getElementById(
-          "reportType"
-        ),
+            "barChart"
+        );
 
-      startDate:
+
+    const reportFilterForm =
         document.getElementById(
-          "startDate"
-        ),
-
-      endDate:
-        document.getElementById(
-          "endDate"
-        ),
-
-      generate:
-        document.getElementById(
-          "generateButton"
-        ),
-
-      refresh:
-        document.getElementById(
-          "refreshButton"
-        ),
-
-      print:
-        document.getElementById(
-          "printButton"
-        ),
-
-      customerMetric:
-        document.getElementById(
-          "customerMetric"
-        ),
-
-      accountMetric:
-        document.getElementById(
-          "accountMetric"
-        ),
-
-      transactionMetric:
-        document.getElementById(
-          "transactionMetric"
-        ),
-
-      reviewMetric:
-        document.getElementById(
-          "reviewMetric"
-        ),
-
-      chart:
-        document.getElementById(
-          "activityChart"
-        ),
-
-      breakdown:
-        document.getElementById(
-          "breakdownList"
-        ),
-
-      table:
-        document.getElementById(
-          "reportTableBody"
-        ),
-
-      error:
-        document.getElementById(
-          "errorAlert"
-        ),
-
-      success:
-        document.getElementById(
-          "successAlert"
-        )
-
-    };
+            "reportFilterForm"
+        );
 
 
-    /* ====================================================
-       SECURITY / OUTPUT HELPERS
-       ==================================================== */
+    /* =====================================================
+       FORMAT CURRENCY
+       ===================================================== */
+
+    function formatCurrency(value) {
+
+        return new Intl.NumberFormat(
+            "en-NG",
+            {
+                style: "currency",
+                currency: "NGN",
+                maximumFractionDigits: 0
+            }
+        ).format(value);
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+       ===================================================== */
 
     function escapeHtml(value) {
 
-      if (
-        value === null ||
-        value === undefined
-      ) {
-        return "";
-      }
-
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
 
 
-    function number(value) {
-
-      const parsed =
-        Number(value);
-
-      if (
-        !Number.isFinite(parsed)
-      ) {
-        return 0;
-      }
-
-      return parsed;
-
-    }
-
-
-    function formatNumber(value) {
-
-      return number(value)
-        .toLocaleString();
-
-    }
-
-
-    function formatAmount(value) {
-
-      const parsed =
-        Number(value);
-
-      if (
-        !Number.isFinite(parsed)
-      ) {
-        return "—";
-      }
-
-      return parsed.toLocaleString(
-        undefined,
-        {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }
-      );
-
-    }
-
-
-    function formatDate(value) {
-
-      if (!value) {
-        return "—";
-      }
-
-      const date =
-        new Date(value);
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-        return escapeHtml(value);
-      }
-
-      return date.toLocaleString();
-
-    }
-
-
-    /* ====================================================
-       ALERTS
-       ==================================================== */
-
-    function clearAlerts() {
-
-      elements.error.classList.remove(
-        "show"
-      );
-
-      elements.success.classList.remove(
-        "show"
-      );
-
-      elements.error.textContent =
-        "";
-
-      elements.success.textContent =
-        "";
-
-    }
-
-
-    function showError(message) {
-
-      elements.success.classList.remove(
-        "show"
-      );
-
-      elements.error.textContent =
-        message ||
-        "Unable to complete the request.";
-
-      elements.error.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function showSuccess(message) {
-
-      elements.error.classList.remove(
-        "show"
-      );
-
-      elements.success.textContent =
-        message ||
-        "Report generated successfully.";
-
-      elements.success.classList.add(
-        "show"
-      );
-
-    }
-
-
-    /* ====================================================
-       DATE HELPERS
-       ==================================================== */
-
-    function toDateInputValue(date) {
-
-      const year =
-        date.getFullYear();
-
-      const month =
-        String(
-          date.getMonth() + 1
-        ).padStart(2, "0");
-
-      const day =
-        String(
-          date.getDate()
-        ).padStart(2, "0");
-
-      return `${year}-${month}-${day}`;
-
-    }
-
-
-    function initializeDates() {
-
-      const end =
-        new Date();
-
-      const start =
-        new Date();
-
-      start.setDate(
-        start.getDate() - 30
-      );
-
-      elements.startDate.value =
-        toDateInputValue(start);
-
-      elements.endDate.value =
-        toDateInputValue(end);
-
-      state.startDate =
-        elements.startDate.value;
-
-      state.endDate =
-        elements.endDate.value;
-
-    }
-
-
-    /* ====================================================
-       LOADING STATE
-       ==================================================== */
-
-    function setLoading(
-      loading
-    ) {
-
-      document.body.classList.toggle(
-        "loading",
-        loading
-      );
-
-      elements.generate.disabled =
-        loading;
-
-      elements.refresh.disabled =
-        loading;
-
-      if (loading) {
-
-        elements.generate.textContent =
-          "Loading...";
-
-      } else {
-
-        elements.generate.textContent =
-          "Generate";
-
-      }
-
-    }
-
-
-    /* ====================================================
-       API REQUEST
-       ==================================================== */
-
-    async function requestReport() {
-
-      /*
-       * The preferred integration point is a function
-       * supplied by app.js.
-       *
-       * This keeps the page compatible with the existing
-       * GTF-Banking frontend architecture.
-       */
-
-      if (
-        typeof window.gtfAdminGetReport ===
-        "function"
-      ) {
-
-        return await
-          window.gtfAdminGetReport({
-            reportType:
-              state.reportType,
-
-            startDate:
-              state.startDate,
-
-            endDate:
-              state.endDate
-          });
-
-      }
-
-
-      /*
-       * Backend fallback.
-       *
-       * Authentication must be handled by the backend.
-       * No service-role key or administrator password
-       * belongs in this file.
-       */
-
-      const params =
-        new URLSearchParams();
-
-      params.set(
-        "reportType",
-        state.reportType
-      );
-
-      params.set(
-        "startDate",
-        state.startDate
-      );
-
-      params.set(
-        "endDate",
-        state.endDate
-      );
-
-
-      const response =
-        await fetch(
-          `/api/reports?${params.toString()}`,
-          {
-            method: "GET",
-
-            credentials: "include",
-
-            headers: {
-              "Accept":
-                "application/json"
-            }
-          }
-        );
-
-
-      let data = null;
-
-      try {
-
-        data =
-          await response.json();
-
-      } catch {
-
-        data = null;
-
-      }
-
-
-      if (!response.ok) {
-
-        throw new Error(
-          data?.message ||
-          "The report service returned an error."
-        );
-
-      }
-
-
-      return data;
-
-    }
-
-
-    /* ====================================================
-       RENDER METRICS
-       ==================================================== */
-
-    function renderMetrics(
-      report
-    ) {
-
-      elements.customerMetric.textContent =
-        formatNumber(
-          report.totalCustomers ??
-          report.customers ??
-          0
-        );
-
-
-      elements.accountMetric.textContent =
-        formatNumber(
-          report.totalAccounts ??
-          report.accounts ??
-          0
-        );
-
-
-      elements.transactionMetric.textContent =
-        formatNumber(
-          report.totalTransactions ??
-          report.transactions ??
-          0
-        );
-
-
-      elements.reviewMetric.textContent =
-        formatNumber(
-          report.pendingReviews ??
-          report.pending ??
-          0
-        );
-
-    }
-
-
-    /* ====================================================
-       RENDER ACTIVITY CHART
-       ==================================================== */
-
-    function renderChart(
-      report
-    ) {
-
-      let activity =
-        report.transactionActivity;
-
-
-      if (
-        !Array.isArray(activity)
-      ) {
-
-        activity =
-          report.activity;
-
-      }
-
-
-      if (
-        !Array.isArray(activity) ||
-        activity.length === 0
-      ) {
-
-        elements.chart.innerHTML = `
-          <div class="empty-state">
-            No transaction activity is available
-            for this reporting period.
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      const limited =
-        activity.slice(-14);
-
-
-      const values =
-        limited.map(
-          item =>
-            number(
-              item.value ??
-              item.count ??
-              item.transactions ??
-              0
-            )
-        );
-
-
-      const maximum =
-        Math.max(
-          ...values,
-          1
-        );
-
-
-      elements.chart.innerHTML =
-        "";
-
-
-      limited.forEach(
-        (item, index) => {
-
-          const value =
-            values[index];
-
-
-          const height =
-            Math.max(
-              3,
-              (value / maximum) * 190
-            );
-
-
-          const column =
-            document.createElement(
-              "div"
-            );
-
-          column.className =
-            "chart-column";
-
-
-          const valueElement =
-            document.createElement(
-              "div"
-            );
-
-          valueElement.className =
-            "chart-value";
-
-          valueElement.textContent =
-            formatNumber(value);
-
-
-          const bar =
-            document.createElement(
-              "div"
-            );
-
-          bar.className =
-            "chart-bar";
-
-          bar.style.height =
-            `${height}px`;
-
-          bar.title =
-            `${formatNumber(value)} transactions`;
-
-
-          const label =
-            document.createElement(
-              "div"
-            );
-
-          label.className =
-            "chart-label";
-
-          label.textContent =
-            item.label ||
-            item.date ||
-            `Period ${index + 1}`;
-
-
-          column.appendChild(
-            valueElement
-          );
-
-          column.appendChild(
-            bar
-          );
-
-          column.appendChild(
-            label
-          );
-
-
-          elements.chart.appendChild(
-            column
-          );
-
-        }
-      );
-
-    }
-
-
-    /* ====================================================
-       RENDER BREAKDOWN
-       ==================================================== */
-
-    function renderBreakdown(
-      report
-    ) {
-
-      let data =
-        report.accountBreakdown;
-
-
-      if (
-        !Array.isArray(data)
-      ) {
-
-        data =
-          report.breakdown;
-
-      }
-
-
-      if (
-        !Array.isArray(data) ||
-        data.length === 0
-      ) {
-
-        elements.breakdown.innerHTML = `
-          <li class="empty-state">
-            No account breakdown is available.
-          </li>
-        `;
-
-        return;
-
-      }
-
-
-      elements.breakdown.innerHTML =
-        "";
-
-
-      data.forEach(
-        item => {
-
-          const row =
-            document.createElement(
-              "li"
-            );
-
-          row.className =
-            "breakdown-row";
-
-
-          const name =
-            document.createElement(
-              "span"
-            );
-
-          name.className =
-            "breakdown-name";
-
-          name.textContent =
-            item.name ||
-            item.type ||
-            item.status ||
-            "Unknown";
-
-
-          const value =
-            document.createElement(
-              "span"
-            );
-
-          value.className =
-            "breakdown-value";
-
-          value.textContent =
-            formatNumber(
-              item.value ??
-              item.count ??
-              0
-            );
-
-
-          row.appendChild(
-            name
-          );
-
-          row.appendChild(
-            value
-          );
-
-
-          elements.breakdown.appendChild(
-            row
-          );
-
-        }
-      );
-
-    }
-
-
-    /* ====================================================
-       STATUS CLASS
-       ==================================================== */
-
-    function getStatusClass(
-      status
-    ) {
-
-      const normalized =
-        String(
-          status || "pending"
-        )
-        .toLowerCase();
-
-
-      if (
-        [
-          "completed",
-          "complete",
-          "success",
-          "successful",
-          "approved"
-        ].includes(normalized)
-      ) {
-
-        return "status-success";
-
-      }
-
-
-      if (
-        [
-          "failed",
-          "failure",
-          "rejected",
-          "cancelled",
-          "canceled"
-        ].includes(normalized)
-      ) {
-
-        return "status-failed";
-
-      }
-
-
-      return "status-pending";
-
-    }
-
-
-    /* ====================================================
+    /* =====================================================
        RENDER TABLE
-       ==================================================== */
+       ===================================================== */
 
-    function renderTable(
-      report
-    ) {
+    function renderTable(data) {
 
-      let rows =
-        report.recentTransactions;
+        if (!data.length) {
 
+            reportTableBody.innerHTML = `
 
-      if (
-        !Array.isArray(rows)
-      ) {
+                <tr>
 
-        rows =
-          report.transactionsList;
+                    <td colspan="5"
+                        style="text-align:center;padding:30px;color:#7c8983;"
+                    >
+                        No report data found.
+                    </td>
 
-      }
-
-
-      if (
-        !Array.isArray(rows)
-      ) {
-
-        rows = [];
-
-      }
-
-
-      if (
-        rows.length === 0
-      ) {
-
-        elements.table.innerHTML = `
-          <tr>
-            <td
-              colspan="5"
-              class="empty-state"
-            >
-              No report activity is available.
-            </td>
-          </tr>
-        `;
-
-        return;
-
-      }
-
-
-      elements.table.innerHTML =
-        "";
-
-
-      rows
-        .slice(0, 50)
-        .forEach(
-          transaction => {
-
-            const row =
-              document.createElement(
-                "tr"
-              );
-
-
-            const reference =
-              transaction.reference ||
-              transaction.reference_id ||
-              transaction.id ||
-              "—";
-
-
-            const type =
-              transaction.type ||
-              transaction.transaction_type ||
-              "—";
-
-
-            const status =
-              transaction.status ||
-              "pending";
-
-
-            const statusLabel =
-              String(status)
-                .replaceAll("_", " ")
-                .replace(
-                  /\b\w/g,
-                  character =>
-                    character.toUpperCase()
-                );
-
-
-            row.innerHTML = `
-
-              <td>
-                ${escapeHtml(reference)}
-              </td>
-
-              <td>
-                ${escapeHtml(type)}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  formatAmount(
-                    transaction.amount
-                  )
-                )}
-              </td>
-
-              <td>
-                <span
-                  class="status ${getStatusClass(status)}"
-                >
-                  ${escapeHtml(statusLabel)}
-                </span>
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  formatDate(
-                    transaction.created_at ||
-                    transaction.date
-                  )
-                )}
-              </td>
+                </tr>
 
             `;
 
+            return;
 
-            elements.table.appendChild(
-              row
-            );
+        }
 
-          }
-        );
+
+        reportTableBody.innerHTML =
+            data.map(item => `
+
+                <tr>
+
+                    <td>
+                        ${escapeHtml(item.date)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(item.type)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(item.transactions)}
+                    </td>
+
+                    <td class="amount">
+                        ${formatCurrency(item.volume)}
+                    </td>
+
+                    <td>
+                        ${escapeHtml(item.status)}
+                    </td>
+
+                </tr>
+
+            `).join("");
 
     }
 
 
-    /* ====================================================
+    /* =====================================================
+       RENDER CHART
+       ===================================================== */
+
+    function renderChart(data) {
+
+        barChart.innerHTML = "";
+
+
+        if (!data.length) {
+            return;
+        }
+
+
+        const maximum =
+            Math.max(
+                ...data.map(
+                    item => item.volume
+                )
+            );
+
+
+        data.forEach(item => {
+
+            const column =
+                document.createElement("div");
+
+            column.className =
+                "bar-column";
+
+
+            const percentage =
+                maximum > 0
+                    ? (item.volume / maximum) * 100
+                    : 0;
+
+
+            const bar =
+                document.createElement("div");
+
+            bar.className =
+                "bar";
+
+
+            bar.style.height =
+                `${Math.max(percentage, 2)}%`;
+
+
+            const value =
+                document.createElement("span");
+
+            value.className =
+                "bar-value";
+
+
+            value.textContent =
+                formatCurrency(
+                    item.volume
+                );
+
+
+            const label =
+                document.createElement("span");
+
+            label.className =
+                "bar-label";
+
+
+            label.textContent =
+                item.date.slice(5);
+
+
+            column.appendChild(value);
+
+            column.appendChild(bar);
+
+            column.appendChild(label);
+
+            barChart.appendChild(column);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       UPDATE KPIs
+       ===================================================== */
+
+    function updateKPIs(data) {
+
+        const totalVolume =
+            data.reduce(
+                (sum, item) =>
+                    sum + item.volume,
+                0
+            );
+
+
+        const totalTransactions =
+            data.reduce(
+                (sum, item) =>
+                    sum + item.transactions,
+                0
+            );
+
+
+        const failed =
+            data.filter(
+                item =>
+                    item.status
+                        .toLowerCase() ===
+                    "failed"
+            ).length;
+
+
+        document.getElementById(
+            "transactionVolume"
+        ).textContent =
+            formatCurrency(totalVolume);
+
+
+        document.getElementById(
+            "transactionCount"
+        ).textContent =
+            totalTransactions;
+
+
+        document.getElementById(
+            "newCustomers"
+        ).textContent =
+            data.length * 3;
+
+
+        document.getElementById(
+            "activeAccounts"
+        ).textContent =
+            data.length * 8;
+
+
+        document.getElementById(
+            "pendingReviews"
+        ).textContent =
+            data.filter(
+                item =>
+                    item.status
+                        .toLowerCase() ===
+                    "pending"
+            ).length;
+
+
+        document.getElementById(
+            "failedTransactions"
+        ).textContent =
+            failed;
+
+    }
+
+
+    /* =====================================================
        GENERATE REPORT
-       ==================================================== */
+       ===================================================== */
 
-    async function generateReport() {
+    function generateReport() {
 
-      clearAlerts();
-
-
-      const start =
-        elements.startDate.value;
-
-      const end =
-        elements.endDate.value;
+        const reportType =
+            document.getElementById(
+                "reportType"
+            ).value;
 
 
-      if (!start || !end) {
-
-        showError(
-          "Please select both a start date and an end date."
-        );
-
-        return;
-
-      }
+        const status =
+            document.getElementById(
+                "status"
+            ).value;
 
 
-      if (start > end) {
-
-        showError(
-          "The start date cannot be later than the end date."
-        );
-
-        return;
-
-      }
+        const startDate =
+            document.getElementById(
+                "startDate"
+            ).value;
 
 
-      state.reportType =
-        elements.reportType.value;
-
-      state.startDate =
-        start;
-
-      state.endDate =
-        end;
+        const endDate =
+            document.getElementById(
+                "endDate"
+            ).value;
 
 
-      setLoading(true);
-
-
-      try {
-
-        const result =
-          await requestReport();
+        let filtered =
+            [...reportData];
 
 
         if (
-          !result ||
-          result.success === false
+            startDate
         ) {
 
-          throw new Error(
-            result?.message ||
-            "The report could not be generated."
-          );
+            filtered =
+                filtered.filter(
+                    item =>
+                        item.date >= startDate
+                );
 
         }
 
 
-        state.report =
-          result.data ??
-          result;
+        if (
+            endDate
+        ) {
+
+            filtered =
+                filtered.filter(
+                    item =>
+                        item.date <= endDate
+                );
+
+        }
 
 
-        renderMetrics(
-          state.report
-        );
+        if (
+            status
+        ) {
 
-        renderChart(
-          state.report
-        );
+            filtered =
+                filtered.filter(
+                    item =>
+                        item.status
+                            .toLowerCase() ===
+                        status
+                    );
 
-        renderBreakdown(
-          state.report
-        );
-
-        renderTable(
-          state.report
-        );
+        }
 
 
-        showSuccess(
-          "Report generated successfully."
-        );
+        /*
+         * Report type is retained as a filter point
+         * for the backend integration.
+         */
+
+        if (
+            reportType ===
+            "customers"
+        ) {
+
+            filtered =
+                filtered.map(item => ({
+                    ...item,
+                    type: "Customer Activity"
+                }));
+
+        }
 
 
-      } catch (error) {
+        if (
+            reportType ===
+            "accounts"
+        ) {
 
-        console.error(
-          "GTF Banking report error:",
-          error
-        );
+            filtered =
+                filtered.map(item => ({
+                    ...item,
+                    type: "Account Activity"
+                }));
+
+        }
 
 
-        showError(
-          error.message ||
-          "Unable to generate the report."
-        );
+        renderTable(filtered);
 
+        renderChart(filtered);
 
-        renderMetrics({});
-
-        renderChart({});
-
-        renderBreakdown({});
-
-        renderTable({});
-
-      } finally {
-
-        setLoading(false);
-
-      }
+        updateKPIs(filtered);
 
     }
 
 
-    /* ====================================================
-       FORM EVENTS
-       ==================================================== */
+    /* =====================================================
+       FORM
+       ===================================================== */
 
-    elements.form.addEventListener(
-      "submit",
-      event => {
+    reportFilterForm.addEventListener(
+        "submit",
+        function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        generateReport();
-
-      }
-    );
-
-
-    elements.refresh.addEventListener(
-      "click",
-      () => {
-
-        generateReport();
-
-      }
-    );
-
-
-    elements.print.addEventListener(
-      "click",
-      () => {
-
-        window.print();
-
-      }
-    );
-
-
-    /* ====================================================
-       DASHBOARD
-       ==================================================== */
-
-    document
-      .getElementById(
-        "dashboardButton"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          window.location.href =
-            "index.html";
+            generateReport();
 
         }
-      );
+    );
 
 
-    /* ====================================================
-       LOGOUT
-       ==================================================== */
+    /* =====================================================
+       REFRESH
+       ===================================================== */
 
     document
-      .getElementById(
-        "logoutButton"
-      )
-      .addEventListener(
-        "click",
-        async () => {
+        .getElementById("refreshButton")
+        .addEventListener(
+            "click",
+            function() {
 
-          try {
+                document.getElementById(
+                    "reportType"
+                ).value = "overview";
 
-            if (
-              typeof window.gtfLogout ===
-              "function"
-            ) {
 
-              await window.gtfLogout();
+                document.getElementById(
+                    "status"
+                ).value = "";
 
-            } else {
 
-              await fetch(
-                "/api/auth/logout",
-                {
-                  method: "POST",
-                  credentials: "include",
-                  headers: {
-                    "Accept":
-                      "application/json"
-                  }
-                }
-              );
+                document.getElementById(
+                    "startDate"
+                ).value = "";
+
+
+                document.getElementById(
+                    "endDate"
+                ).value = "";
+
+
+                generateReport();
 
             }
-
-          } catch (error) {
-
-            console.error(
-              "Logout error:",
-              error
-            );
-
-          } finally {
-
-            window.location.href =
-              "login.html";
-
-          }
-
-        }
-      );
+        );
 
 
-    /* ====================================================
-       INITIALIZATION
-       ==================================================== */
+    /* =====================================================
+       EXPORT CSV
+       ===================================================== */
+
+    document
+        .getElementById("exportButton")
+        .addEventListener(
+            "click",
+            function() {
+
+                const header = [
+                    "Date",
+                    "Transaction Type",
+                    "Transactions",
+                    "Volume",
+                    "Status"
+                ];
+
+
+                const rows =
+                    reportData.map(
+                        item => [
+
+                            item.date,
+
+                            item.type,
+
+                            item.transactions,
+
+                            item.volume,
+
+                            item.status
+
+                        ]
+                    );
+
+
+                const csv =
+                    [
+                        header,
+                        ...rows
+                    ]
+                    .map(
+                        row =>
+                            row
+                                .map(
+                                    value =>
+                                        `"${String(value)
+                                            .replace(
+                                                /"/g,
+                                                '""'
+                                            )}"`
+                                )
+                                .join(",")
+                    )
+                    .join("\n");
+
+
+                const blob =
+                    new Blob(
+                        [csv],
+                        {
+                            type:
+                                "text/csv;charset=utf-8;"
+                        }
+                    );
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href = url;
+
+                link.download =
+                    "gtf-banking-report.csv";
+
+
+                document.body.appendChild(
+                    link
+                );
+
+
+                link.click();
+
+                link.remove();
+
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    document
+        .getElementById("logoutButton")
+        .addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "./login.html";
+
+            }
+        );
+
+
+    /* =====================================================
+       DEFAULT DATES
+       ===================================================== */
 
     document.addEventListener(
-      "DOMContentLoaded",
-      () => {
+        "DOMContentLoaded",
+        function() {
 
-        initializeDates();
+            generateReport();
 
-      }
+        }
     );
 
-  </script>
+</script>
+
 
 </body>
+
 </html>
