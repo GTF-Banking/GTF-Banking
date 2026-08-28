@@ -1,2111 +1,3251 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
 
-  <title>Transactions | GTF Admin</title>
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="GTF Banking administration transaction management."
-  >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="../assets/gtf-logo.svg"
-  >
+    <meta
+        name="description"
+        content="Global TrustFund Administration Transactions"
+    >
 
-  <link
-    rel="stylesheet"
-    href="../css/styles.css"
-  >
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
 
-  <style>
-    .admin-page {
-      min-height: 100vh;
-      background: #f4f7fa;
-    }
+    <title>
+        Transactions | Global TrustFund Admin
+    </title>
 
-    .transactions-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+    <link
+        rel="stylesheet"
+        href="../css/styles.css"
+    >
 
-    .transactions-search {
-      min-width: 280px;
-      flex: 1;
-      max-width: 440px;
-    }
+    <style>
 
-    .transactions-search input,
-    .transactions-filter select {
-      width: 100%;
-      min-height: 40px;
-      padding: 9px 12px;
-      border: 1px solid #d9e2ea;
-      border-radius: 6px;
-      background: #fff;
-      color: #172b3a;
-      outline: none;
-      box-sizing: border-box;
-    }
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-green-dark: #092f24;
+            --gtf-green-light: #176b48;
+            --gtf-gold: #c9962b;
 
-    .transactions-search input:focus,
-    .transactions-filter select:focus {
-      border-color: #145da0;
-      box-shadow: 0 0 0 3px rgba(20, 93, 160, .08);
-    }
+            --gtf-bg: #f4f8f6;
+            --gtf-card: #ffffff;
+            --gtf-border: #dfe8e3;
 
-    .transactions-filters {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
 
-    .transactions-filter {
-      min-width: 145px;
-    }
+            --success-bg: #eaf5ee;
+            --success-text: #176b48;
 
-    .transactions-action {
-      min-height: 40px;
-      padding: 9px 14px;
-      border: 1px solid #145da0;
-      border-radius: 6px;
-      background: #145da0;
-      color: #fff;
-      font-size: .72rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
+            --warning-bg: #fff7df;
+            --warning-text: #85691c;
 
-    .transactions-action:hover {
-      background: #0d477c;
-    }
+            --danger-bg: #f9eded;
+            --danger-text: #8b4444;
 
-    .transactions-action.secondary {
-      background: #fff;
-      color: #145da0;
-    }
+            --info-bg: #edf5fa;
+            --info-text: #24627f;
+        }
 
-    .transactions-summary {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 20px;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .transaction-summary-card {
-      padding: 18px;
-      border: 1px solid #dce4eb;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 7px 22px rgba(11, 42, 74, .05);
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
 
-    .transaction-summary-card span {
-      display: block;
-      color: #66788a;
-      font-size: .65rem;
-      font-weight: 600;
-    }
+        body {
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
 
-    .transaction-summary-card strong {
-      display: block;
-      margin-top: 5px;
-      color: #0b2a4a;
-      font-size: 1.25rem;
-    }
+        button,
+        input,
+        select {
+            font: inherit;
+        }
 
-    .transaction-summary-card small {
-      display: block;
-      margin-top: 5px;
-      color: #8495a4;
-      font-size: .52rem;
-    }
+        button {
+            cursor: pointer;
+        }
 
-    .transactions-table-card {
-      overflow: hidden;
-      border: 1px solid #dce4eb;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 7px 22px rgba(11, 42, 74, .05);
-    }
+        /* =====================================================
+           PAGE
+           ===================================================== */
 
-    .transactions-table-header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #e3e9ee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
+        .admin-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .transactions-table-header h2 {
-      margin: 0;
-      color: #0b2a4a;
-      font-size: 1rem;
-    }
+        /* =====================================================
+           HEADER
+           ===================================================== */
 
-    .transactions-table-header span {
-      color: #66788a;
-      font-size: .62rem;
-    }
+        .admin-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
 
-    .transactions-table-wrap {
-      width: 100%;
-      overflow-x: auto;
-    }
+            background: #ffffff;
 
-    .transactions-table {
-      width: 100%;
-      min-width: 1100px;
-      border-collapse: collapse;
-    }
+            border-bottom:
+                1px solid var(--gtf-border);
 
-    .transactions-table th {
-      padding: 13px 15px;
-      background: #f8fafc;
-      color: #607386;
-      border-bottom: 1px solid #dce4eb;
-      text-align: left;
-      font-size: .58rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
+            box-shadow:
+                0 4px 18px
+                rgba(11, 61, 46, .05);
+        }
 
-    .transactions-table td {
-      padding: 14px 15px;
-      border-bottom: 1px solid #edf1f4;
-      color: #334b5d;
-      font-size: .62rem;
-      vertical-align: middle;
-    }
+        .admin-header-inner {
+            width: 100%;
+            max-width: 1440px;
+            min-height: 72px;
 
-    .transactions-table tr:hover td {
-      background: #fbfdff;
-    }
+            margin: 0 auto;
+            padding: 12px 25px;
 
-    .transaction-id {
-      color: #145da0;
-      font-family: monospace;
-      font-size: .58rem;
-      font-weight: 700;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    .transaction-customer {
-      color: #0b2a4a;
-      font-weight: 700;
-    }
+            gap: 20px;
+        }
 
-    .transaction-account {
-      margin-top: 3px;
-      color: #8495a4;
-      font-family: monospace;
-      font-size: .52rem;
-    }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
 
-    .transaction-type {
-      color: #42586b;
-      font-weight: 600;
-    }
+            color: var(--gtf-green);
+            text-decoration: none;
+        }
 
-    .transaction-amount {
-      color: #0b2a4a;
-      font-weight: 700;
-      white-space: nowrap;
-    }
+        .brand-logo {
+            width: 45px;
+            height: 45px;
 
-    .transaction-amount.credit {
-      color: #18733c;
-    }
+            display: block;
+            object-fit: contain;
+        }
 
-    .transaction-amount.debit {
-      color: #a52d36;
-    }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .transaction-status {
-      display: inline-flex;
-      align-items: center;
-      min-height: 24px;
-      padding: 4px 9px;
-      border-radius: 20px;
-      font-size: .5rem;
-      font-weight: 700;
-    }
+        .brand-text strong {
+            color: var(--gtf-green);
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
 
-    .transaction-status.completed {
-      background: #e7f6ed;
-      color: #18733c;
-    }
+        .brand-text small {
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 9px;
+        }
 
-    .transaction-status.pending {
-      background: #fff5dc;
-      color: #8a6816;
-    }
+        .admin-header-right {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
 
-    .transaction-status.failed,
-    .transaction-status.reversed {
-      background: #fdebec;
-      color: #a52d36;
-    }
+        .admin-label {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
 
-    .transaction-status.cancelled {
-      background: #edf0f3;
-      color: #5d6d7c;
-    }
+        .admin-label strong {
+            color: var(--gtf-text);
+            font-size: 9px;
+        }
 
-    .transaction-method {
-      color: #607386;
-      font-size: .57rem;
-    }
+        .admin-label span {
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
 
-    .transaction-actions {
-      display: flex;
-      gap: 6px;
-    }
+        .admin-avatar {
+            width: 36px;
+            height: 36px;
 
-    .row-button {
-      min-height: 30px;
-      padding: 5px 9px;
-      border: 1px solid #d5e0e8;
-      border-radius: 5px;
-      background: #fff;
-      color: #145da0;
-      font-size: .52rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .row-button:hover {
-      background: #edf5fb;
-    }
+            border-radius: 50%;
 
-    .row-button.danger {
-      color: #a52d36;
-    }
+            background: var(--gtf-green);
+            color: #ffffff;
 
-    .transactions-empty {
-      display: none;
-      padding: 45px 20px;
-      text-align: center;
-      color: #66788a;
-      font-size: .65rem;
-    }
+            font-size: 9px;
+            font-weight: 800;
+        }
 
-    .transactions-pagination {
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-top: 1px solid #e7edf1;
-    }
+        .logout-button {
+            min-height: 32px;
+            padding: 0 11px;
 
-    .transactions-pagination-info {
-      color: #66788a;
-      font-size: .56rem;
-    }
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
 
-    .pagination-buttons {
-      display: flex;
-      gap: 6px;
-    }
+            background: #ffffff;
+            color: var(--gtf-green);
 
-    .pagination-button {
-      min-width: 31px;
-      min-height: 31px;
-      border: 1px solid #d6e0e7;
-      border-radius: 5px;
-      background: #fff;
-      color: #42586b;
-      font-size: .55rem;
-      cursor: pointer;
-    }
+            font-size: 7px;
+            font-weight: 700;
+        }
 
-    .pagination-button.active {
-      background: #145da0;
-      border-color: #145da0;
-      color: #fff;
-    }
+        .logout-button:hover {
+            background: var(--gtf-bg);
+        }
 
-    .transactions-notice {
-      margin-bottom: 18px;
-      padding: 12px 15px;
-      border-left: 3px solid #c9962b;
-      border-radius: 4px;
-      background: #fffaf0;
-      color: #6e5a2b;
-      font-size: .57rem;
-    }
+        /* =====================================================
+           BODY
+           ===================================================== */
 
-    .date-filter {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .admin-body {
+            width: 100%;
+            max-width: 1440px;
 
-    .date-filter input {
-      min-height: 40px;
-      padding: 8px 10px;
-      border: 1px solid #d9e2ea;
-      border-radius: 6px;
-      background: #fff;
-      color: #172b3a;
-      font-size: .62rem;
-    }
+            margin: 0 auto;
+            padding: 25px;
 
-    @media (max-width: 1100px) {
-      .transactions-summary {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
 
-    @media (max-width: 700px) {
-      .transactions-summary {
-        grid-template-columns: 1fr;
-      }
+            gap: 25px;
 
-      .transactions-toolbar {
-        align-items: stretch;
-      }
+            flex: 1;
+        }
 
-      .transactions-search {
-        max-width: none;
-      }
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
 
-      .transactions-filters {
-        width: 100%;
-      }
+        .admin-sidebar {
+            height: fit-content;
 
-      .transactions-filter {
-        flex: 1;
-      }
+            position: sticky;
+            top: 97px;
 
-      .date-filter {
-        width: 100%;
-      }
+            padding: 15px;
 
-      .date-filter input {
-        flex: 1;
-      }
+            background: #ffffff;
 
-      .transactions-pagination {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 12px;
+        }
+
+        .sidebar-title {
+            padding: 8px 10px 12px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            display: grid;
+            gap: 4px;
+        }
+
+        .sidebar-nav a {
+            min-height: 38px;
+
+            padding: 0 10px;
+
+            display: flex;
+            align-items: center;
+
+            border-radius: 7px;
+
+            color: var(--gtf-muted);
+
+            text-decoration: none;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--gtf-bg);
+            color: var(--gtf-green);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        .nav-icon {
+            width: 22px;
+            flex: 0 0 22px;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .admin-main {
+            min-width: 0;
+        }
+
+        .page-heading {
+            margin-bottom: 22px;
+
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        .page-heading p {
+            margin: 7px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+            line-height: 1.6;
+        }
+
+        .heading-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            min-height: 36px;
+
+            padding: 0 13px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .button:hover {
+            background: var(--gtf-bg);
+        }
+
+        .button-primary {
+            border-color: var(--gtf-green);
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        .button-primary:hover {
+            background: var(--gtf-green-dark);
+        }
+
+        /* =====================================================
+           SUMMARY CARDS
+           ===================================================== */
+
+        .summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 18px;
+        }
+
+        .summary-card {
+            padding: 17px;
+
+            background: #ffffff;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 10px;
+        }
+
+        .summary-label {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+
+        .summary-value {
+            margin-top: 7px;
+
+            color: var(--gtf-green);
+
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .summary-note {
+            margin-top: 5px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           FILTER CARD
+           ===================================================== */
+
+        .filter-card {
+            margin-bottom: 18px;
+
+            padding: 17px;
+
+            background: #ffffff;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 10px;
+        }
+
+        .filter-title {
+            margin-bottom: 13px;
+
+            color: var(--gtf-green);
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .filter-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.6fr
+                1fr
+                1fr
+                1fr
+                auto;
+
+            gap: 9px;
+
+            align-items: end;
+        }
+
+        .filter-group {
+            display: grid;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            color: var(--gtf-text);
+
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+
+            min-height: 36px;
+
+            padding: 0 9px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #ffffff;
+            color: var(--gtf-text);
+
+            font-size: 8px;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: var(--gtf-green-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.08);
+        }
+
+        .filter-button {
+            min-height: 36px;
+
+            padding: 0 13px;
+
+            border:
+                1px solid var(--gtf-green);
+
+            border-radius: 6px;
+
+            background: var(--gtf-green);
+            color: #ffffff;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .filter-button:hover {
+            background: var(--gtf-green-dark);
+        }
+
+        /* =====================================================
+           TABLE CARD
+           ===================================================== */
+
+        .table-card {
+            background: #ffffff;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 17px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
+
+        .table-header h2 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 12px;
+        }
+
+        .table-header span {
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 900px;
+
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 11px 13px;
+
+            background: #f8faf9;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+
+            color: var(--gtf-muted);
+
+            text-align: left;
+
+            font-size: 7px;
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        td {
+            padding: 13px;
+
+            border-bottom:
+                1px solid #edf2ef;
+
+            color: var(--gtf-text);
+
+            font-size: 8px;
+
+            vertical-align: middle;
+        }
+
+        tbody tr:hover {
+            background: #fbfdfc;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .transaction-id {
+            color: var(--gtf-green);
+            font-weight: 800;
+        }
+
+        .customer-name {
+            font-weight: 700;
+        }
+
+        .customer-account {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+        }
+
+        .amount {
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .amount.credit {
+            color: var(--success-text);
+        }
+
+        .amount.debit {
+            color: var(--danger-text);
+        }
+
+        /* =====================================================
+           TYPE BADGES
+           ===================================================== */
+
+        .type-badge,
+        .status-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            min-height: 22px;
+
+            padding: 0 8px;
+
+            border-radius: 20px;
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+        .type-badge.transfer {
+            background: var(--info-bg);
+            color: var(--info-text);
+        }
+
+        .type-badge.deposit {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .type-badge.withdrawal {
+            background: var(--warning-bg);
+            color: var(--warning-text);
+        }
+
+        .type-badge.payment {
+            background: #f0eef8;
+            color: #635c87;
+        }
+
+        .status-badge.completed {
+            background: var(--success-bg);
+            color: var(--success-text);
+        }
+
+        .status-badge.pending {
+            background: var(--warning-bg);
+            color: var(--warning-text);
+        }
+
+        .status-badge.failed {
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+
+        .status-badge.review {
+            background: var(--info-bg);
+            color: var(--info-text);
+        }
+
+        /* =====================================================
+           ACTIONS
+           ===================================================== */
+
+        .row-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .row-button {
+            min-height: 28px;
+
+            padding: 0 8px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            font-size: 6px;
+            font-weight: 700;
+        }
+
+        .row-button:hover {
+            background: var(--gtf-bg);
+        }
+
+        /* =====================================================
+           PAGINATION
+           ===================================================== */
+
+        .table-footer {
+            padding: 13px 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+        .pagination-info {
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 4px;
+        }
+
+        .page-button {
+            width: 29px;
+            height: 29px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .page-button:hover {
+            background: var(--gtf-bg);
+        }
+
+        .page-button.active {
+            background: var(--gtf-green);
+            border-color: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        /* =====================================================
+           MODAL
+           ===================================================== */
+
+        .modal-backdrop {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 300;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(9, 47, 36, .48);
+        }
+
+        .modal-backdrop.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 560px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #ffffff;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(0,0,0,.2);
+        }
+
+        .modal-header {
+            padding: 18px 20px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 14px;
+        }
+
+        .modal-close {
+            width: 30px;
+            height: 30px;
+
+            border: 0;
+            border-radius: 50%;
+
+            background: var(--gtf-bg);
+
+            color: var(--gtf-muted);
+
+            font-size: 14px;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .detail-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 14px;
+        }
+
+        .detail-item {
+            padding: 11px;
+
+            background: #f8faf9;
+
+            border-radius: 7px;
+        }
+
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            color: var(--gtf-text);
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+        .modal-footer {
+            padding: 14px 20px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+        /* =====================================================
+           TOAST
+           ===================================================== */
+
+        .toast {
+            position: fixed;
+
+            right: 22px;
+            bottom: 22px;
+
+            z-index: 500;
+
+            max-width: 320px;
+
+            padding: 12px 15px;
+
+            border-radius: 8px;
+
+            background: var(--gtf-green);
+            color: #ffffff;
+
+            font-size: 8px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,.15);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform:
+                translateY(10px);
+
+            transition: .2s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .admin-footer {
+            padding: 16px 25px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+        .admin-footer-inner {
+            width: 100%;
+            max-width: 1440px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1150px) {
+
+            .summary-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .filter-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .filter-button {
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .admin-body {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                position: static;
+            }
+
+            .sidebar-nav {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .admin-header-inner {
+                padding: 10px 14px;
+            }
+
+            .admin-label {
+                display: none;
+            }
+
+            .admin-body {
+                padding: 15px;
+            }
+
+            .sidebar-nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .page-heading {
+                flex-direction: column;
+            }
+
+            .page-heading h1 {
+                font-size: 22px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-item.full {
+                grid-column: auto;
+            }
+
+            .table-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .pagination {
+                justify-content: center;
+            }
+
+            .admin-footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <div class="admin-page">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
 
-    <div class="side-brand">
-      <img
-        src="../assets/gtf-logo.svg"
-        alt="GTF Banking"
-        style="width:38px;height:38px;object-fit:contain;"
-      >
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-      <span>GTF</span> ADMIN
-    </div>
+    <header class="admin-header">
 
-    <nav class="side-nav">
-
-      <a href="index.html">
-        Dashboard
-      </a>
-
-      <a href="customers.html">
-        Customers
-      </a>
-
-      <a href="accounts.html">
-        Accounts
-      </a>
-
-      <a
-        href="transactions.html"
-        class="active"
-        aria-current="page"
-      >
-        Transactions
-      </a>
-
-      <a href="audit.html">
-        Audit Logs
-      </a>
-
-      <a href="compliance.html">
-        Compliance
-      </a>
-
-      <a href="reports.html">
-        Reports
-      </a>
-
-      <a href="settings.html">
-        Settings
-      </a>
-
-    </nav>
-
-  </aside>
+        <div class="admin-header-inner">
 
 
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
+            <a
+                href="./index.html"
+                class="brand"
+                aria-label="Global TrustFund Administration"
+            >
 
-    <header class="topbar">
+                <img
+                    src="../assets/gtf-logo.svg"
+                    class="brand-logo"
+                    alt="Global TrustFund logo"
+                >
 
-      <div>
+                <span class="brand-text">
 
-        <h1>
-          Transactions
-        </h1>
+                    <strong>
+                        Global TrustFund
+                    </strong>
 
-        <p>
-          Monitor and review customer banking transactions.
-        </p>
+                    <small>
+                        Administration
+                    </small>
 
-      </div>
+                </span>
 
-      <div class="topbar-actions">
+            </a>
 
-        <a
-          href="../index.html"
-          class="btn btn-secondary"
-        >
-          View Website
-        </a>
 
-        <button
-          id="logoutButton"
-          class="btn btn-danger"
-          type="button"
-        >
-          Sign Out
-        </button>
+            <div class="admin-header-right">
 
-      </div>
+                <div class="admin-label">
+
+                    <strong>
+                        Administrator
+                    </strong>
+
+                    <span>
+                        Transaction Operations
+                    </span>
+
+                </div>
+
+
+                <div class="admin-avatar">
+                    AD
+                </div>
+
+
+                <button
+                    type="button"
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    Sign Out
+                </button>
+
+            </div>
+
+        </div>
 
     </header>
 
 
-    <section class="content-section">
+    <!-- =====================================================
+         BODY
+         ===================================================== -->
 
-      <div class="transactions-notice">
-        Transaction information is retrieved from the authenticated
-        GTF backend. Administrative actions must be authorized by
-        the backend and must not rely on frontend-only permissions.
-      </div>
+    <div class="admin-body">
 
 
-      <!-- SUMMARY -->
-      <div class="transactions-summary">
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
 
-        <div class="transaction-summary-card">
+        <aside class="admin-sidebar">
 
-          <span>
-            Total Transactions
-          </span>
+            <div class="sidebar-title">
+                Administration
+            </div>
 
-          <strong id="totalTransactions">
-            0
-          </strong>
 
-          <small>
-            Loaded transaction records
-          </small>
+            <nav
+                class="sidebar-nav"
+                aria-label="Admin navigation"
+            >
 
-        </div>
+                <a href="./index.html">
+                    <span class="nav-icon">⌂</span>
+                    Dashboard
+                </a>
 
 
-        <div class="transaction-summary-card">
+                <a href="./customers.html">
+                    <span class="nav-icon">◉</span>
+                    Customers
+                </a>
 
-          <span>
-            Completed
-          </span>
 
-          <strong id="completedTransactions">
-            0
-          </strong>
+                <a href="./accounts.html">
+                    <span class="nav-icon">▣</span>
+                    Accounts
+                </a>
 
-          <small>
-            Successfully processed
-          </small>
 
-        </div>
+                <a
+                    href="./transactions.html"
+                    class="active"
+                    aria-current="page"
+                >
+                    <span class="nav-icon">⇄</span>
+                    Transactions
+                </a>
 
 
-        <div class="transaction-summary-card">
+                <a href="./reports.html">
+                    <span class="nav-icon">▤</span>
+                    Reports
+                </a>
 
-          <span>
-            Pending
-          </span>
 
-          <strong id="pendingTransactions">
-            0
-          </strong>
+                <a href="./compliance.html">
+                    <span class="nav-icon">✓</span>
+                    Compliance
+                </a>
 
-          <small>
-            Awaiting processing
-          </small>
 
-        </div>
+                <a href="./audit.html">
+                    <span class="nav-icon">◌</span>
+                    Audit
+                </a>
 
 
-        <div class="transaction-summary-card">
+                <a href="./settings.html">
+                    <span class="nav-icon">⚙</span>
+                    Settings
+                </a>
 
-          <span>
-            Failed / Reversed
-          </span>
+            </nav>
 
-          <strong id="failedTransactions">
-            0
-          </strong>
+        </aside>
 
-          <small>
-            Requires review
-          </small>
 
-        </div>
+        <!-- =================================================
+             MAIN
+             ================================================= -->
 
-      </div>
+        <main class="admin-main">
 
 
-      <!-- TOOLBAR -->
-      <div class="transactions-toolbar">
+            <!-- PAGE HEADING -->
 
-        <div class="transactions-search">
+            <section class="page-heading">
 
-          <input
-            id="transactionSearch"
-            type="search"
-            placeholder="Search transaction, customer or account..."
-            autocomplete="off"
-          >
+                <div>
 
-        </div>
+                    <h1>
+                        Transactions
+                    </h1>
 
+                    <p>
+                        Review, search, and monitor transaction
+                        activity across the banking platform.
+                    </p>
 
-        <div class="transactions-filters">
+                </div>
 
-          <div class="transactions-filter">
 
-            <select id="transactionTypeFilter">
+                <div class="heading-actions">
 
-              <option value="all">
-                All transaction types
-              </option>
+                    <button
+                        type="button"
+                        class="button"
+                        id="exportButton"
+                    >
+                        Export
+                    </button>
 
-              <option value="transfer">
-                Transfer
-              </option>
 
-              <option value="deposit">
-                Deposit
-              </option>
+                    <button
+                        type="button"
+                        class="button button-primary"
+                        id="refreshButton"
+                    >
+                        Refresh
+                    </button>
 
-              <option value="withdrawal">
-                Withdrawal
-              </option>
+                </div>
 
-              <option value="payment">
-                Payment
-              </option>
+            </section>
 
-              <option value="fee">
-                Fee
-              </option>
 
-              <option value="refund">
-                Refund
-              </option>
+            <!-- =================================================
+                 SUMMARY
+                 ================================================= -->
 
-            </select>
+            <section
+                class="summary-grid"
+                aria-label="Transaction summary"
+            >
 
-          </div>
 
+                <div class="summary-card">
 
-          <div class="transactions-filter">
+                    <div class="summary-label">
+                        Today's Transactions
+                    </div>
 
-            <select id="transactionStatusFilter">
+                    <div
+                        class="summary-value"
+                        id="todayCount"
+                    >
+                        1,284
+                    </div>
 
-              <option value="all">
-                All statuses
-              </option>
+                    <div class="summary-note">
+                        Total recorded today
+                    </div>
 
-              <option value="completed">
-                Completed
-              </option>
+                </div>
 
-              <option value="pending">
-                Pending
-              </option>
 
-              <option value="failed">
-                Failed
-              </option>
+                <div class="summary-card">
 
-              <option value="reversed">
-                Reversed
-              </option>
+                    <div class="summary-label">
+                        Total Volume
+                    </div>
 
-              <option value="cancelled">
-                Cancelled
-              </option>
+                    <div
+                        class="summary-value"
+                        id="totalVolume"
+                    >
+                        $842.6K
+                    </div>
 
-            </select>
+                    <div class="summary-note">
+                        Current reporting period
+                    </div>
 
-          </div>
+                </div>
 
 
-          <div class="transactions-filter">
+                <div class="summary-card">
 
-            <select id="transactionDirectionFilter">
+                    <div class="summary-label">
+                        Pending Review
+                    </div>
 
-              <option value="all">
-                All directions
-              </option>
+                    <div
+                        class="summary-value"
+                        id="pendingCount"
+                    >
+                        23
+                    </div>
 
-              <option value="credit">
-                Credit
-              </option>
+                    <div class="summary-note">
+                        Transactions awaiting action
+                    </div>
 
-              <option value="debit">
-                Debit
-              </option>
+                </div>
 
-            </select>
 
-          </div>
+                <div class="summary-card">
 
+                    <div class="summary-label">
+                        Failed
+                    </div>
 
-          <button
-            id="refreshTransactions"
-            class="transactions-action secondary"
-            type="button"
-          >
-            Refresh
-          </button>
+                    <div
+                        class="summary-value"
+                        id="failedCount"
+                    >
+                        7
+                    </div>
 
-        </div>
+                    <div class="summary-note">
+                        Transactions requiring attention
+                    </div>
 
-      </div>
+                </div>
 
+            </section>
 
-      <!-- TRANSACTION TABLE -->
-      <section class="transactions-table-card">
 
-        <div class="transactions-table-header">
+            <!-- =================================================
+                 FILTERS
+                 ================================================= -->
 
-          <div>
+            <section class="filter-card">
 
-            <h2>
-              Transaction Ledger
-            </h2>
+                <div class="filter-title">
+                    Search & Filter Transactions
+                </div>
 
-            <span id="transactionResultCount">
-              0 transactions
+
+                <div class="filter-grid">
+
+
+                    <div class="filter-group">
+
+                        <label for="searchInput">
+                            Search
+                        </label>
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Transaction ID, customer, account..."
+                        >
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="typeFilter">
+                            Transaction Type
+                        </label>
+
+                        <select id="typeFilter">
+
+                            <option value="">
+                                All Types
+                            </option>
+
+                            <option value="transfer">
+                                Transfer
+                            </option>
+
+                            <option value="deposit">
+                                Deposit
+                            </option>
+
+                            <option value="withdrawal">
+                                Withdrawal
+                            </option>
+
+                            <option value="payment">
+                                Payment
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="statusFilter">
+                            Status
+                        </label>
+
+                        <select id="statusFilter">
+
+                            <option value="">
+                                All Statuses
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="review">
+                                Review
+                            </option>
+
+                            <option value="failed">
+                                Failed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="dateFilter">
+                            Date
+                        </label>
+
+                        <select id="dateFilter">
+
+                            <option value="">
+                                All Dates
+                            </option>
+
+                            <option value="today">
+                                Today
+                            </option>
+
+                            <option value="7">
+                                Last 7 Days
+                            </option>
+
+                            <option value="30">
+                                Last 30 Days
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="filter-button"
+                        id="filterButton"
+                    >
+                        Apply
+                    </button>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 TRANSACTION TABLE
+                 ================================================= -->
+
+            <section class="table-card">
+
+
+                <div class="table-header">
+
+                    <div>
+
+                        <h2>
+                            Transaction Activity
+                        </h2>
+
+                    </div>
+
+                    <span id="resultCount">
+                        Showing 8 transactions
+                    </span>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Transaction
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Date & Time
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="transactionTableBody">
+
+
+                            <tr
+                                data-type="transfer"
+                                data-status="completed"
+                            >
+
+                                <td>
+
+                                    <span class="transaction-id">
+                                        TXN-2026-001284
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        David Morgan
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****4821
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge transfer">
+                                        Transfer
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount debit">
+                                        -$2,450.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>09:42 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge completed">
+                                        Completed
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001284"
+                                            data-customer="David Morgan"
+                                            data-account="****4821"
+                                            data-type="Transfer"
+                                            data-amount="-$2,450.00"
+                                            data-date="Aug 28, 2026 09:42 AM"
+                                            data-status="Completed"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="deposit"
+                                data-status="completed"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001283
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        Sarah Williams
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****7392
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge deposit">
+                                        Deposit
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount credit">
+                                        +$5,000.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>09:35 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge completed">
+                                        Completed
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001283"
+                                            data-customer="Sarah Williams"
+                                            data-account="****7392"
+                                            data-type="Deposit"
+                                            data-amount="+$5,000.00"
+                                            data-date="Aug 28, 2026 09:35 AM"
+                                            data-status="Completed"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="withdrawal"
+                                data-status="pending"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001282
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        Michael Carter
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****2156
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge withdrawal">
+                                        Withdrawal
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount debit">
+                                        -$1,200.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>09:28 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge pending">
+                                        Pending
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001282"
+                                            data-customer="Michael Carter"
+                                            data-account="****2156"
+                                            data-type="Withdrawal"
+                                            data-amount="-$1,200.00"
+                                            data-date="Aug 28, 2026 09:28 AM"
+                                            data-status="Pending"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="payment"
+                                data-status="completed"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001281
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        Emily Johnson
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****6408
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge payment">
+                                        Payment
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount debit">
+                                        -$375.50
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>09:14 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge completed">
+                                        Completed
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001281"
+                                            data-customer="Emily Johnson"
+                                            data-account="****6408"
+                                            data-type="Payment"
+                                            data-amount="-$375.50"
+                                            data-date="Aug 28, 2026 09:14 AM"
+                                            data-status="Completed"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="transfer"
+                                data-status="review"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001280
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        Robert Anderson
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****9134
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge transfer">
+                                        Transfer
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount debit">
+                                        -$12,500.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>08:57 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge review">
+                                        Review
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001280"
+                                            data-customer="Robert Anderson"
+                                            data-account="****9134"
+                                            data-type="Transfer"
+                                            data-amount="-$12,500.00"
+                                            data-date="Aug 28, 2026 08:57 AM"
+                                            data-status="Review"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="deposit"
+                                data-status="completed"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001279
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        Olivia Brown
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****5277
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge deposit">
+                                        Deposit
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount credit">
+                                        +$8,750.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>08:42 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge completed">
+                                        Completed
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001279"
+                                            data-customer="Olivia Brown"
+                                            data-account="****5277"
+                                            data-type="Deposit"
+                                            data-amount="+$8,750.00"
+                                            data-date="Aug 28, 2026 08:42 AM"
+                                            data-status="Completed"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="payment"
+                                data-status="failed"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001278
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        James Wilson
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****3619
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge payment">
+                                        Payment
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount debit">
+                                        -$620.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>08:31 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge failed">
+                                        Failed
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001278"
+                                            data-customer="James Wilson"
+                                            data-account="****3619"
+                                            data-type="Payment"
+                                            data-amount="-$620.00"
+                                            data-date="Aug 28, 2026 08:31 AM"
+                                            data-status="Failed"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                            <tr
+                                data-type="transfer"
+                                data-status="completed"
+                            >
+
+                                <td>
+                                    <span class="transaction-id">
+                                        TXN-2026-001277
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <span class="customer-name">
+                                        Daniel Thompson
+                                    </span>
+
+                                    <span class="customer-account">
+                                        ****8043
+                                    </span>
+
+                                </td>
+
+
+                                <td>
+                                    <span class="type-badge transfer">
+                                        Transfer
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="amount debit">
+                                        -$3,100.00
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    Aug 28, 2026<br>
+                                    <small>08:18 AM</small>
+                                </td>
+
+
+                                <td>
+                                    <span class="status-badge completed">
+                                        Completed
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    <div class="row-actions">
+
+                                        <button
+                                            type="button"
+                                            class="row-button view-button"
+                                            data-id="TXN-2026-001277"
+                                            data-customer="Daniel Thompson"
+                                            data-account="****8043"
+                                            data-type="Transfer"
+                                            data-amount="-$3,100.00"
+                                            data-date="Aug 28, 2026 08:18 AM"
+                                            data-status="Completed"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- PAGINATION -->
+
+                <div class="table-footer">
+
+                    <span
+                        class="pagination-info"
+                        id="paginationInfo"
+                    >
+                        Showing 1–8 of 1,284 transactions
+                    </span>
+
+
+                    <div class="pagination">
+
+                        <button
+                            type="button"
+                            class="page-button"
+                            id="previousPage"
+                        >
+                            ‹
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button active"
+                        >
+                            1
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button"
+                        >
+                            2
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button"
+                        >
+                            3
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button"
+                        >
+                            4
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="page-button"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="admin-footer">
+
+        <div class="admin-footer-inner">
+
+            <span>
+                © 2026 Global TrustFund. Administrative Portal.
             </span>
 
-          </div>
-
-          <button
-            id="exportTransactions"
-            class="transactions-action"
-            type="button"
-          >
-            Export CSV
-          </button>
+            <span>
+                Transaction Management
+            </span>
 
         </div>
 
+    </footer>
 
-        <div class="transactions-table-wrap">
-
-          <table class="transactions-table">
-
-            <thead>
-
-              <tr>
-
-                <th>
-                  Transaction
-                </th>
-
-                <th>
-                  Customer
-                </th>
-
-                <th>
-                  Account
-                </th>
-
-                <th>
-                  Type
-                </th>
-
-                <th>
-                  Direction
-                </th>
-
-                <th>
-                  Amount
-                </th>
-
-                <th>
-                  Currency
-                </th>
-
-                <th>
-                  Method
-                </th>
-
-                <th>
-                  Status
-                </th>
-
-                <th>
-                  Date
-                </th>
-
-                <th>
-                  Actions
-                </th>
-
-              </tr>
-
-            </thead>
-
-            <tbody id="transactionsTableBody">
-              <!-- Backend transaction records -->
-            </tbody>
-
-          </table>
-
-
-          <div
-            id="transactionsEmpty"
-            class="transactions-empty"
-          >
-            No transactions match the current filters.
-          </div>
-
-        </div>
-
-
-        <div class="transactions-pagination">
-
-          <div
-            id="paginationInfo"
-            class="transactions-pagination-info"
-          >
-            Showing 0 transactions
-          </div>
-
-          <div class="pagination-buttons">
-
-            <button
-              id="previousPage"
-              class="pagination-button"
-              type="button"
-            >
-              ‹
-            </button>
-
-            <button
-              class="pagination-button active"
-              type="button"
-            >
-              1
-            </button>
-
-            <button
-              id="nextPage"
-              class="pagination-button"
-              type="button"
-            >
-              ›
-            </button>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </section>
-
-  </main>
 
 </div>
 
 
-<script>
-"use strict";
+<!-- =====================================================
+     TRANSACTION DETAIL MODAL
+     ===================================================== -->
 
-/*
-=========================================================
- GTF BANKING ADMIN — TRANSACTIONS
-=========================================================
+<div
+    class="modal-backdrop"
+    id="transactionModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="transactionModalTitle"
+>
 
-Frontend transaction management interface.
 
-The frontend does NOT contain:
-- database credentials
-- Supabase service-role keys
-- private API keys
-- authorization secrets
+    <div class="modal">
 
-All authorization and transaction operations must be
-validated by the backend.
 
-Expected endpoint:
+        <div class="modal-header">
 
-GET  /api/transactions
-POST /api/auth/logout
+            <h2 id="transactionModalTitle">
+                Transaction Details
+            </h2>
 
-Optional transaction detail page:
-
-transaction.html?id=<transaction-id>
-
-=========================================================
-*/
-
-const API_BASE =
-  window.GTF_API_BASE || "/api";
-
-const TRANSACTIONS_ENDPOINT =
-  API_BASE + "/transactions";
-
-
-let allTransactions = [];
-
-
-const tableBody =
-  document.getElementById(
-    "transactionsTableBody"
-  );
-
-const emptyState =
-  document.getElementById(
-    "transactionsEmpty"
-  );
-
-const searchInput =
-  document.getElementById(
-    "transactionSearch"
-  );
-
-const typeFilter =
-  document.getElementById(
-    "transactionTypeFilter"
-  );
-
-const statusFilter =
-  document.getElementById(
-    "transactionStatusFilter"
-  );
-
-const directionFilter =
-  document.getElementById(
-    "transactionDirectionFilter"
-  );
-
-
-const totalTransactions =
-  document.getElementById(
-    "totalTransactions"
-  );
-
-const completedTransactions =
-  document.getElementById(
-    "completedTransactions"
-  );
-
-const pendingTransactions =
-  document.getElementById(
-    "pendingTransactions"
-  );
-
-const failedTransactions =
-  document.getElementById(
-    "failedTransactions"
-  );
-
-const resultCount =
-  document.getElementById(
-    "transactionResultCount"
-  );
-
-const paginationInfo =
-  document.getElementById(
-    "paginationInfo"
-  );
-
-
-/*
-=========================================================
- HTML ESCAPING
-=========================================================
-*/
-
-function escapeHTML(value) {
-
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-
-}
-
-
-/*
-=========================================================
- NORMALIZE BACKEND RECORD
-=========================================================
-*/
-
-function normalizeTransaction(transaction) {
-
-  return {
-
-    id:
-      transaction.id ||
-      transaction.transaction_id ||
-      "",
-
-    customerName:
-      transaction.customerName ||
-      transaction.customer_name ||
-      transaction.user_name ||
-      transaction.name ||
-      "Unknown customer",
-
-    email:
-      transaction.email ||
-      "",
-
-    accountNumber:
-      transaction.accountNumber ||
-      transaction.account_number ||
-      "—",
-
-    type:
-      String(
-        transaction.type ||
-        transaction.transaction_type ||
-        "transfer"
-      ).toLowerCase(),
-
-    direction:
-      String(
-        transaction.direction ||
-        (
-          Number(transaction.amount) < 0
-            ? "debit"
-            : "credit"
-        )
-      ).toLowerCase(),
-
-    amount:
-      Math.abs(
-        Number(
-          transaction.amount ??
-          transaction.transaction_amount ??
-          0
-        )
-      ),
-
-    currency:
-      transaction.currency ||
-      "USD",
-
-    method:
-      transaction.method ||
-      transaction.payment_method ||
-      transaction.channel ||
-      "—",
-
-    status:
-      String(
-        transaction.status ||
-        "pending"
-      ).toLowerCase(),
-
-    createdAt:
-      transaction.createdAt ||
-      transaction.created_at ||
-      transaction.date ||
-      "",
-
-    description:
-      transaction.description ||
-      ""
-
-  };
-
-}
-
-
-/*
-=========================================================
- MONEY FORMAT
-=========================================================
-*/
-
-function formatMoney(
-  amount,
-  currency
-) {
-
-  try {
-
-    return new Intl.NumberFormat(
-      undefined,
-      {
-        style: "currency",
-        currency: currency || "USD",
-        maximumFractionDigits: 2
-      }
-    ).format(
-      Number(amount) || 0
-    );
-
-  } catch (error) {
-
-    return (
-      String(currency || "USD") +
-      " " +
-      Number(amount || 0).toFixed(2)
-    );
-
-  }
-
-}
-
-
-/*
-=========================================================
- DATE FORMAT
-=========================================================
-*/
-
-function formatDate(value) {
-
-  if (!value) {
-    return "—";
-  }
-
-  const date =
-    new Date(value);
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-    return "—";
-  }
-
-  return date.toLocaleString(
-    undefined,
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
-
-}
-
-
-/*
-=========================================================
- STATUS CLASS
-=========================================================
-*/
-
-function getStatusClass(status) {
-
-  const allowed = [
-    "completed",
-    "pending",
-    "failed",
-    "reversed",
-    "cancelled"
-  ];
-
-  return allowed.includes(status)
-    ? status
-    : "pending";
-
-}
-
-
-/*
-=========================================================
- RENDER TRANSACTIONS
-=========================================================
-*/
-
-function renderTransactions(
-  transactions
-) {
-
-  tableBody.innerHTML = "";
-
-
-  if (!transactions.length) {
-
-    emptyState.style.display =
-      "block";
-
-    resultCount.textContent =
-      "0 transactions";
-
-    paginationInfo.textContent =
-      "Showing 0 transactions";
-
-    return;
-
-  }
-
-
-  emptyState.style.display =
-    "none";
-
-
-  transactions.forEach(
-    function (transaction) {
-
-      const row =
-        document.createElement(
-          "tr"
-        );
-
-
-      const status =
-        getStatusClass(
-          transaction.status
-        );
-
-
-      const direction =
-        transaction.direction === "debit"
-          ? "debit"
-          : "credit";
-
-
-      const amountPrefix =
-        direction === "debit"
-          ? "−"
-          : "+";
-
-
-      row.innerHTML = `
-
-        <td>
-
-          <div class="transaction-id">
-            ${escapeHTML(
-              transaction.id || "—"
-            )}
-          </div>
-
-          ${
-            transaction.description
-              ? `
-                <div
-                  style="
-                    color:#8495a4;
-                    font-size:.51rem;
-                    margin-top:3px;
-                    max-width:180px;
-                  "
-                >
-                  ${escapeHTML(
-                    transaction.description
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-        </td>
-
-
-        <td>
-
-          <div class="transaction-customer">
-            ${escapeHTML(
-              transaction.customerName
-            )}
-          </div>
-
-          ${
-            transaction.email
-              ? `
-                <div
-                  style="
-                    color:#8495a4;
-                    font-size:.51rem;
-                    margin-top:2px;
-                  "
-                >
-                  ${escapeHTML(
-                    transaction.email
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-        </td>
-
-
-        <td>
-
-          <div class="transaction-account">
-            ${escapeHTML(
-              transaction.accountNumber
-            )}
-          </div>
-
-        </td>
-
-
-        <td>
-
-          <span class="transaction-type">
-            ${escapeHTML(
-              transaction.type
-                .charAt(0)
-                .toUpperCase() +
-              transaction.type.slice(1)
-            )}
-          </span>
-
-        </td>
-
-
-        <td>
-
-          <span
-            class="transaction-amount ${direction}"
-          >
-            ${direction === "debit"
-              ? "Debit"
-              : "Credit"}
-          </span>
-
-        </td>
-
-
-        <td>
-
-          <span
-            class="transaction-amount ${direction}"
-          >
-            ${amountPrefix}${formatMoney(
-              transaction.amount,
-              transaction.currency
-            )}
-          </span>
-
-        </td>
-
-
-        <td>
-          ${escapeHTML(
-            transaction.currency
-          )}
-        </td>
-
-
-        <td>
-
-          <span class="transaction-method">
-            ${escapeHTML(
-              transaction.method
-            )}
-          </span>
-
-        </td>
-
-
-        <td>
-
-          <span
-            class="transaction-status ${status}"
-          >
-            ${escapeHTML(
-              transaction.status
-                .charAt(0)
-                .toUpperCase() +
-              transaction.status.slice(1)
-            )}
-          </span>
-
-        </td>
-
-
-        <td>
-          ${escapeHTML(
-            formatDate(
-              transaction.createdAt
-            )
-          )}
-        </td>
-
-
-        <td>
-
-          <div class="transaction-actions">
 
             <button
-              type="button"
-              class="row-button"
-              data-action="view"
-              data-id="${escapeHTML(
-                transaction.id
-              )}"
+                type="button"
+                class="modal-close"
+                id="closeModal"
+                aria-label="Close"
             >
-              View
+                ×
             </button>
 
-            ${
-              transaction.status === "pending"
-                ? `
-                  <button
-                    type="button"
-                    class="row-button"
-                    data-action="review"
-                    data-id="${escapeHTML(
-                      transaction.id
-                    )}"
-                  >
-                    Review
-                  </button>
-                `
-                : ""
+        </div>
+
+
+        <div class="modal-body">
+
+
+            <div class="detail-grid">
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Transaction ID
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailId"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Status
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailStatus"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Customer
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailCustomer"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Account
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailAccount"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Transaction Type
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailType"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Amount
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailAmount"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="detail-item full">
+
+                    <span class="detail-label">
+                        Date & Time
+                    </span>
+
+                    <span
+                        class="detail-value"
+                        id="detailDate"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="button"
+                id="modalCancel"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+     ===================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+>
+</div>
+
+
+<script>
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const typeFilter =
+        document.getElementById(
+            "typeFilter"
+        );
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        );
+
+    const dateFilter =
+        document.getElementById(
+            "dateFilter"
+        );
+
+    const tableBody =
+        document.getElementById(
+            "transactionTableBody"
+        );
+
+    const resultCount =
+        document.getElementById(
+            "resultCount"
+        );
+
+    const paginationInfo =
+        document.getElementById(
+            "paginationInfo"
+        );
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    const modal =
+        document.getElementById(
+            "transactionModal"
+        );
+
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    let toastTimer;
+
+
+    function showToast(message) {
+
+        clearTimeout(
+            toastTimer
+        );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        toastTimer =
+            setTimeout(
+                function() {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                2500
+            );
+
+    }
+
+
+    /* =====================================================
+       FILTER TRANSACTIONS
+       ===================================================== */
+
+    function filterTransactions() {
+
+        const search =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+
+        const type =
+            typeFilter.value;
+
+
+        const status =
+            statusFilter.value;
+
+
+        const rows =
+            Array.from(
+                tableBody.querySelectorAll(
+                    "tr"
+                )
+            );
+
+
+        let visible =
+            0;
+
+
+        rows.forEach(
+            function(row) {
+
+                const rowText =
+                    row.textContent
+                        .toLowerCase();
+
+
+                const rowType =
+                    row.dataset.type ||
+                    "";
+
+
+                const rowStatus =
+                    row.dataset.status ||
+                    "";
+
+
+                const matchesSearch =
+                    !search ||
+                    rowText.includes(
+                        search
+                    );
+
+
+                const matchesType =
+                    !type ||
+                    rowType === type;
+
+
+                const matchesStatus =
+                    !status ||
+                    rowStatus === status;
+
+
+                const shouldShow =
+                    matchesSearch &&
+                    matchesType &&
+                    matchesStatus;
+
+
+                row.style.display =
+                    shouldShow
+                        ? ""
+                        : "none";
+
+
+                if (shouldShow) {
+                    visible++;
+                }
+
+            }
+        );
+
+
+        resultCount.textContent =
+            `Showing ${visible} transaction${visible === 1 ? "" : "s"}`;
+
+
+        paginationInfo.textContent =
+            `Showing ${visible} filtered transaction${visible === 1 ? "" : "s"}`;
+
+    }
+
+
+    /* =====================================================
+       FILTER BUTTON
+       ===================================================== */
+
+    document
+        .getElementById(
+            "filterButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                filterTransactions();
+
+                showToast(
+                    "Transaction filters applied."
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       LIVE SEARCH
+       ===================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        filterTransactions
+    );
+
+
+    /* =====================================================
+       VIEW TRANSACTION
+       ===================================================== */
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            const button =
+                event.target.closest(
+                    ".view-button"
+                );
+
+
+            if (!button) {
+                return;
             }
 
-          </div>
 
-        </td>
+            document.getElementById(
+                "detailId"
+            ).textContent =
+                button.dataset.id || "—";
 
-      `;
 
+            document.getElementById(
+                "detailCustomer"
+            ).textContent =
+                button.dataset.customer || "—";
 
-      tableBody.appendChild(
-        row
-      );
 
-    }
-  );
+            document.getElementById(
+                "detailAccount"
+            ).textContent =
+                button.dataset.account || "—";
 
 
-  resultCount.textContent =
-    `${transactions.length} transaction${
-      transactions.length === 1
-        ? ""
-        : "s"
-    }`;
+            document.getElementById(
+                "detailType"
+            ).textContent =
+                button.dataset.type || "—";
 
 
-  paginationInfo.textContent =
-    `Showing ${transactions.length} transaction${
-      transactions.length === 1
-        ? ""
-        : "s"
-    }`;
+            document.getElementById(
+                "detailAmount"
+            ).textContent =
+                button.dataset.amount || "—";
 
-}
 
+            document.getElementById(
+                "detailDate"
+            ).textContent =
+                button.dataset.date || "—";
 
-/*
-=========================================================
- SUMMARY
-=========================================================
-*/
 
-function updateSummary() {
+            document.getElementById(
+                "detailStatus"
+            ).textContent =
+                button.dataset.status || "—";
 
-  totalTransactions.textContent =
-    allTransactions.length;
 
-
-  completedTransactions.textContent =
-    allTransactions.filter(
-      function (transaction) {
-
-        return transaction.status ===
-          "completed";
-
-      }
-    ).length;
-
-
-  pendingTransactions.textContent =
-    allTransactions.filter(
-      function (transaction) {
-
-        return transaction.status ===
-          "pending";
-
-      }
-    ).length;
-
-
-  failedTransactions.textContent =
-    allTransactions.filter(
-      function (transaction) {
-
-        return (
-          transaction.status ===
-            "failed" ||
-          transaction.status ===
-            "reversed"
-        );
-
-      }
-    ).length;
-
-}
-
-
-/*
-=========================================================
- FILTERS
-=========================================================
-*/
-
-function applyFilters() {
-
-  const search =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
-  const selectedType =
-    typeFilter.value;
-
-  const selectedStatus =
-    statusFilter.value;
-
-  const selectedDirection =
-    directionFilter.value;
-
-
-  const filtered =
-    allTransactions.filter(
-      function (transaction) {
-
-        const searchable =
-          [
-            transaction.id,
-            transaction.customerName,
-            transaction.email,
-            transaction.accountNumber,
-            transaction.type,
-            transaction.direction,
-            transaction.currency,
-            transaction.method,
-            transaction.status,
-            transaction.description
-          ]
-            .join(" ")
-            .toLowerCase();
-
-
-        const matchesSearch =
-          !search ||
-          searchable.includes(
-            search
-          );
-
-
-        const matchesType =
-          selectedType === "all" ||
-          transaction.type ===
-            selectedType;
-
-
-        const matchesStatus =
-          selectedStatus === "all" ||
-          transaction.status ===
-            selectedStatus;
-
-
-        const matchesDirection =
-          selectedDirection === "all" ||
-          transaction.direction ===
-            selectedDirection;
-
-
-        return (
-          matchesSearch &&
-          matchesType &&
-          matchesStatus &&
-          matchesDirection
-        );
-
-      }
-    );
-
-
-  renderTransactions(
-    filtered
-  );
-
-}
-
-
-/*
-=========================================================
- LOAD TRANSACTIONS
-=========================================================
-*/
-
-async function loadTransactions() {
-
-  tableBody.innerHTML = "";
-
-  emptyState.style.display =
-    "none";
-
-  resultCount.textContent =
-    "Loading transactions...";
-
-
-  try {
-
-    const response =
-      await fetch(
-        TRANSACTIONS_ENDPOINT,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Accept":
-              "application/json"
-          }
-        }
-      );
-
-
-    if (
-      response.status === 401 ||
-      response.status === 403
-    ) {
-
-      window.location.href =
-        "login.html";
-
-      return;
-
-    }
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Transaction request failed (${response.status})`
-      );
-
-    }
-
-
-    const payload =
-      await response.json();
-
-
-    const data =
-      Array.isArray(payload)
-        ? payload
-        : (
-          payload.transactions ||
-          payload.data ||
-          []
-        );
-
-
-    allTransactions =
-      data.map(
-        normalizeTransaction
-      );
-
-
-    updateSummary();
-
-    applyFilters();
-
-
-  } catch (error) {
-
-    console.error(
-      "Unable to load transactions:",
-      error
-    );
-
-
-    allTransactions = [];
-
-    updateSummary();
-
-
-    tableBody.innerHTML = "";
-
-    emptyState.style.display =
-      "block";
-
-    emptyState.textContent =
-      "Transactions could not be loaded from the backend. Check the authenticated API connection.";
-
-
-    resultCount.textContent =
-      "Unable to load transactions";
-
-
-    paginationInfo.textContent =
-      "No transaction data loaded";
-
-  }
-
-}
-
-
-/*
-=========================================================
- CSV EXPORT
-=========================================================
-*/
-
-function exportTransactions() {
-
-  const search =
-    searchInput.value
-      .trim()
-      .toLowerCase();
-
-  const selectedType =
-    typeFilter.value;
-
-  const selectedStatus =
-    statusFilter.value;
-
-  const selectedDirection =
-    directionFilter.value;
-
-
-  const transactions =
-    allTransactions.filter(
-      function (transaction) {
-
-        const searchable =
-          [
-            transaction.id,
-            transaction.customerName,
-            transaction.email,
-            transaction.accountNumber,
-            transaction.type,
-            transaction.direction,
-            transaction.currency,
-            transaction.method,
-            transaction.status,
-            transaction.description
-          ]
-            .join(" ")
-            .toLowerCase();
-
-
-        return (
-          (!search ||
-            searchable.includes(
-              search
-            )) &&
-
-          (
-            selectedType === "all" ||
-            transaction.type ===
-              selectedType
-          ) &&
-
-          (
-            selectedStatus === "all" ||
-            transaction.status ===
-              selectedStatus
-          ) &&
-
-          (
-            selectedDirection === "all" ||
-            transaction.direction ===
-              selectedDirection
-          )
-        );
-
-      }
-    );
-
-
-  if (!transactions.length) {
-
-    alert(
-      "There are no transaction records to export."
-    );
-
-    return;
-
-  }
-
-
-  const headers = [
-    "Transaction ID",
-    "Customer",
-    "Email",
-    "Account Number",
-    "Type",
-    "Direction",
-    "Amount",
-    "Currency",
-    "Method",
-    "Status",
-    "Date"
-  ];
-
-
-  const rows =
-    transactions.map(
-      function (transaction) {
-
-        return [
-
-          transaction.id,
-
-          transaction.customerName,
-
-          transaction.email,
-
-          transaction.accountNumber,
-
-          transaction.type,
-
-          transaction.direction,
-
-          transaction.amount,
-
-          transaction.currency,
-
-          transaction.method,
-
-          transaction.status,
-
-          formatDate(
-            transaction.createdAt
-          )
-
-        ];
-
-      }
-    );
-
-
-  const csv =
-    [
-      headers,
-      ...rows
-    ]
-      .map(
-        function (row) {
-
-          return row
-            .map(
-              function (value) {
-
-                return `"${String(
-                  value ?? ""
-                ).replace(
-                  /"/g,
-                  '""'
-                )}"`;
-
-              }
-            )
-            .join(",");
+            modal.classList.add(
+                "show"
+            );
 
         }
-      )
-      .join("\n");
-
-
-  const blob =
-    new Blob(
-      [csv],
-      {
-        type:
-          "text/csv;charset=utf-8;"
-      }
     );
 
 
-  const url =
-    URL.createObjectURL(
-      blob
-    );
+    /* =====================================================
+       CLOSE MODAL
+       ===================================================== */
 
+    function closeModal() {
 
-  const link =
-    document.createElement(
-      "a"
-    );
-
-  link.href = url;
-
-  link.download =
-    "gtf-transactions.csv";
-
-
-  document.body.appendChild(
-    link
-  );
-
-  link.click();
-
-  link.remove();
-
-  URL.revokeObjectURL(
-    url
-  );
-
-}
-
-
-/*
-=========================================================
- TABLE ACTIONS
-=========================================================
-*/
-
-tableBody.addEventListener(
-  "click",
-  function (event) {
-
-    const button =
-      event.target.closest(
-        "button[data-action]"
-      );
-
-
-    if (!button) {
-      return;
-    }
-
-
-    const transactionId =
-      button.dataset.id;
-
-    const action =
-      button.dataset.action;
-
-
-    if (!transactionId) {
-
-      alert(
-        "This transaction does not have a valid ID."
-      );
-
-      return;
+        modal.classList.remove(
+            "show"
+        );
 
     }
 
 
-    if (action === "view") {
-
-      window.location.href =
-        `transaction.html?id=${encodeURIComponent(
-          transactionId
-        )}`;
-
-      return;
-
-    }
+    document
+        .getElementById(
+            "closeModal"
+        )
+        .addEventListener(
+            "click",
+            closeModal
+        );
 
 
-    if (action === "review") {
-
-      window.location.href =
-        `transaction.html?id=${encodeURIComponent(
-          transactionId
-        )}&mode=review`;
-
-    }
-
-  }
-);
+    document
+        .getElementById(
+            "modalCancel"
+        )
+        .addEventListener(
+            "click",
+            closeModal
+        );
 
 
-/*
-=========================================================
- EVENTS
-=========================================================
-*/
+    modal.addEventListener(
+        "click",
+        function(event) {
 
-searchInput.addEventListener(
-  "input",
-  applyFilters
-);
+            if (
+                event.target ===
+                modal
+            ) {
 
-typeFilter.addEventListener(
-  "change",
-  applyFilters
-);
+                closeModal();
 
-statusFilter.addEventListener(
-  "change",
-  applyFilters
-);
-
-directionFilter.addEventListener(
-  "change",
-  applyFilters
-);
-
-
-document
-  .getElementById(
-    "refreshTransactions"
-  )
-  .addEventListener(
-    "click",
-    loadTransactions
-);
-
-
-document
-  .getElementById(
-    "exportTransactions"
-  )
-  .addEventListener(
-    "click",
-    exportTransactions
-);
-
-
-/*
-=========================================================
- LOGOUT
-=========================================================
-*/
-
-document
-  .getElementById(
-    "logoutButton"
-  )
-  .addEventListener(
-    "click",
-    async function () {
-
-      try {
-
-        await fetch(
-          API_BASE + "/auth/logout",
-          {
-            method: "POST",
-            credentials: "include",
-            headers: {
-              "Accept":
-                "application/json"
             }
-          }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       REFRESH
+       ===================================================== */
+
+    document
+        .getElementById(
+            "refreshButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showToast(
+                    "Transaction data refreshed."
+                );
+
+                /*
+                 * Later, this button can call:
+                 *
+                 * GET /api/transactions
+                 *
+                 * when the backend connection is enabled.
+                 */
+
+            }
         );
 
-      } catch (error) {
 
-        console.error(
-          "Logout request failed:",
-          error
+    /* =====================================================
+       EXPORT
+       ===================================================== */
+
+    document
+        .getElementById(
+            "exportButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                const rows =
+                    Array.from(
+                        tableBody.querySelectorAll(
+                            "tr"
+                        )
+                    )
+                    .filter(
+                        row =>
+                            row.style.display !==
+                            "none"
+                    );
+
+
+                if (!rows.length) {
+
+                    showToast(
+                        "There are no transactions to export."
+                    );
+
+                    return;
+
+                }
+
+
+                const csv = [];
+
+
+                csv.push(
+                    [
+                        "Transaction ID",
+                        "Customer",
+                        "Type",
+                        "Amount",
+                        "Date",
+                        "Status"
+                    ].join(",")
+                );
+
+
+                rows.forEach(
+                    function(row) {
+
+                        const cells =
+                            row.querySelectorAll(
+                                "td"
+                            );
+
+
+                        if (
+                            cells.length <
+                            6
+                        ) {
+                            return;
+                        }
+
+
+                        const transactionId =
+                            cells[0]
+                                .innerText
+                                .trim();
+
+
+                        const customer =
+                            cells[1]
+                                .innerText
+                                .replace(
+                                    /\n/g,
+                                    " "
+                                )
+                                .trim();
+
+
+                        const type =
+                            cells[2]
+                                .innerText
+                                .trim();
+
+
+                        const amount =
+                            cells[3]
+                                .innerText
+                                .trim();
+
+
+                        const date =
+                            cells[4]
+                                .innerText
+                                .replace(
+                                    /\n/g,
+                                    " "
+                                )
+                                .trim();
+
+
+                        const status =
+                            cells[5]
+                                .innerText
+                                .trim();
+
+
+                        csv.push(
+                            [
+                                transactionId,
+                                customer,
+                                type,
+                                amount,
+                                date,
+                                status
+                            ]
+                            .map(
+                                value =>
+                                    `"${value.replace(
+                                        /"/g,
+                                        '""'
+                                    )}"`
+                            )
+                            .join(",")
+                        );
+
+                    }
+                );
+
+
+                const blob =
+                    new Blob(
+                        [
+                            csv.join("\n")
+                        ],
+                        {
+                            type:
+                                "text/csv;charset=utf-8;"
+                        }
+                    );
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href =
+                    url;
+
+
+                link.download =
+                    "gtf-transactions.csv";
+
+
+                document.body.appendChild(
+                    link
+                );
+
+
+                link.click();
+
+
+                link.remove();
+
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+
+                showToast(
+                    "Transaction CSV exported."
+                );
+
+            }
         );
 
-      } finally {
 
-        window.location.href =
-          "login.html";
+    /* =====================================================
+       PAGINATION DEMO
+       ===================================================== */
 
-      }
+    document
+        .querySelectorAll(
+            ".page-button"
+        )
+        .forEach(
+            function(button) {
 
-    }
-  );
+                button.addEventListener(
+                    "click",
+                    function() {
 
+                        if (
+                            button.id ===
+                            "previousPage"
+                        ) {
 
-/*
-=========================================================
- PAGINATION PLACEHOLDERS
-=========================================================
-*/
+                            showToast(
+                                "Previous page selected."
+                            );
 
-document
-  .getElementById(
-    "previousPage"
-  )
-  .addEventListener(
-    "click",
-    function () {
+                            return;
 
-      alert(
-        "You are already on the first page."
-      );
-
-    }
-  );
+                        }
 
 
-document
-  .getElementById(
-    "nextPage"
-  )
-  .addEventListener(
-    "click",
-    function () {
-
-      alert(
-        "Additional pages will be enabled when server-side pagination is connected."
-      );
-
-    }
-  );
+                        const number =
+                            button.textContent
+                                .trim();
 
 
-/*
-=========================================================
- INITIAL LOAD
-=========================================================
-*/
+                        if (
+                            number === "›"
+                        ) {
 
-loadTransactions();
+                            showToast(
+                                "Next page selected."
+                            );
+
+                            return;
+
+                        }
+
+
+                        document
+                            .querySelectorAll(
+                                ".page-button"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+
+                        showToast(
+                            `Page ${number} selected.`
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    document
+        .getElementById(
+            "logoutButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                /*
+                 * Replace with the real Supabase
+                 * authentication sign-out flow
+                 * when authentication is connected.
+                 */
+
+                window.location.href =
+                    "./login.html";
+
+            }
+        );
+
+
+    /* =====================================================
+       INITIAL STATE
+       ===================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            filterTransactions();
+
+        }
+    );
 
 </script>
 
+
 </body>
+
 </html>
