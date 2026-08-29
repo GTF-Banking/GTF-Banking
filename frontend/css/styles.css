@@ -1,3379 +1,839 @@
-/* =========================================================
-   GLOBAL TRUSTFUND BANKING
-   GLOBAL FRONTEND DESIGN SYSTEM
-   File:
-   frontend/css/styles.css
-
-   VERSION:
-   GTF Banking UI v2026
-
-   DESIGN:
-   - Deep green
-   - White
-   - Gold
-   - Banking dashboard
-   - Responsive
-   - Accessible text contrast
-   - Realistic demo cards
-   - Animated card components
-   ========================================================= */
-
-
-/* =========================================================
-   1. ROOT VARIABLES
-   ========================================================= */
+/* ============================================================
+   Global TrustFund — Design System
+   Primary: #0B3D2E | Deep: #062A20 | Secondary: #145A43
+   Gold: #C9A227 | Light Gold: #E0C45C
+   ============================================================ */
 
 :root {
-
-    /* -----------------------------------------------------
-       BRAND
-       ----------------------------------------------------- */
-
-    --gtf-green:
-        #0b3d2e;
-
-    --gtf-green-dark:
-        #06291f;
-
-    --gtf-green-deep:
-        #041f18;
-
-    --gtf-green-light:
-        #176b48;
-
-    --gtf-green-medium:
-        #11563c;
-
-    --gtf-green-soft:
-        #eaf4ef;
-
-    --gtf-green-pale:
-        #f3f9f6;
-
-
-    /* -----------------------------------------------------
-       GOLD
-       ----------------------------------------------------- */
-
-    --gtf-gold:
-        #c9962b;
-
-    --gtf-gold-dark:
-        #8d6817;
-
-    --gtf-gold-medium:
-        #b58320;
-
-    --gtf-gold-light:
-        #e9d29b;
-
-    --gtf-gold-pale:
-        #fbf5e7;
-
-
-    /* -----------------------------------------------------
-       WHITE
-       ----------------------------------------------------- */
-
-    --gtf-white:
-        #ffffff;
-
-    --gtf-white-soft:
-        #fdfefd;
-
-    --gtf-surface:
-        #f7faf8;
-
-
-    /* -----------------------------------------------------
-       TEXT
-       ----------------------------------------------------- */
-
-    --gtf-text:
-        #12352a;
-
-    --gtf-text-dark:
-        #09291f;
-
-    --gtf-text-medium:
-        #35584b;
-
-    --gtf-muted:
-        #627a70;
-
-    --gtf-muted-light:
-        #82968f;
-
-
-    /* -----------------------------------------------------
-       BORDERS
-       ----------------------------------------------------- */
-
-    --gtf-border:
-        #d9e7e0;
-
-    --gtf-border-dark:
-        #bfd5ca;
-
-
-    /* -----------------------------------------------------
-       SHADOWS
-       ----------------------------------------------------- */
-
-    --gtf-shadow-sm:
-        0 5px 18px rgba(11, 61, 46, .07);
-
-    --gtf-shadow-md:
-        0 15px 40px rgba(11, 61, 46, .11);
-
-    --gtf-shadow-lg:
-        0 25px 70px rgba(11, 61, 46, .15);
-
-    --gtf-shadow-card:
-        0 25px 55px rgba(4, 31, 24, .25);
-
-
-    /* -----------------------------------------------------
-       RADIUS
-       ----------------------------------------------------- */
-
-    --gtf-radius-sm:
-        7px;
-
-    --gtf-radius-md:
-        12px;
-
-    --gtf-radius-lg:
-        18px;
-
-    --gtf-radius-xl:
-        24px;
-
-
-    /* -----------------------------------------------------
-       TRANSITIONS
-       ----------------------------------------------------- */
-
-    --gtf-transition:
-        .25s ease;
-
-    --gtf-transition-slow:
-        .45s cubic-bezier(.2, .7, .2, 1);
-
-
-    /* -----------------------------------------------------
-       TYPOGRAPHY
-       ----------------------------------------------------- */
-
-    --gtf-font:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    --gtf-mono:
-        "Courier New",
-        Courier,
-        monospace;
-
+  --primary: #0B3D2E;
+  --deep: #062A20;
+  --secondary: #145A43;
+  --gold: #C9A227;
+  --gold-light: #E0C45C;
+  --white: #FFFFFF;
+  --off-white: #F7F9F7;
+  --dark-text: #10231D;
+  --muted: #66756F;
+  --border: #DCE5E0;
+  --success: #1B7A4E;
+  --warning: #B8860B;
+  --danger: #B33A3A;
+  --info: #2A6B8A;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(11, 61, 46, 0.08);
+  --shadow-lg: 0 12px 40px rgba(11, 61, 46, 0.12);
+  --transition: 0.2s ease;
+  --font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Georgia', 'Times New Roman', serif;
 }
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* =========================================================
-   2. RESET
-   ========================================================= */
-
-*,
-*::before,
-*::after {
-
-    box-sizing:
-        border-box;
-
-}
-
-
-html {
-
-    scroll-behavior:
-        smooth;
-
-}
-
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    min-height:
-        100vh;
-
-    background:
-        var(--gtf-surface);
-
-    color:
-        var(--gtf-text);
-
-    font-family:
-        var(--gtf-font);
-
-    line-height:
-        1.5;
-
-    -webkit-font-smoothing:
-        antialiased;
-
-    text-rendering:
-        optimizeLegibility;
-
-}
-
-
-img {
-
-    max-width:
-        100%;
-
-    height:
-        auto;
-
-}
-
-
-button,
-input,
-select,
-textarea {
-
-    font:
-        inherit;
-
-}
-
-
-button {
-
-    cursor:
-        pointer;
-
-}
-
-
-a {
-
-    color:
-        inherit;
-
-}
-
-
-/* =========================================================
-   3. GLOBAL TEXT VISIBILITY
-   ========================================================= */
-
-/*
-   Important:
-
-   Avoid using white as a global text color.
-
-   White text should only appear on dark surfaces.
-*/
-
-body,
-main,
-section,
-article,
-aside,
-div {
-
-    color:
-        inherit;
-
-}
-
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
-    color:
-        var(--gtf-green);
-
-}
-
-
-p {
-
-    color:
-        var(--gtf-text-medium);
-
-}
-
-
-label {
-
-    color:
-        var(--gtf-text);
-
-    font-weight:
-        700;
-
-}
-
-
-/* =========================================================
-   4. WHITE SURFACE TEXT PROTECTION
-   ========================================================= */
-
-.gtf-white-card,
-.gtf-panel,
-.gtf-card-panel,
-.gtf-dashboard-card,
-.gtf-service-card,
-.gtf-info-card,
-.gtf-account-card {
-
-    color:
-        var(--gtf-text);
-
-}
-
-
-.gtf-white-card h1,
-.gtf-white-card h2,
-.gtf-white-card h3,
-.gtf-white-card h4,
-.gtf-panel h1,
-.gtf-panel h2,
-.gtf-panel h3,
-.gtf-panel h4,
-.gtf-card-panel h1,
-.gtf-card-panel h2,
-.gtf-card-panel h3,
-.gtf-card-panel h4,
-.gtf-dashboard-card h1,
-.gtf-dashboard-card h2,
-.gtf-dashboard-card h3,
-.gtf-dashboard-card h4,
-.gtf-service-card h1,
-.gtf-service-card h2,
-.gtf-service-card h3,
-.gtf-service-card h4 {
-
-    color:
-        var(--gtf-green);
-
-}
-
-
-.gtf-white-card p,
-.gtf-panel p,
-.gtf-card-panel p,
-.gtf-dashboard-card p,
-.gtf-service-card p {
-
-    color:
-        var(--gtf-text-medium);
-
-}
-
-
-/* =========================================================
-   5. GENERAL WHITE CARD SYSTEM
-   ========================================================= */
-
-.gtf-white-card {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    background:
-        var(--gtf-white);
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        var(--gtf-radius-lg);
-
-    padding:
-        24px;
-
-    box-shadow:
-        var(--gtf-shadow-sm);
-
-    transition:
-        transform var(--gtf-transition),
-        box-shadow var(--gtf-transition),
-        border-color var(--gtf-transition);
-
-}
-
-
-.gtf-white-card:hover {
-
-    transform:
-        translateY(-3px);
-
-    border-color:
-        var(--gtf-border-dark);
-
-    box-shadow:
-        var(--gtf-shadow-md);
-
-}
-
-
-/* =========================================================
-   6. GOLD ACCENT BAR
-   ========================================================= */
-
-.gtf-gold-accent {
-
-    position:
-        relative;
-
-}
-
-
-.gtf-gold-accent::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        0;
-
-    left:
-        0;
-
-    width:
-        5px;
-
-    height:
-        100%;
-
-    background:
-        linear-gradient(
-            180deg,
-            var(--gtf-gold-light),
-            var(--gtf-gold),
-            var(--gtf-gold-dark)
-        );
-
-    border-radius:
-        5px 0 0 5px;
-
-}
-
-
-/* =========================================================
-   7. BANK CARD CONTAINER
-   ========================================================= */
-
-/*
-   This is the main component.
-
-   HTML example:
-
-   <div class="gtf-card-demo">
-
-       <div class="gtf-bank-card">
-
-           ...
-
-       </div>
-
-   </div>
-*/
-
-.gtf-card-demo {
-
-    width:
-        100%;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        25px;
-
-    perspective:
-        1200px;
-
-}
-
-
-.gtf-card-wrapper {
-
-    width:
-        min(100%, 430px);
-
-    aspect-ratio:
-        1.586 / 1;
-
-    position:
-        relative;
-
-    perspective:
-        1200px;
-
-}
-
-
-/* =========================================================
-   8. MAIN BANK CARD
-   ========================================================= */
-
-.gtf-bank-card {
-
-    position:
-        relative;
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    overflow:
-        hidden;
-
-    isolation:
-        isolate;
-
-    border:
-        1px solid rgba(255, 255, 255, .25);
-
-    border-radius:
-        19px;
-
-    background:
-
-        radial-gradient(
-            circle at 80% 15%,
-            rgba(233, 210, 155, .22),
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 10% 90%,
-            rgba(23, 107, 72, .35),
-            transparent 30%
-        ),
-
-        linear-gradient(
-            135deg,
-            #0b3d2e 0%,
-            #10533c 45%,
-            #06291f 100%
-        );
-
-    color:
-        #ffffff;
-
-    box-shadow:
-        var(--gtf-shadow-card);
-
-    transform:
-        rotateX(0deg)
-        rotateY(0deg);
-
-    transition:
-        transform .45s cubic-bezier(.2,.8,.2,1),
-        box-shadow .45s ease;
-
-}
-
-
-/* =========================================================
-   9. CARD HOVER
-   ========================================================= */
-
-.gtf-card-wrapper:hover
-.gtf-bank-card {
-
-    transform:
-        translateY(-8px)
-        rotateX(2deg)
-        rotateY(-2deg);
-
-    box-shadow:
-        0 35px 75px
-        rgba(4, 31, 24, .32);
-
-}
-
-
-/* =========================================================
-   10. CARD LIGHT SHINE
-   ========================================================= */
-
-.gtf-bank-card::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    z-index:
-        1;
-
-    top:
-        -70%;
-
-    left:
-        -35%;
-
-    width:
-        45%;
-
-    height:
-        240%;
-
-    pointer-events:
-        none;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.16),
-            transparent
-        );
-
-    transform:
-        rotate(25deg)
-        translateX(-180%);
-
-    transition:
-        transform .9s ease;
-
-}
-
-
-.gtf-card-wrapper:hover
-.gtf-bank-card::before {
-
-    transform:
-        rotate(25deg)
-        translateX(500%);
-
-}
-
-
-/* =========================================================
-   11. CARD DECORATIVE GOLD GLOW
-   ========================================================= */
-
-.gtf-bank-card::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    z-index:
-        0;
-
-    right:
-        -90px;
-
-    bottom:
-        -110px;
-
-    width:
-        270px;
-
-    height:
-        270px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(201,150,43,.22),
-            transparent 68%
-        );
-
-    pointer-events:
-        none;
-
-}
-
-
-/* =========================================================
-   12. CARD INNER CONTENT
-   ========================================================= */
-
-.gtf-bank-card-inner {
-
-    position:
-        relative;
-
-    z-index:
-        2;
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    padding:
-        clamp(20px, 5%, 30px);
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    justify-content:
-        space-between;
-
-}
-
-
-/* =========================================================
-   13. CARD HEADER
-   ========================================================= */
-
-.gtf-card-header {
-
-    display:
-        flex;
-
-    align-items:
-        flex-start;
-
-    justify-content:
-        space-between;
-
-    gap:
-        20px;
-
-}
-
-
-/* =========================================================
-   14. CARD BRAND
-   ========================================================= */
-
-.gtf-card-brand {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        10px;
-
-}
-
-
-.gtf-card-brand-logo {
-
-    width:
-        48px;
-
-    height:
-        48px;
-
-    object-fit:
-        contain;
-
-    filter:
-        drop-shadow(
-            0 3px 7px
-            rgba(0,0,0,.25)
-        );
-
-}
-
-
-.gtf-card-brand-name {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-}
-
-
-.gtf-card-brand-name strong {
-
-    color:
-        #ffffff;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.2;
-
-    font-weight:
-        800;
-
-}
-
-
-.gtf-card-brand-name span {
-
-    margin-top:
-        3px;
-
-    color:
-        rgba(255,255,255,.68);
-
-    font-size:
-        7px;
-
-    letter-spacing:
-        1.1px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* =========================================================
-   15. CARD TYPE
-   ========================================================= */
-
-.gtf-card-type {
-
-    color:
-        rgba(255,255,255,.7);
-
-    font-size:
-        7px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* =========================================================
-   16. REALISTIC GOLD CHIP
-   ========================================================= */
-
-.gtf-card-chip {
-
-    position:
-        relative;
-
-    width:
-        58px;
-
-    height:
-        43px;
-
-    flex:
-        0 0 58px;
-
-    overflow:
-        hidden;
-
-    border:
-        1px solid
-        rgba(115,80,10,.45);
-
-    border-radius:
-        9px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #f9e8a9 0%,
-            #d4a83b 28%,
-            #f5dc82 50%,
-            #b98219 75%,
-            #edcf71 100%
-        );
-
-    box-shadow:
-        inset 0 1px 2px
-        rgba(255,255,255,.7),
-
-        inset 0 -2px 4px
-        rgba(90,55,5,.25),
-
-        0 4px 10px
-        rgba(0,0,0,.18);
-
-}
-
-
-/* Chip horizontal lines */
-
-.gtf-card-chip::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    left:
-        0;
-
-    right:
-        0;
-
-    top:
-        50%;
-
-    height:
-        1px;
-
-    background:
-        rgba(88,62,10,.55);
-
-    box-shadow:
-        0 -10px 0 rgba(88,62,10,.35),
-        0 10px 0 rgba(88,62,10,.35);
-
-}
-
-
-/* Chip vertical center */
-
-.gtf-card-chip::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        0;
-
-    bottom:
-        0;
-
-    left:
-        50%;
-
-    width:
-        1px;
-
-    background:
-        rgba(88,62,10,.5);
-
-}
-
-
-/* =========================================================
-   17. CHIP CONTACT DETAIL
-   ========================================================= */
-
-.gtf-card-chip-inner {
-
-    position:
-        absolute;
-
-    inset:
-        9px 13px;
-
-    border:
-        1px solid
-        rgba(88,62,10,.55);
-
-    border-radius:
-        5px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent 48%,
-            rgba(88,62,10,.42) 49%,
-            rgba(88,62,10,.42) 51%,
-            transparent 52%
-        );
-
-}
-
-
-/* =========================================================
-   18. CARD NUMBER
-   ========================================================= */
-
-.gtf-card-number {
-
-    margin-top:
-        10px;
-
-    color:
-        #ffffff;
-
-    font-family:
-        var(--gtf-mono);
-
-    font-size:
-        clamp(17px, 4vw, 25px);
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        clamp(1px, .5vw, 3px);
-
-    line-height:
-        1.2;
-
-    text-shadow:
-        0 2px 3px
-        rgba(0,0,0,.3);
-
-    white-space:
-        nowrap;
-
-}
-
-
-/* =========================================================
-   19. CARD NUMBER GROUPS
-   ========================================================= */
-
-.gtf-card-number-group {
-
-    display:
-        flex;
-
-    gap:
-        clamp(6px, 1vw, 12px);
-
-}
-
-
-/* =========================================================
-   20. CARD FOOTER
-   ========================================================= */
-
-.gtf-card-footer {
-
-    display:
-        flex;
-
-    align-items:
-        flex-end;
-
-    justify-content:
-        space-between;
-
-    gap:
-        20px;
-
-}
-
-
-/* =========================================================
-   21. CARD META
-   ========================================================= */
-
-.gtf-card-meta {
-
-    display:
-        flex;
-
-    gap:
-        clamp(20px, 6vw, 55px);
-
-}
-
-
-.gtf-card-meta-item {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-}
-
-
-.gtf-card-meta-label {
-
-    margin-bottom:
-        4px;
-
-    color:
-        rgba(255,255,255,.58);
-
-    font-size:
-        6px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        .8px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-.gtf-card-meta-value {
-
-    color:
-        #ffffff;
-
-    font-size:
-        8px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .5px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* =========================================================
-   22. CARD CONTACTLESS ICON
-   ========================================================= */
-
-.gtf-card-contactless {
-
-    position:
-        relative;
-
-    width:
-        24px;
-
-    height:
-        24px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-}
-
-
-.gtf-card-contactless::before,
-.gtf-card-contactless::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    border:
-        2px solid
-        rgba(255,255,255,.72);
-
-    border-left-color:
-        transparent;
-
-    border-bottom-color:
-        transparent;
-
-    border-radius:
-        50%;
-
-    transform:
-        rotate(45deg);
-
-}
-
-
-.gtf-card-contactless::before {
-
-    width:
-        13px;
-
-    height:
-        13px;
-
-}
-
-
-.gtf-card-contactless::after {
-
-    width:
-        20px;
-
-    height:
-        20px;
-
-}
-
-
-/* =========================================================
-   23. CARD GOLD LINE
-   ========================================================= */
-
-.gtf-card-gold-line {
-
-    position:
-        absolute;
-
-    z-index:
-        2;
-
-    left:
-        0;
-
-    right:
-        0;
-
-    bottom:
-        0;
-
-    height:
-        3px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--gtf-gold-dark),
-            var(--gtf-gold-light),
-            var(--gtf-gold),
-            var(--gtf-gold-dark)
-        );
-
-}
-
-
-/* =========================================================
-   24. WHITE / GOLD BANK CARD
-   ========================================================= */
-
-.gtf-bank-card.white-gold {
-
-    color:
-        var(--gtf-green);
-
-    background:
-
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(201,150,43,.15),
-            transparent 28%
-        ),
-
-        linear-gradient(
-            135deg,
-            #ffffff 0%,
-            #f9fbfa 55%,
-            #edf5f0 100%
-        );
-
-    border:
-        1px solid
-        rgba(201,150,43,.32);
-
-    box-shadow:
-        0 25px 55px
-        rgba(11,61,46,.16);
-
-}
-
-
-/* White card text */
-
-.gtf-bank-card.white-gold
-.gtf-card-brand-name strong,
-.gtf-bank-card.white-gold
-.gtf-card-number,
-.gtf-bank-card.white-gold
-.gtf-card-meta-value {
-
-    color:
-        var(--gtf-green);
-
-    text-shadow:
-        none;
-
-}
-
-
-.gtf-bank-card.white-gold
-.gtf-card-brand-name span,
-.gtf-bank-card.white-gold
-.gtf-card-meta-label {
-
-    color:
-        var(--gtf-muted);
-
-}
-
-
-/* =========================================================
-   25. WHITE GOLD CARD CHIP
-   ========================================================= */
-
-.gtf-bank-card.white-gold
-.gtf-card-chip {
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #f8e9ad,
-            #c9962b 45%,
-            #efd47d 70%,
-            #a8791c
-        );
-
-}
-
-
-/* =========================================================
-   26. GOLD BANK CARD
-   ========================================================= */
-
-.gtf-bank-card.gold {
-
-    color:
-        #102c22;
-
-    background:
-
-        radial-gradient(
-            circle at 85% 15%,
-            rgba(255,255,255,.45),
-            transparent 22%
-        ),
-
-        linear-gradient(
-            135deg,
-            #e6c66b,
-            #c9962b 45%,
-            #8d6817 100%
-        );
-
-    border:
-        1px solid
-        rgba(255,255,255,.35);
-
-}
-
-
-/* =========================================================
-   27. DARK CARD
-   ========================================================= */
-
-.gtf-bank-card.dark {
-
-    background:
-
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(201,150,43,.22),
-            transparent 28%
-        ),
-
-        linear-gradient(
-            135deg,
-            #041f18,
-            #0b3d2e 55%,
-            #06291f
-        );
-
-}
-
-
-/* =========================================================
-   28. CARD STATUS
-   ========================================================= */
-
-.gtf-card-status {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        6px;
-
-    padding:
-        6px 10px;
-
-    border-radius:
-        30px;
-
-    background:
-        rgba(255,255,255,.12);
-
-    color:
-        #ffffff;
-
-    font-size:
-        7px;
-
-    font-weight:
-        800;
-
-}
-
-
-.gtf-card-status-dot {
-
-    width:
-        7px;
-
-    height:
-        7px;
-
-    border-radius:
-        50%;
-
-    background:
-        #4ac98b;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(74,201,139,.12);
-
-}
-
-
-/* =========================================================
-   29. CARD DEMO PANEL
-   ========================================================= */
-
-.gtf-card-demo-panel {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    padding:
-        clamp(22px, 5vw, 40px);
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        var(--gtf-radius-xl);
-
-    background:
-        #ffffff;
-
-    box-shadow:
-        var(--gtf-shadow-md);
-
-}
-
-
-.gtf-card-demo-panel::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        -150px;
-
-    right:
-        -100px;
-
-    width:
-        300px;
-
-    height:
-        300px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(201,150,43,.08);
-
-}
-
-
-/* =========================================================
-   30. CARD DEMO HEADER
-   ========================================================= */
-
-.gtf-card-demo-header {
-
-    position:
-        relative;
-
-    z-index:
-        2;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        15px;
-
-    margin-bottom:
-        20px;
-
-}
-
-
-.gtf-card-demo-title {
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        14px;
-
-    font-weight:
-        850;
-
-}
-
-
-.gtf-card-demo-subtitle {
-
-    margin-top:
-        4px;
-
-    color:
-        var(--gtf-muted);
-
-    font-size:
-        8px;
-
-}
-
-
-/* =========================================================
-   31. DEMO MODE BADGE
-   ========================================================= */
-
-.gtf-demo-mode {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        7px;
-
-    padding:
-        7px 10px;
-
-    border:
-        1px solid
-        #d5e7dd;
-
-    border-radius:
-        30px;
-
-    background:
-        #eef8f3;
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        7px;
-
-    font-weight:
-        800;
-
-}
-
-
-.gtf-demo-mode::before {
-
-    content:
-        "";
-
-    width:
-        7px;
-
-    height:
-        7px;
-
-    border-radius:
-        50%;
-
-    background:
-        var(--gtf-gold);
-
-}
-
-
-/* =========================================================
-   32. CARD STACK
-   ========================================================= */
-
-.gtf-card-stack {
-
-    position:
-        relative;
-
-    min-height:
-        310px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-}
-
-
-.gtf-card-stack
-.gtf-card-wrapper {
-
-    position:
-        relative;
-
-    z-index:
-        3;
-
-}
-
-
-.gtf-card-stack::before,
-.gtf-card-stack::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        min(72%, 370px);
-
-    aspect-ratio:
-        1.586 / 1;
-
-    border-radius:
-        19px;
-
-    pointer-events:
-        none;
-
-}
-
-
-.gtf-card-stack::before {
-
-    background:
-        linear-gradient(
-            135deg,
-            #d9c178,
-            #a97b1c
-        );
-
-    transform:
-        translate(18px, 18px)
-        rotate(5deg);
-
-    opacity:
-        .55;
-
-}
-
-
-.gtf-card-stack::after {
-
-    background:
-        linear-gradient(
-            135deg,
-            #dce8e2,
-            #b7cdc2
-        );
-
-    transform:
-        translate(-15px, 12px)
-        rotate(-4deg);
-
-    opacity:
-        .7;
-
-}
-
-
-/* =========================================================
-   33. ACCOUNT DASHBOARD CARD
-   ========================================================= */
-
-.gtf-account-card {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    padding:
-        22px;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        16px;
-
-    background:
-        #ffffff;
-
-    box-shadow:
-        var(--gtf-shadow-sm);
-
-}
-
-
-.gtf-account-card::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    right:
-        -50px;
-
-    top:
-        -50px;
-
-    width:
-        130px;
-
-    height:
-        130px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(201,150,43,.08);
-
-}
-
-
-.gtf-account-card-title {
-
-    color:
-        var(--gtf-muted);
-
-    font-size:
-        8px;
-
-    font-weight:
-        700;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .7px;
-
-}
-
-
-.gtf-account-card-balance {
-
-    margin-top:
-        8px;
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        clamp(22px, 4vw, 32px);
-
-    font-weight:
-        850;
-
-}
-
-
-.gtf-account-card-number {
-
-    margin-top:
-        8px;
-
-    color:
-        var(--gtf-muted);
-
-    font-family:
-        var(--gtf-mono);
-
-    font-size:
-        8px;
-
-}
-
-
-/* =========================================================
-   34. GOLD ACCOUNT CARD VARIANT
-   ========================================================= */
-
-.gtf-account-card.gold-accent {
-
-    border-color:
-        rgba(201,150,43,.35);
-
-}
-
-
-.gtf-account-card.gold-accent
-.gtf-account-card-balance {
-
-    color:
-        var(--gtf-green);
-
-}
-
-
-.gtf-account-card.gold-accent::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    left:
-        0;
-
-    top:
-        0;
-
-    bottom:
-        0;
-
-    width:
-        4px;
-
-    background:
-        linear-gradient(
-            180deg,
-            var(--gtf-gold-light),
-            var(--gtf-gold),
-            var(--gtf-gold-dark)
-        );
-
-}
-
-
-/* =========================================================
-   35. SERVICE CARDS
-   ========================================================= */
-
-.gtf-service-card {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    min-height:
-        210px;
-
-    padding:
-        24px;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        15px;
-
-    background:
-        #ffffff;
-
-    box-shadow:
-        var(--gtf-shadow-sm);
-
-    transition:
-        transform var(--gtf-transition),
-        box-shadow var(--gtf-transition),
-        border-color var(--gtf-transition);
-
-}
-
-
-.gtf-service-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(201,150,43,.4);
-
-    box-shadow:
-        var(--gtf-shadow-md);
-
-}
-
-
-.gtf-service-card-icon {
-
-    width:
-        44px;
-
-    height:
-        44px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    border-radius:
-        12px;
-
-    background:
-        var(--gtf-green-soft);
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        18px;
-
-    font-weight:
-        800;
-
-}
-
-
-.gtf-service-card h3 {
-
-    margin:
-        17px 0 0;
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        13px;
-
-}
-
-
-.gtf-service-card p {
-
-    margin:
-        8px 0 0;
-
-    color:
-        var(--gtf-text-medium);
-
-    font-size:
-        8px;
-
-    line-height:
-        1.7;
-
-}
-
-
-/* =========================================================
-   36. GOLD TOP BORDER
-   ========================================================= */
-
-.gtf-gold-top {
-
-    border-top:
-        3px solid var(--gtf-gold);
-
-}
-
-
-/* =========================================================
-   37. BANKING SECTION
-   ========================================================= */
-
-.gtf-banking-section {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f6faf8,
-            #eaf4ef
-        );
-
-}
-
-
-.gtf-banking-section::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        450px;
-
-    height:
-        450px;
-
-    left:
-        -220px;
-
-    top:
-        -200px;
-
-    border:
-        1px solid
-        rgba(11,61,46,.08);
-
-    border-radius:
-        50%;
-
-}
-
-
-/* =========================================================
-   38. GREEN PANEL
-   ========================================================= */
-
-.gtf-green-panel {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    padding:
-        28px;
-
-    border-radius:
-        18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--gtf-green),
-            var(--gtf-green-light)
-        );
-
-    color:
-        #ffffff;
-
-    box-shadow:
-        var(--gtf-shadow-md);
-
-}
-
-
-.gtf-green-panel h2,
-.gtf-green-panel h3,
-.gtf-green-panel strong {
-
-    color:
-        #ffffff;
-
-}
-
-
-.gtf-green-panel p {
-
-    color:
-        rgba(255,255,255,.76);
-
-}
-
-
-/* =========================================================
-   39. GREEN PANEL GOLD DETAIL
-   ========================================================= */
-
-.gtf-green-panel::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    right:
-        -90px;
-
-    bottom:
-        -100px;
-
-    width:
-        260px;
-
-    height:
-        260px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(233,210,155,.22),
-            transparent 68%
-        );
-
-}
-
-
-/* =========================================================
-   40. BUTTONS
-   ========================================================= */
-
-.gtf-button {
-
-    min-height:
-        42px;
-
-    padding:
-        0 18px;
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        7px;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        8px;
-
-    background:
-        #ffffff;
-
-    color:
-        var(--gtf-green);
-
-    text-decoration:
-        none;
-
-    font-size:
-        8px;
-
-    font-weight:
-        800;
-
-    transition:
-        transform var(--gtf-transition),
-        background var(--gtf-transition),
-        box-shadow var(--gtf-transition);
-
-}
-
-
-.gtf-button:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        var(--gtf-shadow-sm);
-
-}
-
-
-.gtf-button-primary {
-
-    border-color:
-        var(--gtf-green);
-
-    background:
-        var(--gtf-green);
-
-    color:
-        #ffffff;
-
-}
-
-
-.gtf-button-primary:hover {
-
-    background:
-        var(--gtf-green-dark);
-
-}
-
-
-.gtf-button-gold {
-
-    border-color:
-        var(--gtf-gold);
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--gtf-gold-light),
-            var(--gtf-gold)
-        );
-
-    color:
-        var(--gtf-green);
-
-}
-
-
-/* =========================================================
-   41. FORM CONTROLS
-   ========================================================= */
-
-.gtf-input,
-.gtf-select,
-.gtf-textarea {
-
-    width:
-        100%;
-
-    min-height:
-        44px;
-
-    padding:
-        0 13px;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        8px;
-
-    outline:
-        none;
-
-    background:
-        #ffffff;
-
-    color:
-        var(--gtf-text);
-
-    font-size:
-        9px;
-
-    transition:
-        border-color var(--gtf-transition),
-        box-shadow var(--gtf-transition);
-
-}
-
-
-.gtf-textarea {
-
-    padding-top:
-        12px;
-
-    padding-bottom:
-        12px;
-
-    min-height:
-        110px;
-
-    resize:
-        vertical;
-
-}
-
-
-.gtf-input::placeholder,
-.gtf-textarea::placeholder {
-
-    color:
-        var(--gtf-muted-light);
-
-}
-
-
-.gtf-input:focus,
-.gtf-select:focus,
-.gtf-textarea:focus {
-
-    border-color:
-        var(--gtf-green-light);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(23,107,72,.10);
-
-}
-
-
-/* =========================================================
-   42. STATUS BADGES
-   ========================================================= */
-
-.gtf-status {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        6px;
-
-    padding:
-        6px 9px;
-
-    border-radius:
-        30px;
-
-    font-size:
-        7px;
-
-    font-weight:
-        800;
-
-}
-
-
-.gtf-status-success {
-
-    background:
-        #e9f7ef;
-
-    color:
-        #176b48;
-
-}
-
-
-.gtf-status-pending {
-
-    background:
-        #fbf5e7;
-
-    color:
-        #8d6817;
-
-}
-
-
-.gtf-status-neutral {
-
-    background:
-        #eef2f0;
-
-    color:
-        #536b61;
-
-}
-
-
-/* =========================================================
-   43. TABLES
-   ========================================================= */
-
-.gtf-table-wrapper {
-
-    width:
-        100%;
-
-    overflow-x:
-        auto;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        13px;
-
-    background:
-        #ffffff;
-
-}
-
-
-.gtf-table {
-
-    width:
-        100%;
-
-    border-collapse:
-        collapse;
-
-    color:
-        var(--gtf-text);
-
-}
-
-
-.gtf-table th {
-
-    padding:
-        13px;
-
-    background:
-        var(--gtf-green-soft);
-
-    color:
-        var(--gtf-green);
-
-    text-align:
-        left;
-
-    font-size:
-        7px;
-
-    font-weight:
-        850;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .6px;
-
-}
-
-
-.gtf-table td {
-
-    padding:
-        13px;
-
-    border-top:
-        1px solid var(--gtf-border);
-
-    color:
-        var(--gtf-text-medium);
-
-    font-size:
-        8px;
-
-}
-
-
-/* =========================================================
-   44. NAVIGATION
-   ========================================================= */
-
-.gtf-nav {
-
-    background:
-        rgba(255,255,255,.97);
-
-    border-bottom:
-        1px solid var(--gtf-border);
-
-    box-shadow:
-        0 4px 20px
-        rgba(11,61,46,.05);
-
-    backdrop-filter:
-        blur(12px);
-
-}
-
-
-.gtf-nav-inner {
-
-    width:
-        100%;
-
-    max-width:
-        1280px;
-
-    min-height:
-        74px;
-
-    margin:
-        0 auto;
-
-    padding:
-        10px 24px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        20px;
-
-}
-
-
-/* =========================================================
-   45. PRONOUNCED LOGO
-   ========================================================= */
-
-.gtf-logo-large {
-
-    width:
-        62px;
-
-    height:
-        62px;
-
-    object-fit:
-        contain;
-
-    display:
-        block;
-
-}
-
-
-.gtf-logo-large:hover {
-
-    transform:
-        scale(1.04);
-
-}
-
-
-/* =========================================================
-   46. CENTERED HEADER BRAND
-   ========================================================= */
-
-.gtf-centered-brand {
-
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    top:
-        50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    text-align:
-        center;
-
-}
-
-
-.gtf-centered-brand img {
-
-    width:
-        58px;
-
-    height:
-        58px;
-
-    object-fit:
-        contain;
-
-}
-
-
-.gtf-centered-brand strong {
-
-    margin-top:
-        5px;
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        14px;
-
-    line-height:
-        1.1;
-
-    font-weight:
-        850;
-
-}
-
-
-.gtf-centered-brand small {
-
-    margin-top:
-        4px;
-
-    color:
-        var(--gtf-muted);
-
-    font-size:
-        7px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        1.5px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* =========================================================
-   47. PAGE CONTAINER
-   ========================================================= */
-
-.gtf-container {
-
-    width:
-        100%;
-
-    max-width:
-        1280px;
-
-    margin:
-        0 auto;
-
-    padding:
-        0 24px;
-
-}
-
-
-/* =========================================================
-   48. PAGE SECTION
-   ========================================================= */
-
-.gtf-section {
-
-    padding:
-        70px 0;
-
-}
-
-
-/* =========================================================
-   49. SECTION HEADER
-   ========================================================= */
-
-.gtf-section-heading {
-
-    max-width:
-        700px;
-
-    margin:
-        0 auto 35px;
-
-    text-align:
-        center;
-
-}
-
-
-.gtf-section-heading .eyebrow {
-
-    color:
-        var(--gtf-green-light);
-
-    font-size:
-        7px;
-
-    font-weight:
-        850;
-
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-.gtf-section-heading h2 {
-
-    margin:
-        9px 0 0;
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        clamp(25px,4vw,38px);
-
-    line-height:
-        1.2;
-
-}
-
-
-.gtf-section-heading p {
-
-    margin:
-        12px 0 0;
-
-    color:
-        var(--gtf-text-medium);
-
-    font-size:
-        9px;
-
-    line-height:
-        1.8;
-
-}
-
-
-/* =========================================================
-   50. GRID
-   ========================================================= */
-
-.gtf-grid {
-
-    display:
-        grid;
-
-    gap:
-        16px;
-
-}
-
-
-.gtf-grid-2 {
-
-    grid-template-columns:
-        repeat(2, minmax(0,1fr));
-
-}
-
-
-.gtf-grid-3 {
-
-    grid-template-columns:
-        repeat(3, minmax(0,1fr));
-
-}
-
-
-.gtf-grid-4 {
-
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
-
-}
-
-
-/* =========================================================
-   51. ANIMATIONS
-   ========================================================= */
-
-@keyframes gtfFloat {
-
-    0%,
-    100% {
-
-        transform:
-            translateY(0);
-
-    }
-
-    50% {
-
-        transform:
-            translateY(-8px);
-
-    }
-
-}
-
-
-@keyframes gtfPulse {
-
-    0%,
-    100% {
-
-        box-shadow:
-            0 0 0 0
-            rgba(201,150,43,.25);
-
-    }
-
-    50% {
-
-        box-shadow:
-            0 0 0 9px
-            rgba(201,150,43,0);
-
-    }
-
-}
-
-
-@keyframes gtfGoldShimmer {
-
-    0% {
-
-        background-position:
-            0% 50%;
-
-    }
-
-    50% {
-
-        background-position:
-            100% 50%;
-
-    }
-
-    100% {
-
-        background-position:
-            0% 50%;
-
-    }
-
-}
-
-
-.gtf-card-float {
-
-    animation:
-        gtfFloat 5s ease-in-out infinite;
-
-}
-
-
-.gtf-card-status-dot {
-
-    animation:
-        gtfPulse 2.2s infinite;
-
-}
-
-
-.gtf-card-chip.animated {
-
-    background-size:
-        200% 200%;
-
-    animation:
-        gtfGoldShimmer 4s ease infinite;
-
-}
-
-
-/* =========================================================
-   52. HERO VISUAL CARD
-   ========================================================= */
-
-.gtf-hero-card {
-
-    position:
-        relative;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    min-height:
-        420px;
-
-}
-
-
-.gtf-hero-card::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        380px;
-
-    height:
-        380px;
-
-    border:
-        1px solid
-        rgba(23,107,72,.12);
-
-    border-radius:
-        50%;
-
-}
-
-
-.gtf-hero-card::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        470px;
-
-    height:
-        470px;
-
-    border:
-        1px solid
-        rgba(201,150,43,.09);
-
-    border-radius:
-        50%;
-
-}
-
-
-/* =========================================================
-   53. CARD RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .gtf-grid-4 {
-
-        grid-template-columns:
-            repeat(2, minmax(0,1fr));
-
-    }
-
-    .gtf-grid-3 {
-
-        grid-template-columns:
-            repeat(2, minmax(0,1fr));
-
-    }
-
-}
-
-
-@media (max-width: 700px) {
-
-    .gtf-container {
-
-        padding:
-            0 17px;
-
-    }
-
-    .gtf-section {
-
-        padding:
-            55px 0;
-
-    }
-
-    .gtf-grid-2,
-    .gtf-grid-3,
-    .gtf-grid-4 {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-    .gtf-card-demo {
-
-        padding:
-            10px;
-
-    }
-
-    .gtf-card-stack {
-
-        min-height:
-            270px;
-
-    }
-
-    .gtf-card-number {
-
-        font-size:
-            clamp(14px,4vw,20px);
-
-        letter-spacing:
-            1px;
-
-    }
-
-    .gtf-card-chip {
-
-        width:
-            48px;
-
-        height:
-            36px;
-
-        flex-basis:
-            48px;
-
-    }
-
-    .gtf-card-brand-logo {
-
-        width:
-            40px;
-
-        height:
-            40px;
-
-    }
-
-    .gtf-card-brand-name strong {
-
-        font-size:
-            9px;
-
-    }
-
-    .gtf-card-meta-value {
-
-        font-size:
-            7px;
-
-    }
-
-    .gtf-card-meta {
-
-        gap:
-            18px;
-
-    }
-
+  font-family: var(--font);
+  color: var(--dark-text);
+  background: var(--off-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: var(--primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--gold); }
+ul, ol { list-style: none; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--deep);
+}
+h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: 1.25rem; }
+.lead { font-size: 1.125rem; color: var(--muted); }
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+.container-wide { max-width: 1400px; }
+.section { padding: 4rem 0; }
+.section-sm { padding: 2.5rem 0; }
+
+/* Header / Nav */
+.site-header {
+  background: var(--deep);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  gap: 1rem;
+}
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.logo-link img, .logo-link svg { height: 40px; width: auto; }
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary), var(--deep));
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--white);
+  font-size: 0.75rem;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+}
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; }
+.btn-nav {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.btn-nav-outline {
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+  background: transparent;
+}
+.btn-nav-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+.btn-nav-gold {
+  background: var(--gold);
+  color: var(--deep);
+  border-color: var(--gold);
+}
+.btn-nav-gold:hover { background: var(--gold-light); }
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-menu {
+  display: none;
+  background: var(--deep);
+  padding: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.mobile-menu.open { display: block; }
+.mobile-menu a {
+  display: block;
+  color: rgba(255,255,255,0.9);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+}
+.mobile-menu a:hover { background: rgba(255,255,255,0.1); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+  line-height: 1.2;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+.btn-primary:hover {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--white);
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--deep);
+  border-color: var(--gold);
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  color: var(--deep);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+.btn-outline-white {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.6);
+}
+.btn-outline-white:hover {
+  background: var(--white);
+  color: var(--deep);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--primary);
+  border-color: transparent;
+}
+.btn-ghost:hover { background: rgba(11,61,46,0.08); }
+.btn-sm { padding: 0.4rem 0.9rem; font-size: 0.85rem; }
+.btn-lg { padding: 1rem 2rem; font-size: 1.05rem; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.card-body { padding: 1.5rem; }
+.card-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--off-white);
+}
+.card-title { font-size: 1.1rem; font-weight: 600; }
+.card-glass {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Forms */
+.form-group { margin-bottom: 1.25rem; }
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 0.4rem;
+}
+.form-control {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--white);
+  color: var(--dark-text);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(11, 61, 46, 0.15);
+}
+.form-control::placeholder { color: var(--muted); }
+.form-control.is-invalid { border-color: var(--danger); }
+.form-control.is-valid { border-color: var(--success); }
+.form-hint { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+.form-error { font-size: 0.8rem; color: var(--danger); margin-top: 0.3rem; }
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+.form-check input { margin-top: 0.25rem; accent-color: var(--primary); }
+
+/* Alerts */
+.alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+.alert-success { background: #E8F5EE; border-color: #A8D5BC; color: #0B5C32; }
+.alert-warning { background: #FDF6E3; border-color: #E8D48B; color: #7A5C00; }
+.alert-danger { background: #FCEAEA; border-color: #E8B0B0; color: #8B2A2A; }
+.alert-info { background: #E8F4F8; border-color: #A8D0E0; color: #1A5A70; }
+.alert-sim {
+  background: #F8F4E8;
+  border-color: var(--gold);
+  color: #5C4A10;
+  border-left: 4px solid var(--gold);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.badge-success { background: #D4EDDA; color: #155724; }
+.badge-warning { background: #FFF3CD; color: #856404; }
+.badge-danger { background: #F8D7DA; color: #721C24; }
+.badge-info { background: #D1ECF1; color: #0C5460; }
+.badge-neutral { background: #E9ECEF; color: #495057; }
+.badge-gold { background: #F5EED6; color: #7A5C00; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.table th, .table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.table th {
+  background: var(--off-white);
+  font-weight: 600;
+  color: var(--deep);
+  white-space: nowrap;
+}
+.table tbody tr:hover { background: rgba(11,61,46,0.03); }
+.table tbody tr:last-child td { border-bottom: none; }
+.amount-pos { color: var(--success); font-weight: 600; }
+.amount-neg { color: var(--danger); font-weight: 600; }
+
+
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--deep) 0%, var(--primary) 50%, var(--secondary) 100%);
+  color: var(--white);
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(201,162,39,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.hero h1 { color: var(--white); margin-bottom: 1rem; }
+.hero .lead { color: rgba(255,255,255,0.85); margin-bottom: 1.75rem; max-width: 480px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+.hero-visual {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+  text-align: center;
+}
+.atm-mock {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 280px;
+  margin: 0 auto;
+  border: 3px solid var(--gold);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+.atm-screen {
+  background: var(--primary);
+  border-radius: 8px;
+  padding: 1.25rem;
+  min-height: 140px;
+  color: var(--white);
+  font-size: 0.85rem;
+}
+.atm-screen .balance { font-size: 1.5rem; font-weight: 700; color: var(--gold-light); margin: 0.5rem 0; }
+.atm-keys {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+.atm-key {
+  background: #333;
+  border-radius: 4px;
+  height: 28px;
+  border: 1px solid #555;
+}
+
+/* Feature grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+.feature-card h3 { margin-bottom: 0.5rem; }
+.feature-card p { color: var(--muted); font-size: 0.95rem; }
+
+/* Product cards */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.product-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: border-color var(--transition);
+}
+.product-card:hover { border-color: var(--gold); }
+.product-card .icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.product-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.product-card p { font-size: 0.875rem; color: var(--muted); margin-bottom: 1rem; }
+
+/* Steps */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  counter-reset: step;
+}
+.step {
+  text-align: center;
+  position: relative;
+}
+.step-num {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--gold);
+}
+
+/* Footer */
+.site-footer {
+  background: var(--deep);
+  color: rgba(255,255,255,0.8);
+  padding: 3.5rem 0 1.5rem;
+  margin-top: auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+.footer-brand p { font-size: 0.9rem; margin-top: 0.75rem; max-width: 280px; }
+.footer-col h4 {
+  color: var(--gold);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+.footer-col a {
+  display: block;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+.footer-col a:hover { color: var(--gold-light); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+.disclaimer {
+  background: rgba(201,162,39,0.15);
+  border: 1px solid rgba(201,162,39,0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  margin-top: 1rem;
+}
+
+/* Auth pages */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--deep) 0%, var(--primary) 100%);
+  padding: 2rem 1rem;
+}
+.auth-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 440px;
+  padding: 2.5rem;
+}
+.auth-card.wide { max-width: 520px; }
+.auth-logo { text-align: center; margin-bottom: 1.5rem; }
+.auth-logo svg, .auth-logo img { height: 48px; margin: 0 auto; }
+.auth-title { text-align: center; margin-bottom: 0.5rem; }
+.auth-subtitle { text-align: center; color: var(--muted); font-size: 0.95rem; margin-bottom: 1.75rem; }
+.auth-footer { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted); }
+.password-strength {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+.password-strength-bar {
+  height: 100%;
+  width: 0;
+  transition: width 0.3s, background 0.3s;
+  border-radius: 2px;
+}
+
+/* Dashboard layout */
+.dash-layout {
+  display: flex;
+  min-height: 100vh;
+}
+.dash-sidebar {
+  width: 260px;
+  background: var(--deep);
+  color: var(--white);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+.sidebar-brand {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sidebar-brand .logo-mark { width: 36px; height: 36px; font-size: 0.7rem; }
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 1rem 0.75rem; }
+.sidebar-section {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  padding: 0.75rem 0.75rem 0.4rem;
+  margin-top: 0.5rem;
+}
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+.sidebar-link:hover, .sidebar-link.active {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+}
+.sidebar-link.active { border-left: 3px solid var(--gold); }
+.dash-main {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.dash-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.dash-content { padding: 1.5rem; flex: 1; }
+.dash-title { font-size: 1.5rem; margin-bottom: 0.25rem; }
+.dash-subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+/* KPI cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.kpi-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.kpi-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.kpi-value { font-size: 1.6rem; font-weight: 700; color: var(--deep); margin: 0.25rem 0; }
+.kpi-meta { font-size: 0.8rem; color: var(--muted); }
+
+/* Account cards */
+.account-card {
+  background: linear-gradient(135deg, var(--primary), var(--deep));
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.account-card::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 120px;
+  height: 120px;
+  background: rgba(201,162,39,0.15);
+  border-radius: 50%;
+}
+.account-type { font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+.account-number { font-size: 0.95rem; letter-spacing: 0.1em; margin: 0.5rem 0; opacity: 0.9; }
+.account-balance { font-size: 1.75rem; font-weight: 700; color: var(--gold-light); }
+.account-status { font-size: 0.8rem; margin-top: 0.75rem; }
+
+/* Card visual */
+.pay-card {
+  background: linear-gradient(135deg, #0B3D2E 0%, #145A43 50%, #062A20 100%);
+  border-radius: 14px;
+  padding: 1.5rem;
+  color: var(--white);
+  max-width: 340px;
+  aspect-ratio: 1.586;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  border: 1px solid rgba(201,162,39,0.4);
+}
+.pay-card .chip {
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+.pay-card .number { font-size: 1.15rem; letter-spacing: 0.15em; margin-bottom: 1rem; font-family: monospace; }
+.pay-card .meta { display: flex; justify-content: space-between; font-size: 0.75rem; opacity: 0.9; }
+.pay-card .brand { position: absolute; bottom: 1.25rem; right: 1.5rem; font-weight: 700; color: var(--gold); }
+
+/* Empty / loading */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--muted);
+}
+.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.empty-state h3 { color: var(--dark-text); margin-bottom: 0.5rem; }
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: var(--muted);
+}
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(6,42,32,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-body { padding: 1.5rem; }
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.text-muted { color: var(--muted); }
+.text-gold { color: var(--gold); }
+.text-success { color: var(--success); }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.flex { display: flex; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; max-width: 320px; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-actions .btn-nav-outline { display: none; }
+  .mobile-toggle { display: block; }
+  .dash-sidebar { transform: translateX(-100%); }
+  .dash-sidebar.open { transform: translateX(0); }
+  .dash-main { margin-left: 0; }
+  .form-row { grid-template-columns: 1fr; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
 }
-
-
-/* =========================================================
-   54. SMALL PHONE
-   ========================================================= */
 
 @media (max-width: 430px) {
-
-    .gtf-card-wrapper {
-
-        width:
-            100%;
-
-    }
-
-    .gtf-bank-card {
-
-        border-radius:
-            15px;
-
-    }
-
-    .gtf-bank-card-inner {
-
-        padding:
-            17px;
-
-    }
-
-    .gtf-card-number {
-
-        font-size:
-            13px;
-
-        letter-spacing:
-            .8px;
-
-    }
-
-    .gtf-card-chip {
-
-        width:
-            43px;
-
-        height:
-            32px;
-
-        flex-basis:
-            43px;
-
-        border-radius:
-            7px;
-
-    }
-
-    .gtf-card-brand-logo {
-
-        width:
-            34px;
-
-        height:
-            34px;
-
-    }
-
-    .gtf-card-brand-name strong {
-
-        font-size:
-            8px;
-
-    }
-
-    .gtf-card-brand-name span {
-
-        font-size:
-            5px;
-
-    }
-
-    .gtf-card-meta {
-
-        gap:
-            12px;
-
-    }
-
-    .gtf-card-meta-label {
-
-        font-size:
-            5px;
-
-    }
-
-    .gtf-card-meta-value {
-
-        font-size:
-            6px;
-
-    }
-
-    .gtf-card-type {
-
-        font-size:
-            5px;
-
-    }
-
+  .kpi-grid { grid-template-columns: 1fr; }
+  .auth-card { padding: 1.5rem; }
+  .hero { padding: 3rem 0; }
 }
 
 
-/* =========================================================
-   55. ACCESSIBILITY
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        animation-duration:
-            .01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            .01ms !important;
-
-        scroll-behavior:
-            auto !important;
-
-    }
-
-}
-
-
-/* =========================================================
-   56. FOCUS VISIBILITY
-   ========================================================= */
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-
-    outline:
-        3px solid
-        rgba(201,150,43,.65);
-
-    outline-offset:
-        3px;
-
-}
-
-
-/* =========================================================
-   57. PREVENT HORIZONTAL OVERFLOW
-   ========================================================= */
-
-html,
-body {
-
-    overflow-x:
-        hidden;
-
-}
-
-
-/* =========================================================
-   58. CARD IMAGE PROTECTION
-   ========================================================= */
-
-.gtf-bank-card img {
-
-    max-width:
-        100%;
-
-    object-fit:
-        contain;
-
-}
-
-
-/* =========================================================
-   59. CARD DEMO LABEL
-   ========================================================= */
-
-.gtf-card-demo-label {
-
-    margin-bottom:
-        12px;
-
-    color:
-        var(--gtf-muted);
-
-    font-size:
-        7px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-}
-
-
-/* =========================================================
-   60. GOLD DIVIDER
-   ========================================================= */
-
-.gtf-gold-divider {
-
-    width:
-        50px;
-
-    height:
-        3px;
-
-    margin:
-        10px 0;
-
-    border-radius:
-        10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--gtf-gold-dark),
-            var(--gtf-gold-light)
-        );
-
-}
-
-
-/* =========================================================
-   END GLOBAL TRUSTFUND CSS
-   ========================================================= */
