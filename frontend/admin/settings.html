@@ -12,54 +12,46 @@
 
     <meta
         name="description"
-        content="Global TrustFund Administration Settings"
+        content="Global TrustFund administrator system settings and banking configuration."
     >
 
     <meta
         name="theme-color"
-        content="#0b3d2e"
+        content="#0b2a4a"
     >
 
     <title>
-        Settings | Global TrustFund Admin
+        Settings | GTF Banking Admin
     </title>
-
 
     <link
         rel="stylesheet"
         href="../css/styles.css"
     >
 
-
     <style>
-
-        /* =====================================================
-           GLOBAL TRUSTFUND ADMIN SETTINGS
-           ===================================================== */
 
         :root {
 
-            --gtf-green: #0b3d2e;
-            --gtf-green-dark: #092f24;
-            --gtf-green-light: #176b48;
-
+            --gtf-blue: #0b2a4a;
+            --gtf-blue-light: #145da0;
             --gtf-gold: #c9962b;
 
-            --gtf-bg: #f4f8f6;
+            --gtf-bg: #f4f7fa;
             --gtf-card: #ffffff;
-            --gtf-border: #dfe8e3;
+            --gtf-border: #dce4eb;
 
-            --gtf-text: #18372c;
-            --gtf-muted: #7c8983;
+            --gtf-text: #183247;
+            --gtf-muted: #71808d;
 
-            --success-bg: #eaf5ee;
-            --success-text: #176b48;
+            --gtf-success: #19734b;
+            --gtf-success-bg: #eaf6ef;
 
-            --warning-bg: #fff7df;
-            --warning-text: #85691c;
+            --gtf-warning: #946b17;
+            --gtf-warning-bg: #fff7df;
 
-            --danger-bg: #f9eded;
-            --danger-text: #8b4444;
+            --gtf-danger: #a04444;
+            --gtf-danger-bg: #fbeded;
 
         }
 
@@ -72,18 +64,15 @@
         html,
         body {
             margin: 0;
-            padding: 0;
             min-height: 100%;
         }
 
 
         body {
 
-            background:
-                var(--gtf-bg);
+            background: var(--gtf-bg);
 
-            color:
-                var(--gtf-text);
+            color: var(--gtf-text);
 
             font-family:
                 Arial,
@@ -95,98 +84,87 @@
 
         button,
         input,
-        select {
+        select,
+        textarea {
             font: inherit;
         }
 
 
-        /* =====================================================
-           PAGE
-           ===================================================== */
+        button {
+            cursor: pointer;
+        }
 
-        .admin-page {
+
+        /* =====================================================
+           APPLICATION
+        ===================================================== */
+
+        .admin-app {
 
             min-height: 100vh;
 
-            display: flex;
-            flex-direction: column;
+            display: grid;
+
+            grid-template-columns:
+                245px
+                minmax(0, 1fr);
 
         }
 
 
         /* =====================================================
-           HEADER
-           ===================================================== */
+           SIDEBAR
+        ===================================================== */
 
-        .admin-header {
+        .sidebar {
 
             position: sticky;
+
             top: 0;
 
-            z-index: 100;
+            height: 100vh;
 
-            background: #ffffff;
+            overflow-y: auto;
 
-            border-bottom:
-                1px solid var(--gtf-border);
+            padding: 22px 16px;
 
-            box-shadow:
-                0 4px 18px
-                rgba(11, 61, 46, .05);
+            background:
+                var(--gtf-blue);
 
-        }
-
-
-        .admin-header-inner {
-
-            width: 100%;
-            max-width: 1440px;
-
-            min-height: 72px;
-
-            margin: 0 auto;
-
-            padding:
-                12px 25px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 20px;
+            color: #fff;
 
         }
 
-
-        /* =====================================================
-           BRAND
-           ===================================================== */
 
         .brand {
 
-            display: inline-flex;
+            display: flex;
 
             align-items: center;
 
             gap: 10px;
 
-            color:
-                var(--gtf-green);
+            padding:
+                5px
+                8px
+                24px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.12);
+
+            color: #fff;
 
             text-decoration: none;
-
-            flex-shrink: 0;
 
         }
 
 
-        .brand-logo {
+        .brand img {
 
-            width: 45px;
-            height: 45px;
+            width: 43px;
 
-            display: block;
+            height: 43px;
 
             object-fit: contain;
 
@@ -204,200 +182,32 @@
 
         .brand-text strong {
 
-            display: block;
-
-            color:
-                var(--gtf-green);
-
-            font-size: 14px;
-
-            line-height: 1.2;
-
-            font-weight: 800;
+            font-size: 13px;
 
         }
 
 
-        .brand-text small {
-
-            display: block;
+        .brand-text span {
 
             margin-top: 3px;
 
             color:
-                var(--gtf-muted);
+                rgba(255,255,255,.58);
 
-            font-size: 9px;
-
-            line-height: 1;
-
-            font-weight: 600;
+            font-size: 8px;
 
         }
 
 
-        /* =====================================================
-           HEADER RIGHT
-           ===================================================== */
+        .nav-title {
 
-        .admin-header-right {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 14px;
-
-        }
-
-
-        .admin-label {
-
-            display: flex;
-
-            flex-direction: column;
-
-            text-align: right;
-
-        }
-
-
-        .admin-label strong {
+            margin:
+                24px
+                9px
+                9px;
 
             color:
-                var(--gtf-text);
-
-            font-size: 9px;
-
-        }
-
-
-        .admin-label span {
-
-            margin-top: 3px;
-
-            color:
-                var(--gtf-muted);
-
-            font-size: 7px;
-
-        }
-
-
-        .admin-avatar {
-
-            width: 36px;
-            height: 36px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background:
-                var(--gtf-green);
-
-            color: #ffffff;
-
-            font-size: 9px;
-
-            font-weight: 800;
-
-        }
-
-
-        .logout-button {
-
-            min-height: 32px;
-
-            padding:
-                0 11px;
-
-            border:
-                1px solid var(--gtf-border);
-
-            border-radius: 6px;
-
-            background: #ffffff;
-
-            color:
-                var(--gtf-green);
-
-            font-size: 7px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-        }
-
-
-        .logout-button:hover {
-
-            background:
-                var(--gtf-bg);
-
-        }
-
-
-        /* =====================================================
-           BODY
-           ===================================================== */
-
-        .admin-body {
-
-            width: 100%;
-            max-width: 1440px;
-
-            margin: 0 auto;
-
-            padding: 25px;
-
-            display: grid;
-
-            grid-template-columns:
-                220px minmax(0, 1fr);
-
-            gap: 25px;
-
-            flex: 1;
-
-        }
-
-
-        /* =====================================================
-           SIDEBAR
-           ===================================================== */
-
-        .admin-sidebar {
-
-            height: fit-content;
-
-            position: sticky;
-
-            top: 97px;
-
-            padding: 15px;
-
-            background: #ffffff;
-
-            border:
-                1px solid var(--gtf-border);
-
-            border-radius: 12px;
-
-        }
-
-
-        .sidebar-title {
-
-            padding:
-                8px 10px 12px;
-
-            color:
-                var(--gtf-muted);
+                rgba(255,255,255,.42);
 
             font-size: 7px;
 
@@ -410,262 +220,430 @@
         }
 
 
-        .sidebar-nav {
+        .nav {
 
             display: grid;
 
-            gap: 4px;
+            gap: 5px;
 
         }
 
 
-        .sidebar-nav a {
-
-            min-height: 38px;
-
-            padding:
-                0 10px;
+        .nav a {
 
             display: flex;
 
             align-items: center;
 
+            gap: 10px;
+
+            min-height: 38px;
+
+            padding:
+                0
+                11px;
+
             border-radius: 7px;
 
             color:
-                var(--gtf-muted);
+                rgba(255,255,255,.72);
+
+            font-size: 9px;
+
+            font-weight: 600;
 
             text-decoration: none;
 
-            font-size: 8px;
-
-            font-weight: 700;
-
         }
 
 
-        .sidebar-nav a:hover {
+        .nav a:hover,
+        .nav a.active {
 
             background:
-                var(--gtf-bg);
+                rgba(255,255,255,.10);
 
-            color:
-                var(--gtf-green);
-
-        }
-
-
-        .sidebar-nav a.active {
-
-            background:
-                var(--gtf-green);
-
-            color: #ffffff;
+            color: #fff;
 
         }
 
 
         .nav-icon {
 
-            width: 22px;
+            width: 18px;
 
-            flex: 0 0 22px;
+            text-align: center;
 
             font-size: 11px;
 
         }
 
 
+        .admin-user {
+
+            margin-top: 30px;
+
+            padding: 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.05);
+
+        }
+
+
+        .admin-user strong {
+
+            display: block;
+
+            font-size: 9px;
+
+        }
+
+
+        .admin-user span {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 7px;
+
+        }
+
+
+        .logout {
+
+            width: 100%;
+
+            min-height: 30px;
+
+            margin-top: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            border-radius: 6px;
+
+            background: transparent;
+
+            color:
+                rgba(255,255,255,.75);
+
+            font-size: 8px;
+
+        }
+
+
+        .logout:hover {
+
+            background:
+                rgba(255,255,255,.08);
+
+        }
+
+
         /* =====================================================
            MAIN
-           ===================================================== */
+        ===================================================== */
 
-        .admin-main {
+        .main {
 
             min-width: 0;
 
         }
 
 
-        .page-heading {
+        .topbar {
 
-            margin-bottom: 22px;
+            min-height: 68px;
+
+            padding:
+                14px
+                28px;
 
             display: flex;
 
-            align-items: flex-start;
+            align-items: center;
 
             justify-content: space-between;
 
             gap: 20px;
 
+            background: #fff;
+
+            border-bottom:
+                1px solid
+                var(--gtf-border);
+
         }
 
 
-        .page-heading h1 {
+        .topbar h1 {
 
             margin: 0;
 
             color:
-                var(--gtf-green);
+                var(--gtf-blue);
 
-            font-size: 26px;
-
-            line-height: 1.2;
+            font-size: 20px;
 
         }
 
 
-        .page-heading p {
+        .topbar p {
 
-            margin: 7px 0 0;
+            margin:
+                5px
+                0
+                0;
 
             color:
                 var(--gtf-muted);
 
             font-size: 8px;
 
-            line-height: 1.6;
+        }
+
+
+        .session-status {
+
+            padding:
+                7px
+                10px;
+
+            border-radius: 20px;
+
+            background:
+                var(--gtf-success-bg);
+
+            color:
+                var(--gtf-success);
+
+            font-size: 7px;
+
+            font-weight: 700;
 
         }
 
 
-        .heading-actions {
+        .content {
 
-            display: flex;
-
-            gap: 8px;
-
-            flex-wrap: wrap;
+            padding: 27px;
 
         }
 
 
-        .button {
+        /* =====================================================
+           SETTINGS LAYOUT
+        ===================================================== */
+
+        .settings-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                205px
+                minmax(0, 1fr);
+
+            gap: 18px;
+
+            align-items: start;
+
+        }
+
+
+        /* =====================================================
+           SETTINGS NAVIGATION
+        ===================================================== */
+
+        .settings-nav {
+
+            position: sticky;
+
+            top: 18px;
+
+            padding: 10px;
+
+            background: #fff;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 11px;
+
+        }
+
+
+        .settings-nav-title {
+
+            padding:
+                8px
+                9px
+                10px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            letter-spacing: .7px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .settings-tab {
+
+            width: 100%;
 
             min-height: 36px;
 
             padding:
-                0 13px;
+                0
+                10px;
 
-            border:
-                1px solid var(--gtf-border);
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            border: 0;
 
             border-radius: 6px;
 
-            background: #ffffff;
+            background: transparent;
 
             color:
-                var(--gtf-green);
+                var(--gtf-muted);
+
+            text-align: left;
 
             font-size: 8px;
 
             font-weight: 700;
 
-            cursor: pointer;
+        }
+
+
+        .settings-tab:hover {
+
+            background: #f4f7fa;
+
+            color:
+                var(--gtf-blue);
 
         }
 
 
-        .button:hover {
+        .settings-tab.active {
 
             background:
-                var(--gtf-bg);
+                var(--gtf-blue);
+
+            color: #fff;
 
         }
 
 
-        .button-primary {
+        .settings-tab-icon {
 
-            background:
-                var(--gtf-green);
+            width: 17px;
 
-            border-color:
-                var(--gtf-green);
+            text-align: center;
 
-            color: #ffffff;
-
-        }
-
-
-        .button-primary:hover {
-
-            background:
-                var(--gtf-green-dark);
+            font-size: 10px;
 
         }
 
 
         /* =====================================================
-           SETTINGS GRID
-           ===================================================== */
+           SETTINGS CONTENT
+        ===================================================== */
 
-        .settings-grid {
+        .settings-content {
 
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 18px;
+            min-width: 0;
 
         }
 
 
-        /* =====================================================
-           SETTINGS CARD
-           ===================================================== */
+        .settings-section {
+
+            display: none;
+
+        }
+
+
+        .settings-section.active {
+
+            display: block;
+
+        }
+
 
         .settings-card {
 
-            background:
-                #ffffff;
+            margin-bottom: 18px;
+
+            background: #fff;
 
             border:
-                1px solid var(--gtf-border);
+                1px solid
+                var(--gtf-border);
 
-            border-radius: 12px;
+            border-radius: 11px;
 
             overflow: hidden;
 
         }
 
 
-        .settings-card.full-width {
-
-            grid-column:
-                1 / -1;
-
-        }
-
-
-        .settings-card-header {
+        .settings-header {
 
             padding:
-                18px 20px;
+                17px
+                18px;
 
             border-bottom:
-                1px solid var(--gtf-border);
+                1px solid
+                var(--gtf-border);
 
         }
 
 
-        .settings-card-header h2 {
+        .settings-header h2 {
 
             margin: 0;
 
             color:
-                var(--gtf-green);
+                var(--gtf-blue);
 
             font-size: 13px;
 
         }
 
 
-        .settings-card-header p {
+        .settings-header p {
 
             margin:
-                5px 0 0;
+                5px
+                0
+                0;
 
             color:
                 var(--gtf-muted);
@@ -677,21 +655,206 @@
         }
 
 
-        .settings-card-body {
+        .settings-body {
 
-            padding:
-                20px;
+            padding: 18px;
 
         }
 
 
         /* =====================================================
-           SETTING ROW
-           ===================================================== */
+           FORM GRID
+        ===================================================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 15px;
+
+        }
+
+
+        .form-grid.single {
+
+            grid-template-columns: 1fr;
+
+        }
+
+
+        .form-field {
+
+            display: grid;
+
+            gap: 5px;
+
+        }
+
+
+        .form-field.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .form-field label {
+
+            color:
+                var(--gtf-text);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+        }
+
+
+        .form-field small {
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 6px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+
+            width: 100%;
+
+            min-height: 36px;
+
+            padding:
+                0
+                9px;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #fff;
+
+            color:
+                var(--gtf-text);
+
+            font-size: 8px;
+
+        }
+
+
+        .form-field textarea {
+
+            min-height: 78px;
+
+            padding: 9px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+
+            border-color:
+                var(--gtf-blue-light);
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            margin-top: 18px;
+
+        }
+
+
+        .button {
+
+            min-height: 36px;
+
+            padding:
+                0
+                14px;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background:
+                var(--gtf-blue);
+
+            color: #fff;
+
+            font-size: 8px;
+
+            font-weight: 700;
+
+        }
+
+
+        .button:hover {
+
+            background:
+                var(--gtf-blue-light);
+
+        }
+
+
+        .button.secondary {
+
+            background:
+                #eef3f7;
+
+            color:
+                var(--gtf-blue);
+
+        }
+
+
+        .button.danger {
+
+            background:
+                var(--gtf-danger-bg);
+
+            color:
+                var(--gtf-danger);
+
+        }
+
+
+        /* =====================================================
+           TOGGLE
+        ===================================================== */
 
         .setting-row {
 
-            min-height: 52px;
+            min-height: 56px;
 
             display: flex;
 
@@ -702,17 +865,12 @@
             gap: 20px;
 
             padding:
-                10px 0;
+                11px
+                0;
 
             border-bottom:
-                1px solid #edf2ef;
-
-        }
-
-
-        .setting-row:first-child {
-
-            padding-top: 0;
+                1px solid
+                #edf1f4;
 
         }
 
@@ -721,33 +879,22 @@
 
             border-bottom: 0;
 
-            padding-bottom: 0;
-
         }
 
 
-        .setting-info {
-
-            min-width: 0;
-
-        }
-
-
-        .setting-title {
+        .setting-info strong {
 
             display: block;
 
             color:
-                var(--gtf-text);
+                var(--gtf-blue);
 
-            font-size: 9px;
-
-            font-weight: 700;
+            font-size: 8px;
 
         }
 
 
-        .setting-description {
+        .setting-info span {
 
             display: block;
 
@@ -758,509 +905,595 @@
 
             font-size: 7px;
 
-            line-height: 1.5;
+            line-height: 1.4;
 
         }
 
-
-        /* =====================================================
-           TOGGLE
-           ===================================================== */
 
         .toggle {
 
             position: relative;
 
-            width: 40px;
-            height: 22px;
+            width: 38px;
 
-            flex: 0 0 40px;
+            height: 21px;
+
+            flex: 0 0 auto;
 
         }
 
 
         .toggle input {
 
-            width: 0;
-            height: 0;
-
             opacity: 0;
+
+            width: 0;
+
+            height: 0;
 
         }
 
 
-        .toggle-slider {
+        .slider {
 
             position: absolute;
 
             inset: 0;
 
-            border-radius: 30px;
+            border-radius: 20px;
 
-            background:
-                #cbd6d0;
+            background: #d5dde4;
 
-            cursor: pointer;
-
-            transition:
-                .2s ease;
+            transition: .2s;
 
         }
 
 
-        .toggle-slider::before {
+        .slider::before {
 
             content: "";
 
             position: absolute;
 
-            width: 16px;
-            height: 16px;
+            width: 15px;
+
+            height: 15px;
 
             left: 3px;
+
             top: 3px;
 
             border-radius: 50%;
 
-            background:
-                #ffffff;
+            background: #fff;
 
-            transition:
-                .2s ease;
-
-            box-shadow:
-                0 1px 3px
-                rgba(0,0,0,.15);
+            transition: .2s;
 
         }
 
 
-        .toggle input:checked
-        + .toggle-slider {
+        .toggle input:checked + .slider {
 
             background:
-                var(--gtf-green);
+                var(--gtf-blue);
 
         }
 
 
-        .toggle input:checked
-        + .toggle-slider::before {
+        .toggle input:checked + .slider::before {
 
             transform:
-                translateX(18px);
+                translateX(17px);
 
         }
 
 
         /* =====================================================
-           FORM
-           ===================================================== */
+           STATUS / INFO
+        ===================================================== */
 
-        .form-grid {
+        .info-box {
+
+            margin-bottom: 15px;
+
+            padding: 12px;
+
+            border:
+                1px solid
+                #dce8f1;
+
+            border-radius: 7px;
+
+            background:
+                #f4f8fb;
+
+            color:
+                var(--gtf-blue);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .success-box {
+
+            border-color:
+                #cfe7da;
+
+            background:
+                var(--gtf-success-bg);
+
+            color:
+                var(--gtf-success);
+
+        }
+
+
+        .warning-box {
+
+            border-color:
+                #eadcae;
+
+            background:
+                var(--gtf-warning-bg);
+
+            color:
+                var(--gtf-warning);
+
+        }
+
+
+        /* =====================================================
+           CURRENCY TABLE
+        ===================================================== */
+
+        .table-wrap {
+
+            width: 100%;
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            min-width: 650px;
+
+            border-collapse: collapse;
+
+        }
+
+
+        th {
+
+            padding:
+                11px
+                14px;
+
+            background:
+                #f8fafb;
+
+            border-bottom:
+                1px solid
+                var(--gtf-border);
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            text-align: left;
+
+            text-transform: uppercase;
+
+        }
+
+
+        td {
+
+            padding:
+                11px
+                14px;
+
+            border-bottom:
+                1px solid
+                #edf1f4;
+
+            font-size: 8px;
+
+        }
+
+
+        tbody tr:last-child td {
+
+            border-bottom: 0;
+
+        }
+
+
+        .currency-code {
+
+            display: inline-block;
+
+            padding:
+                4px
+                7px;
+
+            border-radius: 20px;
+
+            background:
+                #eef3f7;
+
+            color:
+                var(--gtf-blue);
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+        }
+
+
+        .currency-status {
+
+            display: inline-block;
+
+            padding:
+                4px
+                7px;
+
+            border-radius: 20px;
+
+            background:
+                var(--gtf-success-bg);
+
+            color:
+                var(--gtf-success);
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+        }
+
+
+        .currency-action {
+
+            border: 0;
+
+            background: transparent;
+
+            color:
+                var(--gtf-blue-light);
+
+            font-size: 7px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           SECURITY CARDS
+        ===================================================== */
+
+        .security-grid {
 
             display: grid;
 
             grid-template-columns:
-                1fr 1fr;
+                repeat(2, minmax(0, 1fr));
 
             gap: 15px;
 
         }
 
 
-        .form-group {
+        .security-item {
 
-            display: grid;
-
-            gap: 6px;
-
-        }
-
-
-        .form-group.full {
-
-            grid-column:
-                1 / -1;
-
-        }
-
-
-        .form-group label {
-
-            color:
-                var(--gtf-text);
-
-            font-size: 8px;
-
-            font-weight: 700;
-
-        }
-
-
-        .form-group input,
-        .form-group select {
-
-            width: 100%;
-
-            min-height: 39px;
-
-            padding:
-                0 10px;
+            padding: 15px;
 
             border:
-                1px solid var(--gtf-border);
+                1px solid
+                var(--gtf-border);
 
-            border-radius: 6px;
+            border-radius: 8px;
 
-            outline: none;
-
-            background:
-                #ffffff;
-
-            color:
-                var(--gtf-text);
-
-            font-size: 8px;
+            background: #fff;
 
         }
 
 
-        .form-group input:focus,
-        .form-group select:focus {
+        .security-item h3 {
 
-            border-color:
-                var(--gtf-green-light);
+            margin: 0;
 
-            box-shadow:
-                0 0 0 3px
-                rgba(23,107,72,.08);
+            color:
+                var(--gtf-blue);
+
+            font-size: 10px;
+
+        }
+
+
+        .security-item p {
+
+            margin:
+                6px
+                0
+                14px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .security-status {
+
+            display: inline-block;
+
+            padding:
+                5px
+                8px;
+
+            border-radius: 20px;
+
+            background:
+                var(--gtf-success-bg);
+
+            color:
+                var(--gtf-success);
+
+            font-size: 6px;
+
+            font-weight: 800;
 
         }
 
 
         /* =====================================================
-           SECURITY STATUS
-           ===================================================== */
+           SYSTEM STATUS
+        ===================================================== */
 
-        .security-status {
+        .system-grid {
 
-            margin-bottom:
-                18px;
+            display: grid;
 
-            padding:
-                12px 14px;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 13px;
+
+        }
+
+
+        .system-card {
+
+            padding: 15px;
+
+            background:
+                #f8fafb;
+
+            border:
+                1px solid
+                var(--gtf-border);
+
+            border-radius: 8px;
+
+        }
+
+
+        .system-card span {
+
+            display: block;
+
+            color:
+                var(--gtf-muted);
+
+            font-size: 7px;
+
+        }
+
+
+        .system-card strong {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color:
+                var(--gtf-blue);
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(5,20,32,.55);
+
+        }
+
+
+        .modal.open {
+
+            display: flex;
+
+        }
+
+
+        .modal-card {
+
+            width:
+                min(560px,100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 23px;
+
+            background: #fff;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.2);
+
+        }
+
+
+        .modal-header {
 
             display: flex;
 
             align-items: center;
 
-            gap: 10px;
+            justify-content: space-between;
 
-            background:
-                var(--success-bg);
+            gap: 15px;
 
-            border:
-                1px solid #d5eadc;
-
-            border-radius: 7px;
-
-            color:
-                var(--success-text);
-
-            font-size: 8px;
-
-            font-weight: 700;
+            margin-bottom: 18px;
 
         }
 
 
-        .status-dot {
+        .modal-header h2 {
 
-            width: 8px;
-            height: 8px;
+            margin: 0;
 
-            flex: 0 0 8px;
+            color:
+                var(--gtf-blue);
+
+            font-size: 16px;
+
+        }
+
+
+        .close {
+
+            width: 30px;
+
+            height: 30px;
+
+            border: 0;
 
             border-radius: 50%;
 
             background:
-                var(--success-text);
-
-        }
-
-
-        /* =====================================================
-           DANGER ZONE
-           ===================================================== */
-
-        .danger-card {
-
-            border-color:
-                #ecdada;
-
-        }
-
-
-        .danger-card
-        .settings-card-header h2 {
+                #eef2f5;
 
             color:
-                var(--danger-text);
+                var(--gtf-blue);
 
-        }
-
-
-        .danger-button {
-
-            min-height: 34px;
-
-            padding:
-                0 12px;
-
-            border:
-                1px solid #e1bcbc;
-
-            border-radius: 6px;
-
-            background:
-                #ffffff;
-
-            color:
-                var(--danger-text);
-
-            font-size: 7px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-        }
-
-
-        .danger-button:hover {
-
-            background:
-                var(--danger-bg);
-
-        }
-
-
-        /* =====================================================
-           SAVE BAR
-           ===================================================== */
-
-        .save-bar {
-
-            margin-top:
-                18px;
-
-            padding:
-                15px 18px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 15px;
-
-            background:
-                #ffffff;
-
-            border:
-                1px solid var(--gtf-border);
-
-            border-radius: 10px;
-
-        }
-
-
-        .save-message {
-
-            color:
-                var(--gtf-muted);
-
-            font-size: 7px;
-
-        }
-
-
-        /* =====================================================
-           TOAST
-           ===================================================== */
-
-        .toast {
-
-            position: fixed;
-
-            right: 22px;
-            bottom: 22px;
-
-            z-index: 500;
-
-            max-width: 320px;
-
-            padding:
-                12px 15px;
-
-            border-radius: 8px;
-
-            background:
-                var(--gtf-green);
-
-            color: #ffffff;
-
-            font-size: 8px;
-
-            line-height: 1.5;
-
-            box-shadow:
-                0 10px 30px
-                rgba(0,0,0,.15);
-
-            opacity: 0;
-
-            pointer-events: none;
-
-            transform:
-                translateY(10px);
-
-            transition:
-                .2s ease;
-
-        }
-
-
-        .toast.show {
-
-            opacity: 1;
-
-            transform:
-                translateY(0);
-
-        }
-
-
-        /* =====================================================
-           FOOTER
-           ===================================================== */
-
-        .admin-footer {
-
-            padding:
-                16px 25px;
-
-            background:
-                #ffffff;
-
-            border-top:
-                1px solid var(--gtf-border);
-
-        }
-
-
-        .admin-footer-inner {
-
-            width: 100%;
-            max-width: 1440px;
-
-            margin: 0 auto;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 15px;
-
-            color:
-                var(--gtf-muted);
-
-            font-size: 7px;
+            font-size: 16px;
 
         }
 
 
         /* =====================================================
            RESPONSIVE
-           ===================================================== */
+        ===================================================== */
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1050px) {
 
-            .settings-grid {
+            .settings-layout {
 
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .settings-card.full-width {
-
-                grid-column:
-                    auto;
-
-            }
-
-        }
-
-
-        @media (max-width: 850px) {
-
-            .admin-body {
-
-                grid-template-columns:
-                    1fr;
+                grid-template-columns: 1fr;
 
             }
 
 
-            .admin-sidebar {
+            .settings-nav {
 
                 position: static;
 
-            }
-
-
-            .sidebar-nav {
+                display: grid;
 
                 grid-template-columns:
                     repeat(4, 1fr);
 
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .admin-header-inner {
-
-                padding:
-                    10px 14px;
+                gap: 5px;
 
             }
 
 
-            .admin-label {
+            .settings-nav-title {
 
                 display: none;
 
             }
 
 
-            .admin-body {
+            .security-grid {
 
-                padding:
-                    15px;
+                grid-template-columns: 1fr;
 
             }
 
 
-            .sidebar-nav {
+            .system-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .admin-app {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .sidebar {
+
+                position: static;
+
+                height: auto;
+
+            }
+
+
+            .nav {
 
                 grid-template-columns:
                     repeat(2, 1fr);
@@ -1268,63 +1501,93 @@
             }
 
 
-            .page-heading {
+            .admin-user {
 
-                flex-direction:
-                    column;
+                display: none;
 
             }
 
 
-            .page-heading h1 {
+            .content {
 
-                font-size:
-                    22px;
+                padding: 17px;
+
+            }
+
+
+            .settings-nav {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
 
             }
 
 
             .form-grid {
 
-                grid-template-columns:
-                    1fr;
+                grid-template-columns: 1fr;
 
             }
 
 
-            .form-group.full {
+            .form-field.full {
 
-                grid-column:
-                    auto;
+                grid-column: auto;
+
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .topbar {
+
+                padding:
+                    13px
+                    17px;
 
             }
 
 
-            .save-bar {
+            .session-status {
 
-                flex-direction:
-                    column;
-
-                align-items:
-                    stretch;
+                display: none;
 
             }
 
 
-            .save-bar .button {
+            .settings-nav {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .system-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .setting-row {
+
+                align-items: flex-start;
+
+            }
+
+
+            .actions {
+
+                flex-direction: column-reverse;
+
+            }
+
+
+            .actions .button {
 
                 width: 100%;
-
-            }
-
-
-            .admin-footer-inner {
-
-                flex-direction:
-                    column;
-
-                text-align:
-                    center;
 
             }
 
@@ -1338,1426 +1601,2673 @@
 <body>
 
 
-<div class="admin-page">
+<div class="admin-app">
 
 
     <!-- =====================================================
-         HEADER
-         ===================================================== -->
+         SIDEBAR
+    ====================================================== -->
 
-    <header class="admin-header">
-
-        <div class="admin-header-inner">
+    <aside class="sidebar">
 
 
-            <a
-                href="./index.html"
-                class="brand"
-                aria-label="Global TrustFund Admin"
+        <a
+            href="./index.html"
+            class="brand"
+        >
+
+            <img
+                src="../assets/gtf-logo.svg"
+                alt="Global TrustFund logo"
             >
 
-                <img
-                    src="../assets/gtf-logo.svg"
-                    class="brand-logo"
-                    alt="Global TrustFund logo"
-                >
+            <span class="brand-text">
 
+                <strong>
+                    Global TrustFund
+                </strong>
 
-                <span class="brand-text">
-
-                    <strong>
-                        Global TrustFund
-                    </strong>
-
-                    <small>
-                        Administration
-                    </small>
-
+                <span>
+                    Administration Portal
                 </span>
+
+            </span>
+
+        </a>
+
+
+        <div class="nav-title">
+            Management
+        </div>
+
+
+        <nav class="nav">
+
+
+            <a href="./index.html">
+
+                <span class="nav-icon">
+                    ⌂
+                </span>
+
+                Dashboard
 
             </a>
 
 
-            <div class="admin-header-right">
+            <a href="./customers.html">
 
-                <div class="admin-label">
-
-                    <strong>
-                        Administrator
-                    </strong>
-
-                    <span>
-                        System Settings
-                    </span>
-
-                </div>
-
-
-                <div class="admin-avatar">
-                    AD
-                </div>
-
-
-                <button
-                    type="button"
-                    class="logout-button"
-                    id="logoutButton"
-                >
-                    Sign Out
-                </button>
-
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================================
-         BODY
-         ===================================================== -->
-
-    <div class="admin-body">
-
-
-        <!-- =================================================
-             SIDEBAR
-             ================================================= -->
-
-        <aside class="admin-sidebar">
-
-            <div class="sidebar-title">
-                Administration
-            </div>
-
-
-            <nav
-                class="sidebar-nav"
-                aria-label="Admin navigation"
-            >
-
-                <a href="./index.html">
-
-                    <span class="nav-icon">
-                        ⌂
-                    </span>
-
-                    Dashboard
-
-                </a>
-
-
-                <a href="./customers.html">
-
-                    <span class="nav-icon">
-                        ◉
-                    </span>
-
-                    Customers
-
-                </a>
-
-
-                <a href="./accounts.html">
-
-                    <span class="nav-icon">
-                        ▣
-                    </span>
-
-                    Accounts
-
-                </a>
-
-
-                <a href="./transactions.html">
-
-                    <span class="nav-icon">
-                        ⇄
-                    </span>
-
-                    Transactions
-
-                </a>
-
-
-                <a href="./reports.html">
-
-                    <span class="nav-icon">
-                        ▤
-                    </span>
-
-                    Reports
-
-                </a>
-
-
-                <a href="./compliance.html">
-
-                    <span class="nav-icon">
-                        ✓
-                    </span>
-
-                    Compliance
-
-                </a>
-
-
-                <a href="./audit.html">
-
-                    <span class="nav-icon">
-                        ◌
-                    </span>
-
-                    Audit
-
-                </a>
-
-
-                <a
-                    href="./settings.html"
-                    class="active"
-                    aria-current="page"
-                >
-
-                    <span class="nav-icon">
-                        ⚙
-                    </span>
-
-                    Settings
-
-                </a>
-
-            </nav>
-
-        </aside>
-
-
-        <!-- =================================================
-             MAIN
-             ================================================= -->
-
-        <main class="admin-main">
-
-
-            <!-- PAGE HEADING -->
-
-            <section class="page-heading">
-
-                <div>
-
-                    <h1>
-                        System Settings
-                    </h1>
-
-                    <p>
-                        Manage administrator preferences,
-                        security controls, notifications, and
-                        banking system configuration.
-                    </p>
-
-                </div>
-
-
-                <div class="heading-actions">
-
-                    <button
-                        type="button"
-                        class="button"
-                        id="resetButton"
-                    >
-                        Reset
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="button button-primary"
-                        id="saveTopButton"
-                    >
-                        Save Changes
-                    </button>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 SETTINGS
-                 ================================================= -->
-
-            <div class="settings-grid">
-
-
-                <!-- =================================================
-                     ADMIN PROFILE
-                     ================================================= -->
-
-                <section class="settings-card">
-
-                    <div class="settings-card-header">
-
-                        <h2>
-                            Administrator Profile
-                        </h2>
-
-                        <p>
-                            Manage the administrator profile
-                            associated with this portal.
-                        </p>
-
-                    </div>
-
-
-                    <div class="settings-card-body">
-
-                        <div class="form-grid">
-
-
-                            <div class="form-group">
-
-                                <label for="adminFirstName">
-                                    First Name
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="adminFirstName"
-                                    value="System"
-                                >
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="adminLastName">
-                                    Last Name
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="adminLastName"
-                                    value="Administrator"
-                                >
-
-                            </div>
-
-
-                            <div class="form-group full">
-
-                                <label for="adminEmail">
-                                    Email Address
-                                </label>
-
-                                <input
-                                    type="email"
-                                    id="adminEmail"
-                                    value="admin@globaltrustfund.com"
-                                >
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="adminRole">
-                                    Role
-                                </label>
-
-                                <select
-                                    id="adminRole"
-                                    disabled
-                                >
-
-                                    <option>
-                                        Administrator
-                                    </option>
-
-                                    <option>
-                                        Super Administrator
-                                    </option>
-
-                                    <option>
-                                        Compliance Officer
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="timezone">
-                                    Time Zone
-                                </label>
-
-                                <select id="timezone">
-
-                                    <option value="Africa/Lagos">
-                                        Africa/Lagos
-                                    </option>
-
-                                    <option value="America/New_York">
-                                        America/New_York
-                                    </option>
-
-                                    <option value="UTC">
-                                        UTC
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     SECURITY
-                     ================================================= -->
-
-                <section class="settings-card">
-
-                    <div class="settings-card-header">
-
-                        <h2>
-                            Security
-                        </h2>
-
-                        <p>
-                            Configure administrator security
-                            controls and session protection.
-                        </p>
-
-                    </div>
-
-
-                    <div class="settings-card-body">
-
-
-                        <div class="security-status">
-
-                            <span class="status-dot"></span>
-
-                            Security configuration is active.
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Two-Factor Authentication
-                                </span>
-
-                                <span class="setting-description">
-                                    Require an additional verification
-                                    factor for administrator access.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="twoFactor"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Login Notifications
-                                </span>
-
-                                <span class="setting-description">
-                                    Notify administrators when a new
-                                    login is detected.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="loginNotifications"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Session Timeout
-                                </span>
-
-                                <span class="setting-description">
-                                    Automatically expire inactive
-                                    administrator sessions.
-                                </span>
-
-                            </div>
-
-
-                            <select
-                                id="sessionTimeout"
-                                style="
-                                    min-height:34px;
-                                    border:1px solid var(--gtf-border);
-                                    border-radius:6px;
-                                    padding:0 8px;
-                                    color:var(--gtf-text);
-                                    font-size:7px;
-                                    background:#fff;
-                                "
-                            >
-
-                                <option value="15">
-                                    15 minutes
-                                </option>
-
-                                <option
-                                    value="30"
-                                    selected
-                                >
-                                    30 minutes
-                                </option>
-
-                                <option value="60">
-                                    60 minutes
-                                </option>
-
-                                <option value="120">
-                                    2 hours
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Login Attempt Protection
-                                </span>
-
-                                <span class="setting-description">
-                                    Protect administrator accounts
-                                    against repeated failed logins.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="loginProtection"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     NOTIFICATIONS
-                     ================================================= -->
-
-                <section class="settings-card">
-
-                    <div class="settings-card-header">
-
-                        <h2>
-                            Notifications
-                        </h2>
-
-                        <p>
-                            Choose which operational events should
-                            generate administrator notifications.
-                        </p>
-
-                    </div>
-
-
-                    <div class="settings-card-body">
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    New Customer Registration
-                                </span>
-
-                                <span class="setting-description">
-                                    Notify administrators when a new
-                                    customer application is submitted.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="newCustomerNotification"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Account Approval Requests
-                                </span>
-
-                                <span class="setting-description">
-                                    Receive alerts when accounts require
-                                    administrative review.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="accountApprovalNotification"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Compliance Alerts
-                                </span>
-
-                                <span class="setting-description">
-                                    Notify authorized personnel about
-                                    compliance events requiring review.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="complianceNotification"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Transaction Exceptions
-                                </span>
-
-                                <span class="setting-description">
-                                    Alert administrators about failed
-                                    or unusual transaction states.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="transactionNotification"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     SYSTEM PREFERENCES
-                     ================================================= -->
-
-                <section class="settings-card">
-
-                    <div class="settings-card-header">
-
-                        <h2>
-                            System Preferences
-                        </h2>
-
-                        <p>
-                            Configure general preferences for the
-                            administrative interface.
-                        </p>
-
-                    </div>
-
-
-                    <div class="settings-card-body">
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Maintenance Mode
-                                </span>
-
-                                <span class="setting-description">
-                                    Place the banking application into
-                                    maintenance mode.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="maintenanceMode"
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Audit Logging
-                                </span>
-
-                                <span class="setting-description">
-                                    Record administrator actions for
-                                    security and audit review.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="auditLogging"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Automatic Report Generation
-                                </span>
-
-                                <span class="setting-description">
-                                    Enable scheduled operational reports.
-                                </span>
-
-                            </div>
-
-
-                            <label class="toggle">
-
-                                <input
-                                    type="checkbox"
-                                    id="automaticReports"
-                                    checked
-                                >
-
-                                <span class="toggle-slider"></span>
-
-                            </label>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Default Report Format
-                                </span>
-
-                                <span class="setting-description">
-                                    Choose the default format for
-                                    exported reports.
-                                </span>
-
-                            </div>
-
-
-                            <select
-                                id="reportFormat"
-                                style="
-                                    min-height:34px;
-                                    border:1px solid var(--gtf-border);
-                                    border-radius:6px;
-                                    padding:0 8px;
-                                    color:var(--gtf-text);
-                                    font-size:7px;
-                                    background:#fff;
-                                "
-                            >
-
-                                <option value="csv">
-                                    CSV
-                                </option>
-
-                                <option value="json">
-                                    JSON
-                                </option>
-
-                                <option value="pdf">
-                                    PDF
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     PASSWORD
-                     ================================================= -->
-
-                <section class="settings-card">
-
-                    <div class="settings-card-header">
-
-                        <h2>
-                            Change Password
-                        </h2>
-
-                        <p>
-                            Update the administrator account password.
-                        </p>
-
-                    </div>
-
-
-                    <div class="settings-card-body">
-
-                        <div class="form-grid">
-
-
-                            <div class="form-group full">
-
-                                <label for="currentPassword">
-                                    Current Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    id="currentPassword"
-                                    autocomplete="current-password"
-                                    placeholder="Enter current password"
-                                >
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="newPassword">
-                                    New Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    id="newPassword"
-                                    autocomplete="new-password"
-                                    placeholder="Enter new password"
-                                >
-
-                            </div>
-
-
-                            <div class="form-group">
-
-                                <label for="confirmPassword">
-                                    Confirm Password
-                                </label>
-
-                                <input
-                                    type="password"
-                                    id="confirmPassword"
-                                    autocomplete="new-password"
-                                    placeholder="Confirm new password"
-                                >
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-                <!-- =================================================
-                     DANGER ZONE
-                     ================================================= -->
-
-                <section
-                    class="settings-card danger-card"
-                >
-
-                    <div class="settings-card-header">
-
-                        <h2>
-                            Administrative Actions
-                        </h2>
-
-                        <p>
-                            Sensitive administrative operations.
-                            Use these controls carefully.
-                        </p>
-
-                    </div>
-
-
-                    <div class="settings-card-body">
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Clear Local Preferences
-                                </span>
-
-                                <span class="setting-description">
-                                    Remove saved settings from this
-                                    browser session.
-                                </span>
-
-                            </div>
-
-
-                            <button
-                                type="button"
-                                class="danger-button"
-                                id="clearPreferences"
-                            >
-                                Clear
-                            </button>
-
-                        </div>
-
-
-                        <div class="setting-row">
-
-                            <div class="setting-info">
-
-                                <span class="setting-title">
-                                    Sign Out Administrator
-                                </span>
-
-                                <span class="setting-description">
-                                    End the current administrative
-                                    session.
-                                </span>
-
-                            </div>
-
-
-                            <button
-                                type="button"
-                                class="danger-button"
-                                id="dangerLogout"
-                            >
-                                Sign Out
-                            </button>
-
-                        </div>
-
-
-                    </div>
-
-                </section>
-
-
-            </div>
-
-
-            <!-- =================================================
-                 SAVE BAR
-                 ================================================= -->
-
-            <div class="save-bar">
-
-                <span
-                    class="save-message"
-                    id="saveMessage"
-                >
-                    Changes are stored locally in this browser
-                    until backend settings are connected.
+                <span class="nav-icon">
+                    ♙
                 </span>
 
+                Customers
 
-                <button
-                    type="button"
-                    class="button button-primary"
-                    id="saveButton"
-                >
-                    Save Settings
-                </button>
+            </a>
+
+
+            <a href="./accounts.html">
+
+                <span class="nav-icon">
+                    ▣
+                </span>
+
+                Accounts
+
+            </a>
+
+
+            <a href="./transactions.html">
+
+                <span class="nav-icon">
+                    ⇄
+                </span>
+
+                Transactions
+
+            </a>
+
+
+            <a href="./compliance.html">
+
+                <span class="nav-icon">
+                    ✓
+                </span>
+
+                Compliance
+
+            </a>
+
+
+            <a href="./audit.html">
+
+                <span class="nav-icon">
+                    ◌
+                </span>
+
+                Audit Logs
+
+            </a>
+
+
+            <a href="./report.html">
+
+                <span class="nav-icon">
+                    ▤
+                </span>
+
+                Reports
+
+            </a>
+
+
+            <a href="./roles.html">
+
+                <span class="nav-icon">
+                    ♟
+                </span>
+
+                Roles
+
+            </a>
+
+
+            <a
+                href="./settings.html"
+                class="active"
+            >
+
+                <span class="nav-icon">
+                    ⚙
+                </span>
+
+                Settings
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="admin-user">
+
+            <strong>
+                Administrator
+            </strong>
+
+            <span>
+                System Configuration
+            </span>
+
+
+            <button
+                type="button"
+                class="logout"
+                id="logoutButton"
+            >
+                Sign Out
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Administration Settings
+                </h1>
+
+                <p>
+                    Manage Global TrustFund platform configuration and security.
+                </p>
 
             </div>
 
 
-        </main>
-
-    </div>
-
-
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
-
-    <footer class="admin-footer">
-
-        <div class="admin-footer-inner">
-
-            <span>
-                © 2026 Global TrustFund. Administrative Portal.
+            <span class="session-status">
+                ● Admin Session Active
             </span>
 
+        </header>
 
-            <span>
-                System Settings
-            </span>
 
-        </div>
+        <section class="content">
 
-    </footer>
 
+            <div class="settings-layout">
+
+
+                <!-- =================================================
+                     SETTINGS NAVIGATION
+                ================================================== -->
+
+                <aside class="settings-nav">
+
+
+                    <div class="settings-nav-title">
+                        Configuration
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab active"
+                        data-section="general"
+                    >
+
+                        <span class="settings-tab-icon">
+                            ⚙
+                        </span>
+
+                        General
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab"
+                        data-section="security"
+                    >
+
+                        <span class="settings-tab-icon">
+                            ✓
+                        </span>
+
+                        Security
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab"
+                        data-section="notifications"
+                    >
+
+                        <span class="settings-tab-icon">
+                            ◉
+                        </span>
+
+                        Notifications
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab"
+                        data-section="banking"
+                    >
+
+                        <span class="settings-tab-icon">
+                            $
+                        </span>
+
+                        Banking
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab"
+                        data-section="currencies"
+                    >
+
+                        <span class="settings-tab-icon">
+                            ◌
+                        </span>
+
+                        Currencies
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab"
+                        data-section="application"
+                    >
+
+                        <span class="settings-tab-icon">
+                            ▣
+                        </span>
+
+                        Application
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="settings-tab"
+                        data-section="system"
+                    >
+
+                        <span class="settings-tab-icon">
+                            ●
+                        </span>
+
+                        System
+
+                    </button>
+
+
+                </aside>
+
+
+                <!-- =================================================
+                     SETTINGS CONTENT
+                ================================================== -->
+
+                <div class="settings-content">
+
+
+                    <!-- =============================================
+                         GENERAL
+                    ============================================== -->
+
+                    <section
+                        class="settings-section active"
+                        id="section-general"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    General Settings
+                                </h2>
+
+                                <p>
+                                    Configure the basic identity and administrative information for the Global TrustFund platform.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-field">
+
+                                        <label for="institutionName">
+                                            Institution Name
+                                        </label>
+
+                                        <input
+                                            id="institutionName"
+                                            type="text"
+                                            value="Global TrustFund"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="institutionCode">
+                                            Institution Code
+                                        </label>
+
+                                        <input
+                                            id="institutionCode"
+                                            type="text"
+                                            value="GTF"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="supportEmail">
+                                            Support Email
+                                        </label>
+
+                                        <input
+                                            id="supportEmail"
+                                            type="email"
+                                            value="support@globaltrustfund.com"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="timezone">
+                                            System Timezone
+                                        </label>
+
+                                        <select id="timezone">
+
+                                            <option>
+                                                Africa/Lagos
+                                            </option>
+
+                                            <option>
+                                                UTC
+                                            </option>
+
+                                            <option>
+                                                America/New_York
+                                            </option>
+
+                                            <option>
+                                                Europe/London
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field full">
+
+                                        <label for="institutionAddress">
+                                            Institution Address
+                                        </label>
+
+                                        <textarea id="institutionAddress">Global TrustFund Administration Office</textarea>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        data-reset="general"
+                                    >
+                                        Reset
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="button save-settings"
+                                        data-save="general"
+                                    >
+                                        Save Changes
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Platform Preferences
+                                </h2>
+
+                                <p>
+                                    Control general behavior across the administration platform.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Maintenance Mode
+                                        </strong>
+
+                                        <span>
+                                            Temporarily restrict customer-facing services while administration work is performed.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="maintenanceMode"
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            New Customer Registration
+                                        </strong>
+
+                                        <span>
+                                            Allow new customers to submit registration applications.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="registrationEnabled"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Transaction Processing
+                                        </strong>
+
+                                        <span>
+                                            Allow normal transaction processing across enabled banking services.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="transactionsEnabled"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                    <!-- =============================================
+                         SECURITY
+                    ============================================== -->
+
+                    <section
+                        class="settings-section"
+                        id="section-security"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Security Configuration
+                                </h2>
+
+                                <p>
+                                    Configure administrative authentication and account protection policies.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="security-grid">
+
+
+                                    <div class="security-item">
+
+                                        <h3>
+                                            Two-Factor Authentication
+                                        </h3>
+
+                                        <p>
+                                            Require additional verification when administrators sign in.
+                                        </p>
+
+                                        <span class="security-status">
+                                            Recommended
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="security-item">
+
+                                        <h3>
+                                            Session Protection
+                                        </h3>
+
+                                        <p>
+                                            Automatically expire inactive administrator sessions.
+                                        </p>
+
+                                        <span class="security-status">
+                                            Enabled
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div style="height:15px;"></div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Require Two-Factor Authentication
+                                        </strong>
+
+                                        <span>
+                                            Require 2FA for administrator accounts.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="require2FA"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Login Notifications
+                                        </strong>
+
+                                        <span>
+                                            Notify security administrators when an administrator signs in.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            id="loginNotifications"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Automatic Session Timeout
+                                        </strong>
+
+                                        <span>
+                                            End inactive administrative sessions automatically.
+                                        </span>
+
+                                    </div>
+
+
+                                    <select
+                                        id="sessionTimeout"
+                                        style="
+                                            width:120px;
+                                            min-height:32px;
+                                            padding:0 8px;
+                                            border:1px solid #dce4eb;
+                                            border-radius:6px;
+                                            color:#183247;
+                                            font-size:8px;
+                                        "
+                                    >
+
+                                        <option value="15">
+                                            15 minutes
+                                        </option>
+
+                                        <option
+                                            value="30"
+                                            selected
+                                        >
+                                            30 minutes
+                                        </option>
+
+                                        <option value="60">
+                                            60 minutes
+                                        </option>
+
+                                        <option value="120">
+                                            2 hours
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        data-save="security"
+                                    >
+                                        Save Security Settings
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Password Policy
+                                </h2>
+
+                                <p>
+                                    Define minimum requirements for administrator passwords.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-field">
+
+                                        <label for="passwordLength">
+                                            Minimum Password Length
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            id="passwordLength"
+                                            value="10"
+                                            min="8"
+                                            max="64"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="passwordExpiry">
+                                            Password Expiry
+                                        </label>
+
+                                        <select id="passwordExpiry">
+
+                                            <option>
+                                                Never
+                                            </option>
+
+                                            <option selected>
+                                                90 days
+                                            </option>
+
+                                            <option>
+                                                180 days
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                    <!-- =============================================
+                         NOTIFICATIONS
+                    ============================================== -->
+
+                    <section
+                        class="settings-section"
+                        id="section-notifications"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Notification Preferences
+                                </h2>
+
+                                <p>
+                                    Choose which administrative events generate alerts.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Transaction Alerts
+                                        </strong>
+
+                                        <span>
+                                            Notify administrators about unusual or high-value transaction activity.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Compliance Alerts
+                                        </strong>
+
+                                        <span>
+                                            Notify compliance administrators about pending reviews and exceptions.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            System Alerts
+                                        </strong>
+
+                                        <span>
+                                            Notify administrators about system health and service events.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Report Generation Alerts
+                                        </strong>
+
+                                        <span>
+                                            Notify administrators when scheduled reports become available.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        data-save="notifications"
+                                    >
+                                        Save Notification Settings
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                    <!-- =============================================
+                         BANKING
+                    ============================================== -->
+
+                    <section
+                        class="settings-section"
+                        id="section-banking"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Banking Configuration
+                                </h2>
+
+                                <p>
+                                    Configure operational banking defaults and transaction limits.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="info-box">
+                                    Banking limits should be validated and enforced by the backend before they affect live transactions.
+                                </div>
+
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-field">
+
+                                        <label for="defaultCurrency">
+                                            Default Currency
+                                        </label>
+
+                                        <select id="defaultCurrency">
+
+                                            <option selected>
+                                                USD — US Dollar
+                                            </option>
+
+                                            <option>
+                                                NGN — Nigerian Naira
+                                            </option>
+
+                                            <option>
+                                                GBP — Pound Sterling
+                                            </option>
+
+                                            <option>
+                                                EUR — Euro
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="accountApproval">
+                                            Account Approval
+                                        </label>
+
+                                        <select id="accountApproval">
+
+                                            <option selected>
+                                                Administrator Approval
+                                            </option>
+
+                                            <option>
+                                                Automatic
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="dailyTransferLimit">
+                                            Daily Transfer Limit
+                                        </label>
+
+                                        <input
+                                            id="dailyTransferLimit"
+                                            type="number"
+                                            value="25000"
+                                            min="0"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="dailyPaymentLimit">
+                                            Daily Payment Limit
+                                        </label>
+
+                                        <input
+                                            id="dailyPaymentLimit"
+                                            type="number"
+                                            value="10000"
+                                            min="0"
+                                        >
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Require Beneficiary Approval
+                                        </strong>
+
+                                        <span>
+                                            Require approval before newly created beneficiaries can receive transfers.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Enable Scheduled Transfers
+                                        </strong>
+
+                                        <span>
+                                            Allow customers to schedule eligible transfers.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        data-save="banking"
+                                    >
+                                        Save Banking Settings
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                    <!-- =============================================
+                         CURRENCIES
+                    ============================================== -->
+
+                    <section
+                        class="settings-section"
+                        id="section-currencies"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Currency Management
+                                </h2>
+
+                                <p>
+                                    Manage currencies supported by the banking platform.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="table-wrap">
+
+                                    <table>
+
+                                        <thead>
+
+                                            <tr>
+
+                                                <th>
+                                                    Currency
+                                                </th>
+
+                                                <th>
+                                                    Name
+                                                </th>
+
+                                                <th>
+                                                    Symbol
+                                                </th>
+
+                                                <th>
+                                                    Status
+                                                </th>
+
+                                                <th>
+                                                    Action
+                                                </th>
+
+                                            </tr>
+
+                                        </thead>
+
+
+                                        <tbody id="currencyTable">
+
+
+                                            <tr>
+
+                                                <td>
+                                                    <span class="currency-code">
+                                                        USD
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    US Dollar
+                                                </td>
+
+                                                <td>
+                                                    $
+                                                </td>
+
+                                                <td>
+                                                    <span class="currency-status">
+                                                        Active
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <button
+                                                        type="button"
+                                                        class="currency-action"
+                                                        data-currency="USD"
+                                                    >
+                                                        Manage
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+
+                                                <td>
+                                                    <span class="currency-code">
+                                                        NGN
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    Nigerian Naira
+                                                </td>
+
+                                                <td>
+                                                    ₦
+                                                </td>
+
+                                                <td>
+                                                    <span class="currency-status">
+                                                        Active
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <button
+                                                        type="button"
+                                                        class="currency-action"
+                                                        data-currency="NGN"
+                                                    >
+                                                        Manage
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+
+                                                <td>
+                                                    <span class="currency-code">
+                                                        GBP
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    Pound Sterling
+                                                </td>
+
+                                                <td>
+                                                    £
+                                                </td>
+
+                                                <td>
+                                                    <span class="currency-status">
+                                                        Active
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <button
+                                                        type="button"
+                                                        class="currency-action"
+                                                        data-currency="GBP"
+                                                    >
+                                                        Manage
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+
+                                                <td>
+                                                    <span class="currency-code">
+                                                        EUR
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    Euro
+                                                </td>
+
+                                                <td>
+                                                    €
+                                                </td>
+
+                                                <td>
+                                                    <span class="currency-status">
+                                                        Active
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    <button
+                                                        type="button"
+                                                        class="currency-action"
+                                                        data-currency="EUR"
+                                                    >
+                                                        Manage
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        id="addCurrencyButton"
+                                    >
+                                        + Add Currency
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Exchange Rate Configuration
+                                </h2>
+
+                                <p>
+                                    Configure how currency exchange rates are maintained.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Automatic Exchange Rates
+                                        </strong>
+
+                                        <span>
+                                            Allow the backend exchange-rate service to update supported currencies.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-field">
+
+                                        <label for="rateProvider">
+                                            Rate Provider
+                                        </label>
+
+                                        <select id="rateProvider">
+
+                                            <option selected>
+                                                Backend Exchange Service
+                                            </option>
+
+                                            <option>
+                                                Manual Administration
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="rateRefresh">
+                                            Refresh Interval
+                                        </label>
+
+                                        <select id="rateRefresh">
+
+                                            <option>
+                                                Every 15 minutes
+                                            </option>
+
+                                            <option selected>
+                                                Every hour
+                                            </option>
+
+                                            <option>
+                                                Every 6 hours
+                                            </option>
+
+                                            <option>
+                                                Daily
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                    <!-- =============================================
+                         APPLICATION
+                    ============================================== -->
+
+                    <section
+                        class="settings-section"
+                        id="section-application"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Application Settings
+                                </h2>
+
+                                <p>
+                                    Configure customer-facing application behavior and interface defaults.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-field">
+
+                                        <label for="appName">
+                                            Application Name
+                                        </label>
+
+                                        <input
+                                            id="appName"
+                                            type="text"
+                                            value="Global TrustFund Banking"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="supportPhone">
+                                            Support Phone
+                                        </label>
+
+                                        <input
+                                            id="supportPhone"
+                                            type="tel"
+                                            value="+234 000 000 0000"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="defaultLanguage">
+                                            Default Language
+                                        </label>
+
+                                        <select id="defaultLanguage">
+
+                                            <option selected>
+                                                English
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field">
+
+                                        <label for="dateFormat">
+                                            Date Format
+                                        </label>
+
+                                        <select id="dateFormat">
+
+                                            <option selected>
+                                                DD/MM/YYYY
+                                            </option>
+
+                                            <option>
+                                                MM/DD/YYYY
+                                            </option>
+
+                                            <option>
+                                                YYYY-MM-DD
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-field full">
+
+                                        <label for="maintenanceMessage">
+                                            Maintenance Message
+                                        </label>
+
+                                        <textarea id="maintenanceMessage">Global TrustFund services are temporarily unavailable while scheduled maintenance is being performed.</textarea>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Customer Portal
+                                        </strong>
+
+                                        <span>
+                                            Enable access to the customer banking portal.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Mobile Application Access
+                                        </strong>
+
+                                        <span>
+                                            Allow authenticated customers to access supported mobile application services.
+                                        </span>
+
+                                    </div>
+
+
+                                    <label class="toggle">
+
+                                        <input
+                                            type="checkbox"
+                                            checked
+                                        >
+
+                                        <span class="slider"></span>
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        data-save="application"
+                                    >
+                                        Save Application Settings
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                    <!-- =============================================
+                         SYSTEM
+                    ============================================== -->
+
+                    <section
+                        class="settings-section"
+                        id="section-system"
+                    >
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    System Status
+                                </h2>
+
+                                <p>
+                                    Review the current status of core administration services.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="system-grid">
+
+
+                                    <div class="system-card">
+
+                                        <span>
+                                            API Service
+                                        </span>
+
+                                        <strong>
+                                            Online
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="system-card">
+
+                                        <span>
+                                            Database
+                                        </span>
+
+                                        <strong>
+                                            Connected
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="system-card">
+
+                                        <span>
+                                            Authentication
+                                        </span>
+
+                                        <strong>
+                                            Active
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="system-card">
+
+                                        <span>
+                                            Storage
+                                        </span>
+
+                                        <strong>
+                                            Available
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="system-card">
+
+                                        <span>
+                                            Environment
+                                        </span>
+
+                                        <strong>
+                                            Production
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="system-card">
+
+                                        <span>
+                                            Platform Version
+                                        </span>
+
+                                        <strong>
+                                            GTF 1.0
+                                        </strong>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+
+                            <div class="settings-header">
+
+                                <h2>
+                                    Maintenance & Data
+                                </h2>
+
+                                <p>
+                                    Administrative maintenance operations.
+                                </p>
+
+                            </div>
+
+
+                            <div class="settings-body">
+
+
+                                <div class="warning-box">
+
+                                    Maintenance operations should be protected by backend authorization and recorded in the audit log.
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Clear Application Cache
+                                        </strong>
+
+                                        <span>
+                                            Request the backend to invalidate cached configuration data.
+                                        </span>
+
+                                    </div>
+
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="clearCacheButton"
+                                    >
+                                        Clear Cache
+                                    </button>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Refresh Configuration
+                                        </strong>
+
+                                        <span>
+                                            Reload administrative configuration from the backend.
+                                        </span>
+
+                                    </div>
+
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="refreshConfigButton"
+                                    >
+                                        Refresh
+                                    </button>
+
+                                </div>
+
+
+                                <div class="setting-row">
+
+                                    <div class="setting-info">
+
+                                        <strong>
+                                            Export Configuration
+                                        </strong>
+
+                                        <span>
+                                            Export the visible settings configuration as a JSON file.
+                                        </span>
+
+                                    </div>
+
+
+                                    <button
+                                        type="button"
+                                        class="button secondary"
+                                        id="exportSettingsButton"
+                                    >
+                                        Export JSON
+                                    </button>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </section>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 
-<!-- =====================================================
-     TOAST
-     ===================================================== -->
+<!-- =========================================================
+     CURRENCY MODAL
+========================================================== -->
 
 <div
-    class="toast"
-    id="toast"
-    role="status"
-    aria-live="polite"
+    class="modal"
+    id="currencyModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="currencyModalTitle"
 >
+
+
+    <div class="modal-card">
+
+
+        <div class="modal-header">
+
+            <h2 id="currencyModalTitle">
+                Add Currency
+            </h2>
+
+
+            <button
+                type="button"
+                class="close"
+                id="closeCurrencyModal"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="currencyForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="form-field">
+
+                    <label for="currencyCode">
+                        Currency Code
+                    </label>
+
+                    <input
+                        id="currencyCode"
+                        maxlength="3"
+                        placeholder="NGN"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="currencyName">
+                        Currency Name
+                    </label>
+
+                    <input
+                        id="currencyName"
+                        placeholder="Nigerian Naira"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="currencySymbol">
+                        Symbol
+                    </label>
+
+                    <input
+                        id="currencySymbol"
+                        maxlength="5"
+                        placeholder="₦"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    type="button"
+                    class="button secondary"
+                    id="cancelCurrencyButton"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="button"
+                >
+                    Add Currency
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
 </div>
 
 
 <script>
 
-    /* =====================================================
-       SETTINGS STORAGE KEY
-       ===================================================== */
-
-    const SETTINGS_KEY =
-        "gtf_admin_settings";
-
-
-    /* =====================================================
-       ELEMENTS
-       ===================================================== */
-
-    const toast =
-        document.getElementById("toast");
-
-
-    const saveMessage =
-        document.getElementById("saveMessage");
-
-
-    /* =====================================================
-       TOAST
-       ===================================================== */
-
-    let toastTimer;
+    /*
+     * =========================================================
+     * GLOBAL TRUSTFUND ADMIN SETTINGS
+     * =========================================================
+     *
+     * Suggested backend integration:
+     *
+     * GET    /api/settings
+     * PATCH  /api/settings
+     *
+     * GET    /api/settings/currencies
+     * POST   /api/settings/currencies
+     * PATCH  /api/settings/currencies/:id
+     *
+     * POST   /api/settings/cache/clear
+     *
+     * All sensitive settings should ultimately be validated
+     * and authorized by the backend.
+     * =========================================================
+     */
 
 
-    function showToast(message) {
-
-        clearTimeout(toastTimer);
+    const API_BASE = "/api";
 
 
-        toast.textContent =
-            message;
+    /* =========================================================
+       SETTINGS NAVIGATION
+    ========================================================= */
 
-
-        toast.classList.add(
-            "show"
+    const settingTabs =
+        document.querySelectorAll(
+            ".settings-tab"
         );
 
 
-        toastTimer =
-            setTimeout(
-                () => {
+    const settingSections =
+        document.querySelectorAll(
+            ".settings-section"
+        );
 
-                    toast.classList.remove(
-                        "show"
+
+    settingTabs.forEach(tab => {
+
+        tab.addEventListener(
+            "click",
+            function() {
+
+                const section =
+                    this.dataset.section;
+
+
+                settingTabs.forEach(item => {
+
+                    item.classList.remove(
+                        "active"
                     );
 
-                },
-                2500
-            );
-
-    }
+                });
 
 
-    /* =====================================================
-       SETTING FIELDS
-       ===================================================== */
+                settingSections.forEach(item => {
 
-    const settingIds = [
-
-        "adminFirstName",
-        "adminLastName",
-        "adminEmail",
-        "timezone",
-
-        "twoFactor",
-        "loginNotifications",
-        "sessionTimeout",
-        "loginProtection",
-
-        "newCustomerNotification",
-        "accountApprovalNotification",
-        "complianceNotification",
-        "transactionNotification",
-
-        "maintenanceMode",
-        "auditLogging",
-        "automaticReports",
-        "reportFormat"
-
-    ];
-
-
-    /* =====================================================
-       GET SETTINGS
-       ===================================================== */
-
-    function collectSettings() {
-
-        const settings = {};
-
-
-        settingIds.forEach(
-            id => {
-
-                const element =
-                    document.getElementById(
-                        id
+                    item.classList.remove(
+                        "active"
                     );
 
-
-                if (!element) {
-                    return;
-                }
+                });
 
 
-                if (
-                    element.type ===
-                    "checkbox"
-                ) {
-
-                    settings[id] =
-                        element.checked;
-
-                } else {
-
-                    settings[id] =
-                        element.value;
-
-                }
-
-            }
-        );
-
-
-        return settings;
-
-    }
-
-
-    /* =====================================================
-       APPLY SETTINGS
-       ===================================================== */
-
-    function applySettings(settings) {
-
-        if (!settings) {
-            return;
-        }
-
-
-        settingIds.forEach(
-            id => {
-
-                if (
-                    typeof settings[id] ===
-                    "undefined"
-                ) {
-                    return;
-                }
-
-
-                const element =
-                    document.getElementById(
-                        id
-                    );
-
-
-                if (!element) {
-                    return;
-                }
-
-
-                if (
-                    element.type ===
-                    "checkbox"
-                ) {
-
-                    element.checked =
-                        Boolean(
-                            settings[id]
-                        );
-
-                } else {
-
-                    element.value =
-                        settings[id];
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       SAVE SETTINGS
-       ===================================================== */
-
-    function saveSettings() {
-
-        const settings =
-            collectSettings();
-
-
-        localStorage.setItem(
-            SETTINGS_KEY,
-            JSON.stringify(settings)
-        );
-
-
-        saveMessage.textContent =
-            "Settings saved successfully in this browser.";
-
-
-        showToast(
-            "Global TrustFund settings saved."
-        );
-
-    }
-
-
-    /* =====================================================
-       LOAD SETTINGS
-       ===================================================== */
-
-    function loadSettings() {
-
-        try {
-
-            const saved =
-                localStorage.getItem(
-                    SETTINGS_KEY
+                this.classList.add(
+                    "active"
                 );
 
 
-            if (!saved) {
-                return;
+                const target =
+                    document.getElementById(
+                        `section-${section}`
+                    );
+
+
+                if (target) {
+
+                    target.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                localStorage.setItem(
+                    "gtf-admin-settings-section",
+                    section
+                );
+
             }
+        );
+
+    });
 
 
-            const settings =
-                JSON.parse(saved);
+    /* =========================================================
+       RESTORE LAST SETTINGS SECTION
+    ========================================================= */
 
-
-            applySettings(
-                settings
-            );
-
-
-            saveMessage.textContent =
-                "Saved settings loaded from this browser.";
-
-        }
-
-        catch (error) {
-
-            console.warn(
-                "Unable to load settings.",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       RESET SETTINGS
-       ===================================================== */
-
-    function resetSettings() {
-
-        const confirmed =
-            window.confirm(
-                "Reset the administrator settings to their default values?"
-            );
-
-
-        if (!confirmed) {
-            return;
-        }
-
-
-        localStorage.removeItem(
-            SETTINGS_KEY
+    const savedSection =
+        localStorage.getItem(
+            "gtf-admin-settings-section"
         );
 
 
-        window.location.reload();
+    if (savedSection) {
+
+        const savedTab =
+            document.querySelector(
+                `.settings-tab[data-section="${savedSection}"]`
+            );
+
+
+        if (savedTab) {
+
+            savedTab.click();
+
+        }
 
     }
 
 
-    /* =====================================================
-       CLEAR PREFERENCES
-       ===================================================== */
+    /* =========================================================
+       SAVE SETTINGS
+    ========================================================= */
+
+    document
+        .querySelectorAll(
+            ".save-settings"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                async function() {
+
+                    const section =
+                        this.dataset.save;
+
+
+                    /*
+                     * Backend integration point:
+                     *
+                     * PATCH /api/settings
+                     *
+                     * {
+                     *   section,
+                     *   values
+                     * }
+                     */
+
+
+                    localStorage.setItem(
+                        `gtf-settings-${section}`,
+                        "saved"
+                    );
+
+
+                    notify(
+                        `${capitalize(section)} settings saved successfully.`
+                    );
+
+                }
+            );
+
+        });
+
+
+    function capitalize(value) {
+
+        return String(value)
+            .charAt(0)
+            .toUpperCase() +
+            String(value).slice(1);
+
+    }
+
+
+    /* =========================================================
+       RESET GENERAL SETTINGS
+    ========================================================= */
+
+    document
+        .querySelectorAll(
+            "[data-reset]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        this.dataset.reset ===
+                        "general"
+                    ) {
+
+                        document.getElementById(
+                            "institutionName"
+                        ).value =
+                            "Global TrustFund";
+
+
+                        document.getElementById(
+                            "institutionCode"
+                        ).value =
+                            "GTF";
+
+
+                        document.getElementById(
+                            "supportEmail"
+                        ).value =
+                            "support@globaltrustfund.com";
+
+
+                        document.getElementById(
+                            "timezone"
+                        ).value =
+                            "Africa/Lagos";
+
+
+                        document.getElementById(
+                            "institutionAddress"
+                        ).value =
+                            "Global TrustFund Administration Office";
+
+
+                        notify(
+                            "General settings restored."
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /* =========================================================
+       CURRENCY MODAL
+    ========================================================= */
+
+    const currencyModal =
+        document.getElementById(
+            "currencyModal"
+        );
+
+
+    const currencyForm =
+        document.getElementById(
+            "currencyForm"
+        );
+
 
     document
         .getElementById(
-            "clearPreferences"
+            "addCurrencyButton"
         )
         .addEventListener(
             "click",
             function() {
 
+                currencyModal.classList.add(
+                    "open"
+                );
+
+
+                document
+                    .getElementById(
+                        "currencyCode"
+                    )
+                    .focus();
+
+            }
+        );
+
+
+    function closeCurrencyModal() {
+
+        currencyModal.classList.remove(
+            "open"
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "closeCurrencyModal"
+        )
+        .addEventListener(
+            "click",
+            closeCurrencyModal
+        );
+
+
+    document
+        .getElementById(
+            "cancelCurrencyButton"
+        )
+        .addEventListener(
+            "click",
+            closeCurrencyModal
+        );
+
+
+    currencyModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                currencyModal
+            ) {
+
+                closeCurrencyModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       ADD CURRENCY
+    ========================================================= */
+
+    currencyForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const code =
+                document
+                    .getElementById(
+                        "currencyCode"
+                    )
+                    .value
+                    .trim()
+                    .toUpperCase();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "currencyName"
+                    )
+                    .value
+                    .trim();
+
+
+            const symbol =
+                document
+                    .getElementById(
+                        "currencySymbol"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                code.length !== 3
+            ) {
+
+                notify(
+                    "Currency code must contain exactly 3 letters."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Backend integration point:
+             *
+             * POST /api/settings/currencies
+             *
+             * {
+             *   code,
+             *   name,
+             *   symbol
+             * }
+             */
+
+
+            const table =
+                document.getElementById(
+                    "currencyTable"
+                );
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <span class="currency-code">
+                        ${escapeHtml(code)}
+                    </span>
+
+                </td>
+
+
+                <td>
+                    ${escapeHtml(name)}
+                </td>
+
+
+                <td>
+                    ${escapeHtml(symbol)}
+                </td>
+
+
+                <td>
+
+                    <span class="currency-status">
+                        Active
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="currency-action"
+                        data-currency="${escapeHtml(code)}"
+                    >
+                        Manage
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(
+                row
+            );
+
+
+            currencyForm.reset();
+
+            closeCurrencyModal();
+
+
+            notify(
+                `${code} currency added to the frontend.`
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       CURRENCY ACTIONS
+    ========================================================= */
+
+    document
+        .getElementById(
+            "currencyTable"
+        )
+        .addEventListener(
+            "click",
+            function(event) {
+
+                const button =
+                    event.target.closest(
+                        "[data-currency]"
+                    );
+
+
+                if (!button) {
+                    return;
+                }
+
+
+                const currency =
+                    button.dataset.currency;
+
+
+                /*
+                 * Backend integration point:
+                 *
+                 * GET/PATCH
+                 * /api/settings/currencies/:id
+                 */
+
+
+                notify(
+                    `Currency management for ${currency} will be connected to the backend.`
+                );
+
+            }
+        );
+
+
+    /* =========================================================
+       SYSTEM ACTIONS
+    ========================================================= */
+
+    document
+        .getElementById(
+            "clearCacheButton"
+        )
+        .addEventListener(
+            "click",
+            async function() {
+
                 const confirmed =
                     window.confirm(
-                        "Clear saved Global TrustFund administrator preferences from this browser?"
+                        "Clear the application configuration cache?"
                     );
 
 
@@ -2766,77 +4276,254 @@
                 }
 
 
-                localStorage.removeItem(
-                    SETTINGS_KEY
+                /*
+                 * Backend:
+                 *
+                 * POST /api/settings/cache/clear
+                 */
+
+
+                notify(
+                    "Cache clear request submitted."
                 );
-
-
-                showToast(
-                    "Local preferences cleared."
-                );
-
-
-                saveMessage.textContent =
-                    "Local preferences have been cleared.";
 
             }
         );
 
 
-    /* =====================================================
-       SAVE BUTTONS
-       ===================================================== */
-
     document
         .getElementById(
-            "saveButton"
+            "refreshConfigButton"
         )
         .addEventListener(
             "click",
-            saveSettings
+            async function() {
+
+                /*
+                 * Backend:
+                 *
+                 * GET /api/settings
+                 */
+
+
+                notify(
+                    "Configuration refresh requested."
+                );
+
+            }
         );
 
+
+    /* =========================================================
+       EXPORT SETTINGS
+    ========================================================= */
 
     document
         .getElementById(
-            "saveTopButton"
+            "exportSettingsButton"
         )
         .addEventListener(
             "click",
-            saveSettings
+            function() {
+
+                const settings = {
+
+                    institution: {
+
+                        name:
+                            document.getElementById(
+                                "institutionName"
+                            ).value,
+
+                        code:
+                            document.getElementById(
+                                "institutionCode"
+                            ).value,
+
+                        supportEmail:
+                            document.getElementById(
+                                "supportEmail"
+                            ).value,
+
+                        timezone:
+                            document.getElementById(
+                                "timezone"
+                            ).value
+
+                    },
+
+
+                    banking: {
+
+                        defaultCurrency:
+                            document.getElementById(
+                                "defaultCurrency"
+                            ).value,
+
+                        accountApproval:
+                            document.getElementById(
+                                "accountApproval"
+                            ).value,
+
+                        dailyTransferLimit:
+                            document.getElementById(
+                                "dailyTransferLimit"
+                            ).value,
+
+                        dailyPaymentLimit:
+                            document.getElementById(
+                                "dailyPaymentLimit"
+                            ).value
+
+                    },
+
+
+                    application: {
+
+                        name:
+                            document.getElementById(
+                                "appName"
+                            ).value,
+
+                        language:
+                            document.getElementById(
+                                "defaultLanguage"
+                            ).value,
+
+                        dateFormat:
+                            document.getElementById(
+                                "dateFormat"
+                            ).value
+
+                    }
+
+                };
+
+
+                const blob =
+                    new Blob(
+                        [
+                            JSON.stringify(
+                                settings,
+                                null,
+                                2
+                            )
+                        ],
+                        {
+                            type:
+                                "application/json"
+                        }
+                    );
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href = url;
+
+                link.download =
+                    "gtf-admin-settings.json";
+
+
+                document.body.appendChild(
+                    link
+                );
+
+
+                link.click();
+
+
+                link.remove();
+
+
+                URL.revokeObjectURL(
+                    url
+                );
+
+
+                notify(
+                    "Settings configuration exported."
+                );
+
+            }
         );
 
 
-    /* =====================================================
-       RESET BUTTON
-       ===================================================== */
+    /* =========================================================
+       ESCAPE HTML
+    ========================================================= */
 
-    document
-        .getElementById(
-            "resetButton"
-        )
-        .addEventListener(
-            "click",
-            resetSettings
-        );
+    function escapeHtml(value) {
 
-
-    /* =====================================================
-       LOGOUT
-       ===================================================== */
-
-    function logout() {
-
-        /*
-         * When the real authentication system is connected,
-         * this should call the backend/Supabase sign-out flow.
-         */
-
-        window.location.href =
-            "./login.html";
+        return String(value ?? "")
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
 
     }
 
+
+    /* =========================================================
+       NOTIFICATION
+    ========================================================= */
+
+    function notify(message) {
+
+        window.alert(message);
+
+    }
+
+
+    /* =========================================================
+       ESCAPE MODAL
+    ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeCurrencyModal();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
 
     document
         .getElementById(
@@ -2844,94 +4531,21 @@
         )
         .addEventListener(
             "click",
-            logout
-        );
+            async function() {
+
+                /*
+                 * Supabase integration point:
+                 *
+                 * await supabase.auth.signOut();
+                 */
 
 
-    document
-        .getElementById(
-            "dangerLogout"
-        )
-        .addEventListener(
-            "click",
-            logout
-        );
-
-
-    /* =====================================================
-       PASSWORD VALIDATION
-       ===================================================== */
-
-    document
-        .getElementById(
-            "saveButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                const newPassword =
-                    document.getElementById(
-                        "newPassword"
-                    ).value;
-
-
-                const confirmPassword =
-                    document.getElementById(
-                        "confirmPassword"
-                    ).value;
-
-
-                if (
-                    newPassword ||
-                    confirmPassword
-                ) {
-
-                    if (
-                        newPassword !==
-                        confirmPassword
-                    ) {
-
-                        showToast(
-                            "New password and confirmation do not match."
-                        );
-
-                        return;
-
-                    }
-
-
-                    if (
-                        newPassword.length <
-                        8
-                    ) {
-
-                        showToast(
-                            "New password must contain at least 8 characters."
-                        );
-
-                        return;
-
-                    }
-
-                }
+                window.location.href =
+                    "./login.html";
 
             }
         );
 
-
-    /* =====================================================
-       LOAD ON START
-       ===================================================== */
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-            loadSettings();
-
-        }
-    );
 
 </script>
 
