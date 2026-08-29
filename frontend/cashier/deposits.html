@@ -1,3014 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Global TrustFund Banking cashier deposit processing portal.">
-    <title>Deposits | Cashier | GTF Banking</title>
-
-    <link rel="stylesheet" href="../css/styles.css">
-
-    <style>
-        :root {
-            --gtf-green: #0b5d3b;
-            --gtf-dark: #073d28;
-            --gtf-light: #16865a;
-            --gtf-gold: #c9962b;
-            --background: #f4f8f6;
-            --surface: #ffffff;
-            --surface-soft: #f8fbf9;
-            --border: #dce7e1;
-            --text: #18352a;
-            --muted: #718078;
-            --success: #19734b;
-            --success-bg: #eaf7ef;
-            --warning: #946b17;
-            --warning-bg: #fff7df;
-            --danger: #a33f3f;
-            --danger-bg: #fff0f0;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            background: var(--background);
-            color: var(--text);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        .app {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 245px minmax(0, 1fr);
-        }
-
-        /* SIDEBAR */
-
-        .sidebar {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            padding: 22px 16px;
-            background: linear-gradient(180deg, var(--gtf-dark), #052e1f);
-            color: #fff;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 8px 22px;
-            border-bottom: 1px solid rgba(255,255,255,.12);
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .brand img {
-            width: 43px;
-            height: 43px;
-            object-fit: contain;
-        }
-
-        .brand-text strong {
-            display: block;
-            font-size: 13px;
-        }
-
-        .brand-text span {
-            display: block;
-            margin-top: 4px;
-            color: rgba(255,255,255,.55);
-            font-size: 7px;
-        }
-
-        .nav-title {
-            margin: 23px 9px 9px;
-            color: rgba(255,255,255,.42);
-            font-size: 7px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .nav {
-            display: grid;
-            gap: 5px;
-        }
-
-        .nav a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-height: 38px;
-            padding: 0 11px;
-            border-radius: 7px;
-            color: rgba(255,255,255,.72);
-            font-size: 9px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            background: rgba(255,255,255,.10);
-            color: #fff;
-        }
-
-        .nav-icon {
-            width: 18px;
-            text-align: center;
-            font-size: 11px;
-        }
-
-        .profile {
-            margin-top: 30px;
-            padding: 13px;
-            border: 1px solid rgba(255,255,255,.10);
-            border-radius: 9px;
-            background: rgba(255,255,255,.05);
-        }
-
-        .profile strong {
-            display: block;
-            font-size: 9px;
-        }
-
-        .profile span {
-            display: block;
-            margin-top: 4px;
-            color: rgba(255,255,255,.55);
-            font-size: 7px;
-        }
-
-        .logout {
-            width: 100%;
-            min-height: 30px;
-            margin-top: 10px;
-            border: 1px solid rgba(255,255,255,.15);
-            border-radius: 6px;
-            background: transparent;
-            color: rgba(255,255,255,.75);
-            font-size: 8px;
-        }
-
-        .logout:hover {
-            background: rgba(255,255,255,.08);
-        }
-
-        /* MAIN */
-
-        .main {
-            min-width: 0;
-        }
-
-        .topbar {
-            min-height: 68px;
-            padding: 14px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            background: #fff;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .topbar h1 {
-            margin: 0;
-            color: var(--gtf-dark);
-            font-size: 20px;
-        }
-
-        .topbar p {
-            margin: 5px 0 0;
-            color: var(--muted);
-            font-size: 8px;
-        }
-
-        .session {
-            padding: 7px 10px;
-            border-radius: 20px;
-            background: var(--success-bg);
-            color: var(--success);
-            font-size: 7px;
-            font-weight: 800;
-        }
-
-        .content {
-            padding: 27px;
-        }
-
-        /* STATISTICS */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin-bottom: 20px;
-        }
-
-        .stat {
-            padding: 17px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            font-size: 7px;
-            font-weight: 800;
-            letter-spacing: .5px;
-            text-transform: uppercase;
-        }
-
-        .stat-value {
-            margin-top: 7px;
-            color: var(--gtf-dark);
-            font-size: 19px;
-            font-weight: 800;
-        }
-
-        .stat-note {
-            margin-top: 5px;
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        /* LAYOUT */
-
-        .deposit-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(280px, .8fr);
-            gap: 20px;
-            align-items: start;
-        }
-
-        .card {
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 11px;
-        }
-
-        .card + .card {
-            margin-top: 20px;
-        }
-
-        .card-header {
-            padding: 17px 18px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .card-header h2 {
-            margin: 0;
-            color: var(--gtf-dark);
-            font-size: 13px;
-        }
-
-        .card-header p {
-            margin: 5px 0 0;
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        .card-body {
-            padding: 19px;
-        }
-
-        /* FORM */
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .field.full {
-            grid-column: 1 / -1;
-        }
-
-        .field label {
-            color: var(--gtf-dark);
-            font-size: 8px;
-            font-weight: 800;
-        }
-
-        .field label span {
-            color: var(--danger);
-        }
-
-        .input,
-        .select,
-        .textarea {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            outline: none;
-            background: #fff;
-            color: var(--text);
-            font-size: 9px;
-        }
-
-        .input,
-        .select {
-            min-height: 39px;
-            padding: 0 11px;
-        }
-
-        .textarea {
-            min-height: 82px;
-            padding: 10px 11px;
-            resize: vertical;
-        }
-
-        .input:focus,
-        .select:focus,
-        .textarea:focus {
-            border-color: var(--gtf-light);
-            box-shadow: 0 0 0 3px rgba(22,134,90,.08);
-        }
-
-        .input-help {
-            color: var(--muted);
-            font-size: 7px;
-            line-height: 1.5;
-        }
-
-        .account-search {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
-            gap: 8px;
-        }
-
-        .search-button {
-            min-width: 85px;
-            border: 0;
-            border-radius: 6px;
-            background: var(--gtf-dark);
-            color: #fff;
-            font-size: 8px;
-            font-weight: 800;
-        }
-
-        .search-button:hover {
-            background: var(--gtf-green);
-        }
-
-        /* CUSTOMER PREVIEW */
-
-        .customer-preview {
-            display: none;
-            margin-top: 10px;
-            padding: 12px;
-            border: 1px solid var(--border);
-            border-radius: 7px;
-            background: var(--surface-soft);
-        }
-
-        .customer-preview.show {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .customer-avatar {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 0 0 auto;
-            border-radius: 50%;
-            background: #e6f2eb;
-            color: var(--gtf-green);
-            font-size: 9px;
-            font-weight: 800;
-        }
-
-        .customer-preview strong {
-            display: block;
-            color: var(--gtf-dark);
-            font-size: 8px;
-        }
-
-        .customer-preview span {
-            display: block;
-            margin-top: 3px;
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        /* AMOUNT */
-
-        .amount-wrapper {
-            position: relative;
-        }
-
-        .currency {
-            position: absolute;
-            left: 11px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-            font-size: 9px;
-            font-weight: 800;
-            pointer-events: none;
-        }
-
-        .amount-input {
-            padding-left: 43px !important;
-            font-size: 13px !important;
-            font-weight: 800;
-        }
-
-        /* ACTIONS */
-
-        .form-actions {
-            margin-top: 20px;
-            padding-top: 16px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            border-top: 1px solid var(--border);
-        }
-
-        .button {
-            min-height: 39px;
-            padding: 0 16px;
-            border: 0;
-            border-radius: 6px;
-            font-size: 8px;
-            font-weight: 800;
-        }
-
-        .button.primary {
-            background: var(--gtf-green);
-            color: #fff;
-        }
-
-        .button.primary:hover {
-            background: var(--gtf-light);
-        }
-
-        .button.secondary {
-            background: #edf3f0;
-            color: var(--gtf-dark);
-        }
-
-        .button.secondary:hover {
-            background: #e1ebe6;
-        }
-
-        .button:disabled {
-            cursor: not-allowed;
-            opacity: .55;
-        }
-
-        /* RECEIPT PREVIEW */
-
-        .receipt {
-            padding: 18px;
-        }
-
-        .receipt-head {
-            padding-bottom: 14px;
-            border-bottom: 1px dashed var(--border);
-            text-align: center;
-        }
-
-        .receipt-head strong {
-            display: block;
-            color: var(--gtf-dark);
-            font-size: 12px;
-        }
-
-        .receipt-head span {
-            display: block;
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 9px 0;
-            border-bottom: 1px solid #edf1ef;
-        }
-
-        .receipt-row span:first-child {
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        .receipt-row span:last-child {
-            color: var(--text);
-            font-size: 8px;
-            font-weight: 700;
-            text-align: right;
-        }
-
-        .receipt-total {
-            margin-top: 5px;
-            padding-top: 12px;
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-        }
-
-        .receipt-total span:first-child {
-            color: var(--gtf-dark);
-            font-size: 8px;
-            font-weight: 800;
-        }
-
-        .receipt-total span:last-child {
-            color: var(--gtf-green);
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        /* NOTICE */
-
-        .notice {
-            padding: 12px;
-            border-radius: 7px;
-            background: var(--warning-bg);
-            color: var(--warning);
-            font-size: 7px;
-            line-height: 1.5;
-        }
-
-        .notice strong {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 8px;
-        }
-
-        /* RECENT DEPOSITS */
-
-        .recent-table {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            min-width: 700px;
-            border-collapse: collapse;
-        }
-
-        th {
-            padding: 11px 13px;
-            background: #f8faf9;
-            border-bottom: 1px solid var(--border);
-            color: var(--muted);
-            font-size: 7px;
-            font-weight: 800;
-            text-align: left;
-            text-transform: uppercase;
-        }
-
-        td {
-            padding: 12px 13px;
-            border-bottom: 1px solid #edf1ef;
-            color: var(--text);
-            font-size: 8px;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 5px 8px;
-            border-radius: 20px;
-            font-size: 6px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .status.completed {
-            background: var(--success-bg);
-            color: var(--success);
-        }
-
-        .status.pending {
-            background: var(--warning-bg);
-            color: var(--warning);
-        }
-
-        .status.failed {
-            background: var(--danger-bg);
-            color: var(--danger);
-        }
-
-        /* MODAL */
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(7,35,23,.58);
-        }
-
-        .modal.open {
-            display: flex;
-        }
-
-        .modal-card {
-            width: min(470px, 100%);
-            background: #fff;
-            border-radius: 11px;
-            box-shadow: 0 25px 70px rgba(0,0,0,.22);
-        }
-
-        .modal-header {
-            padding: 17px 19px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            color: var(--gtf-dark);
-            font-size: 13px;
-        }
-
-        .close {
-            width: 30px;
-            height: 30px;
-            border: 0;
-            border-radius: 50%;
-            background: #edf3f0;
-            color: var(--gtf-dark);
-            font-size: 16px;
-        }
-
-        .modal-body {
-            padding: 19px;
-        }
-
-        .confirmation {
-            padding: 14px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--surface-soft);
-        }
-
-        .confirmation-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 8px 0;
-            border-bottom: 1px solid #e9efeb;
-        }
-
-        .confirmation-row:last-child {
-            border-bottom: 0;
-        }
-
-        .confirmation-row span:first-child {
-            color: var(--muted);
-            font-size: 7px;
-        }
-
-        .confirmation-row span:last-child {
-            color: var(--gtf-dark);
-            font-size: 8px;
-            font-weight: 800;
-            text-align: right;
-        }
-
-        .modal-footer {
-            padding: 14px 19px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            border-top: 1px solid var(--border);
-            background: var(--surface-soft);
-        }
-
-        /* RESPONSIVE */
-
-        @media (max-width: 1050px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .deposit-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .app {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-                height: auto;
-            }
-
-            .profile {
-                display: none;
-            }
-
-            .nav {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .content {
-                padding: 17px;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .stats,
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .field.full {
-                grid-column: auto;
-            }
-
-            .topbar {
-                padding: 13px 17px;
-            }
-
-            .session {
-                display: none;
-            }
-
-            .account-search {
-                grid-template-columns: 1fr;
-            }
-
-            .search-button {
-                min-height: 38px;
-            }
-
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .form-actions .button {
-                width: 100%;
-            }
-        }
-    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Global TrustFund cashier deposits">
+<meta name="theme-color" content="#0b3d2e">
+
+<title>Deposit | Global TrustFund Cashier</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+:root {
+    --g:#0b3d2e;
+    --gd:#092f24;
+    --gl:#176b48;
+    --gold:#c9962b;
+    --bg:#f4f8f6;
+    --card:#fff;
+    --border:#dfe8e3;
+    --text:#18372c;
+    --muted:#7c8983;
+    --success:#176b48;
+    --success-bg:#eaf5ee;
+    --danger:#8b4444;
+    --danger-bg:#f9eded;
+}
+
+* { box-sizing:border-box; }
+
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.header {
+    background:#fff;
+    border-bottom:1px solid var(--border);
+}
+
+.header-inner {
+    max-width:1440px;
+    min-height:72px;
+    margin:auto;
+    padding:12px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--g);
+    text-decoration:none;
+}
+
+.brand img {
+    width:45px;
+    height:45px;
+}
+
+.brand strong {
+    display:block;
+    font-size:14px;
+}
+
+.brand small {
+    color:var(--muted);
+    font-size:9px;
+}
+
+.logout {
+    min-height:32px;
+    padding:0 11px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:#fff;
+    color:var(--g);
+    font-size:7px;
+    font-weight:700;
+}
+
+.layout {
+    max-width:1440px;
+    margin:auto;
+    padding:25px;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:25px;
+}
+
+.sidebar {
+    height:max-content;
+    position:sticky;
+    top:25px;
+    padding:15px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.sidebar-title {
+    padding:8px 10px 12px;
+    color:var(--muted);
+    font-size:7px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.nav {
+    display:grid;
+    gap:4px;
+}
+
+.nav a {
+    min-height:38px;
+    padding:0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border-radius:7px;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:8px;
+    font-weight:700;
+}
+
+.nav a:hover,
+.nav a.active {
+    background:var(--g);
+    color:#fff;
+}
+
+.heading {
+    margin-bottom:20px;
+}
+
+.heading h1 {
+    margin:0;
+    color:var(--g);
+    font-size:26px;
+}
+
+.heading p {
+    margin:7px 0 0;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.card {
+    margin-bottom:18px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+}
+
+.card-head {
+    padding:17px;
+    border-bottom:1px solid var(--border);
+}
+
+.card-head h2 {
+    margin:0;
+    color:var(--g);
+    font-size:12px;
+}
+
+.form {
+    padding:18px;
+}
+
+.grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.field {
+    display:grid;
+    gap:5px;
+}
+
+.field.full {
+    grid-column:1/-1;
+}
+
+.field label {
+    font-size:7px;
+    font-weight:800;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width:100%;
+    min-height:39px;
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:7px;
+    outline:none;
+    background:#fff;
+    color:var(--text);
+    font-size:8px;
+}
+
+.field textarea {
+    min-height:80px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color:var(--gl);
+    box-shadow:0 0 0 3px rgba(23,107,72,.08);
+}
+
+.actions {
+    margin-top:18px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.button {
+    min-height:38px;
+    padding:0 14px;
+    border-radius:6px;
+    font-size:8px;
+    font-weight:700;
+}
+
+.secondary {
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--g);
+}
+
+.primary {
+    border:1px solid var(--g);
+    background:var(--g);
+    color:#fff;
+}
+
+.primary:hover {
+    background:var(--gd);
+}
+
+.message {
+    display:none;
+    margin-bottom:15px;
+    padding:11px;
+    border-radius:7px;
+    font-size:8px;
+}
+
+.message.show {
+    display:block;
+}
+
+.message.success {
+    background:var(--success-bg);
+    color:var(--success);
+}
+
+.message.error {
+    background:var(--danger-bg);
+    color:var(--danger);
+}
+
+.verify {
+    margin-top:8px;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.footer {
+    padding:16px;
+    background:#fff;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    text-align:center;
+    font-size:7px;
+}
+
+@media(max-width:850px) {
+    .layout {
+        grid-template-columns:1fr;
+    }
+
+    .sidebar {
+        position:static;
+    }
+
+    .nav {
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:600px) {
+    .layout {
+        padding:15px;
+    }
+
+    .nav {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid {
+        grid-template-columns:1fr;
+    }
+
+    .field.full {
+        grid-column:auto;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
-<div class="app">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
-        <a href="./index.html" class="brand">
-            <img src="../assets/gtf-logo.svg" alt="Global TrustFund logo">
-
-            <div class="brand-text">
-                <strong>Global TrustFund</strong>
-                <span>Cashier Operations Portal</span>
-            </div>
-        </a>
-
-        <div class="nav-title">
-            Cashier Operations
-        </div>
-
-        <nav class="nav">
-
-            <a href="./index.html">
-                <span class="nav-icon">⌂</span>
-                Dashboard
-            </a>
-
-            <a href="./transactions.html">
-                <span class="nav-icon">⇄</span>
-                Transactions
-            </a>
-
-            <a href="./customers.html">
-                <span class="nav-icon">♙</span>
-                Customers
-            </a>
-
-            <a href="./deposits.html" class="active">
-                <span class="nav-icon">↓</span>
-                Deposits
-            </a>
-
-            <a href="./withdrawals.html">
-                <span class="nav-icon">↑</span>
-                Withdrawals
-            </a>
-
-            <a href="./transfers.html">
-                <span class="nav-icon">↔</span>
-                Transfers
-            </a>
-
-            <a href="./drawer.html">
-                <span class="nav-icon">▣</span>
-                Cash Drawer
-            </a>
-
-            <a href="./support.html">
-                <span class="nav-icon">?</span>
-                Support
-            </a>
-
-        </nav>
-
-        <div class="profile">
-
-            <strong id="cashierName">
-                Cashier
-            </strong>
-
-            <span>
-                Cashier Operations
-            </span>
-
-            <button
-                class="logout"
-                id="logoutButton"
-                type="button"
-            >
-                Sign Out
-            </button>
-
-        </div>
-
-    </aside>
-
-
-    <!-- MAIN -->
-    <main class="main">
-
-        <header class="topbar">
-
-            <div>
-                <h1>Cash Deposits</h1>
-
-                <p>
-                    Process and record customer deposits.
-                </p>
-            </div>
-
-            <span class="session">
-                ● Cashier Session Active
-            </span>
-
-        </header>
-
-
-        <section class="content">
-
-            <!-- STATISTICS -->
-
-            <section class="stats">
-
-                <div class="stat">
-                    <div class="stat-label">
-                        Today's Deposits
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="todayCount"
-                    >
-                        0
-                    </div>
-
-                    <div class="stat-note">
-                        Completed transactions
-                    </div>
-                </div>
-
-
-                <div class="stat">
-                    <div class="stat-label">
-                        Deposit Volume
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="todayVolume"
-                    >
-                        ₦0.00
-                    </div>
-
-                    <div class="stat-note">
-                        Today's processed value
-                    </div>
-                </div>
-
-
-                <div class="stat">
-                    <div class="stat-label">
-                        Pending
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="pendingCount"
-                    >
-                        0
-                    </div>
-
-                    <div class="stat-note">
-                        Awaiting completion
-                    </div>
-                </div>
-
-
-                <div class="stat">
-                    <div class="stat-label">
-                        Cash Drawer
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="drawerBalance"
-                    >
-                        ₦0.00
-                    </div>
-
-                    <div class="stat-note">
-                        Current recorded balance
-                    </div>
-                </div>
-
-            </section>
-
-
-            <div class="deposit-layout">
-
-                <!-- DEPOSIT FORM -->
-
-                <section class="card">
-
-                    <div class="card-header">
-
-                        <h2>
-                            New Deposit
-                        </h2>
-
-                        <p>
-                            Enter and verify the customer's deposit information.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <form id="depositForm">
-
-                            <div class="form-grid">
-
-                                <!-- ACCOUNT -->
-
-                                <div class="field full">
-
-                                    <label for="accountNumber">
-                                        Customer Account Number
-                                        <span>*</span>
-                                    </label>
-
-                                    <div class="account-search">
-
-                                        <input
-                                            id="accountNumber"
-                                            class="input"
-                                            type="text"
-                                            autocomplete="off"
-                                            placeholder="Enter GTF account number"
-                                            required
-                                        >
-
-                                        <button
-                                            type="button"
-                                            class="search-button"
-                                            id="lookupAccount"
-                                        >
-                                            Verify
-                                        </button>
-
-                                    </div>
-
-                                    <div class="input-help">
-                                        Verify the account before entering the transaction amount.
-                                    </div>
-
-                                    <div
-                                        class="customer-preview"
-                                        id="customerPreview"
-                                    >
-
-                                        <div
-                                            class="customer-avatar"
-                                            id="customerAvatar"
-                                        >
-                                            CU
-                                        </div>
-
-                                        <div>
-
-                                            <strong id="customerName">
-                                                Customer
-                                            </strong>
-
-                                            <span id="customerAccount">
-                                                Account
-                                            </span>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- ACCOUNT TYPE -->
-
-                                <div class="field">
-
-                                    <label for="accountType">
-                                        Account Type
-                                        <span>*</span>
-                                    </label>
-
-                                    <select
-                                        id="accountType"
-                                        class="select"
-                                        required
-                                    >
-
-                                        <option value="">
-                                            Select account type
-                                        </option>
-
-                                        <option value="checking">
-                                            Checking
-                                        </option>
-
-                                        <option value="savings">
-                                            Savings
-                                        </option>
-
-                                        <option value="business">
-                                            Business
-                                        </option>
-
-                                    </select>
-
-                                </div>
-
-
-                                <!-- DEPOSIT TYPE -->
-
-                                <div class="field">
-
-                                    <label for="depositType">
-                                        Deposit Method
-                                        <span>*</span>
-                                    </label>
-
-                                    <select
-                                        id="depositType"
-                                        class="select"
-                                        required
-                                    >
-
-                                        <option value="">
-                                            Select method
-                                        </option>
-
-                                        <option value="cash">
-                                            Cash
-                                        </option>
-
-                                        <option value="check">
-                                            Check
-                                        </option>
-
-                                        <option value="bank_draft">
-                                            Bank Draft
-                                        </option>
-
-                                    </select>
-
-                                </div>
-
-
-                                <!-- AMOUNT -->
-
-                                <div class="field">
-
-                                    <label for="amount">
-                                        Deposit Amount
-                                        <span>*</span>
-                                    </label>
-
-                                    <div class="amount-wrapper">
-
-                                        <span class="currency">
-                                            NGN
-                                        </span>
-
-                                        <input
-                                            id="amount"
-                                            class="input amount-input"
-                                            type="number"
-                                            min="0.01"
-                                            step="0.01"
-                                            placeholder="0.00"
-                                            required
-                                        >
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- REFERENCE -->
-
-                                <div class="field">
-
-                                    <label for="reference">
-                                        Customer Reference
-                                    </label>
-
-                                    <input
-                                        id="reference"
-                                        class="input"
-                                        type="text"
-                                        maxlength="80"
-                                        placeholder="Optional reference"
-                                    >
-
-                                </div>
-
-
-                                <!-- DESCRIPTION -->
-
-                                <div class="field full">
-
-                                    <label for="description">
-                                        Transaction Notes
-                                    </label>
-
-                                    <textarea
-                                        id="description"
-                                        class="textarea"
-                                        maxlength="300"
-                                        placeholder="Enter any relevant transaction notes..."
-                                    ></textarea>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="notice" style="margin-top:18px;">
-
-                                <strong>
-                                    Cashier verification
-                                </strong>
-
-                                Confirm the customer account, deposit amount,
-                                payment method and transaction details before
-                                submitting the deposit.
-
-                            </div>
-
-
-                            <div class="form-actions">
-
-                                <button
-                                    type="button"
-                                    class="button secondary"
-                                    id="clearButton"
-                                >
-                                    Clear Form
-                                </button>
-
-                                <button
-                                    type="submit"
-                                    class="button primary"
-                                    id="submitButton"
-                                >
-                                    Review Deposit
-                                </button>
-
-                            </div>
-
-                        </form>
-
-                    </div>
-
-                </section>
-
-
-                <!-- RECEIPT PREVIEW -->
-
-                <aside>
-
-                    <section class="card">
-
-                        <div class="card-header">
-
-                            <h2>
-                                Deposit Summary
-                            </h2>
-
-                            <p>
-                                Review information before submission.
-                            </p>
-
-                        </div>
-
-
-                        <div class="receipt">
-
-                            <div class="receipt-head">
-
-                                <strong>
-                                    Global TrustFund
-                                </strong>
-
-                                <span>
-                                    Deposit Preview
-                                </span>
-
-                            </div>
-
-
-                            <div class="receipt-row">
-
-                                <span>
-                                    Account
-                                </span>
-
-                                <span id="summaryAccount">
-                                    —
-                                </span>
-
-                            </div>
-
-
-                            <div class="receipt-row">
-
-                                <span>
-                                    Customer
-                                </span>
-
-                                <span id="summaryCustomer">
-                                    —
-                                </span>
-
-                            </div>
-
-
-                            <div class="receipt-row">
-
-                                <span>
-                                    Account Type
-                                </span>
-
-                                <span id="summaryType">
-                                    —
-                                </span>
-
-                            </div>
-
-
-                            <div class="receipt-row">
-
-                                <span>
-                                    Method
-                                </span>
-
-                                <span id="summaryMethod">
-                                    —
-                                </span>
-
-                            </div>
-
-
-                            <div class="receipt-row">
-
-                                <span>
-                                    Reference
-                                </span>
-
-                                <span id="summaryReference">
-                                    —
-                                </span>
-
-                            </div>
-
-
-                            <div class="receipt-total">
-
-                                <span>
-                                    Deposit Amount
-                                </span>
-
-                                <span id="summaryAmount">
-                                    ₦0.00
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </section>
-
-
-                    <section class="card">
-
-                        <div class="card-header">
-
-                            <h2>
-                                Processing Rules
-                            </h2>
-
-                        </div>
-
-                        <div class="card-body">
-
-                            <div class="notice">
-
-                                <strong>
-                                    Important
-                                </strong>
-
-                                Only process deposits for verified customer
-                                accounts. The backend must independently
-                                validate the cashier's session, account status,
-                                transaction amount and authorization.
-
-                            </div>
-
-                        </div>
-
-                    </section>
-
-                </aside>
-
-            </div>
-
-
-            <!-- RECENT DEPOSITS -->
-
-            <section class="card" style="margin-top:20px;">
-
-                <div class="card-header">
-
-                    <div style="
-                        display:flex;
-                        align-items:center;
-                        justify-content:space-between;
-                        gap:15px;
-                    ">
-
-                        <div>
-
-                            <h2>
-                                Recent Deposits
-                            </h2>
-
-                            <p>
-                                Recently processed deposits from this cashier session.
-                            </p>
-
-                        </div>
-
-                        <button
-                            type="button"
-                            class="button secondary"
-                            id="refreshButton"
-                        >
-                            Refresh
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <div class="recent-table">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Transaction
-                                </th>
-
-                                <th>
-                                    Account
-                                </th>
-
-                                <th>
-                                    Customer
-                                </th>
-
-                                <th>
-                                    Amount
-                                </th>
-
-                                <th>
-                                    Method
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody id="depositTableBody">
-
-                            <tr>
-
-                                <td
-                                    colspan="6"
-                                    style="
-                                        padding:30px;
-                                        text-align:center;
-                                        color:var(--muted);
-                                    "
-                                >
-                                    Loading deposits...
-
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </section>
-
-        </section>
-
-    </main>
+<header class="header">
+<div class="header-inner">
+
+<a class="brand" href="./index.html">
+    <img src="../assets/gtf-logo.svg" alt="Global TrustFund">
+    <span>
+        <strong>Global TrustFund</strong>
+        <small>Cashier Operations</small>
+    </span>
+</a>
+
+<button class="logout" onclick="location.href='./signout.html'">
+    Sign Out
+</button>
 
 </div>
+</header>
 
+<div class="layout">
 
-<!-- CONFIRMATION MODAL -->
+<aside class="sidebar">
 
-<div
-    class="modal"
-    id="confirmationModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="confirmationTitle"
+<div class="sidebar-title">Cashier Portal</div>
+
+<nav class="nav">
+<a href="./index.html">⌂ Dashboard</a>
+<a href="./customers.html">◉ Customers</a>
+<a href="./deposit.html" class="active">＋ Deposit</a>
+<a href="./withdrawals.html">− Withdrawals</a>
+<a href="./transfers.html">⇄ Transfers</a>
+<a href="./transactions.html">▤ Transactions</a>
+<a href="./drawer.html">▣ Cash Drawer</a>
+<a href="./support.html">? Support</a>
+</nav>
+
+</aside>
+
+<main>
+
+<section class="heading">
+
+<h1>Customer Deposit</h1>
+
+<p>
+Create and submit an authorized deposit transaction.
+</p>
+
+</section>
+
+<section class="card">
+
+<div class="card-head">
+<h2>Deposit Details</h2>
+</div>
+
+<div class="form">
+
+<div id="message" class="message"></div>
+
+<form id="depositForm">
+
+<div class="grid">
+
+<div class="field">
+
+<label for="account">
+Customer Account
+</label>
+
+<input
+    id="account"
+    name="account_number"
+    required
+    autocomplete="off"
+    placeholder="Enter account number"
 >
 
-    <div class="modal-card">
-
-        <div class="modal-header">
-
-            <h2 id="confirmationTitle">
-                Confirm Deposit
-            </h2>
-
-            <button
-                type="button"
-                class="close"
-                id="closeModal"
-                aria-label="Close"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="modal-body">
-
-            <p style="
-                margin-top:0;
-                color:var(--muted);
-                font-size:8px;
-                line-height:1.5;
-            ">
-                Review the deposit details carefully before submitting.
-            </p>
-
-
-            <div class="confirmation">
-
-                <div class="confirmation-row">
-                    <span>Account</span>
-                    <span id="confirmAccount">—</span>
-                </div>
-
-                <div class="confirmation-row">
-                    <span>Customer</span>
-                    <span id="confirmCustomer">—</span>
-                </div>
-
-                <div class="confirmation-row">
-                    <span>Account Type</span>
-                    <span id="confirmType">—</span>
-                </div>
-
-                <div class="confirmation-row">
-                    <span>Deposit Method</span>
-                    <span id="confirmMethod">—</span>
-                </div>
-
-                <div class="confirmation-row">
-                    <span>Amount</span>
-                    <span id="confirmAmount">₦0.00</span>
-                </div>
-
-                <div class="confirmation-row">
-                    <span>Reference</span>
-                    <span id="confirmReference">—</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="modal-footer">
-
-            <button
-                type="button"
-                class="button secondary"
-                id="cancelConfirmation"
-            >
-                Cancel
-            </button>
-
-            <button
-                type="button"
-                class="button primary"
-                id="confirmDeposit"
-            >
-                Confirm Deposit
-            </button>
-
-        </div>
-
-    </div>
+<div class="verify">
+    The backend will validate the account before posting.
+</div>
 
 </div>
 
+<div class="field">
+
+<label for="amount">
+Amount
+</label>
+
+<input
+    id="amount"
+    name="amount"
+    type="number"
+    min="0"
+    step="0.01"
+    required
+>
+
+</div>
+
+<div class="field">
+
+<label for="currency">
+Currency
+</label>
+
+<select id="currency" name="currency">
+    <option value="NGN">NGN</option>
+    <option value="USD">USD</option>
+    <option value="GBP">GBP</option>
+    <option value="EUR">EUR</option>
+</select>
+
+</div>
+
+<div class="field">
+
+<label for="method">
+Deposit Method
+</label>
+
+<select id="method" name="method" required>
+    <option value="">Select method</option>
+    <option value="cash">Cash</option>
+    <option value="cheque">Cheque</option>
+    <option value="electronic">Electronic</option>
+</select>
+
+</div>
+
+<div class="field full">
+
+<label for="reference">
+Customer/Transaction Reference
+</label>
+
+<input
+    id="reference"
+    name="reference"
+    maxlength="100"
+>
+
+</div>
+
+<div class="field full">
+
+<label for="notes">
+Notes
+</label>
+
+<textarea
+    id="notes"
+    name="notes"
+></textarea>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button
+    type="reset"
+    class="button secondary"
+>
+    Clear
+</button>
+
+<button
+    type="submit"
+    class="button primary"
+    id="submit"
+>
+    Submit Deposit
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<footer class="footer">
+© 2026 Global TrustFund · Authorized Cashier Operations
+</footer>
 
 <script>
+const API_BASE = "/api";
 
-    /*
-     * ======================================================
-     * GTF BANKING — CASHIER DEPOSITS
-     * ======================================================
-     *
-     * Frontend endpoint:
-     *
-     * GET  /api/transactions
-     * POST /api/transactions
-     *
-     * The backend MUST enforce cashier authorization.
-     * Frontend controls are not security controls.
-     */
+const form =
+    document.getElementById("depositForm");
 
+const message =
+    document.getElementById("message");
 
-    const API_BASE = "/api";
+const submit =
+    document.getElementById("submit");
 
+function showMessage(text, type) {
 
-    let verifiedCustomer = null;
+    message.textContent = text;
 
+    message.className =
+        "message show " + type;
+}
 
-    /*
-     * ------------------------------------------------------
-     * DEMO DATA
-     * ------------------------------------------------------
-     */
+form.addEventListener("submit", async event => {
 
-    const demoDeposits = [
+    event.preventDefault();
 
-        {
-            id: "DEP-10001",
-            account: "GTF-104823",
-            customer: "Customer Account",
-            amount: 250000,
-            method: "Cash",
-            status: "Completed"
-        },
+    submit.disabled = true;
+    submit.textContent = "Submitting...";
 
-        {
-            id: "DEP-10002",
-            account: "GTF-203911",
-            customer: "Customer Account",
-            amount: 150000,
-            method: "Check",
-            status: "Completed"
-        },
+    message.className = "message";
 
-        {
-            id: "DEP-10003",
-            account: "GTF-301724",
-            customer: "Customer Account",
-            amount: 75000,
-            method: "Cash",
-            status: "Pending"
-        }
-
-    ];
-
-
-    /*
-     * ------------------------------------------------------
-     * HELPERS
-     * ------------------------------------------------------
-     */
-
-    function escapeHtml(value) {
-
-        return String(value ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-
-    }
-
-
-    function formatCurrency(amount) {
-
-        return new Intl.NumberFormat(
-            "en-NG",
-            {
-                style: "currency",
-                currency: "NGN",
-                minimumFractionDigits: 2
-            }
-        ).format(
-            Number(amount) || 0
+    const payload =
+        Object.fromEntries(
+            new FormData(form)
         );
 
-    }
-
-
-    function getInitials(name) {
-
-        const words =
-            String(name || "Customer")
-                .trim()
-                .split(/\s+/)
-                .filter(Boolean);
-
-        return words
-            .slice(0, 2)
-            .map(
-                word =>
-                    word.charAt(0).toUpperCase()
-            )
-            .join("") || "CU";
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * CUSTOMER LOOKUP
-     * ------------------------------------------------------
-     */
-
-    async function lookupAccount() {
-
-        const account =
-            document.getElementById(
-                "accountNumber"
-            )
-            .value
-            .trim();
-
-
-        if (!account) {
-
-            alert(
-                "Enter a customer account number."
-            );
-
-            return;
-
-        }
-
-
-        const button =
-            document.getElementById(
-                "lookupAccount"
-            );
-
-
-        button.disabled = true;
-
-        button.textContent = "Checking...";
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/users?account_number=${encodeURIComponent(account)}`,
-                    {
-                        method: "GET",
-
-                        credentials: "include",
-
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Account lookup failed."
-                );
-
-            }
-
-
-            const data =
-                await response.json();
-
-
-            const customer =
-
-                data.customer ||
-
-                data.user ||
-
-                (
-                    Array.isArray(
-                        data.users
-                    )
-                        ? data.users[0]
-                        : null
-                ) ||
-
-                (
-                    Array.isArray(
-                        data.data
-                    )
-                        ? data.data[0]
-                        : null
-                );
-
-
-            if (!customer) {
-
-                throw new Error(
-                    "Customer account was not found."
-                );
-
-            }
-
-
-            verifiedCustomer = {
-
-                id:
-                    customer.id ||
-                    customer.customer_id,
-
-                name:
-                    customer.full_name ||
-                    customer.name ||
-                    "Customer",
-
-                email:
-                    customer.email ||
-                    "",
-
-                accountNumber:
-                    customer.account_number ||
-                    account,
-
-                accountType:
-                    customer.account_type ||
-                    "Checking"
-
-            };
-
-
-            showVerifiedCustomer();
-
-
-        } catch (error) {
-
-            /*
-             * Development fallback.
-             */
-
-            verifiedCustomer = {
-
-                id: "DEMO-CUSTOMER",
-
-                name: "Customer Account",
-
-                email: "customer@example.com",
-
-                accountNumber: account,
-
-                accountType: "Checking"
-
-            };
-
-
-            showVerifiedCustomer();
-
-
-            console.warn(
-                "Live customer lookup unavailable. Demo customer displayed.",
-                error
-            );
-
-        } finally {
-
-            button.disabled = false;
-
-            button.textContent = "Verify";
-
-        }
-
-    }
-
-
-    function showVerifiedCustomer() {
-
-        const preview =
-            document.getElementById(
-                "customerPreview"
-            );
-
-
-        document.getElementById(
-            "customerAvatar"
-        ).textContent =
-            getInitials(
-                verifiedCustomer.name
-            );
-
-
-        document.getElementById(
-            "customerName"
-        ).textContent =
-            verifiedCustomer.name;
-
-
-        document.getElementById(
-            "customerAccount"
-        ).textContent =
-            verifiedCustomer.accountNumber;
-
-
-        preview.classList.add(
-            "show"
-        );
-
-
-        document.getElementById(
-            "accountType"
-        ).value =
-            verifiedCustomer.accountType
-                .toLowerCase();
-
-
-        updateSummary();
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * SUMMARY
-     * ------------------------------------------------------
-     */
-
-    function updateSummary() {
-
-        const account =
-            document.getElementById(
-                "accountNumber"
-            ).value.trim();
-
-
-        const type =
-            document.getElementById(
-                "accountType"
-            );
-
-
-        const method =
-            document.getElementById(
-                "depositType"
-            );
-
-
-        const amount =
-            document.getElementById(
-                "amount"
-            ).value;
-
-
-        const reference =
-            document.getElementById(
-                "reference"
-            ).value.trim();
-
-
-        document.getElementById(
-            "summaryAccount"
-        ).textContent =
-            account || "—";
-
-
-        document.getElementById(
-            "summaryCustomer"
-        ).textContent =
-            verifiedCustomer
-                ? verifiedCustomer.name
-                : "—";
-
-
-        document.getElementById(
-            "summaryType"
-        ).textContent =
-            type.options[
-                type.selectedIndex
-            ]?.text || "—";
-
-
-        document.getElementById(
-            "summaryMethod"
-        ).textContent =
-            method.options[
-                method.selectedIndex
-            ]?.text || "—";
-
-
-        document.getElementById(
-            "summaryReference"
-        ).textContent =
-            reference || "—";
-
-
-        document.getElementById(
-            "summaryAmount"
-        ).textContent =
-            formatCurrency(
-                amount
-            );
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * FORM
-     * ------------------------------------------------------
-     */
-
-    document.getElementById(
-        "depositForm"
-    ).addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-
-            const account =
-                document.getElementById(
-                    "accountNumber"
-                )
-                .value
-                .trim();
-
-
-            const accountType =
-                document.getElementById(
-                    "accountType"
-                )
-                .value;
-
-
-            const depositType =
-                document.getElementById(
-                    "depositType"
-                )
-                .value;
-
-
-            const amount =
-                Number(
-                    document.getElementById(
-                        "amount"
-                    ).value
-                );
-
-
-            if (!account) {
-
-                alert(
-                    "Enter the customer account number."
-                );
-
-                return;
-
-            }
-
-
-            if (!verifiedCustomer) {
-
-                alert(
-                    "Verify the customer account before continuing."
-                );
-
-                return;
-
-            }
-
-
-            if (!accountType) {
-
-                alert(
-                    "Select an account type."
-                );
-
-                return;
-
-            }
-
-
-            if (!depositType) {
-
-                alert(
-                    "Select a deposit method."
-                );
-
-                return;
-
-            }
-
-
-            if (
-                !Number.isFinite(amount) ||
-                amount <= 0
-            ) {
-
-                alert(
-                    "Enter a valid deposit amount."
-                );
-
-                return;
-
-            }
-
-
-            prepareConfirmation();
-
-        }
-    );
-
-
-    function prepareConfirmation() {
-
-        const account =
-            document.getElementById(
-                "accountNumber"
-            ).value.trim();
-
-
-        const type =
-            document.getElementById(
-                "accountType"
-            );
-
-
-        const method =
-            document.getElementById(
-                "depositType"
-            );
-
-
-        const amount =
-            document.getElementById(
-                "amount"
-            ).value;
-
-
-        const reference =
-            document.getElementById(
-                "reference"
-            ).value.trim();
-
-
-        document.getElementById(
-            "confirmAccount"
-        ).textContent =
-            account;
-
-
-        document.getElementById(
-            "confirmCustomer"
-        ).textContent =
-            verifiedCustomer
-                ?.name || "—";
-
-
-        document.getElementById(
-            "confirmType"
-        ).textContent =
-            type.options[
-                type.selectedIndex
-            ]?.text || "—";
-
-
-        document.getElementById(
-            "confirmMethod"
-        ).textContent =
-            method.options[
-                method.selectedIndex
-            ]?.text || "—";
-
-
-        document.getElementById(
-            "confirmAmount"
-        ).textContent =
-            formatCurrency(
-                amount
-            );
-
-
-        document.getElementById(
-            "confirmReference"
-        ).textContent =
-            reference || "—";
-
-
-        document.getElementById(
-            "confirmationModal"
-        ).classList.add(
-            "open"
-        );
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * SUBMIT DEPOSIT
-     * ------------------------------------------------------
-     */
-
-    document.getElementById(
-        "confirmDeposit"
-    ).addEventListener(
-        "click",
-        submitDeposit
-    );
-
-
-    async function submitDeposit() {
-
-        const submitButton =
-            document.getElementById(
-                "confirmDeposit"
-            );
-
-
-        submitButton.disabled = true;
-
-        submitButton.textContent =
-            "Processing...";
-
-
-        const payload = {
-
-            account_number:
-                document.getElementById(
-                    "accountNumber"
-                ).value.trim(),
-
-            account_type:
-                document.getElementById(
-                    "accountType"
-                ).value,
-
-            type:
-                "deposit",
-
-            transaction_type:
-                "deposit",
-
-            amount:
-                Number(
-                    document.getElementById(
-                        "amount"
-                    ).value
-                ),
-
-            method:
-                document.getElementById(
-                    "depositType"
-                ).value,
-
-            reference:
-                document.getElementById(
-                    "reference"
-                ).value.trim(),
-
-            description:
-                document.getElementById(
-                    "description"
-                ).value.trim()
-
-        };
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/transactions`,
-                    {
-                        method: "POST",
-
-                        credentials: "include",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json",
-
-                            "Accept":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                payload
-                            )
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                const errorData =
-                    await response
-                        .json()
-                        .catch(
-                            () => ({})
-                        );
-
-
-                throw new Error(
-                    errorData.error ||
-                    errorData.message ||
-                    `Transaction failed (${response.status})`
-                );
-
-            }
-
-
-            const result =
-                await response.json();
-
-
-            closeModal();
-
-
-            alert(
-                result.message ||
-                "Deposit successfully submitted."
-            );
-
-
-            resetForm();
-
-            await loadDeposits();
-
-
-        } catch (error) {
-
-            /*
-             * Do not silently claim that a real banking
-             * transaction succeeded.
-             */
-
-            console.error(
-                "Deposit submission failed:",
-                error
-            );
-
-
-            alert(
-                "The deposit could not be submitted. Please verify the cashier session and backend connection."
-            );
-
-        } finally {
-
-            submitButton.disabled = false;
-
-            submitButton.textContent =
-                "Confirm Deposit";
-
-        }
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * LOAD RECENT DEPOSITS
-     * ------------------------------------------------------
-     */
-
-    async function loadDeposits() {
-
-        let deposits =
-            demoDeposits;
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/transactions?type=deposit`,
-                    {
-                        method: "GET",
-
-                        credentials: "include",
-
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Unable to load deposits."
-                );
-
-            }
-
-
-            const data =
-                await response.json();
-
-
-            const records =
-
-                Array.isArray(data)
-                    ? data
-
-                    : Array.isArray(
-                        data.transactions
-                    )
-                        ? data.transactions
-
-                    : Array.isArray(
-                        data.data
-                    )
-                        ? data.data
-
-                    : [];
-
-
-            if (records.length) {
-
-                deposits =
-                    records.filter(
-                        item =>
-                            String(
-                                item.type ||
-                                item.transaction_type ||
-                                ""
-                            ).toLowerCase()
-                            ===
-                            "deposit"
-                    );
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Using development deposit data.",
-                error
-            );
-
-        }
-
-
-        renderDeposits(
-            deposits
-        );
-
-
-        updateDepositStats(
-            deposits
-        );
-
-    }
-
-
-    function renderDeposits(
-        deposits
-    ) {
-
-        const body =
-            document.getElementById(
-                "depositTableBody"
-            );
-
-
-        body.innerHTML = "";
-
-
-        if (!deposits.length) {
-
-            body.innerHTML = `
-
-                <tr>
-
-                    <td
-                        colspan="6"
-                        style="
-                            padding:30px;
-                            text-align:center;
-                            color:var(--muted);
-                        "
-                    >
-                        No deposits found.
-
-                    </td>
-
-                </tr>
-
-            `;
-
-            return;
-
-        }
-
-
-        deposits
-            .slice(0, 10)
-            .forEach(
-                deposit => {
-
-                    const status =
-                        String(
-                            deposit.status ||
-                            "Completed"
-                        );
-
-
-                    const statusClass =
-                        status
-                            .toLowerCase()
-                            .replace(
-                                /\s+/g,
-                                "-"
-                            );
-
-
-                    const row =
-                        document.createElement(
-                            "tr"
-                        );
-
-
-                    row.innerHTML = `
-
-                        <td>
-                            ${escapeHtml(
-                                deposit.id ||
-                                deposit.transaction_id ||
-                                "—"
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                deposit.account ||
-                                deposit.account_number ||
-                                "—"
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                deposit.customer ||
-                                deposit.customer_name ||
-                                "Customer"
-                            )}
-                        </td>
-
-                        <td>
-                            <strong>
-                                ${formatCurrency(
-                                    deposit.amount
-                                )}
-                            </strong>
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                deposit.method ||
-                                "Cash"
-                            )}
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="status ${statusClass}"
-                            >
-                                ${escapeHtml(
-                                    status
-                                )}
-                            </span>
-
-                        </td>
-
-                    `;
-
-
-                    body.appendChild(
-                        row
-                    );
-
-                }
-            );
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * STATISTICS
-     * ------------------------------------------------------
-     */
-
-    function updateDepositStats(
-        deposits
-    ) {
-
-        const completed =
-            deposits.filter(
-                deposit =>
-                    String(
-                        deposit.status ||
-                        "Completed"
-                    ).toLowerCase()
-                    ===
-                    "completed"
-            );
-
-
-        const pending =
-            deposits.filter(
-                deposit =>
-                    String(
-                        deposit.status ||
-                        ""
-                    ).toLowerCase()
-                    ===
-                    "pending"
-            );
-
-
-        const volume =
-            completed.reduce(
-                (
-                    total,
-                    deposit
-                ) =>
-                    total +
-                    (
-                        Number(
-                            deposit.amount
-                        ) || 0
-                    ),
-                0
-            );
-
-
-        document.getElementById(
-            "todayCount"
-        ).textContent =
-            completed.length;
-
-
-        document.getElementById(
-            "todayVolume"
-        ).textContent =
-            formatCurrency(
-                volume
-            );
-
-
-        document.getElementById(
-            "pendingCount"
-        ).textContent =
-            pending.length;
-
-    }
-
-
-    /*
-     * ------------------------------------------------------
-     * FORM RESET
-     * ------------------------------------------------------
-     */
-
-    function resetForm() {
-
-        document.getElementById(
-            "depositForm"
-        ).reset();
-
-
-        verifiedCustomer =
-            null;
-
-
-        document.getElementById(
-            "customerPreview"
-        ).classList.remove(
-            "show"
-        );
-
-
-        updateSummary();
-
-    }
-
-
-    document.getElementById(
-        "clearButton"
-    ).addEventListener(
-        "click",
-        resetForm
-    );
-
-
-    /*
-     * ------------------------------------------------------
-     * INPUT EVENTS
-     * ------------------------------------------------------
-     */
-
-    [
-        "accountNumber",
-        "accountType",
-        "depositType",
-        "amount",
-        "reference"
-    ]
-    .forEach(
-        id => {
-
-            document.getElementById(
-                id
-            ).addEventListener(
-                "input",
-                updateSummary
-            );
-
-
-            document.getElementById(
-                id
-            ).addEventListener(
-                "change",
-                updateSummary
-            );
-
-        }
-    );
-
-
-    document.getElementById(
-        "lookupAccount"
-    ).addEventListener(
-        "click",
-        lookupAccount
-    );
-
-
-    document.getElementById(
-        "accountNumber"
-    ).addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key ===
-                "Enter"
-            ) {
-
-                event.preventDefault();
-
-                lookupAccount();
-
-            }
-
-        }
-    );
-
-
-    /*
-     * ------------------------------------------------------
-     * MODAL
-     * ------------------------------------------------------
-     */
-
-    function closeModal() {
-
-        document.getElementById(
-            "confirmationModal"
-        ).classList.remove(
-            "open"
-        );
-
-    }
-
-
-    document.getElementById(
-        "closeModal"
-    ).addEventListener(
-        "click",
-        closeModal
-    );
-
-
-    document.getElementById(
-        "cancelConfirmation"
-    ).addEventListener(
-        "click",
-        closeModal
-    );
-
-
-    document.getElementById(
-        "confirmationModal"
-    ).addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target.id ===
-                "confirmationModal"
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-
-    /*
-     * ------------------------------------------------------
-     * REFRESH
-     * ------------------------------------------------------
-     */
-
-    document.getElementById(
-        "refreshButton"
-    ).addEventListener(
-        "click",
-        loadDeposits
-    );
-
-
-    /*
-     * ------------------------------------------------------
-     * CASHIER NAME
-     * ------------------------------------------------------
-     */
+    payload.amount =
+        Number(payload.amount);
 
     try {
 
-        const savedUser =
-            localStorage.getItem(
-                "gtf_user"
+        const response =
+            await fetch(
+                API_BASE + "/transactions/deposit",
+                {
+                    method:"POST",
+                    credentials:"include",
+                    headers:{
+                        "Accept":"application/json",
+                        "Content-Type":"application/json"
+                    },
+                    body:JSON.stringify(payload)
+                }
             );
 
-
-        if (savedUser) {
-
-            const user =
-                JSON.parse(
-                    savedUser
-                );
-
-
-            document.getElementById(
-                "cashierName"
-            ).textContent =
-
-                user.full_name ||
-
-                user.name ||
-
-                user.email ||
-
-                "Cashier";
-
+        if (
+            response.status === 401 ||
+            response.status === 403
+        ) {
+            location.href="./login.html";
+            return;
         }
+
+        const data =
+            await response
+                .json()
+                .catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(
+                data.message ||
+                data.error ||
+                "Deposit could not be submitted."
+            );
+        }
+
+        showMessage(
+            "Deposit submitted successfully. Reference: " +
+            (
+                data.reference ||
+                data.transaction_id ||
+                data.id ||
+                "assigned by the system"
+            ),
+            "success"
+        );
+
+        form.reset();
 
     } catch (error) {
 
-        console.warn(
-            "Unable to load cashier profile.",
-            error
+        showMessage(
+            error.message,
+            "error"
         );
 
+    } finally {
+
+        submit.disabled = false;
+        submit.textContent = "Submit Deposit";
     }
-
-
-    /*
-     * ------------------------------------------------------
-     * LOGOUT
-     * ------------------------------------------------------
-     */
-
-    function clearSession() {
-
-        const keys = [
-
-            "gtf_user",
-            "gtf_cashier",
-            "gtf_session",
-            "gtf_access_token",
-            "gtf_refresh_token",
-            "access_token",
-            "refresh_token"
-
-        ];
-
-
-        keys.forEach(
-            key => {
-
-                try {
-
-                    localStorage.removeItem(
-                        key
-                    );
-
-                } catch (error) {}
-
-            }
-        );
-
-
-        try {
-
-            sessionStorage.clear();
-
-        } catch (error) {}
-
-    }
-
-
-    document.getElementById(
-        "logoutButton"
-    ).addEventListener(
-        "click",
-        () => {
-
-            clearSession();
-
-
-            fetch(
-                `${API_BASE}/auth/signout`,
-                {
-                    method: "POST",
-
-                    credentials:
-                        "include",
-
-                    headers: {
-                        "Accept":
-                            "application/json",
-
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-                            role: "cashier"
-                        })
-                }
-            )
-            .catch(
-                () => {}
-            )
-            .finally(
-                () => {
-
-                    window.location.replace(
-                        "./login.html"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    /*
-     * ------------------------------------------------------
-     * INITIALIZE
-     * ------------------------------------------------------
-     */
-
-    updateSummary();
-
-    loadDeposits();
-
+});
 </script>
 
 </body>
