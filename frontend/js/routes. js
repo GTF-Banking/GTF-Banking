@@ -1,0 +1,195 @@
+/* =========================================================
+   GLOBAL TRUSTFUND
+   CENTRAL ROUTE REGISTRY
+
+   File:
+   frontend/js/routes.js
+
+   IMPORTANT:
+   Change page locations here instead of editing href values
+   throughout the frontend.
+   ========================================================= */
+
+(function (window) {
+
+    "use strict";
+
+
+    const ROUTES = {
+
+        /* =====================================================
+           PUBLIC
+           ===================================================== */
+
+        home: {
+            path: "/index.html",
+            label: "Home"
+        },
+
+        about: {
+            path: "/about.html",
+            label: "About"
+        },
+
+        contact: {
+            path: "/contact.html",
+            label: "Contact"
+        },
+
+        support: {
+            path: "/support.html",
+            label: "Support"
+        },
+
+        security: {
+            path: "/security.html",
+            label: "Security"
+        },
+
+
+        /* =====================================================
+           CUSTOMER
+           ===================================================== */
+
+        customerLogin: {
+            path: "/customer/login.html",
+            label: "Customer Sign In"
+        },
+
+        customerRegister: {
+            path: "/customer/register.html",
+            label: "Open an Account"
+        },
+
+        customerDashboard: {
+            path: "/customer/dashboard.html",
+            label: "Dashboard"
+        },
+
+        customerAccounts: {
+            path: "/customer/accounts.html",
+            label: "Accounts"
+        },
+
+        customerTransfers: {
+            path: "/customer/transfers.html",
+            label: "Transfers"
+        },
+
+        customerPayments: {
+            path: "/customer/payments.html",
+            label: "Payments"
+        },
+
+        customerCards: {
+            path: "/customer/cards.html",
+            label: "Cards"
+        },
+
+        customerTransactions: {
+            path: "/customer/transactions.html",
+            label: "Transactions"
+        },
+
+        customerProfile: {
+            path: "/customer/profile.html",
+            label: "Profile"
+        },
+
+        customerSecurity: {
+            path: "/customer/security.html",
+            label: "Security"
+        },
+
+        customerSupport: {
+            path: "/customer/support.html",
+            label: "Support"
+        },
+
+        customerNotifications: {
+            path: "/customer/notifications.html",
+            label: "Notifications"
+        },
+
+
+        /* =====================================================
+           MANAGEMENT
+           ===================================================== */
+
+        managerLogin: {
+            path: "/manager/login.html",
+            label: "Management Sign In"
+        },
+
+        managerDashboard: {
+            path: "/manager/index.html",
+            label: "Management Portal"
+        },
+
+
+        /* =====================================================
+           CASHIER
+           ===================================================== */
+
+        cashierLogin: {
+            path: "/cashier/login.html",
+            label: "Cashier Sign In"
+        },
+
+        cashierDashboard: {
+            path: "/cashier/index.html",
+            label: "Cashier Portal"
+        }
+
+    };
+
+
+    /* =========================================================
+       PUBLIC API
+       ========================================================= */
+
+    window.GTF_ROUTES = ROUTES;
+
+
+    /* =========================================================
+       GET ROUTE
+       ========================================================= */
+
+    window.gtfRoute = function (name) {
+
+        if (!ROUTES[name]) {
+
+            console.warn(
+                "[GTF Routes] Unknown route:",
+                name
+            );
+
+            return "#";
+
+        }
+
+        return ROUTES[name].path;
+
+    };
+
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    window.gtfNavigate = function (name) {
+
+        const route =
+            gtfRoute(name);
+
+        if (route && route !== "#") {
+
+            window.location.href =
+                route;
+
+        }
+
+    };
+
+
+})(window);
