@@ -8,6 +8,7 @@
   <meta name="robots" content="index, follow">
   <title>Global TrustFund | Secure Digital Banking</title>
 
+  <link rel="icon" type="image/svg+xml" href="./logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,7 +54,6 @@
       margin-inline: auto;
     }
 
-    /* Accessibility */
     .skip-link {
       position: absolute;
       top: -100px;
@@ -73,7 +73,7 @@
       outline-offset: 2px;
     }
 
-    /* ========== HEADER ========== */
+    /* Header */
     .header {
       position: sticky;
       top: 0;
@@ -98,17 +98,12 @@
       flex-shrink: 0;
     }
 
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      background: var(--green-800);
-      color: white;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: -0.5px;
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
     }
 
     .brand-text strong {
@@ -198,7 +193,6 @@
       color: var(--green-800);
     }
 
-    /* Mobile nav */
     .mobile-nav {
       display: none;
       flex-direction: column;
@@ -223,7 +217,7 @@
       color: var(--green-800);
     }
 
-    /* ========== HERO ========== */
+    /* Hero */
     .hero {
       background: linear-gradient(165deg, #f4faf7 0%, #eaf4ef 45%, #f7faf8 100%);
       padding: 72px 0 80px;
@@ -314,6 +308,11 @@
       color: var(--green-800);
     }
 
+    .dash-brand .brand-logo {
+      width: 32px;
+      height: 32px;
+    }
+
     .dash-status {
       display: flex;
       align-items: center;
@@ -398,7 +397,7 @@
       color: var(--green-800);
     }
 
-    /* ========== TRUST BAR ========== */
+    /* Trust bar */
     .trust-bar {
       background: white;
       border-bottom: 1px solid var(--border);
@@ -442,7 +441,7 @@
       color: var(--muted);
     }
 
-    /* ========== SECTIONS ========== */
+    /* Sections */
     .section { padding: 80px 0; }
 
     .section-header {
@@ -473,7 +472,6 @@
       color: var(--muted);
     }
 
-    /* Services */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -712,7 +710,7 @@
       background: var(--green-50);
     }
 
-    /* ========== FOOTER ========== */
+    /* Footer */
     .footer {
       background: var(--green-900);
       color: white;
@@ -732,10 +730,6 @@
       margin-top: 14px;
       max-width: 280px;
       line-height: 1.6;
-    }
-
-    .footer-brand .brand-mark {
-      background: rgba(255,255,255,0.12);
     }
 
     .footer-brand .brand-text strong { color: white; }
@@ -766,7 +760,7 @@
       color: rgba(255,255,255,0.35);
     }
 
-    /* ========== RESPONSIVE ========== */
+    /* Responsive */
     @media (max-width: 1024px) {
       .nav { display: none; }
       .menu-toggle { display: flex; align-items: center; justify-content: center; }
@@ -796,6 +790,11 @@
       .header-inner { height: 64px; }
 
       .header-actions .btn-outline { display: none; }
+
+      .brand-logo {
+        width: 36px;
+        height: 36px;
+      }
 
       .hero { padding: 40px 0 56px; }
 
@@ -855,11 +854,11 @@
   <header class="header">
     <div class="container header-inner">
       <a href="./index.html" class="brand" aria-label="Global TrustFund home">
-        <div class="brand-mark">GT</div>
-        <div class="brand-text">
+        <img src="./logo.svg" alt="Global TrustFund" class="brand-logo" width="42" height="42">
+        <span class="brand-text">
           <strong>Global TrustFund</strong>
           <span>Digital Banking</span>
-        </div>
+        </span>
       </a>
 
       <nav class="nav" aria-label="Primary">
@@ -907,7 +906,7 @@
         <div class="dash-card" aria-label="Banking dashboard demonstration">
           <div class="dash-header">
             <div class="dash-brand">
-              <div class="brand-mark" style="width:32px;height:32px;font-size:12px;border-radius:8px;">GT</div>
+              <img src="./logo.svg" alt="" class="brand-logo" width="32" height="32">
               Banking Dashboard
             </div>
             <div class="dash-status">Demo Mode</div>
@@ -1143,11 +1142,11 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="./index.html" class="brand">
-            <div class="brand-mark">GT</div>
-            <div class="brand-text">
+            <img src="./logo.svg" alt="Global TrustFund" class="brand-logo" width="42" height="42">
+            <span class="brand-text">
               <strong>Global TrustFund</strong>
               <span>Digital Banking</span>
-            </div>
+            </span>
           </a>
           <p>A unified digital banking platform for customers, cashiers, and authorized management teams.</p>
         </div>
@@ -1208,7 +1207,6 @@
       });
     }
 
-    // Smooth scroll for internal anchors
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener("click", e => {
         const id = link.getAttribute("href");
