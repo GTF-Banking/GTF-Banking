@@ -12,7 +12,7 @@
 
     <meta
         name="description"
-        content="Global TrustFund administrator accounts management."
+        content="Global TrustFund administrator account management."
     >
 
     <meta
@@ -24,10 +24,6 @@
         Accounts | Global TrustFund Admin
     </title>
 
-    <!-- =====================================================
-         GLOBAL GTF STYLESHEET
-         ===================================================== -->
-
     <link
         rel="stylesheet"
         href="../css/styles.css"
@@ -38,6 +34,10 @@
 
 <body>
 
+
+<!-- =========================================================
+     ADMIN APPLICATION
+     ========================================================= -->
 
 <div class="admin-page">
 
@@ -53,12 +53,12 @@
             <a
                 href="../index.html"
                 class="brand"
-                aria-label="Global TrustFund home"
+                aria-label="Global TrustFund"
             >
 
                 <img
                     src="../assets/gtf-logo.svg"
-                    alt="Global TrustFund logo"
+                    alt="Global TrustFund"
                     class="brand-logo"
                 >
 
@@ -98,7 +98,7 @@
 
 
     <!-- =====================================================
-         BODY
+         ADMIN BODY
          ===================================================== -->
 
     <div class="admin-body">
@@ -117,7 +117,7 @@
 
             <nav
                 class="admin-nav"
-                aria-label="Admin navigation"
+                aria-label="Administration navigation"
             >
 
                 <a href="./index.html">
@@ -171,17 +171,17 @@
 
 
         <!-- =================================================
-             MAIN
+             MAIN CONTENT
              ================================================= -->
 
         <main class="admin-main">
 
 
             <!-- =================================================
-                 PAGE HEADING
+                 PAGE HEADER
                  ================================================= -->
 
-            <div class="page-heading">
+            <section class="page-heading">
 
                 <div>
 
@@ -194,26 +194,21 @@
                     </h1>
 
                     <p>
-                        View and manage Global TrustFund customer
-                        accounts and account status.
+                        View, search and manage customer accounts.
                     </p>
 
                 </div>
 
 
-                <div>
+                <button
+                    type="button"
+                    class="button button-primary"
+                    id="createAccountButton"
+                >
+                    Create Account
+                </button>
 
-                    <button
-                        type="button"
-                        class="button button-primary"
-                        id="createAccountButton"
-                    >
-                        Create Account
-                    </button>
-
-                </div>
-
-            </div>
+            </section>
 
 
             <!-- =================================================
@@ -229,14 +224,13 @@
 
 
             <!-- =================================================
-                 STATISTICS
+                 ACCOUNT STATISTICS
                  ================================================= -->
 
             <section
                 class="stats-grid"
                 aria-label="Account statistics"
             >
-
 
                 <article class="stat-card">
 
@@ -252,7 +246,7 @@
                     </div>
 
                     <div class="stat-description">
-                        All registered accounts
+                        All customer accounts
                     </div>
 
                 </article>
@@ -272,7 +266,7 @@
                     </div>
 
                     <div class="stat-description">
-                        Currently active accounts
+                        Active accounts
                     </div>
 
                 </article>
@@ -317,12 +311,11 @@
 
                 </article>
 
-
             </section>
 
 
             <!-- =================================================
-                 ACCOUNTS PANEL
+                 ACCOUNTS CARD
                  ================================================= -->
 
             <section class="accounts-panel">
@@ -341,8 +334,7 @@
                         </h2>
 
                         <p>
-                            Search, filter and manage customer
-                            banking accounts.
+                            Search and filter customer account records.
                         </p>
 
                     </div>
@@ -360,17 +352,17 @@
 
 
                 <!-- =================================================
-                     FILTERS
+                     FILTER BAR
                      ================================================= -->
 
                 <div class="filters">
-
 
                     <input
                         type="search"
                         id="accountSearch"
                         class="search-input"
-                        placeholder="Search account number or customer..."
+                        placeholder="Search account or customer..."
+                        autocomplete="off"
                         aria-label="Search accounts"
                     >
 
@@ -378,7 +370,7 @@
                     <select
                         id="accountTypeFilter"
                         class="filter-select"
-                        aria-label="Filter by account type"
+                        aria-label="Account type"
                     >
 
                         <option value="">
@@ -407,7 +399,7 @@
                     <select
                         id="accountStatusFilter"
                         class="filter-select"
-                        aria-label="Filter by account status"
+                        aria-label="Account status"
                     >
 
                         <option value="">
@@ -440,7 +432,6 @@
                     >
                         Clear
                     </button>
-
 
                 </div>
 
@@ -505,7 +496,13 @@
                                         id="tableMessage"
                                     >
 
-                                        Loading accounts...
+                                        <div class="loading">
+
+                                            <span class="loading-spinner"></span>
+
+                                            Loading accounts...
+
+                                        </div>
 
                                     </div>
 
@@ -549,13 +546,12 @@
                             ‹
                         </button>
 
-                        <button
-                            type="button"
-                            class="page-button active"
-                            aria-current="page"
-                        >
-                            1
-                        </button>
+
+                        <span
+                            id="pageNumbers"
+                            class="pagination-pages"
+                        ></span>
+
 
                         <button
                             type="button"
@@ -570,12 +566,9 @@
 
                 </div>
 
-
             </section>
 
-
         </main>
-
 
     </div>
 
@@ -600,7 +593,6 @@
 
     </footer>
 
-
 </div>
 
 
@@ -623,9 +615,18 @@
 
         <div class="modal-header">
 
-            <h2 id="createAccountTitle">
-                Create Account
-            </h2>
+            <div>
+
+                <div class="eyebrow">
+                    ACCOUNT MANAGEMENT
+                </div>
+
+                <h2 id="createAccountTitle">
+                    Create Account
+                </h2>
+
+            </div>
+
 
             <button
                 type="button"
@@ -643,7 +644,6 @@
             class="form"
             id="createAccountForm"
         >
-
 
             <div class="form-group">
 
@@ -669,7 +669,6 @@
 
             <div class="form-grid">
 
-
                 <div class="form-group">
 
                     <label for="newAccountType">
@@ -684,7 +683,7 @@
                     >
 
                         <option value="">
-                            Select type
+                            Select account type
                         </option>
 
                         <option value="checking">
@@ -722,29 +721,28 @@
                     >
 
                         <option value="USD">
-                            USD
+                            USD — US Dollar
                         </option>
 
                         <option value="NGN">
-                            NGN
+                            NGN — Nigerian Naira
                         </option>
 
                         <option value="GBP">
-                            GBP
+                            GBP — British Pound
                         </option>
 
                         <option value="EUR">
-                            EUR
+                            EUR — Euro
                         </option>
 
                         <option value="CAD">
-                            CAD
+                            CAD — Canadian Dollar
                         </option>
 
                     </select>
 
                 </div>
-
 
             </div>
 
@@ -763,7 +761,7 @@
                     min="0"
                     step="0.01"
                     value="0"
-                    placeholder="0.00"
+                    inputmode="decimal"
                 >
 
             </div>
@@ -779,6 +777,7 @@
                     id="accountNotes"
                     name="notes"
                     class="form-control"
+                    rows="4"
                     placeholder="Optional account notes"
                 ></textarea>
 
@@ -802,15 +801,16 @@
                     Cancel
                 </button>
 
+
                 <button
                     type="submit"
                     class="button button-primary"
+                    id="submitCreateAccount"
                 >
                     Create Account
                 </button>
 
             </div>
-
 
         </form>
 
@@ -838,9 +838,18 @@
 
         <div class="modal-header">
 
-            <h2 id="accountDetailsTitle">
-                Account Details
-            </h2>
+            <div>
+
+                <div class="eyebrow">
+                    ACCOUNT INFORMATION
+                </div>
+
+                <h2 id="accountDetailsTitle">
+                    Account Details
+                </h2>
+
+            </div>
+
 
             <button
                 type="button"
@@ -872,7 +881,7 @@
 
 
 <!-- =========================================================
-     PAGE JAVASCRIPT
+     PAGE SCRIPT
      ========================================================= -->
 
 <script>
@@ -882,19 +891,9 @@
     "use strict";
 
 
-    /*
-     * ========================================================
-     * CONFIGURATION
-     * ========================================================
-     *
-     * Keep your Supabase credentials in the application's
-     * approved configuration file rather than placing secret
-     * server credentials in this HTML page.
-     *
-     * The admin interface should use authenticated backend
-     * requests for privileged operations.
-     */
-
+    /* ========================================================
+       STATE
+       ======================================================== */
 
     const state = {
 
@@ -904,94 +903,155 @@
 
         currentPage: 1,
 
-        pageSize: 10
+        pageSize: 10,
+
+        loading: false
 
     };
 
+
+    /* ========================================================
+       DOM
+       ======================================================== */
 
     const elements = {
 
         tableBody:
-            document.getElementById("accountsTableBody"),
-
-        tableMessage:
-            document.getElementById("tableMessage"),
+            document.getElementById(
+                "accountsTableBody"
+            ),
 
         resultCount:
-            document.getElementById("resultCount"),
+            document.getElementById(
+                "resultCount"
+            ),
 
         search:
-            document.getElementById("accountSearch"),
+            document.getElementById(
+                "accountSearch"
+            ),
 
         typeFilter:
-            document.getElementById("accountTypeFilter"),
+            document.getElementById(
+                "accountTypeFilter"
+            ),
 
         statusFilter:
-            document.getElementById("accountStatusFilter"),
+            document.getElementById(
+                "accountStatusFilter"
+            ),
 
         clearFilters:
-            document.getElementById("clearFilters"),
+            document.getElementById(
+                "clearFilters"
+            ),
 
         refresh:
-            document.getElementById("refreshAccounts"),
+            document.getElementById(
+                "refreshAccounts"
+            ),
 
         previous:
-            document.getElementById("previousPage"),
+            document.getElementById(
+                "previousPage"
+            ),
 
         next:
-            document.getElementById("nextPage"),
+            document.getElementById(
+                "nextPage"
+            ),
 
-        pagination:
-            document.getElementById("pagination"),
+        pageNumbers:
+            document.getElementById(
+                "pageNumbers"
+            ),
 
         total:
-            document.getElementById("totalAccounts"),
+            document.getElementById(
+                "totalAccounts"
+            ),
 
         active:
-            document.getElementById("activeAccounts"),
+            document.getElementById(
+                "activeAccounts"
+            ),
 
         pending:
-            document.getElementById("pendingAccounts"),
+            document.getElementById(
+                "pendingAccounts"
+            ),
 
         suspended:
-            document.getElementById("suspendedAccounts"),
+            document.getElementById(
+                "suspendedAccounts"
+            ),
 
         alert:
-            document.getElementById("adminAlert"),
+            document.getElementById(
+                "adminAlert"
+            ),
 
         createButton:
-            document.getElementById("createAccountButton"),
+            document.getElementById(
+                "createAccountButton"
+            ),
 
         createModal:
-            document.getElementById("createAccountModal"),
+            document.getElementById(
+                "createAccountModal"
+            ),
 
         closeCreate:
-            document.getElementById("closeCreateAccount"),
+            document.getElementById(
+                "closeCreateAccount"
+            ),
 
         cancelCreate:
-            document.getElementById("cancelCreateAccount"),
+            document.getElementById(
+                "cancelCreateAccount"
+            ),
 
         createForm:
-            document.getElementById("createAccountForm"),
+            document.getElementById(
+                "createAccountForm"
+            ),
+
+        createMessage:
+            document.getElementById(
+                "createAccountMessage"
+            ),
+
+        submitCreate:
+            document.getElementById(
+                "submitCreateAccount"
+            ),
 
         detailsModal:
-            document.getElementById("accountDetailsModal"),
+            document.getElementById(
+                "accountDetailsModal"
+            ),
 
         closeDetails:
-            document.getElementById("closeAccountDetails"),
+            document.getElementById(
+                "closeAccountDetails"
+            ),
 
         detailsContent:
-            document.getElementById("accountDetailsContent")
+            document.getElementById(
+                "accountDetailsContent"
+            ),
+
+        customerId:
+            document.getElementById(
+                "customerId"
+            )
 
     };
 
 
-    /*
-     * ========================================================
-     * HELPERS
-     * ========================================================
-     */
-
+    /* ========================================================
+       SAFETY HELPERS
+       ======================================================== */
 
     function escapeHtml(value) {
 
@@ -1005,12 +1065,34 @@
     }
 
 
+    function normalizeStatus(status) {
+
+        return String(
+            status || "pending"
+        )
+            .trim()
+            .toLowerCase();
+
+    }
+
+
+    function normalizeType(type) {
+
+        return String(
+            type || ""
+        )
+            .trim()
+            .toLowerCase();
+
+    }
+
+
     function formatCurrency(
         amount,
         currency = "USD"
     ) {
 
-        const number =
+        const numericAmount =
             Number(amount) || 0;
 
         try {
@@ -1019,13 +1101,17 @@
                 undefined,
                 {
                     style: "currency",
-                    currency
+                    currency:
+                        String(currency || "USD")
+                            .toUpperCase()
                 }
-            ).format(number);
+            ).format(
+                numericAmount
+            );
 
         } catch {
 
-            return `${currency} ${number.toFixed(2)}`;
+            return `${currency} ${numericAmount.toFixed(2)}`;
 
         }
 
@@ -1063,8 +1149,13 @@
     }
 
 
+    /* ========================================================
+       ALERTS
+       ======================================================== */
+
     function showAlert(
-        message
+        message,
+        type = "warning"
     ) {
 
         if (!elements.alert) {
@@ -1074,9 +1165,8 @@
         elements.alert.textContent =
             message;
 
-        elements.alert.classList.add(
-            "show"
-        );
+        elements.alert.className =
+            `admin-alert show alert-${type}`;
 
     }
 
@@ -1094,25 +1184,34 @@
     }
 
 
-    function normalizeStatus(
-        status
-    ) {
+    /* ========================================================
+       STATUS BADGE
+       ======================================================== */
 
-        return String(
-            status || "pending"
-        ).toLowerCase();
-
-    }
-
-
-    function statusBadge(
-        status
-    ) {
+    function statusBadge(status) {
 
         const normalized =
             normalizeStatus(status);
 
-        const classMap = {
+
+        const labels = {
+
+            active:
+                "Active",
+
+            pending:
+                "Pending",
+
+            suspended:
+                "Suspended",
+
+            closed:
+                "Closed"
+
+        };
+
+
+        const classes = {
 
             active:
                 "badge-success",
@@ -1128,39 +1227,40 @@
 
         };
 
-        const badgeClass =
-            classMap[normalized] ||
-            "badge-neutral";
-
-        const label =
-            normalized
-                .charAt(0)
-                .toUpperCase() +
-            normalized.slice(1);
 
         return `
-            <span class="badge ${badgeClass}">
-                ${escapeHtml(label)}
+
+            <span
+                class="badge ${
+                    classes[normalized] ||
+                    "badge-neutral"
+                }"
+            >
+                ${escapeHtml(
+                    labels[normalized] ||
+                    normalized ||
+                    "Unknown"
+                )}
             </span>
+
         `;
 
     }
 
 
-    /*
-     * ========================================================
-     * RENDER
-     * ========================================================
-     */
-
+    /* ========================================================
+       STATISTICS
+       ======================================================== */
 
     function updateStatistics() {
 
         const accounts =
             state.accounts;
 
+
         elements.total.textContent =
             accounts.length;
+
 
         elements.active.textContent =
             accounts.filter(
@@ -1170,6 +1270,7 @@
                     ) === "active"
             ).length;
 
+
         elements.pending.textContent =
             accounts.filter(
                 account =>
@@ -1177,6 +1278,7 @@
                         account.status
                     ) === "pending"
             ).length;
+
 
         elements.suspended.textContent =
             accounts.filter(
@@ -1189,6 +1291,10 @@
     }
 
 
+    /* ========================================================
+       FILTERING
+       ======================================================== */
+
     function applyFilters() {
 
         const search =
@@ -1196,15 +1302,17 @@
                 .trim()
                 .toLowerCase();
 
-        const type =
-            elements.typeFilter.value
-                .trim()
-                .toLowerCase();
 
-        const status =
-            elements.statusFilter.value
-                .trim()
-                .toLowerCase();
+        const selectedType =
+            normalizeType(
+                elements.typeFilter.value
+            );
+
+
+        const selectedStatus =
+            normalizeStatus(
+                elements.statusFilter.value
+            );
 
 
         state.filteredAccounts =
@@ -1223,7 +1331,9 @@
 
                         account.customer_email,
 
-                        account.customerEmail
+                        account.customerEmail,
+
+                        account.email
 
                     ]
                         .filter(Boolean)
@@ -1232,11 +1342,10 @@
 
 
                     const accountType =
-                        String(
+                        normalizeType(
                             account.account_type ||
-                            account.accountType ||
-                            ""
-                        ).toLowerCase();
+                            account.accountType
+                        );
 
 
                     const accountStatus =
@@ -1245,48 +1354,91 @@
                         );
 
 
+                    const matchesSearch =
+                        !search ||
+                        searchable.includes(
+                            search
+                        );
+
+
+                    const matchesType =
+                        !selectedType ||
+                        accountType ===
+                        selectedType;
+
+
+                    const matchesStatus =
+                        !selectedStatus ||
+                        accountStatus ===
+                        selectedStatus;
+
+
                     return (
-
-                        (!search ||
-                            searchable.includes(
-                                search
-                            ))
-
-                        &&
-
-                        (!type ||
-                            accountType === type)
-
-                        &&
-
-                        (!status ||
-                            accountStatus === status)
-
+                        matchesSearch &&
+                        matchesType &&
+                        matchesStatus
                     );
 
                 }
             );
 
 
-        state.currentPage = 1;
+        state.currentPage =
+            1;
+
 
         renderTable();
 
     }
 
 
+    /* ========================================================
+       TABLE
+       ======================================================== */
+
     function renderTable() {
 
         const accounts =
             state.filteredAccounts;
 
+
+        const total =
+            accounts.length;
+
+
+        const totalPages =
+            Math.max(
+                1,
+                Math.ceil(
+                    total /
+                    state.pageSize
+                )
+            );
+
+
+        if (
+            state.currentPage >
+            totalPages
+        ) {
+
+            state.currentPage =
+                totalPages;
+
+        }
+
+
         const start =
-            (state.currentPage - 1) *
+            (
+                state.currentPage -
+                1
+            ) *
             state.pageSize;
+
 
         const end =
             start +
             state.pageSize;
+
 
         const visible =
             accounts.slice(
@@ -1314,8 +1466,8 @@
                             </h3>
 
                             <p>
-                                There are no accounts matching
-                                the current search and filters.
+                                No account records match
+                                your current filters.
                             </p>
 
                         </div>
@@ -1329,20 +1481,20 @@
         } else {
 
             elements.tableBody.innerHTML =
-                visible.map(
-                    renderAccountRow
-                ).join("");
+                visible
+                    .map(
+                        renderAccountRow
+                    )
+                    .join("");
 
         }
 
-
-        const total =
-            accounts.length;
 
         const first =
             total === 0
                 ? 0
                 : start + 1;
+
 
         const last =
             Math.min(
@@ -1352,10 +1504,14 @@
 
 
         elements.resultCount.textContent =
-            `Showing ${first}–${last} of ${total} accounts`;
+            total === 0
+                ? "Showing 0 accounts"
+                : `Showing ${first}–${last} of ${total} accounts`;
 
 
-        renderPagination();
+        renderPagination(
+            totalPages
+        );
 
     }
 
@@ -1364,39 +1520,53 @@
         account
     ) {
 
+        const id =
+            account.id ||
+            account.account_id ||
+            "";
+
+
         const accountNumber =
             account.account_number ||
             account.accountNumber ||
             "—";
+
 
         const customerName =
             account.customer_name ||
             account.customerName ||
             "Unknown customer";
 
+
         const customerEmail =
             account.customer_email ||
             account.customerEmail ||
+            account.email ||
             "";
+
 
         const accountType =
             account.account_type ||
             account.accountType ||
             "—";
 
+
         const balance =
             account.balance ??
             account.current_balance ??
             0;
 
+
         const currency =
             account.currency ||
             "USD";
+
 
         const status =
             normalizeStatus(
                 account.status
             );
+
 
         const created =
             account.created_at ||
@@ -1410,7 +1580,11 @@
                 <td>
 
                     <span class="text-green fw-extra-bold">
-                        ${escapeHtml(accountNumber)}
+
+                        ${escapeHtml(
+                            accountNumber
+                        )}
+
                     </span>
 
                 </td>
@@ -1419,16 +1593,28 @@
                 <td>
 
                     <strong>
-                        ${escapeHtml(customerName)}
+
+                        ${escapeHtml(
+                            customerName
+                        )}
+
                     </strong>
+
 
                     ${
                         customerEmail
                             ? `
+
                                 <br>
+
                                 <span class="text-muted">
-                                    ${escapeHtml(customerEmail)}
+
+                                    ${escapeHtml(
+                                        customerEmail
+                                    )}
+
                                 </span>
+
                               `
                             : ""
                     }
@@ -1439,7 +1625,11 @@
                 <td>
 
                     <span class="fw-bold">
-                        ${escapeHtml(accountType)}
+
+                        ${escapeHtml(
+                            accountType
+                        )}
+
                     </span>
 
                 </td>
@@ -1448,31 +1638,45 @@
                 <td>
 
                     <span class="fw-extra-bold">
+
                         ${escapeHtml(
                             formatCurrency(
                                 balance,
                                 currency
                             )
                         )}
+
                     </span>
 
                 </td>
 
 
                 <td>
-                    ${escapeHtml(currency)}
-                </td>
 
-
-                <td>
-                    ${statusBadge(status)}
-                </td>
-
-
-                <td>
                     ${escapeHtml(
-                        formatDate(created)
+                        currency
                     )}
+
+                </td>
+
+
+                <td>
+
+                    ${statusBadge(
+                        status
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHtml(
+                        formatDate(
+                            created
+                        )
+                    )}
+
                 </td>
 
 
@@ -1481,12 +1685,10 @@
                     <button
                         type="button"
                         class="button button-outline button-small"
-                        data-account-id="${escapeHtml(
-                            account.id ||
-                            account.account_id ||
-                            ""
-                        )}"
                         data-action="view-account"
+                        data-account-id="${escapeHtml(
+                            id
+                        )}"
                     >
                         View
                     </button>
@@ -1500,38 +1702,60 @@
     }
 
 
-    function renderPagination() {
+    /* ========================================================
+       PAGINATION
+       ======================================================== */
 
-        const totalPages =
+    function renderPagination(
+        totalPages
+    ) {
+
+        elements.pageNumbers.innerHTML =
+            "";
+
+
+        const maxButtons =
+            5;
+
+
+        let startPage =
             Math.max(
                 1,
-                Math.ceil(
-                    state.filteredAccounts.length /
-                    state.pageSize
-                )
+                state.currentPage -
+                2
             );
 
 
-        state.currentPage =
+        let endPage =
             Math.min(
-                state.currentPage,
-                totalPages
+                totalPages,
+                startPage +
+                maxButtons -
+                1
             );
 
 
-        elements.pagination
-            .querySelectorAll(
-                ".dynamic-page"
-            )
-            .forEach(
-                element =>
-                    element.remove()
-            );
+        if (
+            endPage -
+            startPage +
+            1 <
+            maxButtons
+        ) {
+
+            startPage =
+                Math.max(
+                    1,
+                    endPage -
+                    maxButtons +
+                    1
+                );
+
+        }
 
 
         for (
-            let page = 1;
-            page <= totalPages;
+            let page = startPage;
+            page <= endPage;
             page++
         ) {
 
@@ -1540,11 +1764,18 @@
                     "button"
                 );
 
+
             button.type =
                 "button";
 
+
             button.className =
-                "page-button dynamic-page";
+                "page-button";
+
+
+            button.textContent =
+                page;
+
 
             if (
                 page ===
@@ -1562,8 +1793,6 @@
 
             }
 
-            button.textContent =
-                page;
 
             button.addEventListener(
                 "click",
@@ -1578,7 +1807,7 @@
             );
 
 
-            elements.next.before(
+            elements.pageNumbers.appendChild(
                 button
             );
 
@@ -1588,27 +1817,111 @@
         elements.previous.disabled =
             state.currentPage <= 1;
 
+
         elements.next.disabled =
-            state.currentPage >= totalPages;
+            state.currentPage >=
+            totalPages;
 
     }
 
 
-    /*
-     * ========================================================
-     * DATA
-     * ========================================================
-     *
-     * Connect this function to your authenticated backend/API.
-     *
-     * Do not put a Supabase service-role/secret key in this
-     * browser page.
-     */
+    /* ========================================================
+       BACKEND API
+       ======================================================== */
 
+    async function apiRequest(
+        endpoint,
+        options = {}
+    ) {
+
+        const response =
+            await fetch(
+                endpoint,
+                {
+                    credentials:
+                        "include",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json",
+
+                        ...(options.body
+                            ? {
+                                "Content-Type":
+                                    "application/json"
+                            }
+                            : {}),
+
+                        ...(options.headers ||
+                            {})
+
+                    },
+
+                    ...options
+                }
+            );
+
+
+        let data = null;
+
+
+        try {
+
+            data =
+                await response.json();
+
+        } catch {
+
+            data = null;
+
+        }
+
+
+        if (!response.ok) {
+
+            const message =
+                data?.message ||
+                data?.error ||
+                `Request failed with status ${response.status}.`;
+
+
+            throw new Error(
+                message
+            );
+
+        }
+
+
+        return data;
+
+    }
+
+
+    /* ========================================================
+       LOAD ACCOUNTS
+       ======================================================== */
 
     async function loadAccounts() {
 
+        if (
+            state.loading
+        ) {
+
+            return;
+
+        }
+
+
+        state.loading =
+            true;
+
+
         hideAlert();
+
+
+        elements.refresh.disabled =
+            true;
 
 
         elements.tableBody.innerHTML = `
@@ -1639,38 +1952,43 @@
         try {
 
             /*
-             * Replace this request with your authenticated
-             * backend endpoint when the admin API is connected.
+             * Your backend should expose:
              *
-             * Example:
+             * GET /api/accounts
              *
-             * const response =
-             *     await fetch("/api/admin/accounts", {
-             *         credentials: "include"
-             *     });
+             * or:
              *
-             * if (!response.ok) {
-             *     throw new Error(
-             *         "Unable to load accounts."
-             *     );
-             * }
+             * GET /api/admin/accounts
              *
-             * state.accounts =
-             *     await response.json();
+             *
+             * Do not put a Supabase service-role key
+             * in this browser file.
              */
 
 
-            /*
-             * Temporary empty state.
-             *
-             * This prevents the page from inventing banking
-             * records before the real backend is connected.
-             */
+            const data =
+                await apiRequest(
+                    "/api/admin/accounts"
+                );
 
-            state.accounts = [];
+
+            const accounts =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(
+                        data?.accounts
+                    )
+                        ? data.accounts
+                        : [];
+
+
+            state.accounts =
+                accounts;
+
 
             state.filteredAccounts =
-                [];
+                [...accounts];
+
 
             updateStatistics();
 
@@ -1680,35 +1998,202 @@
         } catch (error) {
 
             console.error(
-                "Accounts loading error:",
+                "Account loading error:",
                 error
             );
 
-            showAlert(
-                "Unable to load accounts. Please try again."
-            );
+
+            /*
+             * If the backend endpoint has not yet
+             * been installed, display a clean message
+             * instead of creating fake banking records.
+             */
+
 
             state.accounts =
                 [];
 
+
             state.filteredAccounts =
                 [];
+
 
             updateStatistics();
 
             renderTable();
+
+
+            showAlert(
+                error.message ||
+                "Unable to load accounts. Please try again."
+            );
+
+        } finally {
+
+            state.loading =
+                false;
+
+
+            elements.refresh.disabled =
+                false;
 
         }
 
     }
 
 
-    /*
-     * ========================================================
-     * MODALS
-     * ========================================================
-     */
+    /* ========================================================
+       LOAD CUSTOMERS FOR ACCOUNT CREATION
+       ======================================================== */
 
+    async function loadCustomers() {
+
+        if (
+            !elements.customerId
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const data =
+                await apiRequest(
+                    "/api/admin/customers"
+                );
+
+
+            const customers =
+                Array.isArray(data)
+                    ? data
+                    : Array.isArray(
+                        data?.customers
+                    )
+                        ? data.customers
+                        : [];
+
+
+            elements.customerId.innerHTML = `
+
+                <option value="">
+                    Select customer
+                </option>
+
+            `;
+
+
+            customers.forEach(
+                customer => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        customer.id ||
+                        customer.customer_id ||
+                        "";
+
+
+                    option.textContent =
+                        customer.full_name ||
+                        customer.name ||
+                        customer.email ||
+                        "Customer";
+
+
+                    elements.customerId.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Customer loading error:",
+                error
+            );
+
+
+            elements.customerId.innerHTML = `
+
+                <option value="">
+                    Unable to load customers
+                </option>
+
+            `;
+
+        }
+
+    }
+
+
+    /* ========================================================
+       CREATE ACCOUNT
+       ======================================================== */
+
+    async function createAccount(
+        formData
+    ) {
+
+        const payload = {
+
+            customer_id:
+                formData.get(
+                    "customer_id"
+                ),
+
+            account_type:
+                formData.get(
+                    "account_type"
+                ),
+
+            currency:
+                formData.get(
+                    "currency"
+                ),
+
+            opening_balance:
+                Number(
+                    formData.get(
+                        "opening_balance"
+                    ) || 0
+                ),
+
+            notes:
+                formData.get(
+                    "notes"
+                ) || ""
+
+        };
+
+
+        return apiRequest(
+            "/api/admin/accounts",
+            {
+                method:
+                    "POST",
+
+                body:
+                    JSON.stringify(
+                        payload
+                    )
+            }
+        );
+
+    }
+
+
+    /* ========================================================
+       MODALS
+       ======================================================== */
 
     function openModal(
         modal
@@ -1718,13 +2203,20 @@
             return;
         }
 
+
         modal.classList.add(
             "active"
         );
 
+
         modal.setAttribute(
             "aria-hidden",
             "false"
+        );
+
+
+        document.body.classList.add(
+            "modal-open"
         );
 
     }
@@ -1738,24 +2230,229 @@
             return;
         }
 
+
         modal.classList.remove(
             "active"
         );
+
 
         modal.setAttribute(
             "aria-hidden",
             "true"
         );
 
+
+        if (
+            !document.querySelector(
+                ".modal-overlay.active"
+            )
+        ) {
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+        }
+
     }
 
 
-    /*
-     * ========================================================
-     * EVENT HANDLERS
-     * ========================================================
-     */
+    /* ========================================================
+       ACCOUNT DETAILS
+       ======================================================== */
 
+    function showAccountDetails(
+        account
+    ) {
+
+        const accountNumber =
+            account.account_number ||
+            account.accountNumber ||
+            "Account";
+
+
+        const customerName =
+            account.customer_name ||
+            account.customerName ||
+            "—";
+
+
+        const customerEmail =
+            account.customer_email ||
+            account.customerEmail ||
+            account.email ||
+            "—";
+
+
+        const accountType =
+            account.account_type ||
+            account.accountType ||
+            "—";
+
+
+        const balance =
+            account.balance ??
+            account.current_balance ??
+            0;
+
+
+        const currency =
+            account.currency ||
+            "USD";
+
+
+        const created =
+            account.created_at ||
+            account.createdAt;
+
+
+        elements.detailsContent.innerHTML = `
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            ACCOUNT
+                        </div>
+
+                        <h3>
+                            ${escapeHtml(
+                                accountNumber
+                            )}
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                        ${statusBadge(
+                            account.status
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="divider"></div>
+
+
+                <div class="detail-list">
+
+                    <div class="detail-row">
+
+                        <span>
+                            Customer
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                customerName
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>
+                            Email
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                customerEmail
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>
+                            Account Type
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                accountType
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>
+                            Balance
+                        </span>
+
+                        <strong class="text-green">
+                            ${escapeHtml(
+                                formatCurrency(
+                                    balance,
+                                    currency
+                                )
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>
+                            Currency
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                currency
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-row">
+
+                        <span>
+                            Created
+                        </span>
+
+                        <strong>
+                            ${escapeHtml(
+                                formatDate(
+                                    created
+                                )
+                            )}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        openModal(
+            elements.detailsModal
+        );
+
+    }
+
+
+    /* ========================================================
+       EVENTS
+       ======================================================== */
 
     elements.search.addEventListener(
         "input",
@@ -1850,7 +2547,16 @@
 
     elements.createButton.addEventListener(
         "click",
-        () => {
+        async () => {
+
+            document.getElementById(
+                "createAccountMessage"
+            ).hidden =
+                true;
+
+
+            await loadCustomers();
+
 
             openModal(
                 elements.createModal
@@ -1911,7 +2617,7 @@
             }
 
 
-            const accountId =
+            const id =
                 button.dataset.accountId;
 
 
@@ -1923,7 +2629,7 @@
                             item.account_id ||
                             ""
                         ) ===
-                        String(accountId)
+                        String(id)
                 );
 
 
@@ -1932,65 +2638,8 @@
             }
 
 
-            elements.detailsContent.innerHTML = `
-
-                <div class="card">
-
-                    <h3>
-                        ${escapeHtml(
-                            account.account_number ||
-                            account.accountNumber ||
-                            "Account"
-                        )}
-                    </h3>
-
-                    <div class="divider"></div>
-
-                    <p>
-                        <strong>Customer:</strong>
-                        ${escapeHtml(
-                            account.customer_name ||
-                            account.customerName ||
-                            "—"
-                        )}
-                    </p>
-
-                    <p>
-                        <strong>Account Type:</strong>
-                        ${escapeHtml(
-                            account.account_type ||
-                            account.accountType ||
-                            "—"
-                        )}
-                    </p>
-
-                    <p>
-                        <strong>Balance:</strong>
-                        ${escapeHtml(
-                            formatCurrency(
-                                account.balance ||
-                                account.current_balance ||
-                                0,
-                                account.currency ||
-                                "USD"
-                            )
-                        )}
-                    </p>
-
-                    <p>
-                        <strong>Status:</strong>
-                        ${statusBadge(
-                            account.status
-                        )}
-                    </p>
-
-                </div>
-
-            `;
-
-
-            openModal(
-                elements.detailsModal
+            showAccountDetails(
+                account
             );
 
         }
@@ -2040,6 +2689,10 @@
     );
 
 
+    /* ========================================================
+       CREATE FORM
+       ======================================================== */
+
     elements.createForm.addEventListener(
         "submit",
         async event => {
@@ -2047,51 +2700,91 @@
             event.preventDefault();
 
 
-            /*
-             * Connect this form to the authenticated
-             * admin backend endpoint.
-             *
-             * Example:
-             *
-             * const response = await fetch(
-             *     "/api/admin/accounts",
-             *     {
-             *         method: "POST",
-             *         credentials: "include",
-             *         headers: {
-             *             "Content-Type":
-             *                 "application/json"
-             *         },
-             *         body: JSON.stringify(
-             *             Object.fromEntries(
-             *                 new FormData(
-             *                     elements.createForm
-             *                 )
-             *             )
-             *         )
-             *     }
-             * );
-             */
+            const message =
+                elements.createMessage;
 
 
-            showAlert(
-                "Account creation is waiting for the authenticated backend API connection."
-            );
+            try {
+
+                elements.submitCreate.disabled =
+                    true;
 
 
-            closeModal(
-                elements.createModal
-            );
+                elements.submitCreate.textContent =
+                    "Creating...";
+
+
+                message.hidden =
+                    true;
+
+
+                const formData =
+                    new FormData(
+                        elements.createForm
+                    );
+
+
+                await createAccount(
+                    formData
+                );
+
+
+                elements.createForm.reset();
+
+
+                closeModal(
+                    elements.createModal
+                );
+
+
+                showAlert(
+                    "Account created successfully.",
+                    "success"
+                );
+
+
+                await loadAccounts();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Create account error:",
+                    error
+                );
+
+
+                message.hidden =
+                    false;
+
+
+                message.textContent =
+                    error.message ||
+                    "Unable to create account.";
+
+
+            } finally {
+
+                elements.submitCreate.disabled =
+                    false;
+
+
+                elements.submitCreate.textContent =
+                    "Create Account";
+
+            }
 
         }
     );
 
 
-    /*
-     * ========================================================
-     * INITIALIZATION
-     * ========================================================
-     */
+    /* ========================================================
+       INITIALIZATION
+       ======================================================== */
+
+    updateStatistics();
+
+    renderTable();
 
     loadAccounts();
 
