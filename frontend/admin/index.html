@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -12,7 +11,7 @@
 
     <meta
         name="description"
-        content="Global TrustFund administrator dashboard."
+        content="Global TrustFund administrator dashboard for managing customers, accounts, transactions, compliance and system activity."
     >
 
     <meta
@@ -20,9 +19,7 @@
         content="#0b3d2e"
     >
 
-    <title>
-        Admin Dashboard | Global TrustFund
-    </title>
+    <title>Admin Dashboard | Global TrustFund</title>
 
     <link
         rel="stylesheet"
@@ -30,21 +27,45 @@
     >
 
     <style>
+        /* =========================================================
+           GLOBAL TRUSTFUND
+           ADMIN DASHBOARD
+           ========================================================= */
 
         :root {
-            --gtf-green: #0b3d2e;
-            --gtf-dark: #092f24;
-            --gtf-light: #176b48;
-            --gtf-bg: #f4f8f6;
-            --gtf-soft: #eaf3ee;
-            --gtf-border: #dfe8e3;
-            --gtf-text: #18372c;
-            --gtf-muted: #7c8983;
+            --gtf-green-950: #06251c;
+            --gtf-green-900: #083126;
+            --gtf-green-800: #0b3d2e;
+            --gtf-green-700: #10543e;
+            --gtf-green-600: #176b48;
+            --gtf-green-500: #21875b;
+            --gtf-green-100: #e7f3ed;
+            --gtf-green-050: #f3f9f6;
+
+            --gtf-bg: #f5f8f6;
             --gtf-white: #ffffff;
-            --gtf-warning: #876b27;
-            --gtf-warning-bg: #fbf5df;
-            --gtf-danger: #8b4444;
-            --gtf-danger-bg: #f9eded;
+
+            --gtf-text: #18372c;
+            --gtf-text-strong: #0b2d22;
+            --gtf-muted: #74827c;
+            --gtf-muted-light: #9aa59f;
+
+            --gtf-border: #dfe8e3;
+            --gtf-border-light: #edf2ef;
+
+            --gtf-warning: #8b6a1c;
+            --gtf-warning-bg: #fff7df;
+
+            --gtf-danger: #a04747;
+            --gtf-danger-bg: #fceded;
+
+            --gtf-info: #3f6280;
+            --gtf-info-bg: #edf4f8;
+
+            --gtf-shadow:
+                0 8px 28px rgba(8, 49, 38, .045);
+
+            --gtf-radius: 12px;
         }
 
         * {
@@ -53,6 +74,7 @@
 
         html {
             min-height: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -66,6 +88,13 @@
                 Arial,
                 Helvetica,
                 sans-serif;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        a {
+            color: inherit;
         }
 
         button,
@@ -74,9 +103,13 @@
             font: inherit;
         }
 
-        /* =====================================================
-           LAYOUT
-           ===================================================== */
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* =========================================================
+           PAGE
+           ========================================================= */
 
         .admin-page {
             min-height: 100vh;
@@ -85,26 +118,33 @@
             flex-direction: column;
         }
 
-        /* =====================================================
+        /* =========================================================
            HEADER
-           ===================================================== */
+           ========================================================= */
 
         .admin-header {
-            background: var(--gtf-white);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+
+            background:
+                rgba(255, 255, 255, .97);
 
             border-bottom:
                 1px solid
                 var(--gtf-border);
+
+            backdrop-filter: blur(12px);
         }
 
         .admin-header-inner {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1320px;
 
-            min-height: 76px;
+            min-height: 72px;
 
             margin: 0 auto;
-            padding: 12px 20px;
+            padding: 10px 22px;
 
             display: flex;
             align-items: center;
@@ -117,16 +157,16 @@
             display: inline-flex;
             align-items: center;
 
-            gap: 10px;
+            gap: 11px;
 
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
             text-decoration: none;
         }
 
         .brand-logo {
-            width: 45px;
-            height: 45px;
+            width: 43px;
+            height: 43px;
 
             display: block;
 
@@ -139,16 +179,16 @@
         }
 
         .brand-text strong {
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
             font-size: 14px;
             font-weight: 800;
 
-            line-height: 1.2;
+            line-height: 1.15;
         }
 
         .brand-text small {
-            margin-top: 3px;
+            margin-top: 4px;
 
             color: var(--gtf-muted);
 
@@ -159,58 +199,80 @@
         .admin-header-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+
+            gap: 10px;
         }
 
         .admin-badge {
-            padding: 6px 9px;
+            display: inline-flex;
+            align-items: center;
 
-            border-radius: 5px;
+            min-height: 26px;
 
-            background: var(--gtf-soft);
-            color: var(--gtf-green);
+            padding: 0 9px;
+
+            border:
+                1px solid
+                #cce1d6;
+
+            border-radius: 6px;
+
+            background: var(--gtf-green-100);
+            color: var(--gtf-green-700);
 
             font-size: 7px;
             font-weight: 800;
 
-            letter-spacing: .5px;
+            letter-spacing: .6px;
         }
 
         .admin-user {
+            max-width: 190px;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
             color: var(--gtf-muted);
 
             font-size: 8px;
+            font-weight: 600;
         }
 
-        /* =====================================================
-           BODY LAYOUT
-           ===================================================== */
+        /* =========================================================
+           BODY
+           ========================================================= */
 
         .admin-body {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1320px;
 
             margin: 0 auto;
 
-            padding: 25px 20px 50px;
+            padding: 24px 22px 48px;
 
             display: grid;
 
             grid-template-columns:
-                205px
+                210px
                 minmax(0, 1fr);
 
             gap: 24px;
+
+            flex: 1;
         }
 
-        /* =====================================================
+        /* =========================================================
            SIDEBAR
-           ===================================================== */
+           ========================================================= */
 
         .admin-sidebar {
             align-self: start;
 
-            padding: 15px;
+            position: sticky;
+            top: 96px;
+
+            padding: 14px;
 
             background: var(--gtf-white);
 
@@ -218,28 +280,27 @@
                 1px solid
                 var(--gtf-border);
 
-            border-radius: 12px;
+            border-radius: var(--gtf-radius);
 
-            box-shadow:
-                0 8px 24px
-                rgba(11,61,46,.04);
+            box-shadow: var(--gtf-shadow);
         }
 
         .sidebar-title {
-            margin: 3px 8px 12px;
+            margin: 4px 8px 11px;
 
-            color: var(--gtf-muted);
+            color: var(--gtf-muted-light);
 
             font-size: 7px;
             font-weight: 800;
 
             letter-spacing: 1px;
+
             text-transform: uppercase;
         }
 
         .admin-nav {
             display: grid;
-            gap: 4px;
+            gap: 3px;
         }
 
         .admin-nav a {
@@ -258,22 +319,39 @@
             font-weight: 700;
 
             text-decoration: none;
+
+            transition:
+                background .15s ease,
+                color .15s ease,
+                transform .15s ease;
         }
 
         .admin-nav a:hover {
-            background: var(--gtf-soft);
-            color: var(--gtf-green);
+            background: var(--gtf-green-050);
+            color: var(--gtf-green-700);
+
+            transform: translateX(1px);
         }
 
         .admin-nav a.active {
-            background: var(--gtf-green);
+            background: var(--gtf-green-800);
             color: #ffffff;
+        }
+
+        .nav-icon {
+            width: 20px;
+
+            margin-right: 7px;
+
+            text-align: center;
+
+            font-size: 10px;
         }
 
         .sidebar-divider {
             height: 1px;
 
-            margin: 12px 4px;
+            margin: 11px 4px;
 
             background: var(--gtf-border);
         }
@@ -284,18 +362,23 @@
 
         .admin-nav a.signout:hover {
             background: var(--gtf-danger-bg);
+            color: var(--gtf-danger);
         }
 
-        /* =====================================================
+        /* =========================================================
            MAIN
-           ===================================================== */
+           ========================================================= */
 
         .admin-main {
             min-width: 0;
         }
 
+        /* =========================================================
+           PAGE HEADING
+           ========================================================= */
+
         .page-heading {
-            margin-bottom: 22px;
+            margin-bottom: 20px;
 
             display: flex;
             align-items: flex-end;
@@ -304,25 +387,35 @@
             gap: 20px;
         }
 
+        .heading-copy {
+            min-width: 0;
+        }
+
         .eyebrow {
-            color: var(--gtf-light);
+            display: block;
+
+            color: var(--gtf-green-600);
 
             font-size: 7px;
             font-weight: 800;
 
-            letter-spacing: 1.2px;
+            letter-spacing: 1.3px;
         }
 
         .page-heading h1 {
             margin: 6px 0 5px;
 
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
             font-size: 28px;
-            line-height: 1.2;
+            font-weight: 800;
+
+            line-height: 1.15;
         }
 
         .page-heading p {
+            max-width: 650px;
+
             margin: 0;
 
             color: var(--gtf-muted);
@@ -334,37 +427,57 @@
         .refresh-button {
             min-height: 36px;
 
-            padding: 0 13px;
+            padding: 0 14px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
 
             border:
                 1px solid
                 var(--gtf-border);
 
-            border-radius: 6px;
+            border-radius: 7px;
 
             background: #ffffff;
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
             font-size: 8px;
             font-weight: 700;
 
             cursor: pointer;
+
+            white-space: nowrap;
+
+            transition:
+                background .15s ease,
+                border-color .15s ease;
         }
 
         .refresh-button:hover {
-            background: var(--gtf-soft);
+            background: var(--gtf-green-050);
+            border-color: #c9ddd2;
         }
 
-        /* =====================================================
+        .refresh-button:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        /* =========================================================
            ALERT
-           ===================================================== */
+           ========================================================= */
 
         .admin-alert {
             display: none;
 
-            margin-bottom: 18px;
+            margin-bottom: 17px;
 
-            padding: 12px 14px;
+            padding: 11px 13px;
+
+            border:
+                1px solid
+                #eadba8;
 
             border-radius: 8px;
 
@@ -379,9 +492,9 @@
             display: block;
         }
 
-        /* =====================================================
-           STAT CARDS
-           ===================================================== */
+        /* =========================================================
+           STATISTICS
+           ========================================================= */
 
         .stats-grid {
             display: grid;
@@ -391,13 +504,13 @@
 
             gap: 13px;
 
-            margin-bottom: 20px;
+            margin-bottom: 19px;
         }
 
         .stat-card {
             min-width: 0;
 
-            padding: 18px;
+            padding: 17px;
 
             background: var(--gtf-white);
 
@@ -405,11 +518,17 @@
                 1px solid
                 var(--gtf-border);
 
-            border-radius: 11px;
+            border-radius: var(--gtf-radius);
 
-            box-shadow:
-                0 8px 22px
-                rgba(11,61,46,.04);
+            box-shadow: var(--gtf-shadow);
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 8px;
         }
 
         .stat-label {
@@ -422,15 +541,34 @@
             letter-spacing: .6px;
         }
 
+        .stat-icon {
+            width: 26px;
+            height: 26px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            background: var(--gtf-green-100);
+            color: var(--gtf-green-700);
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
         .stat-value {
-            margin-top: 8px;
+            margin-top: 9px;
 
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 800;
 
             line-height: 1;
+
+            font-variant-numeric: tabular-nums;
         }
 
         .stat-description {
@@ -439,18 +577,19 @@
             color: var(--gtf-muted);
 
             font-size: 7px;
+            line-height: 1.4;
         }
 
-        /* =====================================================
+        /* =========================================================
            DASHBOARD GRID
-           ===================================================== */
+           ========================================================= */
 
         .dashboard-grid {
             display: grid;
 
             grid-template-columns:
                 minmax(0, 1.45fr)
-                minmax(260px, .75fr);
+                minmax(250px, .75fr);
 
             gap: 18px;
         }
@@ -464,11 +603,9 @@
                 1px solid
                 var(--gtf-border);
 
-            border-radius: 12px;
+            border-radius: var(--gtf-radius);
 
-            box-shadow:
-                0 8px 24px
-                rgba(11,61,46,.04);
+            box-shadow: var(--gtf-shadow);
 
             overflow: hidden;
         }
@@ -489,48 +626,64 @@
             gap: 12px;
         }
 
+        .panel-header-copy {
+            min-width: 0;
+        }
+
         .panel-header h2 {
             margin: 0;
 
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
             font-size: 12px;
+            font-weight: 800;
+        }
+
+        .panel-header p {
+            margin: 4px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
         }
 
         .panel-header a {
-            color: var(--gtf-light);
+            color: var(--gtf-green-600);
 
             font-size: 7px;
             font-weight: 800;
 
             text-decoration: none;
+
+            white-space: nowrap;
         }
 
         .panel-header a:hover {
             text-decoration: underline;
         }
 
-        /* =====================================================
+        /* =========================================================
            ACTIVITY TABLE
-           ===================================================== */
+           ========================================================= */
 
         .table-wrapper {
             width: 100%;
+
             overflow-x: auto;
         }
 
         .activity-table {
             width: 100%;
 
-            border-collapse: collapse;
+            min-width: 540px;
 
-            min-width: 500px;
+            border-collapse: collapse;
         }
 
         .activity-table th {
             padding: 10px 14px;
 
-            background: #fbfcfb;
+            background: #fafcfb;
 
             color: var(--gtf-muted);
 
@@ -540,6 +693,7 @@
             text-align: left;
 
             text-transform: uppercase;
+
             letter-spacing: .5px;
         }
 
@@ -548,26 +702,41 @@
 
             border-top:
                 1px solid
-                var(--gtf-border);
+                var(--gtf-border-light);
 
             color: var(--gtf-text);
 
             font-size: 7px;
+
+            vertical-align: middle;
+        }
+
+        .activity-table tbody tr:hover {
+            background: #fcfefd;
         }
 
         .activity-table .muted {
             color: var(--gtf-muted);
         }
 
+        .activity-name {
+            font-weight: 700;
+        }
+
         .status-pill {
             display: inline-flex;
+            align-items: center;
 
-            padding: 4px 7px;
+            min-height: 20px;
+
+            padding: 0 7px;
 
             border-radius: 5px;
 
             font-size: 6px;
             font-weight: 800;
+
+            white-space: nowrap;
         }
 
         .status-pill.pending {
@@ -576,18 +745,48 @@
         }
 
         .status-pill.completed {
-            background: var(--gtf-soft);
-            color: var(--gtf-light);
+            background: var(--gtf-green-100);
+            color: var(--gtf-green-700);
         }
 
         .status-pill.review {
-            background: #eef1f7;
-            color: #52617a;
+            background: var(--gtf-info-bg);
+            color: var(--gtf-info);
         }
 
-        /* =====================================================
+        .status-pill.failed {
+            background: var(--gtf-danger-bg);
+            color: var(--gtf-danger);
+        }
+
+        /* =========================================================
+           EMPTY STATE
+           ========================================================= */
+
+        .activity-empty {
+            padding: 28px 15px !important;
+
+            text-align: center;
+
+            color: var(--gtf-muted) !important;
+        }
+
+        /* =========================================================
+           RIGHT COLUMN
+           ========================================================= */
+
+        .dashboard-side {
+            min-width: 0;
+
+            display: grid;
+            gap: 18px;
+
+            align-content: start;
+        }
+
+        /* =========================================================
            QUICK ACTIONS
-           ===================================================== */
+           ========================================================= */
 
         .quick-actions {
             padding: 14px;
@@ -595,13 +794,13 @@
             display: grid;
 
             grid-template-columns:
-                1fr 1fr;
+                repeat(2, minmax(0, 1fr));
 
             gap: 8px;
         }
 
         .quick-action {
-            min-height: 70px;
+            min-height: 72px;
 
             padding: 11px;
 
@@ -620,17 +819,23 @@
             color: var(--gtf-text);
 
             text-decoration: none;
+
+            transition:
+                background .15s ease,
+                border-color .15s ease,
+                transform .15s ease;
         }
 
         .quick-action:hover {
-            background: var(--gtf-soft);
+            background: var(--gtf-green-050);
 
-            border-color:
-                #c8d9d0;
+            border-color: #c8d9d0;
+
+            transform: translateY(-1px);
         }
 
         .quick-action strong {
-            color: var(--gtf-green);
+            color: var(--gtf-green-800);
 
             font-size: 8px;
         }
@@ -644,12 +849,12 @@
             line-height: 1.4;
         }
 
-        /* =====================================================
+        /* =========================================================
            SYSTEM STATUS
-           ===================================================== */
+           ========================================================= */
 
         .system-status {
-            padding: 15px 17px;
+            padding: 14px 17px;
         }
 
         .system-row {
@@ -659,9 +864,11 @@
             align-items: center;
             justify-content: space-between;
 
+            gap: 12px;
+
             border-bottom:
                 1px solid
-                var(--gtf-border);
+                var(--gtf-border-light);
         }
 
         .system-row:last-child {
@@ -681,29 +888,57 @@
 
             gap: 5px;
 
-            color: var(--gtf-light);
+            color: var(--gtf-green-600);
 
             font-size: 6px;
             font-weight: 800;
+
+            white-space: nowrap;
         }
 
         .system-dot {
             width: 6px;
             height: 6px;
 
+            flex: 0 0 6px;
+
             border-radius: 50%;
 
-            background: var(--gtf-light);
+            background: var(--gtf-green-500);
         }
 
-        /* =====================================================
+        /* =========================================================
+           SECURITY NOTE
+           ========================================================= */
+
+        .security-note {
+            padding: 13px 17px;
+
+            border-top:
+                1px solid
+                var(--gtf-border);
+
+            background: var(--gtf-green-050);
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+
+            line-height: 1.5;
+        }
+
+        .security-note strong {
+            color: var(--gtf-green-700);
+        }
+
+        /* =========================================================
            FOOTER
-           ===================================================== */
+           ========================================================= */
 
         .admin-footer {
             margin-top: auto;
 
-            padding: 18px 20px;
+            padding: 17px 22px;
 
             background: #ffffff;
 
@@ -714,7 +949,7 @@
 
         .admin-footer-inner {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1320px;
 
             margin: 0 auto;
 
@@ -729,11 +964,11 @@
             font-size: 7px;
         }
 
-        /* =====================================================
+        /* =========================================================
            RESPONSIVE
-           ===================================================== */
+           ========================================================= */
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1050px) {
 
             .admin-body {
                 grid-template-columns: 1fr;
@@ -745,7 +980,7 @@
 
             .admin-nav {
                 grid-template-columns:
-                    repeat(4, 1fr);
+                    repeat(4, minmax(0, 1fr));
             }
 
             .sidebar-title,
@@ -755,12 +990,34 @@
 
             .stats-grid {
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(2, minmax(0, 1fr));
             }
 
         }
 
-        @media (max-width: 760px) {
+        @media (max-width: 800px) {
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-side {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                align-items: start;
+            }
+
+        }
+
+        @media (max-width: 680px) {
+
+            .admin-header-inner {
+                min-height: 64px;
+
+                padding:
+                    9px 14px;
+            }
 
             .admin-header-right {
                 display: none;
@@ -773,15 +1030,20 @@
 
             .admin-nav {
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(2, minmax(0, 1fr));
             }
 
             .page-heading {
                 align-items: flex-start;
+
                 flex-direction: column;
             }
 
-            .dashboard-grid {
+            .refresh-button {
+                width: 100%;
+            }
+
+            .dashboard-side {
                 grid-template-columns: 1fr;
             }
 
@@ -789,9 +1051,17 @@
 
         @media (max-width: 500px) {
 
-            .admin-header-inner {
-                padding:
-                    10px 13px;
+            .brand-logo {
+                width: 39px;
+                height: 39px;
+            }
+
+            .brand-text strong {
+                font-size: 12px;
+            }
+
+            .brand-text small {
+                font-size: 7px;
             }
 
             .stats-grid {
@@ -804,11 +1074,29 @@
 
             .admin-footer-inner {
                 flex-direction: column;
+
                 text-align: center;
             }
 
         }
 
+        /* =========================================================
+           REDUCED MOTION
+           ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+
+        }
     </style>
 
 </head>
@@ -816,18 +1104,15 @@
 
 <body>
 
-
 <div class="admin-page">
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          HEADER
-         ===================================================== -->
+         ========================================================= -->
 
     <header class="admin-header">
 
         <div class="admin-header-inner">
-
 
             <a
                 href="../index.html"
@@ -871,22 +1156,21 @@
 
             </div>
 
-
         </div>
 
     </header>
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          BODY
-         ===================================================== -->
+         ========================================================= -->
 
     <div class="admin-body">
 
 
-        <!-- =================================================
+        <!-- =====================================================
              SIDEBAR
-             ================================================= -->
+             ===================================================== -->
 
         <aside class="admin-sidebar">
 
@@ -903,44 +1187,63 @@
                 <a
                     href="./index.html"
                     class="active"
+                    aria-current="page"
                 >
+                    <span class="nav-icon">⌂</span>
                     Dashboard
                 </a>
 
+
                 <a href="./customers.html">
+                    <span class="nav-icon">♙</span>
                     Customers
                 </a>
 
+
                 <a href="./accounts.html">
+                    <span class="nav-icon">▣</span>
                     Accounts
                 </a>
 
+
                 <a href="./transactions.html">
+                    <span class="nav-icon">⇄</span>
                     Transactions
                 </a>
 
+
                 <a href="./reports.html">
+                    <span class="nav-icon">▤</span>
                     Reports
                 </a>
 
+
                 <a href="./compliance.html">
+                    <span class="nav-icon">✓</span>
                     Compliance
                 </a>
 
+
                 <a href="./audit.html">
+                    <span class="nav-icon">◌</span>
                     Audit Logs
                 </a>
 
+
                 <a href="./settings.html">
+                    <span class="nav-icon">⚙</span>
                     Settings
                 </a>
 
+
                 <div class="sidebar-divider"></div>
+
 
                 <a
                     href="../dashboard/signout.html"
                     class="signout"
                 >
+                    <span class="nav-icon">↪</span>
                     Sign Out
                 </a>
 
@@ -949,9 +1252,9 @@
         </aside>
 
 
-        <!-- =================================================
+        <!-- =====================================================
              MAIN
-             ================================================= -->
+             ===================================================== -->
 
         <main class="admin-main">
 
@@ -960,7 +1263,7 @@
 
             <section class="page-heading">
 
-                <div>
+                <div class="heading-copy">
 
                     <span class="eyebrow">
                         ADMINISTRATION
@@ -972,8 +1275,8 @@
 
                     <p>
                         Monitor customers, accounts,
-                        transactions, compliance, and
-                        platform activity.
+                        transactions, compliance and
+                        platform activity from one place.
                     </p>
 
                 </div>
@@ -1012,8 +1315,19 @@
 
                 <article class="stat-card">
 
-                    <div class="stat-label">
-                        Customers
+                    <div class="stat-top">
+
+                        <div class="stat-label">
+                            Customers
+                        </div>
+
+                        <div
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            ♙
+                        </div>
+
                     </div>
 
                     <div
@@ -1032,8 +1346,19 @@
 
                 <article class="stat-card">
 
-                    <div class="stat-label">
-                        Accounts
+                    <div class="stat-top">
+
+                        <div class="stat-label">
+                            Accounts
+                        </div>
+
+                        <div
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            ▣
+                        </div>
+
                     </div>
 
                     <div
@@ -1052,8 +1377,19 @@
 
                 <article class="stat-card">
 
-                    <div class="stat-label">
-                        Pending Review
+                    <div class="stat-top">
+
+                        <div class="stat-label">
+                            Pending Review
+                        </div>
+
+                        <div
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            !
+                        </div>
+
                     </div>
 
                     <div
@@ -1072,8 +1408,19 @@
 
                 <article class="stat-card">
 
-                    <div class="stat-label">
-                        Transactions
+                    <div class="stat-top">
+
+                        <div class="stat-label">
+                            Transactions
+                        </div>
+
+                        <div
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            ⇄
+                        </div>
+
                     </div>
 
                     <div
@@ -1100,15 +1447,27 @@
             <section class="dashboard-grid">
 
 
-                <!-- RECENT ACTIVITY -->
+                <!-- =================================================
+                     RECENT ACTIVITY
+                     ================================================= -->
 
                 <article class="panel">
 
                     <div class="panel-header">
 
-                        <h2>
-                            Recent Activity
-                        </h2>
+                        <div class="panel-header-copy">
+
+                            <h2>
+                                Recent Activity
+                            </h2>
+
+                            <p>
+                                Latest administrative and
+                                platform events.
+                            </p>
+
+                        </div>
+
 
                         <a href="./audit.html">
                             View Audit Logs →
@@ -1150,7 +1509,7 @@
 
                                 <tr>
 
-                                    <td>
+                                    <td class="activity-name">
                                         Dashboard ready
                                     </td>
 
@@ -1159,9 +1518,13 @@
                                     </td>
 
                                     <td>
-                                        <span class="status-pill completed">
+
+                                        <span
+                                            class="status-pill completed"
+                                        >
                                             Ready
                                         </span>
+
                                     </td>
 
                                     <td class="muted">
@@ -1179,14 +1542,11 @@
                 </article>
 
 
-                <!-- RIGHT COLUMN -->
+                <!-- =================================================
+                     RIGHT COLUMN
+                     ================================================= -->
 
-                <div
-                    style="
-                        display:grid;
-                        gap:18px;
-                    "
-                >
+                <div class="dashboard-side">
 
 
                     <!-- QUICK ACTIONS -->
@@ -1195,9 +1555,17 @@
 
                         <div class="panel-header">
 
-                            <h2>
-                                Quick Actions
-                            </h2>
+                            <div class="panel-header-copy">
+
+                                <h2>
+                                    Quick Actions
+                                </h2>
+
+                                <p>
+                                    Common administration tasks.
+                                </p>
+
+                            </div>
 
                         </div>
 
@@ -1312,9 +1680,17 @@
 
                         <div class="panel-header">
 
-                            <h2>
-                                System Status
-                            </h2>
+                            <div class="panel-header-copy">
+
+                                <h2>
+                                    System Status
+                                </h2>
+
+                                <p>
+                                    Current service availability.
+                                </p>
+
+                            </div>
 
                         </div>
 
@@ -1330,7 +1706,10 @@
 
                                 <span class="system-state">
 
-                                    <span class="system-dot"></span>
+                                    <span
+                                        class="system-dot"
+                                        aria-hidden="true"
+                                    ></span>
 
                                     Operational
 
@@ -1347,7 +1726,10 @@
 
                                 <span class="system-state">
 
-                                    <span class="system-dot"></span>
+                                    <span
+                                        class="system-dot"
+                                        aria-hidden="true"
+                                    ></span>
 
                                     Operational
 
@@ -1364,7 +1746,10 @@
 
                                 <span class="system-state">
 
-                                    <span class="system-dot"></span>
+                                    <span
+                                        class="system-dot"
+                                        aria-hidden="true"
+                                    ></span>
 
                                     Operational
 
@@ -1381,7 +1766,10 @@
 
                                 <span class="system-state">
 
-                                    <span class="system-dot"></span>
+                                    <span
+                                        class="system-dot"
+                                        aria-hidden="true"
+                                    ></span>
 
                                     Operational
 
@@ -1392,11 +1780,24 @@
 
                         </div>
 
+
+                        <div class="security-note">
+
+                            <strong>
+                                Security notice:
+                            </strong>
+
+                            Administrative actions should
+                            only be performed by authorized
+                            personnel. Keep authentication
+                            credentials private.
+
+                        </div>
+
                     </article>
 
 
                 </div>
-
 
             </section>
 
@@ -1406,9 +1807,9 @@
     </div>
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          FOOTER
-         ===================================================== -->
+         ========================================================= -->
 
     <footer class="admin-footer">
 
@@ -1419,7 +1820,6 @@
                 ©
                 <span id="currentYear"></span>
                 Global TrustFund.
-
                 All rights reserved.
 
             </span>
@@ -1438,7 +1838,7 @@
 
 
 <!-- =========================================================
-     EXISTING JAVASCRIPT
+     GLOBAL JAVASCRIPT
      ========================================================= -->
 
 <script src="../js/app.js"></script>
@@ -1449,19 +1849,26 @@
 
 <script>
 
+    /* =========================================================
+       GTF ADMIN DASHBOARD
+       ========================================================= */
+
+    const API_BASE = "../api";
+
+
     document.addEventListener(
         "DOMContentLoaded",
         async function () {
 
-            document.getElementById(
-                "currentYear"
-            ).textContent =
-                new Date().getFullYear();
+            setText(
+                "currentYear",
+                new Date().getFullYear()
+            );
 
 
             /*
-             * Use the existing role guard when
-             * available.
+             * Run the existing admin authorization
+             * middleware when available.
              */
 
             try {
@@ -1487,22 +1894,25 @@
             } catch (error) {
 
                 console.warn(
-                    "Admin role guard:",
+                    "Admin authorization check:",
                     error
                 );
 
             }
 
 
-            loadDashboard();
+            await Promise.all([
+                loadAdminUser(),
+                loadDashboard()
+            ]);
 
         }
     );
 
 
-    /* =====================================================
+    /* =========================================================
        LOAD DASHBOARD
-       ===================================================== */
+       ========================================================= */
 
     async function loadDashboard() {
 
@@ -1513,7 +1923,7 @@
 
             const response =
                 await fetch(
-                    "../api/dashboard/summary",
+                    `${API_BASE}/dashboard/summary`,
                     {
                         method: "GET",
 
@@ -1530,8 +1940,7 @@
             if (!response.ok) {
 
                 throw new Error(
-                    "Dashboard API returned " +
-                    response.status
+                    `Dashboard API returned ${response.status}`
                 );
 
             }
@@ -1542,23 +1951,25 @@
 
 
             /*
-             * Support several common API response
-             * structures so this frontend remains
-             * compatible with the existing backend.
+             * Accept several backend response
+             * structures.
              */
 
             const data =
-                result?.data ||
-                result?.summary ||
-                result;
+                result?.data ??
+                result?.summary ??
+                result ??
+                {};
 
 
             updateStatistics(data);
 
+
             updateActivity(
-                data?.recentActivity ||
-                data?.recent_activity ||
-                data?.activities ||
+                data?.recentActivity ??
+                data?.recent_activity ??
+                data?.activities ??
+                data?.recentActivities ??
                 []
             );
 
@@ -1572,12 +1983,17 @@
 
 
             /*
-             * Keep the dashboard usable when the
-             * backend endpoint has not been completed.
+             * Keep the interface functional while
+             * the backend endpoint is unavailable.
              */
 
+            updateStatistics({});
+
+            updateActivity([]);
+
+
             showAlert(
-                "Dashboard statistics could not be loaded from the API. The interface is ready for the backend connection."
+                "Dashboard statistics could not be loaded from the API. The administrative interface is available, but live statistics are currently unavailable."
             );
 
         }
@@ -1585,9 +2001,9 @@
     }
 
 
-    /* =====================================================
+    /* =========================================================
        UPDATE STATISTICS
-       ===================================================== */
+       ========================================================= */
 
     function updateStatistics(data) {
 
@@ -1625,7 +2041,8 @@
                     "pendingCount",
                     "pending_count",
                     "pendingReviews",
-                    "pending_reviews"
+                    "pending_reviews",
+                    "pending_review"
                 ]
             );
 
@@ -1674,8 +2091,13 @@
         keys
     ) {
 
-        if (!object) {
+        if (
+            !object ||
+            typeof object !== "object"
+        ) {
+
             return 0;
+
         }
 
 
@@ -1683,17 +2105,20 @@
             const key of keys
         ) {
 
+            const value =
+                object[key];
+
+
             if (
-                object[key] !== undefined &&
-                object[key] !== null &&
-                !isNaN(
-                    Number(object[key])
+                value !== undefined &&
+                value !== null &&
+                value !== "" &&
+                Number.isFinite(
+                    Number(value)
                 )
             ) {
 
-                return Number(
-                    object[key]
-                );
+                return Number(value);
 
             }
 
@@ -1716,26 +2141,9 @@
     }
 
 
-    function setText(
-        id,
-        value
-    ) {
-
-        const element =
-            document.getElementById(id);
-
-
-        if (element) {
-            element.textContent =
-                value;
-        }
-
-    }
-
-
-    /* =====================================================
-       ACTIVITY
-       ===================================================== */
+    /* =========================================================
+       RECENT ACTIVITY
+       ========================================================= */
 
     function updateActivity(
         activities
@@ -1757,6 +2165,21 @@
             activities.length === 0
         ) {
 
+            tbody.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="activity-empty"
+                    >
+                        No recent activity is available.
+                    </td>
+
+                </tr>
+
+            `;
+
             return;
 
         }
@@ -1777,45 +2200,51 @@
 
 
                     const activityName =
-                        activity.activity ||
-                        activity.action ||
-                        activity.event ||
+                        activity?.activity ??
+                        activity?.action ??
+                        activity?.event ??
+                        activity?.description ??
                         "System activity";
 
 
                     const user =
-                        activity.user ||
-                        activity.email ||
-                        activity.user_email ||
+                        activity?.user ??
+                        activity?.user_name ??
+                        activity?.userName ??
+                        activity?.email ??
+                        activity?.user_email ??
                         "System";
 
 
                     const status =
-                        activity.status ||
+                        activity?.status ??
                         "completed";
 
 
                     const time =
-                        activity.created_at ||
-                        activity.createdAt ||
-                        activity.time ||
+                        activity?.created_at ??
+                        activity?.createdAt ??
+                        activity?.timestamp ??
+                        activity?.time ??
                         "—";
 
 
                     const statusClass =
-                        getStatusClass(
-                            status
-                        );
+                        getStatusClass(status);
 
 
                     row.innerHTML = `
 
-                        <td>
-                            ${escapeHtml(activityName)}
+                        <td class="activity-name">
+                            ${escapeHtml(
+                                activityName
+                            )}
                         </td>
 
                         <td class="muted">
-                            ${escapeHtml(user)}
+                            ${escapeHtml(
+                                user
+                            )}
                         </td>
 
                         <td>
@@ -1852,14 +2281,25 @@
     ) {
 
         const normalized =
-            String(status)
-                .toLowerCase();
+            String(
+                status || ""
+            ).toLowerCase();
 
 
         if (
-            normalized.includes(
-                "pending"
-            )
+            normalized.includes("fail") ||
+            normalized.includes("error") ||
+            normalized.includes("reject")
+        ) {
+
+            return "failed";
+
+        }
+
+
+        if (
+            normalized.includes("pending") ||
+            normalized.includes("processing")
         ) {
 
             return "pending";
@@ -1868,9 +2308,8 @@
 
 
         if (
-            normalized.includes(
-                "review"
-            )
+            normalized.includes("review") ||
+            normalized.includes("approval")
         ) {
 
             return "review";
@@ -1888,13 +2327,20 @@
     ) {
 
         const text =
-            String(value || "");
+            String(
+                value || ""
+            );
 
 
-        return text
-            .charAt(0)
-            .toUpperCase() +
-            text.slice(1);
+        if (!text) {
+            return "";
+        }
+
+
+        return (
+            text.charAt(0).toUpperCase() +
+            text.slice(1)
+        );
 
     }
 
@@ -1939,6 +2385,203 @@
     }
 
 
+    /* =========================================================
+       LOAD ADMIN USER
+       ========================================================= */
+
+    async function loadAdminUser() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/users/me`,
+                    {
+                        method: "GET",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (!response.ok) {
+                return;
+            }
+
+
+            const result =
+                await response.json();
+
+
+            const user =
+                result?.user ??
+                result?.data ??
+                result ??
+                {};
+
+
+            const displayName =
+                user?.full_name ??
+                user?.fullName ??
+                user?.name ??
+                user?.email;
+
+
+            if (displayName) {
+
+                setText(
+                    "adminUser",
+                    displayName
+                );
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to load administrator profile:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       REFRESH BUTTON
+       ========================================================= */
+
+    const refreshButton =
+        document.getElementById(
+            "refreshButton"
+        );
+
+
+    if (refreshButton) {
+
+        refreshButton.addEventListener(
+            "click",
+            async function () {
+
+                const button =
+                    this;
+
+
+                button.disabled =
+                    true;
+
+
+                button.textContent =
+                    "Refreshing...";
+
+
+                try {
+
+                    await loadDashboard();
+
+                    await loadAdminUser();
+
+                } finally {
+
+                    button.disabled =
+                        false;
+
+                    button.textContent =
+                        "Refresh Dashboard";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       ALERT
+       ========================================================= */
+
+    function showAlert(
+        message
+    ) {
+
+        const alert =
+            document.getElementById(
+                "adminAlert"
+            );
+
+
+        if (!alert) {
+            return;
+        }
+
+
+        alert.textContent =
+            message;
+
+
+        alert.classList.add(
+            "show"
+        );
+
+    }
+
+
+    function clearAlert() {
+
+        const alert =
+            document.getElementById(
+                "adminAlert"
+            );
+
+
+        if (!alert) {
+            return;
+        }
+
+
+        alert.textContent =
+            "";
+
+
+        alert.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /* =========================================================
+       SAFE TEXT OUTPUT
+       ========================================================= */
+
+    function setText(
+        id,
+        value
+    ) {
+
+        const element =
+            document.getElementById(id);
+
+
+        if (element) {
+
+            element.textContent =
+                String(
+                    value ?? ""
+                );
+
+        }
+
+    }
+
+
     function escapeHtml(
         value
     ) {
@@ -1969,164 +2612,7 @@
 
     }
 
-
-    /* =====================================================
-       ADMIN USER
-       ===================================================== */
-
-    async function loadAdminUser() {
-
-        try {
-
-            const response =
-                await fetch(
-                    "../api/users/me",
-                    {
-                        method: "GET",
-
-                        credentials: "include",
-
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                return;
-            }
-
-
-            const result =
-                await response.json();
-
-
-            const user =
-                result?.user ||
-                result?.data ||
-                result;
-
-
-            const displayName =
-                user?.full_name ||
-                user?.fullName ||
-                user?.name ||
-                user?.email;
-
-
-            if (displayName) {
-
-                setText(
-                    "adminUser",
-                    displayName
-                );
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Unable to load admin user:",
-                error
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       REFRESH
-       ===================================================== */
-
-    document
-        .getElementById(
-            "refreshButton"
-        )
-        .addEventListener(
-            "click",
-            async function () {
-
-                const button =
-                    this;
-
-
-                button.disabled =
-                    true;
-
-
-                button.textContent =
-                    "Refreshing...";
-
-
-                try {
-
-                    await loadDashboard();
-
-                } finally {
-
-                    button.disabled =
-                        false;
-
-                    button.textContent =
-                        "Refresh Dashboard";
-
-                }
-
-            }
-        );
-
-
-    /* =====================================================
-       ALERT
-       ===================================================== */
-
-    function showAlert(
-        message
-    ) {
-
-        const alert =
-            document.getElementById(
-                "adminAlert"
-            );
-
-
-        alert.textContent =
-            message;
-
-
-        alert.classList.add(
-            "show"
-        );
-
-    }
-
-
-    function clearAlert() {
-
-        const alert =
-            document.getElementById(
-                "adminAlert"
-            );
-
-
-        alert.textContent =
-            "";
-
-
-        alert.classList.remove(
-            "show"
-        );
-
-    }
-
-
-    loadAdminUser();
-
 </script>
-
 
 </body>
 
