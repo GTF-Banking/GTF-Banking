@@ -1,1366 +1,2636 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    <meta charset="UTF-8">
 
-  <meta
-    name="description"
-    content="Sign in securely to your GTF Banking account."
-  >
-
-  <meta
-    name="theme-color"
-    content="#0b2a4a"
-  >
-
-  <title>Sign In | GTF Banking</title>
-
-  <link
-    rel="stylesheet"
-    href="css/styles.css"
-  >
-
-  <style>
-    :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-light: #f5f8fb;
-      --gtf-border: #d9e2ea;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-danger: #b42318;
-      --gtf-success: #16794c;
-      --gtf-white: #ffffff;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-      color: var(--gtf-text);
-      background: var(--gtf-light);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    .topbar {
-      background: var(--gtf-navy);
-      color: white;
-    }
-
-    .topbar-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 8px 20px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 20px;
-      font-size: 0.88rem;
-    }
-
-    .topbar a:hover {
-      text-decoration: underline;
-    }
-
-    .site-header {
-      background: white;
-      border-bottom: 1px solid var(--gtf-border);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--gtf-navy);
-      font-weight: 700;
-    }
-
-    .brand img {
-      width: 46px;
-      height: 46px;
-      object-fit: contain;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.2;
-    }
-
-    .brand-name {
-      font-size: 1.2rem;
-    }
-
-    .brand-subtitle {
-      font-size: 0.72rem;
-      color: var(--gtf-muted);
-      font-weight: 400;
-    }
-
-    .back-home {
-      color: var(--gtf-blue);
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .login-page {
-      min-height: calc(100vh - 160px);
-      padding: 55px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .login-layout {
-      width: 100%;
-      max-width: 1050px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: white;
-      border: 1px solid var(--gtf-border);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow:
-        0 15px 45px
-        rgba(11, 42, 74, 0.08);
-    }
-
-    .login-info {
-      background: var(--gtf-navy);
-      color: white;
-      padding: 55px 45px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .login-info h1 {
-      margin: 0 0 18px;
-      font-size: 2.35rem;
-      line-height: 1.15;
-    }
-
-    .login-info p {
-      color: #d9e5ef;
-      margin-bottom: 28px;
-    }
-
-    .login-benefits {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .login-benefits li {
-      margin-bottom: 16px;
-      padding-left: 28px;
-      position: relative;
-      color: #e7eef4;
-    }
-
-    .login-benefits li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      font-weight: bold;
-    }
-
-    .login-form-area {
-      padding: 50px 45px;
-    }
-
-    .form-heading {
-      margin-bottom: 28px;
-    }
-
-    .form-heading h2 {
-      margin: 0 0 8px;
-      color: var(--gtf-navy);
-      font-size: 1.8rem;
-    }
-
-    .form-heading p {
-      margin: 0;
-      color: var(--gtf-muted);
-    }
-
-    .alert {
-      display: none;
-      margin-bottom: 20px;
-      padding: 13px 15px;
-      border-radius: 7px;
-      font-size: 0.92rem;
-    }
-
-    .alert.error {
-      display: block;
-      color: var(--gtf-danger);
-      background: #fff1f0;
-      border: 1px solid #f3c7c3;
-    }
-
-    .alert.success {
-      display: block;
-      color: var(--gtf-success);
-      background: #effaf4;
-      border: 1px solid #b8e2ca;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: 700;
-      color: var(--gtf-text);
-    }
-
-    .input-wrapper {
-      position: relative;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-      outline: none;
-      background: white;
-      color: var(--gtf-text);
-      transition: border-color 0.2s ease,
-                  box-shadow 0.2s ease;
-    }
-
-    .form-group input:focus {
-      border-color: var(--gtf-blue);
-      box-shadow:
-        0 0 0 3px
-        rgba(20, 93, 160, 0.12);
-    }
-
-    .password-input {
-      padding-right: 80px !important;
-    }
-
-    .password-toggle {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: 0;
-      background: transparent;
-      color: var(--gtf-blue);
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      padding: 7px;
-    }
-
-    .form-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 22px;
-    }
-
-    .remember {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--gtf-muted);
-      font-size: 0.9rem;
-    }
-
-    .remember input {
-      width: auto;
-    }
-
-    .forgot-link {
-      color: var(--gtf-blue);
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .forgot-link:hover,
-    .signup-link:hover {
-      text-decoration: underline;
-    }
-
-    .submit-button {
-      width: 100%;
-      padding: 14px;
-      border: 0;
-      border-radius: 7px;
-      background: var(--gtf-blue);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .submit-button:hover {
-      background: var(--gtf-navy);
-    }
-
-    .submit-button:disabled {
-      cursor: not-allowed;
-      opacity: 0.65;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 25px 0;
-      color: var(--gtf-muted);
-      font-size: 0.85rem;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-      height: 1px;
-      background: var(--gtf-border);
-      flex: 1;
-    }
-
-    .signup-prompt {
-      text-align: center;
-      color: var(--gtf-muted);
-      font-size: 0.92rem;
-    }
-
-    .signup-link {
-      color: var(--gtf-blue);
-      font-weight: 700;
-    }
-
-    .security-note {
-      margin-top: 25px;
-      padding: 13px;
-      background: #f5f8fb;
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-      color: var(--gtf-muted);
-      font-size: 0.8rem;
-    }
-
-    .footer {
-      background: var(--gtf-navy);
-      color: white;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 0.82rem;
-    }
-
-    .footer a {
-      color: #d2dee8;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 800px) {
-      .login-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .login-info {
-        padding: 40px 30px;
-      }
-
-      .login-form-area {
-        padding: 40px 30px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .topbar-inner {
-        justify-content: center;
-      }
-
-      .back-home {
-        display: none;
-      }
-
-      .login-page {
-        padding: 25px 12px;
-      }
-
-      .login-info,
-      .login-form-area {
-        padding: 30px 20px;
-      }
-
-      .login-info h1 {
-        font-size: 2rem;
-      }
-
-      .form-row {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- =====================================================
-       TOP BAR
-       ====================================================== -->
-
-  <div class="topbar">
-
-    <div class="topbar-inner">
-
-      <a href="support.html">
-        Support
-      </a>
-
-      <a href="pages/security.html">
-        Security
-      </a>
-
-      <a href="pages/contact.html">
-        Contact
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       HEADER
-       ====================================================== -->
-
-  <header class="site-header">
-
-    <div class="nav-container">
-
-      <a
-        href="index.html"
-        class="brand"
-        aria-label="GTF Banking home"
-      >
-
-        <img
-          src="assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          onerror="this.style.display='none'"
-        >
-
-        <span class="brand-text">
-
-          <span class="brand-name">
-            GTF Banking
-          </span>
-
-          <span class="brand-subtitle">
-            Global Trust Fund
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <a
-        href="index.html"
-        class="back-home"
-      >
-        ← Back to Home
-      </a>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================================
-       LOGIN
-       ====================================================== -->
-
-  <main class="login-page">
-
-    <section
-      class="login-layout"
-      aria-labelledby="login-title"
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
     >
 
-      <!-- =================================================
+    <meta
+        name="description"
+        content="Sign in securely to your GTF Banking account."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b3d2e"
+    >
+
+    <title>Sign In | GTF Banking</title>
+
+    <link
+        rel="stylesheet"
+        href="css/styles.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           GTF BANKING LOGIN
+           GLOBAL GREEN DESIGN
+           ===================================================== */
+
+        :root {
+
+            --gtf-green-dark: #0b3d2e;
+            --gtf-green: #126b4f;
+            --gtf-green-light: #19875f;
+            --gtf-green-soft: #eaf6f1;
+
+            --gtf-white: #ffffff;
+
+            --gtf-bg: #f4f8f6;
+
+            --gtf-border: #d8e5df;
+
+            --gtf-text: #17342b;
+            --gtf-muted: #687b74;
+
+            --gtf-danger: #b42318;
+            --gtf-danger-bg: #fff1f0;
+
+            --gtf-success: #16794c;
+            --gtf-success-bg: #effaf4;
+
+            --gtf-shadow:
+                0 18px 50px rgba(11, 61, 46, 0.10);
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: var(--gtf-text);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f8f6 0%,
+                    #edf5f1 100%
+                );
+
+        }
+
+
+        a {
+
+            color: inherit;
+
+            text-decoration: none;
+
+        }
+
+
+        button,
+        input {
+
+            font: inherit;
+
+        }
+
+
+        button {
+
+            -webkit-tap-highlight-color:
+                transparent;
+
+        }
+
+
+        /* =====================================================
+           TOP BAR
+           ===================================================== */
+
+        .topbar {
+
+            background:
+                var(--gtf-green-dark);
+
+            color:
+                var(--gtf-white);
+
+        }
+
+
+        .topbar-inner {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding:
+                8px 20px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            align-items: center;
+
+            gap: 20px;
+
+            font-size:
+                0.84rem;
+
+        }
+
+
+        .topbar a {
+
+            color:
+                #e3f0eb;
+
+            transition:
+                opacity 0.2s ease;
+
+        }
+
+
+        .topbar a:hover {
+
+            opacity: 0.75;
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .site-header {
+
+            background:
+                var(--gtf-white);
+
+            border-bottom:
+                1px solid var(--gtf-border);
+
+        }
+
+
+        .nav-container {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding:
+                14px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color:
+                var(--gtf-green-dark);
+
+            font-weight:
+                700;
+
+        }
+
+
+        .brand img {
+
+            width: 46px;
+
+            height: 46px;
+
+            object-fit:
+                contain;
+
+        }
+
+
+        .brand-text {
+
+            display: flex;
+
+            flex-direction:
+                column;
+
+            line-height:
+                1.2;
+
+        }
+
+
+        .brand-name {
+
+            font-size:
+                1.2rem;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .brand-subtitle {
+
+            margin-top:
+                2px;
+
+            font-size:
+                0.72rem;
+
+            color:
+                var(--gtf-muted);
+
+            font-weight:
+                400;
+
+        }
+
+
+        .back-home {
+
+            color:
+                var(--gtf-green);
+
+            font-size:
+                0.92rem;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .back-home:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .login-page {
+
+            min-height:
+                calc(100vh - 160px);
+
+            padding:
+                55px 20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+        }
+
+
+        .login-layout {
+
+            width: 100%;
+
+            max-width:
+                1050px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            overflow:
+                hidden;
+
+            background:
+                var(--gtf-white);
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius:
+                16px;
+
+            box-shadow:
+                var(--gtf-shadow);
+
+        }
+
+
+        /* =====================================================
            INFORMATION PANEL
-           ================================================== -->
+           ===================================================== */
 
-      <div class="login-info">
+        .login-info {
 
-        <h1>
-          Welcome back.
-        </h1>
+            padding:
+                55px 45px;
 
-        <p>
-          Sign in to access your GTF Banking account and
-          manage your available banking services.
-        </p>
+            display:
+                flex;
 
-        <ul class="login-benefits">
+            flex-direction:
+                column;
 
-          <li>
-            Access your account securely
-          </li>
+            justify-content:
+                center;
 
-          <li>
-            Review available account information
-          </li>
+            color:
+                var(--gtf-white);
 
-          <li>
-            Manage supported banking services
-          </li>
-
-          <li>
-            View your transaction activity
-          </li>
-
-        </ul>
-
-      </div>
-
-
-      <!-- =================================================
-           LOGIN FORM
-           ================================================== -->
-
-      <div class="login-form-area">
-
-        <div class="form-heading">
-
-          <h2 id="login-title">
-            Sign in
-          </h2>
-
-          <p>
-            Enter your account credentials below.
-          </p>
-
-        </div>
-
-
-        <!-- Error/success messages -->
-
-        <div
-          id="loginMessage"
-          class="alert"
-          role="alert"
-          aria-live="polite"
-        ></div>
-
-
-        <form
-          id="loginForm"
-          novalidate
-        >
-
-          <!-- Email -->
-
-          <div class="form-group">
-
-            <label for="email">
-              Email address
-            </label>
-
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              inputmode="email"
-              maxlength="254"
-              placeholder="you@example.com"
-              required
-            >
-
-          </div>
-
-
-          <!-- Password -->
-
-          <div class="form-group">
-
-            <label for="password">
-              Password
-            </label>
-
-            <div class="input-wrapper">
-
-              <input
-                id="password"
-                name="password"
-                class="password-input"
-                type="password"
-                autocomplete="current-password"
-                minlength="8"
-                maxlength="128"
-                placeholder="Enter your password"
-                required
-              >
-
-              <button
-                type="button"
-                id="togglePassword"
-                class="password-toggle"
-                aria-label="Show password"
-                aria-pressed="false"
-              >
-                Show
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <!-- Remember/Forgot -->
-
-          <div class="form-row">
-
-            <label class="remember">
-
-              <input
-                id="rememberMe"
-                name="rememberMe"
-                type="checkbox"
-              >
-
-              <span>
-                Remember this device
-              </span>
-
-            </label>
-
-
-            <a
-              href="#"
-              id="forgotPassword"
-              class="forgot-link"
-            >
-              Forgot password?
-            </a>
-
-          </div>
-
-
-          <!-- Submit -->
-
-          <button
-            id="loginButton"
-            class="submit-button"
-            type="submit"
-          >
-            Sign In
-          </button>
-
-        </form>
-
-
-        <div class="divider">
-          <span>
-            New to GTF Banking?
-          </span>
-        </div>
-
-
-        <div class="signup-prompt">
-
-          <a
-            href="signup.html"
-            class="signup-link"
-          >
-            Create an account
-          </a>
-
-        </div>
-
-
-        <div class="security-note">
-
-          <strong>Security reminder:</strong>
-          Never share your password, authentication codes,
-          or other account credentials with anyone.
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =====================================================
-       FOOTER
-       ====================================================== -->
-
-  <footer class="footer">
-
-    <div class="footer-inner">
-
-      <span>
-        ©
-        <span id="currentYear"></span>
-        GTF Banking. All rights reserved.
-      </span>
-
-      <div class="footer-links">
-
-        <a href="pages/privacy.html">
-          Privacy
-        </a>
-
-        <a href="pages/security.html">
-          Security
-        </a>
-
-        <a href="support.html">
-          Support
-        </a>
-
-        <a href="pages/contact.html">
-          Contact
-        </a>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =====================================================
-       LOGIN SCRIPT
-       ====================================================== -->
-
-  <script type="module">
-
-    /*
-     * GTF Banking login page.
-     *
-     * This page expects the public Supabase URL and
-     * publishable/anonymous browser key to be configured
-     * by your application.
-     *
-     * NEVER place a Supabase service-role key here.
-     */
-
-    const loginForm =
-      document.getElementById(
-        "loginForm"
-      );
-
-    const emailInput =
-      document.getElementById(
-        "email"
-      );
-
-    const passwordInput =
-      document.getElementById(
-        "password"
-      );
-
-    const loginButton =
-      document.getElementById(
-        "loginButton"
-      );
-
-    const loginMessage =
-      document.getElementById(
-        "loginMessage"
-      );
-
-    const togglePassword =
-      document.getElementById(
-        "togglePassword"
-      );
-
-    const forgotPassword =
-      document.getElementById(
-        "forgotPassword"
-      );
-
-    const rememberMe =
-      document.getElementById(
-        "rememberMe"
-      );
-
-
-    /* =====================================================
-       YEAR
-       ====================================================== */
-
-    const currentYear =
-      document.getElementById(
-        "currentYear"
-      );
-
-    if (currentYear) {
-
-      currentYear.textContent =
-        new Date().getFullYear();
-
-    }
-
-
-    /* =====================================================
-       MESSAGE
-       ====================================================== */
-
-    function showMessage(
-      message,
-      type = "error"
-    ) {
-
-      if (!loginMessage) {
-        return;
-      }
-
-      loginMessage.textContent =
-        message;
-
-      loginMessage.className =
-        "alert " + type;
-
-    }
-
-
-    function clearMessage() {
-
-      if (!loginMessage) {
-        return;
-      }
-
-      loginMessage.textContent =
-        "";
-
-      loginMessage.className =
-        "alert";
-
-    }
-
-
-    /* =====================================================
-       PASSWORD VISIBILITY
-       ====================================================== */
-
-    if (togglePassword) {
-
-      togglePassword.addEventListener(
-        "click",
-        function () {
-
-          const showing =
-            passwordInput.type ===
-            "text";
-
-
-          passwordInput.type =
-            showing
-              ? "password"
-              : "text";
-
-
-          togglePassword.textContent =
-            showing
-              ? "Show"
-              : "Hide";
-
-
-          togglePassword.setAttribute(
-            "aria-label",
-            showing
-              ? "Show password"
-              : "Hide password"
-          );
-
-
-          togglePassword.setAttribute(
-            "aria-pressed",
-            String(!showing)
-          );
-
-        }
-      );
-
-    }
-
-
-    /* =====================================================
-       LOCAL REMEMBERED EMAIL
-       ====================================================== */
-
-    try {
-
-      const rememberedEmail =
-        localStorage.getItem(
-          "gtf_remembered_email"
-        );
-
-
-      if (
-        rememberedEmail
-      ) {
-
-        emailInput.value =
-          rememberedEmail;
-
-        rememberMe.checked =
-          true;
-
-      }
-
-    } catch (error) {
-
-      /*
-       * localStorage may be unavailable in
-       * some browser privacy modes.
-       */
-
-      console.warn(
-        "Local storage unavailable."
-      );
-
-    }
-
-
-    /* =====================================================
-       FORGOT PASSWORD
-       ====================================================== */
-
-    forgotPassword.addEventListener(
-      "click",
-      async function (event) {
-
-        event.preventDefault();
-
-        clearMessage();
-
-
-        const email =
-          emailInput.value.trim();
-
-
-        if (!email) {
-
-          showMessage(
-            "Enter your email address first, then select Forgot password."
-          );
-
-          emailInput.focus();
-
-          return;
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--gtf-green-dark),
+                    var(--gtf-green)
+                );
 
         }
 
 
-        if (
-          !emailInput.checkValidity()
-        ) {
+        .login-info h1 {
 
-          showMessage(
-            "Please enter a valid email address."
-          );
+            margin:
+                0 0 18px;
 
-          emailInput.focus();
+            font-size:
+                2.35rem;
 
-          return;
+            line-height:
+                1.15;
 
-        }
-
-
-        /*
-         * The Supabase client should be initialized
-         * by your application configuration.
-         *
-         * If your app.js exposes a reset-password
-         * function, use it here.
-         */
-
-        try {
-
-          if (
-            typeof window.gtfResetPassword ===
-            "function"
-          ) {
-
-            await window.gtfResetPassword(
-              email
-            );
-
-
-            showMessage(
-              "If an account exists for this email, password-reset instructions have been requested.",
-              "success"
-            );
-
-            return;
-
-          }
-
-
-          showMessage(
-            "Password recovery is not configured on this page yet. Connect the page to your Supabase authentication function."
-          );
-
-        } catch (error) {
-
-          console.error(
-            "Password reset error:",
-            error
-          );
-
-          showMessage(
-            "Unable to process the password reset request. Please try again."
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =====================================================
-       LOGIN
-       ====================================================== */
-
-    loginForm.addEventListener(
-      "submit",
-      async function (event) {
-
-        event.preventDefault();
-
-        clearMessage();
-
-
-        const email =
-          emailInput.value
-            .trim()
-            .toLowerCase();
-
-
-        const password =
-          passwordInput.value;
-
-
-        /* -----------------------------------------------
-           Client-side validation
-           ------------------------------------------------ */
-
-        if (!email) {
-
-          showMessage(
-            "Please enter your email address."
-          );
-
-          emailInput.focus();
-
-          return;
+            font-weight:
+                800;
 
         }
 
 
-        if (
-          !emailInput.checkValidity()
-        ) {
+        .login-info p {
 
-          showMessage(
-            "Please enter a valid email address."
-          );
+            margin:
+                0 0 28px;
 
-          emailInput.focus();
+            max-width:
+                470px;
 
-          return;
+            color:
+                #dcece6;
 
-        }
-
-
-        if (!password) {
-
-          showMessage(
-            "Please enter your password."
-          );
-
-          passwordInput.focus();
-
-          return;
+            line-height:
+                1.7;
 
         }
 
 
-        if (
-          password.length < 8
-        ) {
+        .login-benefits {
 
-          showMessage(
-            "Your password must contain at least 8 characters."
-          );
+            margin:
+                0;
 
-          passwordInput.focus();
+            padding:
+                0;
 
-          return;
-
-        }
-
-
-        /* -----------------------------------------------
-           Remember email only.
-           Never store the password.
-           ------------------------------------------------ */
-
-        try {
-
-          if (
-            rememberMe.checked
-          ) {
-
-            localStorage.setItem(
-              "gtf_remembered_email",
-              email
-            );
-
-          } else {
-
-            localStorage.removeItem(
-              "gtf_remembered_email"
-            );
-
-          }
-
-        } catch (error) {
-
-          console.warn(
-            "Could not update local storage."
-          );
+            list-style:
+                none;
 
         }
 
 
-        /* -----------------------------------------------
-           Loading state
-           ------------------------------------------------ */
+        .login-benefits li {
 
-        loginButton.disabled =
-          true;
+            position:
+                relative;
 
-        loginButton.textContent =
-          "Signing in...";
+            margin-bottom:
+                16px;
 
+            padding-left:
+                29px;
 
-        try {
+            color:
+                #e8f3ef;
 
-          /*
-           * Preferred integration:
-           *
-           * app.js can expose:
-           *
-           * window.gtfLogin(email, password)
-           *
-           * which should call:
-           *
-           * supabase.auth.signInWithPassword(...)
-           *
-           * This keeps the authentication implementation
-           * centralized.
-           */
+            line-height:
+                1.5;
 
-          if (
-            typeof window.gtfLogin !==
-            "function"
-          ) {
-
-            throw new Error(
-              "Authentication service is not connected."
-            );
-
-          }
+        }
 
 
-          const result =
-            await window.gtfLogin(
-              email,
-              password
-            );
+        .login-benefits li::before {
+
+            content:
+                "✓";
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            top:
+                0;
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,0.14);
+
+            color:
+                #ffffff;
+
+            font-weight:
+                800;
+
+        }
 
 
-          /*
-           * Accept either:
-           *
-           * { user, session }
-           *
-           * or
-           *
-           * { success: true, user, session }
-           */
+        /* =====================================================
+           FORM AREA
+           ===================================================== */
 
-          if (
-            !result ||
-            result.success === false
-          ) {
+        .login-form-area {
 
-            throw new Error(
-              result?.message ||
-              "Sign-in failed."
-            );
+            padding:
+                50px 45px;
 
-          }
+            background:
+                var(--gtf-white);
+
+        }
 
 
-          showMessage(
-            "Sign-in successful. Redirecting...",
-            "success"
-          );
+        .form-heading {
+
+            margin-bottom:
+                28px;
+
+        }
 
 
-          /*
-           * Allow app.js to specify the destination.
-           *
-           * Default:
-           * dashboard/index.html
-           */
+        .form-heading h2 {
 
-          const destination =
-            result.redirectTo ||
-            "dashboard/index.html";
+            margin:
+                0 0 8px;
 
+            color:
+                var(--gtf-green-dark);
 
-          setTimeout(
-            function () {
+            font-size:
+                1.85rem;
 
-              window.location.href =
-                destination;
+            font-weight:
+                800;
 
-            },
-            500
-          );
+        }
 
 
-        } catch (error) {
+        .form-heading p {
 
-          console.error(
-            "GTF Banking login error:",
-            error
-          );
+            margin:
+                0;
 
+            color:
+                var(--gtf-muted);
 
-          let message =
-            "Unable to sign in. Please check your credentials and try again.";
+            line-height:
+                1.5;
 
-
-          /*
-           * Avoid exposing raw database/server
-           * errors directly to customers.
-           */
-
-          if (
-            error &&
-            typeof error.message ===
-            "string"
-          ) {
-
-            const lower =
-              error.message.toLowerCase();
+        }
 
 
-            if (
-              lower.includes(
-                "invalid login"
-              ) ||
-              lower.includes(
-                "invalid credentials"
-              ) ||
-              lower.includes(
-                "invalid email"
-              )
-            ) {
+        /* =====================================================
+           ALERT
+           ===================================================== */
 
-              message =
-                "The email address or password is incorrect.";
+        .alert {
+
+            display:
+                none;
+
+            margin-bottom:
+                20px;
+
+            padding:
+                13px 15px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                0.9rem;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .alert.error {
+
+            display:
+                block;
+
+            color:
+                var(--gtf-danger);
+
+            background:
+                var(--gtf-danger-bg);
+
+            border:
+                1px solid #f3c7c3;
+
+        }
+
+
+        .alert.success {
+
+            display:
+                block;
+
+            color:
+                var(--gtf-success);
+
+            background:
+                var(--gtf-success-bg);
+
+            border:
+                1px solid #b8e2ca;
+
+        }
+
+
+        .alert.info {
+
+            display:
+                block;
+
+            color:
+                var(--gtf-green-dark);
+
+            background:
+                var(--gtf-green-soft);
+
+            border:
+                1px solid #c8e3d8;
+
+        }
+
+
+        /* =====================================================
+           FORM
+           ===================================================== */
+
+        .form-group {
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        .form-group label {
+
+            display:
+                block;
+
+            margin-bottom:
+                7px;
+
+            color:
+                var(--gtf-text);
+
+            font-size:
+                0.92rem;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .input-wrapper {
+
+            position:
+                relative;
+
+        }
+
+
+        .form-group input {
+
+            width:
+                100%;
+
+            min-height:
+                48px;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius:
+                8px;
+
+            outline:
+                none;
+
+            background:
+                #ffffff;
+
+            color:
+                var(--gtf-text);
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+        }
+
+
+        .form-group input::placeholder {
+
+            color:
+                #91a19b;
+
+        }
+
+
+        .form-group input:hover {
+
+            border-color:
+                #b9ccc4;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color:
+                var(--gtf-green);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(18, 107, 79, 0.12);
+
+        }
+
+
+        .form-group input[aria-invalid="true"] {
+
+            border-color:
+                var(--gtf-danger);
+
+        }
+
+
+        .password-input {
+
+            padding-right:
+                82px !important;
+
+        }
+
+
+        .password-toggle {
+
+            position:
+                absolute;
+
+            right:
+                8px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            padding:
+                7px;
+
+            border:
+                0;
+
+            background:
+                transparent;
+
+            color:
+                var(--gtf-green);
+
+            font-size:
+                0.84rem;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .password-toggle:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           FORM ROW
+           ===================================================== */
+
+        .form-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        .remember {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size:
+                0.88rem;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .remember input {
+
+            width:
+                auto;
+
+            min-height:
+                auto;
+
+            accent-color:
+                var(--gtf-green);
+
+        }
+
+
+        .forgot-link {
+
+            color:
+                var(--gtf-green);
+
+            font-size:
+                0.88rem;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .forgot-link:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           BUTTON
+           ===================================================== */
+
+        .submit-button {
+
+            width:
+                100%;
+
+            min-height:
+                48px;
+
+            padding:
+                13px 16px;
+
+            border:
+                0;
+
+            border-radius:
+                8px;
+
+            background:
+                var(--gtf-green);
+
+            color:
+                #ffffff;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                opacity 0.2s ease;
+
+        }
+
+
+        .submit-button:hover:not(:disabled) {
+
+            background:
+                var(--gtf-green-dark);
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+        .submit-button:active:not(:disabled) {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        .submit-button:disabled {
+
+            cursor:
+                not-allowed;
+
+            opacity:
+                0.65;
+
+        }
+
+
+        /* =====================================================
+           DIVIDER
+           ===================================================== */
+
+        .divider {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            margin:
+                25px 0;
+
+            color:
+                var(--gtf-muted);
+
+            font-size:
+                0.83rem;
+
+            text-align:
+                center;
+
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content:
+                "";
+
+            height:
+                1px;
+
+            flex:
+                1;
+
+            background:
+                var(--gtf-border);
+
+        }
+
+
+        /* =====================================================
+           SIGNUP
+           ===================================================== */
+
+        .signup-prompt {
+
+            text-align:
+                center;
+
+            color:
+                var(--gtf-muted);
+
+            font-size:
+                0.9rem;
+
+        }
+
+
+        .signup-link {
+
+            color:
+                var(--gtf-green);
+
+            font-weight:
+                800;
+
+        }
+
+
+        .signup-link:hover {
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           SECURITY NOTE
+           ===================================================== */
+
+        .security-note {
+
+            margin-top:
+                25px;
+
+            padding:
+                14px;
+
+            background:
+                #f5f9f7;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius:
+                8px;
+
+            color:
+                var(--gtf-muted);
+
+            font-size:
+                0.79rem;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .security-note strong {
+
+            color:
+                var(--gtf-green-dark);
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .footer {
+
+            background:
+                var(--gtf-green-dark);
+
+            color:
+                #ffffff;
+
+        }
+
+
+        .footer-inner {
+
+            width:
+                100%;
+
+            max-width:
+                1200px;
+
+            margin:
+                0 auto;
+
+            padding:
+                20px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            flex-wrap:
+                wrap;
+
+            font-size:
+                0.8rem;
+
+        }
+
+
+        .footer-links {
+
+            display:
+                flex;
+
+            gap:
+                18px;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
+        .footer a {
+
+            color:
+                #d8ebe4;
+
+        }
+
+
+        .footer a:hover {
+
+            color:
+                #ffffff;
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .login-layout {
+
+                grid-template-columns:
+                    1fr;
 
             }
 
-          }
+
+            .login-info {
+
+                padding:
+                    40px 30px;
+
+            }
 
 
-          showMessage(
-            message
-          );
+            .login-form-area {
 
+                padding:
+                    40px 30px;
 
-          loginButton.disabled =
-            false;
-
-          loginButton.textContent =
-            "Sign In";
+            }
 
         }
 
-      }
-    );
 
-  </script>
+        @media (max-width: 520px) {
+
+            .topbar-inner {
+
+                justify-content:
+                    center;
+
+                gap:
+                    14px;
+
+                font-size:
+                    0.76rem;
+
+            }
 
 
-  <!-- Existing application code -->
-  <script
-    src="js/app.js"
-    defer
-  ></script>
+            .nav-container {
+
+                padding:
+                    12px 15px;
+
+            }
+
+
+            .brand img {
+
+                width:
+                    40px;
+
+                height:
+                    40px;
+
+            }
+
+
+            .brand-name {
+
+                font-size:
+                    1.05rem;
+
+            }
+
+
+            .back-home {
+
+                display:
+                    none;
+
+            }
+
+
+            .login-page {
+
+                padding:
+                    25px 12px;
+
+            }
+
+
+            .login-info,
+            .login-form-area {
+
+                padding:
+                    30px 20px;
+
+            }
+
+
+            .login-info h1 {
+
+                font-size:
+                    2rem;
+
+            }
+
+
+            .form-row {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .footer-inner {
+
+                justify-content:
+                    center;
+
+                text-align:
+                    center;
+
+            }
+
+
+            .footer-links {
+
+                justify-content:
+                    center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOP BAR
+         ===================================================== -->
+
+    <div class="topbar">
+
+        <div class="topbar-inner">
+
+            <a href="support.html">
+                Support
+            </a>
+
+            <a href="pages/security.html">
+                Security
+            </a>
+
+            <a href="pages/contact.html">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="site-header">
+
+        <div class="nav-container">
+
+            <a
+                href="index.html"
+                class="brand"
+                aria-label="GTF Banking home"
+            >
+
+                <img
+                    src="assets/gtf-logo.svg"
+                    alt="GTF Banking logo"
+                    onerror="this.style.display='none'"
+                >
+
+                <span class="brand-text">
+
+                    <span class="brand-name">
+                        GTF Banking
+                    </span>
+
+                    <span class="brand-subtitle">
+                        Global Trust Fund
+                    </span>
+
+                </span>
+
+            </a>
+
+
+            <a
+                href="index.html"
+                class="back-home"
+            >
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         LOGIN PAGE
+         ===================================================== -->
+
+    <main class="login-page">
+
+        <section
+            class="login-layout"
+            aria-labelledby="login-title"
+        >
+
+
+            <!-- =================================================
+                 INFORMATION PANEL
+                 ================================================= -->
+
+            <div class="login-info">
+
+                <h1>
+                    Welcome back.
+                </h1>
+
+                <p>
+                    Sign in securely to access your GTF Banking
+                    account and the services available to you.
+                </p>
+
+
+                <ul class="login-benefits">
+
+                    <li>
+                        Secure access to your account
+                    </li>
+
+                    <li>
+                        Review your account information
+                    </li>
+
+                    <li>
+                        Manage available banking services
+                    </li>
+
+                    <li>
+                        Review your account activity
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOGIN FORM
+                 ================================================= -->
+
+            <div class="login-form-area">
+
+                <div class="form-heading">
+
+                    <h2 id="login-title">
+                        Sign in
+                    </h2>
+
+                    <p>
+                        Enter your registered credentials below.
+                    </p>
+
+                </div>
+
+
+                <!-- API response message -->
+
+                <div
+                    id="loginMessage"
+                    class="alert"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+
+                <form
+                    id="loginForm"
+                    novalidate
+                >
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            autocomplete="username"
+                            inputmode="email"
+                            maxlength="254"
+                            placeholder="you@example.com"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                id="password"
+                                name="password"
+                                class="password-input"
+                                type="password"
+                                autocomplete="current-password"
+                                minlength="8"
+                                maxlength="128"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="password-toggle"
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- REMEMBER / FORGOT -->
+
+                    <div class="form-row">
+
+                        <label class="remember">
+
+                            <input
+                                id="rememberMe"
+                                name="rememberMe"
+                                type="checkbox"
+                            >
+
+                            <span>
+                                Remember this device
+                            </span>
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            id="forgotPassword"
+                            class="forgot-link"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        id="loginButton"
+                        class="submit-button"
+                        type="submit"
+                    >
+                        Sign In
+                    </button>
+
+                </form>
+
+
+
+                <!-- DIVIDER -->
+
+                <div class="divider">
+
+                    <span>
+                        New to GTF Banking?
+                    </span>
+
+                </div>
+
+
+
+                <!-- REGISTRATION -->
+
+                <div class="signup-prompt">
+
+                    <a
+                        href="signup.html"
+                        class="signup-link"
+                    >
+                        Create an account
+                    </a>
+
+                </div>
+
+
+
+                <!-- SECURITY -->
+
+                <div class="security-note">
+
+                    <strong>
+                        Security reminder:
+                    </strong>
+
+                    Never share your password,
+                    authentication codes, or account
+                    credentials with anyone.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-inner">
+
+            <span>
+
+                ©
+                <span id="currentYear"></span>
+                GTF Banking. All rights reserved.
+
+            </span>
+
+
+            <div class="footer-links">
+
+                <a href="pages/privacy.html">
+                    Privacy
+                </a>
+
+                <a href="pages/security.html">
+                    Security
+                </a>
+
+                <a href="support.html">
+                    Support
+                </a>
+
+                <a href="pages/contact.html">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         LOGIN APPLICATION SCRIPT
+         ===================================================== -->
+
+    <script>
+
+        /*
+         * =====================================================
+         * GTF BANKING LOGIN
+         * =====================================================
+         *
+         * Authentication is performed through the existing
+         * application API:
+         *
+         * POST /api/auth/login
+         *
+         * No demo credentials are included.
+         *
+         * The password is sent only to the authenticated
+         * application endpoint over HTTPS in production.
+         *
+         * A service-role or secret Supabase key must NEVER
+         * be placed in this HTML file.
+         * =====================================================
+         */
+
+
+        "use strict";
+
+
+        /* =====================================================
+           CONFIGURATION
+           ===================================================== */
+
+        const API_BASE = "/api";
+
+
+        const LOGIN_ENDPOINT =
+            `${API_BASE}/auth/login`;
+
+
+        const RESET_ENDPOINT =
+            `${API_BASE}/auth/forgot-password`;
+
+
+        /* =====================================================
+           ELEMENTS
+           ===================================================== */
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const emailInput =
+            document.getElementById(
+                "email"
+            );
+
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+
+        const rememberMe =
+            document.getElementById(
+                "rememberMe"
+            );
+
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+
+        const loginMessage =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
+
+        const forgotPassword =
+            document.getElementById(
+                "forgotPassword"
+            );
+
+
+        const currentYear =
+            document.getElementById(
+                "currentYear"
+            );
+
+
+
+        /* =====================================================
+           YEAR
+           ===================================================== */
+
+        if (currentYear) {
+
+            currentYear.textContent =
+                new Date().getFullYear();
+
+        }
+
+
+
+        /* =====================================================
+           MESSAGE FUNCTIONS
+           ===================================================== */
+
+        function clearMessage() {
+
+            if (!loginMessage) {
+                return;
+            }
+
+
+            loginMessage.textContent =
+                "";
+
+            loginMessage.className =
+                "alert";
+
+        }
+
+
+
+        function showMessage(
+            message,
+            type = "error"
+        ) {
+
+            if (!loginMessage) {
+                return;
+            }
+
+
+            loginMessage.textContent =
+                message;
+
+
+            loginMessage.className =
+                `alert ${type}`;
+
+        }
+
+
+
+        /* =====================================================
+           PASSWORD VISIBILITY
+           ===================================================== */
+
+        if (togglePassword) {
+
+            togglePassword.addEventListener(
+                "click",
+                function () {
+
+                    const isPassword =
+                        passwordInput.type ===
+                        "password";
+
+
+                    passwordInput.type =
+                        isPassword
+                            ? "text"
+                            : "password";
+
+
+                    togglePassword.textContent =
+                        isPassword
+                            ? "Hide"
+                            : "Show";
+
+
+                    togglePassword.setAttribute(
+                        "aria-label",
+                        isPassword
+                            ? "Hide password"
+                            : "Show password"
+                    );
+
+
+                    togglePassword.setAttribute(
+                        "aria-pressed",
+                        String(isPassword)
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           REMEMBERED EMAIL
+           ===================================================== */
+
+        try {
+
+            const savedEmail =
+                localStorage.getItem(
+                    "gtf_remembered_email"
+                );
+
+
+            if (savedEmail) {
+
+                emailInput.value =
+                    savedEmail;
+
+                rememberMe.checked =
+                    true;
+
+            }
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to access local storage."
+            );
+
+        }
+
+
+
+        /* =====================================================
+           EMAIL VALIDATION
+           ===================================================== */
+
+        function validateEmail(
+            email
+        ) {
+
+            if (!email) {
+                return false;
+            }
+
+
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                .test(email);
+
+        }
+
+
+
+        /* =====================================================
+           SAVE REMEMBERED EMAIL
+           ===================================================== */
+
+        function updateRememberedEmail(
+            email
+        ) {
+
+            try {
+
+                if (
+                    rememberMe.checked
+                ) {
+
+                    localStorage.setItem(
+                        "gtf_remembered_email",
+                        email
+                    );
+
+                } else {
+
+                    localStorage.removeItem(
+                        "gtf_remembered_email"
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    "Unable to update remembered email."
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           PASSWORD RESET
+           ===================================================== */
+
+        if (forgotPassword) {
+
+            forgotPassword.addEventListener(
+                "click",
+                async function (event) {
+
+                    event.preventDefault();
+
+                    clearMessage();
+
+
+                    const email =
+                        emailInput.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    if (!email) {
+
+                        showMessage(
+                            "Enter your email address first."
+                        );
+
+                        emailInput.focus();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !validateEmail(
+                            email
+                        )
+                    ) {
+
+                        showMessage(
+                            "Please enter a valid email address."
+                        );
+
+                        emailInput.focus();
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        forgotPassword.style.pointerEvents =
+                            "none";
+
+                        forgotPassword.style.opacity =
+                            "0.6";
+
+
+                        const response =
+                            await fetch(
+                                RESET_ENDPOINT,
+                                {
+                                    method:
+                                        "POST",
+
+                                    headers: {
+                                        "Accept":
+                                            "application/json",
+
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    credentials:
+                                        "include",
+
+                                    body:
+                                        JSON.stringify({
+                                            email:
+                                                email
+                                        })
+                                }
+                            );
+
+
+                        let result =
+                            null;
+
+
+                        try {
+
+                            result =
+                                await response.json();
+
+                        } catch (
+                            jsonError
+                        ) {
+
+                            result =
+                                null;
+
+                        }
+
+
+                        if (
+                            !response.ok
+                        ) {
+
+                            throw new Error(
+                                result?.message ||
+                                "Unable to process the password recovery request."
+                            );
+
+                        }
+
+
+                        showMessage(
+                            result?.message ||
+                            "If an account exists for this email address, password recovery instructions have been requested.",
+                            "success"
+                        );
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Password reset error:",
+                            error
+                        );
+
+
+                        showMessage(
+                            "Unable to process the password recovery request. Please try again."
+                        );
+
+                    } finally {
+
+                        forgotPassword.style.pointerEvents =
+                            "";
+
+                        forgotPassword.style.opacity =
+                            "";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LOGIN REQUEST
+           ===================================================== */
+
+        async function authenticateUser(
+            email,
+            password
+        ) {
+
+            const response =
+                await fetch(
+                    LOGIN_ENDPOINT,
+                    {
+                        method:
+                            "POST",
+
+                        headers: {
+                            "Accept":
+                                "application/json",
+
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        credentials:
+                            "include",
+
+                        body:
+                            JSON.stringify({
+                                email:
+                                    email,
+
+                                password:
+                                    password
+                            })
+                    }
+                );
+
+
+            let result =
+                null;
+
+
+            try {
+
+                result =
+                    await response.json();
+
+            } catch (
+                jsonError
+            ) {
+
+                result =
+                    null;
+
+            }
+
+
+            if (
+                !response.ok
+            ) {
+
+                const error =
+                    new Error(
+                        result?.message ||
+                        "Authentication failed."
+                    );
+
+
+                error.status =
+                    response.status;
+
+
+                error.code =
+                    result?.code ||
+                    null;
+
+
+                throw error;
+
+            }
+
+
+            return result;
+
+        }
+
+
+
+        /* =====================================================
+           DETERMINE REDIRECT
+           ===================================================== */
+
+        function getRedirectDestination(
+            result
+        ) {
+
+            /*
+             * The backend can explicitly provide a
+             * redirect destination.
+             */
+
+            if (
+                result &&
+                typeof result.redirectTo ===
+                    "string" &&
+                result.redirectTo.trim()
+            ) {
+
+                return result.redirectTo;
+
+            }
+
+
+            if (
+                result &&
+                typeof result.redirect ===
+                    "string" &&
+                result.redirect.trim()
+            ) {
+
+                return result.redirect;
+
+            }
+
+
+            /*
+             * Customer portal default.
+             */
+
+            return "customer/dashboard.html";
+
+        }
+
+
+
+        /* =====================================================
+           AUTHENTICATION ERROR MESSAGE
+           ===================================================== */
+
+        function getSafeLoginError(
+            error
+        ) {
+
+            if (
+                !error
+            ) {
+
+                return (
+                    "Unable to sign in. Please try again."
+                );
+
+            }
+
+
+            if (
+                error.status ===
+                429
+            ) {
+
+                return (
+                    "Too many sign-in attempts. Please wait a moment and try again."
+                );
+
+            }
+
+
+            if (
+                error.status ===
+                401
+            ) {
+
+                return (
+                    "The email address or password is incorrect."
+                );
+
+            }
+
+
+            if (
+                error.status ===
+                403
+            ) {
+
+                return (
+                    "Your account is not currently permitted to sign in."
+                );
+
+            }
+
+
+            if (
+                error.status >=
+                    500
+            ) {
+
+                return (
+                    "The authentication service is temporarily unavailable. Please try again later."
+                );
+
+            }
+
+
+            const message =
+                typeof error.message ===
+                    "string"
+                    ? error.message.toLowerCase()
+                    : "";
+
+
+            if (
+                message.includes(
+                    "invalid login"
+                ) ||
+                message.includes(
+                    "invalid credentials"
+                ) ||
+                message.includes(
+                    "invalid password"
+                ) ||
+                message.includes(
+                    "invalid email"
+                )
+            ) {
+
+                return (
+                    "The email address or password is incorrect."
+                );
+
+            }
+
+
+            return (
+                "Unable to sign in. Please check your credentials and try again."
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LOGIN SUBMIT
+           ===================================================== */
+
+        if (loginForm) {
+
+            loginForm.addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+                    clearMessage();
+
+
+                    const email =
+                        emailInput.value
+                            .trim()
+                            .toLowerCase();
+
+
+                    const password =
+                        passwordInput.value;
+
+
+                    /* -----------------------------------------
+                       Validate email
+                       ----------------------------------------- */
+
+                    if (!email) {
+
+                        showMessage(
+                            "Please enter your email address."
+                        );
+
+                        emailInput.focus();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !validateEmail(
+                            email
+                        )
+                    ) {
+
+                        showMessage(
+                            "Please enter a valid email address."
+                        );
+
+                        emailInput.focus();
+
+                        return;
+
+                    }
+
+
+                    /* -----------------------------------------
+                       Validate password
+                       ----------------------------------------- */
+
+                    if (!password) {
+
+                        showMessage(
+                            "Please enter your password."
+                        );
+
+                        passwordInput.focus();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        password.length <
+                        8
+                    ) {
+
+                        showMessage(
+                            "Your password must contain at least 8 characters."
+                        );
+
+                        passwordInput.focus();
+
+                        return;
+
+                    }
+
+
+                    /* -----------------------------------------
+                       Remember email
+                       ----------------------------------------- */
+
+                    updateRememberedEmail(
+                        email
+                    );
+
+
+                    /* -----------------------------------------
+                       Loading state
+                       ----------------------------------------- */
+
+                    loginButton.disabled =
+                        true;
+
+                    loginButton.textContent =
+                        "Signing in...";
+
+
+                    try {
+
+                        /*
+                         * Send credentials to the existing
+                         * application backend.
+                         */
+
+                        const result =
+                            await authenticateUser(
+                                email,
+                                password
+                            );
+
+
+                        /*
+                         * A successful HTTP response is
+                         * considered authenticated unless
+                         * the backend explicitly reports
+                         * success:false.
+                         */
+
+                        if (
+                            result &&
+                            result.success ===
+                                false
+                        ) {
+
+                            const error =
+                                new Error(
+                                    result.message ||
+                                    "Authentication failed."
+                                );
+
+
+                            error.status =
+                                result.status ||
+                                401;
+
+
+                            throw error;
+
+                        }
+
+
+                        showMessage(
+                            "Sign-in successful. Redirecting...",
+                            "success"
+                        );
+
+
+                        /*
+                         * Do not store the password or
+                         * access token manually in localStorage.
+                         *
+                         * The backend/session mechanism is
+                         * responsible for maintaining the
+                         * authenticated session.
+                         */
+
+                        const destination =
+                            getRedirectDestination(
+                                result
+                            );
+
+
+                        setTimeout(
+                            function () {
+
+                                window.location.replace(
+                                    destination
+                                );
+
+                            },
+                            500
+                        );
+
+
+                    } catch (
+                        error
+                    ) {
+
+                        console.error(
+                            "GTF Banking authentication error:",
+                            error
+                        );
+
+
+                        showMessage(
+                            getSafeLoginError(
+                                error
+                            )
+                        );
+
+
+                        loginButton.disabled =
+                            false;
+
+                        loginButton.textContent =
+                            "Sign In";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           REMOVE PASSWORD WHEN PAGE IS LEFT
+           ===================================================== */
+
+        window.addEventListener(
+            "pagehide",
+            function () {
+
+                if (
+                    passwordInput
+                ) {
+
+                    passwordInput.value =
+                        "";
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           INITIAL FOCUS
+           ===================================================== */
+
+        if (
+            !emailInput.value
+        ) {
+
+            emailInput.focus();
+
+        }
+
+    </script>
+
+
+    <!-- =====================================================
+         EXISTING GLOBAL APPLICATION SCRIPT
+         ===================================================== -->
+
+    <script
+        src="js/app.js"
+        defer
+    ></script>
+
 
 </body>
+
 </html>
