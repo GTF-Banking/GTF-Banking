@@ -1,81 +1,179 @@
 /* =========================================================
-   GLOBAL TRUSTFUND
-   UNIVERSAL FRONTEND DESIGN SYSTEM
-   Readability + Dark Green Banking Theme
-   File: frontend/css/styles.css
+   GLOBAL TRUSTFUND BANKING
+   GLOBAL FRONTEND DESIGN SYSTEM
+   File:
+   frontend/css/styles.css
+
+   VERSION:
+   GTF Banking UI v2026
+
+   DESIGN:
+   - Deep green
+   - White
+   - Gold
+   - Banking dashboard
+   - Responsive
+   - Accessible text contrast
+   - Realistic demo cards
+   - Animated card components
    ========================================================= */
 
 
 /* =========================================================
-   1. DESIGN TOKENS
+   1. ROOT VARIABLES
    ========================================================= */
 
 :root {
 
-    /* Brand */
-    --gtf-green: #0b3d2e;
-    --gtf-green-dark: #062c21;
-    --gtf-green-deep: #05251c;
-    --gtf-green-light: #176b48;
-    --gtf-green-medium: #237c58;
+    /* -----------------------------------------------------
+       BRAND
+       ----------------------------------------------------- */
 
-    /* Light green surfaces */
-    --gtf-green-soft: #eaf5ef;
-    --gtf-green-pale: #f3faf6;
-    --gtf-green-tint: #edf7f2;
+    --gtf-green:
+        #0b3d2e;
 
-    /* Gold */
-    --gtf-gold: #c9962b;
-    --gtf-gold-dark: #9b721d;
-    --gtf-gold-light: #ead39c;
+    --gtf-green-dark:
+        #06291f;
 
-    /* Backgrounds */
-    --gtf-bg: #f3f8f5;
-    --gtf-bg-light: #f8fbf9;
-    --gtf-white: #ffffff;
+    --gtf-green-deep:
+        #041f18;
 
-    /* Text */
-    --gtf-text: #0b3d2e;
-    --gtf-text-dark: #062c21;
-    --gtf-text-medium: #245545;
-    --gtf-text-muted: #45695c;
-    --gtf-text-soft: #5c786d;
+    --gtf-green-light:
+        #176b48;
 
-    /* Borders */
-    --gtf-border: #d5e5dd;
-    --gtf-border-dark: #b8d2c6;
+    --gtf-green-medium:
+        #11563c;
 
-    /* Status */
-    --gtf-success: #16794f;
-    --gtf-warning: #a76e12;
-    --gtf-danger: #a33a32;
-    --gtf-info: #216c61;
+    --gtf-green-soft:
+        #eaf4ef;
 
-    /* Shadows */
-    --gtf-shadow-xs:
-        0 2px 8px rgba(6, 44, 33, .05);
+    --gtf-green-pale:
+        #f3f9f6;
+
+
+    /* -----------------------------------------------------
+       GOLD
+       ----------------------------------------------------- */
+
+    --gtf-gold:
+        #c9962b;
+
+    --gtf-gold-dark:
+        #8d6817;
+
+    --gtf-gold-medium:
+        #b58320;
+
+    --gtf-gold-light:
+        #e9d29b;
+
+    --gtf-gold-pale:
+        #fbf5e7;
+
+
+    /* -----------------------------------------------------
+       WHITE
+       ----------------------------------------------------- */
+
+    --gtf-white:
+        #ffffff;
+
+    --gtf-white-soft:
+        #fdfefd;
+
+    --gtf-surface:
+        #f7faf8;
+
+
+    /* -----------------------------------------------------
+       TEXT
+       ----------------------------------------------------- */
+
+    --gtf-text:
+        #12352a;
+
+    --gtf-text-dark:
+        #09291f;
+
+    --gtf-text-medium:
+        #35584b;
+
+    --gtf-muted:
+        #627a70;
+
+    --gtf-muted-light:
+        #82968f;
+
+
+    /* -----------------------------------------------------
+       BORDERS
+       ----------------------------------------------------- */
+
+    --gtf-border:
+        #d9e7e0;
+
+    --gtf-border-dark:
+        #bfd5ca;
+
+
+    /* -----------------------------------------------------
+       SHADOWS
+       ----------------------------------------------------- */
 
     --gtf-shadow-sm:
-        0 6px 20px rgba(6, 44, 33, .07);
+        0 5px 18px rgba(11, 61, 46, .07);
 
     --gtf-shadow-md:
-        0 14px 36px rgba(6, 44, 33, .10);
+        0 15px 40px rgba(11, 61, 46, .11);
 
     --gtf-shadow-lg:
-        0 25px 65px rgba(6, 44, 33, .14);
+        0 25px 70px rgba(11, 61, 46, .15);
 
-    /* Radius */
-    --gtf-radius-sm: 8px;
-    --gtf-radius-md: 12px;
-    --gtf-radius-lg: 18px;
-    --gtf-radius-xl: 24px;
+    --gtf-shadow-card:
+        0 25px 55px rgba(4, 31, 24, .25);
 
-    /* Layout */
-    --gtf-container: 1280px;
 
-    /* Animation */
+    /* -----------------------------------------------------
+       RADIUS
+       ----------------------------------------------------- */
+
+    --gtf-radius-sm:
+        7px;
+
+    --gtf-radius-md:
+        12px;
+
+    --gtf-radius-lg:
+        18px;
+
+    --gtf-radius-xl:
+        24px;
+
+
+    /* -----------------------------------------------------
+       TRANSITIONS
+       ----------------------------------------------------- */
+
     --gtf-transition:
-        all .22s ease;
+        .25s ease;
+
+    --gtf-transition-slow:
+        .45s cubic-bezier(.2, .7, .2, 1);
+
+
+    /* -----------------------------------------------------
+       TYPOGRAPHY
+       ----------------------------------------------------- */
+
+    --gtf-font:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    --gtf-mono:
+        "Courier New",
+        Courier,
+        monospace;
 
 }
 
@@ -88,349 +186,62 @@
 *::before,
 *::after {
 
-    box-sizing: border-box;
+    box-sizing:
+        border-box;
 
 }
 
 
 html {
 
-    scroll-behavior: smooth;
-
-    font-size: 16px;
+    scroll-behavior:
+        smooth;
 
 }
 
 
 body {
 
-    margin: 0;
+    margin:
+        0;
 
-    padding: 0;
+    padding:
+        0;
 
-    min-height: 100vh;
+    min-height:
+        100vh;
 
     background:
-        var(--gtf-bg);
+        var(--gtf-surface);
 
     color:
         var(--gtf-text);
 
     font-family:
-        Inter,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 16px;
-
-    line-height: 1.6;
-
-    -webkit-font-smoothing: antialiased;
-
-    text-rendering: optimizeLegibility;
-
-}
-
-
-/* =========================================================
-   3. GLOBAL TEXT READABILITY
-   ========================================================= */
-
-/*
-   IMPORTANT:
-   Light-background text is NEVER white.
-
-   This is the primary fix for the screenshot.
-*/
-
-
-body,
-main,
-section,
-article,
-aside,
-header,
-footer,
-nav,
-div,
-p,
-span,
-small,
-label,
-li,
-td,
-th {
-
-    text-rendering: optimizeLegibility;
-
-}
-
-
-/* Default text */
-
-body {
-
-    color:
-        var(--gtf-text);
-
-}
-
-
-/* Paragraphs */
-
-p {
-
-    color:
-        var(--gtf-text-medium);
-
-    font-size:
-        15px;
+        var(--gtf-font);
 
     line-height:
-        1.75;
+        1.5;
+
+    -webkit-font-smoothing:
+        antialiased;
+
+    text-rendering:
+        optimizeLegibility;
 
 }
 
 
-/* Headings */
+img {
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+    max-width:
+        100%;
 
-    margin-top: 0;
-
-    color:
-        var(--gtf-green);
-
-    font-weight:
-        800;
-
-    line-height:
-        1.2;
+    height:
+        auto;
 
 }
 
-
-/* Strong text */
-
-strong,
-b {
-
-    color:
-        var(--gtf-green);
-
-    font-weight:
-        800;
-
-}
-
-
-/* Small text */
-
-small {
-
-    color:
-        var(--gtf-text-muted);
-
-}
-
-
-/* Labels */
-
-label {
-
-    color:
-        var(--gtf-green);
-
-    font-weight:
-        700;
-
-}
-
-
-/* Lists */
-
-li {
-
-    color:
-        var(--gtf-text-medium);
-
-}
-
-
-/* =========================================================
-   4. FORCE READABLE TEXT ON LIGHT BACKGROUNDS
-   ========================================================= */
-
-/*
-   These rules specifically prevent the problem shown
-   in the screenshot where important copy becomes white
-   against a pale mint background.
-*/
-
-.hero,
-.hero-content,
-.hero-description,
-.hero-note,
-.section,
-.section-heading,
-.service-card,
-.security-card,
-.trust-strip,
-.trust-item,
-.digital-panel,
-.card,
-.panel,
-.content-card,
-.dashboard-card,
-.form-card,
-.auth-card {
-
-    color:
-        var(--gtf-text);
-
-}
-
-
-/* Paragraphs inside light surfaces */
-
-.hero p,
-.hero-description,
-.hero-note,
-.section p,
-.section-heading p,
-.service-card p,
-.security-card p,
-.trust-item span,
-.card p,
-.panel p,
-.content-card p,
-.dashboard-card p,
-.form-card p,
-.auth-card p {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* Labels inside light surfaces */
-
-.hero .label,
-.hero .eyebrow,
-.section .label,
-.section-heading .label {
-
-    color:
-        var(--gtf-green-light) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* =========================================================
-   5. NEVER USE FAINT WHITE TEXT ON LIGHT BACKGROUNDS
-   ========================================================= */
-
-/*
-   This is intentionally strong because your screenshot
-   shows white text disappearing into the background.
-*/
-
-.hero-description,
-.hero-note,
-.section-heading p,
-.service-card p,
-.security-card p,
-.trust-item span,
-.digital-panel-row span,
-.card-description,
-.panel-description,
-.muted,
-.subtitle,
-.description {
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* White text declarations on normal light components */
-
-.hero:not(.dark),
-.section:not(.dark),
-.service-card,
-.security-card,
-.trust-strip,
-.trust-item,
-.card,
-.panel,
-.form-card {
-
-    --text-color:
-        var(--gtf-text);
-
-}
-
-
-/* =========================================================
-   6. LINKS
-   ========================================================= */
-
-a {
-
-    color:
-        var(--gtf-green-light);
-
-    text-decoration:
-        none;
-
-    transition:
-        var(--gtf-transition);
-
-}
-
-
-a:hover {
-
-    color:
-        var(--gtf-green);
-
-}
-
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-
-    outline:
-        3px solid rgba(201, 150, 43, .45);
-
-    outline-offset:
-        3px;
-
-}
-
-
-/* =========================================================
-   7. BUTTONS
-   ========================================================= */
 
 button,
 input,
@@ -451,31 +262,1948 @@ button {
 }
 
 
-.btn,
-.button,
-button.primary,
-.primary-button {
+a {
 
-    min-height:
-        44px;
+    color:
+        inherit;
 
-    padding:
-        0 20px;
+}
 
-    border:
-        1px solid var(--gtf-green);
 
-    border-radius:
-        var(--gtf-radius-sm);
+/* =========================================================
+   3. GLOBAL TEXT VISIBILITY
+   ========================================================= */
+
+/*
+   Important:
+
+   Avoid using white as a global text color.
+
+   White text should only appear on dark surfaces.
+*/
+
+body,
+main,
+section,
+article,
+aside,
+div {
+
+    color:
+        inherit;
+
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color:
+        var(--gtf-green);
+
+}
+
+
+p {
+
+    color:
+        var(--gtf-text-medium);
+
+}
+
+
+label {
+
+    color:
+        var(--gtf-text);
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================================================
+   4. WHITE SURFACE TEXT PROTECTION
+   ========================================================= */
+
+.gtf-white-card,
+.gtf-panel,
+.gtf-card-panel,
+.gtf-dashboard-card,
+.gtf-service-card,
+.gtf-info-card,
+.gtf-account-card {
+
+    color:
+        var(--gtf-text);
+
+}
+
+
+.gtf-white-card h1,
+.gtf-white-card h2,
+.gtf-white-card h3,
+.gtf-white-card h4,
+.gtf-panel h1,
+.gtf-panel h2,
+.gtf-panel h3,
+.gtf-panel h4,
+.gtf-card-panel h1,
+.gtf-card-panel h2,
+.gtf-card-panel h3,
+.gtf-card-panel h4,
+.gtf-dashboard-card h1,
+.gtf-dashboard-card h2,
+.gtf-dashboard-card h3,
+.gtf-dashboard-card h4,
+.gtf-service-card h1,
+.gtf-service-card h2,
+.gtf-service-card h3,
+.gtf-service-card h4 {
+
+    color:
+        var(--gtf-green);
+
+}
+
+
+.gtf-white-card p,
+.gtf-panel p,
+.gtf-card-panel p,
+.gtf-dashboard-card p,
+.gtf-service-card p {
+
+    color:
+        var(--gtf-text-medium);
+
+}
+
+
+/* =========================================================
+   5. GENERAL WHITE CARD SYSTEM
+   ========================================================= */
+
+.gtf-white-card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
 
     background:
-        var(--gtf-green);
+        var(--gtf-white);
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
+        var(--gtf-radius-lg);
+
+    padding:
+        24px;
+
+    box-shadow:
+        var(--gtf-shadow-sm);
+
+    transition:
+        transform var(--gtf-transition),
+        box-shadow var(--gtf-transition),
+        border-color var(--gtf-transition);
+
+}
+
+
+.gtf-white-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        var(--gtf-border-dark);
+
+    box-shadow:
+        var(--gtf-shadow-md);
+
+}
+
+
+/* =========================================================
+   6. GOLD ACCENT BAR
+   ========================================================= */
+
+.gtf-gold-accent {
+
+    position:
+        relative;
+
+}
+
+
+.gtf-gold-accent::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    width:
+        5px;
+
+    height:
+        100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--gtf-gold-light),
+            var(--gtf-gold),
+            var(--gtf-gold-dark)
+        );
+
+    border-radius:
+        5px 0 0 5px;
+
+}
+
+
+/* =========================================================
+   7. BANK CARD CONTAINER
+   ========================================================= */
+
+/*
+   This is the main component.
+
+   HTML example:
+
+   <div class="gtf-card-demo">
+
+       <div class="gtf-bank-card">
+
+           ...
+
+       </div>
+
+   </div>
+*/
+
+.gtf-card-demo {
+
+    width:
+        100%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        25px;
+
+    perspective:
+        1200px;
+
+}
+
+
+.gtf-card-wrapper {
+
+    width:
+        min(100%, 430px);
+
+    aspect-ratio:
+        1.586 / 1;
+
+    position:
+        relative;
+
+    perspective:
+        1200px;
+
+}
+
+
+/* =========================================================
+   8. MAIN BANK CARD
+   ========================================================= */
+
+.gtf-bank-card {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    overflow:
+        hidden;
+
+    isolation:
+        isolate;
+
+    border:
+        1px solid rgba(255, 255, 255, .25);
+
+    border-radius:
+        19px;
+
+    background:
+
+        radial-gradient(
+            circle at 80% 15%,
+            rgba(233, 210, 155, .22),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(23, 107, 72, .35),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #0b3d2e 0%,
+            #10533c 45%,
+            #06291f 100%
+        );
 
     color:
         #ffffff;
 
+    box-shadow:
+        var(--gtf-shadow-card);
+
+    transform:
+        rotateX(0deg)
+        rotateY(0deg);
+
+    transition:
+        transform .45s cubic-bezier(.2,.8,.2,1),
+        box-shadow .45s ease;
+
+}
+
+
+/* =========================================================
+   9. CARD HOVER
+   ========================================================= */
+
+.gtf-card-wrapper:hover
+.gtf-bank-card {
+
+    transform:
+        translateY(-8px)
+        rotateX(2deg)
+        rotateY(-2deg);
+
+    box-shadow:
+        0 35px 75px
+        rgba(4, 31, 24, .32);
+
+}
+
+
+/* =========================================================
+   10. CARD LIGHT SHINE
+   ========================================================= */
+
+.gtf-bank-card::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        1;
+
+    top:
+        -70%;
+
+    left:
+        -35%;
+
+    width:
+        45%;
+
+    height:
+        240%;
+
+    pointer-events:
+        none;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.16),
+            transparent
+        );
+
+    transform:
+        rotate(25deg)
+        translateX(-180%);
+
+    transition:
+        transform .9s ease;
+
+}
+
+
+.gtf-card-wrapper:hover
+.gtf-bank-card::before {
+
+    transform:
+        rotate(25deg)
+        translateX(500%);
+
+}
+
+
+/* =========================================================
+   11. CARD DECORATIVE GOLD GLOW
+   ========================================================= */
+
+.gtf-bank-card::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    z-index:
+        0;
+
+    right:
+        -90px;
+
+    bottom:
+        -110px;
+
+    width:
+        270px;
+
+    height:
+        270px;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(201,150,43,.22),
+            transparent 68%
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   12. CARD INNER CONTENT
+   ========================================================= */
+
+.gtf-bank-card-inner {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    padding:
+        clamp(20px, 5%, 30px);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        space-between;
+
+}
+
+
+/* =========================================================
+   13. CARD HEADER
+   ========================================================= */
+
+.gtf-card-header {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+}
+
+
+/* =========================================================
+   14. CARD BRAND
+   ========================================================= */
+
+.gtf-card-brand {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+}
+
+
+.gtf-card-brand-logo {
+
+    width:
+        48px;
+
+    height:
+        48px;
+
+    object-fit:
+        contain;
+
+    filter:
+        drop-shadow(
+            0 3px 7px
+            rgba(0,0,0,.25)
+        );
+
+}
+
+
+.gtf-card-brand-name {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.gtf-card-brand-name strong {
+
+    color:
+        #ffffff;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.2;
+
     font-weight:
         800;
+
+}
+
+
+.gtf-card-brand-name span {
+
+    margin-top:
+        3px;
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-size:
+        7px;
+
+    letter-spacing:
+        1.1px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   15. CARD TYPE
+   ========================================================= */
+
+.gtf-card-type {
+
+    color:
+        rgba(255,255,255,.7);
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   16. REALISTIC GOLD CHIP
+   ========================================================= */
+
+.gtf-card-chip {
+
+    position:
+        relative;
+
+    width:
+        58px;
+
+    height:
+        43px;
+
+    flex:
+        0 0 58px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        rgba(115,80,10,.45);
+
+    border-radius:
+        9px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #f9e8a9 0%,
+            #d4a83b 28%,
+            #f5dc82 50%,
+            #b98219 75%,
+            #edcf71 100%
+        );
+
+    box-shadow:
+        inset 0 1px 2px
+        rgba(255,255,255,.7),
+
+        inset 0 -2px 4px
+        rgba(90,55,5,.25),
+
+        0 4px 10px
+        rgba(0,0,0,.18);
+
+}
+
+
+/* Chip horizontal lines */
+
+.gtf-card-chip::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    top:
+        50%;
+
+    height:
+        1px;
+
+    background:
+        rgba(88,62,10,.55);
+
+    box-shadow:
+        0 -10px 0 rgba(88,62,10,.35),
+        0 10px 0 rgba(88,62,10,.35);
+
+}
+
+
+/* Chip vertical center */
+
+.gtf-card-chip::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    bottom:
+        0;
+
+    left:
+        50%;
+
+    width:
+        1px;
+
+    background:
+        rgba(88,62,10,.5);
+
+}
+
+
+/* =========================================================
+   17. CHIP CONTACT DETAIL
+   ========================================================= */
+
+.gtf-card-chip-inner {
+
+    position:
+        absolute;
+
+    inset:
+        9px 13px;
+
+    border:
+        1px solid
+        rgba(88,62,10,.55);
+
+    border-radius:
+        5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 48%,
+            rgba(88,62,10,.42) 49%,
+            rgba(88,62,10,.42) 51%,
+            transparent 52%
+        );
+
+}
+
+
+/* =========================================================
+   18. CARD NUMBER
+   ========================================================= */
+
+.gtf-card-number {
+
+    margin-top:
+        10px;
+
+    color:
+        #ffffff;
+
+    font-family:
+        var(--gtf-mono);
+
+    font-size:
+        clamp(17px, 4vw, 25px);
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        clamp(1px, .5vw, 3px);
+
+    line-height:
+        1.2;
+
+    text-shadow:
+        0 2px 3px
+        rgba(0,0,0,.3);
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* =========================================================
+   19. CARD NUMBER GROUPS
+   ========================================================= */
+
+.gtf-card-number-group {
+
+    display:
+        flex;
+
+    gap:
+        clamp(6px, 1vw, 12px);
+
+}
+
+
+/* =========================================================
+   20. CARD FOOTER
+   ========================================================= */
+
+.gtf-card-footer {
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+}
+
+
+/* =========================================================
+   21. CARD META
+   ========================================================= */
+
+.gtf-card-meta {
+
+    display:
+        flex;
+
+    gap:
+        clamp(20px, 6vw, 55px);
+
+}
+
+
+.gtf-card-meta-item {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.gtf-card-meta-label {
+
+    margin-bottom:
+        4px;
+
+    color:
+        rgba(255,255,255,.58);
+
+    font-size:
+        6px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        .8px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.gtf-card-meta-value {
+
+    color:
+        #ffffff;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .5px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   22. CARD CONTACTLESS ICON
+   ========================================================= */
+
+.gtf-card-contactless {
+
+    position:
+        relative;
+
+    width:
+        24px;
+
+    height:
+        24px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+}
+
+
+.gtf-card-contactless::before,
+.gtf-card-contactless::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    border:
+        2px solid
+        rgba(255,255,255,.72);
+
+    border-left-color:
+        transparent;
+
+    border-bottom-color:
+        transparent;
+
+    border-radius:
+        50%;
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+.gtf-card-contactless::before {
+
+    width:
+        13px;
+
+    height:
+        13px;
+
+}
+
+
+.gtf-card-contactless::after {
+
+    width:
+        20px;
+
+    height:
+        20px;
+
+}
+
+
+/* =========================================================
+   23. CARD GOLD LINE
+   ========================================================= */
+
+.gtf-card-gold-line {
+
+    position:
+        absolute;
+
+    z-index:
+        2;
+
+    left:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        0;
+
+    height:
+        3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gtf-gold-dark),
+            var(--gtf-gold-light),
+            var(--gtf-gold),
+            var(--gtf-gold-dark)
+        );
+
+}
+
+
+/* =========================================================
+   24. WHITE / GOLD BANK CARD
+   ========================================================= */
+
+.gtf-bank-card.white-gold {
+
+    color:
+        var(--gtf-green);
+
+    background:
+
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(201,150,43,.15),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #f9fbfa 55%,
+            #edf5f0 100%
+        );
+
+    border:
+        1px solid
+        rgba(201,150,43,.32);
+
+    box-shadow:
+        0 25px 55px
+        rgba(11,61,46,.16);
+
+}
+
+
+/* White card text */
+
+.gtf-bank-card.white-gold
+.gtf-card-brand-name strong,
+.gtf-bank-card.white-gold
+.gtf-card-number,
+.gtf-bank-card.white-gold
+.gtf-card-meta-value {
+
+    color:
+        var(--gtf-green);
+
+    text-shadow:
+        none;
+
+}
+
+
+.gtf-bank-card.white-gold
+.gtf-card-brand-name span,
+.gtf-bank-card.white-gold
+.gtf-card-meta-label {
+
+    color:
+        var(--gtf-muted);
+
+}
+
+
+/* =========================================================
+   25. WHITE GOLD CARD CHIP
+   ========================================================= */
+
+.gtf-bank-card.white-gold
+.gtf-card-chip {
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #f8e9ad,
+            #c9962b 45%,
+            #efd47d 70%,
+            #a8791c
+        );
+
+}
+
+
+/* =========================================================
+   26. GOLD BANK CARD
+   ========================================================= */
+
+.gtf-bank-card.gold {
+
+    color:
+        #102c22;
+
+    background:
+
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(255,255,255,.45),
+            transparent 22%
+        ),
+
+        linear-gradient(
+            135deg,
+            #e6c66b,
+            #c9962b 45%,
+            #8d6817 100%
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+}
+
+
+/* =========================================================
+   27. DARK CARD
+   ========================================================= */
+
+.gtf-bank-card.dark {
+
+    background:
+
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(201,150,43,.22),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #041f18,
+            #0b3d2e 55%,
+            #06291f
+        );
+
+}
+
+
+/* =========================================================
+   28. CARD STATUS
+   ========================================================= */
+
+.gtf-card-status {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        30px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    color:
+        #ffffff;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+}
+
+
+.gtf-card-status-dot {
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #4ac98b;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(74,201,139,.12);
+
+}
+
+
+/* =========================================================
+   29. CARD DEMO PANEL
+   ========================================================= */
+
+.gtf-card-demo-panel {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    padding:
+        clamp(22px, 5vw, 40px);
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
+        var(--gtf-radius-xl);
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        var(--gtf-shadow-md);
+
+}
+
+
+.gtf-card-demo-panel::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        -150px;
+
+    right:
+        -100px;
+
+    width:
+        300px;
+
+    height:
+        300px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(201,150,43,.08);
+
+}
+
+
+/* =========================================================
+   30. CARD DEMO HEADER
+   ========================================================= */
+
+.gtf-card-demo-header {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.gtf-card-demo-title {
+
+    color:
+        var(--gtf-green);
+
+    font-size:
+        14px;
+
+    font-weight:
+        850;
+
+}
+
+
+.gtf-card-demo-subtitle {
+
+    margin-top:
+        4px;
+
+    color:
+        var(--gtf-muted);
+
+    font-size:
+        8px;
+
+}
+
+
+/* =========================================================
+   31. DEMO MODE BADGE
+   ========================================================= */
+
+.gtf-demo-mode {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        7px 10px;
+
+    border:
+        1px solid
+        #d5e7dd;
+
+    border-radius:
+        30px;
+
+    background:
+        #eef8f3;
+
+    color:
+        var(--gtf-green);
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+}
+
+
+.gtf-demo-mode::before {
+
+    content:
+        "";
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--gtf-gold);
+
+}
+
+
+/* =========================================================
+   32. CARD STACK
+   ========================================================= */
+
+.gtf-card-stack {
+
+    position:
+        relative;
+
+    min-height:
+        310px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+}
+
+
+.gtf-card-stack
+.gtf-card-wrapper {
+
+    position:
+        relative;
+
+    z-index:
+        3;
+
+}
+
+
+.gtf-card-stack::before,
+.gtf-card-stack::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        min(72%, 370px);
+
+    aspect-ratio:
+        1.586 / 1;
+
+    border-radius:
+        19px;
+
+    pointer-events:
+        none;
+
+}
+
+
+.gtf-card-stack::before {
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9c178,
+            #a97b1c
+        );
+
+    transform:
+        translate(18px, 18px)
+        rotate(5deg);
+
+    opacity:
+        .55;
+
+}
+
+
+.gtf-card-stack::after {
+
+    background:
+        linear-gradient(
+            135deg,
+            #dce8e2,
+            #b7cdc2
+        );
+
+    transform:
+        translate(-15px, 12px)
+        rotate(-4deg);
+
+    opacity:
+        .7;
+
+}
+
+
+/* =========================================================
+   33. ACCOUNT DASHBOARD CARD
+   ========================================================= */
+
+.gtf-account-card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    padding:
+        22px;
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
+        16px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        var(--gtf-shadow-sm);
+
+}
+
+
+.gtf-account-card::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    right:
+        -50px;
+
+    top:
+        -50px;
+
+    width:
+        130px;
+
+    height:
+        130px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(201,150,43,.08);
+
+}
+
+
+.gtf-account-card-title {
+
+    color:
+        var(--gtf-muted);
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .7px;
+
+}
+
+
+.gtf-account-card-balance {
+
+    margin-top:
+        8px;
+
+    color:
+        var(--gtf-green);
+
+    font-size:
+        clamp(22px, 4vw, 32px);
+
+    font-weight:
+        850;
+
+}
+
+
+.gtf-account-card-number {
+
+    margin-top:
+        8px;
+
+    color:
+        var(--gtf-muted);
+
+    font-family:
+        var(--gtf-mono);
+
+    font-size:
+        8px;
+
+}
+
+
+/* =========================================================
+   34. GOLD ACCOUNT CARD VARIANT
+   ========================================================= */
+
+.gtf-account-card.gold-accent {
+
+    border-color:
+        rgba(201,150,43,.35);
+
+}
+
+
+.gtf-account-card.gold-accent
+.gtf-account-card-balance {
+
+    color:
+        var(--gtf-green);
+
+}
+
+
+.gtf-account-card.gold-accent::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--gtf-gold-light),
+            var(--gtf-gold),
+            var(--gtf-gold-dark)
+        );
+
+}
+
+
+/* =========================================================
+   35. SERVICE CARDS
+   ========================================================= */
+
+.gtf-service-card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    min-height:
+        210px;
+
+    padding:
+        24px;
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
+        15px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        var(--gtf-shadow-sm);
+
+    transition:
+        transform var(--gtf-transition),
+        box-shadow var(--gtf-transition),
+        border-color var(--gtf-transition);
+
+}
+
+
+.gtf-service-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(201,150,43,.4);
+
+    box-shadow:
+        var(--gtf-shadow-md);
+
+}
+
+
+.gtf-service-card-icon {
+
+    width:
+        44px;
+
+    height:
+        44px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        12px;
+
+    background:
+        var(--gtf-green-soft);
+
+    color:
+        var(--gtf-green);
+
+    font-size:
+        18px;
+
+    font-weight:
+        800;
+
+}
+
+
+.gtf-service-card h3 {
+
+    margin:
+        17px 0 0;
+
+    color:
+        var(--gtf-green);
+
+    font-size:
+        13px;
+
+}
+
+
+.gtf-service-card p {
+
+    margin:
+        8px 0 0;
+
+    color:
+        var(--gtf-text-medium);
+
+    font-size:
+        8px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   36. GOLD TOP BORDER
+   ========================================================= */
+
+.gtf-gold-top {
+
+    border-top:
+        3px solid var(--gtf-gold);
+
+}
+
+
+/* =========================================================
+   37. BANKING SECTION
+   ========================================================= */
+
+.gtf-banking-section {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f6faf8,
+            #eaf4ef
+        );
+
+}
+
+
+.gtf-banking-section::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        450px;
+
+    height:
+        450px;
+
+    left:
+        -220px;
+
+    top:
+        -200px;
+
+    border:
+        1px solid
+        rgba(11,61,46,.08);
+
+    border-radius:
+        50%;
+
+}
+
+
+/* =========================================================
+   38. GREEN PANEL
+   ========================================================= */
+
+.gtf-green-panel {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    padding:
+        28px;
+
+    border-radius:
+        18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gtf-green),
+            var(--gtf-green-light)
+        );
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        var(--gtf-shadow-md);
+
+}
+
+
+.gtf-green-panel h2,
+.gtf-green-panel h3,
+.gtf-green-panel strong {
+
+    color:
+        #ffffff;
+
+}
+
+
+.gtf-green-panel p {
+
+    color:
+        rgba(255,255,255,.76);
+
+}
+
+
+/* =========================================================
+   39. GREEN PANEL GOLD DETAIL
+   ========================================================= */
+
+.gtf-green-panel::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    right:
+        -90px;
+
+    bottom:
+        -100px;
+
+    width:
+        260px;
+
+    height:
+        260px;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(233,210,155,.22),
+            transparent 68%
+        );
+
+}
+
+
+/* =========================================================
+   40. BUTTONS
+   ========================================================= */
+
+.gtf-button {
+
+    min-height:
+        42px;
+
+    padding:
+        0 18px;
 
     display:
         inline-flex;
@@ -487,42 +2215,13 @@ button.primary,
         center;
 
     gap:
+        7px;
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
         8px;
-
-    cursor:
-        pointer;
-
-    transition:
-        var(--gtf-transition);
-
-}
-
-
-.btn:hover,
-.button:hover,
-button.primary:hover,
-.primary-button:hover {
-
-    background:
-        var(--gtf-green-dark);
-
-    border-color:
-        var(--gtf-green-dark);
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        var(--gtf-shadow-sm);
-
-}
-
-
-/* Secondary button */
-
-.btn.secondary,
-.button.secondary,
-.secondary-button {
 
     background:
         #ffffff;
@@ -530,18 +2229,67 @@ button.primary:hover,
     color:
         var(--gtf-green);
 
-    border-color:
-        var(--gtf-border-dark);
+    text-decoration:
+        none;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+
+    transition:
+        transform var(--gtf-transition),
+        background var(--gtf-transition),
+        box-shadow var(--gtf-transition);
 
 }
 
 
-.btn.secondary:hover,
-.button.secondary:hover,
-.secondary-button:hover {
+.gtf-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        var(--gtf-shadow-sm);
+
+}
+
+
+.gtf-button-primary {
+
+    border-color:
+        var(--gtf-green);
 
     background:
-        var(--gtf-green-soft);
+        var(--gtf-green);
+
+    color:
+        #ffffff;
+
+}
+
+
+.gtf-button-primary:hover {
+
+    background:
+        var(--gtf-green-dark);
+
+}
+
+
+.gtf-button-gold {
+
+    border-color:
+        var(--gtf-gold);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--gtf-gold-light),
+            var(--gtf-gold)
+        );
 
     color:
         var(--gtf-green);
@@ -550,48 +2298,269 @@ button.primary:hover,
 
 
 /* =========================================================
-   8. HEADER
+   41. FORM CONTROLS
    ========================================================= */
 
-.site-header {
+.gtf-input,
+.gtf-select,
+.gtf-textarea {
 
-    position:
-        sticky;
+    width:
+        100%;
 
-    top:
-        0;
+    min-height:
+        44px;
 
-    z-index:
-        1000;
+    padding:
+        0 13px;
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
+        8px;
+
+    outline:
+        none;
 
     background:
-        rgba(255,255,255,.98);
+        #ffffff;
+
+    color:
+        var(--gtf-text);
+
+    font-size:
+        9px;
+
+    transition:
+        border-color var(--gtf-transition),
+        box-shadow var(--gtf-transition);
+
+}
+
+
+.gtf-textarea {
+
+    padding-top:
+        12px;
+
+    padding-bottom:
+        12px;
+
+    min-height:
+        110px;
+
+    resize:
+        vertical;
+
+}
+
+
+.gtf-input::placeholder,
+.gtf-textarea::placeholder {
+
+    color:
+        var(--gtf-muted-light);
+
+}
+
+
+.gtf-input:focus,
+.gtf-select:focus,
+.gtf-textarea:focus {
+
+    border-color:
+        var(--gtf-green-light);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(23,107,72,.10);
+
+}
+
+
+/* =========================================================
+   42. STATUS BADGES
+   ========================================================= */
+
+.gtf-status {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    padding:
+        6px 9px;
+
+    border-radius:
+        30px;
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+}
+
+
+.gtf-status-success {
+
+    background:
+        #e9f7ef;
+
+    color:
+        #176b48;
+
+}
+
+
+.gtf-status-pending {
+
+    background:
+        #fbf5e7;
+
+    color:
+        #8d6817;
+
+}
+
+
+.gtf-status-neutral {
+
+    background:
+        #eef2f0;
+
+    color:
+        #536b61;
+
+}
+
+
+/* =========================================================
+   43. TABLES
+   ========================================================= */
+
+.gtf-table-wrapper {
+
+    width:
+        100%;
+
+    overflow-x:
+        auto;
+
+    border:
+        1px solid var(--gtf-border);
+
+    border-radius:
+        13px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.gtf-table {
+
+    width:
+        100%;
+
+    border-collapse:
+        collapse;
+
+    color:
+        var(--gtf-text);
+
+}
+
+
+.gtf-table th {
+
+    padding:
+        13px;
+
+    background:
+        var(--gtf-green-soft);
+
+    color:
+        var(--gtf-green);
+
+    text-align:
+        left;
+
+    font-size:
+        7px;
+
+    font-weight:
+        850;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .6px;
+
+}
+
+
+.gtf-table td {
+
+    padding:
+        13px;
+
+    border-top:
+        1px solid var(--gtf-border);
+
+    color:
+        var(--gtf-text-medium);
+
+    font-size:
+        8px;
+
+}
+
+
+/* =========================================================
+   44. NAVIGATION
+   ========================================================= */
+
+.gtf-nav {
+
+    background:
+        rgba(255,255,255,.97);
 
     border-bottom:
         1px solid var(--gtf-border);
 
     box-shadow:
-        0 4px 20px rgba(6,44,33,.06);
+        0 4px 20px
+        rgba(11,61,46,.05);
 
     backdrop-filter:
-        blur(16px);
+        blur(12px);
 
 }
 
 
-.header-inner {
+.gtf-nav-inner {
 
     width:
         100%;
 
     max-width:
-        var(--gtf-container);
+        1280px;
 
     min-height:
-        78px;
+        74px;
 
     margin:
-        auto;
+        0 auto;
 
     padding:
         10px 24px;
@@ -612,36 +2581,16 @@ button.primary:hover,
 
 
 /* =========================================================
-   9. BRAND
+   45. PRONOUNCED LOGO
    ========================================================= */
 
-.brand {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        11px;
-
-    color:
-        var(--gtf-green);
-
-    text-decoration:
-        none;
-
-}
-
-
-.brand-logo {
+.gtf-logo-large {
 
     width:
-        48px;
+        62px;
 
     height:
-        48px;
+        62px;
 
     object-fit:
         contain;
@@ -652,7 +2601,31 @@ button.primary:hover,
 }
 
 
-.brand-text {
+.gtf-logo-large:hover {
+
+    transform:
+        scale(1.04);
+
+}
+
+
+/* =========================================================
+   46. CENTERED HEADER BRAND
+   ========================================================= */
+
+.gtf-centered-brand {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
 
     display:
         flex;
@@ -660,244 +2633,173 @@ button.primary:hover,
     flex-direction:
         column;
 
-}
-
-
-.brand-text strong {
-
-    color:
-        var(--gtf-green) !important;
-
-    font-size:
-        16px;
-
-    line-height:
-        1.2;
-
-    font-weight:
-        850;
-
-}
-
-
-.brand-text small {
-
-    margin-top:
-        3px;
-
-    color:
-        var(--gtf-text-muted) !important;
-
-    font-size:
-        9px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        1.2px;
-
-}
-
-
-/* =========================================================
-   10. NAVIGATION
-   ========================================================= */
-
-.main-nav {
-
-    display:
-        flex;
-
     align-items:
         center;
 
-    gap:
-        5px;
+    justify-content:
+        center;
+
+    text-align:
+        center;
 
 }
 
 
-.main-nav a {
-
-    padding:
-        9px 12px;
-
-    border-radius:
-        7px;
-
-    color:
-        var(--gtf-text-medium);
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
-}
-
-
-.main-nav a:hover {
-
-    background:
-        var(--gtf-green-soft);
-
-    color:
-        var(--gtf-green);
-
-}
-
-
-/* =========================================================
-   11. MOBILE MENU
-   ========================================================= */
-
-.mobile-menu-button {
+.gtf-centered-brand img {
 
     width:
-        42px;
+        58px;
 
     height:
-        42px;
+        58px;
 
-    border:
-        1px solid var(--gtf-border);
+    object-fit:
+        contain;
 
-    border-radius:
-        var(--gtf-radius-sm);
+}
 
-    background:
-        #ffffff;
+
+.gtf-centered-brand strong {
+
+    margin-top:
+        5px;
 
     color:
         var(--gtf-green);
-
-    font-size:
-        22px;
-
-}
-
-
-.mobile-nav {
-
-    display:
-        none;
-
-    padding:
-        12px 16px 18px;
-
-    background:
-        #ffffff;
-
-    border-top:
-        1px solid var(--gtf-border);
-
-}
-
-
-.mobile-nav.open {
-
-    display:
-        grid;
-
-}
-
-
-.mobile-nav a {
-
-    padding:
-        12px;
-
-    color:
-        var(--gtf-text-medium);
 
     font-size:
         14px;
 
-    font-weight:
-        700;
+    line-height:
+        1.1;
 
-    border-radius:
-        8px;
+    font-weight:
+        850;
 
 }
 
 
-.mobile-nav a:hover {
+.gtf-centered-brand small {
 
-    background:
-        var(--gtf-green-soft);
+    margin-top:
+        4px;
 
     color:
-        var(--gtf-green);
+        var(--gtf-muted);
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.5px;
+
+    text-transform:
+        uppercase;
 
 }
 
 
 /* =========================================================
-   12. HERO
+   47. PAGE CONTAINER
    ========================================================= */
 
-.hero {
+.gtf-container {
 
-    position:
-        relative;
+    width:
+        100%;
 
-    overflow:
-        hidden;
+    max-width:
+        1280px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f5faf7 0%,
-            #edf7f2 55%,
-            #e5f2eb 100%
-        );
+    margin:
+        0 auto;
+
+    padding:
+        0 24px;
 
 }
 
 
-.hero-content {
+/* =========================================================
+   48. PAGE SECTION
+   ========================================================= */
 
-    position:
-        relative;
+.gtf-section {
 
-    z-index:
-        2;
+    padding:
+        70px 0;
 
 }
 
 
-.hero h1 {
+/* =========================================================
+   49. SECTION HEADER
+   ========================================================= */
+
+.gtf-section-heading {
+
+    max-width:
+        700px;
+
+    margin:
+        0 auto 35px;
+
+    text-align:
+        center;
+
+}
+
+
+.gtf-section-heading .eyebrow {
 
     color:
-        var(--gtf-green) !important;
+        var(--gtf-green-light);
+
+    font-size:
+        7px;
 
     font-weight:
         850;
 
     letter-spacing:
-        -.8px;
+        1px;
+
+    text-transform:
+        uppercase;
 
 }
 
 
-.hero h1 span {
+.gtf-section-heading h2 {
+
+    margin:
+        9px 0 0;
 
     color:
-        var(--gtf-green-light) !important;
-
-}
-
-
-.hero-description {
-
-    color:
-        var(--gtf-text-medium) !important;
+        var(--gtf-green);
 
     font-size:
-        16px;
+        clamp(25px,4vw,38px);
+
+    line-height:
+        1.2;
+
+}
+
+
+.gtf-section-heading p {
+
+    margin:
+        12px 0 0;
+
+    color:
+        var(--gtf-text-medium);
+
+    font-size:
+        9px;
 
     line-height:
         1.8;
@@ -906,81 +2808,154 @@ button.primary:hover,
 
 
 /* =========================================================
-   13. EYEBROW
+   50. GRID
    ========================================================= */
 
-.eyebrow {
+.gtf-grid {
 
     display:
-        inline-flex;
-
-    align-items:
-        center;
+        grid;
 
     gap:
-        8px;
-
-    padding:
-        8px 13px;
-
-    border:
-        1px solid #c8ded3;
-
-    border-radius:
-        999px;
-
-    background:
-        rgba(255,255,255,.85);
-
-    color:
-        var(--gtf-green-light) !important;
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        1.1px;
+        16px;
 
 }
 
 
-.eyebrow-dot {
+.gtf-grid-2 {
 
-    width:
-        8px;
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
 
-    height:
-        8px;
+}
 
-    border-radius:
-        50%;
 
-    background:
-        var(--gtf-gold);
+.gtf-grid-3 {
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+}
+
+
+.gtf-grid-4 {
+
+    grid-template-columns:
+        repeat(4, minmax(0,1fr));
 
 }
 
 
 /* =========================================================
-   14. HERO BUTTONS
+   51. ANIMATIONS
    ========================================================= */
 
-.hero-button {
+@keyframes gtfFloat {
 
-    min-height:
-        48px;
+    0%,
+    100% {
 
-    padding:
-        0 22px;
+        transform:
+            translateY(0);
 
-    border-radius:
-        9px;
+    }
+
+    50% {
+
+        transform:
+            translateY(-8px);
+
+    }
+
+}
+
+
+@keyframes gtfPulse {
+
+    0%,
+    100% {
+
+        box-shadow:
+            0 0 0 0
+            rgba(201,150,43,.25);
+
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 0 9px
+            rgba(201,150,43,0);
+
+    }
+
+}
+
+
+@keyframes gtfGoldShimmer {
+
+    0% {
+
+        background-position:
+            0% 50%;
+
+    }
+
+    50% {
+
+        background-position:
+            100% 50%;
+
+    }
+
+    100% {
+
+        background-position:
+            0% 50%;
+
+    }
+
+}
+
+
+.gtf-card-float {
+
+    animation:
+        gtfFloat 5s ease-in-out infinite;
+
+}
+
+
+.gtf-card-status-dot {
+
+    animation:
+        gtfPulse 2.2s infinite;
+
+}
+
+
+.gtf-card-chip.animated {
+
+    background-size:
+        200% 200%;
+
+    animation:
+        gtfGoldShimmer 4s ease infinite;
+
+}
+
+
+/* =========================================================
+   52. HERO VISUAL CARD
+   ========================================================= */
+
+.gtf-hero-card {
+
+    position:
+        relative;
 
     display:
-        inline-flex;
+        flex;
 
     align-items:
         center;
@@ -988,1243 +2963,281 @@ button.primary:hover,
     justify-content:
         center;
 
-    font-size:
-        14px;
-
-    font-weight:
-        800;
-
-}
-
-
-.hero-button.primary {
-
-    background:
-        var(--gtf-green);
-
-    border-color:
-        var(--gtf-green);
-
-    color:
-        #ffffff !important;
-
-}
-
-
-.hero-button.secondary {
-
-    background:
-        #ffffff;
-
-    border-color:
-        var(--gtf-border-dark);
-
-    color:
-        var(--gtf-green) !important;
-
-}
-
-
-/*
-   IMPORTANT:
-   Prevent inline white styles from making text invisible
-   on light backgrounds.
-*/
-
-.hero-button.secondary[style] {
-
-    color:
-        var(--gtf-green) !important;
-
-    background:
-        #ffffff !important;
-
-    border-color:
-        var(--gtf-border-dark) !important;
-
-}
-
-
-/* =========================================================
-   15. HERO NOTE
-   ========================================================= */
-
-.hero-note {
-
-    color:
-        var(--gtf-text-muted) !important;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.65;
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* =========================================================
-   16. TRUST STRIP
-   ========================================================= */
-
-.trust-strip {
-
-    background:
-        #ffffff;
-
-    border-bottom:
-        1px solid var(--gtf-border);
-
-}
-
-
-.trust-item strong {
-
-    color:
-        var(--gtf-green) !important;
-
-    font-size:
-        14px;
-
-}
-
-
-.trust-item span {
-
-    color:
-        var(--gtf-text-muted) !important;
-
-    font-size:
-        12px;
-
-    opacity:
-        1 !important;
-
-}
-
-
-.trust-icon {
-
-    color:
-        var(--gtf-green);
-
-    background:
-        var(--gtf-green-soft);
-
-}
-
-
-/* =========================================================
-   17. GENERAL SECTIONS
-   ========================================================= */
-
-.section {
-
-    width:
-        100%;
-
-    max-width:
-        var(--gtf-container);
-
-    margin:
-        auto;
-
-    padding:
-        80px 24px;
-
-}
-
-
-.section-heading h2 {
-
-    color:
-        var(--gtf-green) !important;
-
-}
-
-
-.section-heading p {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    font-size:
-        15px;
-
-    opacity:
-        1 !important;
-
-}
-
-
-.section-heading .label {
-
-    color:
-        var(--gtf-green-light) !important;
-
-}
-
-
-/* =========================================================
-   18. SERVICE CARDS
-   ========================================================= */
-
-.service-card {
-
-    background:
-        #ffffff;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        var(--gtf-radius-md);
-
-    box-shadow:
-        var(--gtf-shadow-xs);
-
-    color:
-        var(--gtf-text);
-
-}
-
-
-.service-card:hover {
-
-    transform:
-        translateY(-4px);
-
-    border-color:
-        var(--gtf-border-dark);
-
-    box-shadow:
-        var(--gtf-shadow-md);
-
-}
-
-
-.service-card h3 {
-
-    color:
-        var(--gtf-green) !important;
-
-    font-size:
-        17px;
-
-}
-
-
-.service-card p {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.7;
-
-    opacity:
-        1 !important;
-
-}
-
-
-.service-link {
-
-    color:
-        var(--gtf-green-light) !important;
-
-    font-weight:
-        800;
-
-}
-
-
-/* =========================================================
-   19. SECURITY CARDS
-   ========================================================= */
-
-.security-card {
-
-    background:
-        #ffffff;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        var(--gtf-radius-md);
-
-    color:
-        var(--gtf-text);
-
-}
-
-
-.security-number {
-
-    color:
-        var(--gtf-gold-dark);
-
-    font-weight:
-        900;
-
-}
-
-
-.security-card h3 {
-
-    color:
-        var(--gtf-green) !important;
-
-}
-
-
-.security-card p {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* =========================================================
-   20. DARK GREEN SECTIONS
-   ========================================================= */
-
-/*
-   White text is appropriate ONLY inside explicitly
-   dark-green sections.
-*/
-
-.digital-section,
-.dark-section,
-.site-footer,
-.gtf-dark {
-
-    background:
-        var(--gtf-green);
-
-    color:
-        #ffffff;
-
-}
-
-
-.digital-section h1,
-.digital-section h2,
-.digital-section h3,
-.digital-section h4,
-.digital-section p,
-.digital-section span,
-.digital-section strong,
-.digital-section label,
-.dark-section h1,
-.dark-section h2,
-.dark-section h3,
-.dark-section h4,
-.dark-section p,
-.dark-section span,
-.dark-section strong,
-.dark-section label {
-
-    color:
-        #ffffff;
-
-}
-
-
-/* Secondary text inside dark sections */
-
-.digital-section p,
-.digital-section span,
-.dark-section p,
-.dark-section span {
-
-    opacity:
-        1;
-
-}
-
-
-/* =========================================================
-   21. DIGITAL PANEL
-   ========================================================= */
-
-.digital-panel {
-
-    background:
-        rgba(255,255,255,.08);
-
-    border:
-        1px solid rgba(255,255,255,.16);
-
-    border-radius:
-        var(--gtf-radius-lg);
-
-}
-
-
-.digital-panel-title {
-
-    color:
-        #ffffff !important;
-
-    font-size:
-        14px;
-
-}
-
-
-.digital-panel-status {
-
-    color:
-        #d8eee3 !important;
-
-}
-
-
-.digital-panel-row {
-
-    border-bottom:
-        1px solid rgba(255,255,255,.12);
-
-}
-
-
-.digital-panel-row span {
-
-    color:
-        rgba(255,255,255,.78) !important;
-
-}
-
-
-.digital-panel-row strong {
-
-    color:
-        #ffffff !important;
-
-}
-
-
-/* =========================================================
-   22. DASHBOARD CARDS
-   ========================================================= */
-
-.dashboard-card,
-.account-card,
-.balance-card,
-.transaction-card,
-.stat-card {
-
-    background:
-        #ffffff;
-
-    border:
-        1px solid var(--gtf-border);
-
-    border-radius:
-        var(--gtf-radius-md);
-
-    color:
-        var(--gtf-text);
-
-    box-shadow:
-        var(--gtf-shadow-xs);
-
-}
-
-
-.dashboard-card h1,
-.dashboard-card h2,
-.dashboard-card h3,
-.account-card h1,
-.account-card h2,
-.account-card h3,
-.balance-card h1,
-.balance-card h2,
-.balance-card h3,
-.transaction-card h1,
-.transaction-card h2,
-.transaction-card h3,
-.stat-card h1,
-.stat-card h2,
-.stat-card h3 {
-
-    color:
-        var(--gtf-green) !important;
-
-}
-
-
-.dashboard-card p,
-.account-card p,
-.balance-card p,
-.transaction-card p,
-.stat-card p {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* =========================================================
-   23. FORMS
-   ========================================================= */
-
-input,
-select,
-textarea {
-
-    width:
-        100%;
-
     min-height:
-        44px;
-
-    padding:
-        11px 13px;
-
-    border:
-        1px solid var(--gtf-border-dark);
-
-    border-radius:
-        8px;
-
-    background:
-        #ffffff;
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        14px;
+        420px;
 
 }
 
 
-input::placeholder,
-textarea::placeholder {
+.gtf-hero-card::before {
 
-    color:
-        #628075;
+    content:
+        "";
 
-    opacity:
-        1;
-
-}
-
-
-input:focus,
-select:focus,
-textarea:focus {
-
-    border-color:
-        var(--gtf-green-light);
-
-    box-shadow:
-        0 0 0 3px rgba(23,107,72,.10);
-
-    outline:
-        none;
-
-}
-
-
-/* =========================================================
-   24. FORM HELP TEXT
-   ========================================================= */
-
-.help-text,
-.form-help,
-.field-help,
-.hint {
-
-    color:
-        var(--gtf-text-muted) !important;
-
-    opacity:
-        1 !important;
-
-    font-size:
-        12px;
-
-}
-
-
-/* =========================================================
-   25. TABLES
-   ========================================================= */
-
-table {
+    position:
+        absolute;
 
     width:
-        100%;
+        380px;
 
-    border-collapse:
-        collapse;
+    height:
+        380px;
 
-    background:
-        #ffffff;
-
-}
-
-
-th {
-
-    padding:
-        13px;
-
-    background:
-        var(--gtf-green-soft);
-
-    color:
-        var(--gtf-green);
-
-    font-size:
-        13px;
-
-    font-weight:
-        800;
-
-    text-align:
-        left;
-
-}
-
-
-td {
-
-    padding:
-        13px;
-
-    color:
-        var(--gtf-text-medium);
-
-    border-bottom:
-        1px solid var(--gtf-border);
-
-    font-size:
-        13px;
-
-}
-
-
-tr:hover td {
-
-    background:
-        #f7fbf9;
-
-}
-
-
-/* =========================================================
-   26. STATUS BADGES
-   ========================================================= */
-
-.status,
-.badge {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        5px;
-
-    padding:
-        5px 9px;
+    border:
+        1px solid
+        rgba(23,107,72,.12);
 
     border-radius:
-        999px;
-
-    font-size:
-        11px;
-
-    font-weight:
-        800;
+        50%;
 
 }
 
 
-.status-success,
-.badge-success {
+.gtf-hero-card::after {
 
-    background:
-        #e4f5ec;
+    content:
+        "";
 
-    color:
-        #12643f;
+    position:
+        absolute;
 
-}
+    width:
+        470px;
 
-
-.status-warning,
-.badge-warning {
-
-    background:
-        #fff3d7;
-
-    color:
-        #80560c;
-
-}
-
-
-.status-danger,
-.badge-danger {
-
-    background:
-        #fde9e7;
-
-    color:
-        #8d302a;
-
-}
-
-
-/* =========================================================
-   27. CTA
-   ========================================================= */
-
-.cta {
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--gtf-green),
-            var(--gtf-green-light)
-        );
-
-    color:
-        #ffffff;
-
-}
-
-
-.cta h1,
-.cta h2,
-.cta h3,
-.cta p {
-
-    color:
-        #ffffff !important;
-
-}
-
-
-.cta p {
-
-    opacity:
-        1;
-
-}
-
-
-/* =========================================================
-   28. FOOTER
-   ========================================================= */
-
-.site-footer {
-
-    background:
-        var(--gtf-green-dark);
-
-    color:
-        #ffffff;
-
-}
-
-
-.site-footer .brand-text strong {
-
-    color:
-        #ffffff !important;
-
-}
-
-
-.site-footer .brand-text small {
-
-    color:
-        rgba(255,255,255,.75) !important;
-
-}
-
-
-.footer-brand p {
-
-    color:
-        rgba(255,255,255,.78) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-.footer-column h3 {
-
-    color:
-        #ffffff !important;
-
-}
-
-
-.footer-column a {
-
-    color:
-        rgba(255,255,255,.78);
-
-}
-
-
-.footer-column a:hover {
-
-    color:
-        #ffffff;
-
-}
-
-
-/* =========================================================
-   29. ICONS
-   ========================================================= */
-
-.icon,
-.service-icon,
-.trust-icon {
-
-    color:
-        var(--gtf-green);
-
-    background:
-        var(--gtf-green-soft);
-
-}
-
-
-/* =========================================================
-   30. LOGIN / REGISTER PAGES
-   ========================================================= */
-
-.auth-page,
-.login-page,
-.register-page {
-
-    min-height:
-        100vh;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f3faf6,
-            #e8f4ee
-        );
-
-}
-
-
-.auth-card,
-.login-card,
-.register-card {
-
-    background:
-        #ffffff;
+    height:
+        470px;
 
     border:
-        1px solid var(--gtf-border);
+        1px solid
+        rgba(201,150,43,.09);
 
     border-radius:
-        var(--gtf-radius-lg);
-
-    box-shadow:
-        var(--gtf-shadow-md);
-
-}
-
-
-.auth-card h1,
-.auth-card h2,
-.login-card h1,
-.login-card h2,
-.register-card h1,
-.register-card h2 {
-
-    color:
-        var(--gtf-green) !important;
-
-}
-
-
-.auth-card p,
-.login-card p,
-.register-card p {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    opacity:
-        1 !important;
+        50%;
 
 }
 
 
 /* =========================================================
-   31. ALERTS
+   53. CARD RESPONSIVE
    ========================================================= */
 
-.alert {
+@media (max-width: 900px) {
 
-    padding:
-        12px 14px;
+    .gtf-grid-4 {
 
-    border-radius:
-        8px;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.5;
-
-}
-
-
-.alert-success {
-
-    background:
-        #e8f6ef;
-
-    border:
-        1px solid #b9dfcc;
-
-    color:
-        #12643f;
-
-}
-
-
-.alert-error {
-
-    background:
-        #fcedeb;
-
-    border:
-        1px solid #e5bdb8;
-
-    color:
-        #8d302a;
-
-}
-
-
-.alert-warning {
-
-    background:
-        #fff5dd;
-
-    border:
-        1px solid #e6d09c;
-
-    color:
-        #79530b;
-
-}
-
-
-/* =========================================================
-   32. VISIBILITY OVERRIDE
-   ========================================================= */
-
-/*
-   Use this for existing HTML that accidentally contains:
-
-   color:white
-   color:#fff
-   color:rgba(255,255,255,.5)
-
-   on LIGHT surfaces.
-*/
-
-.light-surface,
-.light-background,
-.white-card,
-.content-card,
-.form-card,
-.info-card {
-
-    color:
-        var(--gtf-text) !important;
-
-}
-
-
-.light-surface p,
-.light-surface span,
-.light-surface small,
-.light-surface label,
-.light-background p,
-.light-background span,
-.light-background small,
-.light-background label,
-.white-card p,
-.white-card span,
-.white-card small,
-.white-card label,
-.content-card p,
-.content-card span,
-.content-card small,
-.content-card label,
-.form-card p,
-.form-card span,
-.form-card small,
-.form-card label {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-/* =========================================================
-   33. REMOVE FAINT TEXT
-   ========================================================= */
-
-.text-muted {
-
-    color:
-        var(--gtf-text-muted) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-.text-secondary {
-
-    color:
-        var(--gtf-text-medium) !important;
-
-    opacity:
-        1 !important;
-
-}
-
-
-.text-white {
-
-    color:
-        #ffffff !important;
-
-}
-
-
-/*
-   Important:
-   Do NOT globally convert .text-white.
-
-   It is intentionally preserved for dark green cards,
-   navigation bars, CTA sections and buttons.
-*/
-
-
-/* =========================================================
-   34. MOBILE
-   ========================================================= */
-
-@media (max-width: 1050px) {
-
-    .main-nav {
-
-        display:
-            none;
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
 
     }
 
-    .mobile-menu-button {
+    .gtf-grid-3 {
 
-        display:
-            block;
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
 
     }
 
 }
 
 
-@media (max-width: 750px) {
+@media (max-width: 700px) {
 
-    body {
-
-        font-size:
-            15px;
-
-    }
-
-
-    p {
-
-        font-size:
-            14px;
-
-    }
-
-
-    .section {
+    .gtf-container {
 
         padding:
-            60px 18px;
+            0 17px;
 
     }
 
+    .gtf-section {
 
-    .hero-description {
+        padding:
+            55px 0;
+
+    }
+
+    .gtf-grid-2,
+    .gtf-grid-3,
+    .gtf-grid-4 {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .gtf-card-demo {
+
+        padding:
+            10px;
+
+    }
+
+    .gtf-card-stack {
+
+        min-height:
+            270px;
+
+    }
+
+    .gtf-card-number {
 
         font-size:
-            15px;
+            clamp(14px,4vw,20px);
 
-        line-height:
-            1.75;
+        letter-spacing:
+            1px;
 
     }
 
+    .gtf-card-chip {
 
-    .hero-note {
+        width:
+            48px;
+
+        height:
+            36px;
+
+        flex-basis:
+            48px;
+
+    }
+
+    .gtf-card-brand-logo {
+
+        width:
+            40px;
+
+        height:
+            40px;
+
+    }
+
+    .gtf-card-brand-name strong {
 
         font-size:
-            13px;
+            9px;
 
     }
 
+    .gtf-card-meta-value {
 
-    .hero-button {
+        font-size:
+            7px;
+
+    }
+
+    .gtf-card-meta {
+
+        gap:
+            18px;
+
+    }
+
+}
+
+
+/* =========================================================
+   54. SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .gtf-card-wrapper {
 
         width:
             100%;
 
-        min-height:
-            50px;
-
-        font-size:
-            14px;
-
     }
 
+    .gtf-bank-card {
 
-    .service-card p,
-    .security-card p {
-
-        font-size:
-            13px;
-
-    }
-
-
-    .trust-item span {
-
-        font-size:
-            12px;
-
-    }
-
-
-    .section-heading p {
-
-        font-size:
-            14px;
-
-    }
-
-}
-
-
-@media (max-width: 500px) {
-
-    .header-inner {
-
-        padding:
-            10px 15px;
-
-    }
-
-
-    .brand-logo {
-
-        width:
-            46px;
-
-        height:
-            46px;
-
-    }
-
-
-    .brand-text strong {
-
-        font-size:
+        border-radius:
             15px;
 
     }
 
+    .gtf-bank-card-inner {
 
-    .brand-text small {
+        padding:
+            17px;
+
+    }
+
+    .gtf-card-number {
+
+        font-size:
+            13px;
+
+        letter-spacing:
+            .8px;
+
+    }
+
+    .gtf-card-chip {
+
+        width:
+            43px;
+
+        height:
+            32px;
+
+        flex-basis:
+            43px;
+
+        border-radius:
+            7px;
+
+    }
+
+    .gtf-card-brand-logo {
+
+        width:
+            34px;
+
+        height:
+            34px;
+
+    }
+
+    .gtf-card-brand-name strong {
 
         font-size:
             8px;
 
     }
 
-
-    .hero h1 {
+    .gtf-card-brand-name span {
 
         font-size:
-            clamp(32px, 9vw, 42px);
+            5px;
 
     }
 
+    .gtf-card-meta {
 
-    .hero-description {
-
-        font-size:
-            15px;
-
-        line-height:
-            1.75;
+        gap:
+            12px;
 
     }
 
-
-    .hero-note {
+    .gtf-card-meta-label {
 
         font-size:
-            13px;
+            5px;
 
     }
 
-
-    .section-heading h2 {
+    .gtf-card-meta-value {
 
         font-size:
-            27px;
+            6px;
+
+    }
+
+    .gtf-card-type {
+
+        font-size:
+            5px;
 
     }
 
@@ -2232,7 +3245,7 @@ tr:hover td {
 
 
 /* =========================================================
-   35. REDUCED MOTION
+   55. ACCESSIBILITY
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2240,9 +3253,6 @@ tr:hover td {
     *,
     *::before,
     *::after {
-
-        scroll-behavior:
-            auto !important;
 
         animation-duration:
             .01ms !important;
@@ -2253,6 +3263,117 @@ tr:hover td {
         transition-duration:
             .01ms !important;
 
+        scroll-behavior:
+            auto !important;
+
     }
 
 }
+
+
+/* =========================================================
+   56. FOCUS VISIBILITY
+   ========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+
+    outline:
+        3px solid
+        rgba(201,150,43,.65);
+
+    outline-offset:
+        3px;
+
+}
+
+
+/* =========================================================
+   57. PREVENT HORIZONTAL OVERFLOW
+   ========================================================= */
+
+html,
+body {
+
+    overflow-x:
+        hidden;
+
+}
+
+
+/* =========================================================
+   58. CARD IMAGE PROTECTION
+   ========================================================= */
+
+.gtf-bank-card img {
+
+    max-width:
+        100%;
+
+    object-fit:
+        contain;
+
+}
+
+
+/* =========================================================
+   59. CARD DEMO LABEL
+   ========================================================= */
+
+.gtf-card-demo-label {
+
+    margin-bottom:
+        12px;
+
+    color:
+        var(--gtf-muted);
+
+    font-size:
+        7px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   60. GOLD DIVIDER
+   ========================================================= */
+
+.gtf-gold-divider {
+
+    width:
+        50px;
+
+    height:
+        3px;
+
+    margin:
+        10px 0;
+
+    border-radius:
+        10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--gtf-gold-dark),
+            var(--gtf-gold-light)
+        );
+
+}
+
+
+/* =========================================================
+   END GLOBAL TRUSTFUND CSS
+   ========================================================= */
