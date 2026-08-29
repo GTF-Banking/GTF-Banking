@@ -2,127 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your Global TrustFund banking account.">
+  <meta name="theme-color" content="#0a3326">
+  <meta name="robots" content="index, follow">
+  <title>Create Account | Global TrustFund</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Create your Global TrustFund Banking account."
-  >
-
-  <meta
-    name="theme-color"
-    content="#0b2a4a"
-  >
-
-  <meta
-    name="robots"
-    content="index,follow"
-  >
-
-  <title>Create Account | GTF Banking</title>
-
-  <link
-    rel="stylesheet"
-    href="css/styles.css"
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-green: #0b6b4f;
-      --gtf-green-dark: #084c39;
-      --gtf-light: #f5f8fb;
-      --gtf-white: #ffffff;
-      --gtf-border: #d9e2ea;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-danger: #b42318;
-      --gtf-danger-bg: #fff1f0;
-      --gtf-success: #16794c;
-      --gtf-success-bg: #effaf4;
-      --gtf-warning: #8a5a00;
-      --gtf-warning-bg: #fff8e6;
-      --gtf-focus: rgba(11, 107, 79, 0.14);
+      --green-900: #0a3326;
+      --green-800: #0d3f2e;
+      --green-700: #125c42;
+      --green-600: #1a7a57;
+      --green-100: #e8f5ef;
+      --green-50:  #f4faf7;
+      --gold:      #c9962b;
+      --text:      #1a2e26;
+      --muted:     #5c6f66;
+      --border:    #d5e4db;
+      --white:     #ffffff;
+      --bg:        #f4f8f6;
+      --danger:    #b42318;
+      --danger-bg: #fff1f0;
+      --success:   #16794c;
+      --success-bg:#effaf4;
+      --warning:   #8a5a00;
+      --warning-bg:#fff8e6;
+      --shadow:    0 18px 50px rgba(10, 51, 38, 0.09);
+      --radius:    12px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
       min-height: 100vh;
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-      color: var(--gtf-text);
-      background:
-        linear-gradient(
-          180deg,
-          #f5f8fb 0%,
-          #eef3f7 100%
-        );
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; border: none; background: none; }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    /* Top bar */
     .topbar {
-      background: var(--gtf-navy);
-      color: #fff;
+      background: var(--green-900);
+      color: white;
     }
 
     .topbar-inner {
-      width: 100%;
-      max-width: 1200px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 8px 20px;
       display: flex;
-      align-items: center;
       justify-content: flex-end;
+      align-items: center;
       gap: 20px;
-      font-size: 0.84rem;
+      font-size: 13px;
     }
 
     .topbar a {
-      color: #e7eef4;
+      color: #d8ebe4;
+      transition: color 0.15s;
     }
 
     .topbar a:hover {
-      color: #fff;
+      color: white;
       text-decoration: underline;
     }
 
-    .site-header {
-      background: #fff;
-      border-bottom: 1px solid var(--gtf-border);
+    /* Header */
+    .header {
+      background: white;
+      border-bottom: 1px solid var(--border);
     }
 
-    .nav-container {
-      width: 100%;
-      max-width: 1200px;
+    .header-inner {
+      max-width: 960px;
       margin: 0 auto;
       padding: 14px 20px;
       display: flex;
@@ -135,135 +102,166 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      color: var(--gtf-navy);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--green-800);
+      color: white;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
       font-weight: 700;
-    }
-
-    .brand img {
-      width: 46px;
-      height: 46px;
-      object-fit: contain;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
+      color: var(--green-800);
       line-height: 1.2;
     }
 
-    .brand-name {
-      font-size: 1.2rem;
+    .brand-text span {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
     }
 
-    .brand-subtitle {
-      margin-top: 2px;
-      color: var(--gtf-muted);
-      font-size: 0.72rem;
-      font-weight: 400;
+    .back-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green-600);
     }
 
-    .back-home {
-      color: var(--gtf-green);
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    .back-home:hover {
+    .back-link:hover {
       text-decoration: underline;
     }
 
-    .signup-page {
-      width: 100%;
-      padding: 45px 20px 60px;
+    /* Main */
+    .signup-main {
+      flex: 1;
+      padding: 40px 20px 56px;
     }
 
-    .signup-container {
-      width: 100%;
+    .signup-card {
       max-width: 920px;
       margin: 0 auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
       overflow: hidden;
-      background: var(--gtf-white);
-      border: 1px solid var(--gtf-border);
-      border-radius: 14px;
-      box-shadow:
-        0 18px 50px
-        rgba(11, 42, 74, 0.09);
     }
 
-    .signup-header {
+    .signup-hero {
+      padding: 36px 44px;
+      background: linear-gradient(135deg, var(--green-900), var(--green-700));
+      color: white;
       position: relative;
-      padding: 38px 45px;
-      color: #fff;
-      background:
-        linear-gradient(
-          135deg,
-          var(--gtf-navy) 0%,
-          var(--gtf-green-dark) 100%
-        );
     }
 
-    .signup-header::after {
+    .signup-hero::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
       height: 4px;
-      background:
-        linear-gradient(
-          90deg,
-          var(--gtf-green),
-          #16815f,
-          #c9962b
-        );
+      background: linear-gradient(90deg, var(--green-600), #16815f, var(--gold));
     }
 
-    .signup-header h1 {
-      margin: 0 0 9px;
-      font-size: 2rem;
-      line-height: 1.2;
+    .signup-hero h1 {
+      font-size: clamp(1.5rem, 3vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
     }
 
-    .signup-header p {
-      max-width: 680px;
-      margin: 0;
-      color: #d9e5ef;
+    .signup-hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.78);
+      max-width: 560px;
       line-height: 1.6;
     }
 
-    .signup-form-area {
-      padding: 42px 45px;
+    .signup-body {
+      padding: 40px 44px;
     }
 
+    /* Alerts */
+    .alert {
+      display: none;
+      margin-bottom: 22px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .alert.error {
+      display: block;
+      color: var(--danger);
+      background: var(--danger-bg);
+      border: 1px solid #f3c7c3;
+    }
+
+    .alert.success {
+      display: block;
+      color: var(--success);
+      background: var(--success-bg);
+      border: 1px solid #b8e2ca;
+    }
+
+    .alert.warning {
+      display: block;
+      color: var(--warning);
+      background: var(--warning-bg);
+      border: 1px solid #ead9a8;
+    }
+
+    .required-note {
+      margin-bottom: 24px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    /* Sections */
     .form-section {
-      margin: 0 0 34px;
+      margin-bottom: 32px;
     }
 
     .section-title {
-      margin: 0 0 18px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--green-900);
+      margin-bottom: 6px;
       padding-bottom: 10px;
-      border-bottom: 1px solid var(--gtf-border);
-      color: var(--gtf-navy);
-      font-size: 1.18rem;
-      font-weight: 800;
+      border-bottom: 1px solid var(--border);
     }
 
-    .section-description {
-      margin: -8px 0 20px;
-      color: var(--gtf-muted);
-      font-size: 0.88rem;
-      line-height: 1.5;
+    .section-desc {
+      font-size: 13px;
+      color: var(--muted);
+      margin: -2px 0 18px;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0 20px;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 18px;
     }
 
     .form-group {
+      margin-bottom: 18px;
       min-width: 0;
-      margin-bottom: 20px;
     }
 
     .full-width {
@@ -272,30 +270,23 @@
 
     .form-group label {
       display: block;
-      margin-bottom: 7px;
-      color: var(--gtf-text);
-      font-size: 0.91rem;
-      font-weight: 700;
-    }
-
-    .required {
-      color: var(--gtf-danger);
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
     }
 
     .form-group input,
     .form-group select {
       width: 100%;
-      min-height: 46px;
-      padding: 12px 14px;
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-      outline: none;
-      background: #fff;
-      color: var(--gtf-text);
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+      height: 46px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      color: var(--text);
+      font-size: 15px;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
 
     .form-group input::placeholder {
@@ -309,49 +300,44 @@
 
     .form-group input:focus,
     .form-group select:focus {
-      border-color: var(--gtf-green);
-      box-shadow:
-        0 0 0 3px
-        var(--gtf-focus);
+      outline: none;
+      border-color: var(--green-600);
+      box-shadow: 0 0 0 3px rgba(26, 122, 87, 0.12);
     }
 
     .form-group input[aria-invalid="true"],
     .form-group select[aria-invalid="true"] {
-      border-color: var(--gtf-danger);
+      border-color: var(--danger);
     }
 
-    .input-wrapper {
+    .input-wrap {
       position: relative;
     }
 
     .password-input {
-      padding-right: 78px !important;
+      padding-right: 72px !important;
     }
 
     .password-toggle {
       position: absolute;
+      right: 6px;
       top: 50%;
-      right: 7px;
-      min-width: 52px;
-      padding: 7px 8px;
       transform: translateY(-50%);
-      border: 0;
-      border-radius: 5px;
-      background: transparent;
-      color: var(--gtf-green);
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green-600);
+      border-radius: 6px;
     }
 
     .password-toggle:hover {
-      background: #edf7f3;
+      background: var(--green-50);
     }
 
     .field-help {
-      margin: 6px 0 0;
-      color: var(--gtf-muted);
-      font-size: 0.78rem;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
       line-height: 1.45;
     }
 
@@ -359,37 +345,35 @@
       width: 100%;
       height: 5px;
       margin-top: 10px;
-      overflow: hidden;
       border-radius: 5px;
       background: #e5eaf0;
+      overflow: hidden;
     }
 
     .password-strength-bar {
       width: 0;
       height: 100%;
       border-radius: inherit;
-      transition:
-        width 0.2s ease,
-        background 0.2s ease;
-      background: var(--gtf-green);
+      background: var(--green-600);
+      transition: width 0.2s ease, background 0.2s ease;
     }
 
     .password-status {
       min-height: 18px;
       margin-top: 6px;
-      color: var(--gtf-muted);
-      font-size: 0.78rem;
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .password-requirements {
       margin: 10px 0 0;
       padding: 0;
+      list-style: none;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5px 12px;
-      list-style: none;
-      color: var(--gtf-muted);
-      font-size: 0.76rem;
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .password-requirements li::before {
@@ -398,7 +382,7 @@
     }
 
     .password-requirements li.valid {
-      color: var(--gtf-success);
+      color: var(--success);
     }
 
     .password-requirements li.valid::before {
@@ -410,102 +394,63 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      margin: 4px 0 25px;
-      color: var(--gtf-muted);
-      font-size: 0.87rem;
+      margin: 4px 0 24px;
+      font-size: 13px;
+      color: var(--muted);
       line-height: 1.55;
     }
 
     .terms input {
       width: 17px;
       height: 17px;
-      margin: 3px 0 0;
+      margin-top: 3px;
       flex-shrink: 0;
-      accent-color: var(--gtf-green);
+      accent-color: var(--green-600);
     }
 
     .terms a {
-      color: var(--gtf-green);
-      font-weight: 700;
+      color: var(--green-600);
+      font-weight: 600;
     }
 
     .terms a:hover {
       text-decoration: underline;
     }
 
-    .alert {
-      display: none;
-      margin-bottom: 22px;
-      padding: 13px 15px;
-      border-radius: 7px;
-      font-size: 0.89rem;
-      line-height: 1.5;
-    }
-
-    .alert.error {
-      display: block;
-      color: var(--gtf-danger);
-      background: var(--gtf-danger-bg);
-      border: 1px solid #f3c7c3;
-    }
-
-    .alert.success {
-      display: block;
-      color: var(--gtf-success);
-      background: var(--gtf-success-bg);
-      border: 1px solid #b8e2ca;
-    }
-
-    .alert.warning {
-      display: block;
-      color: var(--gtf-warning);
-      background: var(--gtf-warning-bg);
-      border: 1px solid #ead9a8;
-    }
-
-    .submit-button {
+    .submit-btn {
       width: 100%;
-      min-height: 48px;
-      padding: 13px 18px;
-      border: 0;
-      border-radius: 7px;
-      background: var(--gtf-green);
-      color: #fff;
-      font-size: 0.94rem;
-      font-weight: 800;
-      cursor: pointer;
-      transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        opacity 0.2s ease;
+      height: 48px;
+      border-radius: 9px;
+      background: var(--green-800);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.15s, opacity 0.15s;
     }
 
-    .submit-button:hover {
-      background: var(--gtf-green-dark);
-      transform: translateY(-1px);
+    .submit-btn:hover:not(:disabled) {
+      background: var(--green-900);
     }
 
-    .submit-button:focus-visible {
-      outline: 3px solid rgba(11, 107, 79, 0.25);
-      outline-offset: 2px;
+    .submit-btn:active:not(:disabled) {
+      transform: translateY(1px);
     }
 
-    .submit-button:disabled {
+    .submit-btn:disabled {
       opacity: 0.65;
       cursor: not-allowed;
-      transform: none;
     }
 
     .login-prompt {
-      margin-top: 25px;
-      color: var(--gtf-muted);
-      font-size: 0.9rem;
+      margin-top: 24px;
       text-align: center;
+      font-size: 14px;
+      color: var(--muted);
     }
 
     .login-prompt a {
-      color: var(--gtf-green);
-      font-weight: 800;
+      color: var(--green-600);
+      font-weight: 700;
     }
 
     .login-prompt a:hover {
@@ -513,36 +458,36 @@
     }
 
     .security-note {
-      margin-top: 25px;
+      margin-top: 24px;
       padding: 14px;
-      border: 1px solid var(--gtf-border);
-      border-radius: 7px;
-      background: #f5f8fb;
-      color: var(--gtf-muted);
-      font-size: 0.78rem;
+      background: var(--green-50);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 12px;
+      color: var(--muted);
       line-height: 1.55;
     }
 
     .security-note strong {
-      color: var(--gtf-text);
+      color: var(--green-800);
     }
 
+    /* Footer */
     .footer {
-      background: var(--gtf-navy);
-      color: #fff;
+      background: var(--green-900);
+      color: white;
     }
 
     .footer-inner {
-      width: 100%;
-      max-width: 1200px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 18px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
-      font-size: 0.81rem;
+      font-size: 12px;
     }
 
     .footer-links {
@@ -552,32 +497,15 @@
     }
 
     .footer a {
-      color: #d2dee8;
+      color: #d8ebe4;
     }
 
     .footer a:hover {
-      color: #fff;
+      color: white;
       text-decoration: underline;
     }
 
-    .required-note {
-      margin: -6px 0 25px;
-      color: var(--gtf-muted);
-      font-size: 0.76rem;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
+    /* Responsive */
     @media (max-width: 760px) {
       .form-grid {
         grid-template-columns: 1fr;
@@ -587,10 +515,10 @@
         grid-column: auto;
       }
 
-      .signup-header,
-      .signup-form-area {
-        padding-left: 25px;
-        padding-right: 25px;
+      .signup-hero,
+      .signup-body {
+        padding-left: 28px;
+        padding-right: 28px;
       }
 
       .password-requirements {
@@ -601,59 +529,32 @@
     @media (max-width: 520px) {
       .topbar-inner {
         justify-content: center;
-        gap: 15px;
-        padding-left: 12px;
-        padding-right: 12px;
-        font-size: 0.78rem;
+        gap: 14px;
+        font-size: 12px;
       }
 
-      .nav-container {
-        padding: 12px 14px;
+      .header-inner {
+        padding: 12px 16px;
       }
 
-      .brand img {
-        width: 40px;
-        height: 40px;
-      }
-
-      .brand-name {
-        font-size: 1.05rem;
-      }
-
-      .brand-subtitle {
-        font-size: 0.67rem;
-      }
-
-      .back-home {
+      .back-link {
         display: none;
       }
 
-      .signup-page {
-        padding: 20px 10px 35px;
+      .signup-main {
+        padding: 20px 12px 36px;
       }
 
-      .signup-container {
-        border-radius: 10px;
+      .signup-hero {
+        padding: 28px 20px;
       }
 
-      .signup-header {
-        padding: 30px 20px;
+      .signup-hero h1 {
+        font-size: 1.45rem;
       }
 
-      .signup-header h1 {
-        font-size: 1.65rem;
-      }
-
-      .signup-header p {
-        font-size: 0.9rem;
-      }
-
-      .signup-form-area {
-        padding: 30px 20px;
-      }
-
-      .section-title {
-        font-size: 1.08rem;
+      .signup-body {
+        padding: 28px 20px;
       }
 
       .footer-inner {
@@ -667,1649 +568,452 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
         transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- =====================================================
-       TOP BAR
-       ====================================================== -->
-
+  <!-- Top bar -->
   <div class="topbar">
     <div class="topbar-inner">
-
-      <a href="support.html">
-        Support
-      </a>
-
-      <a href="pages/security.html">
-        Security
-      </a>
-
-      <a href="pages/contact.html">
-        Contact
-      </a>
-
+      <a href="./support.html">Support</a>
+      <a href="./security.html">Security</a>
+      <a href="./contact.html">Contact</a>
     </div>
   </div>
 
-
-  <!-- =====================================================
-       HEADER
-       ====================================================== -->
-
-  <header class="site-header">
-
-    <div class="nav-container">
-
-      <a
-        href="index.html"
-        class="brand"
-        aria-label="GTF Banking home"
-      >
-
-        <img
-          src="assets/gtf-logo.svg"
-          alt="GTF Banking logo"
-          onerror="this.style.display='none'"
-        >
-
-        <span class="brand-text">
-
-          <span class="brand-name">
-            GTF Banking
-          </span>
-
-          <span class="brand-subtitle">
-            Global Trust Fund
-          </span>
-
-        </span>
-
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="./index.html" class="brand" aria-label="Global TrustFund home">
+        <div class="brand-mark">GT</div>
+        <div class="brand-text">
+          <strong>Global TrustFund</strong>
+          <span>Digital Banking</span>
+        </div>
       </a>
-
-      <a
-        href="index.html"
-        class="back-home"
-      >
-        ← Back to Home
-      </a>
-
+      <a href="./index.html" class="back-link">← Back to Home</a>
     </div>
-
   </header>
 
+  <!-- Main -->
+  <main class="signup-main">
+    <section class="signup-card" aria-labelledby="signup-title">
 
-  <!-- =====================================================
-       MAIN
-       ====================================================== -->
-
-  <main class="signup-page">
-
-    <section
-      class="signup-container"
-      aria-labelledby="signup-title"
-    >
-
-      <!-- =================================================
-           PAGE HEADER
-           ================================================== -->
-
-      <div class="signup-header">
-
-        <h1 id="signup-title">
-          Create your GTF Banking account
-        </h1>
-
-        <p>
-          Enter your information below to begin the account
-          registration process.
-        </p>
-
+      <div class="signup-hero">
+        <h1 id="signup-title">Create your banking account</h1>
+        <p>Enter your information below to begin the registration process. All required fields are marked with an asterisk.</p>
       </div>
 
+      <div class="signup-body">
+        <div id="signupMessage" class="alert" role="alert" aria-live="polite"></div>
 
-      <!-- =================================================
-           FORM AREA
-           ================================================== -->
+        <p class="required-note"><span class="required">*</span> Required fields</p>
 
-      <div class="signup-form-area">
+        <form id="signupForm" autocomplete="on" novalidate>
 
-        <div
-          id="signupMessage"
-          class="alert"
-          role="alert"
-          aria-live="polite"
-        ></div>
-
-
-        <p class="required-note">
-          <span class="required">*</span>
-          Required fields
-        </p>
-
-
-        <form
-          id="signupForm"
-          autocomplete="on"
-          novalidate
-        >
-
-          <!-- =============================================
-               PERSONAL INFORMATION
-               ============================================== -->
-
+          <!-- Personal information -->
           <section class="form-section">
-
-            <h2 class="section-title">
-              Personal information
-            </h2>
+            <h2 class="section-title">Personal information</h2>
 
             <div class="form-grid">
-
               <div class="form-group">
-
-                <label for="firstName">
-                  First name
-                  <span class="required">*</span>
-                </label>
-
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  autocomplete="given-name"
-                  maxlength="80"
-                  required
-                >
-
+                <label for="firstName">First name <span class="required">*</span></label>
+                <input id="firstName" name="firstName" type="text" autocomplete="given-name" maxlength="80" required>
               </div>
 
-
               <div class="form-group">
-
-                <label for="lastName">
-                  Last name
-                  <span class="required">*</span>
-                </label>
-
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  autocomplete="family-name"
-                  maxlength="80"
-                  required
-                >
-
+                <label for="lastName">Last name <span class="required">*</span></label>
+                <input id="lastName" name="lastName" type="text" autocomplete="family-name" maxlength="80" required>
               </div>
 
-
               <div class="form-group">
-
-                <label for="email">
-                  Email address
-                  <span class="required">*</span>
-                </label>
-
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  inputmode="email"
-                  autocapitalize="off"
-                  spellcheck="false"
-                  maxlength="254"
-                  placeholder="you@example.com"
-                  required
-                >
-
+                <label for="email">Email address <span class="required">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@example.com" required>
               </div>
 
-
               <div class="form-group">
-
-                <label for="phone">
-                  Phone number
-                </label>
-
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autocomplete="tel"
-                  inputmode="tel"
-                  maxlength="30"
-                  placeholder="+234..."
-                >
-
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" placeholder="+234...">
               </div>
-
             </div>
-
           </section>
 
-
-          <!-- =============================================
-               ACCOUNT INFORMATION
-               ============================================== -->
-
+          <!-- Account information -->
           <section class="form-section">
-
-            <h2 class="section-title">
-              Account information
-            </h2>
-
-            <p class="section-description">
-              Select the account category that best matches
-              your intended banking relationship.
-            </p>
+            <h2 class="section-title">Account information</h2>
+            <p class="section-desc">Select the account category that best matches your intended banking relationship.</p>
 
             <div class="form-grid">
-
               <div class="form-group">
-
-                <label for="accountType">
-                  Account type
-                  <span class="required">*</span>
-                </label>
-
-                <select
-                  id="accountType"
-                  name="accountType"
-                  required
-                >
-
-                  <option
-                    value=""
-                    selected
-                    disabled
-                  >
-                    Select account type
-                  </option>
-
-                  <option value="personal">
-                    Personal
-                  </option>
-
-                  <option value="business">
-                    Business
-                  </option>
-
+                <label for="accountType">Account type <span class="required">*</span></label>
+                <select id="accountType" name="accountType" required>
+                  <option value="" selected disabled>Select account type</option>
+                  <option value="personal">Personal</option>
+                  <option value="business">Business</option>
                 </select>
-
               </div>
 
-
               <div class="form-group">
-
-                <label for="country">
-                  Country
-                  <span class="required">*</span>
-                </label>
-
-                <select
-                  id="country"
-                  name="country"
-                  autocomplete="country"
-                  required
-                >
-
-                  <option
-                    value=""
-                    selected
-                    disabled
-                  >
-                    Select country
-                  </option>
-
-                  <option value="NG">
-                    Nigeria
-                  </option>
-
-                  <option value="US">
-                    United States
-                  </option>
-
-                  <option value="GB">
-                    United Kingdom
-                  </option>
-
-                  <option value="CA">
-                    Canada
-                  </option>
-
-                  <option value="GH">
-                    Ghana
-                  </option>
-
-                  <option value="ZA">
-                    South Africa
-                  </option>
-
-                  <option value="OTHER">
-                    Other
-                  </option>
-
+                <label for="country">Country <span class="required">*</span></label>
+                <select id="country" name="country" autocomplete="country" required>
+                  <option value="" selected disabled>Select country</option>
+                  <option value="NG">Nigeria</option>
+                  <option value="US">United States</option>
+                  <option value="GB">United Kingdom</option>
+                  <option value="CA">Canada</option>
+                  <option value="GH">Ghana</option>
+                  <option value="ZA">South Africa</option>
+                  <option value="OTHER">Other</option>
                 </select>
-
               </div>
-
             </div>
-
           </section>
 
-
-          <!-- =============================================
-               PASSWORD
-               ============================================== -->
-
+          <!-- Password -->
           <section class="form-section">
-
-            <h2 class="section-title">
-              Create a password
-            </h2>
-
-            <p class="section-description">
-              Choose a password that you do not use on another
-              website or service.
-            </p>
+            <h2 class="section-title">Create a password</h2>
+            <p class="section-desc">Choose a password that you do not use on another website or service.</p>
 
             <div class="form-grid">
-
               <div class="form-group">
-
-                <label for="password">
-                  Password
-                  <span class="required">*</span>
-                </label>
-
-                <div class="input-wrapper">
-
-                  <input
-                    id="password"
-                    name="password"
-                    class="password-input"
-                    type="password"
-                    autocomplete="new-password"
-                    minlength="8"
-                    maxlength="128"
-                    aria-describedby="passwordHelp passwordStatus"
-                    required
-                  >
-
-                  <button
-                    type="button"
-                    id="togglePassword"
-                    class="password-toggle"
-                    aria-label="Show password"
-                    aria-pressed="false"
-                  >
-                    Show
-                  </button>
-
+                <label for="password">Password <span class="required">*</span></label>
+                <div class="input-wrap">
+                  <input id="password" name="password" class="password-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="passwordHelp passwordStatus" required>
+                  <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password" aria-pressed="false">Show</button>
                 </div>
-
-                <p
-                  id="passwordHelp"
-                  class="field-help"
-                >
-                  Use at least 8 characters. A longer password
-                  with different character types is recommended.
-                </p>
-
-                <div
-                  class="password-strength"
-                  aria-hidden="true"
-                >
-                  <div
-                    id="passwordStrengthBar"
-                    class="password-strength-bar"
-                  ></div>
+                <p id="passwordHelp" class="field-help">Use at least 8 characters. A longer password with mixed character types is recommended.</p>
+                <div class="password-strength" aria-hidden="true">
+                  <div id="passwordStrengthBar" class="password-strength-bar"></div>
                 </div>
-
-                <div
-                  id="passwordStatus"
-                  class="password-status"
-                  aria-live="polite"
-                ></div>
-
-                <ul
-                  class="password-requirements"
-                  aria-label="Password requirements"
-                >
-
-                  <li id="reqLength">
-                    At least 8 characters
-                  </li>
-
-                  <li id="reqLower">
-                    Lowercase letter
-                  </li>
-
-                  <li id="reqUpper">
-                    Uppercase letter
-                  </li>
-
-                  <li id="reqNumber">
-                    Number
-                  </li>
-
-                  <li id="reqSpecial">
-                    Special character
-                  </li>
-
-                  <li id="reqLong">
-                    12+ characters recommended
-                  </li>
-
+                <div id="passwordStatus" class="password-status" aria-live="polite"></div>
+                <ul class="password-requirements" aria-label="Password requirements">
+                  <li id="reqLength">At least 8 characters</li>
+                  <li id="reqLower">Lowercase letter</li>
+                  <li id="reqUpper">Uppercase letter</li>
+                  <li id="reqNumber">Number</li>
+                  <li id="reqSpecial">Special character</li>
+                  <li id="reqLong">12+ characters recommended</li>
                 </ul>
-
               </div>
-
 
               <div class="form-group">
-
-                <label for="confirmPassword">
-                  Confirm password
-                  <span class="required">*</span>
-                </label>
-
-                <div class="input-wrapper">
-
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    class="password-input"
-                    type="password"
-                    autocomplete="new-password"
-                    minlength="8"
-                    maxlength="128"
-                    aria-describedby="confirmPasswordStatus"
-                    required
-                  >
-
-                  <button
-                    type="button"
-                    id="toggleConfirmPassword"
-                    class="password-toggle"
-                    aria-label="Show password"
-                    aria-pressed="false"
-                  >
-                    Show
-                  </button>
-
+                <label for="confirmPassword">Confirm password <span class="required">*</span></label>
+                <div class="input-wrap">
+                  <input id="confirmPassword" name="confirmPassword" class="password-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="confirmPasswordStatus" required>
+                  <button type="button" id="toggleConfirmPassword" class="password-toggle" aria-label="Show password" aria-pressed="false">Show</button>
                 </div>
-
-                <div
-                  id="confirmPasswordStatus"
-                  class="password-status"
-                  aria-live="polite"
-                ></div>
-
+                <div id="confirmPasswordStatus" class="password-status" aria-live="polite"></div>
               </div>
-
             </div>
-
           </section>
 
-
-          <!-- =============================================
-               TERMS
-               ============================================== -->
-
+          <!-- Terms -->
           <label class="terms">
-
-            <input
-              id="terms"
-              name="terms"
-              type="checkbox"
-              required
-            >
-
+            <input id="terms" name="terms" type="checkbox" required>
             <span>
               I agree to the applicable
-              <a href="pages/privacy.html">
-                privacy policy
-              </a>
-              and understand that account registration is
-              subject to applicable terms, verification,
-              and account requirements.
+              <a href="./privacy.html">privacy policy</a>
+              and understand that account registration is subject to applicable terms, verification, and account requirements.
             </span>
-
           </label>
 
-
-          <!-- =============================================
-               SUBMIT
-               ============================================== -->
-
-          <button
-            id="signupButton"
-            class="submit-button"
-            type="submit"
-          >
-            Create Account
-          </button>
-
+          <button id="signupButton" class="submit-btn" type="submit">Create Account</button>
         </form>
 
-
-        <!-- =============================================
-             LOGIN PROMPT
-             ============================================== -->
-
         <div class="login-prompt">
-
           Already have an account?
-
-          <a href="login.html">
-            Sign in
-          </a>
-
+          <a href="./customer/login.html">Sign in</a>
         </div>
-
-
-        <!-- =============================================
-             SECURITY NOTE
-             ============================================== -->
 
         <div class="security-note">
-
           <strong>Security reminder:</strong>
-          Never share your password, verification codes,
-          or other authentication credentials with another
-          person.
-
+          Never share your password, verification codes, or other authentication credentials with anyone. Global TrustFund will never ask for your password by email or phone.
         </div>
-
       </div>
-
     </section>
-
   </main>
 
-
-  <!-- =====================================================
-       FOOTER
-       ====================================================== -->
-
+  <!-- Footer -->
   <footer class="footer">
-
     <div class="footer-inner">
-
-      <span>
-        ©
-        <span id="currentYear"></span>
-        GTF Banking. All rights reserved.
-      </span>
-
+      <span>© <span id="currentYear"></span> Global TrustFund. All rights reserved.</span>
       <div class="footer-links">
-
-        <a href="pages/privacy.html">
-          Privacy
-        </a>
-
-        <a href="pages/security.html">
-          Security
-        </a>
-
-        <a href="support.html">
-          Support
-        </a>
-
-        <a href="pages/contact.html">
-          Contact
-        </a>
-
+        <a href="./privacy.html">Privacy</a>
+        <a href="./security.html">Security</a>
+        <a href="./support.html">Support</a>
+        <a href="./contact.html">Contact</a>
       </div>
-
     </div>
-
   </footer>
 
-
-  <!-- =====================================================
-       APPLICATION SCRIPT
-       ====================================================== -->
-
-  <script
-    src="js/app.js"
-    defer
-  ></script>
-
-
-  <!-- =====================================================
-       SIGNUP SCRIPT
-       ====================================================== -->
-
-  <script type="module">
-
+  <script>
     "use strict";
 
+    const form = document.getElementById("signupForm");
+    const message = document.getElementById("signupMessage");
+    const signupButton = document.getElementById("signupButton");
+    const firstName = document.getElementById("firstName");
+    const lastName = document.getElementById("lastName");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const accountType = document.getElementById("accountType");
+    const country = document.getElementById("country");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const terms = document.getElementById("terms");
+    const togglePassword = document.getElementById("togglePassword");
+    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+    const strengthBar = document.getElementById("passwordStrengthBar");
+    const passwordStatus = document.getElementById("passwordStatus");
+    const confirmPasswordStatus = document.getElementById("confirmPasswordStatus");
+    const currentYear = document.getElementById("currentYear");
 
-    /* =====================================================
-       ELEMENTS
-       ====================================================== */
-
-    const form =
-      document.getElementById(
-        "signupForm"
-      );
-
-    const message =
-      document.getElementById(
-        "signupMessage"
-      );
-
-    const signupButton =
-      document.getElementById(
-        "signupButton"
-      );
-
-    const firstName =
-      document.getElementById(
-        "firstName"
-      );
-
-    const lastName =
-      document.getElementById(
-        "lastName"
-      );
-
-    const email =
-      document.getElementById(
-        "email"
-      );
-
-    const phone =
-      document.getElementById(
-        "phone"
-      );
-
-    const accountType =
-      document.getElementById(
-        "accountType"
-      );
-
-    const country =
-      document.getElementById(
-        "country"
-      );
-
-    const password =
-      document.getElementById(
-        "password"
-      );
-
-    const confirmPassword =
-      document.getElementById(
-        "confirmPassword"
-      );
-
-    const terms =
-      document.getElementById(
-        "terms"
-      );
-
-    const togglePassword =
-      document.getElementById(
-        "togglePassword"
-      );
-
-    const toggleConfirmPassword =
-      document.getElementById(
-        "toggleConfirmPassword"
-      );
-
-    const strengthBar =
-      document.getElementById(
-        "passwordStrengthBar"
-      );
-
-    const passwordStatus =
-      document.getElementById(
-        "passwordStatus"
-      );
-
-    const confirmPasswordStatus =
-      document.getElementById(
-        "confirmPasswordStatus"
-      );
-
-    const currentYear =
-      document.getElementById(
-        "currentYear"
-      );
-
-
-    /* =====================================================
-       PASSWORD REQUIREMENT ELEMENTS
-       ====================================================== */
-
-    const reqLength =
-      document.getElementById(
-        "reqLength"
-      );
-
-    const reqLower =
-      document.getElementById(
-        "reqLower"
-      );
-
-    const reqUpper =
-      document.getElementById(
-        "reqUpper"
-      );
-
-    const reqNumber =
-      document.getElementById(
-        "reqNumber"
-      );
-
-    const reqSpecial =
-      document.getElementById(
-        "reqSpecial"
-      );
-
-    const reqLong =
-      document.getElementById(
-        "reqLong"
-      );
-
-
-    /* =====================================================
-       YEAR
-       ====================================================== */
+    const reqLength = document.getElementById("reqLength");
+    const reqLower = document.getElementById("reqLower");
+    const reqUpper = document.getElementById("reqUpper");
+    const reqNumber = document.getElementById("reqNumber");
+    const reqSpecial = document.getElementById("reqSpecial");
+    const reqLong = document.getElementById("reqLong");
 
     if (currentYear) {
-
-      currentYear.textContent =
-        new Date().getFullYear();
-
+      currentYear.textContent = new Date().getFullYear();
     }
 
-
-    /* =====================================================
-       MESSAGE HELPERS
-       ====================================================== */
-
-    function showMessage(
-      text,
-      type = "error"
-    ) {
-
-      if (!message) {
-        return;
-      }
-
-      message.textContent =
-        text;
-
-      message.className =
-        "alert " + type;
-
+    function showMessage(text, type = "error") {
+      if (!message) return;
+      message.textContent = text;
+      message.className = "alert " + type;
     }
-
 
     function clearMessage() {
-
-      if (!message) {
-        return;
-      }
-
-      message.textContent =
-        "";
-
-      message.className =
-        "alert";
-
+      if (!message) return;
+      message.textContent = "";
+      message.className = "alert";
     }
 
-
-    /* =====================================================
-       FIELD INVALID STATE
-       ====================================================== */
-
-    function setInvalid(
-      element,
-      invalid
-    ) {
-
-      if (!element) {
-        return;
-      }
-
+    function setInvalid(element, invalid) {
+      if (!element) return;
       if (invalid) {
-
-        element.setAttribute(
-          "aria-invalid",
-          "true"
-        );
-
+        element.setAttribute("aria-invalid", "true");
       } else {
-
-        element.removeAttribute(
-          "aria-invalid"
-        );
-
+        element.removeAttribute("aria-invalid");
       }
-
     }
 
-
-    /* =====================================================
-       PASSWORD VISIBILITY
-       ====================================================== */
-
-    function setupPasswordToggle(
-      button,
-      input
-    ) {
-
-      if (!button || !input) {
-        return;
-      }
-
-      button.addEventListener(
-        "click",
-        function () {
-
-          const visible =
-            input.type === "text";
-
-          input.type =
-            visible
-              ? "password"
-              : "text";
-
-          button.textContent =
-            visible
-              ? "Show"
-              : "Hide";
-
-          button.setAttribute(
-            "aria-label",
-            visible
-              ? "Show password"
-              : "Hide password"
-          );
-
-          button.setAttribute(
-            "aria-pressed",
-            String(!visible)
-          );
-
-        }
-      );
-
+    function setupPasswordToggle(button, input) {
+      if (!button || !input) return;
+      button.addEventListener("click", () => {
+        const visible = input.type === "text";
+        input.type = visible ? "password" : "text";
+        button.textContent = visible ? "Show" : "Hide";
+        button.setAttribute("aria-label", visible ? "Show password" : "Hide password");
+        button.setAttribute("aria-pressed", String(!visible));
+      });
     }
 
+    setupPasswordToggle(togglePassword, password);
+    setupPasswordToggle(toggleConfirmPassword, confirmPassword);
 
-    setupPasswordToggle(
-      togglePassword,
-      password
-    );
-
-    setupPasswordToggle(
-      toggleConfirmPassword,
-      confirmPassword
-    );
-
-
-    /* =====================================================
-       PASSWORD STRENGTH
-       ====================================================== */
-
-    function getPasswordScore(
-      value
-    ) {
-
+    function getPasswordScore(value) {
       let score = 0;
-
-      if (value.length >= 8) {
-        score++;
-      }
-
-      if (value.length >= 12) {
-        score++;
-      }
-
-      if (/[a-z]/.test(value)) {
-        score++;
-      }
-
-      if (/[A-Z]/.test(value)) {
-        score++;
-      }
-
-      if (/[0-9]/.test(value)) {
-        score++;
-      }
-
-      if (/[^A-Za-z0-9]/.test(value)) {
-        score++;
-      }
-
+      if (value.length >= 8) score++;
+      if (value.length >= 12) score++;
+      if (/[a-z]/.test(value)) score++;
+      if (/[A-Z]/.test(value)) score++;
+      if (/[0-9]/.test(value)) score++;
+      if (/[^A-Za-z0-9]/.test(value)) score++;
       return score;
-
     }
 
-
-    function updateRequirement(
-      element,
-      valid
-    ) {
-
-      if (!element) {
-        return;
-      }
-
-      element.classList.toggle(
-        "valid",
-        valid
-      );
-
+    function updateRequirement(element, valid) {
+      if (!element) return;
+      element.classList.toggle("valid", valid);
     }
-
 
     function updatePasswordStrength() {
+      const value = password.value;
+      const score = getPasswordScore(value);
+      const widths = ["0%", "20%", "35%", "55%", "75%", "90%", "100%"];
 
-      const value =
-        password.value;
+      strengthBar.style.width = widths[score];
 
-      const score =
-        getPasswordScore(
-          value
-        );
-
-
-      const widths = [
-        "0%",
-        "20%",
-        "35%",
-        "55%",
-        "75%",
-        "90%",
-        "100%"
-      ];
-
-
-      strengthBar.style.width =
-        widths[score];
-
-
-      updateRequirement(
-        reqLength,
-        value.length >= 8
-      );
-
-      updateRequirement(
-        reqLower,
-        /[a-z]/.test(value)
-      );
-
-      updateRequirement(
-        reqUpper,
-        /[A-Z]/.test(value)
-      );
-
-      updateRequirement(
-        reqNumber,
-        /[0-9]/.test(value)
-      );
-
-      updateRequirement(
-        reqSpecial,
-        /[^A-Za-z0-9]/.test(value)
-      );
-
-      updateRequirement(
-        reqLong,
-        value.length >= 12
-      );
-
+      updateRequirement(reqLength, value.length >= 8);
+      updateRequirement(reqLower, /[a-z]/.test(value));
+      updateRequirement(reqUpper, /[A-Z]/.test(value));
+      updateRequirement(reqNumber, /[0-9]/.test(value));
+      updateRequirement(reqSpecial, /[^A-Za-z0-9]/.test(value));
+      updateRequirement(reqLong, value.length >= 12);
 
       if (!value) {
-
-        strengthBar.style.width =
-          "0%";
-
-        passwordStatus.textContent =
-          "";
-
+        strengthBar.style.width = "0%";
+        passwordStatus.textContent = "";
         return;
-
       }
-
 
       if (score <= 2) {
-
-        passwordStatus.textContent =
-          "Password strength: weak";
-
+        passwordStatus.textContent = "Password strength: weak";
       } else if (score <= 4) {
-
-        passwordStatus.textContent =
-          "Password strength: moderate";
-
+        passwordStatus.textContent = "Password strength: moderate";
       } else {
-
-        passwordStatus.textContent =
-          "Password strength: strong";
-
+        passwordStatus.textContent = "Password strength: strong";
       }
-
     }
 
-
-    password.addEventListener(
-      "input",
-      updatePasswordStrength
-    );
-
-
-    /* =====================================================
-       CONFIRM PASSWORD STATUS
-       ====================================================== */
+    password.addEventListener("input", updatePasswordStrength);
 
     function updatePasswordMatch() {
-
       if (!confirmPassword.value) {
-
-        confirmPasswordStatus.textContent =
-          "";
-
-        setInvalid(
-          confirmPassword,
-          false
-        );
-
+        confirmPasswordStatus.textContent = "";
+        setInvalid(confirmPassword, false);
         return;
-
       }
 
-
-      if (
-        password.value ===
-        confirmPassword.value
-      ) {
-
-        confirmPasswordStatus.textContent =
-          "Passwords match.";
-
-        confirmPasswordStatus.style.color =
-          "var(--gtf-success)";
-
-        setInvalid(
-          confirmPassword,
-          false
-        );
-
+      if (password.value === confirmPassword.value) {
+        confirmPasswordStatus.textContent = "Passwords match.";
+        confirmPasswordStatus.style.color = "var(--success)";
+        setInvalid(confirmPassword, false);
       } else {
-
-        confirmPasswordStatus.textContent =
-          "Passwords do not match.";
-
-        confirmPasswordStatus.style.color =
-          "var(--gtf-danger)";
-
-        setInvalid(
-          confirmPassword,
-          true
-        );
-
+        confirmPasswordStatus.textContent = "Passwords do not match.";
+        confirmPasswordStatus.style.color = "var(--danger)";
+        setInvalid(confirmPassword, true);
       }
-
     }
 
+    confirmPassword.addEventListener("input", updatePasswordMatch);
+    password.addEventListener("input", updatePasswordMatch);
 
-    confirmPassword.addEventListener(
-      "input",
-      updatePasswordMatch
-    );
-
-    password.addEventListener(
-      "input",
-      updatePasswordMatch
-    );
-
-
-    /* =====================================================
-       NORMALIZE INPUT
-       ====================================================== */
-
-    function normalizeName(
-      value
-    ) {
-
-      return value
-        .trim()
-        .replace(/\s+/g, " ");
-
+    function normalizeName(value) {
+      return value.trim().replace(/\s+/g, " ");
     }
-
-
-    /* =====================================================
-       FORM VALIDATION
-       ====================================================== */
 
     function validateForm() {
+      [firstName, lastName, email, accountType, country, password, confirmPassword].forEach(el => setInvalid(el, false));
 
-      setInvalid(
-        firstName,
-        false
-      );
-
-      setInvalid(
-        lastName,
-        false
-      );
-
-      setInvalid(
-        email,
-        false
-      );
-
-      setInvalid(
-        accountType,
-        false
-      );
-
-      setInvalid(
-        country,
-        false
-      );
-
-      setInvalid(
-        password,
-        false
-      );
-
-      setInvalid(
-        confirmPassword,
-        false
-      );
-
-
-      if (
-        !normalizeName(
-          firstName.value
-        )
-      ) {
-
-        setInvalid(
-          firstName,
-          true
-        );
-
-        return {
-          message:
-            "Please enter your first name.",
-          field:
-            firstName
-        };
-
+      if (!normalizeName(firstName.value)) {
+        setInvalid(firstName, true);
+        return { message: "Please enter your first name.", field: firstName };
       }
 
-
-      if (
-        !normalizeName(
-          lastName.value
-        )
-      ) {
-
-        setInvalid(
-          lastName,
-          true
-        );
-
-        return {
-          message:
-            "Please enter your last name.",
-          field:
-            lastName
-        };
-
+      if (!normalizeName(lastName.value)) {
+        setInvalid(lastName, true);
+        return { message: "Please enter your last name.", field: lastName };
       }
 
-
-      if (
-        !email.value.trim() ||
-        !email.checkValidity()
-      ) {
-
-        setInvalid(
-          email,
-          true
-        );
-
-        return {
-          message:
-            "Please enter a valid email address.",
-          field:
-            email
-        };
-
+      if (!email.value.trim() || !email.checkValidity()) {
+        setInvalid(email, true);
+        return { message: "Please enter a valid email address.", field: email };
       }
 
-
-      if (
-        !accountType.value
-      ) {
-
-        setInvalid(
-          accountType,
-          true
-        );
-
-        return {
-          message:
-            "Please select an account type.",
-          field:
-            accountType
-        };
-
+      if (!accountType.value) {
+        setInvalid(accountType, true);
+        return { message: "Please select an account type.", field: accountType };
       }
 
-
-      if (
-        !country.value
-      ) {
-
-        setInvalid(
-          country,
-          true
-        );
-
-        return {
-          message:
-            "Please select your country.",
-          field:
-            country
-        };
-
+      if (!country.value) {
+        setInvalid(country, true);
+        return { message: "Please select your country.", field: country };
       }
 
-
-      if (
-        password.value.length < 8
-      ) {
-
-        setInvalid(
-          password,
-          true
-        );
-
-        return {
-          message:
-            "Your password must contain at least 8 characters.",
-          field:
-            password
-        };
-
+      if (password.value.length < 8) {
+        setInvalid(password, true);
+        return { message: "Your password must contain at least 8 characters.", field: password };
       }
 
-
-      if (
-        password.value !==
-        confirmPassword.value
-      ) {
-
-        setInvalid(
-          confirmPassword,
-          true
-        );
-
-        return {
-          message:
-            "The passwords do not match.",
-          field:
-            confirmPassword
-        };
-
+      if (password.value !== confirmPassword.value) {
+        setInvalid(confirmPassword, true);
+        return { message: "The passwords do not match.", field: confirmPassword };
       }
-
 
       if (!terms.checked) {
-
-        return {
-          message:
-            "Please agree to the applicable terms before creating your account.",
-          field:
-            terms
-        };
-
+        return { message: "Please agree to the applicable terms before creating your account.", field: terms };
       }
-
 
       return null;
-
     }
 
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
 
-    /* =====================================================
-       SUBMIT
-       ====================================================== */
+      const validation = validateForm();
+      if (validation) {
+        showMessage(validation.message);
+        if (validation.field && typeof validation.field.focus === "function") {
+          validation.field.focus();
+        }
+        return;
+      }
 
-    form.addEventListener(
-      "submit",
-      async function (event) {
+      const userData = {
+        firstName: normalizeName(firstName.value),
+        lastName: normalizeName(lastName.value),
+        email: email.value.trim().toLowerCase(),
+        phone: phone.value.trim(),
+        accountType: accountType.value,
+        country: country.value
+      };
 
-        event.preventDefault();
+      signupButton.disabled = true;
+      signupButton.textContent = "Creating Account...";
 
-        clearMessage();
+      try {
+        if (typeof window.gtfSignup !== "function") {
+          throw new Error("Authentication service is not connected.");
+        }
 
+        const result = await window.gtfSignup(userData, password.value);
 
-        const validation =
-          validateForm();
+        if (!result || result.success === false) {
+          throw new Error(result?.message || "Account creation failed.");
+        }
 
+        showMessage(result.message || "Your account has been created successfully.", "success");
 
-        if (validation) {
-
-          showMessage(
-            validation.message
-          );
-
-          if (
-            validation.field &&
-            typeof validation.field.focus ===
-            "function"
-          ) {
-
-            validation.field.focus();
-
-          }
-
+        if (result.requiresEmailConfirmation) {
+          signupButton.disabled = true;
+          signupButton.textContent = "Account Created";
           return;
-
         }
 
+        const destination = result.redirectTo || "./customer/dashboard.html";
 
-        const userData = {
+        setTimeout(() => {
+          window.location.href = destination;
+        }, 700);
 
-          firstName:
-            normalizeName(
-              firstName.value
-            ),
+      } catch (error) {
+        console.error("Signup error:", error);
 
-          lastName:
-            normalizeName(
-              lastName.value
-            ),
+        let errorMessage = "We could not create your account. Please check your information and try again.";
 
-          email:
-            email.value
-              .trim()
-              .toLowerCase(),
-
-          phone:
-            phone.value.trim(),
-
-          accountType:
-            accountType.value,
-
-          country:
-            country.value
-
-        };
-
-
-        /*
-         * Do not store the password in localStorage,
-         * sessionStorage, cookies, or page variables
-         * beyond the authentication call.
-         */
-
-        signupButton.disabled =
-          true;
-
-        signupButton.textContent =
-          "Creating Account...";
-
-
-        try {
-
-          /*
-           * app.js must provide the real authentication
-           * implementation.
-           *
-           * Expected:
-           *
-           * window.gtfSignup(
-           *   userData,
-           *   password
-           * )
-           *
-           * The implementation should use the project's
-           * configured authentication service and database.
-           */
-
-          if (
-            typeof window.gtfSignup !==
-            "function"
-          ) {
-
-            throw new Error(
-              "Authentication service is not connected."
-            );
-
+        if (error && typeof error.message === "string") {
+          const lower = error.message.toLowerCase();
+          if (lower.includes("already registered") || lower.includes("already exists") || lower.includes("user already")) {
+            errorMessage = "An account may already exist for this email address.";
+          } else if (lower.includes("password") && (lower.includes("weak") || lower.includes("short"))) {
+            errorMessage = "Please choose a stronger password.";
+          } else if (lower.includes("email") && lower.includes("invalid")) {
+            errorMessage = "Please enter a valid email address.";
           }
-
-
-          const result =
-            await window.gtfSignup(
-              userData,
-              password.value
-            );
-
-
-          if (
-            !result ||
-            result.success === false
-          ) {
-
-            throw new Error(
-              result?.message ||
-              "Account creation failed."
-            );
-
-          }
-
-
-          showMessage(
-            result.message ||
-            "Your account has been created successfully.",
-            "success"
-          );
-
-
-          /*
-           * When email verification is required,
-           * remain on the page and allow the backend/
-           * authentication layer to complete verification.
-           */
-
-          if (
-            result.requiresEmailConfirmation
-          ) {
-
-            signupButton.disabled =
-              true;
-
-            signupButton.textContent =
-              "Account Created";
-
-            return;
-
-          }
-
-
-          const destination =
-            result.redirectTo ||
-            "dashboard/index.html";
-
-
-          setTimeout(
-            function () {
-
-              window.location.href =
-                destination;
-
-            },
-            700
-          );
-
-
-        } catch (error) {
-
-          console.error(
-            "GTF Banking signup error:",
-            error
-          );
-
-
-          let errorMessage =
-            "We could not create your account. Please check your information and try again.";
-
-
-          if (
-            error &&
-            typeof error.message ===
-            "string"
-          ) {
-
-            const lower =
-              error.message.toLowerCase();
-
-
-            if (
-              lower.includes(
-                "already registered"
-              ) ||
-              lower.includes(
-                "already exists"
-              ) ||
-              lower.includes(
-                "user already"
-              )
-            ) {
-
-              errorMessage =
-                "An account may already exist for this email address.";
-
-            } else if (
-              lower.includes(
-                "password"
-              ) &&
-              (
-                lower.includes(
-                  "weak"
-                ) ||
-                lower.includes(
-                  "short"
-                )
-              )
-            ) {
-
-              errorMessage =
-                "Please choose a stronger password.";
-
-            } else if (
-              lower.includes(
-                "email"
-              ) &&
-              lower.includes(
-                "invalid"
-              )
-            ) {
-
-              errorMessage =
-                "Please enter a valid email address.";
-
-            }
-
-          }
-
-
-          showMessage(
-            errorMessage
-          );
-
-
-          signupButton.disabled =
-            false;
-
-          signupButton.textContent =
-            "Create Account";
-
         }
 
+        showMessage(errorMessage);
+        signupButton.disabled = false;
+        signupButton.textContent = "Create Account";
       }
-    );
+    });
 
-
-    /* =====================================================
-       CLEAR FIELD ERROR WHEN USER EDITS
-       ====================================================== */
-
-    [
-      firstName,
-      lastName,
-      email,
-      accountType,
-      country,
-      password,
-      confirmPassword
-    ].forEach(
-      function (field) {
-
-        field.addEventListener(
-          "input",
-          function () {
-
-            setInvalid(
-              field,
-              false
-            );
-
-          }
-        );
-
-        field.addEventListener(
-          "change",
-          function () {
-
-            setInvalid(
-              field,
-              false
-            );
-
-          }
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       INITIAL STATE
-       ====================================================== */
+    [firstName, lastName, email, accountType, country, password, confirmPassword].forEach(field => {
+      field.addEventListener("input", () => setInvalid(field, false));
+      field.addEventListener("change", () => setInvalid(field, false));
+    });
 
     updatePasswordStrength();
-
   </script>
 
 </body>
