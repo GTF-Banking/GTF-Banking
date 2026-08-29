@@ -10,15 +10,15 @@
 
     <meta
         name="description"
-        content="Global TrustFund Banking cashier operations dashboard."
+        content="Global TrustFund Cashier Dashboard"
     >
 
     <meta
         name="theme-color"
-        content="#0b2a4a"
+        content="#0b3d2e"
     >
 
-    <title>Cashier Dashboard | GTF Banking</title>
+    <title>Cashier Dashboard | Global TrustFund</title>
 
     <link
         rel="stylesheet"
@@ -27,20 +27,29 @@
 
     <style>
         :root {
-            --gtf-blue: #0b2a4a;
-            --gtf-blue-light: #145da0;
+            --gtf-green: #0b3d2e;
+            --gtf-green-dark: #092f24;
+            --gtf-green-light: #176b48;
             --gtf-gold: #c9962b;
-            --gtf-bg: #f4f7fa;
+
+            --gtf-bg: #f4f8f6;
             --gtf-card: #ffffff;
-            --gtf-border: #dce4eb;
-            --gtf-text: #183247;
-            --gtf-muted: #71808d;
-            --gtf-success: #19734b;
-            --gtf-success-bg: #eaf6ef;
-            --gtf-warning: #946b17;
-            --gtf-warning-bg: #fff7df;
-            --gtf-danger: #a04444;
-            --gtf-danger-bg: #fbeded;
+            --gtf-border: #dfe8e3;
+
+            --gtf-text: #18372c;
+            --gtf-muted: #7c8983;
+
+            --success-bg: #eaf5ee;
+            --success-text: #176b48;
+
+            --warning-bg: #fff7df;
+            --warning-text: #85691c;
+
+            --danger-bg: #f9eded;
+            --danger-text: #8b4444;
+
+            --info-bg: #edf5fa;
+            --info-text: #24627f;
         }
 
         * {
@@ -50,21 +59,20 @@
         html,
         body {
             margin: 0;
+            padding: 0;
             min-height: 100%;
         }
 
         body {
             background: var(--gtf-bg);
             color: var(--gtf-text);
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         button,
         input,
-        select {
+        select,
+        textarea {
             font: inherit;
         }
 
@@ -72,43 +80,54 @@
             cursor: pointer;
         }
 
-        /* =========================================
-           APPLICATION
-        ========================================= */
-
-        .cashier-app {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 245px minmax(0, 1fr);
+        a {
+            color: inherit;
         }
 
-        /* =========================================
-           SIDEBAR
-        ========================================= */
+        .cashier-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-        .sidebar {
+        .cashier-header {
             position: sticky;
             top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            padding: 22px 16px;
-            background: var(--gtf-blue);
-            color: #fff;
+            z-index: 100;
+
+            background: #ffffff;
+            border-bottom: 1px solid var(--gtf-border);
+
+            box-shadow:
+                0 4px 18px rgba(11, 61, 46, .05);
+        }
+
+        .cashier-header-inner {
+            width: 100%;
+            max-width: 1440px;
+            min-height: 72px;
+
+            margin: 0 auto;
+            padding: 12px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
         }
 
         .brand {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 5px 8px 24px;
-            border-bottom: 1px solid rgba(255,255,255,.12);
-            color: #fff;
+
             text-decoration: none;
         }
 
-        .brand img {
-            width: 43px;
-            height: 43px;
+        .brand-logo {
+            width: 45px;
+            height: 45px;
             object-fit: contain;
         }
 
@@ -118,639 +137,466 @@
         }
 
         .brand-text strong {
-            font-size: 13px;
+            color: var(--gtf-green);
+            font-size: 14px;
+            font-weight: 800;
         }
 
-        .brand-text span {
+        .brand-text small {
             margin-top: 3px;
-            color: rgba(255,255,255,.58);
-            font-size: 8px;
+            color: var(--gtf-muted);
+            font-size: 9px;
         }
 
-        .nav-title {
-            margin: 24px 9px 9px;
-            color: rgba(255,255,255,.42);
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .operator {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .operator strong {
+            font-size: 9px;
+        }
+
+        .operator span {
+            margin-top: 3px;
+            color: var(--gtf-muted);
+            font-size: 7px;
+        }
+
+        .avatar {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--gtf-green);
+            color: #fff;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .signout {
+            min-height: 32px;
+            padding: 0 11px;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 6px;
+
+            background: #fff;
+            color: var(--gtf-green);
+
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .cashier-body {
+            width: 100%;
+            max-width: 1440px;
+
+            margin: 0 auto;
+            padding: 25px;
+
+            display: grid;
+            grid-template-columns: 220px minmax(0, 1fr);
+
+            gap: 25px;
+            flex: 1;
+        }
+
+        .sidebar {
+            height: fit-content;
+
+            position: sticky;
+            top: 97px;
+
+            padding: 15px;
+
+            background: #fff;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 12px;
+        }
+
+        .sidebar-title {
+            padding: 8px 10px 12px;
+
+            color: var(--gtf-muted);
+
             font-size: 7px;
             font-weight: 800;
-            letter-spacing: 1px;
+
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav {
             display: grid;
-            gap: 5px;
+            gap: 4px;
         }
 
         .nav a {
+            min-height: 38px;
+
+            padding: 0 10px;
+
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-height: 38px;
-            padding: 0 11px;
+
             border-radius: 7px;
-            color: rgba(255,255,255,.72);
-            font-size: 9px;
-            font-weight: 600;
+
+            color: var(--gtf-muted);
+
             text-decoration: none;
+
+            font-size: 8px;
+            font-weight: 700;
         }
 
-        .nav a:hover,
+        .nav a:hover {
+            background: var(--gtf-bg);
+            color: var(--gtf-green);
+        }
+
         .nav a.active {
-            background: rgba(255,255,255,.10);
+            background: var(--gtf-green);
             color: #fff;
         }
 
         .nav-icon {
-            width: 18px;
-            text-align: center;
+            width: 22px;
+            flex: 0 0 22px;
             font-size: 11px;
         }
-
-        .cashier-profile {
-            margin-top: 30px;
-            padding: 13px;
-            border: 1px solid rgba(255,255,255,.10);
-            border-radius: 9px;
-            background: rgba(255,255,255,.05);
-        }
-
-        .cashier-profile strong {
-            display: block;
-            font-size: 9px;
-        }
-
-        .cashier-profile span {
-            display: block;
-            margin-top: 4px;
-            color: rgba(255,255,255,.55);
-            font-size: 7px;
-        }
-
-        .logout {
-            width: 100%;
-            min-height: 30px;
-            margin-top: 10px;
-            border: 1px solid rgba(255,255,255,.15);
-            border-radius: 6px;
-            background: transparent;
-            color: rgba(255,255,255,.75);
-            font-size: 8px;
-        }
-
-        .logout:hover {
-            background: rgba(255,255,255,.08);
-        }
-
-        /* =========================================
-           MAIN
-        ========================================= */
 
         .main {
             min-width: 0;
         }
 
-        .topbar {
-            min-height: 68px;
-            padding: 14px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            background: #fff;
-            border-bottom: 1px solid var(--gtf-border);
+        .heading {
+            margin-bottom: 22px;
         }
 
-        .topbar h1 {
+        .heading h1 {
             margin: 0;
-            color: var(--gtf-blue);
-            font-size: 20px;
+            color: var(--gtf-green);
+            font-size: 26px;
         }
 
-        .topbar p {
-            margin: 5px 0 0;
+        .heading p {
+            margin: 7px 0 0;
             color: var(--gtf-muted);
             font-size: 8px;
+            line-height: 1.6;
         }
 
-        .session {
-            padding: 7px 10px;
-            border-radius: 20px;
-            background: var(--gtf-success-bg);
-            color: var(--gtf-success);
-            font-size: 7px;
-            font-weight: 700;
-        }
-
-        .content {
-            padding: 27px;
-        }
-
-        /* =========================================
-           STATISTICS
-        ========================================= */
-
-        .stats {
+        .summary {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 18px;
         }
 
-        .stat {
+        .card {
             padding: 17px;
+
             background: #fff;
+
             border: 1px solid var(--gtf-border);
             border-radius: 10px;
         }
 
-        .stat-label {
+        .label {
             color: var(--gtf-muted);
             font-size: 7px;
-            font-weight: 800;
-            letter-spacing: .5px;
+            font-weight: 700;
+
             text-transform: uppercase;
+            letter-spacing: .7px;
         }
 
-        .stat-value {
+        .value {
             margin-top: 7px;
-            color: var(--gtf-blue);
-            font-size: 20px;
+            color: var(--gtf-green);
+            font-size: 21px;
             font-weight: 800;
         }
 
-        .stat-note {
+        .note {
             margin-top: 5px;
             color: var(--gtf-muted);
             font-size: 7px;
         }
 
-        /* =========================================
-           QUICK ACTIONS
-        ========================================= */
-
-        .section {
-            margin-bottom: 20px;
-            background: #fff;
-            border: 1px solid var(--gtf-border);
-            border-radius: 11px;
-            overflow: hidden;
-        }
-
-        .section-header {
-            padding: 17px 18px;
-            border-bottom: 1px solid var(--gtf-border);
-        }
-
-        .section-header h2 {
-            margin: 0;
-            color: var(--gtf-blue);
-            font-size: 13px;
-        }
-
-        .section-header p {
-            margin: 5px 0 0;
-            color: var(--gtf-muted);
-            font-size: 7px;
-        }
-
-        .actions {
+        .quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            padding: 17px;
+            gap: 14px;
+            margin-bottom: 18px;
         }
 
-        .action {
-            min-height: 95px;
-            padding: 15px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 9px;
+        .action-card {
+            padding: 18px;
+
             background: #fff;
-            color: var(--gtf-text);
-            text-align: left;
-            transition:
-                border-color .2s ease,
-                transform .2s ease,
-                box-shadow .2s ease;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 10px;
+
+            text-decoration: none;
         }
 
-        .action:hover {
-            transform: translateY(-2px);
-            border-color: var(--gtf-blue-light);
-            box-shadow: 0 7px 20px rgba(11,42,74,.08);
+        .action-card:hover {
+            border-color: var(--gtf-green-light);
+            transform: translateY(-1px);
         }
 
         .action-icon {
-            width: 31px;
-            height: 31px;
+            width: 34px;
+            height: 34px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 9px;
-            border-radius: 7px;
-            background: #eef3f7;
-            color: var(--gtf-blue);
-            font-size: 13px;
+
+            margin-bottom: 10px;
+
+            border-radius: 8px;
+
+            background: var(--gtf-bg);
+            color: var(--gtf-green);
+
+            font-size: 15px;
             font-weight: 800;
         }
 
-        .action strong {
+        .action-card strong {
             display: block;
-            color: var(--gtf-blue);
+            color: var(--gtf-green);
             font-size: 9px;
         }
 
-        .action span {
+        .action-card span {
             display: block;
-            margin-top: 4px;
+            margin-top: 5px;
             color: var(--gtf-muted);
             font-size: 7px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* =========================================
-           WORKSPACE
-        ========================================= */
-
-        .workspace {
+        .grid {
             display: grid;
-            grid-template-columns: 1.25fr .75fr;
-            gap: 20px;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 18px;
         }
 
-        /* =========================================
-           TRANSACTIONS
-        ========================================= */
+        .panel {
+            overflow: hidden;
 
-        .table-wrap {
-            overflow-x: auto;
+            background: #fff;
+
+            border: 1px solid var(--gtf-border);
+            border-radius: 10px;
+        }
+
+        .panel-header {
+            padding: 16px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--gtf-border);
+        }
+
+        .panel-header h2 {
+            margin: 0;
+            color: var(--gtf-green);
+            font-size: 12px;
+        }
+
+        .panel-header a {
+            color: var(--gtf-green-light);
+            text-decoration: none;
+            font-size: 7px;
+            font-weight: 700;
         }
 
         table {
             width: 100%;
-            min-width: 650px;
             border-collapse: collapse;
         }
 
         th {
-            padding: 11px 14px;
-            background: #f8fafb;
+            padding: 10px 13px;
+
+            background: #f8faf9;
+
             border-bottom: 1px solid var(--gtf-border);
+
             color: var(--gtf-muted);
-            font-size: 7px;
-            font-weight: 800;
+
             text-align: left;
+
+            font-size: 7px;
             text-transform: uppercase;
         }
 
         td {
-            padding: 12px 14px;
-            border-bottom: 1px solid #edf1f4;
+            padding: 12px 13px;
+
+            border-bottom: 1px solid #edf2ef;
+
             font-size: 8px;
         }
 
-        tbody tr:hover {
-            background: #fafcfd;
-        }
-
-        .transaction {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .transaction-icon {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: #eef3f7;
-            color: var(--gtf-blue);
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-        .transaction-info strong {
-            display: block;
-            color: var(--gtf-blue);
-            font-size: 8px;
-        }
-
-        .transaction-info span {
-            display: block;
-            margin-top: 3px;
-            color: var(--gtf-muted);
-            font-size: 7px;
+        tbody tr:last-child td {
+            border-bottom: 0;
         }
 
         .status {
-            display: inline-block;
-            padding: 4px 7px;
+            display: inline-flex;
+
+            min-height: 21px;
+
+            align-items: center;
+
+            padding: 0 7px;
+
             border-radius: 20px;
+
             font-size: 6px;
             font-weight: 800;
-            text-transform: uppercase;
         }
 
         .status.completed {
-            background: var(--gtf-success-bg);
-            color: var(--gtf-success);
+            background: var(--success-bg);
+            color: var(--success-text);
         }
 
         .status.pending {
-            background: var(--gtf-warning-bg);
-            color: var(--gtf-warning);
+            background: var(--warning-bg);
+            color: var(--warning-text);
         }
 
-        .status.failed {
-            background: var(--gtf-danger-bg);
-            color: var(--gtf-danger);
+        .notice-list {
+            padding: 5px 18px 15px;
         }
 
-        /* =========================================
-           CASH DRAWER
-        ========================================= */
-
-        .drawer {
-            padding: 17px;
+        .notice {
+            padding: 13px 0;
+            border-bottom: 1px solid #edf2ef;
         }
 
-        .drawer-balance {
-            padding: 17px;
-            border-radius: 9px;
-            background: var(--gtf-blue);
-            color: #fff;
+        .notice:last-child {
+            border-bottom: 0;
         }
 
-        .drawer-balance span {
+        .notice strong {
             display: block;
-            color: rgba(255,255,255,.65);
-            font-size: 7px;
-        }
-
-        .drawer-balance strong {
-            display: block;
-            margin-top: 7px;
-            font-size: 24px;
-        }
-
-        .drawer-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 13px;
-        }
-
-        .drawer-item {
-            padding: 12px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 7px;
-        }
-
-        .drawer-item span {
-            display: block;
-            color: var(--gtf-muted);
-            font-size: 7px;
-        }
-
-        .drawer-item strong {
-            display: block;
-            margin-top: 5px;
-            color: var(--gtf-blue);
-            font-size: 11px;
-        }
-
-        .drawer-buttons {
-            display: grid;
-            gap: 8px;
-            margin-top: 13px;
-        }
-
-        .button {
-            min-height: 37px;
-            border: 0;
-            border-radius: 6px;
-            background: var(--gtf-blue);
-            color: #fff;
             font-size: 8px;
-            font-weight: 700;
+            color: var(--gtf-text);
         }
 
-        .button:hover {
-            background: var(--gtf-blue-light);
-        }
-
-        .button.secondary {
-            background: #eef3f7;
-            color: var(--gtf-blue);
-        }
-
-        /* =========================================
-           CUSTOMER SEARCH
-        ========================================= */
-
-        .customer-search {
-            padding: 17px;
-        }
-
-        .search-row {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 9px;
-        }
-
-        .search-row input {
-            width: 100%;
-            min-height: 38px;
-            padding: 0 11px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 6px;
-            outline: none;
-            font-size: 8px;
-        }
-
-        .search-row input:focus {
-            border-color: var(--gtf-blue-light);
-        }
-
-        .search-result {
-            display: none;
-            margin-top: 13px;
-            padding: 13px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 7px;
-        }
-
-        .search-result.visible {
+        .notice span {
             display: block;
-        }
-
-        .customer-name {
-            color: var(--gtf-blue);
-            font-size: 9px;
-            font-weight: 800;
-        }
-
-        .customer-meta {
             margin-top: 4px;
             color: var(--gtf-muted);
             font-size: 7px;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        /* =========================================
-           MODAL
-        ========================================= */
+        .footer {
+            padding: 16px 25px;
 
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(5,20,32,.55);
-        }
-
-        .modal.open {
-            display: flex;
-        }
-
-        .modal-card {
-            width: min(520px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 23px;
             background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 25px 70px rgba(0,0,0,.2);
+
+            border-top: 1px solid var(--gtf-border);
         }
 
-        .modal-header {
+        .footer-inner {
+            width: 100%;
+            max-width: 1440px;
+
+            margin: 0 auto;
+
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
 
-        .modal-header h2 {
-            margin: 0;
-            color: var(--gtf-blue);
-            font-size: 16px;
-        }
-
-        .close {
-            width: 30px;
-            height: 30px;
-            border: 0;
-            border-radius: 50%;
-            background: #eef2f5;
-            color: var(--gtf-blue);
-            font-size: 16px;
-        }
-
-        .form {
-            display: grid;
-            gap: 13px;
-        }
-
-        .field {
-            display: grid;
-            gap: 5px;
-        }
-
-        .field label {
-            color: var(--gtf-text);
+            color: var(--gtf-muted);
             font-size: 7px;
-            font-weight: 700;
         }
-
-        .field input,
-        .field select {
-            width: 100%;
-            min-height: 37px;
-            padding: 0 9px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 6px;
-            outline: none;
-            color: var(--gtf-text);
-            font-size: 8px;
-            background: #fff;
-        }
-
-        .field input:focus,
-        .field select:focus {
-            border-color: var(--gtf-blue-light);
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 8px;
-            margin-top: 18px;
-        }
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
 
         @media (max-width: 1100px) {
-            .stats {
+            .summary,
+            .quick-actions {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .actions {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .workspace {
+            .grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 800px) {
-            .cashier-app {
+        @media (max-width: 850px) {
+            .cashier-body {
                 grid-template-columns: 1fr;
             }
 
             .sidebar {
                 position: static;
-                height: auto;
+            }
+
+            .nav {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cashier-header-inner {
+                padding: 10px 14px;
+            }
+
+            .operator {
+                display: none;
+            }
+
+            .cashier-body {
+                padding: 15px;
             }
 
             .nav {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .cashier-profile {
-                display: none;
-            }
-
-            .content {
-                padding: 17px;
-            }
-        }
-
-        @media (max-width: 560px) {
-            .stats,
-            .actions {
+            .summary,
+            .quick-actions {
                 grid-template-columns: 1fr;
             }
 
-            .topbar {
-                padding: 13px 17px;
+            .footer-inner {
+                flex-direction: column;
+                gap: 7px;
+                text-align: center;
             }
 
-            .session {
-                display: none;
+            .table-wrapper {
+                overflow-x: auto;
             }
 
-            .search-row {
-                grid-template-columns: 1fr;
+            table {
+                min-width: 600px;
             }
         }
     </style>
@@ -758,376 +604,239 @@
 
 <body>
 
-<div class="cashier-app">
+<div class="cashier-page">
 
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
+    <header class="cashier-header">
 
-    <aside class="sidebar">
+        <div class="cashier-header-inner">
 
-        <a
-            href="./index.html"
-            class="brand"
-        >
+            <a href="./index.html" class="brand">
 
-            <img
-                src="../assets/gtf-logo.svg"
-                alt="Global TrustFund logo"
-            >
+                <img
+                    src="../assets/gtf-logo.svg"
+                    class="brand-logo"
+                    alt="Global TrustFund logo"
+                >
 
-            <span class="brand-text">
-                <strong>Global TrustFund</strong>
-                <span>Cashier Operations Portal</span>
-            </span>
+                <span class="brand-text">
+                    <strong>Global TrustFund</strong>
+                    <small>Cashier Operations</small>
+                </span>
 
-        </a>
-
-
-        <div class="nav-title">
-            Cashier Operations
-        </div>
-
-
-        <nav class="nav">
-
-            <a
-                href="./index.html"
-                class="active"
-            >
-                <span class="nav-icon">⌂</span>
-                Dashboard
             </a>
 
-            <a href="./transactions.html">
-                <span class="nav-icon">⇄</span>
-                Transactions
-            </a>
+            <div class="header-right">
 
-            <a href="./customers.html">
-                <span class="nav-icon">♙</span>
-                Customers
-            </a>
+                <div class="operator">
+                    <strong>Cashier</strong>
+                    <span>Branch Operations</span>
+                </div>
 
-            <a href="./deposits.html">
-                <span class="nav-icon">↓</span>
-                Deposits
-            </a>
+                <div class="avatar">CA</div>
 
-            <a href="./withdrawals.html">
-                <span class="nav-icon">↑</span>
-                Withdrawals
-            </a>
-
-            <a href="./transfers.html">
-                <span class="nav-icon">↔</span>
-                Transfers
-            </a>
-
-            <a href="./drawer.html">
-                <span class="nav-icon">▣</span>
-                Cash Drawer
-            </a>
-
-            <a href="./support.html">
-                <span class="nav-icon">?</span>
-                Support
-            </a>
-
-        </nav>
-
-
-        <div class="cashier-profile">
-
-            <strong id="cashierName">
-                Cashier
-            </strong>
-
-            <span id="cashierRole">
-                Cashier Operations
-            </span>
-
-            <button
-                type="button"
-                class="logout"
-                id="logoutButton"
-            >
-                Sign Out
-            </button>
-
-        </div>
-
-    </aside>
-
-
-    <!-- =========================================
-         MAIN
-    ========================================== -->
-
-    <main class="main">
-
-        <header class="topbar">
-
-            <div>
-
-                <h1>
-                    Cashier Dashboard
-                </h1>
-
-                <p>
-                    Manage daily branch transactions and customer service operations.
-                </p>
+                <button
+                    type="button"
+                    class="signout"
+                    onclick="window.location.href='./login.html'"
+                >
+                    Sign Out
+                </button>
 
             </div>
 
-            <span class="session">
-                ● Cashier Session Active
-            </span>
+        </div>
 
-        </header>
+    </header>
 
 
-        <section class="content">
+    <div class="cashier-body">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                Cashier Portal
+            </div>
+
+            <nav class="nav" aria-label="Cashier navigation">
+
+                <a href="./index.html" class="active">
+                    <span class="nav-icon">⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="./customers.html">
+                    <span class="nav-icon">◉</span>
+                    Customers
+                </a>
+
+                <a href="./deposit.html">
+                    <span class="nav-icon">＋</span>
+                    Deposit
+                </a>
+
+                <a href="./withdrawals.html">
+                    <span class="nav-icon">−</span>
+                    Withdrawals
+                </a>
+
+                <a href="./transfers.html">
+                    <span class="nav-icon">⇄</span>
+                    Transfers
+                </a>
+
+                <a href="./transactions.html">
+                    <span class="nav-icon">▤</span>
+                    Transactions
+                </a>
+
+                <a href="./drawer.html">
+                    <span class="nav-icon">▣</span>
+                    Cash Drawer
+                </a>
+
+                <a href="./support.html">
+                    <span class="nav-icon">?</span>
+                    Support
+                </a>
+
+            </nav>
+
+        </aside>
 
 
-            <!-- =====================================
-                 STATISTICS
-            ====================================== -->
+        <main class="main">
 
-            <section class="stats">
+            <section class="heading">
 
-                <div class="stat">
+                <h1>Cashier Dashboard</h1>
 
-                    <div class="stat-label">
-                        Today's Transactions
-                    </div>
+                <p>
+                    Monitor branch activity, review cashier operations,
+                    and access daily transaction tools.
+                </p>
 
-                    <div
-                        class="stat-value"
-                        id="todayTransactions"
-                    >
-                        0
-                    </div>
+            </section>
 
-                    <div class="stat-note">
-                        Processed during current shift
-                    </div>
 
+            <section class="summary">
+
+                <div class="card">
+                    <div class="label">Today's Transactions</div>
+                    <div class="value">184</div>
+                    <div class="note">Processed at this branch</div>
                 </div>
 
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Deposits
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="todayDeposits"
-                    >
-                        0
-                    </div>
-
-                    <div class="stat-note">
-                        Customer deposits processed
-                    </div>
-
+                <div class="card">
+                    <div class="label">Cash Received</div>
+                    <div class="value">$28.4K</div>
+                    <div class="note">Demo operating total</div>
                 </div>
 
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Withdrawals
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="todayWithdrawals"
-                    >
-                        0
-                    </div>
-
-                    <div class="stat-note">
-                        Customer withdrawals processed
-                    </div>
-
+                <div class="card">
+                    <div class="label">Cash Paid Out</div>
+                    <div class="value">$16.8K</div>
+                    <div class="note">Today's withdrawals</div>
                 </div>
 
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Pending
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="pendingTransactions"
-                    >
-                        0
-                    </div>
-
-                    <div class="stat-note">
-                        Transactions awaiting processing
-                    </div>
-
+                <div class="card">
+                    <div class="label">Pending</div>
+                    <div class="value">6</div>
+                    <div class="note">Items requiring review</div>
                 </div>
 
             </section>
 
 
-            <!-- =====================================
-                 QUICK ACTIONS
-            ====================================== -->
+            <section class="quick-actions">
 
-            <section class="section">
+                <a class="action-card" href="./deposit.html">
+                    <div class="action-icon">＋</div>
+                    <strong>New Deposit</strong>
+                    <span>Record a customer deposit.</span>
+                </a>
 
-                <div class="section-header">
+                <a class="action-card" href="./withdrawals.html">
+                    <div class="action-icon">−</div>
+                    <strong>Withdrawal</strong>
+                    <span>Start a withdrawal request.</span>
+                </a>
 
-                    <h2>
-                        Quick Operations
-                    </h2>
+                <a class="action-card" href="./transfers.html">
+                    <div class="action-icon">⇄</div>
+                    <strong>Transfer</strong>
+                    <span>Prepare an account transfer.</span>
+                </a>
 
-                    <p>
-                        Start a common cashier transaction.
-                    </p>
-
-                </div>
-
-
-                <div class="actions">
-
-                    <button
-                        type="button"
-                        class="action"
-                        data-operation="deposit"
-                    >
-
-                        <div class="action-icon">
-                            ↓
-                        </div>
-
-                        <strong>
-                            Cash Deposit
-                        </strong>
-
-                        <span>
-                            Record a customer deposit.
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="action"
-                        data-operation="withdrawal"
-                    >
-
-                        <div class="action-icon">
-                            ↑
-                        </div>
-
-                        <strong>
-                            Cash Withdrawal
-                        </strong>
-
-                        <span>
-                            Process an approved withdrawal.
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="action"
-                        data-operation="transfer"
-                    >
-
-                        <div class="action-icon">
-                            ↔
-                        </div>
-
-                        <strong>
-                            Account Transfer
-                        </strong>
-
-                        <span>
-                            Initiate an internal account transfer.
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="action"
-                        data-operation="customer"
-                    >
-
-                        <div class="action-icon">
-                            ♙
-                        </div>
-
-                        <strong>
-                            Find Customer
-                        </strong>
-
-                        <span>
-                            Search customer account information.
-                        </span>
-
-                    </button>
-
-                </div>
+                <a class="action-card" href="./drawer.html">
+                    <div class="action-icon">▣</div>
+                    <strong>Cash Drawer</strong>
+                    <span>Review drawer activity.</span>
+                </a>
 
             </section>
 
 
-            <!-- =====================================
-                 WORKSPACE
-            ====================================== -->
+            <div class="grid">
 
-            <section class="workspace">
+                <section class="panel">
 
-
-                <!-- RECENT TRANSACTIONS -->
-
-                <section class="section">
-
-                    <div class="section-header">
-
-                        <h2>
-                            Recent Transactions
-                        </h2>
-
-                        <p>
-                            Latest transactions processed by the cashier.
-                        </p>
-
+                    <div class="panel-header">
+                        <h2>Recent Transactions</h2>
+                        <a href="./transactions.html">View All</a>
                     </div>
 
-
-                    <div class="table-wrap">
+                    <div class="table-wrapper">
 
                         <table>
 
                             <thead>
-
                                 <tr>
-                                    <th>Transaction</th>
-                                    <th>Account</th>
+                                    <th>Reference</th>
+                                    <th>Customer</th>
+                                    <th>Type</th>
                                     <th>Amount</th>
                                     <th>Status</th>
                                 </tr>
-
                             </thead>
 
+                            <tbody>
 
-                            <tbody id="transactionTable">
+                                <tr>
+                                    <td>TXN-10482</td>
+                                    <td>David Morgan</td>
+                                    <td>Deposit</td>
+                                    <td>+$1,250.00</td>
+                                    <td>
+                                        <span class="status completed">
+                                            Completed
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>TXN-10481</td>
+                                    <td>Sarah Williams</td>
+                                    <td>Withdrawal</td>
+                                    <td>-$500.00</td>
+                                    <td>
+                                        <span class="status completed">
+                                            Completed
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>TXN-10480</td>
+                                    <td>Michael Carter</td>
+                                    <td>Transfer</td>
+                                    <td>$2,000.00</td>
+                                    <td>
+                                        <span class="status pending">
+                                            Pending
+                                        </span>
+                                    </td>
+                                </tr>
+
                             </tbody>
 
                         </table>
@@ -1137,1342 +846,66 @@
                 </section>
 
 
-                <!-- CASH DRAWER -->
+                <section class="panel">
 
-                <section class="section">
-
-                    <div class="section-header">
-
-                        <h2>
-                            Cash Drawer
-                        </h2>
-
-                        <p>
-                            Current shift cash position.
-                        </p>
-
+                    <div class="panel-header">
+                        <h2>Branch Notices</h2>
                     </div>
 
+                    <div class="notice-list">
 
-                    <div class="drawer">
-
-                        <div class="drawer-balance">
-
+                        <div class="notice">
+                            <strong>Drawer reconciliation</strong>
                             <span>
-                                Current Drawer Balance
+                                Complete the daily cash reconciliation
+                                before closing the branch.
                             </span>
-
-                            <strong id="drawerBalance">
-                                ₦0.00
-                            </strong>
-
                         </div>
 
-
-                        <div class="drawer-grid">
-
-                            <div class="drawer-item">
-
-                                <span>
-                                    Opening Balance
-                                </span>
-
-                                <strong id="openingBalance">
-                                    ₦0.00
-                                </strong>
-
-                            </div>
-
-
-                            <div class="drawer-item">
-
-                                <span>
-                                    Cash Received
-                                </span>
-
-                                <strong id="cashReceived">
-                                    ₦0.00
-                                </strong>
-
-                            </div>
-
-
-                            <div class="drawer-item">
-
-                                <span>
-                                    Cash Paid
-                                </span>
-
-                                <strong id="cashPaid">
-                                    ₦0.00
-                                </strong>
-
-                            </div>
-
-
-                            <div class="drawer-item">
-
-                                <span>
-                                    Expected
-                                </span>
-
-                                <strong id="expectedBalance">
-                                    ₦0.00
-                                </strong>
-
-                            </div>
-
+                        <div class="notice">
+                            <strong>Pending review</strong>
+                            <span>
+                                Six demo transactions are currently
+                                awaiting supervisor review.
+                            </span>
                         </div>
 
-
-                        <div class="drawer-buttons">
-
-                            <button
-                                type="button"
-                                class="button"
-                                id="openDrawerButton"
-                            >
-                                Open / Start Shift
-                            </button>
-
-                            <button
-                                type="button"
-                                class="button secondary"
-                                id="reconcileButton"
-                            >
-                                Reconcile Drawer
-                            </button>
-
+                        <div class="notice">
+                            <strong>System status</strong>
+                            <span>
+                                Cashier portal services are operating
+                                normally.
+                            </span>
                         </div>
 
                     </div>
 
                 </section>
 
-            </section>
-
-
-            <!-- =====================================
-                 CUSTOMER SEARCH
-            ====================================== -->
-
-            <section class="section">
-
-                <div class="section-header">
-
-                    <h2>
-                        Customer Lookup
-                    </h2>
-
-                    <p>
-                        Search by account number, customer ID or name.
-                    </p>
-
-                </div>
-
-
-                <div class="customer-search">
-
-                    <div class="search-row">
-
-                        <input
-                            type="search"
-                            id="customerSearch"
-                            placeholder="Enter account number or customer name..."
-                            autocomplete="off"
-                        >
-
-                        <button
-                            type="button"
-                            class="button"
-                            id="searchButton"
-                        >
-                            Search
-                        </button>
-
-                    </div>
-
-
-                    <div
-                        class="search-result"
-                        id="searchResult"
-                    >
-
-                        <div
-                            class="customer-name"
-                            id="customerName"
-                        >
-                            Customer
-                        </div>
-
-                        <div
-                            class="customer-meta"
-                            id="customerMeta"
-                        >
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </section>
-
-    </main>
-
-</div>
-
-
-<!-- =========================================
-     OPERATION MODAL
-========================================== -->
-
-<div
-    class="modal"
-    id="operationModal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="operationTitle"
->
-
-    <div class="modal-card">
-
-        <div class="modal-header">
-
-            <h2 id="operationTitle">
-                Cashier Operation
-            </h2>
-
-            <button
-                type="button"
-                class="close"
-                id="closeModal"
-                aria-label="Close"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <form
-            class="form"
-            id="operationForm"
-        >
-
-            <div class="field">
-
-                <label for="accountNumber">
-                    Account Number
-                </label>
-
-                <input
-                    type="text"
-                    id="accountNumber"
-                    required
-                    placeholder="Enter account number"
-                >
-
             </div>
 
-
-            <div class="field">
-
-                <label for="amount">
-                    Amount
-                </label>
-
-                <input
-                    type="number"
-                    id="amount"
-                    min="0"
-                    step="0.01"
-                    required
-                    placeholder="0.00"
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="operationType">
-                    Operation
-                </label>
-
-                <select id="operationType">
-
-                    <option value="deposit">
-                        Cash Deposit
-                    </option>
-
-                    <option value="withdrawal">
-                        Cash Withdrawal
-                    </option>
-
-                    <option value="transfer">
-                        Account Transfer
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="modal-actions">
-
-                <button
-                    type="button"
-                    class="button secondary"
-                    id="cancelOperation"
-                >
-                    Cancel
-                </button>
-
-                <button
-                    type="submit"
-                    class="button"
-                >
-                    Continue
-                </button>
-
-            </div>
-
-        </form>
+        </main>
 
     </div>
 
+
+    <footer class="footer">
+
+        <div class="footer-inner">
+
+            <span>
+                © 2026 Global TrustFund Banking
+            </span>
+
+            <span>
+                Cashier Operations Portal
+            </span>
+
+        </div>
+
+    </footer>
+
 </div>
-
-
-<script>
-
-    /*
-     * ========================================================
-     * GTF BANKING CASHIER DASHBOARD
-     * ========================================================
-     *
-     * API integration points:
-     *
-     * GET  /api/dashboard/summary
-     * GET  /api/transactions
-     * POST /api/transactions
-     * GET  /api/users
-     * GET  /api/users/:id
-     *
-     * Authentication should be enforced by the backend
-     * role middleware.
-     */
-
-
-    const API_BASE = "/api";
-
-
-    const demoData = {
-
-        statistics: {
-            transactions: 24,
-            deposits: 11,
-            withdrawals: 8,
-            pending: 5
-        },
-
-        drawer: {
-            opening: 250000,
-            received: 735000,
-            paid: 420000
-        },
-
-        transactions: [
-
-            {
-                type: "Deposit",
-                account: "GTF-104823",
-                customer: "Customer Account",
-                amount: 150000,
-                status: "Completed"
-            },
-
-            {
-                type: "Withdrawal",
-                account: "GTF-203911",
-                customer: "Customer Account",
-                amount: 50000,
-                status: "Completed"
-            },
-
-            {
-                type: "Deposit",
-                account: "GTF-301724",
-                customer: "Customer Account",
-                amount: 275000,
-                status: "Pending"
-            },
-
-            {
-                type: "Withdrawal",
-                account: "GTF-442018",
-                customer: "Customer Account",
-                amount: 120000,
-                status: "Completed"
-            }
-
-        ]
-
-    };
-
-
-    const operationModal =
-        document.getElementById(
-            "operationModal"
-        );
-
-
-    function formatCurrency(amount) {
-
-        return new Intl.NumberFormat(
-            "en-NG",
-            {
-                style: "currency",
-                currency: "NGN",
-                minimumFractionDigits: 2
-            }
-        ).format(
-            Number(amount) || 0
-        );
-
-    }
-
-
-    function updateStatistics(data) {
-
-        const statistics =
-            data.statistics ||
-            demoData.statistics;
-
-
-        document.getElementById(
-            "todayTransactions"
-        ).textContent =
-            statistics.transactions ?? 0;
-
-
-        document.getElementById(
-            "todayDeposits"
-        ).textContent =
-            statistics.deposits ?? 0;
-
-
-        document.getElementById(
-            "todayWithdrawals"
-        ).textContent =
-            statistics.withdrawals ?? 0;
-
-
-        document.getElementById(
-            "pendingTransactions"
-        ).textContent =
-            statistics.pending ?? 0;
-
-    }
-
-
-    function updateDrawer(data) {
-
-        const drawer =
-            data.drawer ||
-            demoData.drawer;
-
-
-        const expected =
-            Number(drawer.opening || 0) +
-            Number(drawer.received || 0) -
-            Number(drawer.paid || 0);
-
-
-        document.getElementById(
-            "openingBalance"
-        ).textContent =
-            formatCurrency(
-                drawer.opening
-            );
-
-
-        document.getElementById(
-            "cashReceived"
-        ).textContent =
-            formatCurrency(
-                drawer.received
-            );
-
-
-        document.getElementById(
-            "cashPaid"
-        ).textContent =
-            formatCurrency(
-                drawer.paid
-            );
-
-
-        document.getElementById(
-            "expectedBalance"
-        ).textContent =
-            formatCurrency(
-                expected
-            );
-
-
-        document.getElementById(
-            "drawerBalance"
-        ).textContent =
-            formatCurrency(
-                expected
-            );
-
-    }
-
-
-    function renderTransactions(
-        transactions
-    ) {
-
-        const table =
-            document.getElementById(
-                "transactionTable"
-            );
-
-
-        table.innerHTML = "";
-
-
-        if (!transactions.length) {
-
-            table.innerHTML = `
-                <tr>
-                    <td
-                        colspan="4"
-                        style="
-                            text-align:center;
-                            padding:30px;
-                            color:#71808d;
-                        "
-                    >
-                        No transactions found.
-                    </td>
-                </tr>
-            `;
-
-            return;
-
-        }
-
-
-        transactions.forEach(
-            transaction => {
-
-                const row =
-                    document.createElement(
-                        "tr"
-                    );
-
-
-                const type =
-                    String(
-                        transaction.type ||
-                        "Transaction"
-                    );
-
-
-                const status =
-                    String(
-                        transaction.status ||
-                        "Pending"
-                    ).toLowerCase();
-
-
-                row.innerHTML = `
-
-                    <td>
-
-                        <div class="transaction">
-
-                            <div class="transaction-icon">
-                                ${
-                                    type
-                                        .toLowerCase()
-                                        .includes(
-                                            "deposit"
-                                        )
-                                        ? "↓"
-                                        : "↑"
-                                }
-                            </div>
-
-                            <div class="transaction-info">
-
-                                <strong>
-                                    ${escapeHtml(type)}
-                                </strong>
-
-                                <span>
-                                    ${escapeHtml(
-                                        transaction.customer ||
-                                        "Customer Account"
-                                    )}
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </td>
-
-
-                    <td>
-                        ${escapeHtml(
-                            transaction.account ||
-                            "—"
-                        )}
-                    </td>
-
-
-                    <td>
-                        ${formatCurrency(
-                            transaction.amount
-                        )}
-                    </td>
-
-
-                    <td>
-
-                        <span
-                            class="status ${
-                                status === "completed"
-                                    ? "completed"
-                                    : status === "failed"
-                                        ? "failed"
-                                        : "pending"
-                            }"
-                        >
-                            ${escapeHtml(status)}
-                        </span>
-
-                    </td>
-
-                `;
-
-
-                table.appendChild(row);
-
-            }
-        );
-
-    }
-
-
-    function escapeHtml(value) {
-
-        return String(
-            value ?? ""
-        )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-    }
-
-
-    async function loadDashboard() {
-
-        /*
-         * First render safe local data.
-         */
-
-        updateStatistics(
-            demoData
-        );
-
-        updateDrawer(
-            demoData
-        );
-
-        renderTransactions(
-            demoData.transactions
-        );
-
-
-        /*
-         * Then attempt the real backend.
-         */
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/dashboard/summary`,
-                    {
-                        method: "GET",
-                        credentials: "include",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                throw new Error(
-                    `Dashboard API returned ${response.status}`
-                );
-            }
-
-
-            const data =
-                await response.json();
-
-
-            updateStatistics(
-                data
-            );
-
-
-            if (data.drawer) {
-                updateDrawer(data);
-            }
-
-
-        } catch (error) {
-
-            console.warn(
-                "Dashboard API unavailable. Demo data retained.",
-                error
-            );
-
-        }
-
-
-        /*
-         * Attempt to load transactions.
-         */
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/transactions`,
-                    {
-                        method: "GET",
-                        credentials: "include",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                throw new Error(
-                    `Transactions API returned ${response.status}`
-                );
-            }
-
-
-            const data =
-                await response.json();
-
-
-            const transactions =
-                Array.isArray(data)
-                    ? data
-                    : Array.isArray(data.transactions)
-                        ? data.transactions
-                        : Array.isArray(data.data)
-                            ? data.data
-                            : [];
-
-
-            if (transactions.length) {
-
-                renderTransactions(
-                    transactions.slice(
-                        0,
-                        10
-                    )
-                );
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Transactions API unavailable.",
-                error
-            );
-
-        }
-
-    }
-
-
-    function openOperation(
-        operation
-    ) {
-
-        operationModal.classList.add(
-            "open"
-        );
-
-
-        const operationType =
-            document.getElementById(
-                "operationType"
-            );
-
-
-        if (
-            operation ===
-            "customer"
-        ) {
-
-            operationModal.classList.remove(
-                "open"
-            );
-
-
-            document
-                .getElementById(
-                    "customerSearch"
-                )
-                .focus();
-
-            return;
-
-        }
-
-
-        operationType.value =
-            operation;
-
-
-        document.getElementById(
-            "operationTitle"
-        ).textContent =
-            operation === "deposit"
-                ? "Cash Deposit"
-                : operation === "withdrawal"
-                    ? "Cash Withdrawal"
-                    : "Account Transfer";
-
-
-        document.getElementById(
-            "accountNumber"
-        ).focus();
-
-    }
-
-
-    function closeOperation() {
-
-        operationModal.classList.remove(
-            "open"
-        );
-
-    }
-
-
-    document
-        .querySelectorAll(
-            "[data-operation]"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        openOperation(
-                            button.dataset
-                                .operation
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "closeModal"
-        )
-        .addEventListener(
-            "click",
-            closeOperation
-        );
-
-
-    document
-        .getElementById(
-            "cancelOperation"
-        )
-        .addEventListener(
-            "click",
-            closeOperation
-        );
-
-
-    operationModal.addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target ===
-                operationModal
-            ) {
-                closeOperation();
-            }
-
-        }
-    );
-
-
-    document
-        .getElementById(
-            "operationForm"
-        )
-        .addEventListener(
-            "submit",
-            async event => {
-
-                event.preventDefault();
-
-
-                const account =
-                    document
-                        .getElementById(
-                            "accountNumber"
-                        )
-                        .value
-                        .trim();
-
-
-                const amount =
-                    Number(
-                        document
-                            .getElementById(
-                                "amount"
-                            )
-                            .value
-                    );
-
-
-                const operation =
-                    document
-                        .getElementById(
-                            "operationType"
-                        )
-                        .value;
-
-
-                if (
-                    !account ||
-                    !amount ||
-                    amount <= 0
-                ) {
-
-                    alert(
-                        "Please enter a valid account number and amount."
-                    );
-
-                    return;
-
-                }
-
-
-                /*
-                 * This is the point where the transaction
-                 * should be sent to the backend.
-                 *
-                 * POST /api/transactions
-                 */
-
-                try {
-
-                    const response =
-                        await fetch(
-                            `${API_BASE}/transactions`,
-                            {
-                                method: "POST",
-
-                                credentials:
-                                    "include",
-
-                                headers: {
-                                    "Content-Type":
-                                        "application/json",
-                                    "Accept":
-                                        "application/json"
-                                },
-
-                                body:
-                                    JSON.stringify({
-                                        account_number:
-                                            account,
-                                        amount,
-                                        type:
-                                            operation
-                                    })
-                            }
-                        );
-
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            `Transaction request failed: ${response.status}`
-                        );
-
-                    }
-
-
-                    alert(
-                        "Transaction submitted successfully."
-                    );
-
-
-                } catch (error) {
-
-                    console.warn(
-                        "Transaction API unavailable.",
-                        error
-                    );
-
-
-                    alert(
-                        "Transaction form is ready. Connect the cashier transaction endpoint to process this operation."
-                    );
-
-                }
-
-
-                closeOperation();
-
-
-                document
-                    .getElementById(
-                        "operationForm"
-                    )
-                    .reset();
-
-            }
-        );
-
-
-    async function searchCustomer() {
-
-        const input =
-            document
-                .getElementById(
-                    "customerSearch"
-                )
-                .value
-                .trim();
-
-
-        const result =
-            document.getElementById(
-                "searchResult"
-            );
-
-
-        if (!input) {
-
-            result.classList.remove(
-                "visible"
-            );
-
-            return;
-
-        }
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/users?search=${encodeURIComponent(input)}`,
-                    {
-                        method: "GET",
-                        credentials: "include",
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
-                    }
-                );
-
-
-            if (!response.ok) {
-                throw new Error(
-                    `Customer search returned ${response.status}`
-                );
-            }
-
-
-            const data =
-                await response.json();
-
-
-            const customer =
-                Array.isArray(data)
-                    ? data[0]
-                    : Array.isArray(data.users)
-                        ? data.users[0]
-                        : Array.isArray(data.data)
-                            ? data.data[0]
-                            : data.user ||
-                              data.customer ||
-                              null;
-
-
-            if (!customer) {
-                throw new Error(
-                    "Customer not found"
-                );
-            }
-
-
-            document.getElementById(
-                "customerName"
-            ).textContent =
-                customer.full_name ||
-                customer.name ||
-                "Customer";
-
-
-            document.getElementById(
-                "customerMeta"
-            ).textContent =
-                `Account: ${
-                    customer.account_number ||
-                    "Not available"
-                } · Customer ID: ${
-                    customer.id ||
-                    "Not available"
-                }`;
-
-
-        } catch (error) {
-
-            /*
-             * Safe demo response for frontend development.
-             */
-
-            document.getElementById(
-                "customerName"
-            ).textContent =
-                "Demo Customer Record";
-
-
-            document.getElementById(
-                "customerMeta"
-            ).textContent =
-                `Search reference: ${input} · Connect /api/users for live customer lookup.`;
-
-        }
-
-
-        result.classList.add(
-            "visible"
-        );
-
-    }
-
-
-    document
-        .getElementById(
-            "searchButton"
-        )
-        .addEventListener(
-            "click",
-            searchCustomer
-        );
-
-
-    document
-        .getElementById(
-            "customerSearch"
-        )
-        .addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key ===
-                    "Enter"
-                ) {
-
-                    event.preventDefault();
-
-                    searchCustomer();
-
-                }
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "openDrawerButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                alert(
-                    "Cash drawer opening/start-shift workflow is ready for backend integration."
-                );
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "reconcileButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                alert(
-                    "Drawer reconciliation workflow is ready for backend integration."
-                );
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "logoutButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                /*
-                 * Clear local frontend session information.
-                 */
-
-                [
-                    "gtf_user",
-                    "gtf_session",
-                    "gtf_access_token",
-                    "gtf_refresh_token",
-                    "access_token",
-                    "refresh_token"
-                ].forEach(
-                    key => {
-
-                        try {
-                            localStorage.removeItem(
-                                key
-                            );
-                        } catch (error) {}
-
-                    }
-                );
-
-
-                try {
-                    sessionStorage.clear();
-                } catch (error) {}
-
-
-                /*
-                 * Backend sign-out.
-                 */
-
-                fetch(
-                    `${API_BASE}/auth/signout`,
-                    {
-                        method: "POST",
-                        credentials: "include",
-                        headers: {
-                            "Accept":
-                                "application/json",
-                            "Content-Type":
-                                "application/json"
-                        },
-                        body:
-                            JSON.stringify({
-                                role: "cashier"
-                            })
-                    }
-                )
-                .catch(
-                    () => {}
-                )
-                .finally(
-                    () => {
-
-                        window.location.replace(
-                            "./login.html"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-                closeOperation();
-            }
-
-        }
-    );
-
-
-    /*
-     * Initialize dashboard.
-     */
-
-    loadDashboard();
-
-</script>
 
 </body>
 </html>
