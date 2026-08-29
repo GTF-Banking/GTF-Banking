@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -18,71 +20,912 @@
         content="#0b3d2e"
     >
 
-    <title>Customer Portal | Global TrustFund</title>
+    <title>
+        Global TrustFund | Personal Banking
+    </title>
 
-    <!-- Global Styles -->
     <link
         rel="stylesheet"
         href="../css/styles.css"
     >
 
-    <!-- Global Application Scripts -->
-    <script
-        src="../js/app.js"
-        defer
-    ></script>
+    <style>
 
-    <script
-        src="../js/auth.js"
-        defer
-    ></script>
+        :root {
+            --gtf-green: #0b3d2e;
+            --gtf-green-dark: #092f24;
+            --gtf-green-light: #176b48;
+            --gtf-gold: #c9962b;
 
-    <script
-        src="../js/role-guard.js"
-        defer
-    ></script>
+            --gtf-bg: #f4f8f6;
+            --gtf-card: #ffffff;
+            --gtf-border: #dfe8e3;
+
+            --gtf-text: #18372c;
+            --gtf-muted: #718078;
+
+            --success-bg: #eaf5ee;
+            --success-text: #176b48;
+
+            --warning-bg: #fff7df;
+            --warning-text: #85691c;
+
+            --danger-bg: #f9eded;
+            --danger-text: #8b4444;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            background: var(--gtf-bg);
+            color: var(--gtf-text);
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =====================================================
+           PAGE
+           ===================================================== */
+
+        .customer-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .customer-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+
+            box-shadow:
+                0 4px 18px
+                rgba(11, 61, 46, .05);
+        }
+
+        .customer-header-inner {
+            width: 100%;
+            max-width: 1440px;
+
+            min-height: 72px;
+
+            margin: 0 auto;
+            padding: 12px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--gtf-green);
+
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 45px;
+            height: 45px;
+
+            display: block;
+
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text strong {
+            color: var(--gtf-green);
+
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .brand-text small {
+            margin-top: 3px;
+
+            color: var(--gtf-muted);
+
+            font-size: 9px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .customer-label {
+            display: flex;
+            flex-direction: column;
+
+            text-align: right;
+        }
+
+        .customer-label strong {
+            font-size: 9px;
+        }
+
+        .customer-label span {
+            margin-top: 3px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        .customer-avatar {
+            width: 37px;
+            height: 37px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--gtf-green);
+
+            color: #ffffff;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .signout-button {
+            min-height: 32px;
+
+            padding: 0 11px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            font-size: 7px;
+            font-weight: 700;
+        }
+
+        .signout-button:hover {
+            background: var(--gtf-bg);
+        }
+
+        /* =====================================================
+           BODY
+           ===================================================== */
+
+        .customer-body {
+            width: 100%;
+            max-width: 1440px;
+
+            margin: 0 auto;
+
+            padding: 25px;
+
+            display: grid;
+
+            grid-template-columns:
+                220px minmax(0, 1fr);
+
+            gap: 25px;
+
+            flex: 1;
+        }
+
+        /* =====================================================
+           SIDEBAR
+           ===================================================== */
+
+        .customer-sidebar {
+            height: fit-content;
+
+            position: sticky;
+            top: 97px;
+
+            padding: 15px;
+
+            background: #ffffff;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 12px;
+        }
+
+        .sidebar-title {
+            padding:
+                8px 10px 12px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav {
+            display: grid;
+            gap: 4px;
+        }
+
+        .sidebar-nav a {
+            min-height: 38px;
+
+            padding: 0 10px;
+
+            display: flex;
+            align-items: center;
+
+            border-radius: 7px;
+
+            color: var(--gtf-muted);
+
+            text-decoration: none;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .sidebar-nav a:hover {
+            background: var(--gtf-bg);
+            color: var(--gtf-green);
+        }
+
+        .sidebar-nav a.active {
+            background: var(--gtf-green);
+            color: #ffffff;
+        }
+
+        .nav-icon {
+            width: 23px;
+            flex: 0 0 23px;
+
+            font-size: 11px;
+        }
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .customer-main {
+            min-width: 0;
+        }
+
+        .page-heading {
+            margin-bottom: 22px;
+
+            display: flex;
+
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        .page-heading p {
+            margin: 7px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+        .heading-actions {
+            display: flex;
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .button {
+            min-height: 36px;
+
+            padding: 0 13px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 6px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .button:hover {
+            background: var(--gtf-bg);
+        }
+
+        .button-primary {
+            border-color: var(--gtf-green);
+
+            background: var(--gtf-green);
+
+            color: #ffffff;
+        }
+
+        .button-primary:hover {
+            background: var(--gtf-green-dark);
+        }
+
+        /* =====================================================
+           LOADING
+           ===================================================== */
+
+        .loading {
+            padding: 35px;
+
+            text-align: center;
+
+            color: var(--gtf-muted);
+
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           ERROR
+           ===================================================== */
+
+        .api-error {
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 13px 15px;
+
+            border:
+                1px solid #efd6d6;
+
+            border-radius: 8px;
+
+            background: var(--danger-bg);
+
+            color: var(--danger-text);
+
+            font-size: 8px;
+
+            line-height: 1.5;
+        }
+
+        .api-error.show {
+            display: block;
+        }
+
+        /* =====================================================
+           WELCOME CARD
+           ===================================================== */
+
+        .welcome-card {
+            margin-bottom: 18px;
+
+            padding: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--gtf-green),
+                    var(--gtf-green-light)
+                );
+
+            border-radius: 12px;
+
+            color: #ffffff;
+
+            box-shadow:
+                0 12px 28px
+                rgba(11, 61, 46, .12);
+        }
+
+        .welcome-card h2 {
+            margin: 0;
+
+            font-size: 20px;
+        }
+
+        .welcome-card p {
+            margin: 7px 0 0;
+
+            max-width: 600px;
+
+            color:
+                rgba(255,255,255,.82);
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           ACCOUNT CARDS
+           ===================================================== */
+
+        .section-title {
+            margin:
+                0 0 12px;
+
+            color: var(--gtf-green);
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .account-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 18px;
+        }
+
+        .account-card {
+            padding: 18px;
+
+            background: #ffffff;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 10px;
+        }
+
+        .account-card:hover {
+            border-color:
+                rgba(11,61,46,.25);
+        }
+
+        .account-type {
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            letter-spacing: .7px;
+
+            text-transform: uppercase;
+        }
+
+        .account-number {
+            margin-top: 6px;
+
+            color: var(--gtf-text);
+
+            font-size: 8px;
+        }
+
+        .account-balance {
+            margin-top: 16px;
+
+            color: var(--gtf-green);
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+        .account-status {
+            display: inline-flex;
+
+            margin-top: 9px;
+
+            padding: 5px 8px;
+
+            border-radius: 20px;
+
+            background: var(--success-bg);
+
+            color: var(--success-text);
+
+            font-size: 6px;
+
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           CONTENT GRID
+           ===================================================== */
+
+        .content-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.5fr)
+                minmax(260px, 1fr);
+
+            gap: 18px;
+        }
+
+        .panel {
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 10px;
+        }
+
+        .panel-header {
+            padding: 15px 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
+
+        .panel-header h2 {
+            margin: 0;
+
+            color: var(--gtf-green);
+
+            font-size: 11px;
+        }
+
+        .panel-header a {
+            color: var(--gtf-green);
+
+            text-decoration: none;
+
+            font-size: 7px;
+
+            font-weight: 700;
+        }
+
+        .panel-body {
+            padding: 0;
+        }
+
+        /* =====================================================
+           TRANSACTIONS
+           ===================================================== */
+
+        .transaction {
+            padding: 13px 17px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-bottom:
+                1px solid #edf2ef;
+        }
+
+        .transaction:last-child {
+            border-bottom: 0;
+        }
+
+        .transaction-main {
+            min-width: 0;
+        }
+
+        .transaction-title {
+            color: var(--gtf-text);
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+        .transaction-meta {
+            margin-top: 4px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+        }
+
+        .transaction-amount {
+            white-space: nowrap;
+
+            font-size: 8px;
+
+            font-weight: 800;
+        }
+
+        .transaction-amount.credit {
+            color: var(--success-text);
+        }
+
+        .transaction-amount.debit {
+            color: var(--danger-text);
+        }
+
+        .empty-state {
+            padding: 30px 18px;
+
+            text-align: center;
+
+            color: var(--gtf-muted);
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           QUICK ACTIONS
+           ===================================================== */
+
+        .quick-actions {
+            padding: 15px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 8px;
+        }
+
+        .quick-action {
+            min-height: 70px;
+
+            padding: 12px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-start;
+            justify-content: center;
+
+            gap: 6px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 8px;
+
+            background: #ffffff;
+
+            color: var(--gtf-green);
+
+            text-decoration: none;
+        }
+
+        .quick-action:hover {
+            background: var(--gtf-bg);
+
+            border-color:
+                rgba(11,61,46,.25);
+        }
+
+        .quick-action-icon {
+            font-size: 15px;
+        }
+
+        .quick-action strong {
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .customer-footer {
+            padding: 16px 25px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+        .customer-footer-inner {
+            width: 100%;
+            max-width: 1440px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .account-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .customer-body {
+                grid-template-columns: 1fr;
+            }
+
+            .customer-sidebar {
+                position: static;
+            }
+
+            .sidebar-nav {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .customer-header-inner {
+                padding: 10px 14px;
+            }
+
+            .customer-label {
+                display: none;
+            }
+
+            .customer-body {
+                padding: 15px;
+            }
+
+            .sidebar-nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .page-heading {
+                flex-direction: column;
+            }
+
+            .page-heading h1 {
+                font-size: 22px;
+            }
+
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .customer-footer-inner {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body class="dashboard-page">
+
+<body>
+
+
+<div class="customer-page">
+
 
     <!-- =====================================================
-         CUSTOMER DASHBOARD
+         HEADER
          ===================================================== -->
 
-    <div class="dashboard-layout">
+    <header class="customer-header">
 
-        <!-- =================================================
-             SIDEBAR
-             ================================================= -->
+        <div class="customer-header-inner">
 
-        <aside
-            class="dashboard-sidebar"
-            id="customerSidebar"
-            aria-label="Customer navigation"
-        >
-
-            <!-- Brand -->
 
             <a
-                href="index.html"
+                href="./dashboard.html"
                 class="brand"
-                aria-label="Global TrustFund Customer Portal"
+                aria-label="Global TrustFund Banking"
             >
 
                 <img
                     src="../assets/gtf-logo.svg"
-                    alt="Global TrustFund"
                     class="brand-logo"
+                    alt="Global TrustFund logo"
                 >
 
                 <span class="brand-text">
 
                     <strong>
-                        GLOBAL TRUSTFUND
+                        Global TrustFund
                     </strong>
 
                     <small>
-                        CUSTOMER BANKING
+                        Personal Banking
                     </small>
 
                 </span>
@@ -90,818 +933,364 @@
             </a>
 
 
-            <!-- Navigation -->
+            <div class="header-right">
 
-            <nav class="sidebar-navigation">
+                <div class="customer-label">
 
-                <div class="sidebar-section-title">
-                    Banking
-                </div>
-
-                <a
-                    href="index.html"
-                    class="sidebar-link active"
-                    aria-current="page"
-                >
-
-                    <span class="sidebar-icon">
-                        ⌂
-                    </span>
+                    <strong id="customerName">
+                        Customer
+                    </strong>
 
                     <span>
-                        Dashboard
+                        Personal Banking
                     </span>
 
-                </a>
-
-
-                <a
-                    href="accounts.html"
-                    class="sidebar-link"
-                >
-
-                    <span class="sidebar-icon">
-                        ▣
-                    </span>
-
-                    <span>
-                        My Accounts
-                    </span>
-
-                </a>
-
-
-                <a
-                    href="transactions.html"
-                    class="sidebar-link"
-                >
-
-                    <span class="sidebar-icon">
-                        ⇄
-                    </span>
-
-                    <span>
-                        Transactions
-                    </span>
-
-                </a>
-
-
-                <a
-                    href="transfers.html"
-                    class="sidebar-link"
-                >
-
-                    <span class="sidebar-icon">
-                        →
-                    </span>
-
-                    <span>
-                        Transfers
-                    </span>
-
-                </a>
-
-
-                <div class="sidebar-section-title">
-                    Account
                 </div>
 
 
-                <a
-                    href="profile.html"
-                    class="sidebar-link"
+                <div
+                    class="customer-avatar"
+                    id="customerAvatar"
                 >
-
-                    <span class="sidebar-icon">
-                        ◉
-                    </span>
-
-                    <span>
-                        My Profile
-                    </span>
-
-                </a>
-
-
-                <a
-                    href="verification.html"
-                    class="sidebar-link"
-                >
-
-                    <span class="sidebar-icon">
-                        ✓
-                    </span>
-
-                    <span>
-                        Verification
-                    </span>
-
-                </a>
-
-
-                <a
-                    href="documents.html"
-                    class="sidebar-link"
-                >
-
-                    <span class="sidebar-icon">
-                        ▤
-                    </span>
-
-                    <span>
-                        Documents
-                    </span>
-
-                </a>
-
-
-                <a
-                    href="notifications.html"
-                    class="sidebar-link"
-                >
-
-                    <span class="sidebar-icon">
-                        ♢
-                    </span>
-
-                    <span>
-                        Notifications
-                    </span>
-
-                </a>
-
-
-                <div class="sidebar-section-title">
-                    Security & Help
+                    CU
                 </div>
 
 
-                <a
-                    href="security.html"
-                    class="sidebar-link"
+                <button
+                    type="button"
+                    class="signout-button"
+                    id="signoutButton"
                 >
+                    Sign Out
+                </button>
 
-                    <span class="sidebar-icon">
-                        ◈
-                    </span>
+            </div>
 
-                    <span>
-                        Security
-                    </span>
+        </div>
 
+    </header>
+
+
+    <!-- =====================================================
+         BODY
+         ===================================================== -->
+
+    <div class="customer-body">
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="customer-sidebar">
+
+            <div class="sidebar-title">
+                My Banking
+            </div>
+
+
+            <nav
+                class="sidebar-nav"
+                aria-label="Customer navigation"
+            >
+
+                <a
+                    href="./dashboard.html"
+                    class="active"
+                >
+                    <span class="nav-icon">⌂</span>
+                    Dashboard
                 </a>
 
 
-                <a
-                    href="support.html"
-                    class="sidebar-link"
-                >
+                <a href="./accounts.html">
+                    <span class="nav-icon">▣</span>
+                    Accounts
+                </a>
 
-                    <span class="sidebar-icon">
-                        ?
-                    </span>
 
-                    <span>
-                        Support
-                    </span>
+                <a href="./transactions.html">
+                    <span class="nav-icon">⇄</span>
+                    Transactions
+                </a>
 
+
+                <a href="./transfers.html">
+                    <span class="nav-icon">↗</span>
+                    Transfers
+                </a>
+
+
+                <a href="./payments.html">
+                    <span class="nav-icon">₦</span>
+                    Payments
+                </a>
+
+
+                <a href="./cards.html">
+                    <span class="nav-icon">▭</span>
+                    Cards
+                </a>
+
+
+                <a href="./loans.html">
+                    <span class="nav-icon">◫</span>
+                    Loans
+                </a>
+
+
+                <a href="./notifications.html">
+                    <span class="nav-icon">◉</span>
+                    Notifications
+                </a>
+
+
+                <a href="./profile.html">
+                    <span class="nav-icon">◎</span>
+                    Profile
+                </a>
+
+
+                <a href="./security.html">
+                    <span class="nav-icon">✓</span>
+                    Security
+                </a>
+
+
+                <a href="./support.html">
+                    <span class="nav-icon">?</span>
+                    Support
                 </a>
 
             </nav>
-
-
-            <!-- Sidebar Footer -->
-
-            <div class="sidebar-footer">
-
-                <a
-                    href="signout.html"
-                    class="sidebar-link"
-                    id="customerSignOut"
-                >
-
-                    <span class="sidebar-icon">
-                        ↪
-                    </span>
-
-                    <span>
-                        Sign Out
-                    </span>
-
-                </a>
-
-            </div>
 
         </aside>
 
 
         <!-- =================================================
-             MAIN AREA
+             MAIN
              ================================================= -->
 
-        <main class="dashboard-main">
+        <main class="customer-main">
 
-            <!-- =============================================
-                 HEADER
-                 ============================================= -->
 
-            <header class="dashboard-header">
+            <div
+                class="api-error"
+                id="apiError"
+                role="alert"
+            ></div>
 
-                <div class="dashboard-header-title">
+
+            <!-- PAGE HEADING -->
+
+            <section class="page-heading">
+
+                <div>
 
                     <h1>
-                        Customer Dashboard
+                        Banking Overview
                     </h1>
 
                     <p>
-                        Secure online banking with Global TrustFund
+                        Manage your accounts and monitor your
+                        banking activity from one secure location.
                     </p>
 
                 </div>
 
 
-                <div class="dashboard-header-actions">
+                <div class="heading-actions">
 
-                    <!-- Notifications -->
+                    <button
+                        type="button"
+                        class="button"
+                        id="refreshButton"
+                    >
+                        Refresh
+                    </button>
 
                     <a
-                        href="notifications.html"
-                        class="button button-outline button-small"
-                        aria-label="View notifications"
+                        href="./transfers.html"
+                        class="button button-primary"
+                        style="display:flex;align-items:center;text-decoration:none;"
                     >
-                        Notifications
+                        Transfer Money
                     </a>
 
+                </div>
 
-                    <!-- User -->
+            </section>
 
-                    <div class="dashboard-user">
 
-                        <div
-                            class="user-avatar"
-                            id="customerAvatar"
-                            aria-hidden="true"
-                        >
-                            C
-                        </div>
+            <!-- =================================================
+                 WELCOME
+                 ================================================= -->
 
-                        <div class="user-info">
+            <section class="welcome-card">
 
-                            <strong id="customerName">
-                                Customer
-                            </strong>
+                <h2 id="welcomeTitle">
+                    Welcome
+                </h2>
 
-                            <small id="customerRole">
-                                Customer Account
-                            </small>
+                <p>
+                    Your account information below is loaded
+                    directly from your Global TrustFund banking
+                    account.
+                </p>
 
-                        </div>
+            </section>
 
+
+            <!-- =================================================
+                 ACCOUNTS
+                 ================================================= -->
+
+            <section>
+
+                <h2 class="section-title">
+                    Your Accounts
+                </h2>
+
+
+                <div
+                    class="account-grid"
+                    id="accountGrid"
+                >
+
+                    <div class="loading">
+                        Loading your accounts...
                     </div>
 
                 </div>
 
-            </header>
+            </section>
 
 
-            <!-- =============================================
-                 DASHBOARD CONTENT
-                 ============================================= -->
+            <!-- =================================================
+                 CONTENT
+                 ================================================= -->
 
-            <div class="dashboard-content">
+            <section class="content-grid">
 
-                <!-- Welcome -->
 
-                <section class="dashboard-welcome">
+                <!-- RECENT TRANSACTIONS -->
 
-                    <h2 id="welcomeMessage">
-                        Welcome back
-                    </h2>
+                <div class="panel">
 
-                    <p>
-                        Here's an overview of your Global TrustFund account.
-                    </p>
+                    <div class="panel-header">
 
-                </section>
+                        <h2>
+                            Recent Transactions
+                        </h2>
 
-
-                <!-- =========================================
-                     ACCOUNT STATUS
-                     ========================================= -->
-
-                <div
-                    id="accountStatusAlert"
-                    class="alert alert-info mb-3"
-                    role="status"
-                >
-
-                    <strong>
-                        Account Status:
-                    </strong>
-
-                    <span id="accountStatus">
-                        Active
-                    </span>
-
-                </div>
-
-
-                <!-- =========================================
-                     STATISTICS
-                     ========================================= -->
-
-                <section
-                    class="stats-grid"
-                    aria-label="Account summary"
-                >
-
-                    <article class="stat-card">
-
-                        <span class="stat-card-label">
-                            Total Balance
-                        </span>
-
-                        <strong
-                            class="stat-card-value"
-                            id="totalBalance"
-                        >
-                            ₦0.00
-                        </strong>
-
-                        <span class="stat-card-meta">
-                            Across your accounts
-                        </span>
-
-                    </article>
-
-
-                    <article class="stat-card">
-
-                        <span class="stat-card-label">
-                            Available Balance
-                        </span>
-
-                        <strong
-                            class="stat-card-value"
-                            id="availableBalance"
-                        >
-                            ₦0.00
-                        </strong>
-
-                        <span class="stat-card-meta">
-                            Available to use
-                        </span>
-
-                    </article>
-
-
-                    <article class="stat-card">
-
-                        <span class="stat-card-label">
-                            Accounts
-                        </span>
-
-                        <strong
-                            class="stat-card-value"
-                            id="accountCount"
-                        >
-                            0
-                        </strong>
-
-                        <span class="stat-card-meta">
-                            Active accounts
-                        </span>
-
-                    </article>
-
-
-                    <article class="stat-card">
-
-                        <span class="stat-card-label">
-                            Pending
-                        </span>
-
-                        <strong
-                            class="stat-card-value"
-                            id="pendingCount"
-                        >
-                            0
-                        </strong>
-
-                        <span class="stat-card-meta">
-                            Pending transactions
-                        </span>
-
-                    </article>
-
-                </section>
-
-
-                <!-- =========================================
-                     MAIN DASHBOARD GRID
-                     ========================================= -->
-
-                <div class="dashboard-grid">
-
-                    <!-- =====================================
-                         ACCOUNTS
-                         ===================================== -->
-
-                    <section class="card">
-
-                        <div
-                            class="chart-header"
-                        >
-
-                            <div>
-
-                                <h3>
-                                    My Accounts
-                                </h3>
-
-                                <p
-                                    class="text-muted"
-                                    style="font-size:7px;margin:4px 0 0;"
-                                >
-                                    Your active banking accounts
-                                </p>
-
-                            </div>
-
-                            <a
-                                href="accounts.html"
-                                class="button button-outline button-small"
-                            >
-                                View All
-                            </a>
-
-                        </div>
-
-
-                        <div
-                            class="account-grid"
-                            id="accountList"
-                        >
-
-                            <!-- Account 1 -->
-
-                            <article class="account-card">
-
-                                <span class="account-card-type">
-                                    Checking Account
-                                </span>
-
-                                <div class="account-card-name">
-                                    Global TrustFund Checking
-                                </div>
-
-                                <div
-                                    class="account-card-balance"
-                                    data-account-balance
-                                >
-                                    ₦0.00
-                                </div>
-
-                                <div
-                                    class="account-card-number"
-                                    data-account-number
-                                >
-                                    Account ending •••• 0000
-                                </div>
-
-                            </article>
-
-
-                            <!-- Account 2 -->
-
-                            <article class="account-card">
-
-                                <span class="account-card-type">
-                                    Savings Account
-                                </span>
-
-                                <div class="account-card-name">
-                                    Global TrustFund Savings
-                                </div>
-
-                                <div
-                                    class="account-card-balance"
-                                    data-savings-balance
-                                >
-                                    ₦0.00
-                                </div>
-
-                                <div
-                                    class="account-card-number"
-                                    data-savings-number
-                                >
-                                    Account ending •••• 0000
-                                </div>
-
-                            </article>
-
-                        </div>
-
-                    </section>
-
-
-                    <!-- =====================================
-                         QUICK ACTIONS
-                         ===================================== -->
-
-                    <section class="card">
-
-                        <div class="chart-header">
-
-                            <h3>
-                                Quick Actions
-                            </h3>
-
-                        </div>
-
-
-                        <div
-                            class="management-layout"
-                            style="grid-template-columns:1fr 1fr;"
-                        >
-
-                            <a
-                                href="transfers.html"
-                                class="management-card"
-                                style="text-decoration:none;"
-                            >
-
-                                <h3>
-                                    Transfer
-                                </h3>
-
-                                <div class="management-card-value">
-                                    →
-                                </div>
-
-                                <p>
-                                    Send money securely.
-                                </p>
-
-                            </a>
-
-
-                            <a
-                                href="transactions.html"
-                                class="management-card"
-                                style="text-decoration:none;"
-                            >
-
-                                <h3>
-                                    Transactions
-                                </h3>
-
-                                <div class="management-card-value">
-                                    ⇄
-                                </div>
-
-                                <p>
-                                    View account activity.
-                                </p>
-
-                            </a>
-
-
-                            <a
-                                href="profile.html"
-                                class="management-card"
-                                style="text-decoration:none;"
-                            >
-
-                                <h3>
-                                    Profile
-                                </h3>
-
-                                <div class="management-card-value">
-                                    ◉
-                                </div>
-
-                                <p>
-                                    Manage your information.
-                                </p>
-
-                            </a>
-
-
-                            <a
-                                href="support.html"
-                                class="management-card"
-                                style="text-decoration:none;"
-                            >
-
-                                <h3>
-                                    Support
-                                </h3>
-
-                                <div class="management-card-value">
-                                    ?
-                                </div>
-
-                                <p>
-                                    Get customer assistance.
-                                </p>
-
-                            </a>
-
-                        </div>
-
-                    </section>
-
-                </div>
-
-
-                <!-- =========================================
-                     RECENT TRANSACTIONS
-                     ========================================= -->
-
-                <section class="card mt-3">
-
-                    <div class="chart-header">
-
-                        <div>
-
-                            <h3>
-                                Recent Transactions
-                            </h3>
-
-                            <p
-                                class="text-muted"
-                                style="font-size:7px;margin:4px 0 0;"
-                            >
-                                Latest activity on your accounts
-                            </p>
-
-                        </div>
-
-                        <a
-                            href="transactions.html"
-                            class="button button-outline button-small"
-                        >
-                            View Transactions
+                        <a href="./transactions.html">
+                            View All
                         </a>
 
                     </div>
 
 
                     <div
-                        class="transaction-list"
-                        id="recentTransactions"
+                        class="panel-body"
+                        id="transactionList"
                     >
 
-                        <!-- Transaction -->
-
-                        <div class="transaction-item">
-
-                            <div class="transaction-left">
-
-                                <div class="transaction-icon">
-                                    ↓
-                                </div>
-
-                                <div class="transaction-details">
-
-                                    <strong>
-                                        Account Activity
-                                    </strong>
-
-                                    <span>
-                                        No recent transactions
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                            <span class="transaction-amount credit">
-                                —
-                            </span>
-
+                        <div class="loading">
+                            Loading transactions...
                         </div>
 
                     </div>
 
-                </section>
+                </div>
 
 
-                <!-- =========================================
-                     SECURITY & VERIFICATION
-                     ========================================= -->
+                <!-- QUICK ACTIONS -->
 
-                <div class="dashboard-grid-three mt-3">
+                <div class="panel">
 
-                    <section class="card">
+                    <div class="panel-header">
 
-                        <h3>
-                            Verification
-                        </h3>
+                        <h2>
+                            Quick Actions
+                        </h2>
 
-                        <p>
-                            Keep your customer verification information
-                            up to date.
-                        </p>
+                    </div>
 
-                        <div class="mt-2">
 
-                            <span
-                                class="badge badge-success"
-                                id="verificationStatus"
-                            >
-                                Verified
-                            </span>
+                    <div class="quick-actions">
 
-                        </div>
 
                         <a
-                            href="verification.html"
-                            class="button button-outline button-small mt-2"
+                            href="./transfers.html"
+                            class="quick-action"
                         >
-                            View Status
-                        </a>
 
-                    </section>
-
-
-                    <section class="card">
-
-                        <h3>
-                            Account Security
-                        </h3>
-
-                        <p>
-                            Review your security settings and account
-                            activity.
-                        </p>
-
-                        <div class="mt-2">
-
-                            <span class="badge badge-success">
-                                Protected
+                            <span class="quick-action-icon">
+                                ↗
                             </span>
 
-                        </div>
+                            <strong>
+                                Transfer Money
+                            </strong>
 
-                        <a
-                            href="security.html"
-                            class="button button-outline button-small mt-2"
-                        >
-                            Security Center
                         </a>
 
-                    </section>
 
+                        <a
+                            href="./payments.html"
+                            class="quick-action"
+                        >
 
-                    <section class="card">
-
-                        <h3>
-                            Customer Support
-                        </h3>
-
-                        <p>
-                            Need assistance with your account?
-                        </p>
-
-                        <div class="mt-2">
-
-                            <span class="badge badge-info">
-                                Available
+                            <span class="quick-action-icon">
+                                ₦
                             </span>
 
-                        </div>
+                            <strong>
+                                Make Payment
+                            </strong>
 
-                        <a
-                            href="support.html"
-                            class="button button-outline button-small mt-2"
-                        >
-                            Contact Support
                         </a>
 
-                    </section>
+
+                        <a
+                            href="./cards.html"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-action-icon">
+                                ▭
+                            </span>
+
+                            <strong>
+                                Manage Cards
+                            </strong>
+
+                        </a>
+
+
+                        <a
+                            href="./support.html"
+                            class="quick-action"
+                        >
+
+                            <span class="quick-action-icon">
+                                ?
+                            </span>
+
+                            <strong>
+                                Get Support
+                            </strong>
+
+                        </a>
+
+
+                    </div>
 
                 </div>
 
 
-                <!-- =========================================
-                     IMPORTANT NOTICE
-                     ========================================= -->
+            </section>
 
-                <section class="alert alert-warning mt-3">
-
-                    <strong>
-                        Security Notice:
-                    </strong>
-
-                    Never share your password, PIN, verification codes,
-                    or other security credentials with anyone.
-
-                </section>
-
-            </div>
 
         </main>
 
@@ -909,193 +1298,1140 @@
 
 
     <!-- =====================================================
-         MOBILE SIDEBAR BUTTON
+         FOOTER
          ===================================================== -->
 
-    <button
-        type="button"
-        class="mobile-menu-button"
-        id="customerMenuButton"
-        aria-label="Open customer navigation"
-        aria-controls="customerSidebar"
-        aria-expanded="false"
-        style="
-            position:fixed;
-            left:15px;
-            bottom:15px;
-            z-index:200;
-            background:#ffffff;
-        "
-    >
+    <footer class="customer-footer">
 
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="customer-footer-inner">
 
-    </button>
+            <span>
+                © 2026 Global TrustFund. All rights reserved.
+            </span>
+
+            <span>
+                Secure Personal Banking
+            </span>
+
+        </div>
+
+    </footer>
 
 
-    <!-- =====================================================
-         PAGE SCRIPT
-         ===================================================== -->
-
-    <script>
-
-        document.addEventListener("DOMContentLoaded", function () {
-
-            const sidebar =
-                document.getElementById("customerSidebar");
-
-            const menuButton =
-                document.getElementById("customerMenuButton");
-
-            const customerName =
-                document.getElementById("customerName");
-
-            const customerAvatar =
-                document.getElementById("customerAvatar");
-
-            const welcomeMessage =
-                document.getElementById("welcomeMessage");
+</div>
 
 
-            /*
-             * Mobile navigation
-             */
+<script>
 
-            if (menuButton && sidebar) {
+    /* =====================================================
+       CONFIGURATION
+       ===================================================== */
 
-                menuButton.addEventListener("click", function () {
+    const API_BASE = "/api";
 
-                    const isOpen =
-                        sidebar.classList.toggle("open");
 
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        String(isOpen)
-                    );
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
 
-                });
+    const accountGrid =
+        document.getElementById(
+            "accountGrid"
+        );
 
+
+    const transactionList =
+        document.getElementById(
+            "transactionList"
+        );
+
+
+    const apiError =
+        document.getElementById(
+            "apiError"
+        );
+
+
+    const customerName =
+        document.getElementById(
+            "customerName"
+        );
+
+
+    const customerAvatar =
+        document.getElementById(
+            "customerAvatar"
+        );
+
+
+    const welcomeTitle =
+        document.getElementById(
+            "welcomeTitle"
+        );
+
+
+    /* =====================================================
+       AUTH TOKEN
+       ===================================================== */
+
+    function getAccessToken() {
+
+        const possibleKeys = [
+
+            "gtf_access_token",
+
+            "access_token",
+
+            "supabase_access_token",
+
+            "token"
+
+        ];
+
+
+        for (
+            const key of possibleKeys
+        ) {
+
+            const value =
+                localStorage.getItem(
+                    key
+                );
+
+
+            if (value) {
+                return value;
             }
 
+        }
 
-            /*
-             * Basic customer display helper.
-             *
-             * The authentication layer can replace these
-             * values when the authenticated customer is loaded.
-             */
 
-            function loadCustomerDisplay() {
+        return null;
 
-                let customer = null;
+    }
+
+
+    /* =====================================================
+       API REQUEST
+       ===================================================== */
+
+    async function apiRequest(
+        endpoint,
+        options = {}
+    ) {
+
+        const token =
+            getAccessToken();
+
+
+        const headers = {
+
+            "Accept":
+                "application/json",
+
+            ...(options.body
+                ? {
+                    "Content-Type":
+                        "application/json"
+                }
+                : {}),
+
+            ...(options.headers || {})
+
+        };
+
+
+        if (token) {
+
+            headers.Authorization =
+                `Bearer ${token}`;
+
+        }
+
+
+        const response =
+            await fetch(
+                `${API_BASE}${endpoint}`,
+                {
+                    ...options,
+
+                    headers,
+
+                    credentials:
+                        "include"
+                }
+            );
+
+
+        let data = null;
+
+
+        try {
+
+            data =
+                await response.json();
+
+        } catch {
+
+            data = null;
+
+        }
+
+
+        if (
+            response.status ===
+            401
+        ) {
+
+            clearSession();
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+
+            throw new Error(
+                "Your session has expired."
+            );
+
+        }
+
+
+        if (!response.ok) {
+
+            const message =
+                data?.message ||
+                data?.error ||
+                `Request failed with status ${response.status}.`;
+
+
+            throw new Error(
+                message
+            );
+
+        }
+
+
+        return data;
+
+    }
+
+
+    /* =====================================================
+       SESSION
+       ===================================================== */
+
+    function clearSession() {
+
+        const keys = [
+
+            "gtf_user",
+
+            "gtf_customer",
+
+            "gtf_session",
+
+            "gtf_access_token",
+
+            "gtf_refresh_token",
+
+            "access_token",
+
+            "refresh_token"
+
+        ];
+
+
+        keys.forEach(
+            key => {
 
                 try {
 
-                    const storedCustomer =
-                        localStorage.getItem("gtf_customer");
+                    localStorage.removeItem(
+                        key
+                    );
 
-                    if (storedCustomer) {
+                } catch {}
 
-                        customer =
-                            JSON.parse(storedCustomer);
+            }
+        );
 
-                    }
+    }
 
-                } catch (error) {
 
-                    console.warn(
-                        "Unable to load customer profile.",
-                        error
+    /* =====================================================
+       ERROR
+       ===================================================== */
+
+    function showError(
+        message
+    ) {
+
+        apiError.textContent =
+            message;
+
+        apiError.classList.add(
+            "show"
+        );
+
+    }
+
+
+    function clearError() {
+
+        apiError.textContent =
+            "";
+
+        apiError.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    /* =====================================================
+       CUSTOMER NAME
+       ===================================================== */
+
+    function getStoredCustomer() {
+
+        const keys = [
+
+            "gtf_customer",
+
+            "gtf_user"
+
+        ];
+
+
+        for (
+            const key of keys
+        ) {
+
+            try {
+
+                const raw =
+                    localStorage.getItem(
+                        key
+                    );
+
+
+                if (!raw) {
+                    continue;
+                }
+
+
+                const parsed =
+                    JSON.parse(
+                        raw
+                    );
+
+
+                if (
+                    parsed &&
+                    typeof parsed ===
+                    "object"
+                ) {
+
+                    return parsed;
+
+                }
+
+            } catch {}
+
+        }
+
+
+        return null;
+
+    }
+
+
+    function updateCustomerIdentity(
+        customer
+    ) {
+
+        if (!customer) {
+            return;
+        }
+
+
+        const name =
+            customer.full_name ||
+            customer.fullName ||
+            customer.name ||
+            [
+                customer.first_name,
+                customer.last_name
+            ]
+            .filter(Boolean)
+            .join(" ") ||
+            "Customer";
+
+
+        customerName.textContent =
+            name;
+
+
+        welcomeTitle.textContent =
+            `Welcome, ${name}`;
+
+
+        const initials =
+            name
+                .split(/\s+/)
+                .filter(Boolean)
+                .slice(0, 2)
+                .map(
+                    part =>
+                        part.charAt(0)
+                )
+                .join("")
+                .toUpperCase();
+
+
+        customerAvatar.textContent =
+            initials || "CU";
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE API DATA
+       ===================================================== */
+
+    function extractArray(
+        data,
+        keys = []
+    ) {
+
+        if (Array.isArray(data)) {
+            return data;
+        }
+
+
+        if (
+            data &&
+            Array.isArray(data.data)
+        ) {
+
+            return data.data;
+
+        }
+
+
+        for (
+            const key of keys
+        ) {
+
+            if (
+                data &&
+                Array.isArray(
+                    data[key]
+                )
+            ) {
+
+                return data[key];
+
+            }
+
+        }
+
+
+        return [];
+
+    }
+
+
+    /* =====================================================
+       FORMAT MONEY
+       ===================================================== */
+
+    function formatMoney(
+        amount,
+        currency = "USD"
+    ) {
+
+        const numeric =
+            Number(
+                amount
+            );
+
+
+        if (
+            !Number.isFinite(
+                numeric
+            )
+        ) {
+
+            return "—";
+
+        }
+
+
+        try {
+
+            return new Intl.NumberFormat(
+                undefined,
+                {
+                    style:
+                        "currency",
+
+                    currency:
+
+                        currency ||
+                        "USD",
+
+                    minimumFractionDigits:
+                        2
+                }
+            ).format(
+                numeric
+            );
+
+        } catch {
+
+            return `${currency || ""} ${numeric.toFixed(2)}`;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ACCOUNTS
+       ===================================================== */
+
+    function renderAccounts(
+        accounts
+    ) {
+
+        accountGrid.innerHTML =
+            "";
+
+
+        if (!accounts.length) {
+
+            accountGrid.innerHTML = `
+
+                <div
+                    class="account-card"
+                    style="grid-column:1/-1;"
+                >
+
+                    <div class="empty-state">
+                        No accounts are currently available.
+                    </div>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        accounts.forEach(
+            account => {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "account-card";
+
+
+                const type =
+                    account.account_type_name ||
+                    account.account_type ||
+                    account.type ||
+                    "Account";
+
+
+                const number =
+                    account.account_number ||
+                    account.number ||
+                    "Account number unavailable";
+
+
+                const balance =
+                    account.available_balance ??
+                    account.current_balance ??
+                    account.balance ??
+                    0;
+
+
+                const currency =
+                    account.currency_code ||
+                    account.currency ||
+                    "USD";
+
+
+                const status =
+                    account.status ||
+                    "Active";
+
+
+                card.innerHTML = `
+
+                    <div class="account-type">
+                        ${escapeHtml(type)}
+                    </div>
+
+                    <div class="account-number">
+                        ${escapeHtml(number)}
+                    </div>
+
+                    <div class="account-balance">
+                        ${escapeHtml(
+                            formatMoney(
+                                balance,
+                                currency
+                            )
+                        )}
+                    </div>
+
+                    <span class="account-status">
+                        ${escapeHtml(status)}
+                    </span>
+
+                `;
+
+
+                accountGrid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       TRANSACTIONS
+       ===================================================== */
+
+    function renderTransactions(
+        transactions
+    ) {
+
+        transactionList.innerHTML =
+            "";
+
+
+        if (
+            !transactions.length
+        ) {
+
+            transactionList.innerHTML = `
+
+                <div class="empty-state">
+                    No recent transactions are available.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        transactions
+            .slice(0, 8)
+            .forEach(
+                transaction => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "transaction";
+
+
+                    const description =
+                        transaction.description ||
+                        transaction.merchant_name ||
+                        transaction.payee_name ||
+                        transaction.type ||
+                        "Transaction";
+
+
+                    const date =
+                        transaction.created_at ||
+                        transaction.transaction_date ||
+                        transaction.date;
+
+
+                    const amount =
+                        Number(
+                            transaction.amount
+                        );
+
+
+                    const currency =
+                        transaction.currency_code ||
+                        transaction.currency ||
+                        "USD";
+
+
+                    const isCredit =
+                        transaction.direction ===
+                        "credit" ||
+                        transaction.type ===
+                        "deposit" ||
+                        transaction.credit ===
+                        true;
+
+
+                    const amountClass =
+                        isCredit
+                            ? "credit"
+                            : "debit";
+
+
+                    const sign =
+                        isCredit
+                            ? "+"
+                            : "-";
+
+
+                    item.innerHTML = `
+
+                        <div class="transaction-main">
+
+                            <div class="transaction-title">
+                                ${escapeHtml(
+                                    description
+                                )}
+                            </div>
+
+                            <div class="transaction-meta">
+                                ${escapeHtml(
+                                    formatDate(
+                                        date
+                                    )
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="transaction-amount ${amountClass}"
+                        >
+                            ${sign}${escapeHtml(
+                                formatMoney(
+                                    Math.abs(
+                                        amount
+                                    ),
+                                    currency
+                                )
+                            )}
+                        </div>
+
+                    `;
+
+
+                    transactionList.appendChild(
+                        item
                     );
 
                 }
+            );
+
+    }
 
 
-                if (!customer) {
-                    return;
-                }
+    /* =====================================================
+       DATE
+       ===================================================== */
+
+    function formatDate(
+        value
+    ) {
+
+        if (!value) {
+            return "Date unavailable";
+        }
 
 
-                const name =
-                    customer.full_name ||
-                    customer.name ||
-                    customer.first_name ||
-                    customer.email ||
-                    "Customer";
+        const date =
+            new Date(
+                value
+            );
 
 
-                if (customerName) {
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
 
-                    customerName.textContent =
-                        name;
+            return String(
+                value
+            );
 
-                }
-
-
-                if (welcomeMessage) {
-
-                    welcomeMessage.textContent =
-                        "Welcome back, " + name;
-
-                }
+        }
 
 
-                if (customerAvatar) {
+        return new Intl.DateTimeFormat(
+            undefined,
+            {
+                dateStyle:
+                    "medium",
 
-                    customerAvatar.textContent =
-                        name
-                            .trim()
-                            .charAt(0)
-                            .toUpperCase();
+                timeStyle:
+                    "short"
+            }
+        ).format(
+            date
+        );
 
-                }
+    }
+
+
+    /* =====================================================
+       HTML ESCAPING
+       ===================================================== */
+
+    function escapeHtml(
+        value
+    ) {
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+    }
+
+
+    /* =====================================================
+       LOAD DASHBOARD
+       ===================================================== */
+
+    async function loadDashboard() {
+
+        clearError();
+
+
+        accountGrid.innerHTML = `
+
+            <div class="loading">
+                Loading your accounts...
+            </div>
+
+        `;
+
+
+        transactionList.innerHTML = `
+
+            <div class="loading">
+                Loading transactions...
+            </div>
+
+        `;
+
+
+        try {
+
+            /*
+             * Uses the existing API structure:
+             *
+             * GET /api/users/me
+             * GET /api/accounts
+             * GET /api/transactions
+             *
+             * The individual endpoints remain independent so
+             * a missing optional endpoint does not require
+             * fabricated banking data.
+             */
+
+
+            const userPromise =
+                apiRequest(
+                    "/users/me"
+                );
+
+
+            const accountsPromise =
+                apiRequest(
+                    "/accounts"
+                );
+
+
+            const transactionsPromise =
+                apiRequest(
+                    "/transactions"
+                );
+
+
+            const [
+                userResult,
+                accountsResult,
+                transactionsResult
+            ] =
+                await Promise.allSettled(
+                    [
+                        userPromise,
+                        accountsPromise,
+                        transactionsPromise
+                    ]
+                );
+
+
+            if (
+                userResult.status ===
+                "fulfilled"
+            ) {
+
+                const user =
+                    userResult.value?.user ||
+                    userResult.value?.data ||
+                    userResult.value;
+
+
+                updateCustomerIdentity(
+                    user
+                );
+
+            } else {
+
+                updateCustomerIdentity(
+                    getStoredCustomer()
+                );
 
             }
 
 
-            loadCustomerDisplay();
+            if (
+                accountsResult.status ===
+                "fulfilled"
+            ) {
+
+                const accounts =
+                    extractArray(
+                        accountsResult.value,
+                        [
+                            "accounts",
+                            "items"
+                        ]
+                    );
 
 
-            /*
-             * Close mobile navigation after selecting
-             * a navigation link.
-             */
+                renderAccounts(
+                    accounts
+                );
 
-            document
-                .querySelectorAll(".sidebar-link")
-                .forEach(function (link) {
+            } else {
 
-                    link.addEventListener("click", function () {
+                accountGrid.innerHTML = `
 
-                        if (
-                            window.innerWidth <= 850 &&
-                            sidebar
-                        ) {
+                    <div
+                        class="account-card"
+                        style="grid-column:1/-1;"
+                    >
 
-                            sidebar.classList.remove(
-                                "open"
-                            );
+                        <div class="empty-state">
+                            Unable to load account information.
+                        </div>
 
-                            if (menuButton) {
+                    </div>
 
-                                menuButton.setAttribute(
-                                    "aria-expanded",
-                                    "false"
-                                );
+                `;
 
-                            }
+            }
 
+
+            if (
+                transactionsResult.status ===
+                "fulfilled"
+            ) {
+
+                const transactions =
+                    extractArray(
+                        transactionsResult.value,
+                        [
+                            "transactions",
+                            "items"
+                        ]
+                    );
+
+
+                renderTransactions(
+                    transactions
+                );
+
+            } else {
+
+                transactionList.innerHTML = `
+
+                    <div class="empty-state">
+                        Unable to load recent transactions.
+                    </div>
+
+                `;
+
+            }
+
+
+            const failures = [
+                accountsResult,
+                transactionsResult
+            ]
+            .filter(
+                result =>
+                    result.status ===
+                    "rejected"
+            );
+
+
+            if (failures.length) {
+
+                showError(
+                    "Some banking information could not be loaded. Please refresh and try again."
+                );
+
+            }
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                "Dashboard error:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to load your banking information."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       REFRESH
+       ===================================================== */
+
+    document
+        .getElementById(
+            "refreshButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                loadDashboard();
+
+            }
+        );
+
+
+    /* =====================================================
+       SIGN OUT
+       ===================================================== */
+
+    document
+        .getElementById(
+            "signoutButton"
+        )
+        .addEventListener(
+            "click",
+            async function() {
+
+                try {
+
+                    await apiRequest(
+                        "/auth/signout",
+                        {
+                            method:
+                                "POST",
+
+                            body:
+                                JSON.stringify({
+                                    role:
+                                        "customer"
+                                })
                         }
+                    );
 
-                    });
+                } catch (
+                    error
+                ) {
 
-                });
+                    console.warn(
+                        "Sign-out request:",
+                        error
+                    );
 
-        });
+                } finally {
 
-    </script>
+                    clearSession();
+
+
+                    window.location.replace(
+                        "./login.html"
+                    );
+
+                }
+
+            }
+        );
+
+
+    /* =====================================================
+       INITIALIZATION
+       ===================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            updateCustomerIdentity(
+                getStoredCustomer()
+            );
+
+
+            loadDashboard();
+
+        }
+    );
+
+</script>
+
 
 </body>
+
 </html>
