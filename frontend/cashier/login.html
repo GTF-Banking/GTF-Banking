@@ -1,1607 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Global TrustFund Banking cashier portal login."
-    >
-
-    <meta
-        name="theme-color"
-        content="#0b5d3b"
-    >
-
-    <title>Cashier Login | Global TrustFund</title>
-
-    <link
-        rel="stylesheet"
-        href="../css/styles.css"
-    >
-
-    <style>
-        :root {
-            --gtf-green: #0b5d3b;
-            --gtf-green-dark: #08452d;
-            --gtf-green-light: #16865a;
-            --gtf-gold: #c9962b;
-            --gtf-bg: #f4f8f6;
-            --gtf-border: #d9e5df;
-            --gtf-text: #18352a;
-            --gtf-muted: #718078;
-            --gtf-danger: #a33f3f;
-            --gtf-danger-bg: #fff0f0;
-            --gtf-success: #19734b;
-            --gtf-success-bg: #eaf7ef;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            margin: 0;
-            min-height: 100%;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 22px;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(22, 134, 90, .10),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #f7faf8,
-                    #edf5f1
-                );
-            color: var(--gtf-text);
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        .login-page {
-            width: 100%;
-            max-width: 430px;
-        }
-
-        .login-card {
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid var(--gtf-border);
-            border-radius: 15px;
-            box-shadow:
-                0 24px 65px rgba(8, 69, 45, .13);
-        }
-
-        .top-line {
-            height: 6px;
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--gtf-green-dark),
-                    var(--gtf-green),
-                    var(--gtf-gold)
-                );
-        }
-
-        .login-content {
-            padding: 34px 31px 30px;
-        }
-
-        /* =========================================
-           BRAND
-        ========================================= */
-
-        .brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 11px;
-            margin-bottom: 26px;
-        }
-
-        .logo {
-            width: 62px;
-            height: 62px;
-            object-fit: contain;
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand-text strong {
-            color: var(--gtf-green-dark);
-            font-size: 15px;
-        }
-
-        .brand-text span {
-            margin-top: 4px;
-            color: var(--gtf-muted);
-            font-size: 7px;
-            font-weight: 700;
-            letter-spacing: .7px;
-            text-transform: uppercase;
-        }
-
-        /* =========================================
-           HEADER
-        ========================================= */
-
-        .heading {
-            text-align: center;
-        }
-
-        .heading h1 {
-            margin: 0;
-            color: var(--gtf-green-dark);
-            font-size: 21px;
-            font-weight: 800;
-        }
-
-        .heading p {
-            margin: 8px auto 0;
-            max-width: 320px;
-            color: var(--gtf-muted);
-            font-size: 8px;
-            line-height: 1.6;
-        }
-
-        .portal-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 13px;
-            padding: 6px 10px;
-            border-radius: 20px;
-            background: var(--gtf-success-bg);
-            color: var(--gtf-success);
-            font-size: 7px;
-            font-weight: 800;
-        }
-
-        .portal-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--gtf-success);
-        }
-
-        /* =========================================
-           ALERT
-        ========================================= */
-
-        .alert {
-            display: none;
-            margin-top: 20px;
-            padding: 11px 12px;
-            border: 1px solid #efcccc;
-            border-radius: 7px;
-            background: var(--gtf-danger-bg);
-            color: var(--gtf-danger);
-            font-size: 8px;
-            line-height: 1.5;
-        }
-
-        .alert.visible {
-            display: block;
-        }
-
-        .alert.success {
-            border-color: #cce5d7;
-            background: var(--gtf-success-bg);
-            color: var(--gtf-success);
-        }
-
-        /* =========================================
-           FORM
-        ========================================= */
-
-        .login-form {
-            margin-top: 23px;
-        }
-
-        .field {
-            margin-bottom: 16px;
-        }
-
-        .field-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .field label {
-            color: var(--gtf-text);
-            font-size: 8px;
-            font-weight: 800;
-        }
-
-        .field-note {
-            color: var(--gtf-muted);
-            font-size: 7px;
-        }
-
-        .input-wrap {
-            position: relative;
-        }
-
-        .input-wrap input {
-            width: 100%;
-            min-height: 43px;
-            padding: 0 12px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 7px;
-            outline: none;
-            background: #fff;
-            color: var(--gtf-text);
-            font-size: 9px;
-            transition:
-                border-color .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .input-wrap input:focus {
-            border-color: var(--gtf-green-light);
-            box-shadow:
-                0 0 0 3px rgba(22,134,90,.10);
-        }
-
-        .input-wrap input::placeholder {
-            color: #a1aaa6;
-        }
-
-        .password-input {
-            padding-right: 70px !important;
-        }
-
-        .show-password {
-            position: absolute;
-            top: 50%;
-            right: 8px;
-            transform: translateY(-50%);
-            min-height: 29px;
-            padding: 0 8px;
-            border: 0;
-            border-radius: 5px;
-            background: #eef5f1;
-            color: var(--gtf-green-dark);
-            font-size: 7px;
-            font-weight: 800;
-        }
-
-        .show-password:hover {
-            background: #e3eee8;
-        }
-
-        /* =========================================
-           OPTIONS
-        ========================================= */
-
-        .form-options {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            margin: 4px 0 18px;
-        }
-
-        .remember {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--gtf-muted);
-            font-size: 7px;
-        }
-
-        .remember input {
-            width: 13px;
-            height: 13px;
-            accent-color: var(--gtf-green);
-        }
-
-        .forgot {
-            border: 0;
-            padding: 0;
-            background: transparent;
-            color: var(--gtf-green);
-            font-size: 7px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .forgot:hover {
-            text-decoration: underline;
-        }
-
-        /* =========================================
-           BUTTON
-        ========================================= */
-
-        .login-button {
-            width: 100%;
-            min-height: 44px;
-            border: 0;
-            border-radius: 7px;
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--gtf-green-dark),
-                    var(--gtf-green)
-                );
-            color: #fff;
-            font-size: 9px;
-            font-weight: 800;
-            box-shadow:
-                0 7px 18px rgba(11,93,59,.18);
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease,
-                opacity .2s ease;
-        }
-
-        .login-button:hover {
-            transform: translateY(-1px);
-            box-shadow:
-                0 10px 23px rgba(11,93,59,.22);
-        }
-
-        .login-button:disabled {
-            cursor: not-allowed;
-            opacity: .65;
-            transform: none;
-        }
-
-        .button-content {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .spinner {
-            width: 13px;
-            height: 13px;
-            display: none;
-            border: 2px solid rgba(255,255,255,.35);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
-        }
-
-        .loading .spinner {
-            display: inline-block;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* =========================================
-           SECURITY NOTICE
-        ========================================= */
-
-        .security {
-            display: flex;
-            gap: 9px;
-            margin-top: 21px;
-            padding: 12px;
-            border: 1px solid var(--gtf-border);
-            border-radius: 8px;
-            background: #fafcfb;
-        }
-
-        .security-icon {
-            flex: 0 0 auto;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            background: var(--gtf-success-bg);
-            color: var(--gtf-green);
-            font-size: 11px;
-        }
-
-        .security-text strong {
-            display: block;
-            color: var(--gtf-text);
-            font-size: 7px;
-        }
-
-        .security-text span {
-            display: block;
-            margin-top: 3px;
-            color: var(--gtf-muted);
-            font-size: 6.5px;
-            line-height: 1.5;
-        }
-
-        /* =========================================
-           FOOTER
-        ========================================= */
-
-        .footer {
-            padding: 15px 20px;
-            border-top: 1px solid var(--gtf-border);
-            background: #fafcfb;
-            color: var(--gtf-muted);
-            font-size: 7px;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        .footer a {
-            color: var(--gtf-green);
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 480px) {
-
-            body {
-                padding: 12px;
-            }
-
-            .login-content {
-                padding: 28px 21px 24px;
-            }
-
-            .brand {
-                margin-bottom: 22px;
-            }
-
-            .brand-text strong {
-                font-size: 13px;
-            }
-
-        }
-    </style>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Global TrustFund authorized cashier login."
+>
+
+<meta name="theme-color" content="#0b3d2e">
+
+<title>Cashier Login | Global TrustFund</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+:root {
+    --g:#0b3d2e;
+    --gd:#092f24;
+    --gl:#176b48;
+    --gold:#c9962b;
+    --bg:#f4f8f6;
+    --border:#dfe8e3;
+    --text:#18372c;
+    --muted:#7c8983;
+    --danger:#8b4444;
+    --danger-bg:#f9eded;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+html,
+body {
+    margin:0;
+    min-height:100%;
+}
+
+body {
+    min-height:100vh;
+    display:grid;
+    place-items:center;
+    padding:20px;
+    background:
+        linear-gradient(
+            135deg,
+            #f4f8f6,
+            #e7f0eb
+        );
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.card {
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 20px 55px rgba(11,61,46,.12);
+}
+
+.top {
+    height:7px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--g),
+            var(--gl),
+            var(--gold)
+        );
+}
+
+.content {
+    padding:35px 30px 30px;
+}
+
+.brand {
+    text-align:center;
+}
+
+.brand img {
+    width:72px;
+    height:72px;
+    object-fit:contain;
+}
+
+h1 {
+    margin:15px 0 0;
+    color:var(--g);
+    font-size:22px;
+}
+
+.subtitle {
+    margin:8px auto 23px;
+    max-width:330px;
+    color:var(--muted);
+    font-size:8px;
+    line-height:1.7;
+    text-align:center;
+}
+
+.error {
+    display:none;
+    margin-bottom:13px;
+    padding:10px;
+    border-radius:7px;
+    background:var(--danger-bg);
+    color:var(--danger);
+    font-size:8px;
+}
+
+.error.show {
+    display:block;
+}
+
+.form {
+    display:grid;
+    gap:13px;
+}
+
+.field {
+    display:grid;
+    gap:5px;
+}
+
+.field label {
+    color:var(--text);
+    font-size:7px;
+    font-weight:800;
+}
+
+.field input {
+    width:100%;
+    min-height:42px;
+    padding:0 11px;
+    border:1px solid var(--border);
+    border-radius:7px;
+    outline:none;
+    font-size:9px;
+}
+
+.field input:focus {
+    border-color:var(--gl);
+    box-shadow:0 0 0 3px rgba(23,107,72,.08);
+}
+
+button {
+    min-height:43px;
+    border:0;
+    border-radius:7px;
+    background:var(--g);
+    color:#fff;
+    font-size:8px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+button:hover {
+    background:var(--gd);
+}
+
+button:disabled {
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.note {
+    margin-top:19px;
+    padding-top:15px;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:7px;
+    line-height:1.6;
+    text-align:center;
+}
+
+.footer {
+    padding:14px;
+    border-top:1px solid var(--border);
+    background:#fafcfb;
+    color:var(--muted);
+    text-align:center;
+    font-size:7px;
+}
+
+@media(max-width:500px) {
+    .content {
+        padding:28px 22px 24px;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
-<main class="login-page">
+<main class="card">
 
-    <section class="login-card">
+<div class="top"></div>
 
-        <div class="top-line"></div>
+<div class="content">
 
-        <div class="login-content">
+<div class="brand">
 
-            <!-- BRAND -->
+<img
+    src="../assets/gtf-logo.svg"
+    alt="Global TrustFund"
+>
 
-            <div class="brand">
+<h1>Cashier Sign In</h1>
 
-                <img
-                    class="logo"
-                    src="../assets/gtf-logo.svg"
-                    alt="Global TrustFund Banking"
-                >
+<p class="subtitle">
+    Secure access for authorized cashier personnel.
+    All authenticated operational activity is logged.
+</p>
 
-                <div class="brand-text">
+</div>
 
-                    <strong>
-                        Global TrustFund
-                    </strong>
+<div id="error" class="error"></div>
 
-                    <span>
-                        Banking Services
-                    </span>
+<form id="loginForm" class="form">
 
-                </div>
+<div class="field">
 
-            </div>
+<label for="identifier">
+    Staff ID or Email
+</label>
 
+<input
+    id="identifier"
+    name="identifier"
+    type="text"
+    autocomplete="username"
+    required
+>
 
-            <!-- HEADING -->
+</div>
 
-            <div class="heading">
+<div class="field">
 
-                <h1>
-                    Cashier Portal
-                </h1>
+<label for="password">
+    Password
+</label>
 
-                <p>
-                    Sign in with your authorized cashier
-                    credentials to access branch operations.
-                </p>
+<input
+    id="password"
+    name="password"
+    type="password"
+    autocomplete="current-password"
+    required
+>
 
-                <div class="portal-badge">
+</div>
 
-                    <span class="portal-dot"></span>
+<button id="submitButton" type="submit">
+    Sign In
+</button>
 
-                    Authorized Staff Access
+</form>
 
-                </div>
+<div class="note">
+    Cashier permissions are determined by the authenticated
+    backend role. Do not share your staff credentials.
+</div>
 
-            </div>
+</div>
 
-
-            <!-- ALERT -->
-
-            <div
-                class="alert"
-                id="alert"
-                role="alert"
-                aria-live="polite"
-            ></div>
-
-
-            <!-- LOGIN FORM -->
-
-            <form
-                class="login-form"
-                id="loginForm"
-                novalidate
-            >
-
-                <!-- USERNAME -->
-
-                <div class="field">
-
-                    <div class="field-header">
-
-                        <label for="identifier">
-                            Employee ID / Email
-                        </label>
-
-                        <span class="field-note">
-                            Required
-                        </span>
-
-                    </div>
-
-                    <div class="input-wrap">
-
-                        <input
-                            type="text"
-                            id="identifier"
-                            name="identifier"
-                            placeholder="Enter employee ID or email"
-                            autocomplete="username"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- PASSWORD -->
-
-                <div class="field">
-
-                    <div class="field-header">
-
-                        <label for="password">
-                            Password
-                        </label>
-
-                        <span class="field-note">
-                            Required
-                        </span>
-
-                    </div>
-
-                    <div class="input-wrap">
-
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            class="password-input"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="show-password"
-                            id="togglePassword"
-                            aria-label="Show password"
-                        >
-                            Show
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- OPTIONS -->
-
-                <div class="form-options">
-
-                    <label class="remember">
-
-                        <input
-                            type="checkbox"
-                            id="remember"
-                            name="remember"
-                        >
-
-                        Remember employee ID
-
-                    </label>
-
-
-                    <button
-                        type="button"
-                        class="forgot"
-                        id="forgotPassword"
-                    >
-                        Forgot password?
-                    </button>
-
-                </div>
-
-
-                <!-- SUBMIT -->
-
-                <button
-                    type="submit"
-                    class="login-button"
-                    id="loginButton"
-                >
-
-                    <span class="button-content">
-
-                        <span
-                            class="spinner"
-                            aria-hidden="true"
-                        ></span>
-
-                        <span id="buttonText">
-                            Sign In to Cashier Portal
-                        </span>
-
-                    </span>
-
-                </button>
-
-            </form>
-
-
-            <!-- SECURITY -->
-
-            <div class="security">
-
-                <div class="security-icon">
-                    ✓
-                </div>
-
-                <div class="security-text">
-
-                    <strong>
-                        Secure Staff Authentication
-                    </strong>
-
-                    <span>
-                        This portal is restricted to authorized
-                        Global TrustFund personnel. Never share
-                        your password or authentication credentials.
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- FOOTER -->
-
-        <footer class="footer">
-
-            Need assistance?
-            <a href="../support.html">
-                Contact GTF Support
-            </a>
-
-            <br>
-
-            © 2026 Global TrustFund Banking
-
-        </footer>
-
-    </section>
+<footer class="footer">
+    © 2026 Global TrustFund · Cashier Operations
+</footer>
 
 </main>
 
-
 <script>
-
-    /*
-     * =========================================================
-     * GTF BANKING — CASHIER LOGIN
-     * =========================================================
-     *
-     * Authentication endpoint:
-     *
-     * POST /api/auth/login
-     *
-     * Expected request:
-     *
-     * {
-     *     "identifier": "cashier@example.com",
-     *     "password": "password"
-     * }
-     *
-     * The backend should validate the user's role and reject
-     * users who do not have the cashier role.
-     */
-
-
-    const API_BASE = "/api";
-
-
-    const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
-
-
-    const identifierInput =
-        document.getElementById(
-            "identifier"
-        );
-
-
-    const passwordInput =
-        document.getElementById(
-            "password"
-        );
-
-
-    const rememberInput =
-        document.getElementById(
-            "remember"
-        );
-
-
-    const loginButton =
-        document.getElementById(
-            "loginButton"
-        );
-
-
-    const buttonText =
-        document.getElementById(
-            "buttonText"
-        );
-
-
-    const alertBox =
-        document.getElementById(
-            "alert"
-        );
-
-
-    const togglePassword =
-        document.getElementById(
-            "togglePassword"
-        );
-
-
-    /*
-     * =========================================================
-     * ALERT
-     * =========================================================
-     */
-
-    function showAlert(
-        message,
-        type = "error"
-    ) {
-
-        alertBox.textContent =
-            message;
-
-        alertBox.classList.add(
-            "visible"
-        );
-
-
-        if (type === "success") {
-
-            alertBox.classList.add(
-                "success"
-            );
-
-        } else {
-
-            alertBox.classList.remove(
-                "success"
-            );
-
-        }
-
-    }
-
-
-    function hideAlert() {
-
-        alertBox.textContent = "";
-
-        alertBox.classList.remove(
-            "visible",
-            "success"
-        );
-
-    }
-
-
-    /*
-     * =========================================================
-     * LOADING STATE
-     * =========================================================
-     */
-
-    function setLoading(
-        loading
-    ) {
-
-        loginButton.disabled =
-            loading;
-
-
-        if (loading) {
-
-            loginButton.classList.add(
-                "loading"
-            );
-
-            buttonText.textContent =
-                "Authenticating...";
-
-        } else {
-
-            loginButton.classList.remove(
-                "loading"
-            );
-
-            buttonText.textContent =
-                "Sign In to Cashier Portal";
-
-        }
-
-    }
-
-
-    /*
-     * =========================================================
-     * PASSWORD VISIBILITY
-     * =========================================================
-     */
-
-    togglePassword.addEventListener(
-        "click",
-        function() {
-
-            const isPassword =
-                passwordInput.type ===
-                "password";
-
-
-            passwordInput.type =
-                isPassword
-                    ? "text"
-                    : "password";
-
-
-            togglePassword.textContent =
-                isPassword
-                    ? "Hide"
-                    : "Show";
-
-
-            togglePassword.setAttribute(
-                "aria-label",
-                isPassword
-                    ? "Hide password"
-                    : "Show password"
-            );
-
-        }
-    );
-
-
-    /*
-     * =========================================================
-     * REMEMBER EMPLOYEE ID
-     * =========================================================
-     */
-
-    const savedIdentifier =
-        localStorage.getItem(
-            "gtf_cashier_identifier"
-        );
-
-
-    if (savedIdentifier) {
-
-        identifierInput.value =
-            savedIdentifier;
-
-        rememberInput.checked =
-            true;
-
-    }
-
-
-    /*
-     * =========================================================
-     * VALIDATION
-     * =========================================================
-     */
-
-    function validateForm() {
-
-        const identifier =
-            identifierInput.value.trim();
-
-
-        const password =
-            passwordInput.value;
-
-
-        if (!identifier) {
-
-            showAlert(
-                "Please enter your employee ID or email."
-            );
-
-            identifierInput.focus();
-
-            return false;
-
-        }
-
-
-        if (!password) {
-
-            showAlert(
-                "Please enter your password."
-            );
-
-            passwordInput.focus();
-
-            return false;
-
-        }
-
-
-        if (password.length < 6) {
-
-            showAlert(
-                "Please enter a valid password."
-            );
-
-            passwordInput.focus();
-
-            return false;
-
-        }
-
-
-        return true;
-
-    }
-
-
-    /*
-     * =========================================================
-     * EXTRACT LOGIN RESPONSE
-     * =========================================================
-     */
-
-    function extractAuthData(
-        responseData
-    ) {
-
-        /*
-         * Supports several common backend response
-         * structures without assuming one exact shape.
-         */
-
-        const user =
-            responseData.user ||
-            responseData.data?.user ||
-            responseData.profile ||
-            null;
-
-
-        const session =
-            responseData.session ||
-            responseData.data?.session ||
-            null;
-
-
-        const accessToken =
-            responseData.access_token ||
-            responseData.accessToken ||
-            session?.access_token ||
-            session?.accessToken ||
-            null;
-
-
-        const refreshToken =
-            responseData.refresh_token ||
-            responseData.refreshToken ||
-            session?.refresh_token ||
-            session?.refreshToken ||
-            null;
-
-
-        return {
-            user,
-            session,
-            accessToken,
-            refreshToken
-        };
-
-    }
-
-
-    /*
-     * =========================================================
-     * CHECK CASHIER ROLE
-     * =========================================================
-     */
-
-    function hasCashierRole(
-        user
-    ) {
-
-        if (!user) {
-            return false;
-        }
-
-
-        const possibleRoles = [
-
-            user.role,
-
-            user.user_role,
-
-            user.account_role,
-
-            user.staff_role,
-
-            user.roles
-
-        ];
-
-
-        const roles = [];
-
-
-        possibleRoles.forEach(
-            value => {
-
-                if (Array.isArray(value)) {
-
-                    value.forEach(
-                        role => {
-
-                            roles.push(
-                                String(role)
-                                    .toLowerCase()
-                            );
-
-                        }
-                    );
-
-                } else if (
-                    typeof value ===
-                    "string"
-                ) {
-
-                    roles.push(
-                        value.toLowerCase()
-                    );
-
-                }
-
+const API_BASE = "/api";
+
+const form = document.getElementById("loginForm");
+const errorBox = document.getElementById("error");
+const submitButton = document.getElementById("submitButton");
+
+form.addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    errorBox.classList.remove("show");
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Signing in...";
+
+    const identifier =
+        document.getElementById("identifier")
+            .value
+            .trim();
+
+    const password =
+        document.getElementById("password")
+            .value;
+
+    try {
+
+        const response = await fetch(
+            API_BASE + "/auth/login",
+            {
+                method:"POST",
+                credentials:"include",
+                headers:{
+                    "Accept":"application/json",
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                    identifier,
+                    email:identifier,
+                    password,
+                    role:"cashier"
+                })
             }
         );
 
+        const data =
+            await response
+                .json()
+                .catch(() => ({}));
 
-        /*
-         * If the backend explicitly returns a role,
-         * enforce cashier access.
-         */
-
-        if (roles.length) {
-
-            return roles.some(
-                role =>
-                    role === "cashier" ||
-                    role === "cashier_staff" ||
-                    role === "teller"
+        if (!response.ok) {
+            throw new Error(
+                data.message ||
+                data.error ||
+                "Unable to sign in."
             );
-
         }
 
-
-        /*
-         * If the backend did not return role information,
-         * allow the backend's authorization layer to be
-         * authoritative.
-         */
-
-        return true;
-
-    }
-
-
-    /*
-     * =========================================================
-     * SAVE SESSION
-     * =========================================================
-     */
-
-    function saveSession(
-        responseData
-    ) {
-
-        const {
-            user,
-            accessToken,
-            refreshToken
-        } =
-            extractAuthData(
-                responseData
-            );
-
-
-        if (rememberInput.checked) {
-
-            localStorage.setItem(
-                "gtf_cashier_identifier",
-                identifierInput.value.trim()
-            );
-
-        } else {
-
-            localStorage.removeItem(
-                "gtf_cashier_identifier"
-            );
-
-        }
-
-
-        /*
-         * Store user information for frontend role guards.
-         */
-
-        if (user) {
-
+        if (data.user) {
             localStorage.setItem(
                 "gtf_user",
-                JSON.stringify(user)
+                JSON.stringify(data.user)
             );
-
-
-            localStorage.setItem(
-                "gtf_cashier",
-                JSON.stringify(user)
-            );
-
         }
 
+        window.location.replace("./index.html");
 
-        /*
-         * Store tokens only when returned by the
-         * authentication service.
-         */
+    } catch (error) {
 
-        if (accessToken) {
+        errorBox.textContent =
+            error.message;
 
-            localStorage.setItem(
-                "gtf_access_token",
-                accessToken
-            );
+        errorBox.classList.add("show");
 
-
-            localStorage.setItem(
-                "access_token",
-                accessToken
-            );
-
-        }
-
-
-        if (refreshToken) {
-
-            localStorage.setItem(
-                "gtf_refresh_token",
-                refreshToken
-            );
-
-
-            localStorage.setItem(
-                "refresh_token",
-                refreshToken
-            );
-
-        }
-
-
-        /*
-         * Store a simple session marker.
-         */
-
-        localStorage.setItem(
-            "gtf_session",
-            "authenticated"
-        );
-
+        submitButton.disabled = false;
+        submitButton.textContent = "Sign In";
     }
-
-
-    /*
-     * =========================================================
-     * LOGIN
-     * =========================================================
-     */
-
-    async function login() {
-
-        hideAlert();
-
-
-        if (!validateForm()) {
-            return;
-        }
-
-
-        const identifier =
-            identifierInput.value.trim();
-
-
-        const password =
-            passwordInput.value;
-
-
-        setLoading(true);
-
-
-        try {
-
-            const response =
-                await fetch(
-                    `${API_BASE}/auth/login`,
-                    {
-                        method: "POST",
-
-                        credentials: "include",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json",
-
-                            "Accept":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify({
-                                identifier,
-                                email:
-                                    identifier,
-                                password,
-                                role:
-                                    "cashier"
-                            })
-                    }
-                );
-
-
-            let responseData = {};
-
-
-            try {
-
-                responseData =
-                    await response.json();
-
-            } catch (jsonError) {
-
-                responseData = {};
-
-            }
-
-
-            if (!response.ok) {
-
-                const message =
-                    responseData.error ||
-                    responseData.message ||
-                    "Unable to sign in. Please check your credentials.";
-
-
-                throw new Error(
-                    message
-                );
-
-            }
-
-
-            /*
-             * Make sure the backend actually returned
-             * a successful authentication result.
-             */
-
-            if (
-                responseData.success === false
-            ) {
-
-                throw new Error(
-                    responseData.error ||
-                    responseData.message ||
-                    "Authentication failed."
-                );
-
-            }
-
-
-            const authData =
-                extractAuthData(
-                    responseData
-                );
-
-
-            /*
-             * Enforce cashier access when role information
-             * is included in the response.
-             */
-
-            if (
-                authData.user &&
-                !hasCashierRole(
-                    authData.user
-                )
-            ) {
-
-                throw new Error(
-                    "This account is not authorized to access the cashier portal."
-                );
-
-            }
-
-
-            saveSession(
-                responseData
-            );
-
-
-            showAlert(
-                "Authentication successful. Opening cashier portal...",
-                "success"
-            );
-
-
-            /*
-             * Redirect to cashier dashboard.
-             */
-
-            setTimeout(
-                () => {
-
-                    window.location.replace(
-                        "./index.html"
-                    );
-
-                },
-                700
-            );
-
-
-        } catch (error) {
-
-            console.error(
-                "Cashier login error:",
-                error
-            );
-
-
-            /*
-             * Never display raw server internals to users.
-             */
-
-            let message =
-                error.message ||
-                "Unable to sign in.";
-
-
-            if (
-                message.toLowerCase()
-                    .includes(
-                        "failed to fetch"
-                    )
-            ) {
-
-                message =
-                    "The banking authentication service is currently unavailable. Please try again.";
-
-            }
-
-
-            showAlert(
-                message
-            );
-
-
-            setLoading(false);
-
-        }
-
-    }
-
-
-    loginForm.addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-            login();
-
-        }
-    );
-
-
-    /*
-     * =========================================================
-     * FORGOT PASSWORD
-     * =========================================================
-     */
-
-    document
-        .getElementById(
-            "forgotPassword"
-        )
-        .addEventListener(
-            "click",
-            () => {
-
-                showAlert(
-                    "Please contact your authorized GTF administrator or support team to reset your cashier credentials."
-                );
-
-            }
-        );
-
-
-    /*
-     * =========================================================
-     * INPUT CLEANUP
-     * =========================================================
-     */
-
-    identifierInput.addEventListener(
-        "input",
-        hideAlert
-    );
-
-
-    passwordInput.addEventListener(
-        "input",
-        hideAlert
-    );
-
-
-    /*
-     * =========================================================
-     * PREVENT RESUBMISSION WHILE LOADING
-     * =========================================================
-     */
-
-    window.addEventListener(
-        "pageshow",
-        () => {
-
-            setLoading(false);
-
-        }
-    );
-
-
-    /*
-     * =========================================================
-     * DEVELOPMENT CHECK
-     * =========================================================
-     *
-     * If a previous authenticated cashier session exists,
-     * the user can be sent directly to the dashboard.
-     *
-     * This does NOT replace backend authorization.
-     */
-
-    const existingSession =
-        localStorage.getItem(
-            "gtf_session"
-        );
-
-
-    const existingUser =
-        localStorage.getItem(
-            "gtf_user"
-        );
-
-
-    if (
-        existingSession ===
-            "authenticated" &&
-        existingUser
-    ) {
-
-        try {
-
-            const user =
-                JSON.parse(
-                    existingUser
-                );
-
-
-            if (
-                hasCashierRole(
-                    user
-                )
-            ) {
-
-                /*
-                 * Do not automatically redirect while the
-                 * page is being opened from an explicit login
-                 * action. The backend remains authoritative.
-                 */
-
-            }
-
-        } catch (error) {
-
-            localStorage.removeItem(
-                "gtf_user"
-            );
-
-        }
-
-    }
-
+});
 </script>
 
 </body>
