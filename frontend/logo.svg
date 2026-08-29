@@ -1,0 +1,168 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  role="img"
+  aria-labelledby="gtf-logo-title gtf-logo-description"
+>
+  <title id="gtf-logo-title">Global TrustFund</title>
+  <desc id="gtf-logo-description">
+    Global TrustFund professional banking shield logo with GTF monogram in green, white, and gold.
+  </desc>
+
+  <defs>
+    <!-- Deep forest green shield -->
+    <linearGradient id="shieldGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d3f2e"/>
+      <stop offset="55%" stop-color="#0a3326"/>
+      <stop offset="100%" stop-color="#06291f"/>
+    </linearGradient>
+
+    <!-- Soft inner green highlight -->
+    <linearGradient id="innerGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#176b48"/>
+      <stop offset="100%" stop-color="#0d3f2e"/>
+    </linearGradient>
+
+    <!-- Classic banking gold -->
+    <linearGradient id="goldBand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ead49c"/>
+      <stop offset="40%" stop-color="#c9962b"/>
+      <stop offset="100%" stop-color="#a67c1a"/>
+    </linearGradient>
+
+    <!-- Subtle gold edge highlight -->
+    <linearGradient id="goldEdge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0d78c"/>
+      <stop offset="100%" stop-color="#c9962b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer shield (deep green) -->
+  <path
+    d="M256 28
+       L448 98
+       V236
+       C448 352 372 438 256 492
+       C140 438 64 352 64 236
+       V98
+       Z"
+    fill="url(#shieldGreen)"
+  />
+
+  <!-- Gold outer rim -->
+  <path
+    d="M256 48
+       L424 110
+       V234
+       C424 338 360 416 256 466
+       C152 416 88 338 88 234
+       V110
+       Z"
+    fill="none"
+    stroke="url(#goldBand)"
+    stroke-width="11"
+    stroke-linejoin="round"
+  />
+
+  <!-- Inner green panel -->
+  <path
+    d="M256 92
+       L382 138
+       V228
+       C382 304 336 360 256 398
+       C176 360 130 304 130 228
+       V138
+       Z"
+    fill="url(#innerGreen)"
+  />
+
+  <!-- Thin white inner border for clarity -->
+  <path
+    d="M256 104
+       L368 147
+       V226
+       C368 294 328 344 256 378
+       C184 344 144 294 144 226
+       V147
+       Z"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="4"
+    opacity="0.85"
+  />
+
+  <!-- Monogram: G -->
+  <path
+    d="M210 168
+       C200 156 186 150 171 150
+       C141 150 120 173 120 208
+       C120 243 142 266 172 266
+       C190 266 206 259 218 247
+       V214
+       H168
+       V234
+       H195
+       C189 242 181 246 172 246
+       C154 246 143 231 143 208
+       C143 185 154 170 172 170
+       C185 170 195 176 202 185
+       Z"
+    fill="#ffffff"
+  />
+
+  <!-- Monogram: T -->
+  <path
+    d="M214 150
+       H314
+       V172
+       H279
+       V266
+       H249
+       V172
+       H214
+       Z"
+    fill="#ffffff"
+  />
+
+  <!-- Monogram: F -->
+  <path
+    d="M308 150
+       H380
+       V172
+       H338
+       V196
+       H372
+       V217
+       H338
+       V266
+       H308
+       Z"
+    fill="#ffffff"
+  />
+
+  <!-- Gold horizontal trust bar -->
+  <path
+    d="M152 304 H360"
+    fill="none"
+    stroke="url(#goldEdge)"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+
+  <!-- Gold trust mark (centered below bar) -->
+  <circle
+    cx="256"
+    cy="338"
+    r="11"
+    fill="url(#goldBand)"
+  />
+
+  <!-- Small white highlight on gold mark for depth -->
+  <circle
+    cx="252"
+    cy="334"
+    r="3.5"
+    fill="#ffffff"
+    opacity="0.35"
+  />
+</svg>
