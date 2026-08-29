@@ -12,7 +12,7 @@
 
     <meta
         name="description"
-        content="Global TrustFund Administration Transactions"
+        content="Global TrustFund Administration Settings"
     >
 
     <meta
@@ -21,7 +21,7 @@
     >
 
     <title>
-        Transactions | Global TrustFund Admin
+        Settings | Global TrustFund Admin
     </title>
 
     <link
@@ -31,7 +31,12 @@
 
     <style>
 
+        /* =====================================================
+           GLOBAL TRUSTFUND ADMIN SETTINGS
+           ===================================================== */
+
         :root {
+
             --gtf-green: #0b3d2e;
             --gtf-green-dark: #092f24;
             --gtf-green-light: #176b48;
@@ -57,9 +62,11 @@
             --info-text: #24627f;
         }
 
+
         * {
             box-sizing: border-box;
         }
+
 
         html,
         body {
@@ -68,24 +75,30 @@
             min-height: 100%;
         }
 
+
         body {
             background: var(--gtf-bg);
             color: var(--gtf-text);
+
             font-family:
                 Arial,
                 Helvetica,
                 sans-serif;
         }
 
+
         button,
         input,
-        select {
+        select,
+        textarea {
             font: inherit;
         }
+
 
         button {
             cursor: pointer;
         }
+
 
         /* =====================================================
            PAGE
@@ -93,9 +106,11 @@
 
         .admin-page {
             min-height: 100vh;
+
             display: flex;
             flex-direction: column;
         }
+
 
         /* =====================================================
            HEADER
@@ -104,6 +119,7 @@
         .admin-header {
             position: sticky;
             top: 0;
+
             z-index: 100;
 
             background: #ffffff;
@@ -115,6 +131,7 @@
                 0 4px 18px
                 rgba(11, 61, 46, .05);
         }
+
 
         .admin-header-inner {
             width: 100%;
@@ -131,63 +148,85 @@
             gap: 20px;
         }
 
+
         .brand {
             display: inline-flex;
             align-items: center;
+
             gap: 10px;
 
             color: var(--gtf-green);
+
             text-decoration: none;
         }
+
 
         .brand-logo {
             width: 45px;
             height: 45px;
 
             display: block;
+
             object-fit: contain;
         }
+
 
         .brand-text {
             display: flex;
             flex-direction: column;
         }
 
+
         .brand-text strong {
             color: var(--gtf-green);
+
             font-size: 14px;
             line-height: 1.2;
+
             font-weight: 800;
         }
 
+
         .brand-text small {
             margin-top: 3px;
+
             color: var(--gtf-muted);
+
             font-size: 9px;
         }
+
 
         .admin-header-right {
             display: flex;
             align-items: center;
+
             gap: 13px;
         }
+
 
         .admin-label {
             display: flex;
             flex-direction: column;
+
             text-align: right;
         }
 
+
         .admin-label strong {
             color: var(--gtf-text);
+
             font-size: 9px;
         }
 
+
         .admin-label span {
             margin-top: 3px;
+
             color: var(--gtf-muted);
+
             font-size: 7px;
         }
+
 
         .admin-avatar {
             width: 36px;
@@ -206,11 +245,15 @@
             font-weight: 800;
         }
 
+
         .logout-button {
             min-height: 32px;
+
             padding: 0 11px;
 
-            border: 1px solid var(--gtf-border);
+            border:
+                1px solid var(--gtf-border);
+
             border-radius: 6px;
 
             background: #ffffff;
@@ -220,9 +263,11 @@
             font-weight: 700;
         }
 
+
         .logout-button:hover {
             background: var(--gtf-bg);
         }
+
 
         /* =====================================================
            BODY
@@ -236,12 +281,15 @@
             padding: 25px;
 
             display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
+
+            grid-template-columns:
+                220px minmax(0, 1fr);
 
             gap: 25px;
 
             flex: 1;
         }
+
 
         /* =====================================================
            SIDEBAR
@@ -263,6 +311,7 @@
             border-radius: 12px;
         }
 
+
         .sidebar-title {
             padding: 8px 10px 12px;
 
@@ -272,13 +321,17 @@
             font-weight: 800;
 
             letter-spacing: 1px;
+
             text-transform: uppercase;
         }
 
+
         .sidebar-nav {
             display: grid;
+
             gap: 4px;
         }
+
 
         .sidebar-nav a {
             min-height: 38px;
@@ -298,21 +351,29 @@
             font-weight: 700;
         }
 
+
         .sidebar-nav a:hover {
             background: var(--gtf-bg);
+
             color: var(--gtf-green);
         }
 
+
         .sidebar-nav a.active {
             background: var(--gtf-green);
+
             color: #ffffff;
         }
 
+
         .nav-icon {
             width: 22px;
+
             flex: 0 0 22px;
+
             font-size: 11px;
         }
+
 
         /* =====================================================
            MAIN
@@ -321,6 +382,7 @@
         .admin-main {
             min-width: 0;
         }
+
 
         .page-heading {
             margin-bottom: 22px;
@@ -332,6 +394,7 @@
             gap: 20px;
         }
 
+
         .page-heading h1 {
             margin: 0;
 
@@ -340,6 +403,7 @@
             font-size: 26px;
             line-height: 1.2;
         }
+
 
         .page-heading p {
             margin: 7px 0 0;
@@ -350,11 +414,15 @@
             line-height: 1.6;
         }
 
+
         .heading-actions {
             display: flex;
+
             gap: 8px;
+
             flex-wrap: wrap;
         }
+
 
         .button {
             min-height: 36px;
@@ -374,37 +442,62 @@
             font-weight: 700;
         }
 
+
         .button:hover {
             background: var(--gtf-bg);
         }
 
+
         .button-primary {
             border-color: var(--gtf-green);
+
             background: var(--gtf-green);
+
             color: #ffffff;
         }
+
 
         .button-primary:hover {
             background: var(--gtf-green-dark);
         }
 
+
+        .button-danger {
+            border-color: #e3c8c8;
+
+            background: #ffffff;
+
+            color: var(--danger-text);
+        }
+
+
+        .button-danger:hover {
+            background: var(--danger-bg);
+        }
+
+
         /* =====================================================
-           SUMMARY CARDS
+           SETTINGS LAYOUT
            ===================================================== */
 
-        .summary-grid {
+        .settings-layout {
             display: grid;
 
             grid-template-columns:
-                repeat(4, 1fr);
+                190px minmax(0, 1fr);
 
-            gap: 14px;
+            gap: 18px;
 
-            margin-bottom: 18px;
+            align-items: start;
         }
 
-        .summary-card {
-            padding: 17px;
+
+        /* =====================================================
+           SETTINGS NAVIGATION
+           ===================================================== */
+
+        .settings-nav-card {
+            padding: 10px;
 
             background: #ffffff;
 
@@ -412,43 +505,105 @@
                 1px solid var(--gtf-border);
 
             border-radius: 10px;
+
+            position: sticky;
+            top: 97px;
         }
 
-        .summary-label {
+
+        .settings-nav-title {
+            padding: 8px 9px 10px;
+
             color: var(--gtf-muted);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: .8px;
+
+            text-transform: uppercase;
+        }
+
+
+        .settings-nav {
+            display: grid;
+
+            gap: 3px;
+        }
+
+
+        .settings-nav button {
+            width: 100%;
+            min-height: 35px;
+
+            padding: 0 9px;
+
+            display: flex;
+            align-items: center;
+
+            border: 0;
+
+            border-radius: 6px;
+
+            background: transparent;
+
+            color: var(--gtf-muted);
+
+            text-align: left;
 
             font-size: 7px;
             font-weight: 700;
-
-            text-transform: uppercase;
-            letter-spacing: .7px;
         }
 
-        .summary-value {
-            margin-top: 7px;
+
+        .settings-nav button:hover {
+            background: var(--gtf-bg);
 
             color: var(--gtf-green);
-
-            font-size: 21px;
-            font-weight: 800;
         }
 
-        .summary-note {
-            margin-top: 5px;
 
-            color: var(--gtf-muted);
+        .settings-nav button.active {
+            background: var(--gtf-green);
 
-            font-size: 7px;
+            color: #ffffff;
         }
+
+
+        .settings-nav-icon {
+            width: 22px;
+
+            flex: 0 0 22px;
+
+            font-size: 10px;
+        }
+
 
         /* =====================================================
-           FILTER CARD
+           SETTINGS CONTENT
            ===================================================== */
 
-        .filter-card {
-            margin-bottom: 18px;
+        .settings-content {
+            min-width: 0;
+        }
 
-            padding: 17px;
+
+        .settings-section {
+            display: none;
+        }
+
+
+        .settings-section.active {
+            display: block;
+        }
+
+
+        /* =====================================================
+           SETTINGS CARD
+           ===================================================== */
+
+        .settings-card {
+            margin-bottom: 18px;
 
             background: #ffffff;
 
@@ -456,49 +611,318 @@
                 1px solid var(--gtf-border);
 
             border-radius: 10px;
+
+            overflow: hidden;
         }
 
-        .filter-title {
-            margin-bottom: 13px;
+
+        .settings-card-header {
+            padding: 17px 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            border-bottom:
+                1px solid var(--gtf-border);
+        }
+
+
+        .settings-card-header h2 {
+            margin: 0;
 
             color: var(--gtf-green);
 
-            font-size: 10px;
-            font-weight: 800;
+            font-size: 12px;
         }
 
-        .filter-grid {
+
+        .settings-card-header p {
+            margin: 5px 0 0;
+
+            color: var(--gtf-muted);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+
+        .settings-card-body {
+            padding: 18px;
+        }
+
+
+        /* =====================================================
+           FORM
+           ===================================================== */
+
+        .form-grid {
             display: grid;
 
             grid-template-columns:
-                1.6fr
-                1fr
-                1fr
-                1fr
-                auto;
+                1fr 1fr;
 
-            gap: 9px;
-
-            align-items: end;
+            gap: 14px;
         }
 
-        .filter-group {
+
+        .form-group {
             display: grid;
+
             gap: 5px;
         }
 
-        .filter-group label {
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+
+        .form-group label {
             color: var(--gtf-text);
 
             font-size: 7px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
-        .filter-group input,
-        .filter-group select {
+
+        .form-help {
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+
+            line-height: 1.5;
+        }
+
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
 
             min-height: 36px;
+
+            padding: 8px 10px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            background: #ffffff;
+
+            color: var(--gtf-text);
+
+            font-size: 8px;
+        }
+
+
+        .form-group textarea {
+            min-height: 80px;
+
+            resize: vertical;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gtf-green-light);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,107,72,.08);
+        }
+
+
+        .form-actions {
+            margin-top: 18px;
+
+            padding-top: 15px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            border-top:
+                1px solid var(--gtf-border);
+        }
+
+
+        /* =====================================================
+           STATUS LABEL
+           ===================================================== */
+
+        .setting-status {
+            display: inline-flex;
+
+            align-items: center;
+
+            min-height: 22px;
+
+            padding: 0 8px;
+
+            border-radius: 20px;
+
+            background: var(--success-bg);
+
+            color: var(--success-text);
+
+            font-size: 6px;
+            font-weight: 800;
+        }
+
+
+        .setting-status.warning {
+            background: var(--warning-bg);
+
+            color: var(--warning-text);
+        }
+
+
+        .setting-status.danger {
+            background: var(--danger-bg);
+
+            color: var(--danger-text);
+        }
+
+
+        /* =====================================================
+           SETTING ROW
+           ===================================================== */
+
+        .setting-list {
+            display: grid;
+
+            gap: 0;
+        }
+
+
+        .setting-row {
+            min-height: 64px;
+
+            padding: 13px 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            border-bottom:
+                1px solid #edf2ef;
+        }
+
+
+        .setting-row:first-child {
+            padding-top: 0;
+        }
+
+
+        .setting-row:last-child {
+            padding-bottom: 0;
+
+            border-bottom: 0;
+        }
+
+
+        .setting-info {
+            min-width: 0;
+        }
+
+
+        .setting-name {
+            color: var(--gtf-text);
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+
+        .setting-description {
+            margin-top: 4px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           TOGGLE
+           ===================================================== */
+
+        .toggle {
+            width: 40px;
+            height: 22px;
+
+            position: relative;
+
+            flex: 0 0 auto;
+
+            border: 0;
+
+            border-radius: 20px;
+
+            background: #cfd8d3;
+
+            transition: .2s ease;
+        }
+
+
+        .toggle::after {
+            content: "";
+
+            width: 16px;
+            height: 16px;
+
+            position: absolute;
+
+            top: 3px;
+            left: 3px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 1px 3px
+                rgba(0,0,0,.15);
+
+            transition: .2s ease;
+        }
+
+
+        .toggle.active {
+            background: var(--gtf-green);
+        }
+
+
+        .toggle.active::after {
+            transform:
+                translateX(18px);
+        }
+
+
+        /* =====================================================
+           INLINE SELECT
+           ===================================================== */
+
+        .inline-select {
+            min-width: 150px;
+
+            min-height: 34px;
 
             padding: 0 9px;
 
@@ -510,321 +934,233 @@
             outline: none;
 
             background: #ffffff;
+
+            color: var(--gtf-text);
+
+            font-size: 7px;
+        }
+
+
+        .inline-select:focus {
+            border-color: var(--gtf-green-light);
+        }
+
+
+        /* =====================================================
+           COLOR SETTINGS
+           ===================================================== */
+
+        .color-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+        }
+
+
+        .color-item {
+            padding: 12px;
+
+            background: #f8faf9;
+
+            border-radius: 8px;
+        }
+
+
+        .color-item label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--gtf-text);
+
+            font-size: 7px;
+            font-weight: 800;
+        }
+
+
+        .color-control {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .color-control input[type="color"] {
+            width: 38px;
+            height: 32px;
+
+            padding: 2px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            cursor: pointer;
+        }
+
+
+        .color-code {
+            min-width: 0;
+            flex: 1;
+
+            min-height: 32px;
+
+            padding: 0 8px;
+
+            border:
+                1px solid var(--gtf-border);
+
+            border-radius: 5px;
+
+            background: #ffffff;
+
+            color: var(--gtf-text);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           SYSTEM INFORMATION
+           ===================================================== */
+
+        .system-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .system-item {
+            padding: 12px;
+
+            background: #f8faf9;
+
+            border-radius: 7px;
+        }
+
+
+        .system-label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--gtf-muted);
+
+            font-size: 6px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .system-value {
             color: var(--gtf-text);
 
             font-size: 8px;
-        }
 
-        .filter-group input:focus,
-        .filter-group select:focus {
-            border-color: var(--gtf-green-light);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(23,107,72,.08);
-        }
-
-        .filter-button {
-            min-height: 36px;
-
-            padding: 0 13px;
-
-            border:
-                1px solid var(--gtf-green);
-
-            border-radius: 6px;
-
-            background: var(--gtf-green);
-            color: #ffffff;
-
-            font-size: 8px;
             font-weight: 700;
         }
 
-        .filter-button:hover {
-            background: var(--gtf-green-dark);
-        }
 
         /* =====================================================
-           TABLE CARD
+           WARNING BOX
            ===================================================== */
 
-        .table-card {
-            background: #ffffff;
+        .warning-box {
+            margin-top: 15px;
 
-            border:
-                1px solid var(--gtf-border);
-
-            border-radius: 10px;
-
-            overflow: hidden;
-        }
-
-        .table-header {
-            padding: 17px 18px;
+            padding: 12px;
 
             display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            gap: 15px;
+            gap: 10px;
 
-            border-bottom:
-                1px solid var(--gtf-border);
+            background: var(--warning-bg);
+
+            border:
+                1px solid #f0dfaa;
+
+            border-radius: 7px;
         }
 
-        .table-header h2 {
-            margin: 0;
 
-            color: var(--gtf-green);
+        .warning-icon {
+            color: var(--warning-text);
 
             font-size: 12px;
         }
 
-        .table-header span {
-            color: var(--gtf-muted);
-            font-size: 7px;
-        }
 
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-
-            min-width: 900px;
-
-            border-collapse: collapse;
-        }
-
-        th {
-            padding: 11px 13px;
-
-            background: #f8faf9;
-
-            border-bottom:
-                1px solid var(--gtf-border);
-
-            color: var(--gtf-muted);
-
-            text-align: left;
-
-            font-size: 7px;
-            font-weight: 800;
-
-            white-space: nowrap;
-
-            text-transform: uppercase;
-            letter-spacing: .4px;
-        }
-
-        td {
-            padding: 13px;
-
-            border-bottom:
-                1px solid #edf2ef;
-
-            color: var(--gtf-text);
-
-            font-size: 8px;
-
-            vertical-align: middle;
-        }
-
-        tbody tr:hover {
-            background: #fbfdfc;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: 0;
-        }
-
-        .transaction-id {
-            color: var(--gtf-green);
-            font-weight: 800;
-        }
-
-        .customer-name {
-            font-weight: 700;
-        }
-
-        .customer-account {
+        .warning-content strong {
             display: block;
 
-            margin-top: 3px;
+            margin-bottom: 4px;
 
-            color: var(--gtf-muted);
+            color: var(--warning-text);
+
+            font-size: 7px;
+        }
+
+
+        .warning-content span {
+            color: #77672f;
 
             font-size: 6px;
+
+            line-height: 1.5;
         }
 
-        .amount {
-            font-weight: 800;
-            white-space: nowrap;
-        }
-
-        .amount.credit {
-            color: var(--success-text);
-        }
-
-        .amount.debit {
-            color: var(--danger-text);
-        }
 
         /* =====================================================
-           TYPE BADGES
+           DANGER BOX
            ===================================================== */
 
-        .type-badge,
-        .status-badge {
-            display: inline-flex;
+        .danger-box {
+            margin-top: 15px;
 
-            align-items: center;
+            padding: 12px;
 
-            min-height: 22px;
-
-            padding: 0 8px;
-
-            border-radius: 20px;
-
-            font-size: 6px;
-
-            font-weight: 800;
-
-            white-space: nowrap;
-        }
-
-        .type-badge.transfer {
-            background: var(--info-bg);
-            color: var(--info-text);
-        }
-
-        .type-badge.deposit {
-            background: var(--success-bg);
-            color: var(--success-text);
-        }
-
-        .type-badge.withdrawal {
-            background: var(--warning-bg);
-            color: var(--warning-text);
-        }
-
-        .type-badge.payment {
-            background: #f0eef8;
-            color: #635c87;
-        }
-
-        .status-badge.completed {
-            background: var(--success-bg);
-            color: var(--success-text);
-        }
-
-        .status-badge.pending {
-            background: var(--warning-bg);
-            color: var(--warning-text);
-        }
-
-        .status-badge.failed {
             background: var(--danger-bg);
-            color: var(--danger-text);
-        }
-
-        .status-badge.review {
-            background: var(--info-bg);
-            color: var(--info-text);
-        }
-
-        /* =====================================================
-           ACTIONS
-           ===================================================== */
-
-        .row-actions {
-            display: flex;
-            gap: 5px;
-        }
-
-        .row-button {
-            min-height: 28px;
-
-            padding: 0 8px;
 
             border:
-                1px solid var(--gtf-border);
+                1px solid #ecd4d4;
 
-            border-radius: 5px;
+            border-radius: 7px;
+        }
 
-            background: #ffffff;
 
-            color: var(--gtf-green);
+        .danger-box strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--danger-text);
+
+            font-size: 7px;
+        }
+
+
+        .danger-box span {
+            color: #765252;
 
             font-size: 6px;
-            font-weight: 700;
+
+            line-height: 1.5;
         }
 
-        .row-button:hover {
-            background: var(--gtf-bg);
-        }
-
-        /* =====================================================
-           PAGINATION
-           ===================================================== */
-
-        .table-footer {
-            padding: 13px 17px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 12px;
-
-            border-top:
-                1px solid var(--gtf-border);
-        }
-
-        .pagination-info {
-            color: var(--gtf-muted);
-            font-size: 7px;
-        }
-
-        .pagination {
-            display: flex;
-            gap: 4px;
-        }
-
-        .page-button {
-            width: 29px;
-            height: 29px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border:
-                1px solid var(--gtf-border);
-
-            border-radius: 5px;
-
-            background: #ffffff;
-
-            color: var(--gtf-muted);
-
-            font-size: 7px;
-            font-weight: 700;
-        }
-
-        .page-button:hover {
-            background: var(--gtf-bg);
-        }
-
-        .page-button.active {
-            background: var(--gtf-green);
-            border-color: var(--gtf-green);
-            color: #ffffff;
-        }
 
         /* =====================================================
            MODAL
@@ -848,13 +1184,15 @@
                 rgba(9, 47, 36, .48);
         }
 
+
         .modal-backdrop.show {
             display: flex;
         }
 
+
         .modal {
             width: 100%;
-            max-width: 560px;
+            max-width: 480px;
 
             max-height: 90vh;
 
@@ -869,6 +1207,7 @@
                 rgba(0,0,0,.2);
         }
 
+
         .modal-header {
             padding: 18px 20px;
 
@@ -881,6 +1220,7 @@
                 1px solid var(--gtf-border);
         }
 
+
         .modal-header h2 {
             margin: 0;
 
@@ -889,11 +1229,13 @@
             font-size: 14px;
         }
 
+
         .modal-close {
             width: 30px;
             height: 30px;
 
             border: 0;
+
             border-radius: 50%;
 
             background: var(--gtf-bg);
@@ -903,52 +1245,17 @@
             font-size: 14px;
         }
 
+
         .modal-body {
             padding: 20px;
-        }
-
-        .detail-grid {
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 14px;
-        }
-
-        .detail-item {
-            padding: 11px;
-
-            background: #f8faf9;
-
-            border-radius: 7px;
-        }
-
-        .detail-item.full {
-            grid-column: 1 / -1;
-        }
-
-        .detail-label {
-            display: block;
-
-            margin-bottom: 5px;
 
             color: var(--gtf-muted);
 
-            font-size: 6px;
-
-            font-weight: 800;
-
-            text-transform: uppercase;
-        }
-
-        .detail-value {
-            color: var(--gtf-text);
-
             font-size: 8px;
 
-            font-weight: 700;
+            line-height: 1.6;
         }
+
 
         .modal-footer {
             padding: 14px 20px;
@@ -962,6 +1269,7 @@
             border-top:
                 1px solid var(--gtf-border);
         }
+
 
         /* =====================================================
            TOAST
@@ -982,6 +1290,7 @@
             border-radius: 8px;
 
             background: var(--gtf-green);
+
             color: #ffffff;
 
             font-size: 8px;
@@ -1000,12 +1309,14 @@
             transition: .2s ease;
         }
 
+
         .toast.show {
             opacity: 1;
 
             transform:
                 translateY(0);
         }
+
 
         /* =====================================================
            FOOTER
@@ -1019,6 +1330,7 @@
             border-top:
                 1px solid var(--gtf-border);
         }
+
 
         .admin-footer-inner {
             width: 100%;
@@ -1038,27 +1350,41 @@
             font-size: 7px;
         }
 
+
         /* =====================================================
            RESPONSIVE
            ===================================================== */
 
-        @media (max-width: 1150px) {
+        @media (max-width: 1050px) {
 
-            .summary-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
+            .settings-layout {
+                grid-template-columns: 1fr;
             }
 
-            .filter-grid {
+
+            .settings-nav-card {
+                position: static;
+            }
+
+
+            .settings-nav {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+
+            .settings-nav-title {
+                display: none;
+            }
+
+
+            .color-grid {
                 grid-template-columns:
                     1fr 1fr;
             }
 
-            .filter-button {
-                width: 100%;
-            }
-
         }
+
 
         @media (max-width: 850px) {
 
@@ -1066,9 +1392,11 @@
                 grid-template-columns: 1fr;
             }
 
+
             .admin-sidebar {
                 position: static;
             }
+
 
             .sidebar-nav {
                 grid-template-columns:
@@ -1077,61 +1405,118 @@
 
         }
 
-        @media (max-width: 600px) {
+
+        @media (max-width: 650px) {
 
             .admin-header-inner {
                 padding: 10px 14px;
             }
 
+
             .admin-label {
                 display: none;
             }
 
+
             .admin-body {
                 padding: 15px;
             }
+
 
             .sidebar-nav {
                 grid-template-columns:
                     repeat(2, 1fr);
             }
 
+
             .page-heading {
                 flex-direction: column;
             }
+
 
             .page-heading h1 {
                 font-size: 22px;
             }
 
-            .summary-grid {
+
+            .settings-nav {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .form-grid {
                 grid-template-columns: 1fr;
             }
 
-            .filter-grid {
-                grid-template-columns: 1fr;
-            }
 
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .detail-item.full {
+            .form-group.full {
                 grid-column: auto;
             }
 
-            .table-footer {
-                flex-direction: column;
-                align-items: stretch;
+
+            .color-grid {
+                grid-template-columns: 1fr;
             }
 
-            .pagination {
-                justify-content: center;
+
+            .system-grid {
+                grid-template-columns: 1fr;
             }
+
+
+            .setting-row {
+                align-items: flex-start;
+            }
+
+
+            .inline-select {
+                min-width: 120px;
+            }
+
 
             .admin-footer-inner {
                 flex-direction: column;
+
                 text-align: center;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .settings-nav {
+                grid-template-columns: 1fr;
+            }
+
+
+            .settings-card-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .setting-row {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+
+            .inline-select {
+                width: 100%;
+            }
+
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+
+            .form-actions .button {
+                width: 100%;
             }
 
         }
@@ -1168,6 +1553,7 @@
                     alt="Global TrustFund logo"
                 >
 
+
                 <span class="brand-text">
 
                     <strong>
@@ -1192,7 +1578,7 @@
                     </strong>
 
                     <span>
-                        Transaction Operations
+                        System Configuration
                     </span>
 
                 </div>
@@ -1259,11 +1645,7 @@
                 </a>
 
 
-                <a
-                    href="./transactions.html"
-                    class="active"
-                    aria-current="page"
-                >
+                <a href="./transactions.html">
                     <span class="nav-icon">⇄</span>
                     Transactions
                 </a>
@@ -1287,7 +1669,11 @@
                 </a>
 
 
-                <a href="./settings.html">
+                <a
+                    href="./settings.html"
+                    class="active"
+                    aria-current="page"
+                >
                     <span class="nav-icon">⚙</span>
                     Settings
                 </a>
@@ -1304,19 +1690,22 @@
         <main class="admin-main">
 
 
-            <!-- PAGE HEADING -->
+            <!-- =================================================
+                 PAGE HEADING
+                 ================================================= -->
 
             <section class="page-heading">
 
                 <div>
 
                     <h1>
-                        Transactions
+                        Settings
                     </h1>
 
                     <p>
-                        Review, search, and monitor transaction
-                        activity across the banking platform.
+                        Manage platform configuration, security,
+                        notifications, regional preferences,
+                        and administrative controls.
                     </p>
 
                 </div>
@@ -1327,18 +1716,18 @@
                     <button
                         type="button"
                         class="button"
-                        id="exportButton"
+                        id="resetButton"
                     >
-                        Export
+                        Reset Changes
                     </button>
 
 
                     <button
                         type="button"
                         class="button button-primary"
-                        id="refreshButton"
+                        id="saveAllButton"
                     >
-                        Refresh
+                        Save Changes
                     </button>
 
                 </div>
@@ -1347,995 +1736,1807 @@
 
 
             <!-- =================================================
-                 SUMMARY
+                 SETTINGS LAYOUT
                  ================================================= -->
 
-            <section
-                class="summary-grid"
-                aria-label="Transaction summary"
-            >
+            <div class="settings-layout">
 
 
-                <div class="summary-card">
+                <!-- =================================================
+                     SETTINGS NAV
+                     ================================================= -->
 
-                    <div class="summary-label">
-                        Today's Transactions
+                <aside class="settings-nav-card">
+
+                    <div class="settings-nav-title">
+                        Configuration
                     </div>
 
-                    <div
-                        class="summary-value"
-                        id="todayCount"
+
+                    <nav
+                        class="settings-nav"
+                        aria-label="Settings sections"
                     >
-                        1,284
-                    </div>
-
-                    <div class="summary-note">
-                        Total recorded today
-                    </div>
-
-                </div>
-
-
-                <div class="summary-card">
-
-                    <div class="summary-label">
-                        Total Volume
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="totalVolume"
-                    >
-                        $842.6K
-                    </div>
-
-                    <div class="summary-note">
-                        Current reporting period
-                    </div>
-
-                </div>
-
-
-                <div class="summary-card">
-
-                    <div class="summary-label">
-                        Pending Review
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="pendingCount"
-                    >
-                        23
-                    </div>
-
-                    <div class="summary-note">
-                        Transactions awaiting action
-                    </div>
-
-                </div>
-
-
-                <div class="summary-card">
-
-                    <div class="summary-label">
-                        Failed
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="failedCount"
-                    >
-                        7
-                    </div>
-
-                    <div class="summary-note">
-                        Transactions requiring attention
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 FILTERS
-                 ================================================= -->
-
-            <section class="filter-card">
-
-                <div class="filter-title">
-                    Search & Filter Transactions
-                </div>
-
-
-                <div class="filter-grid">
-
-
-                    <div class="filter-group">
-
-                        <label for="searchInput">
-                            Search
-                        </label>
-
-                        <input
-                            type="search"
-                            id="searchInput"
-                            placeholder="Transaction ID, customer, account..."
-                        >
-
-                    </div>
-
-
-                    <div class="filter-group">
-
-                        <label for="typeFilter">
-                            Transaction Type
-                        </label>
-
-                        <select id="typeFilter">
-
-                            <option value="">
-                                All Types
-                            </option>
-
-                            <option value="transfer">
-                                Transfer
-                            </option>
-
-                            <option value="deposit">
-                                Deposit
-                            </option>
-
-                            <option value="withdrawal">
-                                Withdrawal
-                            </option>
-
-                            <option value="payment">
-                                Payment
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="filter-group">
-
-                        <label for="statusFilter">
-                            Status
-                        </label>
-
-                        <select id="statusFilter">
-
-                            <option value="">
-                                All Statuses
-                            </option>
-
-                            <option value="completed">
-                                Completed
-                            </option>
-
-                            <option value="pending">
-                                Pending
-                            </option>
-
-                            <option value="review">
-                                Review
-                            </option>
-
-                            <option value="failed">
-                                Failed
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="filter-group">
-
-                        <label for="dateFilter">
-                            Date
-                        </label>
-
-                        <select id="dateFilter">
-
-                            <option value="">
-                                All Dates
-                            </option>
-
-                            <option value="today">
-                                Today
-                            </option>
-
-                            <option value="7">
-                                Last 7 Days
-                            </option>
-
-                            <option value="30">
-                                Last 30 Days
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        id="filterButton"
-                    >
-                        Apply
-                    </button>
-
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 TRANSACTION TABLE
-                 ================================================= -->
-
-            <section class="table-card">
-
-
-                <div class="table-header">
-
-                    <div>
-
-                        <h2>
-                            Transaction Activity
-                        </h2>
-
-                    </div>
-
-                    <span id="resultCount">
-                        Showing 8 transactions
-                    </span>
-
-                </div>
-
-
-                <div class="table-wrapper">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Transaction
-                                </th>
-
-                                <th>
-                                    Customer
-                                </th>
-
-                                <th>
-                                    Type
-                                </th>
-
-                                <th>
-                                    Amount
-                                </th>
-
-                                <th>
-                                    Date & Time
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                                <th>
-                                    Actions
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody id="transactionTableBody">
-
-
-                            <tr
-                                data-type="transfer"
-                                data-status="completed"
-                            >
-
-                                <td>
-
-                                    <span class="transaction-id">
-                                        TXN-2026-001284
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        David Morgan
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****4821
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge transfer">
-                                        Transfer
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount debit">
-                                        -$2,450.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>09:42 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge completed">
-                                        Completed
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001284"
-                                            data-customer="David Morgan"
-                                            data-account="****4821"
-                                            data-type="Transfer"
-                                            data-amount="-$2,450.00"
-                                            data-date="Aug 28, 2026 09:42 AM"
-                                            data-status="Completed"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="deposit"
-                                data-status="completed"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001283
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        Sarah Williams
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****7392
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge deposit">
-                                        Deposit
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount credit">
-                                        +$5,000.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>09:35 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge completed">
-                                        Completed
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001283"
-                                            data-customer="Sarah Williams"
-                                            data-account="****7392"
-                                            data-type="Deposit"
-                                            data-amount="+$5,000.00"
-                                            data-date="Aug 28, 2026 09:35 AM"
-                                            data-status="Completed"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="withdrawal"
-                                data-status="pending"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001282
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        Michael Carter
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****2156
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge withdrawal">
-                                        Withdrawal
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount debit">
-                                        -$1,200.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>09:28 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge pending">
-                                        Pending
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001282"
-                                            data-customer="Michael Carter"
-                                            data-account="****2156"
-                                            data-type="Withdrawal"
-                                            data-amount="-$1,200.00"
-                                            data-date="Aug 28, 2026 09:28 AM"
-                                            data-status="Pending"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="payment"
-                                data-status="completed"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001281
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        Emily Johnson
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****6408
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge payment">
-                                        Payment
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount debit">
-                                        -$375.50
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>09:14 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge completed">
-                                        Completed
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001281"
-                                            data-customer="Emily Johnson"
-                                            data-account="****6408"
-                                            data-type="Payment"
-                                            data-amount="-$375.50"
-                                            data-date="Aug 28, 2026 09:14 AM"
-                                            data-status="Completed"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="transfer"
-                                data-status="review"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001280
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        Robert Anderson
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****9134
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge transfer">
-                                        Transfer
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount debit">
-                                        -$12,500.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>08:57 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge review">
-                                        Review
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001280"
-                                            data-customer="Robert Anderson"
-                                            data-account="****9134"
-                                            data-type="Transfer"
-                                            data-amount="-$12,500.00"
-                                            data-date="Aug 28, 2026 08:57 AM"
-                                            data-status="Review"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="deposit"
-                                data-status="completed"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001279
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        Olivia Brown
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****5277
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge deposit">
-                                        Deposit
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount credit">
-                                        +$8,750.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>08:42 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge completed">
-                                        Completed
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001279"
-                                            data-customer="Olivia Brown"
-                                            data-account="****5277"
-                                            data-type="Deposit"
-                                            data-amount="+$8,750.00"
-                                            data-date="Aug 28, 2026 08:42 AM"
-                                            data-status="Completed"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="payment"
-                                data-status="failed"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001278
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        James Wilson
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****3619
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge payment">
-                                        Payment
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount debit">
-                                        -$620.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>08:31 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge failed">
-                                        Failed
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001278"
-                                            data-customer="James Wilson"
-                                            data-account="****3619"
-                                            data-type="Payment"
-                                            data-amount="-$620.00"
-                                            data-date="Aug 28, 2026 08:31 AM"
-                                            data-status="Failed"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                            <tr
-                                data-type="transfer"
-                                data-status="completed"
-                            >
-
-                                <td>
-                                    <span class="transaction-id">
-                                        TXN-2026-001277
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <span class="customer-name">
-                                        Daniel Thompson
-                                    </span>
-
-                                    <span class="customer-account">
-                                        ****8043
-                                    </span>
-
-                                </td>
-
-
-                                <td>
-                                    <span class="type-badge transfer">
-                                        Transfer
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    <span class="amount debit">
-                                        -$3,100.00
-                                    </span>
-                                </td>
-
-
-                                <td>
-                                    Aug 28, 2026<br>
-                                    <small>08:18 AM</small>
-                                </td>
-
-
-                                <td>
-                                    <span class="status-badge completed">
-                                        Completed
-                                    </span>
-                                </td>
-
-
-                                <td>
-
-                                    <div class="row-actions">
-
-                                        <button
-                                            type="button"
-                                            class="row-button view-button"
-                                            data-id="TXN-2026-001277"
-                                            data-customer="Daniel Thompson"
-                                            data-account="****8043"
-                                            data-type="Transfer"
-                                            data-amount="-$3,100.00"
-                                            data-date="Aug 28, 2026 08:18 AM"
-                                            data-status="Completed"
-                                        >
-                                            View
-                                        </button>
-
-                                    </div>
-
-                                </td>
-
-                            </tr>
-
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-
-                <!-- PAGINATION -->
-
-                <div class="table-footer">
-
-                    <span
-                        class="pagination-info"
-                        id="paginationInfo"
-                    >
-                        Showing 1–8 of 1,284 transactions
-                    </span>
-
-
-                    <div class="pagination">
 
                         <button
                             type="button"
-                            class="page-button"
-                            id="previousPage"
+                            class="active"
+                            data-section="general"
                         >
-                            ‹
+                            <span class="settings-nav-icon">
+                                ⚙
+                            </span>
+
+                            General
                         </button>
 
 
                         <button
                             type="button"
-                            class="page-button active"
+                            data-section="security"
                         >
-                            1
+                            <span class="settings-nav-icon">
+                                🔒
+                            </span>
+
+                            Security
                         </button>
 
 
                         <button
                             type="button"
-                            class="page-button"
+                            data-section="notifications"
                         >
-                            2
+                            <span class="settings-nav-icon">
+                                ◉
+                            </span>
+
+                            Notifications
                         </button>
 
 
                         <button
                             type="button"
-                            class="page-button"
+                            data-section="regional"
                         >
-                            3
+                            <span class="settings-nav-icon">
+                                ◎
+                            </span>
+
+                            Regional
                         </button>
 
 
                         <button
                             type="button"
-                            class="page-button"
+                            data-section="branding"
                         >
-                            4
+                            <span class="settings-nav-icon">
+                                ◆
+                            </span>
+
+                            Branding
                         </button>
 
 
                         <button
                             type="button"
-                            class="page-button"
+                            data-section="system"
                         >
-                            ›
+                            <span class="settings-nav-icon">
+                                ▣
+                            </span>
+
+                            System
                         </button>
 
-                    </div>
+
+                        <button
+                            type="button"
+                            data-section="danger"
+                        >
+                            <span class="settings-nav-icon">
+                                !
+                            </span>
+
+                            Advanced
+                        </button>
+
+                    </nav>
+
+                </aside>
+
+
+                <!-- =================================================
+                     SETTINGS CONTENT
+                     ================================================= -->
+
+                <div class="settings-content">
+
+
+                    <!-- =================================================
+                         GENERAL
+                         ================================================= -->
+
+                    <section
+                        class="settings-section active"
+                        id="section-general"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        General Settings
+                                    </h2>
+
+                                    <p>
+                                        Basic information used throughout
+                                        the administration platform.
+                                    </p>
+
+                                </div>
+
+
+                                <span class="setting-status">
+                                    Active
+                                </span>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-group">
+
+                                        <label for="institutionName">
+                                            Institution Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="institutionName"
+                                            value="Global TrustFund"
+                                        >
+
+                                        <span class="form-help">
+                                            Display name used across the
+                                            administration interface.
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="institutionCode">
+                                            Institution Code
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="institutionCode"
+                                            value="GTF"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="supportEmail">
+                                            Support Email
+                                        </label>
+
+                                        <input
+                                            type="email"
+                                            id="supportEmail"
+                                            value="support@globaltrustfund.com"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="supportPhone">
+                                            Support Phone
+                                        </label>
+
+                                        <input
+                                            type="tel"
+                                            id="supportPhone"
+                                            value="+1 800 000 0000"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-group full">
+
+                                        <label for="institutionDescription">
+                                            Institution Description
+                                        </label>
+
+                                        <textarea
+                                            id="institutionDescription"
+                                        >Global TrustFund digital banking administration platform.</textarea>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        data-reset-section
+                                    >
+                                        Reset
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="button button-primary save-section"
+                                    >
+                                        Save General Settings
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Platform Preferences
+                                    </h2>
+
+                                    <p>
+                                        Control general behavior across
+                                        the administrative portal.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="setting-list">
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Maintenance Mode
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Temporarily restrict customer
+                                                access while maintenance is
+                                                being performed.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle"
+                                            data-toggle="maintenance"
+                                            aria-label="Toggle maintenance mode"
+                                            aria-pressed="false"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Customer Registration
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Allow new customers to submit
+                                                registration applications.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="registration"
+                                            aria-label="Toggle customer registration"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Automatic Session Timeout
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Automatically sign administrators
+                                                out after a period of inactivity.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="session"
+                                            aria-label="Toggle session timeout"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         SECURITY
+                         ================================================= -->
+
+                    <section
+                        class="settings-section"
+                        id="section-security"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Security Settings
+                                    </h2>
+
+                                    <p>
+                                        Configure security controls for
+                                        administrators and platform access.
+                                    </p>
+
+                                </div>
+
+
+                                <span class="setting-status">
+                                    Protected
+                                </span>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="setting-list">
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Multi-Factor Authentication
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Require an additional
+                                                verification step for
+                                                administrator accounts.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="mfa"
+                                            aria-label="Toggle multi-factor authentication"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Login Attempt Protection
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Temporarily restrict repeated
+                                                unsuccessful authentication
+                                                attempts.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="loginProtection"
+                                            aria-label="Toggle login attempt protection"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Security Event Logging
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Record administrative security
+                                                events for later review.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="securityLogging"
+                                            aria-label="Toggle security logging"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                New Device Verification
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Require verification when an
+                                                administrator signs in from a
+                                                new device.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="deviceVerification"
+                                            aria-label="Toggle device verification"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="button button-primary save-section"
+                                    >
+                                        Save Security Settings
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Session Configuration
+                                    </h2>
+
+                                    <p>
+                                        Define administrator session behavior.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-group">
+
+                                        <label for="sessionTimeout">
+                                            Session Timeout
+                                        </label>
+
+                                        <select id="sessionTimeout">
+
+                                            <option>
+                                                15 minutes
+                                            </option>
+
+                                            <option selected>
+                                                30 minutes
+                                            </option>
+
+                                            <option>
+                                                60 minutes
+                                            </option>
+
+                                            <option>
+                                                120 minutes
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="passwordExpiry">
+                                            Password Expiry
+                                        </label>
+
+                                        <select id="passwordExpiry">
+
+                                            <option>
+                                                30 days
+                                            </option>
+
+                                            <option selected>
+                                                60 days
+                                            </option>
+
+                                            <option>
+                                                90 days
+                                            </option>
+
+                                            <option>
+                                                Never
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         NOTIFICATIONS
+                         ================================================= -->
+
+                    <section
+                        class="settings-section"
+                        id="section-notifications"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Notification Settings
+                                    </h2>
+
+                                    <p>
+                                        Control administrative alerts and
+                                        operational notifications.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="setting-list">
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Transaction Alerts
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Notify administrators about
+                                                significant transaction events.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="transactionAlerts"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Compliance Alerts
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Notify authorized staff when
+                                                compliance events require review.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="complianceAlerts"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Failed Transaction Alerts
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Receive alerts when transaction
+                                                processing fails.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="failedAlerts"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                System Health Alerts
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Receive notifications for
+                                                important platform health events.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="systemAlerts"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Notification Delivery
+                                    </h2>
+
+                                    <p>
+                                        Select the channels used for
+                                        administrative notifications.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="setting-list">
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Email Notifications
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Deliver administrative alerts
+                                                through email.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="emailNotifications"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                In-Portal Notifications
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Display alerts inside the
+                                                administration portal.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="portalNotifications"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         REGIONAL
+                         ================================================= -->
+
+                    <section
+                        class="settings-section"
+                        id="section-regional"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Regional Preferences
+                                    </h2>
+
+                                    <p>
+                                        Configure currency, language, date,
+                                        time, and number formatting.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-group">
+
+                                        <label for="defaultCurrency">
+                                            Default Currency
+                                        </label>
+
+                                        <select id="defaultCurrency">
+
+                                            <option selected>
+                                                USD — US Dollar
+                                            </option>
+
+                                            <option>
+                                                NGN — Nigerian Naira
+                                            </option>
+
+                                            <option>
+                                                GBP — British Pound
+                                            </option>
+
+                                            <option>
+                                                EUR — Euro
+                                            </option>
+
+                                            <option>
+                                                CAD — Canadian Dollar
+                                            </option>
+
+                                            <option>
+                                                AUD — Australian Dollar
+                                            </option>
+
+                                            <option>
+                                                JPY — Japanese Yen
+                                            </option>
+
+                                            <option>
+                                                CHF — Swiss Franc
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="language">
+                                            Language
+                                        </label>
+
+                                        <select id="language">
+
+                                            <option selected>
+                                                English
+                                            </option>
+
+                                            <option>
+                                                French
+                                            </option>
+
+                                            <option>
+                                                Spanish
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="timezone">
+                                            Time Zone
+                                        </label>
+
+                                        <select id="timezone">
+
+                                            <option selected>
+                                                UTC
+                                            </option>
+
+                                            <option>
+                                                Africa/Lagos
+                                            </option>
+
+                                            <option>
+                                                America/New_York
+                                            </option>
+
+                                            <option>
+                                                Europe/London
+                                            </option>
+
+                                            <option>
+                                                Europe/Paris
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="dateFormat">
+                                            Date Format
+                                        </label>
+
+                                        <select id="dateFormat">
+
+                                            <option selected>
+                                                MMM DD, YYYY
+                                            </option>
+
+                                            <option>
+                                                DD/MM/YYYY
+                                            </option>
+
+                                            <option>
+                                                MM/DD/YYYY
+                                            </option>
+
+                                            <option>
+                                                YYYY-MM-DD
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="timeFormat">
+                                            Time Format
+                                        </label>
+
+                                        <select id="timeFormat">
+
+                                            <option selected>
+                                                12-hour
+                                            </option>
+
+                                            <option>
+                                                24-hour
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="decimalPlaces">
+                                            Decimal Places
+                                        </label>
+
+                                        <select id="decimalPlaces">
+
+                                            <option>
+                                                0
+                                            </option>
+
+                                            <option selected>
+                                                2
+                                            </option>
+
+                                            <option>
+                                                3
+                                            </option>
+
+                                            <option>
+                                                4
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="button button-primary save-section"
+                                    >
+                                        Save Regional Settings
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         BRANDING
+                         ================================================= -->
+
+                    <section
+                        class="settings-section"
+                        id="section-branding"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Branding
+                                    </h2>
+
+                                    <p>
+                                        Configure the visual identity used
+                                        across the administration interface.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+
+                                <div class="form-grid">
+
+
+                                    <div class="form-group">
+
+                                        <label for="brandName">
+                                            Brand Name
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="brandName"
+                                            value="Global TrustFund"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                        <label for="brandTagline">
+                                            Brand Tagline
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="brandTagline"
+                                            value="Administration"
+                                        >
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div
+                                    class="color-grid"
+                                    style="margin-top: 15px;"
+                                >
+
+
+                                    <div class="color-item">
+
+                                        <label for="primaryColor">
+                                            Primary Color
+                                        </label>
+
+
+                                        <div class="color-control">
+
+                                            <input
+                                                type="color"
+                                                id="primaryColor"
+                                                value="#0b3d2e"
+                                            >
+
+
+                                            <input
+                                                type="text"
+                                                class="color-code"
+                                                id="primaryColorCode"
+                                                value="#0b3d2e"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="color-item">
+
+                                        <label for="secondaryColor">
+                                            Secondary Color
+                                        </label>
+
+
+                                        <div class="color-control">
+
+                                            <input
+                                                type="color"
+                                                id="secondaryColor"
+                                                value="#176b48"
+                                            >
+
+
+                                            <input
+                                                type="text"
+                                                class="color-code"
+                                                id="secondaryColorCode"
+                                                value="#176b48"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="color-item">
+
+                                        <label for="accentColor">
+                                            Accent Color
+                                        </label>
+
+
+                                        <div class="color-control">
+
+                                            <input
+                                                type="color"
+                                                id="accentColor"
+                                                value="#c9962b"
+                                            >
+
+
+                                            <input
+                                                type="text"
+                                                class="color-code"
+                                                id="accentColorCode"
+                                                value="#c9962b"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="button"
+                                        id="restoreBranding"
+                                    >
+                                        Restore Defaults
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="button button-primary save-section"
+                                    >
+                                        Save Branding
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Logo
+                                    </h2>
+
+                                    <p>
+                                        Current administration portal logo.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div
+                                    style="
+                                        padding:18px;
+                                        background:#f8faf9;
+                                        border-radius:8px;
+                                        display:flex;
+                                        align-items:center;
+                                        gap:15px;
+                                    "
+                                >
+
+                                    <img
+                                        src="../assets/gtf-logo.svg"
+                                        alt="Global TrustFund logo preview"
+                                        style="
+                                            width:65px;
+                                            height:65px;
+                                            object-fit:contain;
+                                        "
+                                    >
+
+
+                                    <div>
+
+                                        <div
+                                            style="
+                                                color:var(--gtf-green);
+                                                font-size:10px;
+                                                font-weight:800;
+                                            "
+                                        >
+                                            Global TrustFund
+                                        </div>
+
+                                        <div
+                                            style="
+                                                margin-top:4px;
+                                                color:var(--gtf-muted);
+                                                font-size:7px;
+                                            "
+                                        >
+                                            Administration portal branding
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         SYSTEM
+                         ================================================= -->
+
+                    <section
+                        class="settings-section"
+                        id="section-system"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        System Information
+                                    </h2>
+
+                                    <p>
+                                        Current platform and environment
+                                        information.
+                                    </p>
+
+                                </div>
+
+
+                                <span class="setting-status">
+                                    Operational
+                                </span>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="system-grid">
+
+
+                                    <div class="system-item">
+
+                                        <span class="system-label">
+                                            Platform
+                                        </span>
+
+                                        <span class="system-value">
+                                            Global TrustFund Banking
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="system-item">
+
+                                        <span class="system-label">
+                                            Environment
+                                        </span>
+
+                                        <span class="system-value">
+                                            Development
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="system-item">
+
+                                        <span class="system-label">
+                                            Application Version
+                                        </span>
+
+                                        <span class="system-value">
+                                            1.0.0
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="system-item">
+
+                                        <span class="system-label">
+                                            API Status
+                                        </span>
+
+                                        <span class="system-value">
+                                            Connected
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="system-item">
+
+                                        <span class="system-label">
+                                            Database
+                                        </span>
+
+                                        <span class="system-value">
+                                            PostgreSQL
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="system-item">
+
+                                        <span class="system-label">
+                                            Authentication
+                                        </span>
+
+                                        <span class="system-value">
+                                            Secure Authentication
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="warning-box">
+
+                                    <div class="warning-icon">
+                                        !
+                                    </div>
+
+
+                                    <div class="warning-content">
+
+                                        <strong>
+                                            Configuration Notice
+                                        </strong>
+
+                                        <span>
+                                            System configuration changes can
+                                            affect application behavior.
+                                            Review changes carefully before
+                                            saving them.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Operational Preferences
+                                    </h2>
+
+                                    <p>
+                                        Manage background system behavior.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <div class="setting-list">
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Automatic Backups
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Maintain scheduled database
+                                                backup operations.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="backups"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                System Health Monitoring
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Monitor application services
+                                                and system availability.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="healthMonitoring"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Audit Logging
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Record administrative actions
+                                                for audit review.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="auditLogging"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         ADVANCED
+                         ================================================= -->
+
+                    <section
+                        class="settings-section"
+                        id="section-danger"
+                    >
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Advanced Configuration
+                                    </h2>
+
+                                    <p>
+                                        Administrative controls requiring
+                                        additional care.
+                                    </p>
+
+                                </div>
+
+                                <span class="setting-status warning">
+                                    Restricted
+                                </span>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+
+                                <div class="setting-list">
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                API Access
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Allow authorized applications
+                                                to communicate with platform APIs.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle active"
+                                            data-toggle="apiAccess"
+                                            aria-pressed="true"
+                                        ></button>
+
+                                    </div>
+
+
+                                    <div class="setting-row">
+
+                                        <div class="setting-info">
+
+                                            <div class="setting-name">
+                                                Developer Diagnostics
+                                            </div>
+
+                                            <div class="setting-description">
+                                                Enable additional diagnostic
+                                                information for authorized
+                                                administrators.
+                                            </div>
+
+                                        </div>
+
+
+                                        <button
+                                            type="button"
+                                            class="toggle"
+                                            data-toggle="diagnostics"
+                                            aria-pressed="false"
+                                        ></button>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="danger-box">
+
+                                    <strong>
+                                        Administrative Warning
+                                    </strong>
+
+                                    <span>
+                                        Advanced settings can affect platform
+                                        availability, security, and data
+                                        processing. Only authorized
+                                        administrators should modify these
+                                        controls.
+                                    </span>
+
+                                </div>
+
+
+                                <div class="form-actions">
+
+                                    <button
+                                        type="button"
+                                        class="button button-danger"
+                                        id="clearSettingsButton"
+                                    >
+                                        Clear Local Preferences
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="settings-card">
+
+                            <div class="settings-card-header">
+
+                                <div>
+
+                                    <h2>
+                                        Configuration Reset
+                                    </h2>
+
+                                    <p>
+                                        Restore interface preferences to
+                                        their default values.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="settings-card-body">
+
+                                <button
+                                    type="button"
+                                    class="button button-danger"
+                                    id="advancedResetButton"
+                                >
+                                    Restore Default Settings
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
 
                 </div>
 
-            </section>
+            </div>
 
 
         </main>
@@ -2356,7 +3557,7 @@
             </span>
 
             <span>
-                Transaction Management
+                System Configuration
             </span>
 
         </div>
@@ -2368,15 +3569,15 @@
 
 
 <!-- =====================================================
-     TRANSACTION DETAIL MODAL
+     CONFIRMATION MODAL
      ===================================================== -->
 
 <div
     class="modal-backdrop"
-    id="transactionModal"
+    id="confirmationModal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="transactionModalTitle"
+    aria-labelledby="confirmationTitle"
 >
 
 
@@ -2385,15 +3586,15 @@
 
         <div class="modal-header">
 
-            <h2 id="transactionModalTitle">
-                Transaction Details
+            <h2 id="confirmationTitle">
+                Confirm Action
             </h2>
 
 
             <button
                 type="button"
                 class="modal-close"
-                id="closeModal"
+                id="closeConfirmation"
                 aria-label="Close"
             >
                 ×
@@ -2404,123 +3605,9 @@
 
         <div class="modal-body">
 
-
-            <div class="detail-grid">
-
-
-                <div class="detail-item">
-
-                    <span class="detail-label">
-                        Transaction ID
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailId"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <span class="detail-label">
-                        Status
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailStatus"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <span class="detail-label">
-                        Customer
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailCustomer"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <span class="detail-label">
-                        Account
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailAccount"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <span class="detail-label">
-                        Transaction Type
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailType"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail-item">
-
-                    <span class="detail-label">
-                        Amount
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailAmount"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-                <div class="detail-item full">
-
-                    <span class="detail-label">
-                        Date & Time
-                    </span>
-
-                    <span
-                        class="detail-value"
-                        id="detailDate"
-                    >
-                        —
-                    </span>
-
-                </div>
-
-
-            </div>
+            <p id="confirmationMessage">
+                Are you sure you want to continue?
+            </p>
 
         </div>
 
@@ -2530,13 +3617,21 @@
             <button
                 type="button"
                 class="button"
-                id="modalCancel"
+                id="cancelConfirmation"
             >
-                Close
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                class="button button-primary"
+                id="confirmAction"
+            >
+                Confirm
             </button>
 
         </div>
-
 
     </div>
 
@@ -2552,8 +3647,7 @@
     id="toast"
     role="status"
     aria-live="polite"
->
-</div>
+></div>
 
 
 <script>
@@ -2562,58 +3656,32 @@
        ELEMENTS
        ===================================================== */
 
-    const searchInput =
-        document.getElementById(
-            "searchInput"
-        );
-
-    const typeFilter =
-        document.getElementById(
-            "typeFilter"
-        );
-
-    const statusFilter =
-        document.getElementById(
-            "statusFilter"
-        );
-
-    const dateFilter =
-        document.getElementById(
-            "dateFilter"
-        );
-
-    const tableBody =
-        document.getElementById(
-            "transactionTableBody"
-        );
-
-    const resultCount =
-        document.getElementById(
-            "resultCount"
-        );
-
-    const paginationInfo =
-        document.getElementById(
-            "paginationInfo"
-        );
-
     const toast =
         document.getElementById(
             "toast"
         );
 
-    const modal =
+
+    const confirmationModal =
         document.getElementById(
-            "transactionModal"
+            "confirmationModal"
         );
+
+
+    const confirmationMessage =
+        document.getElementById(
+            "confirmationMessage"
+        );
+
+
+    let toastTimer = null;
+
+    let pendingAction = null;
 
 
     /* =====================================================
        TOAST
        ===================================================== */
-
-    let toastTimer;
-
 
     function showToast(message) {
 
@@ -2640,204 +3708,81 @@
                     );
 
                 },
-                2500
+                2600
             );
 
     }
 
 
     /* =====================================================
-       FILTER TRANSACTIONS
+       SETTINGS NAVIGATION
        ===================================================== */
 
-    function filterTransactions() {
-
-        const search =
-            searchInput.value
-                .trim()
-                .toLowerCase();
+    const settingsNavButtons =
+        document.querySelectorAll(
+            ".settings-nav button"
+        );
 
 
-        const type =
-            typeFilter.value;
+    const settingsSections =
+        document.querySelectorAll(
+            ".settings-section"
+        );
 
 
-        const status =
-            statusFilter.value;
+    settingsNavButtons.forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    const section =
+                        button.dataset.section;
 
 
-        const rows =
-            Array.from(
-                tableBody.querySelectorAll(
-                    "tr"
-                )
-            );
+                    settingsNavButtons.forEach(
+                        function(item) {
 
+                            item.classList.remove(
+                                "active"
+                            );
 
-        let visible =
-            0;
-
-
-        rows.forEach(
-            function(row) {
-
-                const rowText =
-                    row.textContent
-                        .toLowerCase();
-
-
-                const rowType =
-                    row.dataset.type ||
-                    "";
-
-
-                const rowStatus =
-                    row.dataset.status ||
-                    "";
-
-
-                const matchesSearch =
-                    !search ||
-                    rowText.includes(
-                        search
+                        }
                     );
 
 
-                const matchesType =
-                    !type ||
-                    rowType === type;
+                    settingsSections.forEach(
+                        function(item) {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
 
 
-                const matchesStatus =
-                    !status ||
-                    rowStatus === status;
+                    button.classList.add(
+                        "active"
+                    );
 
 
-                const shouldShow =
-                    matchesSearch &&
-                    matchesType &&
-                    matchesStatus;
+                    const target =
+                        document.getElementById(
+                            `section-${section}`
+                        );
 
 
-                row.style.display =
-                    shouldShow
-                        ? ""
-                        : "none";
+                    if (target) {
 
+                        target.classList.add(
+                            "active"
+                        );
 
-                if (shouldShow) {
-                    visible++;
+                    }
+
                 }
-
-            }
-        );
-
-
-        resultCount.textContent =
-            `Showing ${visible} transaction${visible === 1 ? "" : "s"}`;
-
-
-        paginationInfo.textContent =
-            `Showing ${visible} filtered transaction${visible === 1 ? "" : "s"}`;
-
-    }
-
-
-    /* =====================================================
-       FILTER BUTTON
-       ===================================================== */
-
-    document
-        .getElementById(
-            "filterButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                filterTransactions();
-
-                showToast(
-                    "Transaction filters applied."
-                );
-
-            }
-        );
-
-
-    /* =====================================================
-       LIVE SEARCH
-       ===================================================== */
-
-    searchInput.addEventListener(
-        "input",
-        filterTransactions
-    );
-
-
-    /* =====================================================
-       VIEW TRANSACTION
-       ===================================================== */
-
-    document.addEventListener(
-        "click",
-        function(event) {
-
-            const button =
-                event.target.closest(
-                    ".view-button"
-                );
-
-
-            if (!button) {
-                return;
-            }
-
-
-            document.getElementById(
-                "detailId"
-            ).textContent =
-                button.dataset.id || "—";
-
-
-            document.getElementById(
-                "detailCustomer"
-            ).textContent =
-                button.dataset.customer || "—";
-
-
-            document.getElementById(
-                "detailAccount"
-            ).textContent =
-                button.dataset.account || "—";
-
-
-            document.getElementById(
-                "detailType"
-            ).textContent =
-                button.dataset.type || "—";
-
-
-            document.getElementById(
-                "detailAmount"
-            ).textContent =
-                button.dataset.amount || "—";
-
-
-            document.getElementById(
-                "detailDate"
-            ).textContent =
-                button.dataset.date || "—";
-
-
-            document.getElementById(
-                "detailStatus"
-            ).textContent =
-                button.dataset.status || "—";
-
-
-            modal.classList.add(
-                "show"
             );
 
         }
@@ -2845,54 +3790,464 @@
 
 
     /* =====================================================
-       CLOSE MODAL
+       TOGGLES
        ===================================================== */
 
-    function closeModal() {
+    document
+        .querySelectorAll(
+            ".toggle"
+        )
+        .forEach(
+            function(toggle) {
 
-        modal.classList.remove(
+                toggle.addEventListener(
+                    "click",
+                    function() {
+
+                        const isActive =
+                            toggle.classList.toggle(
+                                "active"
+                            );
+
+
+                        toggle.setAttribute(
+                            "aria-pressed",
+                            isActive
+                                ? "true"
+                                : "false"
+                        );
+
+
+                        const name =
+                            toggle.dataset.toggle ||
+                            "setting";
+
+
+                        const readableName =
+                            name
+                                .replace(
+                                    /([A-Z])/g,
+                                    " $1"
+                                )
+                                .replace(
+                                    /^./,
+                                    function(char) {
+                                        return char.toUpperCase();
+                                    }
+                                );
+
+
+                        showToast(
+                            `${readableName} ${isActive ? "enabled" : "disabled"}.`
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       SAVE BUTTONS
+       ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".save-section"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        showToast(
+                            "Settings saved successfully."
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(
+            "saveAllButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                showToast(
+                    "All settings saved successfully."
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       RESET SECTION
+       ===================================================== */
+
+    document
+        .querySelectorAll(
+            "[data-reset-section]"
+        )
+        .forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        showToast(
+                            "Section values restored."
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       COLOR PICKERS
+       ===================================================== */
+
+    function connectColorPicker(
+        colorId,
+        codeId
+    ) {
+
+        const color =
+            document.getElementById(
+                colorId
+            );
+
+
+        const code =
+            document.getElementById(
+                codeId
+            );
+
+
+        if (!color || !code) {
+            return;
+        }
+
+
+        color.addEventListener(
+            "input",
+            function() {
+
+                code.value =
+                    color.value;
+
+            }
+        );
+
+
+        code.addEventListener(
+            "change",
+            function() {
+
+                const value =
+                    code.value.trim();
+
+
+                if (
+                    /^#[0-9A-Fa-f]{6}$/.test(
+                        value
+                    )
+                ) {
+
+                    color.value =
+                        value;
+
+                }
+
+            }
+        );
+
+    }
+
+
+    connectColorPicker(
+        "primaryColor",
+        "primaryColorCode"
+    );
+
+
+    connectColorPicker(
+        "secondaryColor",
+        "secondaryColorCode"
+    );
+
+
+    connectColorPicker(
+        "accentColor",
+        "accentColorCode"
+    );
+
+
+    /* =====================================================
+       RESTORE BRANDING
+       ===================================================== */
+
+    document
+        .getElementById(
+            "restoreBranding"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                document.getElementById(
+                    "primaryColor"
+                ).value =
+                    "#0b3d2e";
+
+
+                document.getElementById(
+                    "primaryColorCode"
+                ).value =
+                    "#0b3d2e";
+
+
+                document.getElementById(
+                    "secondaryColor"
+                ).value =
+                    "#176b48";
+
+
+                document.getElementById(
+                    "secondaryColorCode"
+                ).value =
+                    "#176b48";
+
+
+                document.getElementById(
+                    "accentColor"
+                ).value =
+                    "#c9962b";
+
+
+                document.getElementById(
+                    "accentColorCode"
+                ).value =
+                    "#c9962b";
+
+
+                showToast(
+                    "Branding defaults restored."
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       CONFIRMATION MODAL
+       ===================================================== */
+
+    function openConfirmation(
+        message,
+        callback
+    ) {
+
+        confirmationMessage.textContent =
+            message;
+
+
+        pendingAction =
+            callback;
+
+
+        confirmationModal.classList.add(
             "show"
         );
 
     }
 
 
+    function closeConfirmation() {
+
+        confirmationModal.classList.remove(
+            "show"
+        );
+
+
+        pendingAction =
+            null;
+
+    }
+
+
     document
         .getElementById(
-            "closeModal"
+            "closeConfirmation"
         )
         .addEventListener(
             "click",
-            closeModal
+            closeConfirmation
         );
 
 
     document
         .getElementById(
-            "modalCancel"
+            "cancelConfirmation"
         )
         .addEventListener(
             "click",
-            closeModal
+            closeConfirmation
         );
 
 
-    modal.addEventListener(
+    document
+        .getElementById(
+            "confirmAction"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                if (
+                    typeof pendingAction ===
+                    "function"
+                ) {
+
+                    pendingAction();
+
+                }
+
+
+                closeConfirmation();
+
+            }
+        );
+
+
+    confirmationModal.addEventListener(
         "click",
         function(event) {
 
             if (
                 event.target ===
-                modal
+                confirmationModal
             ) {
 
-                closeModal();
+                closeConfirmation();
 
             }
 
         }
     );
 
+
+    /* =====================================================
+       RESET ALL
+       ===================================================== */
+
+    document
+        .getElementById(
+            "resetButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                openConfirmation(
+                    "Restore the current settings page to its default values?",
+                    function() {
+
+                        showToast(
+                            "Settings restored to their defaults."
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       CLEAR LOCAL PREFERENCES
+       ===================================================== */
+
+    document
+        .getElementById(
+            "clearSettingsButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                openConfirmation(
+                    "Clear locally stored administration preferences?",
+                    function() {
+
+                        try {
+
+                            localStorage.clear();
+
+                        } catch (error) {
+
+                            console.warn(
+                                "Local storage could not be cleared.",
+                                error
+                            );
+
+                        }
+
+
+                        showToast(
+                            "Local preferences cleared."
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       ADVANCED RESET
+       ===================================================== */
+
+    document
+        .getElementById(
+            "advancedResetButton"
+        )
+        .addEventListener(
+            "click",
+            function() {
+
+                openConfirmation(
+                    "Restore the administration settings to their default configuration?",
+                    function() {
+
+                        showToast(
+                            "Default configuration restored."
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       ESCAPE KEY
+       ===================================================== */
 
     document.addEventListener(
         "keydown",
@@ -2903,306 +4258,12 @@
                 "Escape"
             ) {
 
-                closeModal();
+                closeConfirmation();
 
             }
 
         }
     );
-
-
-    /* =====================================================
-       REFRESH
-       ===================================================== */
-
-    document
-        .getElementById(
-            "refreshButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                showToast(
-                    "Transaction data refreshed."
-                );
-
-                /*
-                 * Later, this button can call:
-                 *
-                 * GET /api/transactions
-                 *
-                 * when the backend connection is enabled.
-                 */
-
-            }
-        );
-
-
-    /* =====================================================
-       EXPORT
-       ===================================================== */
-
-    document
-        .getElementById(
-            "exportButton"
-        )
-        .addEventListener(
-            "click",
-            function() {
-
-                const rows =
-                    Array.from(
-                        tableBody.querySelectorAll(
-                            "tr"
-                        )
-                    )
-                    .filter(
-                        row =>
-                            row.style.display !==
-                            "none"
-                    );
-
-
-                if (!rows.length) {
-
-                    showToast(
-                        "There are no transactions to export."
-                    );
-
-                    return;
-
-                }
-
-
-                const csv = [];
-
-
-                csv.push(
-                    [
-                        "Transaction ID",
-                        "Customer",
-                        "Type",
-                        "Amount",
-                        "Date",
-                        "Status"
-                    ].join(",")
-                );
-
-
-                rows.forEach(
-                    function(row) {
-
-                        const cells =
-                            row.querySelectorAll(
-                                "td"
-                            );
-
-
-                        if (
-                            cells.length <
-                            6
-                        ) {
-                            return;
-                        }
-
-
-                        const transactionId =
-                            cells[0]
-                                .innerText
-                                .trim();
-
-
-                        const customer =
-                            cells[1]
-                                .innerText
-                                .replace(
-                                    /\n/g,
-                                    " "
-                                )
-                                .trim();
-
-
-                        const type =
-                            cells[2]
-                                .innerText
-                                .trim();
-
-
-                        const amount =
-                            cells[3]
-                                .innerText
-                                .trim();
-
-
-                        const date =
-                            cells[4]
-                                .innerText
-                                .replace(
-                                    /\n/g,
-                                    " "
-                                )
-                                .trim();
-
-
-                        const status =
-                            cells[5]
-                                .innerText
-                                .trim();
-
-
-                        csv.push(
-                            [
-                                transactionId,
-                                customer,
-                                type,
-                                amount,
-                                date,
-                                status
-                            ]
-                            .map(
-                                value =>
-                                    `"${value.replace(
-                                        /"/g,
-                                        '""'
-                                    )}"`
-                            )
-                            .join(",")
-                        );
-
-                    }
-                );
-
-
-                const blob =
-                    new Blob(
-                        [
-                            csv.join("\n")
-                        ],
-                        {
-                            type:
-                                "text/csv;charset=utf-8;"
-                        }
-                    );
-
-
-                const url =
-                    URL.createObjectURL(
-                        blob
-                    );
-
-
-                const link =
-                    document.createElement(
-                        "a"
-                    );
-
-
-                link.href =
-                    url;
-
-
-                link.download =
-                    "gtf-transactions.csv";
-
-
-                document.body.appendChild(
-                    link
-                );
-
-
-                link.click();
-
-
-                link.remove();
-
-
-                URL.revokeObjectURL(
-                    url
-                );
-
-
-                showToast(
-                    "Transaction CSV exported."
-                );
-
-            }
-        );
-
-
-    /* =====================================================
-       PAGINATION DEMO
-       ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".page-button"
-        )
-        .forEach(
-            function(button) {
-
-                button.addEventListener(
-                    "click",
-                    function() {
-
-                        if (
-                            button.id ===
-                            "previousPage"
-                        ) {
-
-                            showToast(
-                                "Previous page selected."
-                            );
-
-                            return;
-
-                        }
-
-
-                        const number =
-                            button.textContent
-                                .trim();
-
-
-                        if (
-                            number === "›"
-                        ) {
-
-                            showToast(
-                                "Next page selected."
-                            );
-
-                            return;
-
-                        }
-
-
-                        document
-                            .querySelectorAll(
-                                ".page-button"
-                            )
-                            .forEach(
-                                item =>
-                                    item.classList.remove(
-                                        "active"
-                                    )
-                            );
-
-
-                        button.classList.add(
-                            "active"
-                        );
-
-
-                        showToast(
-                            `Page ${number} selected.`
-                        );
-
-                    }
-                );
-
-            }
-        );
 
 
     /* =====================================================
@@ -3218,9 +4279,9 @@
             function() {
 
                 /*
-                 * Replace with the real Supabase
-                 * authentication sign-out flow
-                 * when authentication is connected.
+                 * Replace with the real authentication
+                 * sign-out flow when authentication is
+                 * connected to the backend.
                  */
 
                 window.location.href =
@@ -3231,14 +4292,34 @@
 
 
     /* =====================================================
-       INITIAL STATE
+       INITIALIZATION
        ===================================================== */
 
     document.addEventListener(
         "DOMContentLoaded",
         function() {
 
-            filterTransactions();
+            const firstSection =
+                document.querySelector(
+                    ".settings-section.active"
+                );
+
+
+            if (!firstSection) {
+
+                const firstButton =
+                    document.querySelector(
+                        ".settings-nav button"
+                    );
+
+
+                if (firstButton) {
+
+                    firstButton.click();
+
+                }
+
+            }
 
         }
     );
