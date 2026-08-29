@@ -10,12 +10,17 @@
 
   <meta
     name="description"
-    content="GTF Banking customer support and help center."
+    content="GTF Banking support center. Get help with your account, online banking, security, cards, transactions, and technical questions."
   >
 
   <meta
     name="theme-color"
-    content="#0b2a4a"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="color-scheme"
+    content="light"
   >
 
   <title>Support | GTF Banking</title>
@@ -26,17 +31,36 @@
   >
 
   <style>
+    /* =====================================================
+       GTF BANKING SUPPORT PAGE
+       File: frontend/support.html
+       ===================================================== */
+
     :root {
-      --gtf-navy: #0b2a4a;
-      --gtf-blue: #145da0;
-      --gtf-light-blue: #eaf3fb;
-      --gtf-background: #f5f8fb;
+      --gtf-green-950: #06261c;
+      --gtf-green-900: #0b3d2e;
+      --gtf-green-800: #0f513d;
+      --gtf-green-700: #167052;
+      --gtf-green-600: #198754;
+      --gtf-green-500: #20a66a;
+
+      --gtf-light: #f4f8f6;
+      --gtf-light-green: #e8f4ee;
+
       --gtf-white: #ffffff;
-      --gtf-text: #172b3a;
-      --gtf-muted: #66788a;
-      --gtf-border: #d9e2ea;
+      --gtf-text: #172b24;
+      --gtf-muted: #66766f;
+      --gtf-border: #d8e3de;
+
       --gtf-danger: #b42318;
+      --gtf-danger-bg: #fff1f0;
       --gtf-success: #16794c;
+      --gtf-success-bg: #effaf4;
+
+      --gtf-shadow:
+        0 12px 35px rgba(6, 38, 28, 0.08);
+
+      --gtf-radius: 12px;
     }
 
     * {
@@ -49,13 +73,21 @@
 
     body {
       margin: 0;
+      min-height: 100vh;
+
       font-family:
         Arial,
         Helvetica,
         sans-serif;
+
       color: var(--gtf-text);
-      background: var(--gtf-background);
+      background: var(--gtf-light);
+
       line-height: 1.6;
+    }
+
+    body.menu-open {
+      overflow: hidden;
     }
 
     a {
@@ -70,524 +102,1060 @@
       font: inherit;
     }
 
+    button,
+    a,
+    input,
+    select,
+    textarea {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(32, 166, 106, 0.35);
+      outline-offset: 3px;
+    }
+
+    /* =====================================================
+       SKIP LINK
+       ===================================================== */
+
+    .skip-link {
+      position: fixed;
+      left: 15px;
+      top: -100px;
+      z-index: 9999;
+
+      padding: 10px 15px;
+
+      background: var(--gtf-green-900);
+      color: white;
+
+      border-radius: 7px;
+      font-weight: 700;
+    }
+
+    .skip-link:focus {
+      top: 15px;
+    }
+
+    /* =====================================================
+       TOP BAR
+       ===================================================== */
+
     .topbar {
-      background: var(--gtf-navy);
+      background: var(--gtf-green-950);
       color: white;
     }
 
     .topbar-inner {
       max-width: 1200px;
       margin: auto;
+
       padding: 8px 20px;
+
       display: flex;
+      align-items: center;
       justify-content: flex-end;
+
       gap: 20px;
-      font-size: 0.88rem;
+
+      font-size: 0.84rem;
+    }
+
+    .topbar a {
+      color: #dceee6;
     }
 
     .topbar a:hover {
+      color: white;
       text-decoration: underline;
     }
 
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
     .site-header {
-      background: white;
-      border-bottom: 1px solid var(--gtf-border);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
+
+      background: rgba(255, 255, 255, 0.97);
+
+      border-bottom:
+        1px solid var(--gtf-border);
+
+      backdrop-filter: blur(10px);
     }
 
     .nav-container {
       max-width: 1200px;
       margin: auto;
-      padding: 14px 20px;
+
+      min-height: 74px;
+
+      padding: 12px 20px;
+
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 25px;
+
+      gap: 22px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      color: var(--gtf-navy);
-      font-weight: 700;
+
+      gap: 11px;
+
       flex-shrink: 0;
+
+      color: var(--gtf-green-900);
+      font-weight: 700;
     }
 
     .brand img {
       width: 46px;
       height: 46px;
+
       object-fit: contain;
     }
 
     .brand-text {
       display: flex;
       flex-direction: column;
-      line-height: 1.2;
+
+      line-height: 1.15;
     }
 
     .brand-name {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
     }
 
     .brand-subtitle {
+      margin-top: 3px;
+
       color: var(--gtf-muted);
-      font-size: 0.72rem;
+
+      font-size: 0.7rem;
       font-weight: 400;
     }
+
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
 
     .main-nav {
       display: flex;
       align-items: center;
-      gap: 18px;
+
+      gap: 17px;
+
+      margin-left: auto;
     }
 
     .main-nav a {
+      position: relative;
+
+      padding: 8px 2px;
+
       color: var(--gtf-text);
-      font-size: 0.92rem;
+
+      font-size: 0.9rem;
       font-weight: 600;
+
+      white-space: nowrap;
+    }
+
+    .main-nav a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+
+      height: 2px;
+
+      background: var(--gtf-green-600);
+
+      transform:
+        scaleX(0);
+
+      transform-origin: center;
+
+      transition:
+        transform 0.2s ease;
     }
 
     .main-nav a:hover,
     .main-nav a.active {
-      color: var(--gtf-blue);
+      color: var(--gtf-green-700);
     }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      transform: scaleX(1);
+    }
+
+    /* =====================================================
+       HEADER ACTIONS
+       ===================================================== */
 
     .header-actions {
       display: flex;
+      align-items: center;
       gap: 8px;
+
+      flex-shrink: 0;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 11px 17px;
+
+      min-height: 42px;
+
+      padding: 10px 16px;
+
       border-radius: 7px;
+
       font-weight: 700;
+      font-size: 0.88rem;
+
       border: 1px solid transparent;
-      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
     }
 
     .btn-primary {
-      background: var(--gtf-blue);
+      background: var(--gtf-green-700);
       color: white;
     }
 
     .btn-primary:hover {
-      background: var(--gtf-navy);
+      background: var(--gtf-green-900);
     }
 
     .btn-outline {
       background: white;
-      color: var(--gtf-blue);
-      border-color: var(--gtf-blue);
+      color: var(--gtf-green-700);
+
+      border-color:
+        var(--gtf-green-700);
     }
 
     .btn-outline:hover {
-      background: var(--gtf-light-blue);
+      background: var(--gtf-light-green);
     }
+
+    /* =====================================================
+       MOBILE MENU
+       ===================================================== */
 
     .menu-toggle {
       display: none;
+
+      margin-left: auto;
+
+      width: 44px;
+      height: 42px;
+
+      border:
+        1px solid var(--gtf-border);
+
+      border-radius: 7px;
+
       background: white;
-      border: 1px solid var(--gtf-border);
-      border-radius: 6px;
-      padding: 8px 11px;
+
+      color: var(--gtf-green-900);
+
       cursor: pointer;
+
+      font-size: 1.25rem;
     }
 
-    /* HERO */
+    /* =====================================================
+       HERO
+       ===================================================== */
 
     .support-hero {
       background:
         linear-gradient(
           135deg,
-          var(--gtf-navy),
-          var(--gtf-blue)
+          var(--gtf-green-950),
+          var(--gtf-green-900) 55%,
+          var(--gtf-green-700)
         );
+
       color: white;
     }
 
     .support-hero-inner {
       max-width: 1000px;
       margin: auto;
-      padding: 70px 20px;
+
+      padding:
+        78px 20px
+        82px;
+
       text-align: center;
+    }
+
+    .hero-label {
+      display: inline-flex;
+
+      padding: 6px 12px;
+
+      margin-bottom: 16px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.2);
+
+      border-radius: 999px;
+
+      background:
+        rgba(255, 255, 255, 0.08);
+
+      color: #dff4e9;
+
+      font-size: 0.8rem;
+      font-weight: 700;
     }
 
     .support-hero h1 {
-      margin: 0 0 15px;
-      font-size: clamp(
-        2.2rem,
-        5vw,
-        3.5rem
-      );
+      margin: 0 0 14px;
+
+      font-size:
+        clamp(2.2rem, 5vw, 3.5rem);
+
+      line-height: 1.12;
     }
 
     .support-hero p {
-      max-width: 700px;
+      max-width: 720px;
+
       margin: auto;
-      color: #e5eef6;
-      font-size: 1.05rem;
+
+      color: #dceee6;
+
+      font-size: 1.04rem;
     }
 
-    /* MAIN */
+    /* =====================================================
+       MAIN
+       ===================================================== */
 
     .support-main {
       max-width: 1200px;
+
       margin: auto;
-      padding: 55px 20px;
+
+      padding:
+        60px 20px 80px;
     }
 
     .section-heading {
+      max-width: 720px;
+
+      margin:
+        0 auto 34px;
+
       text-align: center;
-      max-width: 700px;
-      margin: 0 auto 35px;
     }
 
     .section-heading h2 {
-      color: var(--gtf-navy);
       margin: 0 0 8px;
+
+      color: var(--gtf-green-900);
+
       font-size: 2rem;
+      line-height: 1.2;
     }
 
     .section-heading p {
-      color: var(--gtf-muted);
       margin: 0;
+
+      color: var(--gtf-muted);
     }
 
-    /* QUICK HELP */
+    /* =====================================================
+       QUICK HELP
+       ===================================================== */
+
+    .help-section {
+      margin-bottom: 70px;
+    }
 
     .help-grid {
       display: grid;
+
       grid-template-columns:
         repeat(4, 1fr);
+
       gap: 18px;
-      margin-bottom: 65px;
     }
 
     .help-card {
-      background: white;
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+
+      min-height: 245px;
+
       padding: 25px;
-      transition: 0.2s ease;
+
+      background: white;
+
+      border:
+        1px solid var(--gtf-border);
+
+      border-radius:
+        var(--gtf-radius);
+
+      box-shadow:
+        0 4px 16px
+        rgba(6, 38, 28, 0.03);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .help-card:hover {
-      transform: translateY(-3px);
+      transform:
+        translateY(-4px);
+
       box-shadow:
-        0 8px 24px
-        rgba(11, 42, 74, 0.08);
+        var(--gtf-shadow);
     }
 
     .help-icon {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      margin-bottom: 15px;
+
       border-radius: 50%;
-      background: var(--gtf-light-blue);
-      color: var(--gtf-blue);
+
+      background:
+        var(--gtf-light-green);
+
+      color:
+        var(--gtf-green-700);
+
       font-weight: 800;
-      margin-bottom: 14px;
     }
 
     .help-card h3 {
       margin: 0 0 8px;
-      color: var(--gtf-navy);
+
+      color: var(--gtf-green-900);
+
+      font-size: 1.05rem;
     }
 
     .help-card p {
+      margin: 0 0 18px;
+
       color: var(--gtf-muted);
+
       font-size: 0.9rem;
-      margin-bottom: 15px;
     }
 
     .help-card a {
-      color: var(--gtf-blue);
+      margin-top: auto;
+
+      color: var(--gtf-green-700);
+
       font-weight: 700;
+      font-size: 0.88rem;
     }
 
-    /* FAQ */
+    .help-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* =====================================================
+       FAQ
+       ===================================================== */
 
     .faq-section {
-      margin-bottom: 65px;
+      margin-bottom: 70px;
     }
 
     .faq-list {
-      max-width: 850px;
+      max-width: 880px;
+
       margin: auto;
     }
 
     .faq-item {
-      background: white;
-      border: 1px solid var(--gtf-border);
-      border-radius: 8px;
       margin-bottom: 10px;
+
+      background: white;
+
+      border:
+        1px solid var(--gtf-border);
+
+      border-radius: 9px;
+
       overflow: hidden;
     }
 
     .faq-question {
       width: 100%;
-      border: 0;
-      background: white;
-      color: var(--gtf-navy);
-      padding: 18px 20px;
-      text-align: left;
-      font-weight: 700;
-      cursor: pointer;
+
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
       gap: 15px;
+
+      padding: 18px 20px;
+
+      border: 0;
+
+      background: white;
+
+      color: var(--gtf-green-900);
+
+      text-align: left;
+
+      font-weight: 700;
+
+      cursor: pointer;
     }
 
     .faq-question:hover {
-      background: var(--gtf-light-blue);
+      background:
+        var(--gtf-light-green);
     }
 
     .faq-icon {
-      font-size: 1.2rem;
-      color: var(--gtf-blue);
       flex-shrink: 0;
+
+      width: 28px;
+      height: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        var(--gtf-light-green);
+
+      color:
+        var(--gtf-green-700);
+
+      font-size: 1.1rem;
     }
 
     .faq-answer {
       display: none;
-      padding: 0 20px 18px;
+
+      padding:
+        0 20px 20px;
+
       color: var(--gtf-muted);
+
       font-size: 0.92rem;
+    }
+
+    .faq-answer p {
+      margin: 0;
     }
 
     .faq-item.open .faq-answer {
       display: block;
     }
 
-    /* CONTACT GRID */
+    /* =====================================================
+       CONTACT OPTIONS
+       ===================================================== */
 
     .contact-section {
-      margin-bottom: 65px;
+      margin-bottom: 70px;
     }
 
     .contact-grid {
       display: grid;
+
       grid-template-columns:
         repeat(3, 1fr);
+
       gap: 20px;
     }
 
     .contact-card {
-      background: white;
-      border: 1px solid var(--gtf-border);
-      border-radius: 10px;
       padding: 28px;
+
+      background: white;
+
+      border:
+        1px solid var(--gtf-border);
+
+      border-radius:
+        var(--gtf-radius);
+
       text-align: center;
     }
 
+    .contact-card-icon {
+      width: 45px;
+      height: 45px;
+
+      margin:
+        0 auto 14px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        var(--gtf-light-green);
+
+      color:
+        var(--gtf-green-700);
+
+      font-weight: 800;
+    }
+
     .contact-card h3 {
-      margin-top: 0;
-      color: var(--gtf-navy);
+      margin:
+        0 0 8px;
+
+      color:
+        var(--gtf-green-900);
     }
 
     .contact-card p {
-      color: var(--gtf-muted);
+      margin:
+        0 0 16px;
+
+      color:
+        var(--gtf-muted);
+
       font-size: 0.9rem;
     }
 
     .contact-card a {
-      color: var(--gtf-blue);
+      color:
+        var(--gtf-green-700);
+
       font-weight: 700;
     }
 
-    /* SUPPORT FORM */
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* =====================================================
+       SUPPORT FORM
+       ===================================================== */
 
     .form-section {
-      background: white;
-      border: 1px solid var(--gtf-border);
-      border-radius: 12px;
-      max-width: 850px;
+      max-width: 880px;
+
       margin: auto;
-      padding: 35px;
+
+      padding: 38px;
+
+      background: white;
+
+      border:
+        1px solid var(--gtf-border);
+
+      border-radius:
+        var(--gtf-radius);
+
+      box-shadow:
+        0 6px 25px
+        rgba(6, 38, 28, 0.04);
     }
 
     .form-section h2 {
-      color: var(--gtf-navy);
-      margin-top: 0;
+      margin:
+        0 0 7px;
+
+      color:
+        var(--gtf-green-900);
     }
 
     .form-section > p {
-      color: var(--gtf-muted);
+      margin:
+        0 0 25px;
+
+      color:
+        var(--gtf-muted);
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 18px;
     }
 
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 17px;
     }
 
     .form-group.full {
-      grid-column: 1 / -1;
+      grid-column:
+        1 / -1;
     }
 
     .form-group label {
       display: block;
-      font-weight: 700;
+
       margin-bottom: 7px;
+
+      color:
+        var(--gtf-text);
+
+      font-weight: 700;
     }
 
     .required {
-      color: var(--gtf-danger);
+      color:
+        var(--gtf-danger);
     }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      border: 1px solid var(--gtf-border);
+
+      padding:
+        12px 13px;
+
+      border:
+        1px solid var(--gtf-border);
+
       border-radius: 7px;
-      padding: 12px 13px;
+
       background: white;
-      color: var(--gtf-text);
+
+      color:
+        var(--gtf-text);
+
       outline: none;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .form-group textarea {
-      min-height: 145px;
+      min-height: 150px;
+
       resize: vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color:
+        #87958e;
     }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: var(--gtf-blue);
+      border-color:
+        var(--gtf-green-600);
+
       box-shadow:
         0 0 0 3px
-        rgba(20, 93, 160, 0.12);
+        rgba(25, 135, 84, 0.12);
     }
 
-    .form-submit {
-      width: 100%;
-      border: 0;
-      padding: 14px;
-      border-radius: 7px;
-      background: var(--gtf-blue);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .field-error {
+      margin-top: 5px;
 
-    .form-submit:hover {
-      background: var(--gtf-navy);
-    }
+      color:
+        var(--gtf-danger);
 
-    .form-submit:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
+      font-size: 0.78rem;
     }
 
     .form-message {
       display: none;
-      padding: 13px;
-      border-radius: 7px;
+
       margin-bottom: 20px;
+
+      padding: 13px 15px;
+
+      border-radius: 7px;
+
       font-size: 0.9rem;
     }
 
     .form-message.success {
       display: block;
-      color: var(--gtf-success);
-      background: #effaf4;
-      border: 1px solid #b8e2ca;
+
+      color:
+        var(--gtf-success);
+
+      background:
+        var(--gtf-success-bg);
+
+      border:
+        1px solid #b8e2ca;
     }
 
     .form-message.error {
       display: block;
-      color: var(--gtf-danger);
-      background: #fff1f0;
-      border: 1px solid #f3c7c3;
+
+      color:
+        var(--gtf-danger);
+
+      background:
+        var(--gtf-danger-bg);
+
+      border:
+        1px solid #f3c7c3;
+    }
+
+    .form-submit {
+      width: 100%;
+
+      min-height: 48px;
+
+      border: 0;
+
+      border-radius: 7px;
+
+      background:
+        var(--gtf-green-700);
+
+      color: white;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .form-submit:hover {
+      background:
+        var(--gtf-green-900);
+
+      transform:
+        translateY(-1px);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.65;
+
+      cursor:
+        not-allowed;
+
+      transform: none;
     }
 
     .privacy-note {
-      margin-top: 15px;
-      color: var(--gtf-muted);
-      font-size: 0.78rem;
+      margin:
+        15px 0 0;
+
+      color:
+        var(--gtf-muted);
+
+      font-size:
+        0.78rem;
     }
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer {
-      background: var(--gtf-navy);
+      margin-top: 0;
+
+      background:
+        var(--gtf-green-950);
+
       color: white;
-      margin-top: 60px;
     }
 
     .footer-container {
       max-width: 1200px;
+
       margin: auto;
-      padding: 45px 20px 20px;
+
+      padding:
+        48px 20px 30px;
+
       display: grid;
+
       grid-template-columns:
         1.4fr
         repeat(3, 1fr);
+
       gap: 30px;
     }
 
     .footer h3,
     .footer h4 {
-      margin-top: 0;
+      margin:
+        0 0 12px;
     }
 
-    .footer p,
-    .footer a {
-      color: #c9d6e1;
-    }
+    .footer p {
+      margin:
+        0 0 10px;
 
-    .footer a:hover {
-      color: white;
-      text-decoration: underline;
+      color:
+        #c9ddd4;
+
+      font-size:
+        0.88rem;
     }
 
     .footer-links {
       display: flex;
+
       flex-direction: column;
+
       gap: 8px;
+    }
+
+    .footer-links a {
+      color:
+        #c9ddd4;
+
+      font-size:
+        0.86rem;
+    }
+
+    .footer-links a:hover {
+      color: white;
+
+      text-decoration:
+        underline;
     }
 
     .footer-bottom {
       max-width: 1200px;
+
       margin: auto;
-      border-top: 1px solid
-        rgba(255,255,255,0.15);
-      padding: 18px 20px;
-      color: #c9d6e1;
-      font-size: 0.8rem;
+
+      padding:
+        18px 20px;
+
+      border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 20px;
+
       flex-wrap: wrap;
+
+      color:
+        #c9ddd4;
+
+      font-size:
+        0.78rem;
     }
 
-    @media (max-width: 950px) {
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 1100px) {
+
       .main-nav {
-        display: none;
+        gap: 12px;
       }
 
-      .menu-toggle {
-        display: block;
+      .main-nav a {
+        font-size: 0.84rem;
       }
 
       .help-grid {
         grid-template-columns:
           repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 900px) {
+
+      .main-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+      }
+
+      .main-nav.mobile-open {
+        position: absolute;
+
+        top: 74px;
+        left: 0;
+        right: 0;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        padding:
+          10px 20px 18px;
+
+        background: white;
+
+        border-bottom:
+          1px solid var(--gtf-border);
+
+        box-shadow:
+          0 12px 25px
+          rgba(6, 38, 28, 0.08);
+      }
+
+      .main-nav.mobile-open a {
+        padding: 12px 5px;
+      }
+
+      .main-nav a::after {
+        display: none;
+      }
+
+      .header-actions {
+        margin-left: 0;
       }
 
       .contact-grid {
@@ -598,27 +1166,61 @@
         grid-template-columns:
           repeat(2, 1fr);
       }
+
     }
 
     @media (max-width: 650px) {
+
       .topbar-inner {
         justify-content: center;
+
+        gap: 14px;
+
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .nav-container {
+        padding:
+          11px 15px;
+      }
+
+      .brand-name {
+        font-size:
+          1.05rem;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 42px;
       }
 
       .header-actions {
         display: none;
       }
 
-      .nav-container {
-        flex-wrap: wrap;
+      .menu-toggle {
+        margin-left: auto;
       }
 
-      .main-nav.mobile-open {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 12px;
+      .support-hero-inner {
+        padding:
+          55px 18px 60px;
+      }
+
+      .support-hero h1 {
+        font-size:
+          2.25rem;
+      }
+
+      .support-main {
+        padding:
+          45px 15px 60px;
+      }
+
+      .section-heading h2 {
+        font-size:
+          1.7rem;
       }
 
       .help-grid {
@@ -630,16 +1232,44 @@
       }
 
       .form-group.full {
-        grid-column: auto;
+        grid-column:
+          auto;
       }
 
       .form-section {
-        padding: 25px 18px;
+        padding:
+          25px 18px;
       }
 
       .footer-container {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
+
+        padding-top:
+          38px;
       }
+
+      .footer-bottom {
+        flex-direction:
+          column;
+      }
+
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior:
+          auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition:
+          none !important;
+      }
+
     }
   </style>
 </head>
@@ -647,8 +1277,20 @@
 <body>
 
   <!-- =====================================================
+       SKIP LINK
+       ===================================================== -->
+
+  <a
+    href="#main-content"
+    class="skip-link"
+  >
+    Skip to main content
+  </a>
+
+
+  <!-- =====================================================
        TOP BAR
-       ====================================================== -->
+       ===================================================== -->
 
   <div class="topbar">
 
@@ -673,7 +1315,7 @@
 
   <!-- =====================================================
        HEADER
-       ====================================================== -->
+       ===================================================== -->
 
   <header class="site-header">
 
@@ -712,6 +1354,7 @@
         class="menu-toggle"
         aria-label="Open navigation menu"
         aria-expanded="false"
+        aria-controls="mainNav"
       >
         ☰
       </button>
@@ -787,20 +1430,24 @@
 
   <!-- =====================================================
        HERO
-       ====================================================== -->
+       ===================================================== -->
 
   <section class="support-hero">
 
     <div class="support-hero-inner">
+
+      <div class="hero-label">
+        GTF Support Center
+      </div>
 
       <h1>
         How can we help?
       </h1>
 
       <p>
-        Find answers to common questions or contact
-        GTF Banking support for assistance with the
-        services available through this platform.
+        Find answers to common questions or submit a
+        support request for assistance with the services
+        available through GTF Banking.
       </p>
 
     </div>
@@ -809,17 +1456,23 @@
 
 
   <!-- =====================================================
-       MAIN CONTENT
-       ====================================================== -->
+       MAIN
+       ===================================================== -->
 
-  <main class="support-main">
+  <main
+    id="main-content"
+    class="support-main"
+  >
 
 
     <!-- ===================================================
          QUICK HELP
          ==================================================== -->
 
-    <section aria-labelledby="quick-help-title">
+    <section
+      class="help-section"
+      aria-labelledby="quick-help-title"
+    >
 
       <div class="section-heading">
 
@@ -838,7 +1491,10 @@
 
         <article class="help-card">
 
-          <div class="help-icon">
+          <div
+            class="help-icon"
+            aria-hidden="true"
+          >
             A
           </div>
 
@@ -847,8 +1503,8 @@
           </h3>
 
           <p>
-            Help with signing in, account registration,
-            and password recovery.
+            Get help with registration, signing in,
+            and account access.
           </p>
 
           <a href="login.html">
@@ -860,7 +1516,10 @@
 
         <article class="help-card">
 
-          <div class="help-icon">
+          <div
+            class="help-icon"
+            aria-hidden="true"
+          >
             C
           </div>
 
@@ -869,7 +1528,7 @@
           </h3>
 
           <p>
-            Learn about card services and available
+            Learn about available card services and
             card-related features.
           </p>
 
@@ -882,7 +1541,10 @@
 
         <article class="help-card">
 
-          <div class="help-icon">
+          <div
+            class="help-icon"
+            aria-hidden="true"
+          >
             T
           </div>
 
@@ -891,8 +1553,8 @@
           </h3>
 
           <p>
-            Find information about supported account
-            transactions and activity.
+            Review information about supported account
+            transactions and account activity.
           </p>
 
           <a href="dashboard/transactions.html">
@@ -904,7 +1566,10 @@
 
         <article class="help-card">
 
-          <div class="help-icon">
+          <div
+            class="help-icon"
+            aria-hidden="true"
+          >
             S
           </div>
 
@@ -913,8 +1578,8 @@
           </h3>
 
           <p>
-            Learn about account security and responsible
-            protection of your account information.
+            Review account security information and
+            responsible account-protection guidance.
           </p>
 
           <a href="pages/security.html">
@@ -944,8 +1609,7 @@
         </h2>
 
         <p>
-          Answers to some common questions about
-          GTF Banking.
+          Answers to some common GTF Banking questions.
         </p>
 
       </div>
@@ -953,12 +1617,14 @@
 
       <div class="faq-list">
 
+
         <div class="faq-item">
 
           <button
-            class="faq-question"
             type="button"
+            class="faq-question"
             aria-expanded="false"
+            aria-controls="faq-answer-1"
           >
 
             <span>
@@ -974,12 +1640,16 @@
 
           </button>
 
-          <div class="faq-answer">
+          <div
+            id="faq-answer-1"
+            class="faq-answer"
+            hidden
+          >
 
             <p>
               Select "Open an Account" and complete the
               registration form. Account creation may
-              require email verification and additional
+              require email verification and other
               applicable requirements.
             </p>
 
@@ -991,9 +1661,10 @@
         <div class="faq-item">
 
           <button
-            class="faq-question"
             type="button"
+            class="faq-question"
             aria-expanded="false"
+            aria-controls="faq-answer-2"
           >
 
             <span>
@@ -1009,12 +1680,16 @@
 
           </button>
 
-          <div class="faq-answer">
+          <div
+            id="faq-answer-2"
+            class="faq-answer"
+            hidden
+          >
 
             <p>
-              Go to the sign-in page and use the password
-              recovery option. Follow the instructions
-              provided for your account.
+              Go to the sign-in page and use the available
+              password recovery option. Follow the
+              instructions provided for your account.
             </p>
 
           </div>
@@ -1025,9 +1700,10 @@
         <div class="faq-item">
 
           <button
-            class="faq-question"
             type="button"
+            class="faq-question"
             aria-expanded="false"
+            aria-controls="faq-answer-3"
           >
 
             <span>
@@ -1043,7 +1719,11 @@
 
           </button>
 
-          <div class="faq-answer">
+          <div
+            id="faq-answer-3"
+            class="faq-answer"
+            hidden
+          >
 
             <p>
               Select "Sign In" from the website navigation
@@ -1058,9 +1738,10 @@
         <div class="faq-item">
 
           <button
-            class="faq-question"
             type="button"
+            class="faq-question"
             aria-expanded="false"
+            aria-controls="faq-answer-4"
           >
 
             <span>
@@ -1076,7 +1757,11 @@
 
           </button>
 
-          <div class="faq-answer">
+          <div
+            id="faq-answer-4"
+            class="faq-answer"
+            hidden
+          >
 
             <p>
               Authenticated customers can access the
@@ -1093,9 +1778,10 @@
         <div class="faq-item">
 
           <button
-            class="faq-question"
             type="button"
+            class="faq-question"
             aria-expanded="false"
+            aria-controls="faq-answer-5"
           >
 
             <span>
@@ -1111,12 +1797,16 @@
 
           </button>
 
-          <div class="faq-answer">
+          <div
+            id="faq-answer-5"
+            class="faq-answer"
+            hidden
+          >
 
             <p>
-              You can submit the support form below or
-              use the contact page for the available
-              support channels.
+              Submit the support request form below or
+              visit the contact page for the available
+              communication options.
             </p>
 
           </div>
@@ -1127,9 +1817,10 @@
         <div class="faq-item">
 
           <button
-            class="faq-question"
             type="button"
+            class="faq-question"
             aria-expanded="false"
+            aria-controls="faq-answer-6"
           >
 
             <span>
@@ -1145,18 +1836,23 @@
 
           </button>
 
-          <div class="faq-answer">
+          <div
+            id="faq-answer-6"
+            class="faq-answer"
+            hidden
+          >
 
             <p>
               The platform uses authentication and
-              authorization controls to protect access.
-              Never share your password or authentication
-              codes with another person.
+              authorization controls to help protect
+              account access. Never share your password
+              or authentication codes with another person.
             </p>
 
           </div>
 
         </div>
+
 
       </div>
 
@@ -1187,7 +1883,15 @@
 
       <div class="contact-grid">
 
+
         <article class="contact-card">
+
+          <div
+            class="contact-card-icon"
+            aria-hidden="true"
+          >
+            ?
+          </div>
 
           <h3>
             General Support
@@ -1207,6 +1911,13 @@
 
         <article class="contact-card">
 
+          <div
+            class="contact-card-icon"
+            aria-hidden="true"
+          >
+            S
+          </div>
+
           <h3>
             Security
           </h3>
@@ -1225,12 +1936,19 @@
 
         <article class="contact-card">
 
+          <div
+            class="contact-card-icon"
+            aria-hidden="true"
+          >
+            C
+          </div>
+
           <h3>
             Contact
           </h3>
 
           <p>
-            Find the available contact information and
+            Find available contact information and
             communication options.
           </p>
 
@@ -1239,6 +1957,7 @@
           </a>
 
         </article>
+
 
       </div>
 
@@ -1252,39 +1971,49 @@
     <section
       id="support-form"
       class="form-section"
-      aria-labelledby="form-title"
+      aria-labelledby="support-form-title"
     >
 
-      <h2 id="form-title">
+      <h2 id="support-form-title">
         Submit a support request
       </h2>
 
       <p>
-        Provide the information below and describe how
-        we can assist you.
+        Tell us what you need help with. Please do not
+        include passwords or authentication codes.
       </p>
 
 
       <div
         id="formMessage"
         class="form-message"
-        role="alert"
+        role="status"
         aria-live="polite"
+        aria-atomic="true"
       ></div>
 
 
       <form
         id="supportForm"
+        aria-label="GTF Banking support request"
         novalidate
       >
 
         <div class="form-grid">
 
+
+          <!-- NAME -->
+
           <div class="form-group">
 
             <label for="supportName">
               Full name
-              <span class="required">*</span>
+              <span
+                class="required"
+                aria-hidden="true"
+              >
+                *
+              </span>
             </label>
 
             <input
@@ -1294,16 +2023,25 @@
               autocomplete="name"
               maxlength="120"
               required
+              aria-required="true"
+              placeholder="Enter your full name"
             >
 
           </div>
 
 
+          <!-- EMAIL -->
+
           <div class="form-group">
 
             <label for="supportEmail">
               Email address
-              <span class="required">*</span>
+              <span
+                class="required"
+                aria-hidden="true"
+              >
+                *
+              </span>
             </label>
 
             <input
@@ -1311,24 +2049,35 @@
               name="email"
               type="email"
               autocomplete="email"
+              inputmode="email"
               maxlength="254"
               required
+              aria-required="true"
+              placeholder="you@example.com"
             >
 
           </div>
 
 
+          <!-- CATEGORY -->
+
           <div class="form-group">
 
             <label for="supportCategory">
-              Category
-              <span class="required">*</span>
+              Support category
+              <span
+                class="required"
+                aria-hidden="true"
+              >
+                *
+              </span>
             </label>
 
             <select
               id="supportCategory"
               name="category"
               required
+              aria-required="true"
             >
 
               <option
@@ -1372,11 +2121,18 @@
           </div>
 
 
+          <!-- SUBJECT -->
+
           <div class="form-group">
 
             <label for="supportSubject">
               Subject
-              <span class="required">*</span>
+              <span
+                class="required"
+                aria-hidden="true"
+              >
+                *
+              </span>
             </label>
 
             <input
@@ -1385,27 +2141,39 @@
               type="text"
               maxlength="160"
               required
+              aria-required="true"
+              placeholder="Briefly describe your request"
             >
 
           </div>
 
 
+          <!-- MESSAGE -->
+
           <div class="form-group full">
 
             <label for="supportMessage">
               Message
-              <span class="required">*</span>
+              <span
+                class="required"
+                aria-hidden="true"
+              >
+                *
+              </span>
             </label>
 
             <textarea
               id="supportMessage"
               name="message"
               maxlength="3000"
+              minlength="10"
               required
+              aria-required="true"
               placeholder="Describe your question or issue..."
             ></textarea>
 
           </div>
+
 
         </div>
 
@@ -1420,9 +2188,9 @@
 
 
         <p class="privacy-note">
-          Do not include passwords, authentication codes,
-          full payment-card numbers, or other sensitive
-          credentials in your support request.
+          For your security, do not include passwords,
+          authentication codes, full payment-card numbers,
+          PINs, or other sensitive credentials in this form.
         </p>
 
       </form>
@@ -1434,11 +2202,12 @@
 
   <!-- =====================================================
        FOOTER
-       ====================================================== -->
+       ===================================================== -->
 
   <footer class="footer">
 
     <div class="footer-container">
+
 
       <div>
 
@@ -1540,6 +2309,7 @@
 
       </div>
 
+
     </div>
 
 
@@ -1562,8 +2332,18 @@
 
 
   <!-- =====================================================
-       PAGE SCRIPT
-       ====================================================== -->
+       APPLICATION SCRIPT
+       ===================================================== -->
+
+  <script
+    src="js/app.js"
+    defer
+  ></script>
+
+
+  <!-- =====================================================
+       SUPPORT PAGE SCRIPT
+       ===================================================== -->
 
   <script>
     "use strict";
@@ -1571,7 +2351,7 @@
 
     /* =====================================================
        YEAR
-       ====================================================== */
+       ===================================================== */
 
     const currentYear =
       document.getElementById(
@@ -1579,14 +2359,16 @@
       );
 
     if (currentYear) {
+
       currentYear.textContent =
         new Date().getFullYear();
+
     }
 
 
     /* =====================================================
-       MOBILE MENU
-       ====================================================== */
+       MOBILE NAVIGATION
+       ===================================================== */
 
     const menuToggle =
       document.getElementById(
@@ -1599,6 +2381,33 @@
       );
 
 
+    function closeMobileMenu() {
+
+      if (!mainNav || !menuToggle) {
+        return;
+      }
+
+      mainNav.classList.remove(
+        "mobile-open"
+      );
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      menuToggle.setAttribute(
+        "aria-label",
+        "Open navigation menu"
+      );
+
+      document.body.classList.remove(
+        "menu-open"
+      );
+
+    }
+
+
     if (
       menuToggle &&
       mainNav
@@ -1608,15 +2417,60 @@
         "click",
         function () {
 
-          const open =
+          const isOpen =
             mainNav.classList.toggle(
               "mobile-open"
             );
 
+
           menuToggle.setAttribute(
             "aria-expanded",
-            String(open)
+            String(isOpen)
           );
+
+
+          menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+              ? "Close navigation menu"
+              : "Open navigation menu"
+          );
+
+
+          document.body.classList.toggle(
+            "menu-open",
+            isOpen
+          );
+
+        }
+      );
+
+
+      mainNav
+        .querySelectorAll("a")
+        .forEach(
+          function (link) {
+
+            link.addEventListener(
+              "click",
+              closeMobileMenu
+            );
+
+          }
+        );
+
+
+      window.addEventListener(
+        "resize",
+        function () {
+
+          if (
+            window.innerWidth > 900
+          ) {
+
+            closeMobileMenu();
+
+          }
 
         }
       );
@@ -1625,8 +2479,8 @@
 
 
     /* =====================================================
-       FAQ
-       ====================================================== */
+       FAQ ACCORDION
+       ===================================================== */
 
     const faqQuestions =
       document.querySelectorAll(
@@ -1646,16 +2500,104 @@
                 ".faq-item"
               );
 
-            const isOpen =
-              item.classList.toggle(
-                "open"
+            const answerId =
+              button.getAttribute(
+                "aria-controls"
               );
+
+            const answer =
+              document.getElementById(
+                answerId
+              );
+
+            const isOpen =
+              button.getAttribute(
+                "aria-expanded"
+              ) === "true";
+
+
+            /*
+             * Close other FAQ items.
+             */
+
+            faqQuestions.forEach(
+              function (otherButton) {
+
+                if (
+                  otherButton !== button
+                ) {
+
+                  otherButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                  );
+
+
+                  const otherAnswerId =
+                    otherButton.getAttribute(
+                      "aria-controls"
+                    );
+
+
+                  const otherAnswer =
+                    document.getElementById(
+                      otherAnswerId
+                    );
+
+
+                  if (otherAnswer) {
+
+                    otherAnswer.hidden =
+                      true;
+
+                  }
+
+
+                  const otherIcon =
+                    otherButton.querySelector(
+                      ".faq-icon"
+                    );
+
+
+                  if (otherIcon) {
+
+                    otherIcon.textContent =
+                      "+";
+
+                  }
+
+                }
+
+              }
+            );
+
+
+            const newState =
+              !isOpen;
 
 
             button.setAttribute(
               "aria-expanded",
-              String(isOpen)
+              String(newState)
             );
+
+
+            if (answer) {
+
+              answer.hidden =
+                !newState;
+
+            }
+
+
+            if (item) {
+
+              item.classList.toggle(
+                "open",
+                newState
+              );
+
+            }
 
 
             const icon =
@@ -1667,7 +2609,7 @@
             if (icon) {
 
               icon.textContent =
-                isOpen
+                newState
                   ? "−"
                   : "+";
 
@@ -1682,7 +2624,7 @@
 
     /* =====================================================
        SUPPORT FORM
-       ====================================================== */
+       ===================================================== */
 
     const supportForm =
       document.getElementById(
@@ -1705,159 +2647,267 @@
       type
     ) {
 
+      if (!formMessage) {
+        return;
+      }
+
       formMessage.textContent =
         text;
 
       formMessage.className =
         "form-message " + type;
 
+      formMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+
     }
 
 
-    supportForm.addEventListener(
-      "submit",
-      async function (event) {
+    function clearFormMessage() {
 
-        event.preventDefault();
+      if (!formMessage) {
+        return;
+      }
 
+      formMessage.textContent =
+        "";
 
-        const name =
-          document.getElementById(
-            "supportName"
-          ).value.trim();
+      formMessage.className =
+        "form-message";
 
-
-        const email =
-          document.getElementById(
-            "supportEmail"
-          ).value.trim()
-            .toLowerCase();
+    }
 
 
-        const category =
-          document.getElementById(
-            "supportCategory"
-          ).value;
+    function getField(
+      id
+    ) {
+
+      return document.getElementById(
+        id
+      );
+
+    }
 
 
-        const subject =
-          document.getElementById(
-            "supportSubject"
-          ).value.trim();
+    function validateSupportForm() {
+
+      const name =
+        getField(
+          "supportName"
+        );
+
+      const email =
+        getField(
+          "supportEmail"
+        );
+
+      const category =
+        getField(
+          "supportCategory"
+        );
+
+      const subject =
+        getField(
+          "supportSubject"
+        );
+
+      const message =
+        getField(
+          "supportMessage"
+        );
 
 
-        const supportMessage =
-          document.getElementById(
-            "supportMessage"
-          ).value.trim();
+      if (!name.value.trim()) {
+
+        name.focus();
+
+        return "Please enter your full name.";
+
+      }
 
 
-        if (!name) {
+      if (
+        name.value.trim().length < 2
+      ) {
 
-          showFormMessage(
-            "Please enter your name.",
-            "error"
-          );
+        name.focus();
 
-          return;
+        return "Please enter a valid name.";
 
-        }
-
-
-        if (
-          !email ||
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-            email
-          )
-        ) {
-
-          showFormMessage(
-            "Please enter a valid email address.",
-            "error"
-          );
-
-          return;
-
-        }
+      }
 
 
-        if (!category) {
+      if (
+        !email.value.trim() ||
+        !email.checkValidity()
+      ) {
 
-          showFormMessage(
-            "Please select a support category.",
-            "error"
-          );
+        email.focus();
 
-          return;
+        return "Please enter a valid email address.";
 
-        }
-
-
-        if (!subject) {
-
-          showFormMessage(
-            "Please enter a subject.",
-            "error"
-          );
-
-          return;
-
-        }
+      }
 
 
-        if (
-          supportMessage.length < 10
-        ) {
+      if (!category.value) {
 
-          showFormMessage(
-            "Please provide more information about your request.",
-            "error"
-          );
+        category.focus();
 
-          return;
+        return "Please select a support category.";
 
-        }
+      }
 
 
-        supportSubmit.disabled =
-          true;
+      if (!subject.value.trim()) {
 
-        supportSubmit.textContent =
-          "Submitting...";
+        subject.focus();
 
+        return "Please enter a subject.";
 
-        const requestData = {
-
-          name,
-
-          email,
-
-          category,
-
-          subject,
-
-          message: supportMessage
-
-        };
+      }
 
 
-        try {
+      if (
+        subject.value.trim().length < 3
+      ) {
 
-          /*
-           * Preferred application integration.
-           *
-           * app.js can expose:
-           *
-           * window.gtfSubmitSupportRequest(data)
-           *
-           * The backend should validate the request,
-           * apply rate limits, and store it in Supabase.
-           */
+        subject.focus();
 
-          if (
-            typeof window.gtfSubmitSupportRequest ===
-            "function"
-          ) {
+        return "Please provide a more specific subject.";
+
+      }
+
+
+      if (!message.value.trim()) {
+
+        message.focus();
+
+        return "Please describe your question or issue.";
+
+      }
+
+
+      if (
+        message.value.trim().length < 10
+      ) {
+
+        message.focus();
+
+        return "Please provide more information about your request.";
+
+      }
+
+
+      return null;
+
+    }
+
+
+    if (supportForm) {
+
+      supportForm.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+          clearFormMessage();
+
+
+          const validationError =
+            validateSupportForm();
+
+
+          if (validationError) {
+
+            showFormMessage(
+              validationError,
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          const name =
+            getField(
+              "supportName"
+            ).value.trim();
+
+
+          const email =
+            getField(
+              "supportEmail"
+            ).value.trim()
+              .toLowerCase();
+
+
+          const category =
+            getField(
+              "supportCategory"
+            ).value;
+
+
+          const subject =
+            getField(
+              "supportSubject"
+            ).value.trim();
+
+
+          const supportMessage =
+            getField(
+              "supportMessage"
+            ).value.trim();
+
+
+          const requestData = {
+
+            name,
+
+            email,
+
+            category,
+
+            subject,
+
+            message:
+              supportMessage
+
+          };
+
+
+          supportSubmit.disabled =
+            true;
+
+          supportSubmit.textContent =
+            "Submitting...";
+
+
+          try {
+
+            /*
+             * app.js should expose:
+             *
+             * window.gtfSubmitSupportRequest(data)
+             *
+             * That function should perform the
+             * authenticated/backend request.
+             */
+
+            if (
+              typeof window.gtfSubmitSupportRequest !==
+              "function"
+            ) {
+
+              throw new Error(
+                "Support service is not connected."
+              );
+
+            }
+
 
             const result =
               await window.gtfSubmitSupportRequest(
@@ -1888,54 +2938,59 @@
             supportForm.reset();
 
 
-          } else {
+          } catch (error) {
 
-            /*
-             * Do not pretend the request was sent if
-             * the backend integration has not been added.
-             */
+            console.error(
+              "GTF support request error:",
+              error
+            );
+
 
             showFormMessage(
-              "The support service is not connected yet. Connect this form to your backend support endpoint before using it in production.",
+              error?.message &&
+              error.message !==
+                "Support service is not connected."
+                ? error.message
+                : "We could not submit your support request. Please try again.",
               "error"
             );
 
+          } finally {
+
+            supportSubmit.disabled =
+              false;
+
+            supportSubmit.textContent =
+              "Submit Support Request";
+
           }
 
+        }
+      );
 
-        } catch (error) {
-
-          console.error(
-            "Support request error:",
-            error
-          );
+    }
 
 
-          showFormMessage(
-            "We could not submit your support request. Please try again.",
-            "error"
-          );
+    /* =====================================================
+       ESCAPE KEY
+       ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeMobileMenu();
 
         }
-
-
-        supportSubmit.disabled =
-          false;
-
-        supportSubmit.textContent =
-          "Submit Support Request";
 
       }
     );
 
   </script>
-
-
-  <!-- Existing application JavaScript -->
-  <script
-    src="js/app.js"
-    defer
-  ></script>
 
 </body>
 </html>
