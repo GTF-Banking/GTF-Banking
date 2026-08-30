@@ -1,18 +1,28 @@
 /* =========================================================
    GLOBAL TRUSTFUND
    ROLE GUARD
+
+   File:
    frontend/js/role-guard.js
 
-   Protects frontend portal pages according to the user's
-   authenticated role.
+   Purpose:
+   - Protect authenticated pages
+   - Protect portal folders by role
+   - Redirect unauthenticated users to login
+   - Redirect unauthorized users away from restricted pages
+   - Highlight the current portal
+   - Handle logout links
+   - Prevent accidental access to another portal
 
-   IMPORTANT:
-   This is a frontend navigation guard only.
-   Real authorization MUST also be enforced by the backend
-   and database/RLS policies.
+   Depends on:
+   ../js/api.js
+   ../js/auth.js
+   ../js/app.js
+
    ========================================================= */
 
 (function (window, document) {
+
   "use strict";
 
 
@@ -20,90 +30,173 @@
      CONFIGURATION
      ======================================================= */
 
-  const PORTALS = {
-    customer: {
-      roles: [
-        "customer",
-        "user",
-        "client"
-      ],
-      dashboard:
-        "../customer/dashboard.html",
-      login:
-        "../login.html"
-    },
+  const CONFIG = {
 
-    cashier: {
-      roles: [
-        "cashier"
-      ],
-      dashboard:
-        "../cashier/index.html",
-      login:
-        "../login.html"
-    },
+    login:
+      "/login.html",
 
-    manager: {
-      roles: [
-        "manager"
-      ],
-      dashboard:
-        "../manager/index.html",
-      login:
-        "../login.html"
-    },
+    home:
+      "/index.html",
 
-    admin: {
-      roles: [
-        "admin",
-        "administrator"
-      ],
-      dashboard:
-        "../admin/index.html",
-      login:
-        "../login.html"
-    }
+    customer:
+      "/customer/index.html",
+
+    admin:
+      "/admin/index.html",
+
+    manager:
+      "/manager/index.html",
+
+    cashier:
+      "/cashier/index.html",
+
+    dashboard:
+      "/dashboard/index.html",
+
+    unauthorized:
+      "/index.html"
   };
 
 
   /* =======================================================
-     ROLE NORMALIZATION
+     ROLE DEFINITIONS
+     ======================================================= */
+
+  const ROLES = {
+
+    CUSTOMER: [
+      "customer",
+      "client",
+      "user"
+    ],
+
+    ADMIN: [
+      "admin",
+      "administrator",
+      "superadmin"
+    ],
+
+    MANAGER: [
+      "manager",
+      "branchmanager"
+    ],
+
+    CASHIER: [
+      "cashier",
+      "teller"
+    ]
+  };
+
+
+  /* =======================================================
+     NORMALIZE ROLE
      ======================================================= */
 
   function normalizeRole(role) {
 
-    if (
-      role === null ||
-      role === undefined
-    ) {
-      return "";
+    if (!role) {
+      return null;
     }
-
-
-    if (
-      typeof role === "object"
-    ) {
-
-      role =
-        role.name ||
-        role.slug ||
-        role.role ||
-        role.type ||
-        "";
-    }
-
 
     return String(role)
       .trim()
-      .toLowerCase();
+      .toLowerCase()
+      .replace(/[\s_-]+/g, "");
   }
 
 
   /* =======================================================
-     DETECT CURRENT PORTAL
+     GET CURRENT USER
      ======================================================= */
 
-  function detectPortal() {
+  function getUser() {
+
+    if (
+      window.GTF_AUTH &&
+      typeof GTF_AUTH.getUser ===
+        "function"
+    ) {
+
+      return GTF_AUTH.getUser();
+    }
+
+    try {
+
+      const value =
+        localStorage.getItem(
+          "gtf_user"
+        );
+
+      return value
+        ? JSON.parse(value)
+        : null;
+
+    } catch {
+
+      return null;
+    }
+  }
+
+
+  /* =======================================================
+     GET CURRENT ROLE
+     ======================================================= */
+
+  function getRole() {
+
+    const user =
+      getUser();
+
+
+    if (!user) {
+      return null;
+    }
+
+
+    return normalizeRole(
+      user.role ||
+      user.user_role ||
+      user.account_role ||
+      user.userRole ||
+      user.role_name ||
+      user.roleName ||
+      null
+    );
+  }
+
+
+  /* =======================================================
+     ROLE MATCH
+     ======================================================= */
+
+  function roleMatches(
+    role,
+    allowedRoles
+  ) {
+
+    const normalized =
+      normalizeRole(role);
+
+
+    if (!normalized) {
+      return false;
+    }
+
+
+    return allowedRoles.some(
+      (allowed) =>
+        normalizeRole(
+          allowed
+        ) === normalized
+    );
+  }
+
+
+  /* =======================================================
+     DETERMINE PORTAL
+     ======================================================= */
+
+  function getPortalFromPath() {
 
     const path =
       window.location.pathname
@@ -111,41 +204,42 @@
 
 
     if (
-      path.includes(
-        "/admin/"
-      )
+      /\/admin(?:\/|$)/.test(path)
     ) {
+
       return "admin";
     }
 
 
     if (
-      path.includes(
-        "/manager/"
-      )
+      /\/manager(?:\/|$)/.test(path)
     ) {
+
       return "manager";
     }
 
 
     if (
-      path.includes(
-        "/cashier/"
-      )
+      /\/cashier(?:\/|$)/.test(path)
     ) {
+
       return "cashier";
     }
 
 
     if (
-      path.includes(
-        "/customer/"
-      ) ||
-      path.includes(
-        "/dashboard/"
-      )
+      /\/customer(?:\/|$)/.test(path)
     ) {
+
       return "customer";
+    }
+
+
+    if (
+      /\/dashboard(?:\/|$)/.test(path)
+    ) {
+
+      return "dashboard";
     }
 
 
@@ -154,33 +248,163 @@
 
 
   /* =======================================================
-     CHECK ROLE
+     PORTAL FOR ROLE
      ======================================================= */
 
-  function roleAllowed(
-    role,
-    portal
+  function getPortalForRole(
+    role
   ) {
 
     const normalized =
       normalizeRole(role);
 
 
-    const configuration =
-      PORTALS[portal];
-
-
     if (
-      !configuration
+      ROLES.ADMIN.includes(
+        normalized
+      )
     ) {
-      return false;
+
+      return "admin";
     }
 
 
-    return configuration.roles
-      .includes(
+    if (
+      ROLES.MANAGER.includes(
         normalized
+      )
+    ) {
+
+      return "manager";
+    }
+
+
+    if (
+      ROLES.CASHIER.includes(
+        normalized
+      )
+    ) {
+
+      return "cashier";
+    }
+
+
+    if (
+      ROLES.CUSTOMER.includes(
+        normalized
+      )
+    ) {
+
+      return "customer";
+    }
+
+
+    return "dashboard";
+  }
+
+
+  /* =======================================================
+     PORTAL URL
+     ======================================================= */
+
+  function getPortalURL(
+    portal
+  ) {
+
+    switch (
+      String(portal || "")
+        .toLowerCase()
+    ) {
+
+      case "admin":
+        return CONFIG.admin;
+
+      case "manager":
+        return CONFIG.manager;
+
+      case "cashier":
+        return CONFIG.cashier;
+
+      case "customer":
+        return CONFIG.customer;
+
+      case "dashboard":
+        return CONFIG.dashboard;
+
+      default:
+        return CONFIG.home;
+    }
+  }
+
+
+  /* =======================================================
+     STORE ORIGINAL URL
+     ======================================================= */
+
+  function storeRequestedURL() {
+
+    try {
+
+      localStorage.setItem(
+        "gtf_redirect",
+        window.location.href
       );
+
+    } catch {
+      /* Ignore storage errors. */
+    }
+  }
+
+
+  /* =======================================================
+     CLEAR ORIGINAL URL
+     ======================================================= */
+
+  function clearRequestedURL() {
+
+    try {
+
+      localStorage.removeItem(
+        "gtf_redirect"
+      );
+
+    } catch {
+      /* Ignore storage errors. */
+    }
+  }
+
+
+  /* =======================================================
+     AUTHENTICATION CHECK
+     ======================================================= */
+
+  function isAuthenticated() {
+
+    if (
+      window.GTF_AUTH &&
+      typeof GTF_AUTH.isAuthenticated ===
+        "function"
+    ) {
+
+      return GTF_AUTH.isAuthenticated();
+    }
+
+
+    try {
+
+      return Boolean(
+        localStorage.getItem(
+          "gtf_token"
+        ) ||
+        localStorage.getItem(
+          "gtf_user"
+        )
+      );
+
+    } catch {
+
+      return false;
+    }
   }
 
 
@@ -190,37 +414,10 @@
 
   function redirectToLogin() {
 
-    const portal =
-      detectPortal();
-
-
-    const configuration =
-      PORTALS[portal] ||
-      PORTALS.customer;
-
-
-    const current =
-      window.location.pathname;
-
-
-    const query =
-      new URLSearchParams();
-
-
-    query.set(
-      "redirect",
-      current
-    );
-
-
-    query.set(
-      "message",
-      "Please sign in to continue."
-    );
-
+    storeRequestedURL();
 
     window.location.href =
-      `${configuration.login}?${query.toString()}`;
+      CONFIG.login;
   }
 
 
@@ -232,264 +429,227 @@
     role
   ) {
 
-    const normalized =
-      normalizeRole(role);
+    const portal =
+      getPortalForRole(
+        role
+      );
 
 
-    if (
-      normalized ===
-        "admin" ||
-      normalized ===
-        "administrator"
-    ) {
-
-      window.location.href =
-        "../admin/index.html";
-
-      return;
-    }
-
-
-    if (
-      normalized ===
-      "manager"
-    ) {
-
-      window.location.href =
-        "../manager/index.html";
-
-      return;
-    }
-
-
-    if (
-      normalized ===
-      "cashier"
-    ) {
-
-      window.location.href =
-        "../cashier/index.html";
-
-      return;
-    }
+    const destination =
+      getPortalURL(
+        portal
+      );
 
 
     window.location.href =
-      "../customer/dashboard.html";
+      destination;
   }
 
 
   /* =======================================================
-     GET STORED ROLE
+     SHOW ACCESS DENIED
      ======================================================= */
 
-  function getStoredRole() {
+  function showAccessDenied() {
 
-    if (
-      !window.GTF_AUTH
-    ) {
-      return "";
+    const message =
+      document.querySelector(
+        "[data-access-denied]"
+      );
+
+
+    if (message) {
+
+      message.hidden =
+        false;
+
+      message.textContent =
+        "You do not have permission to access this area.";
+
+      return;
     }
 
 
-    return normalizeRole(
-      GTF_AUTH.getStoredRole()
-    );
+    /*
+     * If the page does not contain a dedicated
+     * access-denied element, redirect to the
+     * user's legitimate portal.
+     */
+
+    const role =
+      getRole();
+
+
+    if (role) {
+
+      redirectToCorrectPortal(
+        role
+      );
+
+    } else {
+
+      window.location.href =
+        CONFIG.home;
+    }
   }
 
 
   /* =======================================================
-     VERIFY ACCESS
+     PROTECT CURRENT PAGE
      ======================================================= */
 
-  async function verify(
-    portal = null
+  function protect(
+    requiredRoles = null,
+    options = {}
   ) {
 
-    portal =
-      portal ||
-      detectPortal();
+    const {
+
+      redirectUnauthorized =
+        true,
+
+      redirectUnauthenticated =
+        true,
+
+      allowChildRoles =
+        false
+
+    } = options;
 
 
     /*
-     * If this isn't a protected portal page,
-     * there is nothing to guard.
+     * Step 1:
+     * Authentication
      */
-    if (!portal) {
+
+    if (
+      !isAuthenticated()
+    ) {
+
+      if (
+        redirectUnauthenticated
+      ) {
+
+        redirectToLogin();
+      }
+
+      return false;
+    }
+
+
+    /*
+     * Step 2:
+     * If there is no role requirement,
+     * authentication alone is sufficient.
+     */
+
+    if (
+      !requiredRoles
+    ) {
+
+      return true;
+    }
+
+
+    const roles =
+      Array.isArray(
+        requiredRoles
+      )
+        ? requiredRoles
+        : [requiredRoles];
+
+
+    const currentRole =
+      getRole();
+
+
+    if (!currentRole) {
+
+      if (
+        redirectUnauthorized
+      ) {
+
+        showAccessDenied();
+      }
+
+      return false;
+    }
+
+
+    /*
+     * Step 3:
+     * Check role.
+     */
+
+    if (
+      roleMatches(
+        currentRole,
+        roles
+      )
+    ) {
+
       return true;
     }
 
 
     /*
-     * Authentication layer must exist.
+     * Optional hierarchical access.
+     *
+     * Admin may optionally be allowed to
+     * view manager/cashier areas if a page
+     * explicitly requests this behavior.
      */
+
     if (
-      !window.GTF_AUTH
+      allowChildRoles &&
+      currentRole === "admin"
     ) {
 
-      console.error(
-        "GTF Role Guard: GTF_AUTH is not loaded."
-      );
-
-      return false;
-    }
-
-
-    try {
-
-      const session =
-        await GTF_AUTH.checkSession();
-
-
-      /*
-       * Not authenticated.
-       */
-      if (
-        !session ||
-        !session.authenticated
-      ) {
-
-        redirectToLogin();
-
-        return false;
-      }
-
-
-      let role =
-        normalizeRole(
-          session.role
+      const normalizedRequired =
+        roles.map(
+          normalizeRole
         );
 
 
-      /*
-       * If the session did not include a role,
-       * ask the authentication layer for it.
-       */
-      if (!role) {
-
-        role =
-          normalizeRole(
-            await GTF_AUTH.getCurrentRole(
-              true
-            )
-          );
-      }
-
-
-      /*
-       * If no role can be established,
-       * don't allow access to the protected page.
-       */
-      if (!role) {
-
-        console.error(
-          "GTF Role Guard: User role could not be determined."
-        );
-
-        if (
-          window.GTF_APP
-        ) {
-
-          GTF_APP.showToast(
-            "Your account role could not be verified.",
-            "danger"
-          );
-        }
-
-
-        return false;
-      }
-
-
-      /*
-       * Check whether the current role belongs
-       * to the requested portal.
-       */
       if (
-        roleAllowed(
-          role,
-          portal
+        normalizedRequired.includes(
+          "manager"
+        ) ||
+        normalizedRequired.includes(
+          "cashier"
+        ) ||
+        normalizedRequired.includes(
+          "customer"
         )
       ) {
 
-        document.documentElement
-          .setAttribute(
-            "data-gtf-role",
-            role
-          );
-
-        document.documentElement
-          .setAttribute(
-            "data-gtf-portal",
-            portal
-          );
-
-
         return true;
       }
-
-
-      /*
-       * Authenticated but attempting to access
-       * another role's portal.
-       */
-      if (
-        window.GTF_APP
-      ) {
-
-        GTF_APP.showToast(
-          "You do not have permission to access this portal.",
-          "danger"
-        );
-      }
-
-
-      setTimeout(
-        () => {
-          redirectToCorrectPortal(
-            role
-          );
-        },
-        600
-      );
-
-
-      return false;
-
-    } catch (error) {
-
-      console.error(
-        "GTF Role Guard Error:",
-        error
-      );
-
-
-      /*
-       * A 401 means the session is no longer valid.
-       */
-      if (
-        error.status ===
-        401
-      ) {
-
-        if (
-          window.GTF_AUTH
-        ) {
-          GTF_AUTH.clearSession();
-        }
-
-
-        redirectToLogin();
-
-        return false;
-      }
-
-
-      /*
-       * For other errors, fail closed.
-       */
-      return false;
     }
+
+
+    if (
+      redirectUnauthorized
+    ) {
+
+      showAccessDenied();
+    }
+
+
+    return false;
+  }
+
+
+  /* =======================================================
+     CUSTOMER GUARD
+     ======================================================= */
+
+  function customer(options = {}) {
+
+    return protect(
+      ROLES.CUSTOMER,
+      options
+    );
   }
 
 
@@ -497,10 +657,11 @@
      ADMIN GUARD
      ======================================================= */
 
-  async function requireAdmin() {
+  function admin(options = {}) {
 
-    return verify(
-      "admin"
+    return protect(
+      ROLES.ADMIN,
+      options
     );
   }
 
@@ -509,10 +670,11 @@
      MANAGER GUARD
      ======================================================= */
 
-  async function requireManager() {
+  function manager(options = {}) {
 
-    return verify(
-      "manager"
+    return protect(
+      ROLES.MANAGER,
+      options
     );
   }
 
@@ -521,198 +683,493 @@
      CASHIER GUARD
      ======================================================= */
 
-  async function requireCashier() {
+  function cashier(options = {}) {
 
-    return verify(
-      "cashier"
+    return protect(
+      ROLES.CASHIER,
+      options
     );
   }
 
 
   /* =======================================================
-     CUSTOMER GUARD
+     AUTHENTICATED USER GUARD
      ======================================================= */
 
-  async function requireCustomer() {
-
-    return verify(
-      "customer"
-    );
-  }
-
-
-  /* =======================================================
-     GENERIC ROLE GUARD
-     ======================================================= */
-
-  async function requireRole(
-    roles
+  function authenticated(
+    options = {}
   ) {
 
-    if (
-      !Array.isArray(roles)
-    ) {
+    return protect(
+      null,
+      options
+    );
+  }
 
-      roles = [
-        roles
-      ];
+
+  /* =======================================================
+     CURRENT PORTAL GUARD
+     ======================================================= */
+
+  function protectCurrentPortal(
+    options = {}
+  ) {
+
+    const portal =
+      getPortalFromPath();
+
+
+    if (!portal) {
+
+      return authenticated(
+        options
+      );
     }
 
 
-    const normalized =
-      roles
-        .map(
-          normalizeRole
-        )
-        .filter(Boolean);
+    switch (portal) {
 
-
-    if (
-      normalized.length === 0
-    ) {
-      return false;
-    }
-
-
-    if (
-      !window.GTF_AUTH
-    ) {
-      return false;
-    }
-
-
-    try {
-
-      const session =
-        await GTF_AUTH.checkSession();
-
-
-      if (
-        !session.authenticated
-      ) {
-
-        redirectToLogin();
-
-        return false;
-      }
-
-
-      let role =
-        normalizeRole(
-          session.role
+      case "customer":
+        return customer(
+          options
         );
 
+      case "admin":
+        return admin(
+          options
+        );
 
-      if (!role) {
+      case "manager":
+        return manager(
+          options
+        );
 
-        role =
-          normalizeRole(
-            await GTF_AUTH.getCurrentRole(
-              true
-            )
-          );
-      }
+      case "cashier":
+        return cashier(
+          options
+        );
 
+      case "dashboard":
+        return authenticated(
+          options
+        );
 
-      if (
-        normalized.includes(
-          role
-        )
-      ) {
-
-        document.documentElement
-          .setAttribute(
-            "data-gtf-role",
-            role
-          );
-
+      default:
         return true;
-      }
+    }
+  }
 
+
+  /* =======================================================
+     PREVENT LOGGED-IN USERS FROM LOGIN PAGE
+     ======================================================= */
+
+  function redirectAuthenticatedUser() {
+
+    if (
+      !isAuthenticated()
+    ) {
+
+      return false;
+    }
+
+
+    const path =
+      window.location.pathname
+        .toLowerCase();
+
+
+    const page =
+      path.split("/").pop();
+
+
+    const authPages = [
+      "login.html",
+      "signup.html",
+      "register.html"
+    ];
+
+
+    if (
+      !authPages.includes(page)
+    ) {
+
+      return false;
+    }
+
+
+    const role =
+      getRole();
+
+
+    if (role) {
 
       redirectToCorrectPortal(
         role
       );
 
-
-      return false;
-
-    } catch (error) {
-
-      console.error(
-        "GTF generic role guard error:",
-        error
-      );
-
-      redirectToLogin();
-
-      return false;
-    }
-  }
-
-
-  /* =======================================================
-     PAGE INITIALIZATION
-     ======================================================= */
-
-  async function initialize() {
-
-    const portal =
-      detectPortal();
-
-
-    if (!portal) {
       return true;
     }
 
 
-    /*
-     * Hide protected content until the role check
-     * completes. CSS can override this with:
-     *
-     * html.gtf-auth-checking body { visibility:hidden; }
-     */
-    document.documentElement
-      .classList.add(
-        "gtf-auth-checking"
+    window.location.href =
+      CONFIG.defaultDashboard ||
+      CONFIG.home;
+
+    return true;
+  }
+
+
+  /* =======================================================
+     LOGOUT HANDLERS
+     ======================================================= */
+
+  function setupLogoutLinks() {
+
+    document.addEventListener(
+      "click",
+      async (event) => {
+
+        const logout =
+          event.target.closest(
+            "[data-logout]"
+          );
+
+
+        if (!logout) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        const redirect =
+          logout.getAttribute(
+            "data-logout-redirect"
+          ) ||
+          CONFIG.login;
+
+
+        const confirmed =
+          logout.hasAttribute(
+            "data-confirm-logout"
+          )
+            ? window.confirm(
+                "Are you sure you want to sign out?"
+              )
+            : true;
+
+
+        if (!confirmed) {
+          return;
+        }
+
+
+        logout.disabled =
+          true;
+
+
+        try {
+
+          if (
+            window.GTF_AUTH &&
+            typeof GTF_AUTH.logout ===
+              "function"
+          ) {
+
+            await GTF_AUTH.logout(
+              null
+            );
+
+          } else {
+
+            try {
+
+              localStorage.removeItem(
+                "gtf_token"
+              );
+
+              localStorage.removeItem(
+                "gtf_user"
+              );
+
+              sessionStorage.removeItem(
+                "gtf_token"
+              );
+
+            } catch {
+              /* Ignore storage errors. */
+            }
+          }
+
+        } finally {
+
+          clearRequestedURL();
+
+          window.location.href =
+            redirect;
+        }
+      }
+    );
+  }
+
+
+  /* =======================================================
+     CURRENT PORTAL NAVIGATION
+     ======================================================= */
+
+  function setupPortalNavigation() {
+
+    document
+      .querySelectorAll(
+        "[data-portal-link]"
+      )
+      .forEach(
+        (link) => {
+
+          const portal =
+            link.getAttribute(
+              "data-portal-link"
+            );
+
+
+          if (!portal) {
+            return;
+          }
+
+
+          link.setAttribute(
+            "href",
+            getPortalURL(
+              portal
+            )
+          );
+        }
       );
+  }
 
 
-    const allowed =
-      await verify(
-        portal
+  /* =======================================================
+     ROLE DISPLAY
+     ======================================================= */
+
+  function displayRole() {
+
+    const role =
+      getRole();
+
+
+    document
+      .querySelectorAll(
+        "[data-current-role]"
+      )
+      .forEach(
+        (element) => {
+
+          element.textContent =
+            role
+              ? role.charAt(0)
+                  .toUpperCase() +
+                role.slice(1)
+              : "Guest";
+        }
       );
+  }
 
 
-    document.documentElement
-      .classList.remove(
-        "gtf-auth-checking"
-      );
+  /* =======================================================
+     USER DISPLAY
+     ======================================================= */
+
+  function displayUser() {
+
+    const user =
+      getUser();
 
 
-    if (!allowed) {
-      return false;
+    if (!user) {
+      return;
     }
 
 
-    /*
-     * Dispatch a useful event for portal scripts.
-     */
-    document.dispatchEvent(
-      new CustomEvent(
-        "gtf:authorized",
-        {
-          detail: {
-            portal,
-            role:
-              document.documentElement
-                .getAttribute(
-                  "data-gtf-role"
-                )
-          }
-        }
+    const firstName =
+      user.first_name ||
+      user.firstName ||
+      "";
+
+
+    const lastName =
+      user.last_name ||
+      user.lastName ||
+      "";
+
+
+    const fullName =
+      user.name ||
+      `${firstName} ${lastName}`
+        .trim() ||
+      "Customer";
+
+
+    document
+      .querySelectorAll(
+        "[data-current-user]"
       )
+      .forEach(
+        (element) => {
+
+          element.textContent =
+            fullName;
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        "[data-current-email]"
+      )
+      .forEach(
+        (element) => {
+
+          element.textContent =
+            user.email ||
+            "";
+        }
+      );
+  }
+
+
+  /* =======================================================
+     PORTAL BODY CLASS
+     ======================================================= */
+
+  function setPortalBodyClass() {
+
+    const portal =
+      getPortalFromPath();
+
+
+    if (!portal) {
+      return;
+    }
+
+
+    document.body.classList.add(
+      `portal-${portal}`
     );
+  }
+
+
+  /* =======================================================
+     BACK BUTTON
+     ======================================================= */
+
+  function setupBackButtons() {
+
+    document.addEventListener(
+      "click",
+      (event) => {
+
+        const button =
+          event.target.closest(
+            "[data-go-back]"
+          );
+
+
+        if (!button) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        const fallback =
+          button.getAttribute(
+            "data-fallback"
+          ) ||
+          CONFIG.home;
+
+
+        if (
+          document.referrer &&
+          window.history.length > 1
+        ) {
+
+          window.history.back();
+
+        } else {
+
+          window.location.href =
+            fallback;
+        }
+      }
+    );
+  }
+
+
+  /* =======================================================
+     GUARD BASED ON HTML ATTRIBUTE
+     ======================================================= */
+
+  function guardFromMarkup() {
+
+    const guard =
+      document.body.dataset
+        .roleGuard;
+
+
+    if (!guard) {
+      return true;
+    }
+
+
+    const value =
+      guard
+        .trim()
+        .toLowerCase();
+
+
+    if (
+      value === "auth" ||
+      value === "authenticated"
+    ) {
+
+      return authenticated();
+    }
+
+
+    if (
+      value === "customer"
+    ) {
+
+      return customer();
+    }
+
+
+    if (
+      value === "admin"
+    ) {
+
+      return admin();
+    }
+
+
+    if (
+      value === "manager"
+    ) {
+
+      return manager();
+    }
+
+
+    if (
+      value === "cashier"
+    ) {
+
+      return cashier();
+    }
 
 
     return true;
@@ -720,38 +1177,62 @@
 
 
   /* =======================================================
-     PUBLIC API
+     PUBLIC OBJECT
      ======================================================= */
 
   const GTF_ROLE_GUARD = {
 
-    portals: PORTALS,
+    config:
+      CONFIG,
 
-    normalizeRole,
+    roles:
+      ROLES,
 
-    detectPortal,
+    getUser,
 
-    roleAllowed,
+    getRole,
 
-    getStoredRole,
+    getPortalFromPath,
 
-    verify,
+    getPortalForRole,
 
-    requireAdmin,
+    getPortalURL,
 
-    requireManager,
+    isAuthenticated,
 
-    requireCashier,
+    protect,
 
-    requireCustomer,
+    authenticated,
 
-    requireRole,
+    customer,
+
+    admin,
+
+    manager,
+
+    cashier,
+
+    protectCurrentPortal,
+
+    redirectAuthenticatedUser,
 
     redirectToLogin,
 
     redirectToCorrectPortal,
 
-    initialize
+    setupLogoutLinks,
+
+    setupPortalNavigation,
+
+    setupBackButtons,
+
+    displayRole,
+
+    displayUser,
+
+    setPortalBodyClass,
+
+    guardFromMarkup
   };
 
 
@@ -764,8 +1245,40 @@
 
 
   /* =======================================================
-     AUTO INITIALIZATION
+     INITIALIZATION
      ======================================================= */
+
+  function initialize() {
+
+    setPortalBodyClass();
+
+    setupLogoutLinks();
+
+    setupPortalNavigation();
+
+    setupBackButtons();
+
+    displayRole();
+
+    displayUser();
+
+
+    /*
+     * Do not automatically protect a page merely
+     * because role-guard.js was included.
+     *
+     * A portal page can explicitly use:
+     *
+     * <body data-role-guard="customer">
+     *
+     * or JavaScript:
+     *
+     * GTF_ROLE_GUARD.customer();
+     */
+
+    guardFromMarkup();
+  }
+
 
   if (
     document.readyState ===
@@ -774,12 +1287,7 @@
 
     document.addEventListener(
       "DOMContentLoaded",
-      () => {
-        initialize();
-      },
-      {
-        once: true
-      }
+      initialize
     );
 
   } else {
@@ -788,4 +1296,4 @@
   }
 
 
-})(window, document);
+})(window);
