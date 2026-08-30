@@ -3,1018 +3,161 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Create your Global TrustFund banking account.">
-  <meta name="theme-color" content="#0a3326">
-  <meta name="robots" content="index, follow">
-  <title>Create Account | Global TrustFund</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --green-900: #0a3326;
-      --green-800: #0d3f2e;
-      --green-700: #125c42;
-      --green-600: #1a7a57;
-      --green-100: #e8f5ef;
-      --green-50:  #f4faf7;
-      --gold:      #c9962b;
-      --text:      #1a2e26;
-      --muted:     #5c6f66;
-      --border:    #d5e4db;
-      --white:     #ffffff;
-      --bg:        #f4f8f6;
-      --danger:    #b42318;
-      --danger-bg: #fff1f0;
-      --success:   #16794c;
-      --success-bg:#effaf4;
-      --warning:   #8a5a00;
-      --warning-bg:#fff8e6;
-      --shadow:    0 18px 50px rgba(10, 51, 38, 0.09);
-      --radius:    12px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input, select { font: inherit; }
-    button { cursor: pointer; border: none; background: none; }
-
-    /* Top bar */
-    .topbar {
-      background: var(--green-900);
-      color: white;
-    }
-
-    .topbar-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 8px 20px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 20px;
-      font-size: 13px;
-    }
-
-    .topbar a {
-      color: #d8ebe4;
-      transition: color 0.15s;
-    }
-
-    .topbar a:hover {
-      color: white;
-      text-decoration: underline;
-    }
-
-    /* Header */
-    .header {
-      background: white;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      background: var(--green-800);
-      color: white;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--green-800);
-      line-height: 1.2;
-    }
-
-    .brand-text span {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .back-link {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--green-600);
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
-
-    /* Main */
-    .signup-main {
-      flex: 1;
-      padding: 40px 20px 56px;
-    }
-
-    .signup-card {
-      max-width: 920px;
-      margin: 0 auto;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .signup-hero {
-      padding: 36px 44px;
-      background: linear-gradient(135deg, var(--green-900), var(--green-700));
-      color: white;
-      position: relative;
-    }
-
-    .signup-hero::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--green-600), #16815f, var(--gold));
-    }
-
-    .signup-hero h1 {
-      font-size: clamp(1.5rem, 3vw, 1.9rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .signup-hero p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.78);
-      max-width: 560px;
-      line-height: 1.6;
-    }
-
-    .signup-body {
-      padding: 40px 44px;
-    }
-
-    /* Alerts */
-    .alert {
-      display: none;
-      margin-bottom: 22px;
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .alert.error {
-      display: block;
-      color: var(--danger);
-      background: var(--danger-bg);
-      border: 1px solid #f3c7c3;
-    }
-
-    .alert.success {
-      display: block;
-      color: var(--success);
-      background: var(--success-bg);
-      border: 1px solid #b8e2ca;
-    }
-
-    .alert.warning {
-      display: block;
-      color: var(--warning);
-      background: var(--warning-bg);
-      border: 1px solid #ead9a8;
-    }
-
-    .required-note {
-      margin-bottom: 24px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .required {
-      color: var(--danger);
-    }
-
-    /* Sections */
-    .form-section {
-      margin-bottom: 32px;
-    }
-
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--green-900);
-      margin-bottom: 6px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin: -2px 0 18px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 18px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-      min-width: 0;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      height: 46px;
-      padding: 0 14px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: white;
-      color: var(--text);
-      font-size: 15px;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    .form-group input::placeholder {
-      color: #94a2af;
-    }
-
-    .form-group input:hover,
-    .form-group select:hover {
-      border-color: #b8c7d3;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--green-600);
-      box-shadow: 0 0 0 3px rgba(26, 122, 87, 0.12);
-    }
-
-    .form-group input[aria-invalid="true"],
-    .form-group select[aria-invalid="true"] {
-      border-color: var(--danger);
-    }
-
-    .input-wrap {
-      position: relative;
-    }
-
-    .password-input {
-      padding-right: 72px !important;
-    }
-
-    .password-toggle {
-      position: absolute;
-      right: 6px;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 6px 10px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--green-600);
-      border-radius: 6px;
-    }
-
-    .password-toggle:hover {
-      background: var(--green-50);
-    }
-
-    .field-help {
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .password-strength {
-      width: 100%;
-      height: 5px;
-      margin-top: 10px;
-      border-radius: 5px;
-      background: #e5eaf0;
-      overflow: hidden;
-    }
-
-    .password-strength-bar {
-      width: 0;
-      height: 100%;
-      border-radius: inherit;
-      background: var(--green-600);
-      transition: width 0.2s ease, background 0.2s ease;
-    }
-
-    .password-status {
-      min-height: 18px;
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .password-requirements {
-      margin: 10px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5px 12px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .password-requirements li::before {
-      content: "○";
-      margin-right: 6px;
-    }
-
-    .password-requirements li.valid {
-      color: var(--success);
-    }
-
-    .password-requirements li.valid::before {
-      content: "✓";
-      font-weight: 700;
-    }
-
-    .terms {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 4px 0 24px;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .terms input {
-      width: 17px;
-      height: 17px;
-      margin-top: 3px;
-      flex-shrink: 0;
-      accent-color: var(--green-600);
-    }
-
-    .terms a {
-      color: var(--green-600);
-      font-weight: 600;
-    }
-
-    .terms a:hover {
-      text-decoration: underline;
-    }
-
-    .submit-btn {
-      width: 100%;
-      height: 48px;
-      border-radius: 9px;
-      background: var(--green-800);
-      color: white;
-      font-size: 15px;
-      font-weight: 700;
-      transition: background 0.15s, transform 0.15s, opacity 0.15s;
-    }
-
-    .submit-btn:hover:not(:disabled) {
-      background: var(--green-900);
-    }
-
-    .submit-btn:active:not(:disabled) {
-      transform: translateY(1px);
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
-
-    .login-prompt {
-      margin-top: 24px;
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .login-prompt a {
-      color: var(--green-600);
-      font-weight: 700;
-    }
-
-    .login-prompt a:hover {
-      text-decoration: underline;
-    }
-
-    .security-note {
-      margin-top: 24px;
-      padding: 14px;
-      background: var(--green-50);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .security-note strong {
-      color: var(--green-800);
-    }
-
-    /* Footer */
-    .footer {
-      background: var(--green-900);
-      color: white;
-    }
-
-    .footer-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      font-size: 12px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .footer a {
-      color: #d8ebe4;
-    }
-
-    .footer a:hover {
-      color: white;
-      text-decoration: underline;
-    }
-
-    /* Responsive */
-    @media (max-width: 760px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .full-width {
-        grid-column: auto;
-      }
-
-      .signup-hero,
-      .signup-body {
-        padding-left: 28px;
-        padding-right: 28px;
-      }
-
-      .password-requirements {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .topbar-inner {
-        justify-content: center;
-        gap: 14px;
-        font-size: 12px;
-      }
-
-      .header-inner {
-        padding: 12px 16px;
-      }
-
-      .back-link {
-        display: none;
-      }
-
-      .signup-main {
-        padding: 20px 12px 36px;
-      }
-
-      .signup-hero {
-        padding: 28px 20px;
-      }
-
-      .signup-hero h1 {
-        font-size: 1.45rem;
-      }
-
-      .signup-body {
-        padding: 28px 20px;
-      }
-
-      .footer-inner {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .footer-links {
-        justify-content: center;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
+  <title>Create Account — Global TrustFund</title>
+  <meta name="description" content="Register for a Global TrustFund digital banking simulation account.">
+  <link rel="icon" href="assets/gtf-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <!-- Top bar -->
-  <div class="topbar">
-    <div class="topbar-inner">
-      <a href="./support.html">Support</a>
-      <a href="./security.html">Security</a>
-      <a href="./contact.html">Contact</a>
+  <div class="auth-page">
+    <div class="auth-card wide">
+      <div class="auth-logo">
+        <a href="index.html" class="logo-link" style="justify-content:center;color:var(--deep);">
+          <span class="logo-mark">GTF</span>
+          <span>Global TrustFund</span>
+        </a>
+      </div>
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Join the Global TrustFund simulation platform</p>
+      <div id="alert-box"></div>
+      <form id="signup-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="first_name">First name</label>
+            <input class="form-control" type="text" id="first_name" name="first_name" required autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="last_name">Last name</label>
+            <input class="form-control" type="text" id="last_name" name="last_name" required autocomplete="family-name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-control" type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone</label>
+          <input class="form-control" type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+1 555 000 0000">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="account_type">Account type</label>
+            <select class="form-control" id="account_type" name="account_type" required>
+              <option value="">Select...</option>
+              <option value="personal">Personal</option>
+              <option value="business">Business</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="country">Country</label>
+            <select class="form-control" id="country" name="country" required>
+              <option value="">Select...</option>
+              <option value="US">United States</option>
+              <option value="GB">United Kingdom</option>
+              <option value="CA">Canada</option>
+              <option value="NG">Nigeria</option>
+              <option value="GH">Ghana</option>
+              <option value="KE">Kenya</option>
+              <option value="ZA">South Africa</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" type="password" id="password" name="password" required autocomplete="new-password" minlength="8">
+          <div class="password-strength"><div class="password-strength-bar" id="strength-bar"></div></div>
+          <p class="form-hint">Min 8 characters, uppercase, lowercase, number, and special character.</p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="confirm_password">Confirm password</label>
+          <input class="form-control" type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label class="form-check">
+            <input type="checkbox" id="terms" name="terms" required>
+            <span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>. I understand this is a simulation platform.</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Create Account</button>
+      </form>
+      <p class="auth-footer">Already have an account? <a href="login.html">Sign In</a></p>
     </div>
   </div>
-
-  <!-- Header -->
-  <header class="header">
-    <div class="header-inner">
-      <a href="./index.html" class="brand" aria-label="Global TrustFund home">
-        <div class="brand-mark">GT</div>
-        <div class="brand-text">
-          <strong>Global TrustFund</strong>
-          <span>Digital Banking</span>
-        </div>
-      </a>
-      <a href="./index.html" class="back-link">← Back to Home</a>
-    </div>
-  </header>
-
-  <!-- Main -->
-  <main class="signup-main">
-    <section class="signup-card" aria-labelledby="signup-title">
-
-      <div class="signup-hero">
-        <h1 id="signup-title">Create your banking account</h1>
-        <p>Enter your information below to begin the registration process. All required fields are marked with an asterisk.</p>
-      </div>
-
-      <div class="signup-body">
-        <div id="signupMessage" class="alert" role="alert" aria-live="polite"></div>
-
-        <p class="required-note"><span class="required">*</span> Required fields</p>
-
-        <form id="signupForm" autocomplete="on" novalidate>
-
-          <!-- Personal information -->
-          <section class="form-section">
-            <h2 class="section-title">Personal information</h2>
-
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="firstName">First name <span class="required">*</span></label>
-                <input id="firstName" name="firstName" type="text" autocomplete="given-name" maxlength="80" required>
-              </div>
-
-              <div class="form-group">
-                <label for="lastName">Last name <span class="required">*</span></label>
-                <input id="lastName" name="lastName" type="text" autocomplete="family-name" maxlength="80" required>
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email address <span class="required">*</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="you@example.com" required>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Phone number</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" placeholder="+234...">
-              </div>
-            </div>
-          </section>
-
-          <!-- Account information -->
-          <section class="form-section">
-            <h2 class="section-title">Account information</h2>
-            <p class="section-desc">Select the account category that best matches your intended banking relationship.</p>
-
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="accountType">Account type <span class="required">*</span></label>
-                <select id="accountType" name="accountType" required>
-                  <option value="" selected disabled>Select account type</option>
-                  <option value="personal">Personal</option>
-                  <option value="business">Business</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="country">Country <span class="required">*</span></label>
-                <select id="country" name="country" autocomplete="country" required>
-                  <option value="" selected disabled>Select country</option>
-                  <option value="NG">Nigeria</option>
-                  <option value="US">United States</option>
-                  <option value="GB">United Kingdom</option>
-                  <option value="CA">Canada</option>
-                  <option value="GH">Ghana</option>
-                  <option value="ZA">South Africa</option>
-                  <option value="OTHER">Other</option>
-                </select>
-              </div>
-            </div>
-          </section>
-
-          <!-- Password -->
-          <section class="form-section">
-            <h2 class="section-title">Create a password</h2>
-            <p class="section-desc">Choose a password that you do not use on another website or service.</p>
-
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="password">Password <span class="required">*</span></label>
-                <div class="input-wrap">
-                  <input id="password" name="password" class="password-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="passwordHelp passwordStatus" required>
-                  <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password" aria-pressed="false">Show</button>
-                </div>
-                <p id="passwordHelp" class="field-help">Use at least 8 characters. A longer password with mixed character types is recommended.</p>
-                <div class="password-strength" aria-hidden="true">
-                  <div id="passwordStrengthBar" class="password-strength-bar"></div>
-                </div>
-                <div id="passwordStatus" class="password-status" aria-live="polite"></div>
-                <ul class="password-requirements" aria-label="Password requirements">
-                  <li id="reqLength">At least 8 characters</li>
-                  <li id="reqLower">Lowercase letter</li>
-                  <li id="reqUpper">Uppercase letter</li>
-                  <li id="reqNumber">Number</li>
-                  <li id="reqSpecial">Special character</li>
-                  <li id="reqLong">12+ characters recommended</li>
-                </ul>
-              </div>
-
-              <div class="form-group">
-                <label for="confirmPassword">Confirm password <span class="required">*</span></label>
-                <div class="input-wrap">
-                  <input id="confirmPassword" name="confirmPassword" class="password-input" type="password" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="confirmPasswordStatus" required>
-                  <button type="button" id="toggleConfirmPassword" class="password-toggle" aria-label="Show password" aria-pressed="false">Show</button>
-                </div>
-                <div id="confirmPasswordStatus" class="password-status" aria-live="polite"></div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Terms -->
-          <label class="terms">
-            <input id="terms" name="terms" type="checkbox" required>
-            <span>
-              I agree to the applicable
-              <a href="./privacy.html">privacy policy</a>
-              and understand that account registration is subject to applicable terms, verification, and account requirements.
-            </span>
-          </label>
-
-          <button id="signupButton" class="submit-btn" type="submit">Create Account</button>
-        </form>
-
-        <div class="login-prompt">
-          Already have an account?
-          <a href="./customer/login.html">Sign in</a>
-        </div>
-
-        <div class="security-note">
-          <strong>Security reminder:</strong>
-          Never share your password, verification codes, or other authentication credentials with anyone. Global TrustFund will never ask for your password by email or phone.
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <span>© <span id="currentYear"></span> Global TrustFund. All rights reserved.</span>
-      <div class="footer-links">
-        <a href="./privacy.html">Privacy</a>
-        <a href="./security.html">Security</a>
-        <a href="./support.html">Support</a>
-        <a href="./contact.html">Contact</a>
-      </div>
-    </div>
-  </footer>
-
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
   <script>
-    "use strict";
+    const pw = document.getElementById('password');
+    const bar = document.getElementById('strength-bar');
+    const colors = ['#B33A3A', '#B8860B', '#B8860B', '#1B7A4E', '#1B7A4E'];
+    pw.addEventListener('input', () => {
+      const s = GTF_APP.passwordStrength(pw.value);
+      bar.style.width = (s * 20) + '%';
+      bar.style.background = colors[Math.max(0, s - 1)] || '#DCE5E0';
+    });
 
-    const form = document.getElementById("signupForm");
-    const message = document.getElementById("signupMessage");
-    const signupButton = document.getElementById("signupButton");
-    const firstName = document.getElementById("firstName");
-    const lastName = document.getElementById("lastName");
-    const email = document.getElementById("email");
-    const phone = document.getElementById("phone");
-    const accountType = document.getElementById("accountType");
-    const country = document.getElementById("country");
-    const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
-    const terms = document.getElementById("terms");
-    const togglePassword = document.getElementById("togglePassword");
-    const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
-    const strengthBar = document.getElementById("passwordStrengthBar");
-    const passwordStatus = document.getElementById("passwordStatus");
-    const confirmPasswordStatus = document.getElementById("confirmPasswordStatus");
-    const currentYear = document.getElementById("currentYear");
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const box = document.getElementById('alert-box');
+      const btn = document.getElementById('submit-btn');
+      box.innerHTML = '';
 
-    const reqLength = document.getElementById("reqLength");
-    const reqLower = document.getElementById("reqLower");
-    const reqUpper = document.getElementById("reqUpper");
-    const reqNumber = document.getElementById("reqNumber");
-    const reqSpecial = document.getElementById("reqSpecial");
-    const reqLong = document.getElementById("reqLong");
+      const first_name = document.getElementById('first_name').value.trim();
+      const last_name = document.getElementById('last_name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const account_type = document.getElementById('account_type').value;
+      const country = document.getElementById('country').value;
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm_password').value;
+      const terms = document.getElementById('terms').checked;
 
-    if (currentYear) {
-      currentYear.textContent = new Date().getFullYear();
-    }
-
-    function showMessage(text, type = "error") {
-      if (!message) return;
-      message.textContent = text;
-      message.className = "alert " + type;
-    }
-
-    function clearMessage() {
-      if (!message) return;
-      message.textContent = "";
-      message.className = "alert";
-    }
-
-    function setInvalid(element, invalid) {
-      if (!element) return;
-      if (invalid) {
-        element.setAttribute("aria-invalid", "true");
-      } else {
-        element.removeAttribute("aria-invalid");
+      if (!terms) {
+        GTF_APP.showAlert(box, 'danger', 'Please accept the Terms and Privacy Policy.');
+        return;
       }
-    }
-
-    function setupPasswordToggle(button, input) {
-      if (!button || !input) return;
-      button.addEventListener("click", () => {
-        const visible = input.type === "text";
-        input.type = visible ? "password" : "text";
-        button.textContent = visible ? "Show" : "Hide";
-        button.setAttribute("aria-label", visible ? "Show password" : "Hide password");
-        button.setAttribute("aria-pressed", String(!visible));
-      });
-    }
-
-    setupPasswordToggle(togglePassword, password);
-    setupPasswordToggle(toggleConfirmPassword, confirmPassword);
-
-    function getPasswordScore(value) {
-      let score = 0;
-      if (value.length >= 8) score++;
-      if (value.length >= 12) score++;
-      if (/[a-z]/.test(value)) score++;
-      if (/[A-Z]/.test(value)) score++;
-      if (/[0-9]/.test(value)) score++;
-      if (/[^A-Za-z0-9]/.test(value)) score++;
-      return score;
-    }
-
-    function updateRequirement(element, valid) {
-      if (!element) return;
-      element.classList.toggle("valid", valid);
-    }
-
-    function updatePasswordStrength() {
-      const value = password.value;
-      const score = getPasswordScore(value);
-      const widths = ["0%", "20%", "35%", "55%", "75%", "90%", "100%"];
-
-      strengthBar.style.width = widths[score];
-
-      updateRequirement(reqLength, value.length >= 8);
-      updateRequirement(reqLower, /[a-z]/.test(value));
-      updateRequirement(reqUpper, /[A-Z]/.test(value));
-      updateRequirement(reqNumber, /[0-9]/.test(value));
-      updateRequirement(reqSpecial, /[^A-Za-z0-9]/.test(value));
-      updateRequirement(reqLong, value.length >= 12);
-
-      if (!value) {
-        strengthBar.style.width = "0%";
-        passwordStatus.textContent = "";
+      if (password !== confirm) {
+        GTF_APP.showAlert(box, 'danger', 'Passwords do not match.');
+        return;
+      }
+      if (!GTF_APP.validatePassword(password)) {
+        GTF_APP.showAlert(box, 'danger', 'Password must be at least 8 characters and include uppercase, lowercase, number, and special character.');
         return;
       }
 
-      if (score <= 2) {
-        passwordStatus.textContent = "Password strength: weak";
-      } else if (score <= 4) {
-        passwordStatus.textContent = "Password strength: moderate";
-      } else {
-        passwordStatus.textContent = "Password strength: strong";
-      }
-    }
-
-    password.addEventListener("input", updatePasswordStrength);
-
-    function updatePasswordMatch() {
-      if (!confirmPassword.value) {
-        confirmPasswordStatus.textContent = "";
-        setInvalid(confirmPassword, false);
-        return;
-      }
-
-      if (password.value === confirmPassword.value) {
-        confirmPasswordStatus.textContent = "Passwords match.";
-        confirmPasswordStatus.style.color = "var(--success)";
-        setInvalid(confirmPassword, false);
-      } else {
-        confirmPasswordStatus.textContent = "Passwords do not match.";
-        confirmPasswordStatus.style.color = "var(--danger)";
-        setInvalid(confirmPassword, true);
-      }
-    }
-
-    confirmPassword.addEventListener("input", updatePasswordMatch);
-    password.addEventListener("input", updatePasswordMatch);
-
-    function normalizeName(value) {
-      return value.trim().replace(/\s+/g, " ");
-    }
-
-    function validateForm() {
-      [firstName, lastName, email, accountType, country, password, confirmPassword].forEach(el => setInvalid(el, false));
-
-      if (!normalizeName(firstName.value)) {
-        setInvalid(firstName, true);
-        return { message: "Please enter your first name.", field: firstName };
-      }
-
-      if (!normalizeName(lastName.value)) {
-        setInvalid(lastName, true);
-        return { message: "Please enter your last name.", field: lastName };
-      }
-
-      if (!email.value.trim() || !email.checkValidity()) {
-        setInvalid(email, true);
-        return { message: "Please enter a valid email address.", field: email };
-      }
-
-      if (!accountType.value) {
-        setInvalid(accountType, true);
-        return { message: "Please select an account type.", field: accountType };
-      }
-
-      if (!country.value) {
-        setInvalid(country, true);
-        return { message: "Please select your country.", field: country };
-      }
-
-      if (password.value.length < 8) {
-        setInvalid(password, true);
-        return { message: "Your password must contain at least 8 characters.", field: password };
-      }
-
-      if (password.value !== confirmPassword.value) {
-        setInvalid(confirmPassword, true);
-        return { message: "The passwords do not match.", field: confirmPassword };
-      }
-
-      if (!terms.checked) {
-        return { message: "Please agree to the applicable terms before creating your account.", field: terms };
-      }
-
-      return null;
-    }
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      clearMessage();
-
-      const validation = validateForm();
-      if (validation) {
-        showMessage(validation.message);
-        if (validation.field && typeof validation.field.focus === "function") {
-          validation.field.focus();
-        }
-        return;
-      }
-
-      const userData = {
-        firstName: normalizeName(firstName.value),
-        lastName: normalizeName(lastName.value),
-        email: email.value.trim().toLowerCase(),
-        phone: phone.value.trim(),
-        accountType: accountType.value,
-        country: country.value
-      };
-
-      signupButton.disabled = true;
-      signupButton.textContent = "Creating Account...";
-
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
       try {
-        if (typeof window.gtfSignup !== "function") {
-          throw new Error("Authentication service is not connected.");
+        const data = await GTF_AUTH.signup({
+          first_name, last_name, email, phone, account_type, country, password
+        });
+        if (
+          data.requires_confirmation ||
+          data.email_confirmation_required ||
+          (data.message && data.message.toLowerCase().includes('confirm'))
+        ) {
+          GTF_APP.showAlert(
+            box,
+            'success',
+            'Account created successfully. Please check your email and confirm your email address before signing in.'
+          );
+          document.getElementById('signup-form').reset();
+          bar.style.width = '0';
+        } else {
+          GTF_APP.showAlert(box, 'success', 'Account created. Redirecting to sign in...');
+          setTimeout(() => {
+            window.location.href = '/login.html';
+          }, 1500);
         }
-
-        const result = await window.gtfSignup(userData, password.value);
-
-        if (!result || result.success === false) {
-          throw new Error(result?.message || "Account creation failed.");
-        }
-
-        showMessage(result.message || "Your account has been created successfully.", "success");
-
-        if (result.requiresEmailConfirmation) {
-          signupButton.disabled = true;
-          signupButton.textContent = "Account Created";
-          return;
-        }
-
-        const destination = result.redirectTo || "./customer/dashboard.html";
-
-        setTimeout(() => {
-          window.location.href = destination;
-        }, 700);
-
-      } catch (error) {
-        console.error("Signup error:", error);
-
-        let errorMessage = "We could not create your account. Please check your information and try again.";
-
-        if (error && typeof error.message === "string") {
-          const lower = error.message.toLowerCase();
-          if (lower.includes("already registered") || lower.includes("already exists") || lower.includes("user already")) {
-            errorMessage = "An account may already exist for this email address.";
-          } else if (lower.includes("password") && (lower.includes("weak") || lower.includes("short"))) {
-            errorMessage = "Please choose a stronger password.";
-          } else if (lower.includes("email") && lower.includes("invalid")) {
-            errorMessage = "Please enter a valid email address.";
-          }
-        }
-
-        showMessage(errorMessage);
-        signupButton.disabled = false;
-        signupButton.textContent = "Create Account";
+      } catch (err) {
+        GTF_APP.showAlert(box, 'danger', err.message || 'Registration failed. Please try again.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
       }
     });
-
-    [firstName, lastName, email, accountType, country, password, confirmPassword].forEach(field => {
-      field.addEventListener("input", () => setInvalid(field, false));
-      field.addEventListener("change", () => setInvalid(field, false));
-    });
-
-    updatePasswordStrength();
   </script>
-
 </body>
 </html>
