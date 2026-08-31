@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Manage your simulated Global TrustFund cards, card controls, and card activity."
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <title>Cards — Global TrustFund</title>
+
+
+  <!-- =====================================================
+       FAVICON
+  ====================================================== -->
+
+  <link
+    rel="icon"
+    href="../assets/gtf-favicon.svg"
+    type="image/svg+xml"
+  >
+
+
+  <!-- =====================================================
+       FONTS
+  ====================================================== -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =====================================================
+       STYLES
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/dashboard.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/responsive.css"
+  >
+
+</head>
+
+
+<body class="dashboard-page cards-page">
+
+
+  <!-- =====================================================
+       DASHBOARD SHELL
+  ====================================================== -->
+
+  <div
+    class="dashboard-shell"
+    id="dashboard-shell"
+  >
+
+
+    <!-- ===================================================
+         SIDEBAR
+    ==================================================== -->
+
+    <aside
+      class="dashboard-sidebar"
+      id="dashboard-sidebar"
+      aria-label="Dashboard navigation"
+    >
+
+
+      <!-- BRAND -->
+
+      <div class="sidebar-brand">
+
+        <a
+          href="index.html"
+          class="logo-link"
+          aria-label="Global TrustFund dashboard home"
+        >
+
+          <img
+            src="../assets/gtf-logo-white.svg"
+            alt="Global TrustFund"
+            class="brand-logo"
+            width="180"
+            height="48"
+          >
+
+        </a>
+
+      </div>
+
+
+      <!-- USER -->
+
+      <div class="sidebar-user">
+
+        <div
+          class="user-avatar"
+          id="sidebar-user-avatar"
+          aria-hidden="true"
+        >
+          U
+        </div>
+
+        <div class="sidebar-user-info">
+
+          <strong id="sidebar-user-name">
+            Customer
+          </strong>
+
+          <span>
+            Personal Banking
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <nav
+        class="sidebar-navigation"
+        aria-label="Customer banking"
+      >
+
+        <p class="sidebar-label">
+          Banking
+        </p>
+
+
+        <a
+          href="index.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ⌂
+          </span>
+
+          <span>
+            Overview
+          </span>
+
+        </a>
+
+
+        <a
+          href="accounts.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ◫
+          </span>
+
+          <span>
+            Accounts
+          </span>
+
+        </a>
+
+
+        <a
+          href="transactions.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ⇄
+          </span>
+
+          <span>
+            Transactions
+          </span>
+
+        </a>
+
+
+        <a
+          href="transfers.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
+
+          <span>
+            Transfers
+          </span>
+
+        </a>
+
+
+        <a
+          href="payments.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            $
+          </span>
+
+          <span>
+            Payments
+          </span>
+
+        </a>
+
+
+        <a
+          href="cards.html"
+          class="sidebar-link active"
+          aria-current="page"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ▣
+          </span>
+
+          <span>
+            Cards
+          </span>
+
+        </a>
+
+
+        <p class="sidebar-label sidebar-label-spaced">
+          Account
+        </p>
+
+
+        <a
+          href="profile.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ◎
+          </span>
+
+          <span>
+            Profile
+          </span>
+
+        </a>
+
+
+        <a
+          href="support.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ?
+          </span>
+
+          <span>
+            Support
+          </span>
+
+        </a>
+
+      </nav>
+
+
+      <!-- SIDEBAR FOOTER -->
+
+      <div class="sidebar-footer">
+
+        <a
+          href="../security.html"
+          class="sidebar-link"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+
+          <span>
+            Security
+          </span>
+
+        </a>
+
+
+        <button
+          type="button"
+          class="sidebar-link sidebar-logout"
+          id="sidebar-logout"
+        >
+
+          <span
+            class="sidebar-icon"
+            aria-hidden="true"
+          >
+            ↪
+          </span>
+
+          <span>
+            Sign Out
+          </span>
+
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         MOBILE OVERLAY
+    ==================================================== -->
+
+    <div
+      class="dashboard-overlay"
+      id="dashboard-overlay"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ===================================================
+         MAIN
+    ==================================================== -->
+
+    <div class="dashboard-main">
+
+
+      <!-- =================================================
+           HEADER
+      ================================================== -->
+
+      <header class="dashboard-header">
+
+        <div class="dashboard-header-left">
+
+          <button
+            type="button"
+            class="dashboard-menu-toggle"
+            id="dashboard-menu-toggle"
+            aria-label="Open dashboard navigation"
+            aria-expanded="false"
+            aria-controls="dashboard-sidebar"
+          >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </button>
+
+
+          <div class="dashboard-heading">
+
+            <span class="dashboard-kicker">
+              Card management
+            </span>
+
+            <h1>
+              Cards
+            </h1>
+
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-header-actions">
+
+
+          <!-- NOTIFICATIONS -->
+
+          <button
+            type="button"
+            class="dashboard-header-button"
+            id="notification-button"
+            aria-label="Notifications"
+            aria-expanded="false"
+            aria-controls="notification-panel"
+          >
+
+            <span aria-hidden="true">
+              ♢
+            </span>
+
+            <span
+              class="notification-badge"
+              id="notification-count"
+              hidden
+            >
+              0
+            </span>
+
+          </button>
+
+
+          <!-- PROFILE -->
+
+          <a
+            href="profile.html"
+            class="dashboard-profile-button"
+            aria-label="Open profile"
+          >
+
+            <span
+              class="header-avatar"
+              id="header-user-avatar"
+            >
+              U
+            </span>
+
+            <span class="header-user-text">
+
+              <strong id="header-user-name">
+                Customer
+              </strong>
+
+              <small>
+                Personal account
+              </small>
+
+            </span>
+
+            <span
+              class="header-chevron"
+              aria-hidden="true"
+            >
+              ▾
+            </span>
+
+          </a>
+
+        </div>
+
+      </header>
+
+
+      <!-- =================================================
+           NOTIFICATION PANEL
+      ================================================== -->
+
+      <div
+        class="notification-panel"
+        id="notification-panel"
+        hidden
+      >
+
+        <div class="notification-panel-header">
+
+          <div>
+
+            <span class="section-kicker">
+              Account alerts
+            </span>
+
+            <h2>
+              Notifications
+            </h2>
+
+          </div>
+
+          <button
+            type="button"
+            class="text-button"
+            id="mark-notifications-read"
+          >
+            Mark all read
+          </button>
+
+        </div>
+
+
+        <div
+          class="notification-list"
+          id="notification-list"
+        >
+
+          <div class="notification-empty">
+
+            <span
+              class="notification-empty-icon"
+              aria-hidden="true"
+            >
+              ✓
+            </span>
+
+            <p>
+              You're all caught up.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CONTENT
+      ================================================== -->
+
+      <main class="dashboard-content">
+
+
+        <!-- =================================================
+             SIMULATION NOTICE
+        ================================================== -->
+
+        <section
+          class="simulation-notice"
+          aria-label="Simulation notice"
+        >
+
+          <div class="simulation-notice-icon">
+            i
+          </div>
+
+          <div>
+
+            <strong>
+              Digital Banking Simulation
+            </strong>
+
+            <p>
+              Cards displayed on this page are simulated.
+              They are not connected to a real card network,
+              financial institution, or payment system.
+            </p>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PAGE INTRO
+        ================================================== -->
+
+        <section class="dashboard-page-intro">
+
+          <div>
+
+            <span class="section-kicker">
+              Your cards
+            </span>
+
+            <h2>
+              Manage your cards
+            </h2>
+
+            <p>
+              View your simulated cards, review card details,
+              and manage available card controls.
+            </p>
+
+          </div>
+
+
+          <div class="page-intro-actions">
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="request-card-button"
+            >
+              + Request a Card
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CARD SUMMARY
+        ================================================== -->
+
+        <section
+          class="card-summary-grid"
+          aria-label="Card summary"
+        >
+
+          <div class="summary-card">
+
+            <div class="summary-card-icon">
+              ▣
+            </div>
+
+            <div>
+
+              <span>
+                Active cards
+              </span>
+
+              <strong id="active-card-count">
+                1
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <div class="summary-card-icon">
+              $
+            </div>
+
+            <div>
+
+              <span>
+                Available spending
+              </span>
+
+              <strong
+                id="available-spending"
+                data-sensitive-value
+              >
+                $5,000.00
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="summary-card">
+
+            <div class="summary-card-icon">
+              ✓
+            </div>
+
+            <div>
+
+              <span>
+                Cards in good standing
+              </span>
+
+              <strong>
+                100%
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FEATURED CARD
+        ================================================== -->
+
+        <section
+          class="dashboard-panel featured-card-panel"
+          aria-labelledby="featured-card-title"
+        >
+
+          <div class="panel-header">
+
+            <div>
+
+              <span class="section-kicker">
+                Primary card
+              </span>
+
+              <h2 id="featured-card-title">
+                GTF Debit Card
+              </h2>
+
+            </div>
+
+
+            <span class="status-badge status-active">
+              Active
+            </span>
+
+          </div>
+
+
+          <div class="card-management-layout">
+
+
+            <!-- CARD VISUAL -->
+
+            <div class="card-display-area">
+
+              <div
+                class="virtual-bank-card"
+                id="primary-card"
+              >
+
+                <div class="virtual-card-top">
+
+                  <span class="virtual-card-brand">
+                    GTF
+                  </span>
+
+                  <span class="virtual-card-type">
+                    DEBIT
+                  </span>
+
+                </div>
+
+
+                <div
+                  class="virtual-card-chip"
+                  aria-hidden="true"
+                >
+
+                  <span></span>
+                  <span></span>
+                  <span></span>
+
+                </div>
+
+
+                <div
+                  class="virtual-card-number"
+                  data-sensitive-card
+                >
+                  •••• &nbsp; •••• &nbsp; •••• &nbsp; 2048
+                </div>
+
+
+                <div class="virtual-card-bottom">
+
+                  <div>
+
+                    <small>
+                      CARDHOLDER
+                    </small>
+
+                    <strong id="cardholder-name">
+                      GTF CUSTOMER
+                    </strong>
+
+                  </div>
+
+
+                  <div>
+
+                    <small>
+                      VALID THRU
+                    </small>
+
+                    <strong>
+                      12/29
+                    </strong>
+
+                  </div>
+
+
+                  <strong class="virtual-card-mark">
+                    GTF
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="card-number-toggle"
+                id="toggle-card-details"
+                aria-pressed="false"
+              >
+                Show card details
+              </button>
+
+            </div>
+
+
+            <!-- CARD INFORMATION -->
+
+            <div class="card-information">
+
+              <div class="card-information-grid">
+
+
+                <div class="card-detail">
+
+                  <span>
+                    Card type
+                  </span>
+
+                  <strong>
+                    Debit
+                  </strong>
+
+                </div>
+
+
+                <div class="card-detail">
+
+                  <span>
+                    Status
+                  </span>
+
+                  <strong class="detail-active">
+                    Active
+                  </strong>
+
+                </div>
+
+
+                <div class="card-detail">
+
+                  <span>
+                    Last four digits
+                  </span>
+
+                  <strong>
+                    2048
+                  </strong>
+
+                </div>
+
+
+                <div class="card-detail">
+
+                  <span>
+                    Expiration
+                  </span>
+
+                  <strong>
+                    12/29
+                  </strong>
+
+                </div>
+
+
+                <div class="card-detail">
+
+                  <span>
+                    Spending limit
+                  </span>
+
+                  <strong>
+                    $5,000.00
+                  </strong>
+
+                </div>
+
+
+                <div class="card-detail">
+
+                  <span>
+                    Billing currency
+                  </span>
+
+                  <strong>
+                    USD
+                  </strong>
+
+                </div>
+
+              </div>
+
+
+              <!-- CARD CONTROLS -->
+
+              <div class="card-controls">
+
+                <h3>
+                  Card controls
+                </h3>
+
+
+                <div class="control-row">
+
+                  <div class="control-row-content">
+
+                    <strong>
+                      Card enabled
+                    </strong>
+
+                    <span>
+                      Allow simulated card transactions.
+                    </span>
+
+                  </div>
+
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="card-enabled"
+                      checked
+                    >
+
+                    <span
+                      class="switch-slider"
+                      aria-hidden="true"
+                    ></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="control-row">
+
+                  <div class="control-row-content">
+
+                    <strong>
+                      Online payments
+                    </strong>
+
+                    <span>
+                      Allow simulated online purchases.
+                    </span>
+
+                  </div>
+
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="online-payments"
+                      checked
+                    >
+
+                    <span
+                      class="switch-slider"
+                      aria-hidden="true"
+                    ></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="control-row">
+
+                  <div class="control-row-content">
+
+                    <strong>
+                      Contactless payments
+                    </strong>
+
+                    <span>
+                      Enable simulated contactless activity.
+                    </span>
+
+                  </div>
+
+
+                  <label class="switch">
+
+                    <input
+                      type="checkbox"
+                      id="contactless-payments"
+                      checked
+                    >
+
+                    <span
+                      class="switch-slider"
+                      aria-hidden="true"
+                    ></span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CARD ACTIONS
+        ================================================== -->
+
+        <section
+          class="dashboard-panel"
+          aria-labelledby="card-actions-heading"
+        >
+
+          <div class="panel-header">
+
+            <div>
+
+              <span class="section-kicker">
+                Card services
+              </span>
+
+              <h2 id="card-actions-heading">
+                Card actions
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="card-actions-grid">
+
+
+            <button
+              type="button"
+              class="card-service-card"
+              data-card-action="freeze"
+            >
+
+              <span class="card-service-icon">
+                ❄
+              </span>
+
+              <span>
+
+                <strong>
+                  Freeze card
+                </strong>
+
+                <small>
+                  Temporarily disable the simulated card.
+                </small>
+
+              </span>
+
+              <span
+                class="card-service-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="card-service-card"
+              data-card-action="replace"
+            >
+
+              <span class="card-service-icon">
+                ↻
+              </span>
+
+              <span>
+
+                <strong>
+                  Replace card
+                </strong>
+
+                <small>
+                  Request a simulated replacement card.
+                </small>
+
+              </span>
+
+              <span
+                class="card-service-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="card-service-card"
+              data-card-action="pin"
+            >
+
+              <span class="card-service-icon">
+                #
+              </span>
+
+              <span>
+
+                <strong>
+                  Card PIN
+                </strong>
+
+                <small>
+                  Manage your simulated card PIN settings.
+                </small>
+
+              </span>
+
+              <span
+                class="card-service-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              class="card-service-card"
+              data-card-action="limits"
+            >
+
+              <span class="card-service-icon">
+                ◫
+              </span>
+
+              <span>
+
+                <strong>
+                  Spending limits
+                </strong>
+
+                <small>
+                  Review simulated card spending limits.
+                </small>
+
+              </span>
+
+              <span
+                class="card-service-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CARD ACTIVITY
+        ================================================== -->
+
+        <section
+          class="dashboard-panel"
+          aria-labelledby="card-activity-heading"
+        >
+
+          <div class="panel-header">
+
+            <div>
+
+              <span class="section-kicker">
+                Card activity
+              </span>
+
+              <h2 id="card-activity-heading">
+                Recent card transactions
+              </h2>
+
+            </div>
+
+
+            <a
+              href="transactions.html"
+              class="text-button"
+            >
+              View all →
+            </a>
+
+          </div>
+
+
+          <div class="table-responsive">
+
+            <table class="data-table">
+
+              <caption class="sr-only">
+                Recent simulated card transactions
+              </caption>
+
+              <thead>
+
+                <tr>
+
+                  <th scope="col">
+                    Date
+                  </th>
+
+                  <th scope="col">
+                    Merchant
+                  </th>
+
+                  <th scope="col">
+                    Category
+                  </th>
+
+                  <th scope="col">
+                    Card
+                  </th>
+
+                  <th scope="col">
+                    Status
+                  </th>
+
+                  <th scope="col">
+                    Amount
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="card-activity-body">
+
+                <tr>
+
+                  <td>
+                    Today
+                  </td>
+
+                  <td>
+
+                    <div class="table-primary-text">
+                      Digital Market
+                    </div>
+
+                    <div class="table-secondary-text">
+                      Online purchase
+                    </div>
+
+                  </td>
+
+                  <td>
+                    Shopping
+                  </td>
+
+                  <td>
+                    •••• 2048
+                  </td>
+
+                  <td>
+
+                    <span class="status-badge status-completed">
+                      Completed
+                    </span>
+
+                  </td>
+
+                  <td class="amount-negative">
+                    −$84.25
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    Yesterday
+                  </td>
+
+                  <td>
+
+                    <div class="table-primary-text">
+                      City Transport
+                    </div>
+
+                    <div class="table-secondary-text">
+                      Card purchase
+                    </div>
+
+                  </td>
+
+                  <td>
+                    Transport
+                  </td>
+
+                  <td>
+                    •••• 2048
+                  </td>
+
+                  <td>
+
+                    <span class="status-badge status-completed">
+                      Completed
+                    </span>
+
+                  </td>
+
+                  <td class="amount-negative">
+                    −$32.00
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    Aug 27
+                  </td>
+
+                  <td>
+
+                    <div class="table-primary-text">
+                      Grocery Market
+                    </div>
+
+                    <div class="table-secondary-text">
+                      Card purchase
+                    </div>
+
+                  </td>
+
+                  <td>
+                    Groceries
+                  </td>
+
+                  <td>
+                    •••• 2048
+                  </td>
+
+                  <td>
+
+                    <span class="status-badge status-completed">
+                      Completed
+                    </span>
+
+                  </td>
+
+                  <td class="amount-negative">
+                    −$126.40
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SECURITY INFORMATION
+        ================================================== -->
+
+        <section class="dashboard-help-card">
+
+          <div class="dashboard-help-icon">
+            ✓
+          </div>
+
+          <div>
+
+            <span class="section-kicker">
+              Card security
+            </span>
+
+            <h2>
+              Keep your card information protected
+            </h2>
+
+            <p>
+              Never share your complete card number, PIN,
+              password, or authentication codes with another person.
+            </p>
+
+          </div>
+
+          <a
+            href="../security.html"
+            class="btn btn-primary"
+          >
+            Security Center
+          </a>
+
+        </section>
+
+      </main>
+
+
+      <!-- =================================================
+           FOOTER
+      ================================================== -->
+
+      <footer class="dashboard-footer">
+
+        <div>
+
+          <strong>
+            Global TrustFund
+          </strong>
+
+          <span>
+            Digital Banking Simulation Platform
+          </span>
+
+        </div>
+
+
+        <div class="dashboard-footer-links">
+
+          <a href="../privacy.html">
+            Privacy
+          </a>
+
+          <a href="../terms.html">
+            Terms
+          </a>
+
+          <a href="../security.html">
+            Security
+          </a>
+
+          <a href="support.html">
+            Support
+          </a>
+
+        </div>
+
+
+        <p>
+
+          ©
+          <span id="dashboard-current-year"></span>
+          Global TrustFund.
+          All rights reserved.
+
+        </p>
+
+      </footer>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       CARD ACTION MODAL
+  ====================================================== -->
+
+  <div
+    class="modal-backdrop"
+    id="card-action-modal"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="card-modal-title"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="section-kicker">
+            Card management
+          </span>
+
+          <h2 id="card-modal-title">
+            Card action
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="modal-close"
+          id="close-card-modal"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="modal-action-icon">
+          ▣
+        </div>
+
+        <h3 id="card-modal-heading">
+          Manage your card
+        </h3>
+
+        <p id="card-modal-description">
+          Select an action to continue.
+        </p>
+
+
+        <div
+          class="form-alert form-alert-info"
+          id="card-modal-notice"
+        >
+
+          <span aria-hidden="true">
+            i
+          </span>
+
+          <p>
+            Card actions on this platform are simulated
+            and do not affect a real payment card.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="cancel-card-action"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="confirm-card-action"
+        >
+          Continue
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       REQUEST CARD MODAL
+  ====================================================== -->
+
+  <div
+    class="modal-backdrop"
+    id="request-card-modal"
+    hidden
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="request-card-title"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="section-kicker">
+            New card
+          </span>
+
+          <h2 id="request-card-title">
+            Request a simulated card
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="modal-close"
+          id="close-request-card-modal"
+          aria-label="Close dialog"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="request-card-form">
+
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <label for="requested-card-type">
+              Card type
+            </label>
+
+            <select
+              id="requested-card-type"
+              class="form-control"
+              name="card_type"
+              required
+            >
+
+              <option value="">
+                Select card type
+              </option>
+
+              <option value="debit">
+                GTF Debit Card
+              </option>
+
+              <option value="virtual">
+                GTF Virtual Card
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="requested-card-purpose">
+              Purpose
+            </label>
+
+            <select
+              id="requested-card-purpose"
+              class="form-control"
+              name="purpose"
+              required
+            >
+
+              <option value="">
+                Select purpose
+              </option>
+
+              <option value="everyday">
+                Everyday spending
+              </option>
+
+              <option value="online">
+                Online purchases
+              </option>
+
+              <option value="travel">
+                Travel
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            class="form-alert form-alert-info"
+          >
+
+            <span aria-hidden="true">
+              i
+            </span>
+
+            <p>
+              This request creates a simulated card record only.
+              No physical card will be issued.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            class="btn btn-outline"
+            id="cancel-request-card"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Submit Request
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST CONTAINER
+  ====================================================== -->
+
+  <div
+    class="toast-container"
+    id="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+
+  <!-- =====================================================
+       LOADING OVERLAY
+  ====================================================== -->
+
+  <div
+    class="dashboard-loading-overlay"
+    id="dashboard-loading"
+    hidden
+    aria-live="polite"
+    aria-busy="true"
+  >
+
+    <div class="dashboard-loading-card">
+
+      <div class="loading-spinner"></div>
+
+      <strong>
+        Updating card
+      </strong>
+
+      <span>
+        Please wait…
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script src="../js/api.js"></script>
+
+  <script src="../js/auth.js"></script>
+
+  <script src="../js/app.js"></script>
+
+  <script src="../js/logo-loader.js"></script>
+
+  <script src="../js/logo-guard.js"></script>
+
+  <script src="../js/cards.js"></script>
+
+
+  <!-- =====================================================
+       PAGE SCRIPT
+  ====================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+
+        /* =================================================
+           YEAR
+        ================================================== */
+
+        const year =
+          document.getElementById(
+            "dashboard-current-year"
+          );
+
+        if (year) {
+
+          year.textContent =
+            new Date().getFullYear();
+
+        }
+
+
+        /* =================================================
+           MOBILE SIDEBAR
+        ================================================== */
+
+        const menuButton =
+          document.getElementById(
+            "dashboard-menu-toggle"
+          );
+
+        const sidebar =
+          document.getElementById(
+            "dashboard-sidebar"
+          );
+
+        const overlay =
+          document.getElementById(
+            "dashboard-overlay"
+          );
+
+
+        function openSidebar() {
+
+          if (sidebar) {
+
+            sidebar.classList.add(
+              "is-open"
+            );
+
+          }
+
+          if (overlay) {
+
+            overlay.classList.add(
+              "is-visible"
+            );
+
+            overlay.setAttribute(
+              "aria-hidden",
+              "false"
+            );
+
+          }
+
+          if (menuButton) {
+
+            menuButton.setAttribute(
+              "aria-expanded",
+              "true"
+            );
+
+          }
+
+          document.body.classList.add(
+            "sidebar-open"
+          );
+
+        }
+
+
+        function closeSidebar() {
+
+          if (sidebar) {
+
+            sidebar.classList.remove(
+              "is-open"
+            );
+
+          }
+
+          if (overlay) {
+
+            overlay.classList.remove(
+              "is-visible"
+            );
+
+            overlay.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+          }
+
+          if (menuButton) {
+
+            menuButton.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+          }
+
+          document.body.classList.remove(
+            "sidebar-open"
+          );
+
+        }
+
+
+        if (menuButton) {
+
+          menuButton.addEventListener(
+            "click",
+            function () {
+
+              if (
+                sidebar &&
+                sidebar.classList.contains(
+                  "is-open"
+                )
+              ) {
+
+                closeSidebar();
+
+              } else {
+
+                openSidebar();
+
+              }
+
+            }
+          );
+
+        }
+
+
+        if (overlay) {
+
+          overlay.addEventListener(
+            "click",
+            closeSidebar
+          );
+
+        }
+
+
+        /* =================================================
+           NOTIFICATIONS
+        ================================================== */
+
+        const notificationButton =
+          document.getElementById(
+            "notification-button"
+          );
+
+        const notificationPanel =
+          document.getElementById(
+            "notification-panel"
+          );
+
+
+        if (
+          notificationButton &&
+          notificationPanel
+        ) {
+
+          notificationButton.addEventListener(
+            "click",
+            function () {
+
+              const open =
+                !notificationPanel.hidden;
+
+              notificationPanel.hidden =
+                open;
+
+              notificationButton.setAttribute(
+                "aria-expanded",
+                String(!open)
+              );
+
+            }
+          );
+
+        }
+
+
+        /* =================================================
+           CARD DETAILS
+        ================================================== */
+
+        const toggleDetails =
+          document.getElementById(
+            "toggle-card-details"
+          );
+
+        const primaryCard =
+          document.getElementById(
+            "primary-card"
+          );
+
+
+        if (
+          toggleDetails &&
+          primaryCard
+        ) {
+
+          toggleDetails.addEventListener(
+            "click",
+            function () {
+
+              const revealed =
+                primaryCard.classList.toggle(
+                  "show-details"
+                );
+
+
+              toggleDetails.textContent =
+                revealed
+                  ? "Hide card details"
+                  : "Show card details";
+
+
+              toggleDetails.setAttribute(
+                "aria-pressed",
+                String(revealed)
+              );
+
+            }
+          );
+
+        }
+
+
+        /* =================================================
+           CARD CONTROL SWITCHES
+        ================================================== */
+
+        const controlIds = [
+
+          "card-enabled",
+          "online-payments",
+          "contactless-payments"
+
+        ];
+
+
+        controlIds.forEach(
+          function (id) {
+
+            const control =
+              document.getElementById(
+                id
+              );
+
+
+            if (!control) {
+              return;
+            }
+
+
+            control.addEventListener(
+              "change",
+              function () {
+
+                const label =
+                  id
+                    .replace(
+                      /-/g,
+                      " "
+                    );
+
+
+                showToast(
+                  label +
+                  (
+                    control.checked
+                      ? " enabled."
+                      : " disabled."
+                  ),
+                  "success"
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        /* =================================================
+           CARD ACTION MODAL
+        ================================================== */
+
+        const actionModal =
+          document.getElementById(
+            "card-action-modal"
+          );
+
+        const actionTitle =
+          document.getElementById(
+            "card-modal-title"
+          );
+
+        const actionHeading =
+          document.getElementById(
+            "card-modal-heading"
+          );
+
+        const actionDescription =
+          document.getElementById(
+            "card-modal-description"
+          );
+
+
+        const actionDescriptions = {
+
+          freeze: {
+
+            title: "Freeze your card",
+
+            heading:
+              "Temporarily freeze this card?",
+
+            description:
+              "Freezing will disable simulated card activity until the card is enabled again."
+
+          },
+
+          replace: {
+
+            title: "Replace your card",
+
+            heading:
+              "Request a replacement card?",
+
+            description:
+              "A simulated replacement-card request will be created for this account."
+
+          },
+
+          pin: {
+
+            title: "Card PIN",
+
+            heading:
+              "Manage your simulated PIN",
+
+            description:
+              "You can use this area to manage simulated PIN settings."
+
+          },
+
+          limits: {
+
+            title: "Spending limits",
+
+            heading:
+              "Review spending limits",
+
+            description:
+              "Your current simulated card spending limit is $5,000.00."
+
+          }
+
+        };
+
+
+        let selectedAction =
+          null;
+
+
+        function openActionModal(
+          action
+        ) {
+
+          selectedAction =
+            action;
+
+
+          const data =
+            actionDescriptions[action];
+
+
+          if (!data) {
+            return;
+          }
+
+
+          if (actionTitle) {
+
+            actionTitle.textContent =
+              data.title;
+
+          }
+
+
+          if (actionHeading) {
+
+            actionHeading.textContent =
+              data.heading;
+
+          }
+
+
+          if (actionDescription) {
+
+            actionDescription.textContent =
+              data.description;
+
+          }
+
+
+          if (actionModal) {
+
+            actionModal.hidden =
+              false;
+
+            actionModal.setAttribute(
+              "aria-hidden",
+              "false"
+            );
+
+            document.body.classList.add(
+              "modal-open"
+            );
+
+          }
+
+        }
+
+
+        function closeActionModal() {
+
+          if (actionModal) {
+
+            actionModal.hidden =
+              true;
+
+            actionModal.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
+          }
+
+          document.body.classList.remove(
+            "modal-open"
+          );
+
+          selectedAction =
+            null;
+
+        }
+
+
+        document
+          .querySelectorAll(
+            "[data-card-action]"
+          )
+          .forEach(
+            function (button) {
+
+              button.addEventListener(
+                "click",
+                function () {
+
+                  openActionModal(
+                    button.dataset.cardAction
+                  );
+
+                }
+              );
+
+            }
+          );
+
+
+        const closeCardModal =
+          document.getElementById(
+            "close-card-modal"
+          );
+
+
+        const cancelCardAction =
+          document.getElementById(
+            "cancel-card-action"
+          );
+
+
+        if (closeCardModal) {
+
+          closeCardModal.addEventListener(
+            "click",
+            closeActionModal
+          );
+
+        }
+
+
+        if (cancelCardAction) {
+
+          cancelCardAction.addEventListener(
+            "click",
+            closeActionModal
+          );
+
+        }
+
+
+        if (actionModal) {
+
+          actionModal.addEventListener(
+            "click",
+            function (event) {
+
+              if (
+                event.target ===
+                actionModal
+              ) {
+
+                closeActionModal();
+
+              }
+
+            }
+          );
+
+        }
+
+
+        /* =================================================
+           CONFIRM CARD ACTION
+        ================================================== */
+
+        const confirmAction =
+          document.getElementById(
+            "confirm-card-action"
+          );
+
+
+        if (confirmAction) {
+
+          confirmAction.addEventListener(
+            "click",
+            function () {
+
+              if (
+                selectedAction ===
+                "freeze"
+              ) {
+
+                const enabled =
+                  document.getElementById(
+                    "card-enabled"
+                  );
+
+
+                if (enabled) {
+
+                  enabled.checked =
+                    false;
+
+                  enabled.dispatchEvent(
+                    new Event(
+                      "change"
+                    )
+                  );
+
+                }
+
+
+                closeActionModal();
+
+
+                showToast(
+                  "The simulated card has been frozen.",
+                  "success"
+                );
+
+
+                return;
+
+              }
+
+
+              closeActionModal();
+
+
+              showToast(
+                "The simulated card action has been recorded.",
+                "success"
+              );
+
+            }
+          );
+
+        }
+
+
+        /* =================================================
+           REQUEST CARD MODAL
+        ================================================== */
+
+        const requestButton =
+          document.getElementById(
+            "request-card-button"
+          );
+
+        const requestModal =
+          document.getElementById(
+            "request-card-modal"
+          );
+
+        const closeRequestModalButton =
+          document.getElementById(
+            "close-request-card-modal"
+          );
+
+        const cancelRequest =
+          document.getElementById(
+            "cancel-request-card"
+          );
+
+        const requestForm =
+          document.getElementById(
+            "request-card-form"
+          );
+
+
+        function openRequestModal() {
+
+          if (!requestModal) {
+            return;
+          }
+
+          requestModal.hidden =
+            false;
+
+          requestModal.setAttribute(
+            "aria-hidden",
+            "false"
+          );
+
+          document.body.classList.add(
+            "modal-open"
+          );
+
+        }
+
+
+        function closeRequestModal() {
+
+          if (!requestModal) {
+            return;
+          }
+
+          requestModal.hidden =
+            true;
+
+          requestModal.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+          document.body.classList.remove(
+            "modal-open"
+          );
+
+        }
+
+
+        if (requestButton) {
+
+          requestButton.addEventListener(
+            "click",
+            openRequestModal
+          );
+
+        }
+
+
+        if (closeRequestModalButton) {
+
+          closeRequestModalButton.addEventListener(
+            "click",
+            closeRequestModal
+          );
+
+        }
+
+
+        if (cancelRequest) {
+
+          cancelRequest.addEventListener(
+            "click",
+            closeRequestModal
+          );
+
+        }
+
+
+        if (requestModal) {
+
+          requestModal.addEventListener(
+            "click",
+            function (event) {
+
+              if (
+                event.target ===
+                requestModal
+              ) {
+
+                closeRequestModal();
+
+              }
+
+            }
+          );
+
+        }
+
+
+        if (requestForm) {
+
+          requestForm.addEventListener(
+            "submit",
+            function (event) {
+
+              event.preventDefault();
+
+
+              closeRequestModal();
+
+
+              requestForm.reset();
+
+
+              showToast(
+                "Your simulated card request has been submitted.",
+                "success"
+              );
+
+            }
+          );
+
+        }
+
+
+        /* =================================================
+           LOGOUT
+        ================================================== */
+
+        const logoutButton =
+          document.getElementById(
+            "sidebar-logout"
+          );
+
+
+        if (logoutButton) {
+
+          logoutButton.addEventListener(
+            "click",
+            async function () {
+
+              logoutButton.disabled =
+                true;
+
+
+              try {
+
+                if (
+                  window.GTF_AUTH &&
+                  typeof
+                    window.GTF_AUTH.logout ===
+                      "function"
+                ) {
+
+                  await
+                    window.GTF_AUTH.logout();
+
+                } else {
+
+                  window.location.href =
+                    "../login.html";
+
+                }
+
+              } catch (error) {
+
+                console.error(
+                  "Logout failed:",
+                  error
+                );
+
+
+                window.location.href =
+                  "../login.html";
+
+              }
+
+            }
+          );
+
+        }
+
+
+        /* =================================================
+           TOAST
+        ================================================== */
+
+        function showToast(
+          message,
+          type
+        ) {
+
+          const container =
+            document.getElementById(
+              "toast-container"
+            );
+
+
+          if (!container) {
+            return;
+          }
+
+
+          const toast =
+            document.createElement(
+              "div"
+            );
+
+
+          toast.className =
+            "toast toast-" +
+            (
+              type ||
+              "info"
+            );
+
+
+          toast.setAttribute(
+            "role",
+            "status"
+          );
+
+
+          const icon =
+            type === "error"
+              ? "!"
+              : "✓";
+
+
+          const iconElement =
+            document.createElement(
+              "span"
+            );
+
+          iconElement.className =
+            "toast-icon";
+
+          iconElement.textContent =
+            icon;
+
+
+          const messageElement =
+            document.createElement(
+              "span"
+            );
+
+          messageElement.className =
+            "toast-message";
+
+          messageElement.textContent =
+            message;
+
+
+          toast.appendChild(
+            iconElement
+          );
+
+          toast.appendChild(
+            messageElement
+          );
+
+
+          container.appendChild(
+            toast
+          );
+
+
+          window.setTimeout(
+            function () {
+
+              toast.classList.add(
+                "toast-leaving"
+              );
+
+
+              window.setTimeout(
+                function () {
+
+                  toast.remove();
+
+                },
+                250
+              );
+
+            },
+            4000
+          );
+
+        }
+
+
+        /* =================================================
+           ESCAPE KEY
+        ================================================== */
+
+        document.addEventListener(
+          "keydown",
+          function (event) {
+
+            if (
+              event.key !==
+              "Escape"
+            ) {
+
+              return;
+
+            }
+
+
+            closeSidebar();
+
+            closeActionModal();
+
+            closeRequestModal();
+
+
+            if (
+              notificationPanel
+            ) {
+
+              notificationPanel.hidden =
+                true;
+
+
+              if (
+                notificationButton
+              ) {
+
+                notificationButton.setAttribute(
+                  "aria-expanded",
+                  "false"
+                );
+
+              }
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
