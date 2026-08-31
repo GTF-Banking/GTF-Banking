@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="description"
+    content="Global TrustFund Manager Dashboard"
+  >
+
+  <title>Manager Dashboard | Global TrustFund</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .manager-page {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .manager-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .manager-header h1 {
+      margin: 0;
+    }
+
+    .manager-header p {
+      margin: 7px 0 0;
+      opacity: .65;
+    }
+
+    .manager-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .manager-status {
+      display: none;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .manager-status.show {
+      display: block;
+    }
+
+    .manager-status.success {
+      background: #d1e7dd;
+      color: #146c43;
+    }
+
+    .manager-status.error {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .manager-status.info {
+      background: #cff4fc;
+      color: #055160;
+    }
+
+    .manager-stats {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .manager-stat {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,.04);
+    }
+
+    .manager-stat-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(11,61,46,.08);
+      font-size: 21px;
+    }
+
+    .manager-stat-label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: .05em;
+      opacity: .58;
+    }
+
+    .manager-stat-value {
+      display: block;
+      margin-top: 5px;
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .manager-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 2fr)
+        minmax(300px, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .manager-panel {
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,.04);
+    }
+
+    .manager-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+
+    .manager-panel-header h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .manager-panel-header p {
+      margin: 5px 0 0;
+      font-size: 11px;
+      opacity: .58;
+    }
+
+    .manager-panel-link {
+      color: #0b3d2e;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .quick-action {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 9px;
+      color: inherit;
+      text-decoration: none;
+      transition:
+        transform .15s ease,
+        background .15s ease;
+    }
+
+    .quick-action:hover {
+      transform: translateY(-1px);
+      background: rgba(11,61,46,.035);
+    }
+
+    .quick-action-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: rgba(11,61,46,.08);
+    }
+
+    .quick-action strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .quick-action small {
+      display: block;
+      margin-top: 3px;
+      font-size: 10px;
+      opacity: .55;
+    }
+
+    .activity-list {
+      padding: 4px 20px 10px;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+
+    .activity-item:last-child {
+      border-bottom: 0;
+    }
+
+    .activity-marker {
+      width: 8px;
+      height: 8px;
+      margin-top: 5px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #0b3d2e;
+    }
+
+    .activity-content strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .activity-content p {
+      margin: 3px 0;
+      font-size: 11px;
+      opacity: .68;
+    }
+
+    .activity-content small {
+      font-size: 9px;
+      opacity: .48;
+    }
+
+    .queue-list {
+      padding: 8px 18px 15px;
+    }
+
+    .queue-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .queue-item:last-child {
+      border-bottom: 0;
+    }
+
+    .queue-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(11,61,46,.08);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .queue-content {
+      flex: 1;
+    }
+
+    .queue-content strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .queue-content small {
+      display: block;
+      margin-top: 3px;
+      font-size: 9px;
+      opacity: .55;
+    }
+
+    .queue-count {
+      min-width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: #0b3d2e;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .performance-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .performance-table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+    }
+
+    .performance-table th,
+    .performance-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      font-size: 11px;
+    }
+
+    .performance-table th {
+      background: rgba(11,61,46,.035);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      opacity: .6;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .status-active {
+      background: #d1e7dd;
+      color: #146c43;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-review {
+      background: #cff4fc;
+      color: #055160;
+    }
+
+    .empty-state {
+      padding: 35px 20px;
+      text-align: center;
+      font-size: 11px;
+      opacity: .55;
+    }
+
+    @media (max-width: 1100px) {
+      .manager-stats {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .manager-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .manager-page {
+        padding: 15px;
+      }
+
+      .manager-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .manager-actions {
+        width: 100%;
+      }
+
+      .manager-actions button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Shared application header -->
+  <div id="app-header"></div>
+
+  <main class="manager-page">
+
+    <!-- Header -->
+    <section class="manager-header">
+
+      <div>
+
+        <h1>
+          Manager Dashboard
+        </h1>
+
+        <p>
+          Monitor operational activity, customers,
+          accounts and review queues.
+        </p>
+
+      </div>
+
+      <div class="manager-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="refreshButton"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+    </section>
+
+    <div
+      id="managerStatus"
+      class="manager-status"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <!-- KPI statistics -->
+    <section
+      class="manager-stats"
+      aria-label="Manager statistics"
+    >
+
+      <article class="manager-stat">
+
+        <div class="manager-stat-icon">
+          👥
+        </div>
+
+        <div>
+          <span class="manager-stat-label">
+            Customers
+          </span>
+
+          <strong
+            id="customersCount"
+            class="manager-stat-value"
+          >
+            —
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="manager-stat">
+
+        <div class="manager-stat-icon">
+          🏦
+        </div>
+
+        <div>
+          <span class="manager-stat-label">
+            Accounts
+          </span>
+
+          <strong
+            id="accountsCount"
+            class="manager-stat-value"
+          >
+            —
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="manager-stat">
+
+        <div class="manager-stat-icon">
+          💳
+        </div>
+
+        <div>
+          <span class="manager-stat-label">
+            Transactions
+          </span>
+
+          <strong
+            id="transactionsCount"
+            class="manager-stat-value"
+          >
+            —
+          </strong>
+        </div>
+
+      </article>
+
+      <article class="manager-stat">
+
+        <div class="manager-stat-icon">
+          ⚠
+        </div>
+
+        <div>
+          <span class="manager-stat-label">
+            Pending Reviews
+          </span>
+
+          <strong
+            id="reviewsCount"
+            class="manager-stat-value"
+          >
+            —
+          </strong>
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- Operations + review queue -->
+    <section class="manager-grid">
+
+      <article class="manager-panel">
+
+        <header class="manager-panel-header">
+
+          <div>
+
+            <h2>
+              Management Tools
+            </h2>
+
+            <p>
+              Access commonly used operational tools.
+            </p>
+
+          </div>
+
+        </header>
+
+        <div class="quick-actions">
+
+          <a
+            href="../admin/customers.html"
+            class="quick-action"
+          >
+
+            <span class="quick-action-icon">
+              👥
+            </span>
+
+            <span>
+              <strong>
+                Customers
+              </strong>
+
+              <small>
+                Review customer records
+              </small>
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/accounts.html"
+            class="quick-action"
+          >
+
+            <span class="quick-action-icon">
+              🏦
+            </span>
+
+            <span>
+              <strong>
+                Accounts
+              </strong>
+
+              <small>
+                Review account activity
+              </small>
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/transactions.html"
+            class="quick-action"
+          >
+
+            <span class="quick-action-icon">
+              💳
+            </span>
+
+            <span>
+              <strong>
+                Transactions
+              </strong>
+
+              <small>
+                Monitor transactions
+              </small>
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/compliance.html"
+            class="quick-action"
+          >
+
+            <span class="quick-action-icon">
+              🛡
+            </span>
+
+            <span>
+              <strong>
+                Compliance
+              </strong>
+
+              <small>
+                Review verification items
+              </small>
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/reports.html"
+            class="quick-action"
+          >
+
+            <span class="quick-action-icon">
+              📊
+            </span>
+
+            <span>
+              <strong>
+                Reports
+              </strong>
+
+              <small>
+                View operational reports
+              </small>
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/support.html"
+            class="quick-action"
+          >
+
+            <span class="quick-action-icon">
+              💬
+            </span>
+
+            <span>
+              <strong>
+                Support
+              </strong>
+
+              <small>
+                Manage support requests
+              </small>
+            </span>
+
+          </a>
+
+        </div>
+
+      </article>
+
+      <article class="manager-panel">
+
+        <header class="manager-panel-header">
+
+          <div>
+
+            <h2>
+              Review Queue
+            </h2>
+
+            <p>
+              Items requiring attention.
+            </p>
+
+          </div>
+
+        </header>
+
+        <div class="queue-list">
+
+          <a
+            href="../admin/compliance.html"
+            class="queue-item"
+          >
+
+            <span class="queue-icon">
+              KYC
+            </span>
+
+            <span class="queue-content">
+
+              <strong>
+                Verification Reviews
+              </strong>
+
+              <small>
+                Customer verification
+              </small>
+
+            </span>
+
+            <span
+              id="kycCount"
+              class="queue-count"
+            >
+              —
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/transactions.html"
+            class="queue-item"
+          >
+
+            <span class="queue-icon">
+              TX
+            </span>
+
+            <span class="queue-content">
+
+              <strong>
+                Transaction Reviews
+              </strong>
+
+              <small>
+                Transactions requiring review
+              </small>
+
+            </span>
+
+            <span
+              id="transactionReviewCount"
+              class="queue-count"
+            >
+              —
+            </span>
+
+          </a>
+
+          <a
+            href="../admin/accounts.html"
+            class="queue-item"
+          >
+
+            <span class="queue-icon">
+              AC
+            </span>
+
+            <span class="queue-content">
+
+              <strong>
+                Account Requests
+              </strong>
+
+              <small>
+                Account-related activity
+              </small>
+
+            </span>
+
+            <span
+              id="accountReviewCount"
+              class="queue-count"
+            >
+              —
+            </span>
+
+          </a>
+
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- Recent activity -->
+    <section class="manager-panel">
+
+      <header class="manager-panel-header">
+
+        <div>
+
+          <h2>
+            Recent Activity
+          </h2>
+
+          <p>
+            Latest operational events.
+          </p>
+
+        </div>
+
+        <a
+          href="../admin/audit.html"
+          class="manager-panel-link"
+        >
+          View Audit
+        </a>
+
+      </header>
+
+      <div
+        id="activityList"
+        class="activity-list"
+      >
+
+        <div class="empty-state">
+          Loading activity...
+        </div>
+
+      </div>
+
+    </section>
+
+    <br>
+
+    <!-- Operational summary -->
+    <section class="manager-panel">
+
+      <header class="manager-panel-header">
+
+        <div>
+
+          <h2>
+            Operational Summary
+          </h2>
+
+          <p>
+            Current management-level indicators.
+          </p>
+
+        </div>
+
+      </header>
+
+      <div class="performance-table-wrapper">
+
+        <table class="performance-table">
+
+          <thead>
+
+            <tr>
+              <th>Area</th>
+              <th>Current Status</th>
+              <th>Volume</th>
+              <th>Review State</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+
+              <td>
+                Customer Operations
+              </td>
+
+              <td>
+                <span
+                  id="customerOpsStatus"
+                  class="status-pill status-active"
+                >
+                  Active
+                </span>
+              </td>
+
+              <td id="customerOpsVolume">
+                —
+              </td>
+
+              <td>
+                <span
+                  id="customerOpsReview"
+                  class="status-pill status-review"
+                >
+                  Monitoring
+                </span>
+              </td>
+
+            </tr>
+
+            <tr>
+
+              <td>
+                Account Operations
+              </td>
+
+              <td>
+                <span
+                  id="accountOpsStatus"
+                  class="status-pill status-active"
+                >
+                  Active
+                </span>
+              </td>
+
+              <td id="accountOpsVolume">
+                —
+              </td>
+
+              <td>
+                <span
+                  id="accountOpsReview"
+                  class="status-pill status-review"
+                >
+                  Monitoring
+                </span>
+              </td>
+
+            </tr>
+
+            <tr>
+
+              <td>
+                Transaction Operations
+              </td>
+
+              <td>
+                <span
+                  id="transactionOpsStatus"
+                  class="status-pill status-active"
+                >
+                  Active
+                </span>
+              </td>
+
+              <td id="transactionOpsVolume">
+                —
+              </td>
+
+              <td>
+                <span
+                  id="transactionOpsReview"
+                  class="status-pill status-review"
+                >
+                  Monitoring
+                </span>
+              </td>
+
+            </tr>
+
+            <tr>
+
+              <td>
+                Compliance Operations
+              </td>
+
+              <td>
+                <span
+                  id="complianceOpsStatus"
+                  class="status-pill status-pending"
+                >
+                  Review
+                </span>
+              </td>
+
+              <td id="complianceOpsVolume">
+                —
+              </td>
+
+              <td>
+                <span
+                  id="complianceOpsReview"
+                  class="status-pill status-pending"
+                >
+                  Attention
+                </span>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+
+      "use strict";
+
+      const $ = id =>
+        document.getElementById(id);
+
+      const state = {
+        data: {}
+      };
+
+      const el = {
+        status:
+          $("managerStatus"),
+
+        refresh:
+          $("refreshButton"),
+
+        customers:
+          $("customersCount"),
+
+        accounts:
+          $("accountsCount"),
+
+        transactions:
+          $("transactionsCount"),
+
+        reviews:
+          $("reviewsCount"),
+
+        kyc:
+          $("kycCount"),
+
+        transactionReviews:
+          $("transactionReviewCount"),
+
+        accountReviews:
+          $("accountReviewCount"),
+
+        activity:
+          $("activityList"),
+
+        customerOpsVolume:
+          $("customerOpsVolume"),
+
+        accountOpsVolume:
+          $("accountOpsVolume"),
+
+        transactionOpsVolume:
+          $("transactionOpsVolume"),
+
+        complianceOpsVolume:
+          $("complianceOpsVolume")
+      };
+
+      function formatNumber(value) {
+
+        const n =
+          Number(value);
+
+        return Number.isFinite(n)
+          ? n.toLocaleString()
+          : "—";
+      }
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(
+            /</g,
+            "&lt;"
+          )
+          .replace(
+            />/g,
+            "&gt;"
+          )
+          .replace(
+            /"/g,
+            "&quot;"
+          )
+          .replace(
+            /'/g,
+            "&#039;"
+          );
+      }
+
+      function formatDate(value) {
+
+        if (!value) {
+          return "—";
+        }
+
+        const date =
+          new Date(value);
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return "—";
+        }
+
+        return date.toLocaleString(
+          undefined,
+          {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
+      }
+
+      function showStatus(
+        text,
+        type = "info"
+      ) {
+
+        el.status.textContent =
+          text;
+
+        el.status.className =
+          `manager-status show ${type}`;
+
+        clearTimeout(
+          showStatus.timer
+        );
+
+        showStatus.timer =
+          setTimeout(
+            () => {
+              el.status.className =
+                "manager-status";
+            },
+            5000
+          );
+      }
+
+      async function apiGet(
+        endpoint
+      ) {
+
+        if (
+          window.API &&
+          typeof window.API.get ===
+            "function"
+        ) {
+
+          return window.API.get(
+            endpoint
+          );
+        }
+
+        const response =
+          await fetch(
+            endpoint,
+            {
+              credentials:
+                "include"
+            }
+          );
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+        }
+
+        return response.json();
+      }
+
+      function normalize(
+        response
+      ) {
+
+        const payload =
+          response?.data ||
+          response ||
+          {};
+
+        return (
+          payload.summary ||
+          payload.dashboard ||
+          payload
+        );
+      }
+
+      async function loadDashboard() {
+
+        el.refresh.disabled =
+          true;
+
+        showStatus(
+          "Refreshing management dashboard...",
+          "info"
+        );
+
+        try {
+
+          const response =
+            await apiGet(
+              "/manager/dashboard/summary"
+            );
+
+          const data =
+            normalize(
+              response
+            );
+
+          state.data =
+            data;
+
+          const customers =
+            data.customers ??
+            data.total_customers ??
+            data.customer_count ??
+            0;
+
+          const accounts =
+            data.accounts ??
+            data.total_accounts ??
+            data.account_count ??
+            0;
+
+          const transactions =
+            data.transactions ??
+            data.total_transactions ??
+            data.transaction_count ??
+            0;
+
+          const reviews =
+            data.pending_reviews ??
+            data.pending ??
+            data.review_count ??
+            0;
+
+          el.customers.textContent =
+            formatNumber(
+              customers
+            );
+
+          el.accounts.textContent =
+            formatNumber(
+              accounts
+            );
+
+          el.transactions.textContent =
+            formatNumber(
+              transactions
+            );
+
+          el.reviews.textContent =
+            formatNumber(
+              reviews
+            );
+
+          el.kyc.textContent =
+            formatNumber(
+              data.pending_kyc ??
+              data.kyc_pending ??
+              reviews
+            );
+
+          el.transactionReviews.textContent =
+            formatNumber(
+              data.pending_transactions ??
+              data.transaction_reviews ??
+              0
+            );
+
+          el.accountReviews.textContent =
+            formatNumber(
+              data.pending_accounts ??
+              data.account_reviews ??
+              0
+            );
+
+          el.customerOpsVolume.textContent =
+            formatNumber(
+              customers
+            );
+
+          el.accountOpsVolume.textContent =
+            formatNumber(
+              accounts
+            );
+
+          el.transactionOpsVolume.textContent =
+            formatNumber(
+              transactions
+            );
+
+          el.complianceOpsVolume.textContent =
+            formatNumber(
+              reviews
+            );
+
+          renderActivity(
+            data.recent_activity ||
+            data.activity ||
+            data.recent_events ||
+            []
+          );
+
+          showStatus(
+            "Dashboard updated successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Manager dashboard error:",
+            error
+          );
+
+          el.customers.textContent =
+            "—";
+
+          el.accounts.textContent =
+            "—";
+
+          el.transactions.textContent =
+            "—";
+
+          el.reviews.textContent =
+            "—";
+
+          el.kyc.textContent =
+            "—";
+
+          el.transactionReviews.textContent =
+            "—";
+
+          el.accountReviews.textContent =
+            "—";
+
+          el.activity.innerHTML = `
+            <div class="empty-state">
+              Management dashboard data is currently unavailable.
+            </div>
+          `;
+
+          showStatus(
+            "Unable to load management dashboard data. Check the API connection.",
+            "error"
+          );
+
+        } finally {
+
+          el.refresh.disabled =
+            false;
+        }
+      }
+
+      function renderActivity(
+        activity
+      ) {
+
+        if (
+          !Array.isArray(activity) ||
+          activity.length === 0
+        ) {
+
+          el.activity.innerHTML = `
+            <div class="empty-state">
+              No recent activity available.
+            </div>
+          `;
+
+          return;
+        }
+
+        el.activity.innerHTML =
+          activity
+            .slice(0, 10)
+            .map(
+              item => {
+
+                const title =
+                  item.action ||
+                  item.event ||
+                  item.type ||
+                  "System event";
+
+                const description =
+                  item.description ||
+                  item.message ||
+                  item.details ||
+                  "";
+
+                const actor =
+                  item.actor_name ||
+                  item.user_name ||
+                  item.email ||
+                  item.actor ||
+                  "System";
+
+                const timestamp =
+                  item.created_at ||
+                  item.timestamp ||
+                  item.date;
+
+                return `
+                  <div class="activity-item">
+
+                    <div class="activity-marker"></div>
+
+                    <div class="activity-content">
+
+                      <strong>
+                        ${escapeHtml(title)}
+                      </strong>
+
+                      <p>
+                        ${escapeHtml(
+                          description
+                        )}
+                      </p>
+
+                      <small>
+                        ${escapeHtml(actor)}
+                        ·
+                        ${escapeHtml(
+                          formatDate(
+                            timestamp
+                          )
+                        )}
+                      </small>
+
+                    </div>
+
+                  </div>
+                `;
+              }
+            )
+            .join("");
+      }
+
+      el.refresh.addEventListener(
+        "click",
+        loadDashboard
+      );
+
+      loadDashboard();
+
+    })();
+  </script>
+
+</body>
+</html>

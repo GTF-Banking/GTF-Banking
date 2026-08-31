@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="description"
+    content="Global TrustFund Manager Portal Login"
+  >
+
+  <title>Manager Login | Global TrustFund</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+
+<body class="auth-page">
+
+  <!-- Shared application header -->
+  <div id="app-header"></div>
+
+  <main class="auth-main">
+
+    <section class="auth-card">
+
+      <!-- Brand -->
+      <div class="auth-brand">
+
+        <a
+          href="../index.html"
+          class="brand-link"
+          aria-label="Global TrustFund home"
+        >
+
+          <span class="brand-mark">
+            GT
+          </span>
+
+          <span class="brand-text">
+
+            <strong>
+              Global TrustFund
+            </strong>
+
+            <small>
+              Banking
+            </small>
+
+          </span>
+
+        </a>
+
+      </div>
+
+      <!-- Heading -->
+      <header class="auth-heading">
+
+        <span class="auth-eyebrow">
+          MANAGEMENT PORTAL
+        </span>
+
+        <h1>
+          Manager Sign In
+        </h1>
+
+        <p>
+          Sign in to access authorized management
+          and operational tools.
+        </p>
+
+      </header>
+
+      <!-- Login message -->
+      <div
+        id="loginMessage"
+        class="auth-message"
+        role="alert"
+        aria-live="polite"
+      ></div>
+
+      <!-- Login form -->
+      <form
+        id="managerLoginForm"
+        class="auth-form"
+        novalidate
+      >
+
+        <!-- Email -->
+        <div class="form-group">
+
+          <label for="email">
+            Email Address
+          </label>
+
+          <input
+            id="email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="username"
+            placeholder="Enter your email"
+            required
+          >
+
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+          <div class="password-field">
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              required
+            >
+
+            <button
+              id="togglePassword"
+              class="password-toggle"
+              type="button"
+              aria-label="Show password"
+              aria-pressed="false"
+            >
+              Show
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Options -->
+        <div class="auth-options">
+
+          <label class="checkbox-label">
+
+            <input
+              id="rememberMe"
+              name="rememberMe"
+              type="checkbox"
+            >
+
+            <span>
+              Keep me signed in
+            </span>
+
+          </label>
+
+          <a
+            href="../support.html"
+            class="auth-link"
+          >
+            Need help?
+          </a>
+
+        </div>
+
+        <!-- Submit -->
+        <button
+          id="loginButton"
+          type="submit"
+          class="btn btn-primary auth-submit"
+        >
+
+          <span id="loginButtonText">
+            Sign In
+          </span>
+
+          <span
+            id="loginSpinner"
+            class="auth-spinner"
+            aria-hidden="true"
+            hidden
+          ></span>
+
+        </button>
+
+      </form>
+
+      <!-- Security notice -->
+      <div class="auth-divider">
+        <span>Authorized Access</span>
+      </div>
+
+      <div class="auth-security-note">
+
+        <span
+          class="security-icon"
+          aria-hidden="true"
+        >
+          🔒
+        </span>
+
+        <p>
+          This portal is restricted to authorized
+          Global TrustFund management personnel.
+        </p>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="auth-footer-links">
+
+        <a href="../index.html">
+          Back to Global TrustFund
+        </a>
+
+        <span aria-hidden="true">
+          ·
+        </span>
+
+        <a href="../privacy.html">
+          Privacy
+        </a>
+
+        <span aria-hidden="true">
+          ·
+        </span>
+
+        <a href="../security.html">
+          Security
+        </a>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+  <!-- Shared scripts -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+
+      "use strict";
+
+      const form =
+        document.getElementById(
+          "managerLoginForm"
+        );
+
+      const email =
+        document.getElementById(
+          "email"
+        );
+
+      const password =
+        document.getElementById(
+          "password"
+        );
+
+      const rememberMe =
+        document.getElementById(
+          "rememberMe"
+        );
+
+      const message =
+        document.getElementById(
+          "loginMessage"
+        );
+
+      const loginButton =
+        document.getElementById(
+          "loginButton"
+        );
+
+      const loginButtonText =
+        document.getElementById(
+          "loginButtonText"
+        );
+
+      const loginSpinner =
+        document.getElementById(
+          "loginSpinner"
+        );
+
+      const togglePassword =
+        document.getElementById(
+          "togglePassword"
+        );
+
+      function showMessage(
+        text,
+        type = "error"
+      ) {
+
+        message.textContent =
+          text;
+
+        message.className =
+          `auth-message show ${type}`;
+
+      }
+
+      function clearMessage() {
+
+        message.textContent =
+          "";
+
+        message.className =
+          "auth-message";
+
+      }
+
+      function setLoading(
+        loading
+      ) {
+
+        loginButton.disabled =
+          loading;
+
+        email.disabled =
+          loading;
+
+        password.disabled =
+          loading;
+
+        rememberMe.disabled =
+          loading;
+
+        loginSpinner.hidden =
+          !loading;
+
+        loginButtonText.textContent =
+          loading
+            ? "Signing In..."
+            : "Sign In";
+
+      }
+
+      function isValidEmail(
+        value
+      ) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          .test(value);
+
+      }
+
+      async function login(
+        emailValue,
+        passwordValue
+      ) {
+
+        /*
+         * Use the shared authentication
+         * module whenever available.
+         */
+        if (
+          window.Auth &&
+          typeof window.Auth.login ===
+            "function"
+        ) {
+
+          return window.Auth.login(
+            emailValue,
+            passwordValue
+          );
+
+        }
+
+        if (
+          window.auth &&
+          typeof window.auth.login ===
+            "function"
+        ) {
+
+          return window.auth.login(
+            emailValue,
+            passwordValue
+          );
+
+        }
+
+        /*
+         * Otherwise use the shared API
+         * wrapper.
+         */
+        if (
+          window.API &&
+          typeof window.API.post ===
+            "function"
+        ) {
+
+          return window.API.post(
+            "/auth/login",
+            {
+              email:
+                emailValue,
+
+              password:
+                passwordValue
+            }
+          );
+
+        }
+
+        throw new Error(
+          "Authentication service is not available."
+        );
+      }
+
+      function extractRole(
+        result
+      ) {
+
+        return String(
+          result?.user?.role ||
+          result?.user?.user_role ||
+          result?.role ||
+          result?.user_role ||
+          ""
+        ).toLowerCase();
+
+      }
+
+      function isAuthorizedManager(
+        result
+      ) {
+
+        const role =
+          extractRole(result);
+
+        /*
+         * If the backend did not include
+         * role information, allow the
+         * backend to remain authoritative.
+         */
+        if (!role) {
+          return true;
+        }
+
+        return (
+          role === "manager" ||
+          role === "branch_manager" ||
+          role === "operations_manager" ||
+          role === "admin" ||
+          role === "administrator"
+        );
+
+      }
+
+      function saveSession(
+        result
+      ) {
+
+        if (
+          !result ||
+          typeof result !==
+            "object"
+        ) {
+          return;
+        }
+
+        const storage =
+          rememberMe.checked
+            ? localStorage
+            : sessionStorage;
+
+        if (
+          result.access_token
+        ) {
+
+          storage.setItem(
+            "access_token",
+            result.access_token
+          );
+
+        }
+
+        if (
+          result.refresh_token
+        ) {
+
+          storage.setItem(
+            "refresh_token",
+            result.refresh_token
+          );
+
+        }
+
+        if (
+          result.session
+        ) {
+
+          storage.setItem(
+            "auth_session",
+            JSON.stringify(
+              result.session
+            )
+          );
+
+        }
+
+        if (
+          result.user
+        ) {
+
+          storage.setItem(
+            "auth_user",
+            JSON.stringify(
+              result.user
+            )
+          );
+
+        }
+
+        storage.setItem(
+          "portal_role",
+          "manager"
+        );
+
+      }
+
+      form.addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+          const emailValue =
+            email.value.trim();
+
+          const passwordValue =
+            password.value;
+
+          if (!emailValue) {
+
+            showMessage(
+              "Please enter your email address."
+            );
+
+            email.focus();
+
+            return;
+          }
+
+          if (
+            !isValidEmail(
+              emailValue
+            )
+          ) {
+
+            showMessage(
+              "Please enter a valid email address."
+            );
+
+            email.focus();
+
+            return;
+          }
+
+          if (!passwordValue) {
+
+            showMessage(
+              "Please enter your password."
+            );
+
+            password.focus();
+
+            return;
+          }
+
+          setLoading(true);
+
+          try {
+
+            const result =
+              await login(
+                emailValue,
+                passwordValue
+              );
+
+            if (
+              result &&
+              result.success === false
+            ) {
+
+              throw new Error(
+                result.message ||
+                "Unable to sign in."
+              );
+
+            }
+
+            if (
+              !isAuthorizedManager(
+                result
+              )
+            ) {
+
+              throw new Error(
+                "This account is not authorized for the manager portal."
+              );
+
+            }
+
+            saveSession(
+              result
+            );
+
+            showMessage(
+              "Sign in successful. Redirecting...",
+              "success"
+            );
+
+            window.setTimeout(
+              () => {
+
+                window.location.replace(
+                  "./index.html"
+                );
+
+              },
+              500
+            );
+
+          } catch (error) {
+
+            console.error(
+              "Manager authentication error:",
+              error
+            );
+
+            showMessage(
+              error?.message ||
+              "Unable to sign in. Please check your credentials and try again.",
+              "error"
+            );
+
+            setLoading(false);
+
+          }
+
+        }
+      );
+
+      togglePassword.addEventListener(
+        "click",
+        () => {
+
+          const isVisible =
+            password.type ===
+            "text";
+
+          password.type =
+            isVisible
+              ? "password"
+              : "text";
+
+          togglePassword.textContent =
+            isVisible
+              ? "Show"
+              : "Hide";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            isVisible
+              ? "Show password"
+              : "Hide password"
+          );
+
+          togglePassword.setAttribute(
+            "aria-pressed",
+            String(!isVisible)
+          );
+
+        }
+      );
+
+      email.addEventListener(
+        "input",
+        clearMessage
+      );
+
+      password.addEventListener(
+        "input",
+        clearMessage
+      );
+
+    })();
+  </script>
+
+</body>
+</html>
