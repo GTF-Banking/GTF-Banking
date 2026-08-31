@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Account — Global TrustFund</title>
+
+  <meta
+    name="description"
+    content="Create a Global TrustFund digital banking simulation account."
+  >
+
+  <meta name="theme-color" content="#0b3d2e">
+
+  <link rel="icon" href="assets/gtf-logo.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <!-- =====================================================
+       AUTH PAGE
+  ====================================================== -->
+
+  <div class="auth-page">
+
+    <!-- Decorative background -->
+    <div class="auth-background" aria-hidden="true">
+      <div class="auth-glow auth-glow-one"></div>
+      <div class="auth-glow auth-glow-two"></div>
+    </div>
+
+
+    <!-- ===================================================
+         AUTH HEADER
+    ==================================================== -->
+
+    <header class="auth-header">
+
+      <div class="container">
+
+        <a
+          href="index.html"
+          class="logo-link"
+          aria-label="Return to Global TrustFund home"
+        >
+
+          <span class="logo-mark">
+            GTF
+          </span>
+
+          <span class="logo-text">
+
+            <strong>
+              Global TrustFund
+            </strong>
+
+            <small>
+              Banking
+            </small>
+
+          </span>
+
+        </a>
+
+
+        <a
+          href="index.html"
+          class="auth-back-link"
+        >
+          ← Back to Home
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- ===================================================
+         SIGNUP MAIN
+    ==================================================== -->
+
+    <main class="auth-main">
+
+      <div class="auth-card wide">
+
+        <!-- =================================================
+             BRAND
+        ================================================== -->
+
+        <div class="auth-logo">
+
+          <a
+            href="index.html"
+            class="logo-link"
+            aria-label="Global TrustFund"
+          >
+
+            <span class="logo-mark">
+              GTF
+            </span>
+
+            <span class="logo-text">
+
+              <strong>
+                Global TrustFund
+              </strong>
+
+              <small>
+                Banking
+              </small>
+
+            </span>
+
+          </a>
+
+        </div>
+
+
+        <!-- =================================================
+             HEADING
+        ================================================== -->
+
+        <div class="auth-heading">
+
+          <span class="section-kicker">
+            Get started
+          </span>
+
+          <h1 class="auth-title">
+            Create your account
+          </h1>
+
+          <p class="auth-subtitle">
+            Join the Global TrustFund digital banking simulation platform.
+          </p>
+
+        </div>
+
+
+        <!-- =================================================
+             ALERT
+        ================================================== -->
+
+        <div
+          id="alert-box"
+          role="alert"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- =================================================
+             SIGNUP FORM
+        ================================================== -->
+
+        <form
+          id="signup-form"
+          novalidate
+          autocomplete="on"
+        >
+
+          <!-- =================================================
+               PERSONAL INFORMATION
+          ================================================== -->
+
+          <div class="form-section">
+
+            <div class="form-section-heading">
+
+              <span class="form-section-number">
+                01
+              </span>
+
+              <div>
+
+                <h2>
+                  Personal information
+                </h2>
+
+                <p>
+                  Enter the name associated with your account.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+              <!-- First name -->
+
+              <div class="form-group">
+
+                <label
+                  class="form-label"
+                  for="first_name"
+                >
+                  First name
+                </label>
+
+                <input
+                  class="form-control"
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  placeholder="First name"
+                  autocomplete="given-name"
+                  required
+                >
+
+              </div>
+
+
+              <!-- Last name -->
+
+              <div class="form-group">
+
+                <label
+                  class="form-label"
+                  for="last_name"
+                >
+                  Last name
+                </label>
+
+                <input
+                  class="form-control"
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  placeholder="Last name"
+                  autocomplete="family-name"
+                  required
+                >
+
+              </div>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+              <label
+                class="form-label"
+                for="email"
+              >
+                Email address
+              </label>
+
+              <input
+                class="form-control"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                inputmode="email"
+                required
+              >
+
+              <p class="form-hint">
+                We'll use this address for account notifications and verification.
+              </p>
+
+            </div>
+
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+              <label
+                class="form-label"
+                for="phone"
+              >
+                Phone number
+              </label>
+
+              <input
+                class="form-control"
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+234 800 000 0000"
+                autocomplete="tel"
+                inputmode="tel"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               ACCOUNT DETAILS
+          ================================================== -->
+
+          <div class="form-section">
+
+            <div class="form-section-heading">
+
+              <span class="form-section-number">
+                02
+              </span>
+
+              <div>
+
+                <h2>
+                  Account details
+                </h2>
+
+                <p>
+                  Select the type of account you want to create.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+              <!-- Account type -->
+
+              <div class="form-group">
+
+                <label
+                  class="form-label"
+                  for="account_type"
+                >
+                  Account type
+                </label>
+
+                <select
+                  class="form-control"
+                  id="account_type"
+                  name="account_type"
+                  required
+                >
+
+                  <option value="">
+                    Select account type
+                  </option>
+
+                  <option value="personal">
+                    Personal
+                  </option>
+
+                  <option value="business">
+                    Business
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- Country -->
+
+              <div class="form-group">
+
+                <label
+                  class="form-label"
+                  for="country"
+                >
+                  Country
+                </label>
+
+                <select
+                  class="form-control"
+                  id="country"
+                  name="country"
+                  required
+                >
+
+                  <option value="">
+                    Select country
+                  </option>
+
+                  <option value="US">
+                    United States
+                  </option>
+
+                  <option value="GB">
+                    United Kingdom
+                  </option>
+
+                  <option value="CA">
+                    Canada
+                  </option>
+
+                  <option value="NG">
+                    Nigeria
+                  </option>
+
+                  <option value="GH">
+                    Ghana
+                  </option>
+
+                  <option value="KE">
+                    Kenya
+                  </option>
+
+                  <option value="ZA">
+                    South Africa
+                  </option>
+
+                  <option value="AU">
+                    Australia
+                  </option>
+
+                  <option value="OTHER">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               PASSWORD
+          ================================================== -->
+
+          <div class="form-section">
+
+            <div class="form-section-heading">
+
+              <span class="form-section-number">
+                03
+              </span>
+
+              <div>
+
+                <h2>
+                  Account security
+                </h2>
+
+                <p>
+                  Create a strong password for your account.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+              <div class="form-label-row">
+
+                <label
+                  class="form-label"
+                  for="password"
+                >
+                  Password
+                </label>
+
+                <span
+                  class="password-strength-label"
+                  id="strength-label"
+                >
+                  —
+                </span>
+
+              </div>
+
+
+              <div class="password-input-wrapper">
+
+                <input
+                  class="form-control"
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Create a password"
+                  autocomplete="new-password"
+                  minlength="8"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="password-toggle"
+                  aria-label="Show password"
+                  aria-pressed="false"
+                >
+                  Show
+                </button>
+
+              </div>
+
+
+              <!-- Strength bar -->
+
+              <div
+                class="password-strength"
+                aria-hidden="true"
+              >
+
+                <div
+                  class="password-strength-bar"
+                  id="strength-bar"
+                ></div>
+
+              </div>
+
+
+              <p class="form-hint">
+                Minimum 8 characters with uppercase, lowercase,
+                number, and special character.
+              </p>
+
+
+              <!-- Password requirements -->
+
+              <div
+                class="password-requirements"
+                id="password-requirements"
+              >
+
+                <div id="req-length">
+                  <span>○</span>
+                  At least 8 characters
+                </div>
+
+                <div id="req-upper">
+                  <span>○</span>
+                  One uppercase letter
+                </div>
+
+                <div id="req-lower">
+                  <span>○</span>
+                  One lowercase letter
+                </div>
+
+                <div id="req-number">
+                  <span>○</span>
+                  One number
+                </div>
+
+                <div id="req-special">
+                  <span>○</span>
+                  One special character
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Confirm password -->
+
+            <div class="form-group">
+
+              <label
+                class="form-label"
+                for="confirm_password"
+              >
+                Confirm password
+              </label>
+
+              <div class="password-input-wrapper">
+
+                <input
+                  class="form-control"
+                  type="password"
+                  id="confirm_password"
+                  name="confirm_password"
+                  placeholder="Confirm your password"
+                  autocomplete="new-password"
+                  required
+                >
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="confirm-toggle"
+                  aria-label="Show confirmation password"
+                  aria-pressed="false"
+                >
+                  Show
+                </button>
+
+              </div>
+
+              <p
+                class="form-hint"
+                id="password-match-message"
+              ></p>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               TERMS
+          ================================================== -->
+
+          <div class="form-section">
+
+            <div class="form-section-heading">
+
+              <span class="form-section-number">
+                04
+              </span>
+
+              <div>
+
+                <h2>
+                  Terms &amp; consent
+                </h2>
+
+                <p>
+                  Review the information before creating your account.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="consent-box">
+
+              <label class="form-check">
+
+                <input
+                  type="checkbox"
+                  id="terms"
+                  name="terms"
+                  required
+                >
+
+                <span>
+                  I agree to the
+                  <a
+                    href="terms.html"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Terms of Service
+                  </a>
+                  and
+                  <a
+                    href="privacy.html"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Privacy Policy
+                  </a>.
+                </span>
+
+              </label>
+
+
+              <label class="form-check">
+
+                <input
+                  type="checkbox"
+                  id="simulation"
+                  name="simulation"
+                  required
+                >
+
+                <span>
+                  I understand that Global TrustFund is a
+                  <strong>digital banking simulation platform</strong>
+                  and that this website does not provide real banking
+                  or financial services.
+                </span>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               SUBMIT
+          ================================================== -->
+
+          <button
+            type="submit"
+            class="btn btn-primary btn-block btn-lg"
+            id="submit-btn"
+          >
+            Create Account
+          </button>
+
+
+          <p class="form-submit-note">
+            By creating an account, you confirm that the information
+            you provide is accurate.
+          </p>
+
+        </form>
+
+
+        <!-- =================================================
+             ALREADY HAVE ACCOUNT
+        ================================================== -->
+
+        <div class="auth-divider">
+          <span>Already have an account?</span>
+        </div>
+
+
+        <a
+          href="login.html"
+          class="btn btn-outline btn-block"
+        >
+          Sign In
+        </a>
+
+
+        <!-- =================================================
+             SUPPORT
+        ================================================== -->
+
+        <p class="auth-footer">
+
+          Need help?
+
+          <a href="support.html">
+            Contact Support
+          </a>
+
+        </p>
+
+      </div>
+
+    </main>
+
+
+    <!-- ===================================================
+         FOOTER
+    ==================================================== -->
+
+    <footer class="auth-page-footer">
+
+      <div class="container">
+
+        <div class="auth-footer-links">
+
+          <a href="index.html">
+            Home
+          </a>
+
+          <a href="personal.html">
+            Personal
+          </a>
+
+          <a href="business.html">
+            Business
+          </a>
+
+          <a href="security.html">
+            Security
+          </a>
+
+          <a href="support.html">
+            Support
+          </a>
+
+          <a href="privacy.html">
+            Privacy
+          </a>
+
+          <a href="terms.html">
+            Terms
+          </a>
+
+        </div>
+
+
+        <p>
+          © <span id="current-year"></span>
+          Global TrustFund. All rights reserved.
+        </p>
+
+
+        <p class="auth-disclaimer">
+          Global TrustFund is a digital banking simulation platform.
+          This website does not represent a licensed financial institution
+          or provide real banking services.
+        </p>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- =====================================================
+       SHARED JAVASCRIPT
+  ====================================================== -->
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/logo-loader.js"></script>
+
+
+  <!-- =====================================================
+       SIGNUP PAGE JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       CURRENT YEAR
+    ====================================================== */
+
+    const yearElement =
+      document.getElementById("current-year");
+
+    if (yearElement) {
+      yearElement.textContent =
+        new Date().getFullYear();
+    }
+
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
+    const signupForm =
+      document.getElementById("signup-form");
+
+    const alertBox =
+      document.getElementById("alert-box");
+
+    const submitButton =
+      document.getElementById("submit-btn");
+
+    const password =
+      document.getElementById("password");
+
+    const confirmPassword =
+      document.getElementById("confirm_password");
+
+    const strengthBar =
+      document.getElementById("strength-bar");
+
+    const strengthLabel =
+      document.getElementById("strength-label");
+
+    const matchMessage =
+      document.getElementById("password-match-message");
+
+
+    /* =====================================================
+       PASSWORD VISIBILITY
+    ====================================================== */
+
+    function setupPasswordToggle(
+      input,
+      button
+    ) {
+
+      if (!input || !button) {
+        return;
+      }
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          const showing =
+            input.type === "text";
+
+          input.type =
+            showing
+              ? "password"
+              : "text";
+
+          button.textContent =
+            showing
+              ? "Show"
+              : "Hide";
+
+          button.setAttribute(
+            "aria-label",
+            showing
+              ? "Show password"
+              : "Hide password"
+          );
+
+          button.setAttribute(
+            "aria-pressed",
+            String(!showing)
+          );
+
+        }
+      );
+
+    }
+
+
+    setupPasswordToggle(
+      password,
+      document.getElementById("password-toggle")
+    );
+
+    setupPasswordToggle(
+      confirmPassword,
+      document.getElementById("confirm-toggle")
+    );
+
+
+    /* =====================================================
+       PASSWORD REQUIREMENTS
+    ====================================================== */
+
+    function updateRequirement(
+      id,
+      valid
+    ) {
+
+      const element =
+        document.getElementById(id);
+
+      if (!element) {
+        return;
+      }
+
+      const icon =
+        element.querySelector("span");
+
+      if (valid) {
+
+        element.classList.add("valid");
+
+        if (icon) {
+          icon.textContent = "✓";
+        }
+
+      } else {
+
+        element.classList.remove("valid");
+
+        if (icon) {
+          icon.textContent = "○";
+        }
+
+      }
+
+    }
+
+
+    function updatePasswordStrength() {
+
+      const value =
+        password.value;
+
+
+      const checks = {
+
+        length:
+          value.length >= 8,
+
+        upper:
+          /[A-Z]/.test(value),
+
+        lower:
+          /[a-z]/.test(value),
+
+        number:
+          /[0-9]/.test(value),
+
+        special:
+          /[^A-Za-z0-9]/.test(value)
+
+      };
+
+
+      updateRequirement(
+        "req-length",
+        checks.length
+      );
+
+      updateRequirement(
+        "req-upper",
+        checks.upper
+      );
+
+      updateRequirement(
+        "req-lower",
+        checks.lower
+      );
+
+      updateRequirement(
+        "req-number",
+        checks.number
+      );
+
+      updateRequirement(
+        "req-special",
+        checks.special
+      );
+
+
+      const score =
+        Object.values(checks)
+          .filter(Boolean)
+          .length;
+
+
+      if (strengthBar) {
+
+        strengthBar.style.width =
+          `${score * 20}%`;
+
+        strengthBar.classList.remove(
+          "weak",
+          "medium",
+          "strong"
+        );
+
+
+        if (score <= 2) {
+
+          strengthBar.classList.add(
+            "weak"
+          );
+
+        } else if (score <= 4) {
+
+          strengthBar.classList.add(
+            "medium"
+          );
+
+        } else {
+
+          strengthBar.classList.add(
+            "strong"
+          );
+
+        }
+
+      }
+
+
+      if (strengthLabel) {
+
+        if (!value) {
+
+          strengthLabel.textContent =
+            "—";
+
+        } else if (score <= 2) {
+
+          strengthLabel.textContent =
+            "Weak";
+
+        } else if (score <= 4) {
+
+          strengthLabel.textContent =
+            "Good";
+
+        } else {
+
+          strengthLabel.textContent =
+            "Strong";
+
+        }
+
+      }
+
+    }
+
+
+    if (password) {
+
+      password.addEventListener(
+        "input",
+        updatePasswordStrength
+      );
+
+    }
+
+
+    /* =====================================================
+       PASSWORD MATCH
+    ====================================================== */
+
+    function checkPasswordMatch() {
+
+      if (!matchMessage) {
+        return;
+      }
+
+      if (!confirmPassword.value) {
+
+        matchMessage.textContent =
+          "";
+
+        matchMessage.className =
+          "form-hint";
+
+        return;
+
+      }
+
+
+      if (
+        password.value ===
+        confirmPassword.value
+      ) {
+
+        matchMessage.textContent =
+          "Passwords match.";
+
+        matchMessage.className =
+          "form-hint password-match-success";
+
+      } else {
+
+        matchMessage.textContent =
+          "Passwords do not match.";
+
+        matchMessage.className =
+          "form-hint password-match-error";
+
+      }
+
+    }
+
+
+    if (confirmPassword) {
+
+      confirmPassword.addEventListener(
+        "input",
+        checkPasswordMatch
+      );
+
+    }
+
+    if (password) {
+
+      password.addEventListener(
+        "input",
+        checkPasswordMatch
+      );
+
+    }
+
+
+    /* =====================================================
+       SHOW ALERT
+    ====================================================== */
+
+    function showSignupAlert(
+      type,
+      message
+    ) {
+
+      if (
+        window.GTF_APP &&
+        typeof GTF_APP.showAlert === "function"
+      ) {
+
+        GTF_APP.showAlert(
+          alertBox,
+          type,
+          message
+        );
+
+        return;
+
+      }
+
+
+      if (!alertBox) {
+        return;
+      }
+
+
+      alertBox.innerHTML =
+        `<div class="alert alert-${type}">
+          ${message}
+        </div>`;
+
+    }
+
+
+    /* =====================================================
+       FORM VALIDATION
+    ====================================================== */
+
+    function validateSignupForm(data) {
+
+      if (!data.first_name) {
+
+        return "Please enter your first name.";
+
+      }
+
+
+      if (!data.last_name) {
+
+        return "Please enter your last name.";
+
+      }
+
+
+      if (!data.email) {
+
+        return "Please enter your email address.";
+
+      }
+
+
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+      if (!emailPattern.test(data.email)) {
+
+        return "Please enter a valid email address.";
+
+      }
+
+
+      if (!data.phone) {
+
+        return "Please enter your phone number.";
+
+      }
+
+
+      if (!data.account_type) {
+
+        return "Please select an account type.";
+
+      }
+
+
+      if (!data.country) {
+
+        return "Please select your country.";
+
+      }
+
+
+      const passwordValid =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
+          .test(data.password);
+
+
+      if (!passwordValid) {
+
+        return (
+          "Password must be at least 8 characters and include " +
+          "uppercase, lowercase, number, and special character."
+        );
+
+      }
+
+
+      if (
+        data.password !==
+        data.confirm_password
+      ) {
+
+        return "Passwords do not match.";
+
+      }
+
+
+      if (!data.terms) {
+
+        return "Please accept the Terms of Service and Privacy Policy.";
+
+      }
+
+
+      if (!data.simulation) {
+
+        return "Please confirm that you understand this is a simulation platform.";
+
+      }
+
+
+      return null;
+
+    }
+
+
+    /* =====================================================
+       SIGNUP SUBMISSION
+    ====================================================== */
+
+    if (signupForm) {
+
+      signupForm.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+
+          if (alertBox) {
+            alertBox.innerHTML = "";
+          }
+
+
+          const data = {
+
+            first_name:
+              document
+                .getElementById("first_name")
+                .value
+                .trim(),
+
+            last_name:
+              document
+                .getElementById("last_name")
+                .value
+                .trim(),
+
+            email:
+              document
+                .getElementById("email")
+                .value
+                .trim(),
+
+            phone:
+              document
+                .getElementById("phone")
+                .value
+                .trim(),
+
+            account_type:
+              document
+                .getElementById("account_type")
+                .value,
+
+            country:
+              document
+                .getElementById("country")
+                .value,
+
+            password:
+              password.value,
+
+            confirm_password:
+              confirmPassword.value,
+
+            terms:
+              document
+                .getElementById("terms")
+                .checked,
+
+            simulation:
+              document
+                .getElementById("simulation")
+                .checked
+
+          };
+
+
+          /* ---------------------------------------------
+             Validate
+          --------------------------------------------- */
+
+          const validationError =
+            validateSignupForm(data);
+
+
+          if (validationError) {
+
+            showSignupAlert(
+              "danger",
+              validationError
+            );
+
+            return;
+
+          }
+
+
+          /* ---------------------------------------------
+             Loading
+          --------------------------------------------- */
+
+          submitButton.disabled =
+            true;
+
+          submitButton.textContent =
+            "Creating account...";
+
+
+          try {
+
+            if (
+              !window.GTF_AUTH ||
+              typeof GTF_AUTH.signup !==
+                "function"
+            ) {
+
+              throw new Error(
+                "Registration service is currently unavailable."
+              );
+
+            }
+
+
+            /*
+             * Do not send the confirmation password
+             * to the backend.
+             */
+
+            const registrationData = {
+
+              first_name:
+                data.first_name,
+
+              last_name:
+                data.last_name,
+
+              email:
+                data.email,
+
+              phone:
+                data.phone,
+
+              account_type:
+                data.account_type,
+
+              country:
+                data.country,
+
+              password:
+                data.password
+
+            };
+
+
+            const response =
+              await GTF_AUTH.signup(
+                registrationData
+              );
+
+
+            /* -----------------------------------------
+               Confirmation required
+            ------------------------------------------ */
+
+            const requiresConfirmation =
+              response?.requires_confirmation ||
+              response?.email_confirmation_required ||
+              (
+                response?.message &&
+                response.message
+                  .toLowerCase()
+                  .includes("confirm")
+              );
+
+
+            if (requiresConfirmation) {
+
+              showSignupAlert(
+                "success",
+                "Your account has been created successfully. " +
+                "Please check your email and confirm your email " +
+                "address before signing in."
+              );
+
+
+              signupForm.reset();
+
+              updatePasswordStrength();
+
+              if (matchMessage) {
+                matchMessage.textContent = "";
+              }
+
+
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+
+
+              return;
+
+            }
+
+
+            /* -----------------------------------------
+               Direct login / redirect
+            ------------------------------------------ */
+
+            showSignupAlert(
+              "success",
+              "Account created successfully. Redirecting to sign in..."
+            );
+
+
+            signupForm.reset();
+
+            updatePasswordStrength();
+
+
+            setTimeout(
+              function () {
+
+                window.location.href =
+                  "login.html";
+
+              },
+              1500
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              "GTF signup error:",
+              error
+            );
+
+
+            showSignupAlert(
+              "danger",
+              error?.message ||
+              "Registration failed. Please try again."
+            );
+
+
+          } finally {
+
+            submitButton.disabled =
+              false;
+
+            submitButton.textContent =
+              "Create Account";
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       CLEAR ALERTS WHILE TYPING
+    ====================================================== */
+
+    document
+      .querySelectorAll(".form-control")
+      .forEach(function (input) {
+
+        input.addEventListener(
+          "input",
+          function () {
+
+            if (
+              alertBox &&
+              alertBox.innerHTML
+            ) {
+
+              alertBox.innerHTML = "";
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       INITIAL PASSWORD STATE
+    ====================================================== */
+
+    updatePasswordStrength();
+
+  </script>
+
+</body>
+</html>
