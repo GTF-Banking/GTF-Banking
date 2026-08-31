@@ -1,0 +1,294 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 512 512"
+  role="img"
+  aria-labelledby="gtfWhiteTitle gtfWhiteDesc"
+>
+
+  <title id="gtfWhiteTitle">
+    Global TrustFund
+  </title>
+
+  <desc id="gtfWhiteDesc">
+    Global TrustFund GTF logo in white, gold and dark green.
+  </desc>
+
+
+  <!-- =====================================================
+       DEFINITIONS
+  ====================================================== -->
+
+  <defs>
+
+    <linearGradient
+      id="whiteGold"
+      x1="0"
+      y1="0"
+      x2="1"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stop-color="#fff8dc"
+      />
+
+      <stop
+        offset="45%"
+        stop-color="#d4af37"
+      />
+
+      <stop
+        offset="100%"
+        stop-color="#a77c12"
+      />
+    </linearGradient>
+
+    <filter
+      id="logoShadow"
+      x="-30%"
+      y="-30%"
+      width="160%"
+      height="160%"
+    >
+
+      <feDropShadow
+        dx="0"
+        dy="7"
+        stdDeviation="9"
+        flood-color="#000000"
+        flood-opacity="0.28"
+      />
+
+    </filter>
+
+  </defs>
+
+
+  <!-- =====================================================
+       OUTER EMBLEM
+  ====================================================== -->
+
+  <circle
+    cx="256"
+    cy="256"
+    r="226"
+    fill="#ffffff"
+    fill-opacity="0.06"
+    stroke="#ffffff"
+    stroke-width="8"
+    filter="url(#logoShadow)"
+  />
+
+
+  <!-- Gold outer ring -->
+
+  <circle
+    cx="256"
+    cy="256"
+    r="211"
+    fill="none"
+    stroke="url(#whiteGold)"
+    stroke-width="9"
+  />
+
+
+  <!-- Inner white ring -->
+
+  <circle
+    cx="256"
+    cy="256"
+    r="194"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="3"
+    stroke-opacity="0.85"
+  />
+
+
+  <!-- =====================================================
+       SHIELD
+  ====================================================== -->
+
+  <path
+    d="
+      M256 79
+      L379 126
+      V241
+      C379 323 328 389 256 425
+      C184 389 133 323 133 241
+      V126
+      Z
+    "
+    fill="#ffffff"
+    fill-opacity="0.96"
+  />
+
+
+  <!-- Gold shield outline -->
+
+  <path
+    d="
+      M256 92
+      L365 134
+      V241
+      C365 314 319 372 256 408
+      C193 372 147 314 147 241
+      V134
+      Z
+    "
+    fill="none"
+    stroke="url(#whiteGold)"
+    stroke-width="7"
+  />
+
+
+  <!-- =====================================================
+       GTF MONOGRAM
+  ====================================================== -->
+
+  <text
+    x="256"
+    y="178"
+    text-anchor="middle"
+    font-family="Inter, Arial, sans-serif"
+    font-size="53"
+    font-weight="800"
+    letter-spacing="4"
+    fill="#0b3d2e"
+  >
+    GTF
+  </text>
+
+
+  <!-- =====================================================
+       GLOBE
+  ====================================================== -->
+
+  <circle
+    cx="256"
+    cy="246"
+    r="70"
+    fill="#0b3d2e"
+    stroke="url(#whiteGold)"
+    stroke-width="4"
+  />
+
+
+  <!-- Globe latitude -->
+
+  <path
+    d="
+      M189 246
+      H323
+    "
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="
+      M201 219
+      C232 237 280 237 311 219
+    "
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="3"
+    stroke-linecap="round"
+    opacity="0.9"
+  />
+
+  <path
+    d="
+      M201 273
+      C232 255 280 255 311 273
+    "
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="3"
+    stroke-linecap="round"
+    opacity="0.9"
+  />
+
+
+  <!-- Globe longitude -->
+
+  <ellipse
+    cx="256"
+    cy="246"
+    rx="28"
+    ry="70"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="4"
+  />
+
+  <ellipse
+    cx="256"
+    cy="246"
+    rx="55"
+    ry="70"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2"
+    opacity="0.65"
+  />
+
+
+  <!-- =====================================================
+       GOLD TRUST STAR
+  ====================================================== -->
+
+  <path
+    d="
+      M256 291
+      L263 307
+      L281 309
+      L267 321
+      L271 339
+      L256 330
+      L241 339
+      L245 321
+      L231 309
+      L249 307
+      Z
+    "
+    fill="url(#whiteGold)"
+  />
+
+
+  <!-- =====================================================
+       LOWER TRUST ARC
+  ====================================================== -->
+
+  <path
+    d="
+      M177 337
+      Q256 377 335 337
+    "
+    fill="none"
+    stroke="url(#whiteGold)"
+    stroke-width="7"
+    stroke-linecap="round"
+  />
+
+
+  <!-- =====================================================
+       BRAND NAME
+  ====================================================== -->
+
+  <text
+    x="256"
+    y="465"
+    text-anchor="middle"
+    font-family="Inter, Arial, sans-serif"
+    font-size="22"
+    font-weight="800"
+    letter-spacing="3"
+    fill="#ffffff"
+  >
+    GLOBAL TRUSTFUND
+  </text>
+
+</svg>

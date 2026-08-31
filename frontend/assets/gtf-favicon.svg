@@ -1,0 +1,187 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  width="64"
+  height="64"
+  role="img"
+  aria-labelledby="faviconTitle"
+>
+
+  <title id="faviconTitle">
+    Global TrustFund
+  </title>
+
+  <defs>
+
+    <linearGradient
+      id="green"
+      x1="0"
+      y1="0"
+      x2="1"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stop-color="#0b3d2e"
+      />
+
+      <stop
+        offset="100%"
+        stop-color="#06291f"
+      />
+    </linearGradient>
+
+    <linearGradient
+      id="gold"
+      x1="0"
+      y1="0"
+      x2="1"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stop-color="#f5d77a"
+      />
+
+      <stop
+        offset="50%"
+        stop-color="#d4af37"
+      />
+
+      <stop
+        offset="100%"
+        stop-color="#a77c12"
+      />
+    </linearGradient>
+
+  </defs>
+
+
+  <!-- Background -->
+
+  <rect
+    x="2"
+    y="2"
+    width="60"
+    height="60"
+    rx="15"
+    fill="url(#green)"
+  />
+
+
+  <!-- Gold border -->
+
+  <rect
+    x="4"
+    y="4"
+    width="56"
+    height="56"
+    rx="13"
+    fill="none"
+    stroke="url(#gold)"
+    stroke-width="3"
+  />
+
+
+  <!-- Inner white ring -->
+
+  <circle
+    cx="32"
+    cy="31"
+    r="20"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2"
+    opacity="0.95"
+  />
+
+
+  <!-- Shield -->
+
+  <path
+    d="
+      M32 13
+      L45 18
+      V30
+      C45 39 40 46 32 50
+      C24 46 19 39 19 30
+      V18
+      Z
+    "
+    fill="#ffffff"
+  />
+
+
+  <!-- Gold shield border -->
+
+  <path
+    d="
+      M32 15
+      L43 19
+      V30
+      C43 38 39 43 32 47
+      C25 43 21 38 21 30
+      V19
+      Z
+    "
+    fill="none"
+    stroke="url(#gold)"
+    stroke-width="1.5"
+  />
+
+
+  <!-- GTF -->
+
+  <text
+    x="32"
+    y="29"
+    text-anchor="middle"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="10"
+    font-weight="800"
+    letter-spacing="0.5"
+    fill="#0b3d2e"
+  >
+    GTF
+  </text>
+
+
+  <!-- Globe -->
+
+  <circle
+    cx="32"
+    cy="34"
+    r="8"
+    fill="#0b3d2e"
+    stroke="url(#gold)"
+    stroke-width="1"
+  />
+
+  <path
+    d="M24 34H40"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="1"
+  />
+
+  <ellipse
+    cx="32"
+    cy="34"
+    rx="3"
+    ry="8"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="1"
+  />
+
+
+  <!-- Gold accent -->
+
+  <circle
+    cx="32"
+    cy="34"
+    r="2"
+    fill="url(#gold)"
+  />
+
+</svg>
