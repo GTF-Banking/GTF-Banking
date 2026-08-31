@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="description"
+    content="Global TrustFund Cashier Portal"
+  >
+
+  <title>Cashier Dashboard | Global TrustFund</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .cashier-page {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .page-header h1 {
+      margin: 0;
+    }
+
+    .page-header p {
+      margin: 7px 0 0;
+      opacity: .62;
+    }
+
+    .page-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-message {
+      display: none;
+      padding: 12px 15px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      background: #d1e7dd;
+      color: #146c43;
+    }
+
+    .status-message.error {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .status-message.info {
+      background: #cff4fc;
+      color: #055160;
+    }
+
+    .cashier-summary {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,.04);
+    }
+
+    .summary-card .label {
+      display: block;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      opacity: .55;
+    }
+
+    .summary-card .value {
+      display: block;
+      margin-top: 6px;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .summary-card .subtext {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      opacity: .5;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(300px, .75fr);
+      gap: 20px;
+    }
+
+    .panel {
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,.04);
+    }
+
+    .panel + .panel {
+      margin-top: 20px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      flex-wrap: wrap;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .panel-header p {
+      margin: 5px 0 0;
+      font-size: 11px;
+      opacity: .55;
+    }
+
+    .panel-body {
+      padding: 20px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .action-card {
+      display: block;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,.1);
+      border-radius: 9px;
+      background: #fff;
+      color: inherit;
+      text-decoration: none;
+      transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+    }
+
+    .action-card:hover {
+      transform: translateY(-2px);
+      background: rgba(11,61,46,.025);
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+
+    .action-card strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .action-card span {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      line-height: 1.5;
+      opacity: .58;
+    }
+
+    .transaction-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .transaction-table {
+      width: 100%;
+      min-width: 650px;
+      border-collapse: collapse;
+    }
+
+    .transaction-table th,
+    .transaction-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      font-size: 11px;
+    }
+
+    .transaction-table th {
+      background: rgba(11,61,46,.035);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      opacity: .6;
+    }
+
+    .transaction-table td strong {
+      font-weight: 750;
+    }
+
+    .transaction-id {
+      font-family: monospace;
+      font-size: 9px;
+      opacity: .55;
+    }
+
+    .amount {
+      white-space: nowrap;
+      font-weight: 800;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .status-completed {
+      background: #d1e7dd;
+      color: #146c43;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-failed {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .status-neutral {
+      background: #e2e3e5;
+      color: #41464b;
+    }
+
+    .balance-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .balance-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+
+    .balance-item:last-child {
+      border-bottom: 0;
+    }
+
+    .balance-currency {
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .balance-description {
+      display: block;
+      margin-top: 3px;
+      font-size: 9px;
+      opacity: .5;
+    }
+
+    .balance-value {
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .notice {
+      padding: 13px 15px;
+      border-radius: 8px;
+      background: rgba(11,61,46,.055);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .empty-state {
+      padding: 35px 20px;
+      text-align: center;
+      font-size: 11px;
+      opacity: .5;
+    }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 20px;
+      border-top: 1px solid rgba(0,0,0,.07);
+      font-size: 9px;
+      opacity: .5;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1050px) {
+      .cashier-summary {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .cashier-page {
+        padding: 15px;
+      }
+
+      .cashier-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="cashier-page">
+
+    <section class="page-header">
+
+      <div>
+        <h1>Cashier Dashboard</h1>
+
+        <p>
+          Manage authorized cashier operations and transaction activity.
+        </p>
+      </div>
+
+      <div class="page-actions">
+
+        <button
+          type="button"
+          id="refreshButton"
+          class="btn btn-secondary"
+        >
+          Refresh
+        </button>
+
+        <a
+          href="../index.html"
+          class="btn btn-secondary"
+        >
+          Home
+        </a>
+
+        <button
+          type="button"
+          id="logoutButton"
+          class="btn btn-primary"
+        >
+          Sign Out
+        </button>
+
+      </div>
+
+    </section>
+
+    <div
+      id="statusMessage"
+      class="status-message"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <!-- Summary -->
+    <section
+      class="cashier-summary"
+      aria-label="Cashier summary"
+    >
+
+      <article class="summary-card">
+
+        <span class="label">
+          Today's Transactions
+        </span>
+
+        <strong
+          id="todayTransactions"
+          class="value"
+        >
+          —
+        </strong>
+
+        <span class="subtext">
+          Posted activity
+        </span>
+
+      </article>
+
+      <article class="summary-card">
+
+        <span class="label">
+          Today's Volume
+        </span>
+
+        <strong
+          id="todayVolume"
+          class="value"
+        >
+          —
+        </strong>
+
+        <span class="subtext">
+          Transaction value
+        </span>
+
+      </article>
+
+      <article class="summary-card">
+
+        <span class="label">
+          Pending
+        </span>
+
+        <strong
+          id="pendingTransactions"
+          class="value"
+        >
+          —
+        </strong>
+
+        <span class="subtext">
+          Awaiting processing
+        </span>
+
+      </article>
+
+      <article class="summary-card">
+
+        <span class="label">
+          Exceptions
+        </span>
+
+        <strong
+          id="exceptionCount"
+          class="value"
+        >
+          —
+        </strong>
+
+        <span class="subtext">
+          Requires review
+        </span>
+
+      </article>
+
+    </section>
+
+    <section class="dashboard-grid">
+
+      <div>
+
+        <!-- Quick actions -->
+        <section class="panel">
+
+          <header class="panel-header">
+
+            <div>
+              <h2>Cashier Operations</h2>
+
+              <p>
+                Access the functions available to your cashier role.
+              </p>
+            </div>
+
+          </header>
+
+          <div class="panel-body">
+
+            <div class="quick-actions">
+
+              <a
+                href="./transactions.html"
+                class="action-card"
+              >
+                <strong>
+                  Transactions
+                </strong>
+
+                <span>
+                  Review recent transactions and transaction status.
+                </span>
+              </a>
+
+              <a
+                href="./customers.html"
+                class="action-card"
+              >
+                <strong>
+                  Customers
+                </strong>
+
+                <span>
+                  Locate customer records and account information.
+                </span>
+              </a>
+
+              <a
+                href="./accounts.html"
+                class="action-card"
+              >
+                <strong>
+                  Accounts
+                </strong>
+
+                <span>
+                  View authorized account information.
+                </span>
+              </a>
+
+              <a
+                href="./support.html"
+                class="action-card"
+              >
+                <strong>
+                  Support
+                </strong>
+
+                <span>
+                  Review service requests requiring cashier assistance.
+                </span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- Recent transactions -->
+        <section class="panel">
+
+          <header class="panel-header">
+
+            <div>
+              <h2>Recent Transactions</h2>
+
+              <p>
+                Latest transaction activity available to your role.
+              </p>
+            </div>
+
+            <a
+              href="./transactions.html"
+              class="btn btn-secondary"
+            >
+              View All
+            </a>
+
+          </header>
+
+          <div class="transaction-table-wrapper">
+
+            <table class="transaction-table">
+
+              <thead>
+
+                <tr>
+                  <th>Transaction</th>
+                  <th>Customer</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="transactionBody">
+
+                <tr>
+                  <td
+                    colspan="6"
+                    class="empty-state"
+                  >
+                    Loading transactions...
+                  </td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+          <footer class="footer-meta">
+
+            <span id="transactionUpdated">
+              Updated: —
+            </span>
+
+            <span>
+              Cashier transaction view
+            </span>
+
+          </footer>
+
+        </section>
+
+      </div>
+
+      <aside>
+
+        <!-- Cash position -->
+        <section class="panel">
+
+          <header class="panel-header">
+
+            <div>
+              <h2>Cash Position</h2>
+
+              <p>
+                Authorized balances and operational positions.
+              </p>
+            </div>
+
+          </header>
+
+          <div class="panel-body">
+
+            <ul
+              id="balanceList"
+              class="balance-list"
+            >
+
+              <li class="empty-state">
+                Loading balances...
+              </li>
+
+            </ul>
+
+          </div>
+
+        </section>
+
+        <!-- Operational notice -->
+        <section class="panel">
+
+          <header class="panel-header">
+
+            <div>
+              <h2>Operational Notice</h2>
+
+              <p>
+                Cashier controls
+              </p>
+            </div>
+
+          </header>
+
+          <div class="panel-body">
+
+            <div class="notice">
+
+              Cashier operations are subject to role permissions,
+              transaction limits, verification requirements and
+              supervisory controls. Do not disclose customer
+              credentials, authentication codes or sensitive
+              account information.
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+
+      "use strict";
+
+      const state = {
+        dashboard: null
+      };
+
+      const el = {
+        status:
+          document.getElementById(
+            "statusMessage"
+          ),
+
+        refresh:
+          document.getElementById(
+            "refreshButton"
+          ),
+
+        logout:
+          document.getElementById(
+            "logoutButton"
+          ),
+
+        todayTransactions:
+          document.getElementById(
+            "todayTransactions"
+          ),
+
+        todayVolume:
+          document.getElementById(
+            "todayVolume"
+          ),
+
+        pending:
+          document.getElementById(
+            "pendingTransactions"
+          ),
+
+        exceptions:
+          document.getElementById(
+            "exceptionCount"
+          ),
+
+        transactionBody:
+          document.getElementById(
+            "transactionBody"
+          ),
+
+        transactionUpdated:
+          document.getElementById(
+            "transactionUpdated"
+          ),
+
+        balanceList:
+          document.getElementById(
+            "balanceList"
+          )
+      };
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+
+      }
+
+      function formatNumber(value) {
+
+        const number =
+          Number(value);
+
+        return Number.isFinite(number)
+          ? number.toLocaleString()
+          : "—";
+
+      }
+
+      function formatMoney(
+        value,
+        currency = "USD"
+      ) {
+
+        const number =
+          Number(value);
+
+        if (
+          !Number.isFinite(number)
+        ) {
+          return "—";
+        }
+
+        try {
+
+          return new Intl.NumberFormat(
+            undefined,
+            {
+              style: "currency",
+              currency:
+                currency || "USD",
+              maximumFractionDigits: 2
+            }
+          ).format(number);
+
+        } catch {
+
+          return `${currency} ${number.toLocaleString(
+            undefined,
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          )}`;
+
+        }
+
+      }
+
+      function formatDate(value) {
+
+        if (!value) {
+          return "—";
+        }
+
+        const date =
+          new Date(value);
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return "—";
+        }
+
+        return date.toLocaleString(
+          undefined,
+          {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
+
+      }
+
+      function showStatus(
+        message,
+        type = "info"
+      ) {
+
+        el.status.textContent =
+          message;
+
+        el.status.className =
+          `status-message show ${type}`;
+
+      }
+
+      function hideStatus() {
+
+        el.status.className =
+          "status-message";
+
+        el.status.textContent =
+          "";
+
+      }
+
+      async function apiGet(
+        endpoint,
+        params = {}
+      ) {
+
+        if (
+          window.API &&
+          typeof window.API.get ===
+            "function"
+        ) {
+
+          return window.API.get(
+            endpoint,
+            params
+          );
+
+        }
+
+        const query =
+          new URLSearchParams();
+
+        Object.entries(params)
+          .forEach(
+            ([key, value]) => {
+
+              if (
+                value !== undefined &&
+                value !== null &&
+                value !== ""
+              ) {
+
+                query.set(
+                  key,
+                  value
+                );
+
+              }
+
+            }
+          );
+
+        const url =
+          query.toString()
+            ? `${endpoint}?${query}`
+            : endpoint;
+
+        const response =
+          await fetch(
+            url,
+            {
+              credentials:
+                "include"
+            }
+          );
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+
+        }
+
+        return response.json();
+
+      }
+
+      async function logout() {
+
+        try {
+
+          if (
+            window.Auth &&
+            typeof window.Auth.logout ===
+              "function"
+          ) {
+
+            await window.Auth.logout();
+
+          } else if (
+            window.API &&
+            typeof window.API.post ===
+              "function"
+          ) {
+
+            await window.API.post(
+              "/auth/logout",
+              {}
+            );
+
+          } else {
+
+            await fetch(
+              "/api/auth/logout",
+              {
+                method: "POST",
+                credentials: "include"
+              }
+            );
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Logout request failed:",
+            error
+          );
+
+        } finally {
+
+          window.location.href =
+            "../login.html";
+
+        }
+
+      }
+
+      function extractDashboard(
+        response
+      ) {
+
+        const payload =
+          response?.data ||
+          response ||
+          {};
+
+        return (
+          payload.dashboard ||
+          payload.summary ||
+          payload
+        );
+
+      }
+
+      async function loadDashboard() {
+
+        el.refresh.disabled =
+          true;
+
+        showStatus(
+          "Refreshing cashier dashboard...",
+          "info"
+        );
+
+        try {
+
+          const response =
+            await apiGet(
+              "/cashier/dashboard"
+            );
+
+          state.dashboard =
+            extractDashboard(
+              response
+            );
+
+          renderDashboard(
+            state.dashboard
+          );
+
+          hideStatus();
+
+        } catch (error) {
+
+          console.error(
+            "Cashier dashboard error:",
+            error
+          );
+
+          showStatus(
+            "Unable to load cashier dashboard data. Check the API connection.",
+            "error"
+          );
+
+          renderFallback();
+
+        } finally {
+
+          el.refresh.disabled =
+            false;
+
+        }
+
+      }
+
+      function renderDashboard(
+        dashboard
+      ) {
+
+        const summary =
+          dashboard.summary ||
+          dashboard.metrics ||
+          {};
+
+        const todayTransactions =
+          summary.today_transactions ??
+          dashboard.today_transactions ??
+          0;
+
+        const todayVolume =
+          summary.today_volume ??
+          dashboard.today_volume ??
+          0;
+
+        const pending =
+          summary.pending_transactions ??
+          summary.pending ??
+          dashboard.pending_transactions ??
+          0;
+
+        const exceptions =
+          summary.exceptions ??
+          summary.exception_count ??
+          dashboard.exceptions ??
+          0;
+
+        const currency =
+          summary.currency ||
+          dashboard.currency ||
+          "USD";
+
+        el.todayTransactions.textContent =
+          formatNumber(
+            todayTransactions
+          );
+
+        el.todayVolume.textContent =
+          formatMoney(
+            todayVolume,
+            currency
+          );
+
+        el.pending.textContent =
+          formatNumber(
+            pending
+          );
+
+        el.exceptions.textContent =
+          formatNumber(
+            exceptions
+          );
+
+        renderTransactions(
+          dashboard
+        );
+
+        renderBalances(
+          dashboard
+        );
+
+      }
+
+      function renderFallback() {
+
+        el.todayTransactions.textContent =
+          "—";
+
+        el.todayVolume.textContent =
+          "—";
+
+        el.pending.textContent =
+          "—";
+
+        el.exceptions.textContent =
+          "—";
+
+        el.transactionBody.innerHTML = `
+          <tr>
+            <td
+              colspan="6"
+              class="empty-state"
+            >
+              Transaction data unavailable.
+            </td>
+          </tr>
+        `;
+
+        el.balanceList.innerHTML = `
+          <li class="empty-state">
+            Balance data unavailable.
+          </li>
+        `;
+
+      }
+
+      function renderTransactions(
+        dashboard
+      ) {
+
+        const transactions =
+          dashboard.recent_transactions ||
+          dashboard.transactions ||
+          dashboard.recent ||
+          [];
+
+        if (
+          !Array.isArray(transactions) ||
+          !transactions.length
+        ) {
+
+          el.transactionBody.innerHTML = `
+            <tr>
+              <td
+                colspan="6"
+                class="empty-state"
+              >
+                No recent transactions found.
+              </td>
+            </tr>
+          `;
+
+          return;
+
+        }
+
+        el.transactionBody.innerHTML =
+          transactions
+            .slice(0, 10)
+            .map(
+              transaction => {
+
+                const id =
+                  transaction.reference ||
+                  transaction.transaction_number ||
+                  transaction.id ||
+                  "—";
+
+                const customer =
+                  transaction.customer_name ||
+                  transaction.customer?.name ||
+                  "Customer";
+
+                const type =
+                  transaction.type ||
+                  transaction.transaction_type ||
+                  "Transaction";
+
+                const amount =
+                  transaction.amount ??
+                  transaction.value ??
+                  0;
+
+                const currency =
+                  transaction.currency ||
+                  "USD";
+
+                const status =
+                  String(
+                    transaction.status ||
+                    "pending"
+                  )
+                    .toLowerCase();
+
+                let statusClass =
+                  "status-neutral";
+
+                if (
+                  status ===
+                    "completed" ||
+                  status ===
+                    "success" ||
+                  status ===
+                    "posted"
+                ) {
+
+                  statusClass =
+                    "status-completed";
+
+                } else if (
+                  status ===
+                    "pending" ||
+                  status ===
+                    "processing"
+                ) {
+
+                  statusClass =
+                    "status-pending";
+
+                } else if (
+                  status ===
+                    "failed" ||
+                  status ===
+                    "declined" ||
+                  status ===
+                    "reversed"
+                ) {
+
+                  statusClass =
+                    "status-failed";
+
+                }
+
+                return `
+                  <tr>
+
+                    <td>
+                      <span class="transaction-id">
+                        ${escapeHtml(id)}
+                      </span>
+                    </td>
+
+                    <td>
+                      <strong>
+                        ${escapeHtml(customer)}
+                      </strong>
+                    </td>
+
+                    <td>
+                      ${escapeHtml(type)}
+                    </td>
+
+                    <td>
+                      <span class="amount">
+                        ${escapeHtml(
+                          formatMoney(
+                            amount,
+                            currency
+                          )
+                        )}
+                      </span>
+                    </td>
+
+                    <td>
+                      <span
+                        class="status-pill ${statusClass}"
+                      >
+                        ${escapeHtml(
+                          status
+                        )}
+                      </span>
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        formatDate(
+                          transaction.created_at ||
+                          transaction.timestamp ||
+                          transaction.date
+                        )
+                      )}
+                    </td>
+
+                  </tr>
+                `;
+
+              }
+            )
+            .join("");
+
+        el.transactionUpdated.textContent =
+          `Updated: ${new Date().toLocaleTimeString()}`;
+
+      }
+
+      function renderBalances(
+        dashboard
+      ) {
+
+        const balances =
+          dashboard.balances ||
+          dashboard.cash_position ||
+          dashboard.positions ||
+          [];
+
+        if (
+          !Array.isArray(balances) ||
+          !balances.length
+        ) {
+
+          el.balanceList.innerHTML = `
+            <li class="empty-state">
+              No balance information available.
+            </li>
+          `;
+
+          return;
+
+        }
+
+        el.balanceList.innerHTML =
+          balances
+            .map(
+              balance => {
+
+                const currency =
+                  balance.currency ||
+                  balance.code ||
+                  "USD";
+
+                const value =
+                  balance.balance ??
+                  balance.amount ??
+                  0;
+
+                const description =
+                  balance.description ||
+                  "Authorized position";
+
+                return `
+                  <li class="balance-item">
+
+                    <div>
+
+                      <div class="balance-currency">
+                        ${escapeHtml(currency)}
+                      </div>
+
+                      <span class="balance-description">
+                        ${escapeHtml(
+                          description
+                        )}
+                      </span>
+
+                    </div>
+
+                    <span class="balance-value">
+                      ${escapeHtml(
+                        formatMoney(
+                          value,
+                          currency
+                        )
+                      )}
+                    </span>
+
+                  </li>
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+      el.refresh.addEventListener(
+        "click",
+        loadDashboard
+      );
+
+      el.logout.addEventListener(
+        "click",
+        logout
+      );
+
+      loadDashboard();
+
+    })();
+  </script>
+
+</body>
+</html>
