@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#0b3d2e">
+  <meta
+    name="description"
+    content="Global TrustFund Admin Support Center"
+  >
+
+  <title>Support | Global TrustFund Admin</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .support-page {
+      padding: 24px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .support-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .support-header h1 {
+      margin: 0;
+    }
+
+    .support-header p {
+      margin: 6px 0 0;
+      opacity: .68;
+    }
+
+    .support-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .support-status {
+      display: none;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .support-status.show {
+      display: block;
+    }
+
+    .support-status.success {
+      color: #146c43;
+      background: #d1e7dd;
+    }
+
+    .support-status.error {
+      color: #842029;
+      background: #f8d7da;
+    }
+
+    .support-status.info {
+      color: #055160;
+      background: #cff4fc;
+    }
+
+    .support-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .support-stat {
+      background: var(--card-bg, #fff);
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 12px;
+      padding: 19px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .04);
+    }
+
+    .support-stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      opacity: .6;
+    }
+
+    .support-stat-value {
+      margin-top: 7px;
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .support-stat-note {
+      margin-top: 6px;
+      font-size: 11px;
+      opacity: .6;
+    }
+
+    .support-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .support-card {
+      background: var(--card-bg, #fff);
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .04);
+      overflow: hidden;
+    }
+
+    .support-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .support-card-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .support-card-header span {
+      font-size: 12px;
+      opacity: .6;
+    }
+
+    .ticket-toolbar {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 10px;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .ticket-toolbar input,
+    .ticket-toolbar select {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 11px;
+      box-sizing: border-box;
+      border: 1px solid rgba(0, 0, 0, .13);
+      border-radius: 8px;
+      background: var(--card-bg, #fff);
+      color: inherit;
+    }
+
+    .ticket-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .ticket-table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+    }
+
+    .ticket-table th,
+    .ticket-table td {
+      padding: 13px 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .ticket-table th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      opacity: .62;
+      background: rgba(11, 61, 46, .035);
+    }
+
+    .ticket-table td {
+      font-size: 13px;
+    }
+
+    .ticket-table tbody tr {
+      cursor: pointer;
+    }
+
+    .ticket-table tbody tr:hover {
+      background: rgba(11, 61, 46, .025);
+    }
+
+    .ticket-subject {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .ticket-subject strong {
+      font-size: 13px;
+    }
+
+    .ticket-subject small {
+      opacity: .6;
+    }
+
+    .ticket-badge {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .status-open {
+      color: #055160;
+      background: #cff4fc;
+    }
+
+    .status-pending {
+      color: #856404;
+      background: #fff3cd;
+    }
+
+    .status-resolved {
+      color: #146c43;
+      background: #d1e7dd;
+    }
+
+    .status-closed {
+      color: #495057;
+      background: #e9ecef;
+    }
+
+    .priority-low {
+      color: #495057;
+      background: #e9ecef;
+    }
+
+    .priority-medium {
+      color: #856404;
+      background: #fff3cd;
+    }
+
+    .priority-high {
+      color: #842029;
+      background: #f8d7da;
+    }
+
+    .priority-urgent {
+      color: #fff;
+      background: #842029;
+    }
+
+    .empty-state {
+      padding: 45px 20px;
+      text-align: center;
+      opacity: .62;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 20px;
+      flex-wrap: wrap;
+    }
+
+    .pagination-info {
+      font-size: 12px;
+      opacity: .65;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 7px;
+    }
+
+    .pagination-buttons button {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(0, 0, 0, .12);
+      border-radius: 7px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .pagination-buttons button.active {
+      background: #0b3d2e;
+      border-color: #0b3d2e;
+      color: #fff;
+    }
+
+    .pagination-buttons button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .quick-actions {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-action {
+      width: 100%;
+      padding: 13px;
+      text-align: left;
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 9px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .quick-action:hover {
+      background: rgba(11, 61, 46, .04);
+    }
+
+    .quick-action strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .quick-action span {
+      display: block;
+      font-size: 11px;
+      opacity: .62;
+    }
+
+    .agent-list {
+      padding: 15px 18px 20px;
+    }
+
+    .agent {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .agent:last-child {
+      border-bottom: 0;
+    }
+
+    .agent-info strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .agent-info span {
+      font-size: 11px;
+      opacity: .6;
+    }
+
+    .agent-online {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #198754;
+      flex: 0 0 auto;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .55);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(850px, 100%);
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--card-bg, #fff);
+      color: inherit;
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .modal-close {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .ticket-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      margin-bottom: 20px;
+    }
+
+    .detail-item {
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(11, 61, 46, .04);
+    }
+
+    .detail-item label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      opacity: .6;
+    }
+
+    .detail-item strong {
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .detail-full {
+      grid-column: 1 / -1;
+    }
+
+    .conversation {
+      border-top: 1px solid rgba(0, 0, 0, .08);
+      padding-top: 18px;
+    }
+
+    .message {
+      margin-bottom: 13px;
+      padding: 12px;
+      border-radius: 9px;
+      background: rgba(11, 61, 46, .04);
+    }
+
+    .message.admin {
+      background: rgba(11, 61, 46, .08);
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+
+    .message-header strong {
+      font-size: 12px;
+    }
+
+    .message-header span {
+      opacity: .6;
+    }
+
+    .message-body {
+      font-size: 13px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .reply-box {
+      margin-top: 18px;
+    }
+
+    .reply-box textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 11px;
+      box-sizing: border-box;
+      resize: vertical;
+      border: 1px solid rgba(0, 0, 0, .14);
+      border-radius: 8px;
+      background: var(--card-bg, #fff);
+      color: inherit;
+      font: inherit;
+    }
+
+    .reply-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 1100px) {
+      .support-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .support-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ticket-toolbar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ticket-toolbar input {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .support-page {
+        padding: 15px;
+      }
+
+      .support-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .ticket-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .ticket-toolbar input {
+        grid-column: auto;
+      }
+
+      .ticket-details {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-full {
+        grid-column: auto;
+      }
+
+      .modal-box {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app-header"></div>
+
+  <main class="admin-main support-page">
+
+    <section class="support-header">
+      <div>
+        <h1>Support Center</h1>
+        <p>
+          Manage customer support requests, tickets and service activity.
+        </p>
+      </div>
+
+      <div class="support-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="refreshSupportBtn"
+        >
+          Refresh
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="newTicketBtn"
+        >
+          Create Ticket
+        </button>
+      </div>
+    </section>
+
+    <div
+      id="supportStatus"
+      class="support-status"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <!-- Statistics -->
+    <section class="support-stats">
+
+      <article class="support-stat">
+        <div class="support-stat-label">
+          Open Tickets
+        </div>
+
+        <div
+          class="support-stat-value"
+          id="openTickets"
+        >
+          —
+        </div>
+
+        <div class="support-stat-note">
+          Awaiting resolution
+        </div>
+      </article>
+
+      <article class="support-stat">
+        <div class="support-stat-label">
+          Pending
+        </div>
+
+        <div
+          class="support-stat-value"
+          id="pendingTickets"
+        >
+          —
+        </div>
+
+        <div class="support-stat-note">
+          Awaiting customer or staff response
+        </div>
+      </article>
+
+      <article class="support-stat">
+        <div class="support-stat-label">
+          Resolved
+        </div>
+
+        <div
+          class="support-stat-value"
+          id="resolvedTickets"
+        >
+          —
+        </div>
+
+        <div class="support-stat-note">
+          Current reporting period
+        </div>
+      </article>
+
+      <article class="support-stat">
+        <div class="support-stat-label">
+          Urgent
+        </div>
+
+        <div
+          class="support-stat-value"
+          id="urgentTickets"
+        >
+          —
+        </div>
+
+        <div class="support-stat-note">
+          Priority requiring attention
+        </div>
+      </article>
+
+    </section>
+
+    <section class="support-layout">
+
+      <!-- Tickets -->
+      <section class="support-card">
+
+        <div class="support-card-header">
+          <div>
+            <h2>Support Tickets</h2>
+          </div>
+
+          <span id="ticketCount">
+            0 tickets
+          </span>
+        </div>
+
+        <div class="ticket-toolbar">
+
+          <input
+            type="search"
+            id="ticketSearch"
+            placeholder="Search tickets, customers or references..."
+            autocomplete="off"
+          >
+
+          <select id="ticketStatusFilter">
+            <option value="">All Statuses</option>
+            <option value="open">Open</option>
+            <option value="pending">Pending</option>
+            <option value="resolved">Resolved</option>
+            <option value="closed">Closed</option>
+          </select>
+
+          <select id="ticketPriorityFilter">
+            <option value="">All Priorities</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="urgent">Urgent</option>
+          </select>
+
+          <select id="ticketCategoryFilter">
+            <option value="">All Categories</option>
+            <option value="account">Account</option>
+            <option value="transaction">Transaction</option>
+            <option value="card">Card</option>
+            <option value="transfer">Transfer</option>
+            <option value="security">Security</option>
+            <option value="technical">Technical</option>
+            <option value="general">General</option>
+          </select>
+
+        </div>
+
+        <div class="ticket-table-wrapper">
+
+          <table class="ticket-table">
+
+            <thead>
+              <tr>
+                <th>Ticket</th>
+                <th>Customer</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th>Assigned</th>
+              </tr>
+            </thead>
+
+            <tbody id="ticketTableBody">
+
+              <tr>
+                <td colspan="7">
+                  <div class="empty-state">
+                    Loading support tickets...
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        <div class="pagination">
+
+          <div
+            class="pagination-info"
+            id="paginationInfo"
+          >
+            Showing 0 tickets
+          </div>
+
+          <div class="pagination-buttons">
+
+            <button
+              type="button"
+              id="previousPageBtn"
+              disabled
+            >
+              ‹
+            </button>
+
+            <button
+              type="button"
+              id="currentPageBtn"
+              class="active"
+            >
+              1
+            </button>
+
+            <button
+              type="button"
+              id="nextPageBtn"
+              disabled
+            >
+              ›
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- Sidebar -->
+      <aside>
+
+        <section class="support-card">
+
+          <div class="support-card-header">
+            <h2>Quick Actions</h2>
+          </div>
+
+          <div class="quick-actions">
+
+            <button
+              type="button"
+              class="quick-action"
+              data-filter-action="urgent"
+            >
+              <strong>View Urgent Tickets</strong>
+              <span>
+                Display tickets requiring immediate attention.
+              </span>
+            </button>
+
+            <button
+              type="button"
+              class="quick-action"
+              data-filter-action="open"
+            >
+              <strong>View Open Tickets</strong>
+              <span>
+                Review currently unresolved requests.
+              </span>
+            </button>
+
+            <button
+              type="button"
+              class="quick-action"
+              data-filter-action="unassigned"
+            >
+              <strong>Unassigned Tickets</strong>
+              <span>
+                Find requests without a support agent.
+              </span>
+            </button>
+
+            <button
+              type="button"
+              class="quick-action"
+              data-filter-action="security"
+            >
+              <strong>Security Requests</strong>
+              <span>
+                Review account and security-related cases.
+              </span>
+            </button>
+
+          </div>
+
+        </section>
+
+        <section
+          class="support-card"
+          style="margin-top:20px;"
+        >
+
+          <div class="support-card-header">
+            <h2>Support Agents</h2>
+            <span id="agentCount">0 online</span>
+          </div>
+
+          <div
+            class="agent-list"
+            id="agentList"
+          >
+            Loading...
+          </div>
+
+        </section>
+
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- Ticket modal -->
+  <div
+    class="modal"
+    id="ticketModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ticketModalTitle"
+  >
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+
+        <h2 id="ticketModalTitle">
+          Support Ticket
+        </h2>
+
+        <button
+          type="button"
+          class="modal-close"
+          id="closeTicketModal"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        class="ticket-details"
+        id="ticketDetails"
+      ></div>
+
+      <div
+        class="conversation"
+        id="conversation"
+      ></div>
+
+      <div class="reply-box">
+
+        <textarea
+          id="replyMessage"
+          placeholder="Write a response to the customer..."
+        ></textarea>
+
+        <div class="reply-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="resolveTicketBtn"
+          >
+            Resolve
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="sendReplyBtn"
+          >
+            Send Reply
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const state = {
+        tickets: [],
+        filteredTickets: [],
+        agents: [],
+        currentPage: 1,
+        pageSize: 10,
+        selectedTicket: null
+      };
+
+      const $ = id =>
+        document.getElementById(id);
+
+      const elements = {
+        status: $("supportStatus"),
+
+        open: $("openTickets"),
+        pending: $("pendingTickets"),
+        resolved: $("resolvedTickets"),
+        urgent: $("urgentTickets"),
+
+        search: $("ticketSearch"),
+        statusFilter: $("ticketStatusFilter"),
+        priorityFilter: $("ticketPriorityFilter"),
+        categoryFilter: $("ticketCategoryFilter"),
+
+        tableBody: $("ticketTableBody"),
+        ticketCount: $("ticketCount"),
+
+        paginationInfo: $("paginationInfo"),
+        previous: $("previousPageBtn"),
+        current: $("currentPageBtn"),
+        next: $("nextPageBtn"),
+
+        refresh: $("refreshSupportBtn"),
+        newTicket: $("newTicketBtn"),
+
+        agentList: $("agentList"),
+        agentCount: $("agentCount"),
+
+        modal: $("ticketModal"),
+        modalTitle: $("ticketModalTitle"),
+        modalClose: $("closeTicketModal"),
+        ticketDetails: $("ticketDetails"),
+        conversation: $("conversation"),
+        replyMessage: $("replyMessage"),
+        sendReply: $("sendReplyBtn"),
+        resolve: $("resolveTicketBtn")
+      };
+
+      function showStatus(
+        message,
+        type = "info"
+      ) {
+        elements.status.textContent =
+          message;
+
+        elements.status.className =
+          `support-status show ${type}`;
+
+        clearTimeout(
+          showStatus.timer
+        );
+
+        showStatus.timer =
+          setTimeout(() => {
+            elements.status.className =
+              "support-status";
+          }, 5000);
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function formatDate(value) {
+
+        if (!value) {
+          return "—";
+        }
+
+        const date =
+          new Date(value);
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return "—";
+        }
+
+        return date.toLocaleString([], {
+          year: "numeric",
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+      }
+
+      async function apiGet(url) {
+
+        if (
+          window.API &&
+          typeof window.API.get === "function"
+        ) {
+          return window.API.get(url);
+        }
+
+        const response =
+          await fetch(url, {
+            credentials: "include"
+          });
+
+        if (!response.ok) {
+          throw new Error(
+            `Request failed: ${response.status}`
+          );
+        }
+
+        return response.json();
+      }
+
+      async function apiRequest(
+        method,
+        url,
+        body
+      ) {
+
+        const methodName =
+          method.toLowerCase();
+
+        if (
+          window.API &&
+          typeof window.API[methodName] ===
+            "function"
+        ) {
+          return window.API[
+            methodName
+          ](url, body);
+        }
+
+        const options = {
+          method,
+          credentials: "include",
+          headers: {
+            "Content-Type":
+              "application/json"
+          }
+        };
+
+        if (body !== undefined) {
+          options.body =
+            JSON.stringify(body);
+        }
+
+        const response =
+          await fetch(
+            url,
+            options
+          );
+
+        if (!response.ok) {
+          throw new Error(
+            `Request failed: ${response.status}`
+          );
+        }
+
+        return response.json();
+      }
+
+      function normalizeTicket(ticket) {
+
+        return {
+          id:
+            ticket.id ||
+            ticket.ticket_id,
+
+          reference:
+            ticket.reference ||
+            ticket.ticket_number ||
+            ticket.ticket_id ||
+            "—",
+
+          subject:
+            ticket.subject ||
+            "Support Request",
+
+          customer:
+            ticket.customer_name ||
+            ticket.customer ||
+            "Unknown Customer",
+
+          customerEmail:
+            ticket.customer_email ||
+            ticket.email ||
+            "",
+
+          category:
+            String(
+              ticket.category ||
+              "general"
+            ).toLowerCase(),
+
+          priority:
+            String(
+              ticket.priority ||
+              "medium"
+            ).toLowerCase(),
+
+          status:
+            String(
+              ticket.status ||
+              "open"
+            ).toLowerCase(),
+
+          assigned:
+            ticket.assigned_to_name ||
+            ticket.assigned_to ||
+            "Unassigned",
+
+          createdAt:
+            ticket.created_at ||
+            ticket.createdAt,
+
+          updatedAt:
+            ticket.updated_at ||
+            ticket.updatedAt ||
+            ticket.created_at,
+
+          description:
+            ticket.description ||
+            ticket.message ||
+            "",
+
+          messages:
+            Array.isArray(
+              ticket.messages
+            )
+              ? ticket.messages
+              : []
+        };
+      }
+
+      async function loadSupport() {
+
+        renderLoading();
+
+        try {
+
+          /*
+           * Expected backend endpoint:
+           *
+           * GET /api/admin/support
+           *
+           * Optional:
+           * GET /api/admin/support/agents
+           */
+
+          const response =
+            await apiGet(
+              "/admin/support"
+            );
+
+          const rawTickets =
+            response.tickets ||
+            response.data?.tickets ||
+            response.data ||
+            [];
+
+          state.tickets =
+            Array.isArray(rawTickets)
+              ? rawTickets.map(
+                  normalizeTicket
+                )
+              : [];
+
+          const summary =
+            response.summary ||
+            response.data?.summary ||
+            {};
+
+          updateStats(
+            summary
+          );
+
+          applyFilters();
+
+          loadAgents();
+
+        } catch (error) {
+
+          console.warn(
+            "Support API unavailable:",
+            error
+          );
+
+          state.tickets = [];
+
+          updateStats({});
+
+          renderEmpty(
+            "Support data is unavailable. Verify the admin API connection."
+          );
+
+          loadAgents();
+        }
+      }
+
+      async function loadAgents() {
+
+        try {
+
+          const response =
+            await apiGet(
+              "/admin/support/agents"
+            );
+
+          state.agents =
+            response.agents ||
+            response.data ||
+            [];
+
+          renderAgents();
+
+        } catch (error) {
+
+          console.warn(
+            "Support agents API unavailable:",
+            error
+          );
+
+          elements.agentCount.textContent =
+            "Unavailable";
+
+          elements.agentList.innerHTML = `
+            <div class="empty-state">
+              Agent information unavailable.
+            </div>
+          `;
+        }
+      }
+
+      function updateStats(summary) {
+
+        const count =
+          status =>
+            state.tickets.filter(
+              ticket =>
+                ticket.status ===
+                status
+            ).length;
+
+        const urgent =
+          state.tickets.filter(
+            ticket =>
+              ticket.priority ===
+              "urgent"
+          ).length;
+
+        elements.open.textContent =
+          summary.open ??
+          count("open");
+
+        elements.pending.textContent =
+          summary.pending ??
+          count("pending");
+
+        elements.resolved.textContent =
+          summary.resolved ??
+          count("resolved");
+
+        elements.urgent.textContent =
+          summary.urgent ??
+          urgent;
+      }
+
+      function applyFilters() {
+
+        const query =
+          elements.search.value
+            .trim()
+            .toLowerCase();
+
+        const status =
+          elements.statusFilter.value;
+
+        const priority =
+          elements.priorityFilter.value;
+
+        const category =
+          elements.categoryFilter.value;
+
+        state.filteredTickets =
+          state.tickets.filter(
+            ticket => {
+
+              const searchable = [
+                ticket.reference,
+                ticket.subject,
+                ticket.customer,
+                ticket.customerEmail,
+                ticket.category,
+                ticket.description
+              ]
+                .join(" ")
+                .toLowerCase();
+
+              if (
+                query &&
+                !searchable.includes(
+                  query
+                )
+              ) {
+                return false;
+              }
+
+              if (
+                status &&
+                ticket.status !== status
+              ) {
+                return false;
+              }
+
+              if (
+                priority &&
+                ticket.priority !== priority
+              ) {
+                return false;
+              }
+
+              if (
+                category &&
+                ticket.category !== category
+              ) {
+                return false;
+              }
+
+              return true;
+            }
+          );
+
+        state.currentPage = 1;
+
+        renderTickets();
+      }
+
+      function renderLoading() {
+
+        elements.tableBody.innerHTML = `
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">
+                Loading support tickets...
+              </div>
+            </td>
+          </tr>
+        `;
+      }
+
+      function renderEmpty(message) {
+
+        elements.tableBody.innerHTML = `
+          <tr>
+            <td colspan="7">
+              <div class="empty-state">
+                ${escapeHtml(
+                  message ||
+                  "No support tickets found."
+                )}
+              </div>
+            </td>
+          </tr>
+        `;
+
+        elements.ticketCount.textContent =
+          "0 tickets";
+
+        elements.paginationInfo.textContent =
+          "Showing 0 tickets";
+
+        elements.previous.disabled =
+          true;
+
+        elements.next.disabled =
+          true;
+      }
+
+      function renderTickets() {
+
+        const total =
+          state.filteredTickets.length;
+
+        const totalPages =
+          Math.max(
+            1,
+            Math.ceil(
+              total /
+              state.pageSize
+            )
+          );
+
+        if (
+          state.currentPage >
+          totalPages
+        ) {
+          state.currentPage =
+            totalPages;
+        }
+
+        const start =
+          (state.currentPage - 1) *
+          state.pageSize;
+
+        const end =
+          start +
+          state.pageSize;
+
+        const pageTickets =
+          state.filteredTickets.slice(
+            start,
+            end
+          );
+
+        elements.tableBody.innerHTML = "";
+
+        if (!pageTickets.length) {
+          renderEmpty();
+          return;
+        }
+
+        pageTickets.forEach(
+          ticket => {
+
+            const row =
+              document.createElement(
+                "tr"
+              );
+
+            row.dataset.ticketId =
+              ticket.id;
+
+            row.innerHTML = `
+              <td>
+                <div class="ticket-subject">
+                  <strong>
+                    ${escapeHtml(
+                      ticket.subject
+                    )}
+                  </strong>
+
+                  <small>
+                    ${escapeHtml(
+                      ticket.reference
+                    )}
+                  </small>
+                </div>
+              </td>
+
+              <td>
+                <div class="ticket-subject">
+                  <strong>
+                    ${escapeHtml(
+                      ticket.customer
+                    )}
+                  </strong>
+
+                  <small>
+                    ${escapeHtml(
+                      ticket.customerEmail
+                    )}
+                  </small>
+                </div>
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  ticket.category
+                )}
+              </td>
+
+              <td>
+                <span class="ticket-badge priority-${
+                  escapeHtml(
+                    ticket.priority
+                  )
+                }">
+                  ${escapeHtml(
+                    ticket.priority
+                  )}
+                </span>
+              </td>
+
+              <td>
+                <span class="ticket-badge status-${
+                  escapeHtml(
+                    ticket.status
+                  )
+                }">
+                  ${escapeHtml(
+                    ticket.status
+                  )}
+                </span>
+              </td>
+
+              <td>
+                ${formatDate(
+                  ticket.updatedAt
+                )}
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  ticket.assigned
+                )}
+              </td>
+            `;
+
+            elements.tableBody.appendChild(
+              row
+            );
+          }
+        );
+
+        elements.ticketCount.textContent =
+          `${total} ticket${
+            total === 1
+              ? ""
+              : "s"
+          }`;
+
+        elements.paginationInfo.textContent =
+          total
+            ? `Showing ${start + 1}-${Math.min(
+                end,
+                total
+              )} of ${total} tickets`
+            : "Showing 0 tickets";
+
+        elements.current.textContent =
+          state.currentPage;
+
+        elements.previous.disabled =
+          state.currentPage <= 1;
+
+        elements.next.disabled =
+          state.currentPage >=
+          totalPages;
+      }
+
+      function renderAgents() {
+
+        const online =
+          state.agents.filter(
+            agent =>
+              agent.online === true ||
+              agent.status === "online"
+          ).length;
+
+        elements.agentCount.textContent =
+          `${online} online`;
+
+        if (!state.agents.length) {
+
+          elements.agentList.innerHTML = `
+            <div class="empty-state">
+              No support agents available.
+            </div>
+          `;
+
+          return;
+        }
+
+        elements.agentList.innerHTML =
+          state.agents
+            .map(agent => {
+
+              const isOnline =
+                agent.online === true ||
+                agent.status === "online";
+
+              return `
+                <div class="agent">
+
+                  <div class="agent-info">
+                    <strong>
+                      ${escapeHtml(
+                        agent.name ||
+                        agent.full_name ||
+                        agent.email ||
+                        "Support Agent"
+                      )}
+                    </strong>
+
+                    <span>
+                      ${escapeHtml(
+                        agent.role ||
+                        "Support"
+                      )}
+                    </span>
+                  </div>
+
+                  <span
+                    class="agent-online"
+                    title="${
+                      isOnline
+                        ? "Online"
+                        : "Offline"
+                    }"
+                    style="${
+                      isOnline
+                        ? ""
+                        : "background:#adb5bd;"
+                    }"
+                  ></span>
+
+                </div>
+              `;
+            })
+            .join("");
+      }
+
+      async function openTicket(id) {
+
+        const ticket =
+          state.tickets.find(
+            item =>
+              String(item.id) ===
+              String(id)
+          );
+
+        if (!ticket) {
+          return;
+        }
+
+        state.selectedTicket =
+          ticket;
+
+        elements.modalTitle.textContent =
+          ticket.subject;
+
+        elements.ticketDetails.innerHTML = `
+
+          <div class="detail-item">
+            <label>Reference</label>
+            <strong>
+              ${escapeHtml(
+                ticket.reference
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Status</label>
+            <strong>
+              ${escapeHtml(
+                ticket.status
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Customer</label>
+            <strong>
+              ${escapeHtml(
+                ticket.customer
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Email</label>
+            <strong>
+              ${escapeHtml(
+                ticket.customerEmail ||
+                "—"
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Category</label>
+            <strong>
+              ${escapeHtml(
+                ticket.category
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Priority</label>
+            <strong>
+              ${escapeHtml(
+                ticket.priority
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Assigned To</label>
+            <strong>
+              ${escapeHtml(
+                ticket.assigned
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item">
+            <label>Last Updated</label>
+            <strong>
+              ${formatDate(
+                ticket.updatedAt
+              )}
+            </strong>
+          </div>
+
+          <div class="detail-item detail-full">
+            <label>Description</label>
+            <strong>
+              ${escapeHtml(
+                ticket.description ||
+                "No description provided."
+              )}
+            </strong>
+          </div>
+        `;
+
+        renderConversation(
+          ticket.messages
+        );
+
+        elements.replyMessage.value =
+          "";
+
+        elements.modal.classList.add(
+          "open"
+        );
+      }
+
+      function renderConversation(messages) {
+
+        if (!messages.length) {
+
+          elements.conversation.innerHTML = `
+            <div class="empty-state">
+              No conversation messages available.
+            </div>
+          `;
+
+          return;
+        }
+
+        elements.conversation.innerHTML =
+          messages
+            .map(message => {
+
+              const isAdmin =
+                message.sender_type ===
+                  "admin" ||
+                message.sender_role ===
+                  "admin";
+
+              return `
+                <div class="message ${
+                  isAdmin
+                    ? "admin"
+                    : ""
+                }">
+
+                  <div class="message-header">
+
+                    <strong>
+                      ${escapeHtml(
+                        message.sender_name ||
+                        message.sender ||
+                        "User"
+                      )}
+                    </strong>
+
+                    <span>
+                      ${formatDate(
+                        message.created_at
+                      )}
+                    </span>
+
+                  </div>
+
+                  <div class="message-body">
+                    ${escapeHtml(
+                      message.message ||
+                      message.body ||
+                      ""
+                    )}
+                  </div>
+
+                </div>
+              `;
+            })
+            .join("");
+      }
+
+      function closeModal() {
+
+        elements.modal.classList.remove(
+          "open"
+        );
+
+        state.selectedTicket =
+          null;
+      }
+
+      async function sendReply() {
+
+        const ticket =
+          state.selectedTicket;
+
+        if (!ticket) {
+          return;
+        }
+
+        const message =
+          elements.replyMessage.value
+            .trim();
+
+        if (!message) {
+
+          showStatus(
+            "Enter a response before sending.",
+            "error"
+          );
+
+          return;
+        }
+
+        try {
+
+          await apiRequest(
+            "POST",
+            `/admin/support/${encodeURIComponent(
+              ticket.id
+            )}/messages`,
+            {
+              message
+            }
+          );
+
+          showStatus(
+            "Response sent successfully.",
+            "success"
+          );
+
+          elements.replyMessage.value =
+            "";
+
+          await loadSupport();
+
+          const refreshed =
+            state.tickets.find(
+              item =>
+                String(item.id) ===
+                String(ticket.id)
+            );
+
+          if (refreshed) {
+            state.selectedTicket =
+              refreshed;
+
+            renderConversation(
+              refreshed.messages
+            );
+          }
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          showStatus(
+            "Unable to send the response.",
+            "error"
+          );
+        }
+      }
+
+      async function resolveTicket() {
+
+        const ticket =
+          state.selectedTicket;
+
+        if (!ticket) {
+          return;
+        }
+
+        const confirmed =
+          window.confirm(
+            "Mark this support ticket as resolved?"
+          );
+
+        if (!confirmed) {
+          return;
+        }
+
+        try {
+
+          await apiRequest(
+            "PATCH",
+            `/admin/support/${encodeURIComponent(
+              ticket.id
+            )}`,
+            {
+              status: "resolved"
+            }
+          );
+
+          showStatus(
+            "Ticket marked as resolved.",
+            "success"
+          );
+
+          closeModal();
+
+          loadSupport();
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          showStatus(
+            "Unable to resolve the ticket.",
+            "error"
+          );
+        }
+      }
+
+      function newTicket() {
+
+        /*
+         * This keeps ticket creation API-driven.
+         * A dedicated customer-support creation form
+         * can be added when the backend route is available.
+         */
+
+        const subject =
+          window.prompt(
+            "Enter the ticket subject:"
+          );
+
+        if (!subject) {
+          return;
+        }
+
+        const message =
+          window.prompt(
+            "Enter the initial support message:"
+          );
+
+        if (!message) {
+          return;
+        }
+
+        createTicket(
+          subject,
+          message
+        );
+      }
+
+      async function createTicket(
+        subject,
+        message
+      ) {
+
+        try {
+
+          await apiRequest(
+            "POST",
+            "/admin/support",
+            {
+              subject,
+              message,
+              priority: "medium",
+              category: "general"
+            }
+          );
+
+          showStatus(
+            "Support ticket created.",
+            "success"
+          );
+
+          loadSupport();
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          showStatus(
+            "Unable to create the support ticket.",
+            "error"
+          );
+        }
+      }
+
+      function applyQuickAction(action) {
+
+        elements.search.value = "";
+        elements.statusFilter.value = "";
+        elements.priorityFilter.value = "";
+        elements.categoryFilter.value = "";
+
+        if (action === "urgent") {
+          elements.priorityFilter.value =
+            "urgent";
+        }
+
+        if (action === "open") {
+          elements.statusFilter.value =
+            "open";
+        }
+
+        if (action === "security") {
+          elements.categoryFilter.value =
+            "security";
+        }
+
+        if (action === "unassigned") {
+
+          state.filteredTickets =
+            state.tickets.filter(
+              ticket =>
+                ticket.assigned ===
+                  "Unassigned" ||
+                !ticket.assigned
+            );
+
+          state.currentPage = 1;
+
+          renderTickets();
+
+          return;
+        }
+
+        applyFilters();
+      }
+
+      elements.search.addEventListener(
+        "input",
+        applyFilters
+      );
+
+      elements.statusFilter.addEventListener(
+        "change",
+        applyFilters
+      );
+
+      elements.priorityFilter.addEventListener(
+        "change",
+        applyFilters
+      );
+
+      elements.categoryFilter.addEventListener(
+        "change",
+        applyFilters
+      );
+
+      elements.tableBody.addEventListener(
+        "click",
+        event => {
+
+          const row =
+            event.target.closest(
+              "[data-ticket-id]"
+            );
+
+          if (!row) {
+            return;
+          }
+
+          openTicket(
+            row.dataset.ticketId
+          );
+        }
+      );
+
+      document
+        .querySelectorAll(
+          "[data-filter-action]"
+        )
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () =>
+              applyQuickAction(
+                button.dataset
+                  .filterAction
+              )
+          );
+        });
+
+      elements.previous.addEventListener(
+        "click",
+        () => {
+
+          if (
+            state.currentPage > 1
+          ) {
+            state.currentPage--;
+
+            renderTickets();
+          }
+        }
+      );
+
+      elements.next.addEventListener(
+        "click",
+        () => {
+
+          const totalPages =
+            Math.ceil(
+              state.filteredTickets.length /
+              state.pageSize
+            );
+
+          if (
+            state.currentPage <
+            totalPages
+          ) {
+            state.currentPage++;
+
+            renderTickets();
+          }
+        }
+      );
+
+      elements.refresh.addEventListener(
+        "click",
+        loadSupport
+      );
+
+      elements.newTicket.addEventListener(
+        "click",
+        newTicket
+      );
+
+      elements.modalClose.addEventListener(
+        "click",
+        closeModal
+      );
+
+      elements.modal.addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target ===
+            elements.modal
+          ) {
+            closeModal();
+          }
+        }
+      );
+
+      elements.sendReply.addEventListener(
+        "click",
+        sendReply
+      );
+
+      elements.resolve.addEventListener(
+        "click",
+        resolveTicket
+      );
+
+      document.addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key === "Escape"
+          ) {
+            closeModal();
+          }
+        }
+      );
+
+      // Initial page load
+      loadSupport();
+
+    })();
+  </script>
+
+</body>
+</html>

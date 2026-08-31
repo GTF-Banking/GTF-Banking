@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="description"
+    content="Global TrustFund Administration - Account Management"
+  >
+
+  <title>Accounts | Global TrustFund Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/admin.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/responsive.css"
+  >
+
+  <style>
+    .admin-page {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .page-header h1 {
+      margin: 0;
+    }
+
+    .page-header p {
+      margin: 6px 0 0;
+      opacity: .65;
+    }
+
+    .page-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .status-message {
+      display: none;
+      margin-bottom: 20px;
+      padding: 12px 15px;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .status-message.show {
+      display: block;
+    }
+
+    .status-message.success {
+      background: #d1e7dd;
+      color: #146c43;
+    }
+
+    .status-message.error {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .status-message.info {
+      background: #cff4fc;
+      color: #055160;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      padding: 19px;
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 12px;
+      background: var(--card-bg, #fff);
+      box-shadow:
+        0 4px 18px rgba(0, 0, 0, .04);
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      opacity: .6;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .filter-card {
+      margin-bottom: 20px;
+      padding: 18px;
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 12px;
+      background: var(--card-bg, #fff);
+      box-shadow:
+        0 4px 18px rgba(0, 0, 0, .04);
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(220px, 2fr)
+        repeat(3, minmax(140px, 1fr))
+        auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .form-group {
+      min-width: 0;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      opacity: .6;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 11px;
+      border:
+        1px solid rgba(0, 0, 0, .15);
+      border-radius: 7px;
+      background: #fff;
+      color: inherit;
+      font: inherit;
+      font-size: 12px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #0b3d2e;
+      box-shadow:
+        0 0 0 2px rgba(11, 61, 46, .08);
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .accounts-card {
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 12px;
+      background: var(--card-bg, #fff);
+      box-shadow:
+        0 4px 18px rgba(0, 0, 0, .04);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 20px;
+      border-bottom:
+        1px solid rgba(0, 0, 0, .07);
+      flex-wrap: wrap;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .results-count {
+      font-size: 11px;
+      opacity: .55;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    .accounts-table {
+      width: 100%;
+      min-width: 1050px;
+      border-collapse: collapse;
+    }
+
+    .accounts-table th,
+    .accounts-table td {
+      padding: 13px 14px;
+      text-align: left;
+      border-bottom:
+        1px solid rgba(0, 0, 0, .07);
+    }
+
+    .accounts-table th {
+      background: rgba(11, 61, 46, .035);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .accounts-table td {
+      font-size: 12px;
+      vertical-align: middle;
+    }
+
+    .accounts-table tbody tr:hover {
+      background:
+        rgba(11, 61, 46, .025);
+    }
+
+    .account-number {
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .customer-name strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .customer-name small {
+      display: block;
+      margin-top: 3px;
+      font-size: 10px;
+      opacity: .55;
+    }
+
+    .account-type {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .balance {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-success {
+      background: #d1e7dd;
+      color: #146c43;
+    }
+
+    .badge-warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .badge-danger {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .badge-info {
+      background: #cff4fc;
+      color: #055160;
+    }
+
+    .badge-neutral {
+      background: #e9ecef;
+      color: #495057;
+    }
+
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .row-action {
+      border: 1px solid rgba(0, 0, 0, .1);
+      border-radius: 6px;
+      padding: 6px 8px;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .row-action:hover {
+      background:
+        rgba(11, 61, 46, .06);
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 18px;
+      flex-wrap: wrap;
+    }
+
+    .pagination-info {
+      font-size: 11px;
+      opacity: .6;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .pagination-button {
+      min-width: 34px;
+      height: 32px;
+      padding: 0 9px;
+      border:
+        1px solid rgba(0, 0, 0, .1);
+      border-radius: 6px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .pagination-button.active {
+      background: #0b3d2e;
+      border-color: #0b3d2e;
+      color: #fff;
+    }
+
+    .pagination-button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      padding: 45px 20px;
+      text-align: center;
+      font-size: 12px;
+      opacity: .55;
+    }
+
+    .loading {
+      opacity: .45;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .42);
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(680px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, .2);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 20px;
+      border-bottom:
+        1px solid rgba(0, 0, 0, .08);
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .modal-close {
+      border: 0;
+      background: transparent;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: .6;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .detail-item {
+      padding: 12px;
+      border-radius: 8px;
+      background:
+        rgba(11, 61, 46, .035);
+    }
+
+    .detail-item label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      opacity: .55;
+    }
+
+    .detail-item span {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 15px 20px;
+      border-top:
+        1px solid rgba(0, 0, 0, .08);
+    }
+
+    @media (max-width: 1200px) {
+      .stats-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .filter-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .filter-actions {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .admin-page {
+        padding: 15px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-actions {
+        grid-column: auto;
+      }
+
+      .filter-actions button {
+        flex: 1;
+      }
+
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-actions {
+        width: 100%;
+      }
+
+      .page-actions a,
+      .page-actions button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Shared application header -->
+  <div id="app-header"></div>
+
+  <main class="admin-main admin-page">
+
+    <!-- Page heading -->
+    <section class="page-header">
+
+      <div>
+        <h1>Account Management</h1>
+
+        <p>
+          Review, monitor and manage customer
+          accounts across Global TrustFund.
+        </p>
+      </div>
+
+      <div class="page-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="refreshAccountsBtn"
+        >
+          Refresh
+        </button>
+
+        <a
+          href="./reports.html"
+          class="btn btn-primary"
+        >
+          Account Reports
+        </a>
+
+      </div>
+
+    </section>
+
+    <div
+      id="statusMessage"
+      class="status-message"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <!-- Account statistics -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+
+        <div class="stat-label">
+          Total Accounts
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalAccounts"
+        >
+          —
+        </div>
+
+      </article>
+
+      <article class="stat-card">
+
+        <div class="stat-label">
+          Active Accounts
+        </div>
+
+        <div
+          class="stat-value"
+          id="activeAccounts"
+        >
+          —
+        </div>
+
+      </article>
+
+      <article class="stat-card">
+
+        <div class="stat-label">
+          Pending Accounts
+        </div>
+
+        <div
+          class="stat-value"
+          id="pendingAccounts"
+        >
+          —
+        </div>
+
+      </article>
+
+      <article class="stat-card">
+
+        <div class="stat-label">
+          Suspended Accounts
+        </div>
+
+        <div
+          class="stat-value"
+          id="suspendedAccounts"
+        >
+          —
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- Filters -->
+    <section class="filter-card">
+
+      <form id="accountFilterForm">
+
+        <div class="filter-grid">
+
+          <div class="form-group">
+
+            <label for="searchAccounts">
+              Search
+            </label>
+
+            <input
+              id="searchAccounts"
+              type="search"
+              placeholder="Account number, customer or email..."
+              autocomplete="off"
+            >
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="accountType">
+              Account Type
+            </label>
+
+            <select id="accountType">
+
+              <option value="">
+                All types
+              </option>
+
+              <option value="checking">
+                Checking
+              </option>
+
+              <option value="savings">
+                Savings
+              </option>
+
+              <option value="business">
+                Business
+              </option>
+
+              <option value="money_market">
+                Money Market
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="accountStatus">
+              Status
+            </label>
+
+            <select id="accountStatus">
+
+              <option value="">
+                All statuses
+              </option>
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="suspended">
+                Suspended
+              </option>
+
+              <option value="closed">
+                Closed
+              </option>
+
+              <option value="blocked">
+                Blocked
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="kycStatus">
+              Verification
+            </label>
+
+            <select id="kycStatus">
+
+              <option value="">
+                All verification states
+              </option>
+
+              <option value="verified">
+                Verified
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="rejected">
+                Rejected
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="filter-actions">
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Search
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="clearFiltersBtn"
+            >
+              Clear
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </section>
+
+    <!-- Accounts table -->
+    <section class="accounts-card">
+
+      <div class="card-header">
+
+        <h2>Customer Accounts</h2>
+
+        <span
+          class="results-count"
+          id="resultsCount"
+        >
+          Loading...
+        </span>
+
+      </div>
+
+      <div class="table-wrapper">
+
+        <table class="accounts-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Account
+              </th>
+
+              <th>
+                Customer
+              </th>
+
+              <th>
+                Type
+              </th>
+
+              <th>
+                Currency
+              </th>
+
+              <th>
+                Balance
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Verification
+              </th>
+
+              <th>
+                Opened
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="accountsBody">
+
+            <tr>
+
+              <td colspan="9">
+
+                <div class="empty-state loading">
+                  Loading accounts...
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div class="pagination">
+
+        <div
+          class="pagination-info"
+          id="paginationInfo"
+        >
+          —
+        </div>
+
+        <div class="pagination-buttons">
+
+          <button
+            type="button"
+            class="pagination-button"
+            id="previousPageBtn"
+          >
+            Previous
+          </button>
+
+          <button
+            type="button"
+            class="pagination-button active"
+            id="currentPageBtn"
+          >
+            1
+          </button>
+
+          <button
+            type="button"
+            class="pagination-button"
+            id="nextPageBtn"
+          >
+            Next
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Account details modal -->
+  <div
+    class="modal-backdrop"
+    id="accountModal"
+    aria-hidden="true"
+  >
+
+    <section
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="accountModalTitle"
+    >
+
+      <header class="modal-header">
+
+        <h2 id="accountModalTitle">
+          Account Details
+        </h2>
+
+        <button
+          type="button"
+          class="modal-close"
+          id="closeAccountModal"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+
+      </header>
+
+      <div class="modal-body">
+
+        <div
+          class="details-grid"
+          id="accountDetails"
+        >
+          <!-- Populated by JavaScript -->
+        </div>
+
+      </div>
+
+      <footer class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="modalCloseBtn"
+        >
+          Close
+        </button>
+
+      </footer>
+
+    </section>
+
+  </div>
+
+  <!-- Shared scripts -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+
+      "use strict";
+
+      const $ = id =>
+        document.getElementById(id);
+
+      const state = {
+        accounts: [],
+        filteredAccounts: [],
+        page: 1,
+        pageSize: 10
+      };
+
+      const elements = {
+        status:
+          $("statusMessage"),
+
+        total:
+          $("totalAccounts"),
+
+        active:
+          $("activeAccounts"),
+
+        pending:
+          $("pendingAccounts"),
+
+        suspended:
+          $("suspendedAccounts"),
+
+        body:
+          $("accountsBody"),
+
+        results:
+          $("resultsCount"),
+
+        paginationInfo:
+          $("paginationInfo"),
+
+        previous:
+          $("previousPageBtn"),
+
+        current:
+          $("currentPageBtn"),
+
+        next:
+          $("nextPageBtn"),
+
+        refresh:
+          $("refreshAccountsBtn"),
+
+        filterForm:
+          $("accountFilterForm"),
+
+        search:
+          $("searchAccounts"),
+
+        type:
+          $("accountType"),
+
+        statusFilter:
+          $("accountStatus"),
+
+        kyc:
+          $("kycStatus"),
+
+        clear:
+          $("clearFiltersBtn"),
+
+        modal:
+          $("accountModal"),
+
+        details:
+          $("accountDetails"),
+
+        modalTitle:
+          $("accountModalTitle"),
+
+        closeModal:
+          $("closeAccountModal"),
+
+        modalCloseBtn:
+          $("modalCloseBtn")
+      };
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(
+            /</g,
+            "&lt;"
+          )
+          .replace(
+            />/g,
+            "&gt;"
+          )
+          .replace(
+            /"/g,
+            "&quot;"
+          )
+          .replace(
+            /'/g,
+            "&#039;"
+          );
+      }
+
+      function formatNumber(value) {
+
+        const number =
+          Number(value);
+
+        if (
+          Number.isNaN(number)
+        ) {
+          return "—";
+        }
+
+        return number.toLocaleString();
+      }
+
+      function formatMoney(
+        value,
+        currency = "USD"
+      ) {
+
+        const number =
+          Number(value);
+
+        if (
+          Number.isNaN(number)
+        ) {
+          return "—";
+        }
+
+        try {
+
+          return new Intl.NumberFormat(
+            undefined,
+            {
+              style: "currency",
+              currency
+            }
+          ).format(number);
+
+        } catch {
+
+          return `${currency} ${
+            number.toLocaleString()
+          }`;
+
+        }
+      }
+
+      function formatDate(value) {
+
+        if (!value) {
+          return "—";
+        }
+
+        const date =
+          new Date(value);
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return "—";
+        }
+
+        return date.toLocaleDateString(
+          undefined,
+          {
+            month: "short",
+            day: "2-digit",
+            year: "numeric"
+          }
+        );
+      }
+
+      function showStatus(
+        message,
+        type = "info"
+      ) {
+
+        elements.status.textContent =
+          message;
+
+        elements.status.className =
+          `status-message show ${type}`;
+
+        clearTimeout(
+          showStatus.timer
+        );
+
+        showStatus.timer =
+          setTimeout(() => {
+
+            elements.status.className =
+              "status-message";
+
+          }, 5000);
+      }
+
+      async function apiGet(url) {
+
+        if (
+          window.API &&
+          typeof window.API.get ===
+            "function"
+        ) {
+
+          return window.API.get(
+            url
+          );
+        }
+
+        const response =
+          await fetch(
+            url,
+            {
+              credentials:
+                "include"
+            }
+          );
+
+        if (!response.ok) {
+          throw new Error(
+            `Request failed: ${response.status}`
+          );
+        }
+
+        return response.json();
+      }
+
+      async function loadAccounts() {
+
+        renderLoading();
+
+        try {
+
+          const response =
+            await apiGet(
+              "/admin/accounts"
+            );
+
+          const payload =
+            response.data ||
+            response;
+
+          state.accounts =
+            Array.isArray(payload)
+              ? payload
+              : (
+                  payload.accounts ||
+                  payload.items ||
+                  []
+                );
+
+          updateStatistics();
+
+          applyFilters();
+
+          showStatus(
+            "Account data loaded successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Account loading error:",
+            error
+          );
+
+          /*
+           * Do not manufacture financial
+           * records when the API is unavailable.
+           */
+          state.accounts = [];
+
+          updateStatistics();
+          renderUnavailable();
+
+          showStatus(
+            "Unable to load account data. Check the admin API connection.",
+            "error"
+          );
+        }
+      }
+
+      function updateStatistics() {
+
+        const accounts =
+          state.accounts;
+
+        const active =
+          accounts.filter(
+            account =>
+              String(
+                account.status ||
+                ""
+              ).toLowerCase() ===
+              "active"
+          ).length;
+
+        const pending =
+          accounts.filter(
+            account =>
+              String(
+                account.status ||
+                ""
+              ).toLowerCase() ===
+              "pending"
+          ).length;
+
+        const suspended =
+          accounts.filter(
+            account => {
+
+              const status =
+                String(
+                  account.status ||
+                  ""
+                ).toLowerCase();
+
+              return (
+                status === "suspended" ||
+                status === "blocked"
+              );
+
+            }
+          ).length;
+
+        elements.total.textContent =
+          formatNumber(
+            accounts.length
+          );
+
+        elements.active.textContent =
+          formatNumber(active);
+
+        elements.pending.textContent =
+          formatNumber(pending);
+
+        elements.suspended.textContent =
+          formatNumber(suspended);
+      }
+
+      function applyFilters() {
+
+        const search =
+          elements.search.value
+            .trim()
+            .toLowerCase();
+
+        const type =
+          elements.type.value
+            .trim()
+            .toLowerCase();
+
+        const status =
+          elements.statusFilter.value
+            .trim()
+            .toLowerCase();
+
+        const kyc =
+          elements.kyc.value
+            .trim()
+            .toLowerCase();
+
+        state.filteredAccounts =
+          state.accounts.filter(
+            account => {
+
+              const searchable = [
+                account.account_number,
+                account.account_no,
+                account.account_id,
+                account.customer_name,
+                account.customer,
+                account.customer_email,
+                account.email
+              ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
+
+              const accountType =
+                String(
+                  account.account_type ||
+                  account.type ||
+                  ""
+                ).toLowerCase();
+
+              const accountStatus =
+                String(
+                  account.status ||
+                  ""
+                ).toLowerCase();
+
+              const verification =
+                String(
+                  account.kyc_status ||
+                  account.verification_status ||
+                  ""
+                ).toLowerCase();
+
+              const matchesSearch =
+                !search ||
+                searchable.includes(
+                  search
+                );
+
+              const matchesType =
+                !type ||
+                accountType === type;
+
+              const matchesStatus =
+                !status ||
+                accountStatus === status;
+
+              const matchesKyc =
+                !kyc ||
+                verification === kyc;
+
+              return (
+                matchesSearch &&
+                matchesType &&
+                matchesStatus &&
+                matchesKyc
+              );
+            }
+          );
+
+        state.page = 1;
+
+        renderAccounts();
+      }
+
+      function renderAccounts() {
+
+        const accounts =
+          state.filteredAccounts;
+
+        const total =
+          accounts.length;
+
+        const totalPages =
+          Math.max(
+            1,
+            Math.ceil(
+              total /
+              state.pageSize
+            )
+          );
+
+        if (
+          state.page >
+          totalPages
+        ) {
+          state.page =
+            totalPages;
+        }
+
+        const start =
+          (
+            state.page - 1
+          ) *
+          state.pageSize;
+
+        const end =
+          Math.min(
+            start +
+              state.pageSize,
+            total
+          );
+
+        const visible =
+          accounts.slice(
+            start,
+            end
+          );
+
+        elements.results.textContent =
+          `${formatNumber(total)} result${
+            total === 1 ? "" : "s"
+          }`;
+
+        elements.paginationInfo.textContent =
+          total
+            ? `Showing ${
+                start + 1
+              }–${end} of ${total}`
+            : "No results";
+
+        elements.current.textContent =
+          state.page;
+
+        elements.previous.disabled =
+          state.page <= 1;
+
+        elements.next.disabled =
+          state.page >= totalPages;
+
+        if (!visible.length) {
+
+          elements.body.innerHTML = `
+            <tr>
+              <td colspan="9">
+                <div class="empty-state">
+                  No accounts match the selected filters.
+                </div>
+              </td>
+            </tr>
+          `;
+
+          return;
+        }
+
+        elements.body.innerHTML =
+          visible
+            .map(renderAccountRow)
+            .join("");
+      }
+
+      function renderAccountRow(
+        account
+      ) {
+
+        const status =
+          String(
+            account.status ||
+            "pending"
+          ).toLowerCase();
+
+        const verification =
+          String(
+            account.kyc_status ||
+            account.verification_status ||
+            "pending"
+          ).toLowerCase();
+
+        const statusClass =
+          status === "active"
+            ? "badge-success"
+            : status === "suspended" ||
+              status === "blocked"
+              ? "badge-danger"
+              : status === "pending"
+                ? "badge-warning"
+                : status === "closed"
+                  ? "badge-neutral"
+                  : "badge-info";
+
+        const verificationClass =
+          verification === "verified" ||
+          verification === "approved" ||
+          verification === "complete"
+            ? "badge-success"
+            : verification === "rejected"
+              ? "badge-danger"
+              : "badge-warning";
+
+        const accountNumber =
+          account.account_number ||
+          account.account_no ||
+          account.account_id ||
+          "—";
+
+        const customerName =
+          account.customer_name ||
+          account.customer ||
+          (
+            `${account.first_name || ""} ${
+              account.last_name || ""
+            }`
+          ).trim() ||
+          "Unknown Customer";
+
+        const customerEmail =
+          account.customer_email ||
+          account.email ||
+          "";
+
+        const type =
+          account.account_type ||
+          account.type ||
+          "—";
+
+        const currency =
+          account.currency ||
+          "USD";
+
+        const balance =
+          account.balance ??
+          account.available_balance ??
+          0;
+
+        const opened =
+          account.opened_at ||
+          account.created_at ||
+          account.opening_date;
+
+        const id =
+          account.id ||
+          account.account_id ||
+          accountNumber;
+
+        return `
+          <tr>
+
+            <td>
+              <span class="account-number">
+                ${escapeHtml(accountNumber)}
+              </span>
+            </td>
+
+            <td>
+              <div class="customer-name">
+
+                <strong>
+                  ${escapeHtml(customerName)}
+                </strong>
+
+                <small>
+                  ${escapeHtml(customerEmail)}
+                </small>
+
+              </div>
+            </td>
+
+            <td>
+              <span class="account-type">
+                ${escapeHtml(type)}
+              </span>
+            </td>
+
+            <td>
+              ${escapeHtml(currency)}
+            </td>
+
+            <td>
+              <span class="balance">
+                ${formatMoney(
+                  balance,
+                  currency
+                )}
+              </span>
+            </td>
+
+            <td>
+              <span class="badge ${statusClass}">
+                ${escapeHtml(status)}
+              </span>
+            </td>
+
+            <td>
+              <span class="badge ${verificationClass}">
+                ${escapeHtml(verification)}
+              </span>
+            </td>
+
+            <td>
+              ${formatDate(opened)}
+            </td>
+
+            <td>
+
+              <div class="row-actions">
+
+                <button
+                  type="button"
+                  class="row-action"
+                  data-action="view"
+                  data-account-id="${escapeHtml(id)}"
+                >
+                  View
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+        `;
+      }
+
+      function renderLoading() {
+
+        elements.body.innerHTML = `
+          <tr>
+            <td colspan="9">
+              <div class="empty-state loading">
+                Loading accounts...
+              </div>
+            </td>
+          </tr>
+        `;
+
+        elements.results.textContent =
+          "Loading...";
+      }
+
+      function renderUnavailable() {
+
+        elements.body.innerHTML = `
+          <tr>
+            <td colspan="9">
+              <div class="empty-state">
+                Account data is currently unavailable.
+              </div>
+            </td>
+          </tr>
+        `;
+
+        elements.results.textContent =
+          "Unavailable";
+
+        elements.paginationInfo.textContent =
+          "Unable to retrieve account data";
+      }
+
+      function findAccount(id) {
+
+        return state.accounts.find(
+          account =>
+            String(
+              account.id ||
+              account.account_id ||
+              account.account_number ||
+              ""
+            ) ===
+            String(id)
+        );
+      }
+
+      function openAccountModal(id) {
+
+        const account =
+          findAccount(id);
+
+        if (!account) {
+
+          showStatus(
+            "Account details could not be found.",
+            "error"
+          );
+
+          return;
+        }
+
+        const accountNumber =
+          account.account_number ||
+          account.account_no ||
+          account.account_id ||
+          "—";
+
+        elements.modalTitle.textContent =
+          `Account ${accountNumber}`;
+
+        const fields = [
+          [
+            "Account Number",
+            accountNumber
+          ],
+          [
+            "Customer",
+            account.customer_name ||
+            account.customer ||
+            "—"
+          ],
+          [
+            "Email",
+            account.customer_email ||
+            account.email ||
+            "—"
+          ],
+          [
+            "Account Type",
+            account.account_type ||
+            account.type ||
+            "—"
+          ],
+          [
+            "Currency",
+            account.currency ||
+            "USD"
+          ],
+          [
+            "Balance",
+            formatMoney(
+              account.balance ??
+              account.available_balance ??
+              0,
+              account.currency ||
+              "USD"
+            )
+          ],
+          [
+            "Status",
+            account.status ||
+            "—"
+          ],
+          [
+            "Verification",
+            account.kyc_status ||
+            account.verification_status ||
+            "—"
+          ],
+          [
+            "Opened",
+            formatDate(
+              account.opened_at ||
+              account.created_at
+            )
+          ],
+          [
+            "Account ID",
+            account.id ||
+            account.account_id ||
+            "—"
+          ]
+        ];
+
+        elements.details.innerHTML =
+          fields
+            .map(
+              ([label, value]) => `
+                <div class="detail-item">
+
+                  <label>
+                    ${escapeHtml(label)}
+                  </label>
+
+                  <span>
+                    ${escapeHtml(value)}
+                  </span>
+
+                </div>
+              `
+            )
+            .join("");
+
+        elements.modal.classList.add(
+          "show"
+        );
+
+        elements.modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+      }
+
+      function closeAccountModal() {
+
+        elements.modal.classList.remove(
+          "show"
+        );
+
+        elements.modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+      }
+
+      elements.filterForm.addEventListener(
+        "submit",
+        event => {
+
+          event.preventDefault();
+
+          applyFilters();
+
+        }
+      );
+
+      elements.search.addEventListener(
+        "input",
+        applyFilters
+      );
+
+      elements.clear.addEventListener(
+        "click",
+        () => {
+
+          elements.search.value =
+            "";
+
+          elements.type.value =
+            "";
+
+          elements.statusFilter.value =
+            "";
+
+          elements.kyc.value =
+            "";
+
+          applyFilters();
+
+        }
+      );
+
+      elements.refresh.addEventListener(
+        "click",
+        async () => {
+
+          elements.refresh.disabled =
+            true;
+
+          try {
+
+            await loadAccounts();
+
+          } finally {
+
+            elements.refresh.disabled =
+              false;
+          }
+        }
+      );
+
+      elements.previous.addEventListener(
+        "click",
+        () => {
+
+          if (
+            state.page > 1
+          ) {
+
+            state.page--;
+
+            renderAccounts();
+          }
+        }
+      );
+
+      elements.next.addEventListener(
+        "click",
+        () => {
+
+          const totalPages =
+            Math.max(
+              1,
+              Math.ceil(
+                state.filteredAccounts.length /
+                state.pageSize
+              )
+            );
+
+          if (
+            state.page <
+            totalPages
+          ) {
+
+            state.page++;
+
+            renderAccounts();
+          }
+        }
+      );
+
+      elements.body.addEventListener(
+        "click",
+        event => {
+
+          const button =
+            event.target.closest(
+              "[data-action='view']"
+            );
+
+          if (!button) {
+            return;
+          }
+
+          openAccountModal(
+            button.dataset.accountId
+          );
+        }
+      );
+
+      elements.closeModal.addEventListener(
+        "click",
+        closeAccountModal
+      );
+
+      elements.modalCloseBtn.addEventListener(
+        "click",
+        closeAccountModal
+      );
+
+      elements.modal.addEventListener(
+        "click",
+        event => {
+
+          if (
+            event.target ===
+            elements.modal
+          ) {
+
+            closeAccountModal();
+          }
+        }
+      );
+
+      document.addEventListener(
+        "keydown",
+        event => {
+
+          if (
+            event.key === "Escape" &&
+            elements.modal.classList.contains(
+              "show"
+            )
+          ) {
+
+            closeAccountModal();
+          }
+        }
+      );
+
+      /*
+       * Initial load.
+       */
+      loadAccounts();
+
+    })();
+  </script>
+
+</body>
+</html>

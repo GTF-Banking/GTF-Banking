@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b3d2e"
+  >
+
+  <meta
+    name="description"
+    content="Global TrustFund Administration Dashboard"
+  >
+
+  <title>Admin Dashboard | Global TrustFund</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+
+<body>
+
+  <!-- Shared header -->
+  <div id="app-header"></div>
+
+  <main class="admin-main">
+
+    <div class="admin-container">
+
+      <!-- Page heading -->
+      <section class="admin-page-header">
+
+        <div>
+          <span class="admin-eyebrow">
+            ADMINISTRATION
+          </span>
+
+          <h1>
+            Administration Dashboard
+          </h1>
+
+          <p>
+            Monitor customers, accounts, transactions,
+            compliance activity and system operations.
+          </p>
+        </div>
+
+        <div class="admin-header-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="refreshDashboard"
+          >
+            Refresh
+          </button>
+
+        </div>
+
+      </section>
+
+      <!-- Status -->
+      <div
+        id="dashboardStatus"
+        class="admin-status"
+        aria-live="polite"
+      ></div>
+
+      <!-- KPI cards -->
+      <section
+        class="admin-stats-grid"
+        aria-label="Dashboard statistics"
+      >
+
+        <article class="admin-stat-card">
+
+          <div class="admin-stat-icon">
+            👥
+          </div>
+
+          <div class="admin-stat-content">
+
+            <span class="admin-stat-label">
+              Total Customers
+            </span>
+
+            <strong
+              id="totalCustomers"
+              class="admin-stat-value"
+            >
+              —
+            </strong>
+
+            <span
+              id="customerTrend"
+              class="admin-stat-meta"
+            >
+              Customer records
+            </span>
+
+          </div>
+
+        </article>
+
+        <article class="admin-stat-card">
+
+          <div class="admin-stat-icon">
+            🏦
+          </div>
+
+          <div class="admin-stat-content">
+
+            <span class="admin-stat-label">
+              Total Accounts
+            </span>
+
+            <strong
+              id="totalAccounts"
+              class="admin-stat-value"
+            >
+              —
+            </strong>
+
+            <span
+              id="accountTrend"
+              class="admin-stat-meta"
+            >
+              Registered accounts
+            </span>
+
+          </div>
+
+        </article>
+
+        <article class="admin-stat-card">
+
+          <div class="admin-stat-icon">
+            💳
+          </div>
+
+          <div class="admin-stat-content">
+
+            <span class="admin-stat-label">
+              Transactions
+            </span>
+
+            <strong
+              id="totalTransactions"
+              class="admin-stat-value"
+            >
+              —
+            </strong>
+
+            <span
+              id="transactionTrend"
+              class="admin-stat-meta"
+            >
+              Recorded transactions
+            </span>
+
+          </div>
+
+        </article>
+
+        <article class="admin-stat-card">
+
+          <div class="admin-stat-icon">
+            ⚠
+          </div>
+
+          <div class="admin-stat-content">
+
+            <span class="admin-stat-label">
+              Pending Reviews
+            </span>
+
+            <strong
+              id="pendingReviews"
+              class="admin-stat-value"
+            >
+              —
+            </strong>
+
+            <span
+              id="reviewTrend"
+              class="admin-stat-meta"
+            >
+              Compliance items
+            </span>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- Main dashboard grid -->
+      <section class="admin-dashboard-grid">
+
+        <!-- Quick actions -->
+        <article class="admin-panel">
+
+          <div class="admin-panel-header">
+
+            <div>
+              <h2>Quick Actions</h2>
+
+              <p>
+                Common administration tasks.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="admin-action-grid">
+
+            <a
+              href="./customers.html"
+              class="admin-action-card"
+            >
+
+              <span class="admin-action-icon">
+                👥
+              </span>
+
+              <span>
+                <strong>
+                  Customers
+                </strong>
+
+                <small>
+                  Manage customer records
+                </small>
+              </span>
+
+            </a>
+
+            <a
+              href="./accounts.html"
+              class="admin-action-card"
+            >
+
+              <span class="admin-action-icon">
+                🏦
+              </span>
+
+              <span>
+                <strong>
+                  Accounts
+                </strong>
+
+                <small>
+                  Review customer accounts
+                </small>
+              </span>
+
+            </a>
+
+            <a
+              href="./transactions.html"
+              class="admin-action-card"
+            >
+
+              <span class="admin-action-icon">
+                💳
+              </span>
+
+              <span>
+                <strong>
+                  Transactions
+                </strong>
+
+                <small>
+                  Review transaction activity
+                </small>
+              </span>
+
+            </a>
+
+            <a
+              href="./compliance.html"
+              class="admin-action-card"
+            >
+
+              <span class="admin-action-icon">
+                🛡
+              </span>
+
+              <span>
+                <strong>
+                  Compliance
+                </strong>
+
+                <small>
+                  Review verification items
+                </small>
+              </span>
+
+            </a>
+
+            <a
+              href="./audit.html"
+              class="admin-action-card"
+            >
+
+              <span class="admin-action-icon">
+                📋
+              </span>
+
+              <span>
+                <strong>
+                  Audit Log
+                </strong>
+
+                <small>
+                  Review administrative events
+                </small>
+              </span>
+
+            </a>
+
+            <a
+              href="./reports.html"
+              class="admin-action-card"
+            >
+
+              <span class="admin-action-icon">
+                📊
+              </span>
+
+              <span>
+                <strong>
+                  Reports
+                </strong>
+
+                <small>
+                  View operational reports
+                </small>
+              </span>
+
+            </a>
+
+          </div>
+
+        </article>
+
+        <!-- System status -->
+        <article class="admin-panel">
+
+          <div class="admin-panel-header">
+
+            <div>
+              <h2>System Status</h2>
+
+              <p>
+                Current service availability.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="system-status-list">
+
+            <div class="system-status-item">
+
+              <div class="system-status-name">
+                <span class="status-dot online"></span>
+
+                <span>
+                  API Service
+                </span>
+              </div>
+
+              <span
+                id="apiStatus"
+                class="status-label status-online"
+              >
+                Checking
+              </span>
+
+            </div>
+
+            <div class="system-status-item">
+
+              <div class="system-status-name">
+                <span class="status-dot online"></span>
+
+                <span>
+                  Authentication
+                </span>
+              </div>
+
+              <span
+                id="authStatus"
+                class="status-label status-online"
+              >
+                Available
+              </span>
+
+            </div>
+
+            <div class="system-status-item">
+
+              <div class="system-status-name">
+                <span class="status-dot online"></span>
+
+                <span>
+                  Database
+                </span>
+              </div>
+
+              <span
+                id="databaseStatus"
+                class="status-label status-online"
+              >
+                Checking
+              </span>
+
+            </div>
+
+            <div class="system-status-item">
+
+              <div class="system-status-name">
+                <span class="status-dot online"></span>
+
+                <span>
+                  Security
+                </span>
+              </div>
+
+              <span
+                id="securityStatus"
+                class="status-label status-online"
+              >
+                Protected
+              </span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- Activity and review -->
+      <section class="admin-dashboard-grid">
+
+        <!-- Recent activity -->
+        <article class="admin-panel admin-panel-wide">
+
+          <div class="admin-panel-header">
+
+            <div>
+              <h2>
+                Recent Activity
+              </h2>
+
+              <p>
+                Latest administrative and system events.
+              </p>
+            </div>
+
+            <a
+              href="./audit.html"
+              class="admin-panel-link"
+            >
+              View Audit Log
+            </a>
+
+          </div>
+
+          <div
+            id="recentActivity"
+            class="admin-activity-list"
+          >
+
+            <div class="admin-empty-state">
+              Loading activity...
+            </div>
+
+          </div>
+
+        </article>
+
+        <!-- Review queue -->
+        <article class="admin-panel">
+
+          <div class="admin-panel-header">
+
+            <div>
+              <h2>
+                Review Queue
+              </h2>
+
+              <p>
+                Items requiring attention.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="review-list">
+
+            <a
+              href="./compliance.html"
+              class="review-item"
+            >
+
+              <span class="review-icon">
+                KYC
+              </span>
+
+              <span class="review-content">
+
+                <strong>
+                  Verification Reviews
+                </strong>
+
+                <small>
+                  Customer verification items
+                </small>
+
+              </span>
+
+              <span
+                id="kycReviewCount"
+                class="review-count"
+              >
+                —
+              </span>
+
+            </a>
+
+            <a
+              href="./transactions.html"
+              class="review-item"
+            >
+
+              <span class="review-icon">
+                TX
+              </span>
+
+              <span class="review-content">
+
+                <strong>
+                  Transaction Reviews
+                </strong>
+
+                <small>
+                  Transactions requiring review
+                </small>
+
+              </span>
+
+              <span
+                id="transactionReviewCount"
+                class="review-count"
+              >
+                —
+              </span>
+
+            </a>
+
+            <a
+              href="./customers.html"
+              class="review-item"
+            >
+
+              <span class="review-icon">
+                AC
+              </span>
+
+              <span class="review-content">
+
+                <strong>
+                  Account Requests
+                </strong>
+
+                <small>
+                  Customer account activity
+                </small>
+
+              </span>
+
+              <span
+                id="accountReviewCount"
+                class="review-count"
+              >
+                —
+              </span>
+
+            </a>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- Administration navigation -->
+      <section class="admin-panel">
+
+        <div class="admin-panel-header">
+
+          <div>
+            <h2>
+              Administration
+            </h2>
+
+            <p>
+              Manage Global TrustFund administration tools.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="admin-nav-grid">
+
+          <a
+            href="./customers.html"
+            class="admin-nav-card"
+          >
+            <strong>Customers</strong>
+            <span>Customer management</span>
+          </a>
+
+          <a
+            href="./accounts.html"
+            class="admin-nav-card"
+          >
+            <strong>Accounts</strong>
+            <span>Account administration</span>
+          </a>
+
+          <a
+            href="./transactions.html"
+            class="admin-nav-card"
+          >
+            <strong>Transactions</strong>
+            <span>Transaction monitoring</span>
+          </a>
+
+          <a
+            href="./compliance.html"
+            class="admin-nav-card"
+          >
+            <strong>Compliance</strong>
+            <span>KYC and compliance review</span>
+          </a>
+
+          <a
+            href="./audit.html"
+            class="admin-nav-card"
+          >
+            <strong>Audit</strong>
+            <span>Administrative audit trail</span>
+          </a>
+
+          <a
+            href="./reports.html"
+            class="admin-nav-card"
+          >
+            <strong>Reports</strong>
+            <span>Operational reporting</span>
+          </a>
+
+          <a
+            href="./settings.html"
+            class="admin-nav-card"
+          >
+            <strong>Settings</strong>
+            <span>Administration settings</span>
+          </a>
+
+          <a
+            href="./support.html"
+            class="admin-nav-card"
+          >
+            <strong>Support</strong>
+            <span>Support management</span>
+          </a>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+
+      "use strict";
+
+      const $ = (id) =>
+        document.getElementById(id);
+
+      const elements = {
+        totalCustomers:
+          $("totalCustomers"),
+
+        totalAccounts:
+          $("totalAccounts"),
+
+        totalTransactions:
+          $("totalTransactions"),
+
+        pendingReviews:
+          $("pendingReviews"),
+
+        customerTrend:
+          $("customerTrend"),
+
+        accountTrend:
+          $("accountTrend"),
+
+        transactionTrend:
+          $("transactionTrend"),
+
+        reviewTrend:
+          $("reviewTrend"),
+
+        recentActivity:
+          $("recentActivity"),
+
+        apiStatus:
+          $("apiStatus"),
+
+        databaseStatus:
+          $("databaseStatus"),
+
+        kycReviewCount:
+          $("kycReviewCount"),
+
+        transactionReviewCount:
+          $("transactionReviewCount"),
+
+        accountReviewCount:
+          $("accountReviewCount"),
+
+        status:
+          $("dashboardStatus"),
+
+        refresh:
+          $("refreshDashboard")
+      };
+
+      function number(value) {
+
+        const n =
+          Number(value);
+
+        return Number.isFinite(n)
+          ? n.toLocaleString()
+          : "—";
+      }
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(
+            /</g,
+            "&lt;"
+          )
+          .replace(
+            />/g,
+            "&gt;"
+          )
+          .replace(
+            /"/g,
+            "&quot;"
+          )
+          .replace(
+            /'/g,
+            "&#039;"
+          );
+      }
+
+      function formatDate(value) {
+
+        if (!value) {
+          return "—";
+        }
+
+        const date =
+          new Date(value);
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return "—";
+        }
+
+        return date.toLocaleString(
+          undefined,
+          {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          }
+        );
+      }
+
+      function setStatus(
+        message,
+        type = "info"
+      ) {
+
+        elements.status.textContent =
+          message;
+
+        elements.status.className =
+          `admin-status ${type}`;
+
+      }
+
+      async function apiGet(endpoint) {
+
+        if (
+          window.API &&
+          typeof window.API.get ===
+            "function"
+        ) {
+
+          return window.API.get(
+            endpoint
+          );
+        }
+
+        const response =
+          await fetch(
+            endpoint,
+            {
+              credentials:
+                "include"
+            }
+          );
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+        }
+
+        return response.json();
+      }
+
+      function normalizeDashboard(
+        response
+      ) {
+
+        const payload =
+          response?.data ||
+          response ||
+          {};
+
+        return (
+          payload.summary ||
+          payload.dashboard ||
+          payload
+        );
+      }
+
+      async function loadDashboard() {
+
+        elements.refresh.disabled =
+          true;
+
+        setStatus(
+          "Refreshing dashboard...",
+          "info"
+        );
+
+        try {
+
+          const response =
+            await apiGet(
+              "/admin/dashboard/summary"
+            );
+
+          const data =
+            normalizeDashboard(
+              response
+            );
+
+          const customers =
+            data.customers ??
+            data.total_customers ??
+            data.customer_count ??
+            0;
+
+          const accounts =
+            data.accounts ??
+            data.total_accounts ??
+            data.account_count ??
+            0;
+
+          const transactions =
+            data.transactions ??
+            data.total_transactions ??
+            data.transaction_count ??
+            0;
+
+          const pending =
+            data.pending_reviews ??
+            data.pending ??
+            data.review_count ??
+            0;
+
+          elements.totalCustomers.textContent =
+            number(customers);
+
+          elements.totalAccounts.textContent =
+            number(accounts);
+
+          elements.totalTransactions.textContent =
+            number(transactions);
+
+          elements.pendingReviews.textContent =
+            number(pending);
+
+          elements.customerTrend.textContent =
+            "Customer records";
+
+          elements.accountTrend.textContent =
+            "Registered accounts";
+
+          elements.transactionTrend.textContent =
+            "Recorded transactions";
+
+          elements.reviewTrend.textContent =
+            "Compliance items";
+
+          elements.kycReviewCount.textContent =
+            number(
+              data.pending_kyc ??
+              data.kyc_pending ??
+              pending
+            );
+
+          elements.transactionReviewCount.textContent =
+            number(
+              data.pending_transactions ??
+              data.transaction_reviews ??
+              0
+            );
+
+          elements.accountReviewCount.textContent =
+            number(
+              data.pending_accounts ??
+              data.account_reviews ??
+              0
+            );
+
+          renderActivity(
+            data.recent_activity ||
+            data.activity ||
+            data.recent_events ||
+            []
+          );
+
+          setApiStatus(
+            true
+          );
+
+          setStatus(
+            "Dashboard updated successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Admin dashboard error:",
+            error
+          );
+
+          elements.totalCustomers.textContent =
+            "—";
+
+          elements.totalAccounts.textContent =
+            "—";
+
+          elements.totalTransactions.textContent =
+            "—";
+
+          elements.pendingReviews.textContent =
+            "—";
+
+          elements.kycReviewCount.textContent =
+            "—";
+
+          elements.transactionReviewCount.textContent =
+            "—";
+
+          elements.accountReviewCount.textContent =
+            "—";
+
+          elements.recentActivity.innerHTML = `
+            <div class="admin-empty-state">
+              Dashboard data is currently unavailable.
+            </div>
+          `;
+
+          setApiStatus(
+            false
+          );
+
+          setStatus(
+            "Unable to load dashboard data. Check the admin API connection.",
+            "error"
+          );
+
+        } finally {
+
+          elements.refresh.disabled =
+            false;
+        }
+      }
+
+      function setApiStatus(
+        online
+      ) {
+
+        if (online) {
+
+          elements.apiStatus.textContent =
+            "Operational";
+
+          elements.apiStatus.className =
+            "status-label status-online";
+
+          elements.databaseStatus.textContent =
+            "Connected";
+
+          elements.databaseStatus.className =
+            "status-label status-online";
+
+        } else {
+
+          elements.apiStatus.textContent =
+            "Unavailable";
+
+          elements.apiStatus.className =
+            "status-label status-offline";
+
+          elements.databaseStatus.textContent =
+            "Unavailable";
+
+          elements.databaseStatus.className =
+            "status-label status-offline";
+        }
+      }
+
+      function renderActivity(
+        activity
+      ) {
+
+        if (
+          !Array.isArray(activity) ||
+          activity.length === 0
+        ) {
+
+          elements.recentActivity.innerHTML = `
+            <div class="admin-empty-state">
+              No recent activity available.
+            </div>
+          `;
+
+          return;
+        }
+
+        elements.recentActivity.innerHTML =
+          activity
+            .slice(0, 8)
+            .map(
+              item => {
+
+                const title =
+                  item.action ||
+                  item.event ||
+                  item.type ||
+                  "System event";
+
+                const description =
+                  item.description ||
+                  item.message ||
+                  item.details ||
+                  "";
+
+                const actor =
+                  item.actor_name ||
+                  item.user_name ||
+                  item.email ||
+                  item.actor ||
+                  "System";
+
+                const date =
+                  item.created_at ||
+                  item.timestamp ||
+                  item.date;
+
+                return `
+                  <div class="admin-activity-item">
+
+                    <div class="admin-activity-marker">
+                      <span></span>
+                    </div>
+
+                    <div class="admin-activity-content">
+
+                      <strong>
+                        ${escapeHtml(title)}
+                      </strong>
+
+                      <p>
+                        ${escapeHtml(description)}
+                      </p>
+
+                      <small>
+                        ${escapeHtml(actor)}
+                        ·
+                        ${escapeHtml(
+                          formatDate(date)
+                        )}
+                      </small>
+
+                    </div>
+
+                  </div>
+                `;
+              }
+            )
+            .join("");
+      }
+
+      elements.refresh.addEventListener(
+        "click",
+        loadDashboard
+      );
+
+      loadDashboard();
+
+    })();
+  </script>
+
+</body>
+</html>

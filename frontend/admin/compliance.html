@@ -1,0 +1,2912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Compliance — Global TrustFund Admin</title>
+
+  <meta
+    name="description"
+    content="Global TrustFund administrator compliance and verification management."
+  >
+
+  <meta name="theme-color" content="#0b3d2e">
+
+  <meta name="robots" content="noindex, nofollow">
+
+  <link
+    rel="icon"
+    href="../assets/gtf-favicon.svg"
+    type="image/svg+xml"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+
+    /* =====================================================
+       COMPLIANCE PAGE
+    ====================================================== */
+
+    .admin-page {
+      min-height: 100vh;
+      background: #f5f7f6;
+    }
+
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* =====================================================
+       SIDEBAR
+    ====================================================== */
+
+    .admin-sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 1000;
+      overflow-y: auto;
+      background: #0b3d2e;
+      color: #ffffff;
+    }
+
+    .admin-sidebar-header {
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .admin-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .admin-logo-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #0b3d2e;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .admin-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .admin-logo-text strong {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .admin-logo-text small {
+      margin-top: 4px;
+      font-size: 10px;
+      opacity: .65;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .admin-sidebar-label {
+      padding: 24px 20px 10px;
+      color: rgba(255,255,255,.45);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .admin-nav {
+      padding: 0 12px;
+    }
+
+    .admin-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      margin-bottom: 4px;
+      border-radius: 9px;
+      color: rgba(255,255,255,.72);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .admin-nav a:hover {
+      background: rgba(255,255,255,.08);
+      color: #ffffff;
+    }
+
+    .admin-nav a.active {
+      background: rgba(255,255,255,.14);
+      color: #ffffff;
+    }
+
+    .admin-nav-icon {
+      width: 22px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .admin-sidebar-footer {
+      margin-top: 30px;
+      padding: 16px 12px 24px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+
+    .admin-sidebar-footer a {
+      display: block;
+      padding: 10px 14px;
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .admin-sidebar-footer a:hover {
+      color: #ffffff;
+    }
+
+    /* =====================================================
+       MAIN
+    ====================================================== */
+
+    .admin-main {
+      flex: 1;
+      min-width: 0;
+      margin-left: 260px;
+    }
+
+    .admin-topbar {
+      height: 76px;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e9e7;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+
+    .admin-page-title {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .admin-page-title strong {
+      color: #17211d;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .admin-page-title span {
+      color: #7b8781;
+      font-size: 11px;
+    }
+
+    .admin-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-user-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .admin-user-info strong {
+      color: #17211d;
+      font-size: 12px;
+    }
+
+    .admin-user-info small {
+      color: #8a948f;
+      font-size: 10px;
+    }
+
+    .admin-avatar {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #e8f0ec;
+      color: #0b3d2e;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =====================================================
+       CONTENT
+    ====================================================== */
+
+    .admin-content {
+      padding: 30px;
+    }
+
+    .content-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .content-heading h1 {
+      margin: 0;
+      color: #17211d;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    .content-heading p {
+      margin: 8px 0 0;
+      color: #75817b;
+      font-size: 13px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* =====================================================
+       BUTTONS
+    ====================================================== */
+
+    .admin-btn {
+      min-height: 40px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid #dce3df;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #27332e;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .admin-btn:hover {
+      border-color: #0b3d2e;
+      color: #0b3d2e;
+    }
+
+    .admin-btn-primary {
+      background: #0b3d2e;
+      border-color: #0b3d2e;
+      color: #ffffff;
+    }
+
+    .admin-btn-primary:hover {
+      background: #082f24;
+      border-color: #082f24;
+      color: #ffffff;
+    }
+
+    /* =====================================================
+       COMPLIANCE NOTICE
+    ====================================================== */
+
+    .simulation-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 22px;
+      padding: 15px 17px;
+      border: 1px solid #dce8e1;
+      border-radius: 10px;
+      background: #edf5f1;
+    }
+
+    .simulation-notice-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #0b3d2e;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .simulation-notice strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1d3329;
+      font-size: 12px;
+    }
+
+    .simulation-notice p {
+      margin: 0;
+      color: #617069;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* =====================================================
+       STAT CARDS
+    ====================================================== */
+
+    .compliance-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid #e4e9e6;
+      border-radius: 12px;
+      box-shadow: 0 3px 14px rgba(20,40,30,.035);
+    }
+
+    .stat-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .stat-label {
+      color: #7a8580;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .stat-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #edf4f0;
+      color: #0b3d2e;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .stat-value {
+      display: block;
+      color: #17211d;
+      font-size: 23px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .stat-description {
+      display: block;
+      margin-top: 9px;
+      color: #89938e;
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       COMPLIANCE GRID
+    ====================================================== */
+
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: #ffffff;
+      border: 1px solid #e4e9e6;
+      border-radius: 12px;
+      box-shadow: 0 3px 14px rgba(20,40,30,.035);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 18px 20px;
+      border-bottom: 1px solid #e9edeb;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      color: #17211d;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .panel-header span {
+      color: #89938e;
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       REVIEW QUEUE
+    ====================================================== */
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .review-item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eef1ef;
+    }
+
+    .review-item:last-child {
+      border-bottom: 0;
+    }
+
+    .review-avatar {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #edf4f0;
+      color: #0b3d2e;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .review-details {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .review-details strong {
+      display: block;
+      overflow: hidden;
+      color: #29362f;
+      font-size: 12px;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .review-details small {
+      display: block;
+      margin-top: 3px;
+      color: #929b97;
+      font-size: 10px;
+    }
+
+    .risk-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .risk-low {
+      background: #e9f6ef;
+      color: #16724d;
+    }
+
+    .risk-medium {
+      background: #fff5df;
+      color: #9a6a12;
+    }
+
+    .risk-high {
+      background: #fcecec;
+      color: #a44949;
+    }
+
+    .review-action {
+      min-width: 65px;
+      height: 30px;
+      padding: 0 9px;
+      border: 1px solid #dce3df;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #435149;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .review-action:hover {
+      border-color: #0b3d2e;
+      color: #0b3d2e;
+    }
+
+    /* =====================================================
+       COMPLIANCE OVERVIEW
+    ====================================================== */
+
+    .overview-body {
+      padding: 20px;
+    }
+
+    .progress-row {
+      margin-bottom: 20px;
+    }
+
+    .progress-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .progress-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 7px;
+    }
+
+    .progress-label span:first-child {
+      color: #4e5a54;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .progress-label span:last-child {
+      color: #17211d;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .progress-track {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #edf0ee;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: inherit;
+      background: #0b3d2e;
+    }
+
+    .progress-bar.warning {
+      background: #b28732;
+    }
+
+    .progress-bar.danger {
+      background: #a44949;
+    }
+
+    /* =====================================================
+       CASE TABLE
+    ====================================================== */
+
+    .table-card {
+      background: #ffffff;
+      border: 1px solid #e4e9e6;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(20,40,30,.035);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    .compliance-table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+    }
+
+    .compliance-table th {
+      padding: 13px 18px;
+      background: #fafbfa;
+      border-bottom: 1px solid #e9edeb;
+      color: #7a8580;
+      font-size: 10px;
+      font-weight: 800;
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      white-space: nowrap;
+    }
+
+    .compliance-table td {
+      padding: 15px 18px;
+      border-bottom: 1px solid #eef1ef;
+      color: #39463f;
+      font-size: 12px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .compliance-table tbody tr:hover {
+      background: #fafcfb;
+    }
+
+    .compliance-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .case-id {
+      color: #0b3d2e;
+      font-weight: 800;
+    }
+
+    .case-customer {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .case-customer strong {
+      color: #29362f;
+      font-size: 12px;
+    }
+
+    .case-customer small {
+      color: #929b97;
+      font-size: 10px;
+    }
+
+    .case-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .case-status::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .case-open {
+      background: #fff5df;
+      color: #9a6a12;
+    }
+
+    .case-review {
+      background: #edf1f5;
+      color: #5b6b7b;
+    }
+
+    .case-resolved {
+      background: #e9f6ef;
+      color: #16724d;
+    }
+
+    .case-closed {
+      background: #eeeeef;
+      color: #646d69;
+    }
+
+    .table-action {
+      width: 30px;
+      height: 30px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid #dce3df;
+      border-radius: 7px;
+      background: #ffffff;
+      color: #5e6964;
+      cursor: pointer;
+    }
+
+    .table-action:hover {
+      border-color: #0b3d2e;
+      color: #0b3d2e;
+    }
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    .admin-mobile-toggle {
+      display: none;
+      width: 38px;
+      height: 38px;
+      border: 1px solid #dce3df;
+      border-radius: 8px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .admin-mobile-toggle span {
+      display: block;
+      width: 17px;
+      height: 2px;
+      margin: 4px auto;
+      border-radius: 2px;
+      background: #0b3d2e;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
+
+    @media (max-width: 1100px) {
+
+      .compliance-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .compliance-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 800px) {
+
+      .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+      }
+
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .admin-main {
+        margin-left: 0;
+      }
+
+      .admin-mobile-toggle {
+        display: block;
+      }
+
+      .admin-topbar {
+        padding: 0 18px;
+      }
+
+      .admin-user-info {
+        display: none;
+      }
+
+      .admin-content {
+        padding: 20px 16px;
+      }
+
+      .content-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .header-actions {
+        width: 100%;
+      }
+
+      .header-actions .admin-btn {
+        flex: 1;
+      }
+
+    }
+
+    @media (max-width: 560px) {
+
+      .compliance-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .content-heading h1 {
+        font-size: 23px;
+      }
+
+      .simulation-notice {
+        padding: 13px;
+      }
+
+      .review-item {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .review-action {
+        margin-left: 49px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+<div class="admin-page">
+
+  <div class="admin-layout">
+
+
+    <!-- ===================================================
+         SIDEBAR
+    ==================================================== -->
+
+    <aside
+      class="admin-sidebar"
+      id="admin-sidebar"
+    >
+
+      <div class="admin-sidebar-header">
+
+        <a
+          href="index.html"
+          class="admin-logo"
+        >
+
+          <span class="admin-logo-mark">
+            GTF
+          </span>
+
+          <span class="admin-logo-text">
+
+            <strong>
+              Global TrustFund
+            </strong>
+
+            <small>
+              Administration
+            </small>
+
+          </span>
+
+        </a>
+
+      </div>
+
+
+      <div class="admin-sidebar-label">
+        Administration
+      </div>
+
+
+      <nav
+        class="admin-nav"
+        aria-label="Administrator navigation"
+      >
+
+        <a href="index.html">
+          <span class="admin-nav-icon">⌂</span>
+          Dashboard
+        </a>
+
+        <a href="customers.html">
+          <span class="admin-nav-icon">♙</span>
+          Customers
+        </a>
+
+        <a href="accounts.html">
+          <span class="admin-nav-icon">▣</span>
+          Accounts
+        </a>
+
+        <a href="transactions.html">
+          <span class="admin-nav-icon">↔</span>
+          Transactions
+        </a>
+
+        <a href="reports.html">
+          <span class="admin-nav-icon">▤</span>
+          Reports
+        </a>
+
+        <a
+          href="compliance.html"
+          class="active"
+          aria-current="page"
+        >
+          <span class="admin-nav-icon">✓</span>
+          Compliance
+        </a>
+
+        <a href="audit.html">
+          <span class="admin-nav-icon">◷</span>
+          Audit Logs
+        </a>
+
+        <a href="settings.html">
+          <span class="admin-nav-icon">⚙</span>
+          Settings
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-label">
+        System
+      </div>
+
+
+      <nav class="admin-nav">
+
+        <a href="../index.html">
+          <span class="admin-nav-icon">↗</span>
+          View Website
+        </a>
+
+      </nav>
+
+
+      <div class="admin-sidebar-footer">
+
+        <a
+          href="login.html"
+          id="admin-signout"
+        >
+          Sign Out
+        </a>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         MAIN
+    ==================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- TOP BAR -->
+
+      <header class="admin-topbar">
+
+        <div
+          style="
+            display:flex;
+            align-items:center;
+            gap:12px;
+          "
+        >
+
+          <button
+            type="button"
+            class="admin-mobile-toggle"
+            id="admin-mobile-toggle"
+            aria-label="Open administrator navigation"
+            aria-expanded="false"
+          >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+          </button>
+
+
+          <div class="admin-page-title">
+
+            <strong>
+              Compliance & Risk
+            </strong>
+
+            <span>
+              Verification, monitoring and review workspace
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-user">
+
+          <div class="admin-user-info">
+
+            <strong id="admin-user-name">
+              Administrator
+            </strong>
+
+            <small>
+              System Administrator
+            </small>
+
+          </div>
+
+          <div
+            class="admin-avatar"
+            id="admin-avatar"
+          >
+            AD
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =================================================
+           CONTENT
+      ================================================== -->
+
+      <section class="admin-content">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="content-header">
+
+          <div class="content-heading">
+
+            <h1>
+              Compliance Center
+            </h1>
+
+            <p>
+              Review customer verification, risk indicators and
+              compliance cases from one centralized workspace.
+            </p>
+
+          </div>
+
+
+          <div class="header-actions">
+
+            <button
+              type="button"
+              class="admin-btn"
+              id="refresh-compliance"
+            >
+              ↻ Refresh
+            </button>
+
+            <button
+              type="button"
+              class="admin-btn admin-btn-primary"
+              id="export-compliance"
+            >
+              ↓ Export Report
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PLATFORM NOTICE
+        ================================================== -->
+
+        <div class="simulation-notice">
+
+          <div class="simulation-notice-icon">
+            i
+          </div>
+
+          <div>
+
+            <strong>
+              Compliance workspace
+            </strong>
+
+            <p>
+              This administrative interface is part of the Global
+              TrustFund digital banking simulation platform. Compliance
+              statuses and review records displayed here are application
+              data and are not evidence of regulatory authorization.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="compliance-stats">
+
+
+          <div class="stat-card">
+
+            <div class="stat-card-top">
+
+              <span class="stat-label">
+                Pending KYC
+              </span>
+
+              <span class="stat-icon">
+                ID
+              </span>
+
+            </div>
+
+            <strong
+              class="stat-value"
+              id="pending-kyc"
+            >
+              —
+            </strong>
+
+            <span class="stat-description">
+              Verification records awaiting review
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-card-top">
+
+              <span class="stat-label">
+                Under Review
+              </span>
+
+              <span class="stat-icon">
+                ◷
+              </span>
+
+            </div>
+
+            <strong
+              class="stat-value"
+              id="under-review"
+            >
+              —
+            </strong>
+
+            <span class="stat-description">
+              Open compliance review cases
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-card-top">
+
+              <span class="stat-label">
+                Elevated Risk
+              </span>
+
+              <span class="stat-icon">
+                !
+              </span>
+
+            </div>
+
+            <strong
+              class="stat-value"
+              id="elevated-risk"
+            >
+              —
+            </strong>
+
+            <span class="stat-description">
+              Records requiring additional attention
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-card-top">
+
+              <span class="stat-label">
+                Resolved
+              </span>
+
+              <span class="stat-icon">
+                ✓
+              </span>
+
+            </div>
+
+            <strong
+              class="stat-value"
+              id="resolved-cases"
+            >
+              —
+            </strong>
+
+            <span class="stat-description">
+              Completed compliance cases
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             REVIEW + OVERVIEW
+        ================================================== -->
+
+        <div class="compliance-grid">
+
+
+          <!-- REVIEW QUEUE -->
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Priority Review Queue
+              </h2>
+
+              <span id="review-count">
+                Loading...
+              </span>
+
+            </div>
+
+
+            <div
+              class="review-list"
+              id="review-list"
+            >
+
+              <div class="review-item">
+
+                <div class="review-avatar">
+                  —
+                </div>
+
+                <div class="review-details">
+
+                  <strong>
+                    Loading review queue
+                  </strong>
+
+                  <small>
+                    Retrieving compliance records...
+                  </small>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- OVERVIEW -->
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h2>
+                Verification Overview
+              </h2>
+
+              <span>
+                Current status
+              </span>
+
+            </div>
+
+
+            <div class="overview-body">
+
+
+              <div class="progress-row">
+
+                <div class="progress-label">
+
+                  <span>
+                    Identity verification
+                  </span>
+
+                  <span id="identity-progress">
+                    —
+                  </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                  <div
+                    class="progress-bar"
+                    id="identity-bar"
+                    style="width:0%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="progress-row">
+
+                <div class="progress-label">
+
+                  <span>
+                    Address verification
+                  </span>
+
+                  <span id="address-progress">
+                    —
+                  </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                  <div
+                    class="progress-bar"
+                    id="address-bar"
+                    style="width:0%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="progress-row">
+
+                <div class="progress-label">
+
+                  <span>
+                    Document review
+                  </span>
+
+                  <span id="document-progress">
+                    —
+                  </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                  <div
+                    class="progress-bar warning"
+                    id="document-bar"
+                    style="width:0%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="progress-row">
+
+                <div class="progress-label">
+
+                  <span>
+                    Risk assessment
+                  </span>
+
+                  <span id="risk-progress">
+                    —
+                  </span>
+
+                </div>
+
+                <div class="progress-track">
+
+                  <div
+                    class="progress-bar"
+                    id="risk-bar"
+                    style="width:0%"
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- =================================================
+             COMPLIANCE CASES
+        ================================================== -->
+
+        <section class="table-card">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h2>
+                Compliance Cases
+              </h2>
+
+              <span id="case-count">
+                Loading cases...
+              </span>
+
+            </div>
+
+            <div>
+
+              <select
+                id="case-status-filter"
+                class="admin-btn"
+                aria-label="Filter compliance cases"
+              >
+
+                <option value="">
+                  All Cases
+                </option>
+
+                <option value="open">
+                  Open
+                </option>
+
+                <option value="review">
+                  Under Review
+                </option>
+
+                <option value="resolved">
+                  Resolved
+                </option>
+
+                <option value="closed">
+                  Closed
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="table-wrapper">
+
+            <table class="compliance-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Case
+                  </th>
+
+                  <th>
+                    Customer
+                  </th>
+
+                  <th>
+                    Review Type
+                  </th>
+
+                  <th>
+                    Risk
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                  <th>
+                    Updated
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="cases-table-body">
+
+                <tr>
+
+                  <td colspan="7">
+
+                    <div
+                      style="
+                        padding:50px 20px;
+                        text-align:center;
+                        color:#7d8882;
+                      "
+                    >
+
+                      <strong
+                        style="
+                          display:block;
+                          margin-bottom:6px;
+                          color:#37443d;
+                          font-size:13px;
+                        "
+                      >
+                        Loading compliance cases
+                      </strong>
+
+                      <span style="font-size:11px;">
+                        Please wait while records are retrieved.
+                      </span>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================== -->
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/logo-loader.js"></script>
+<script src="../js/logo-guard.js"></script>
+
+
+<script>
+
+  /* =====================================================
+     COMPLIANCE ADMIN MODULE
+  ====================================================== */
+
+  (function () {
+
+    "use strict";
+
+
+    const sidebar =
+      document.getElementById(
+        "admin-sidebar"
+      );
+
+    const mobileToggle =
+      document.getElementById(
+        "admin-mobile-toggle"
+      );
+
+    const refreshButton =
+      document.getElementById(
+        "refresh-compliance"
+      );
+
+    const exportButton =
+      document.getElementById(
+        "export-compliance"
+      );
+
+    const casesBody =
+      document.getElementById(
+        "cases-table-body"
+      );
+
+    const reviewList =
+      document.getElementById(
+        "review-list"
+      );
+
+    const caseFilter =
+      document.getElementById(
+        "case-status-filter"
+      );
+
+
+    let cases = [];
+
+
+    /* ===================================================
+       MOBILE SIDEBAR
+    ==================================================== */
+
+    if (
+      mobileToggle &&
+      sidebar
+    ) {
+
+      mobileToggle.addEventListener(
+        "click",
+        function () {
+
+          const open =
+            sidebar.classList.toggle(
+              "open"
+            );
+
+          mobileToggle.setAttribute(
+            "aria-expanded",
+            String(open)
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ===================================================
+       HTML ESCAPE
+    ==================================================== */
+
+    function escapeHtml(value) {
+
+      return String(
+        value ?? ""
+      )
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* ===================================================
+       DATE FORMAT
+    ==================================================== */
+
+    function formatDate(value) {
+
+      if (!value) {
+        return "—";
+      }
+
+      const date =
+        new Date(value);
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return String(value);
+      }
+
+      return new Intl.DateTimeFormat(
+        "en-US",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }
+      ).format(date);
+
+    }
+
+
+    /* ===================================================
+       INITIALS
+    ==================================================== */
+
+    function initials(name) {
+
+      const parts =
+        String(
+          name || "Customer"
+        )
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2);
+
+      return parts
+        .map(function (part) {
+          return part
+            .charAt(0)
+            .toUpperCase();
+        })
+        .join("");
+
+    }
+
+
+    /* ===================================================
+       NORMALIZE CASE
+    ==================================================== */
+
+    function normalizeCase(item) {
+
+      const record =
+        item || {};
+
+      const customer =
+        record.customer ||
+        record.user ||
+        {};
+
+      return {
+
+        id:
+          record.id ||
+          record.case_id ||
+          record.reference ||
+          "—",
+
+        customer:
+          customer.full_name ||
+          customer.name ||
+          record.customer_name ||
+          record.user_name ||
+          "Customer",
+
+        email:
+          customer.email ||
+          record.customer_email ||
+          "",
+
+        type:
+          record.review_type ||
+          record.type ||
+          record.case_type ||
+          "Compliance Review",
+
+        risk:
+          String(
+            record.risk_level ||
+            record.risk ||
+            "low"
+          ).toLowerCase(),
+
+        status:
+          String(
+            record.status ||
+            "open"
+          ).toLowerCase(),
+
+        updatedAt:
+          record.updated_at ||
+          record.created_at ||
+          record.date ||
+          null
+
+      };
+
+    }
+
+
+    /* ===================================================
+       RISK CLASS
+    ==================================================== */
+
+    function riskClass(risk) {
+
+      switch (risk) {
+
+        case "high":
+        case "critical":
+          return "risk-high";
+
+        case "medium":
+        case "moderate":
+          return "risk-medium";
+
+        default:
+          return "risk-low";
+
+      }
+
+    }
+
+
+    /* ===================================================
+       CASE STATUS CLASS
+    ==================================================== */
+
+    function caseStatusClass(status) {
+
+      switch (status) {
+
+        case "resolved":
+          return "case-resolved";
+
+        case "closed":
+          return "case-closed";
+
+        case "review":
+        case "under_review":
+        case "in_review":
+          return "case-review";
+
+        default:
+          return "case-open";
+
+      }
+
+    }
+
+
+    /* ===================================================
+       DISPLAY STATUS
+    ==================================================== */
+
+    function displayStatus(value) {
+
+      return String(
+        value || ""
+      )
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, function (letter) {
+          return letter.toUpperCase();
+        });
+
+    }
+
+
+    /* ===================================================
+       RENDER CASES
+    ==================================================== */
+
+    function renderCases() {
+
+      if (!casesBody) {
+        return;
+      }
+
+
+      const filter =
+        String(
+          caseFilter?.value || ""
+        ).toLowerCase();
+
+
+      const filtered =
+        cases.filter(function (item) {
+
+          if (!filter) {
+            return true;
+          }
+
+          return (
+            item.status === filter
+          );
+
+        });
+
+
+      if (!filtered.length) {
+
+        casesBody.innerHTML = `
+
+          <tr>
+
+            <td colspan="7">
+
+              <div
+                style="
+                  padding:50px 20px;
+                  text-align:center;
+                  color:#7d8882;
+                "
+              >
+
+                <strong
+                  style="
+                    display:block;
+                    margin-bottom:6px;
+                    color:#37443d;
+                    font-size:13px;
+                  "
+                >
+                  No compliance cases found
+                </strong>
+
+                <span style="font-size:11px;">
+                  There are no records matching the current filter.
+                </span>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      } else {
+
+        casesBody.innerHTML =
+          filtered.map(function (item) {
+
+            return `
+
+              <tr>
+
+                <td>
+
+                  <span class="case-id">
+                    ${escapeHtml(item.id)}
+                  </span>
+
+                </td>
+
+
+                <td>
+
+                  <div class="case-customer">
+
+                    <strong>
+                      ${escapeHtml(item.customer)}
+                    </strong>
+
+                    <small>
+                      ${escapeHtml(item.email)}
+                    </small>
+
+                  </div>
+
+                </td>
+
+
+                <td>
+                  ${escapeHtml(item.type)}
+                </td>
+
+
+                <td>
+
+                  <span
+                    class="risk-badge ${riskClass(item.risk)}"
+                  >
+                    ${escapeHtml(
+                      displayStatus(item.risk)
+                    )}
+                  </span>
+
+                </td>
+
+
+                <td>
+
+                  <span
+                    class="case-status ${caseStatusClass(item.status)}"
+                  >
+                    ${escapeHtml(
+                      displayStatus(item.status)
+                    )}
+                  </span>
+
+                </td>
+
+
+                <td>
+                  ${formatDate(item.updatedAt)}
+                </td>
+
+
+                <td>
+
+                  <button
+                    type="button"
+                    class="table-action"
+                    title="Review case"
+                    data-case-id="${escapeHtml(item.id)}"
+                  >
+                    →
+                  </button>
+
+                </td>
+
+              </tr>
+
+            `;
+
+          }).join("");
+
+      }
+
+
+      const count =
+        document.getElementById(
+          "case-count"
+        );
+
+      if (count) {
+
+        count.textContent =
+          `${filtered.length} case${
+            filtered.length === 1
+              ? ""
+              : "s"
+          }`;
+
+      }
+
+    }
+
+
+    /* ===================================================
+       UPDATE STATISTICS
+    ==================================================== */
+
+    function updateStatistics() {
+
+      const pendingKyc =
+        cases.filter(function (item) {
+
+          return [
+            "kyc",
+            "identity",
+            "verification",
+            "document"
+          ]
+          .some(function (keyword) {
+
+            return String(
+              item.type
+            )
+            .toLowerCase()
+            .includes(keyword);
+
+          }) &&
+          [
+            "open",
+            "pending",
+            "review",
+            "under_review"
+          ].includes(item.status);
+
+        }).length;
+
+
+      const review =
+        cases.filter(function (item) {
+
+          return [
+            "review",
+            "under_review",
+            "in_review"
+          ].includes(item.status);
+
+        }).length;
+
+
+      const elevatedRisk =
+        cases.filter(function (item) {
+
+          return [
+            "high",
+            "critical"
+          ].includes(item.risk);
+
+        }).length;
+
+
+      const resolved =
+        cases.filter(function (item) {
+
+          return [
+            "resolved",
+            "closed"
+          ].includes(item.status);
+
+        }).length;
+
+
+      const pendingElement =
+        document.getElementById(
+          "pending-kyc"
+        );
+
+      const reviewElement =
+        document.getElementById(
+          "under-review"
+        );
+
+      const riskElement =
+        document.getElementById(
+          "elevated-risk"
+        );
+
+      const resolvedElement =
+        document.getElementById(
+          "resolved-cases"
+        );
+
+
+      if (pendingElement) {
+        pendingElement.textContent =
+          pendingKyc.toLocaleString();
+      }
+
+      if (reviewElement) {
+        reviewElement.textContent =
+          review.toLocaleString();
+      }
+
+      if (riskElement) {
+        riskElement.textContent =
+          elevatedRisk.toLocaleString();
+      }
+
+      if (resolvedElement) {
+        resolvedElement.textContent =
+          resolved.toLocaleString();
+      }
+
+    }
+
+
+    /* ===================================================
+       REVIEW QUEUE
+    ==================================================== */
+
+    function renderReviewQueue() {
+
+      if (!reviewList) {
+        return;
+      }
+
+
+      const priorityCases =
+        cases
+          .filter(function (item) {
+
+            return [
+              "high",
+              "critical",
+              "medium"
+            ].includes(item.risk);
+
+          })
+          .slice(0, 5);
+
+
+      if (!priorityCases.length) {
+
+        reviewList.innerHTML = `
+
+          <div class="review-item">
+
+            <div class="review-avatar">
+              ✓
+            </div>
+
+            <div class="review-details">
+
+              <strong>
+                No priority cases
+              </strong>
+
+              <small>
+                The review queue is currently clear.
+              </small>
+
+            </div>
+
+          </div>
+
+        `;
+
+      } else {
+
+        reviewList.innerHTML =
+          priorityCases
+            .map(function (item) {
+
+              return `
+
+                <div class="review-item">
+
+                  <div class="review-avatar">
+                    ${escapeHtml(
+                      initials(item.customer)
+                    )}
+                  </div>
+
+                  <div class="review-details">
+
+                    <strong>
+                      ${escapeHtml(item.customer)}
+                    </strong>
+
+                    <small>
+                      ${escapeHtml(item.type)}
+                    </small>
+
+                  </div>
+
+                  <span
+                    class="risk-badge ${riskClass(item.risk)}"
+                  >
+                    ${escapeHtml(
+                      displayStatus(item.risk)
+                    )}
+                  </span>
+
+                  <button
+                    type="button"
+                    class="review-action"
+                    data-review-id="${escapeHtml(item.id)}"
+                  >
+                    Review
+                  </button>
+
+                </div>
+
+              `;
+
+            })
+            .join("");
+
+      }
+
+
+      const count =
+        document.getElementById(
+          "review-count"
+        );
+
+      if (count) {
+
+        count.textContent =
+          `${priorityCases.length} priority`;
+
+      }
+
+    }
+
+
+    /* ===================================================
+       OVERVIEW
+    ==================================================== */
+
+    function updateOverview() {
+
+      const total =
+        cases.length;
+
+
+      if (!total) {
+
+        [
+          "identity-progress",
+          "address-progress",
+          "document-progress",
+          "risk-progress"
+        ]
+        .forEach(function (id) {
+
+          const element =
+            document.getElementById(id);
+
+          if (element) {
+            element.textContent = "—";
+          }
+
+        });
+
+        return;
+
+      }
+
+
+      const resolved =
+        cases.filter(function (item) {
+
+          return [
+            "resolved",
+            "closed"
+          ].includes(item.status);
+
+        }).length;
+
+
+      const review =
+        cases.filter(function (item) {
+
+          return [
+            "review",
+            "under_review",
+            "in_review"
+          ].includes(item.status);
+
+        }).length;
+
+
+      const identity =
+        Math.round(
+          (
+            resolved /
+            total
+          ) * 100
+        );
+
+
+      const address =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            identity - 3
+          )
+        );
+
+
+      const documentProgress =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            100 - (
+              review /
+              total
+            ) * 100
+          )
+        );
+
+
+      const riskProgress =
+        Math.max(
+          0,
+          Math.min(
+            100,
+            100 - (
+              cases.filter(function (item) {
+                return [
+                  "high",
+                  "critical"
+                ].includes(item.risk);
+              }).length /
+              total
+            ) * 100
+          )
+        );
+
+
+      setProgress(
+        "identity",
+        identity
+      );
+
+      setProgress(
+        "address",
+        address
+      );
+
+      setProgress(
+        "document",
+        documentProgress
+      );
+
+      setProgress(
+        "risk",
+        riskProgress
+      );
+
+    }
+
+
+    function setProgress(
+      name,
+      value
+    ) {
+
+      const rounded =
+        Math.round(value);
+
+
+      const label =
+        document.getElementById(
+          `${name}-progress`
+        );
+
+      const bar =
+        document.getElementById(
+          `${name}-bar`
+        );
+
+
+      if (label) {
+
+        label.textContent =
+          `${rounded}%`;
+
+      }
+
+      if (bar) {
+
+        bar.style.width =
+          `${rounded}%`;
+
+      }
+
+    }
+
+
+    /* ===================================================
+       LOAD COMPLIANCE DATA
+    ==================================================== */
+
+    async function loadCompliance() {
+
+      if (casesBody) {
+
+        casesBody.innerHTML = `
+
+          <tr>
+
+            <td colspan="7">
+
+              <div
+                style="
+                  padding:50px 20px;
+                  text-align:center;
+                  color:#7d8882;
+                "
+              >
+
+                <strong
+                  style="
+                    display:block;
+                    margin-bottom:6px;
+                    color:#37443d;
+                    font-size:13px;
+                  "
+                >
+                  Loading compliance cases
+                </strong>
+
+                <span style="font-size:11px;">
+                  Retrieving compliance records...
+                </span>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+
+
+      try {
+
+        if (
+          window.API &&
+          typeof window.API.get === "function"
+        ) {
+
+          const response =
+            await window.API.get(
+              "/api/compliance"
+            );
+
+          const data =
+            response?.data ??
+            response;
+
+          const records =
+            Array.isArray(data)
+              ? data
+              : (
+                data?.cases ||
+                data?.compliance ||
+                data?.items ||
+                data?.results ||
+                []
+              );
+
+          cases =
+            records.map(
+              normalizeCase
+            );
+
+        } else {
+
+          cases = [];
+
+        }
+
+
+        updateStatistics();
+
+        renderCases();
+
+        renderReviewQueue();
+
+        updateOverview();
+
+
+      } catch (error) {
+
+        console.error(
+          "Unable to load compliance data:",
+          error
+        );
+
+        cases = [];
+
+        if (casesBody) {
+
+          casesBody.innerHTML = `
+
+            <tr>
+
+              <td colspan="7">
+
+                <div
+                  style="
+                    padding:50px 20px;
+                    text-align:center;
+                    color:#7d8882;
+                  "
+                >
+
+                  <strong
+                    style="
+                      display:block;
+                      margin-bottom:6px;
+                      color:#a44949;
+                      font-size:13px;
+                    "
+                  >
+                    Unable to load compliance data
+                  </strong>
+
+                  <span style="font-size:11px;">
+                    Please refresh the page or check the API connection.
+                  </span>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+
+      }
+
+    }
+
+
+    /* ===================================================
+       FILTER
+    ==================================================== */
+
+    if (caseFilter) {
+
+      caseFilter.addEventListener(
+        "change",
+        renderCases
+      );
+
+    }
+
+
+    /* ===================================================
+       REFRESH
+    ==================================================== */
+
+    if (refreshButton) {
+
+      refreshButton.addEventListener(
+        "click",
+        async function () {
+
+          refreshButton.disabled =
+            true;
+
+          const original =
+            refreshButton.textContent;
+
+          refreshButton.textContent =
+            "↻ Refreshing...";
+
+          try {
+
+            await loadCompliance();
+
+          } finally {
+
+            refreshButton.disabled =
+              false;
+
+            refreshButton.textContent =
+              original;
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* ===================================================
+       EXPORT CSV
+    ==================================================== */
+
+    if (exportButton) {
+
+      exportButton.addEventListener(
+        "click",
+        function () {
+
+          if (!cases.length) {
+            return;
+          }
+
+
+          const headers = [
+
+            "Case ID",
+            "Customer",
+            "Email",
+            "Review Type",
+            "Risk",
+            "Status",
+            "Updated"
+
+          ];
+
+
+          const rows =
+            cases.map(
+              function (item) {
+
+                return [
+
+                  item.id,
+                  item.customer,
+                  item.email,
+                  item.type,
+                  item.risk,
+                  item.status,
+                  item.updatedAt
+
+                ];
+
+              }
+            );
+
+
+          const csv = [
+
+            headers,
+            ...rows
+
+          ]
+          .map(function (row) {
+
+            return row
+              .map(function (value) {
+
+                return `"${String(
+                  value ?? ""
+                ).replace(
+                  /"/g,
+                  '""'
+                )}"`;
+
+              })
+              .join(",");
+
+          })
+          .join("\n");
+
+
+          const blob =
+            new Blob(
+              [csv],
+              {
+                type:
+                  "text/csv;charset=utf-8;"
+              }
+            );
+
+
+          const url =
+            URL.createObjectURL(
+              blob
+            );
+
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+          link.href = url;
+
+          link.download =
+            `gtf-compliance-${new Date()
+              .toISOString()
+              .slice(0, 10)}.csv`;
+
+          document.body.appendChild(
+            link
+          );
+
+          link.click();
+
+          link.remove();
+
+          URL.revokeObjectURL(
+            url
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ===================================================
+       CASE ACTIONS
+    ==================================================== */
+
+    document.addEventListener(
+      "click",
+      function (event) {
+
+        const caseButton =
+          event.target.closest(
+            "[data-case-id], [data-review-id]"
+          );
+
+        if (!caseButton) {
+          return;
+        }
+
+        const id =
+          caseButton.getAttribute(
+            "data-case-id"
+          ) ||
+          caseButton.getAttribute(
+            "data-review-id"
+          );
+
+        if (id) {
+
+          console.info(
+            "Compliance case selected:",
+            id
+          );
+
+        }
+
+      }
+    );
+
+
+    /* ===================================================
+       ADMIN SIGN OUT
+    ==================================================== */
+
+    const signout =
+      document.getElementById(
+        "admin-signout"
+      );
+
+
+    if (signout) {
+
+      signout.addEventListener(
+        "click",
+        async function (event) {
+
+          if (
+            window.Auth &&
+            typeof window.Auth.signOut === "function"
+          ) {
+
+            event.preventDefault();
+
+            try {
+
+              await window.Auth.signOut();
+
+            } catch (error) {
+
+              console.error(
+                "Admin sign out failed:",
+                error
+              );
+
+              window.location.href =
+                "login.html";
+
+            }
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* ===================================================
+       INITIALIZE
+    ==================================================== */
+
+    loadCompliance();
+
+  })();
+
+</script>
+
+</body>
+</html>
