@@ -1,0 +1,100 @@
+/* =========================================================
+   BANK CARD VISUALS
+   ========================================================= */
+
+.bank-card {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1.586 / 1;
+  border-radius: 16px;
+  padding: 22px 24px;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: var(--gtf-shadow-md);
+}
+
+.bank-card::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  right: -60px;
+  top: -60px;
+  background: rgba(255, 255, 255, .06);
+}
+
+.bank-card.debit {
+  background: linear-gradient(135deg, var(--gtf-green-800), var(--gtf-green-600));
+}
+
+.bank-card.credit {
+  background: linear-gradient(135deg, #1a2744, #2c3e6b);
+}
+
+.bank-card.gold {
+  background: linear-gradient(135deg, #8a6a1a, var(--gtf-gold));
+  color: #1a2e26;
+}
+
+.bank-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.bank-card-chip {
+  width: 42px;
+  height: 32px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #e8d48b, #c9a84c);
+}
+
+.bank-card-network {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: .9;
+}
+
+.bank-card-number {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.bank-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+.bank-card-bottom span {
+  display: block;
+  font-size: 10px;
+  opacity: .7;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.bank-card-bottom strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
