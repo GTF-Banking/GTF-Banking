@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" role="img" aria-label="Global TrustFund">
+  <defs>
+    <linearGradient id="gtGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B3D2E"/>
+      <stop offset="100%" stop-color="#145A43"/>
+    </linearGradient>
+  </defs>
+  <!-- Monogram circle -->
+  <circle cx="20" cy="20" r="18" fill="url(#gtGreen)"/>
+  <text x="20" y="25" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="14" font-weight="700" fill="#C9A227">GT</text>
+  <!-- Wordmark -->
+  <text x="46" y="17" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#0B3D2E">Global TrustFund</text>
+  <text x="46" y="30" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="9" font-weight="500" fill="#66736D" letter-spacing="1.5">BANKING</text>
+</svg>
