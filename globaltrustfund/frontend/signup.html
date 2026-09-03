@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open an Account | Global TrustFund</title>
+  <meta name="description" content="Open a Global TrustFund banking account. Secure registration for personal banking." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <style>
+    .auth-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--gt-soft-white); }
+    .auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2.5rem 1.25rem; }
+    .auth-card {
+      width: 100%; max-width: 480px;
+      background: var(--gt-white); border: 1px solid var(--gt-border);
+      border-radius: var(--radius-xl); box-shadow: var(--gt-shadow-md);
+      padding: 2.25rem 2rem;
+    }
+    .auth-card h1 { font-size: 1.45rem; margin-bottom: 0.35rem; }
+    .auth-card .subtitle { color: var(--gt-muted-text); font-size: 0.925rem; margin-bottom: 1.75rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+    .password-wrap { position: relative; }
+    .password-wrap .toggle-pw {
+      position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--gt-muted-text); font-size: 0.8rem; font-weight: 500;
+      padding: 0.25rem 0.4rem; cursor: pointer;
+    }
+    .password-strength { height: 4px; border-radius: 2px; background: var(--gt-border); margin-top: 0.5rem; overflow: hidden; }
+    .password-strength-bar { height: 100%; width: 0%; transition: width 0.25s ease, background 0.25s ease; }
+    .form-error-banner {
+      display: none; background: rgba(179,58,58,0.08); border: 1px solid rgba(179,58,58,0.25);
+      color: var(--gt-danger); padding: 0.75rem 1rem; border-radius: var(--radius-md);
+      font-size: 0.875rem; margin-bottom: 1.25rem;
+    }
+    .form-error-banner.visible { display: block; }
+    .btn-loading { position: relative; pointer-events: none; opacity: 0.75; }
+    .btn-loading::after {
+      content: ""; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; margin-left: 0.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .auth-footer-links { margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: var(--gt-muted-text); }
+    .terms { font-size: 0.8rem; color: var(--gt-muted-text); line-height: 1.5; margin-bottom: 1.25rem; }
+    .terms a { font-weight: 550; }
+  </style>
+</head>
+<body class="auth-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <div data-brand="full"></div>
+      <div class="header-actions">
+        <a href="/login.html" class="btn btn-ghost btn-sm">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <div data-brand="full" style="margin-bottom:1.75rem;"></div>
+      <h1>Open an account</h1>
+      <p class="subtitle">Create your Global TrustFund banking profile in a few steps.</p>
+
+      <div class="form-error-banner" id="errorBanner" role="alert"></div>
+
+      <form id="signupForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="firstName">First name</label>
+            <input class="form-input" type="text" id="firstName" name="firstName" required autocomplete="given-name" />
+            <span class="form-error" id="firstNameError" hidden></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Last name</label>
+            <input class="form-input" type="text" id="lastName" name="lastName" required autocomplete="family-name" />
+            <span class="form-error" id="lastNameError" hidden></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email address</label>
+          <input class="form-input" type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+          <span class="form-error" id="emailError" hidden></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone (optional)</label>
+          <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+1 555 000 0000" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="password-wrap">
+            <input class="form-input" type="password" id="password" name="password" required autocomplete="new-password" minlength="8" style="padding-right:4.5rem;" />
+            <button type="button" class="toggle-pw" id="togglePassword" aria-label="Show password">Show</button>
+          </div>
+          <div class="password-strength"><div class="password-strength-bar" id="strengthBar"></div></div>
+          <span class="form-hint">At least 8 characters. Use a mix of letters, numbers, and symbols.</span>
+          <span class="form-error" id="passwordError" hidden></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">Confirm password</label>
+          <input class="form-input" type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" />
+          <span class="form-error" id="confirmError" hidden></span>
+        </div>
+
+        <div class="terms">
+          <label style="display:flex;align-items:flex-start;gap:0.55rem;cursor:pointer;">
+            <input type="checkbox" id="agree" name="agree" required style="margin-top:0.2rem;accent-color:var(--gt-deep-green);" />
+            <span>I agree to the <a href="/privacy.html" target="_blank">Privacy Policy</a> and understand this is a demonstration banking platform, not a licensed bank.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;">Create Account</button>
+      </form>
+
+      <div class="auth-footer-links">
+        Already have an account? <a href="/login.html">Sign in</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding:1.5rem 0;">
+    <div class="container">
+      <div class="footer-bottom" style="border:none;padding:0;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+        <span>© 2026 Global TrustFund</span>
+        <a href="/privacy.html" style="color:rgba(255,255,255,0.7);">Privacy</a>
+        <a href="/security.html" style="color:rgba(255,255,255,0.7);">Security</a>
+        <a href="/support.html" style="color:rgba(255,255,255,0.7);">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/env-bootstrap.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById('signupForm');
+      const errorBanner = document.getElementById('errorBanner');
+      const submitBtn = document.getElementById('submitBtn');
+      const passwordInput = document.getElementById('password');
+      const strengthBar = document.getElementById('strengthBar');
+
+      if (GTF.auth.isAuthenticated()) {
+        window.location.replace('/dashboard/');
+        return;
+      }
+
+      document.getElementById('togglePassword').addEventListener('click', function () {
+        const isPw = passwordInput.type === 'password';
+        passwordInput.type = isPw ? 'text' : 'password';
+        this.textContent = isPw ? 'Hide' : 'Show';
+      });
+
+      passwordInput.addEventListener('input', () => {
+        const val = passwordInput.value;
+        let score = 0;
+        if (val.length >= 8) score++;
+        if (/[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+        if (/\d/.test(val)) score++;
+        if (/[^A-Za-z0-9]/.test(val)) score++;
+        const widths = ['0%', '25%', '50%', '75%', '100%'];
+        const colors = ['transparent', '#B33A3A', '#B8860B', '#2A6F8F', '#1B7A4E'];
+        strengthBar.style.width = widths[score];
+        strengthBar.style.background = colors[score];
+      });
+
+      function showError(msg) {
+        errorBanner.textContent = msg;
+        errorBanner.classList.add('visible');
+      }
+
+      function clearErrors() {
+        errorBanner.classList.remove('visible');
+        ['firstNameError','lastNameError','emailError','passwordError','confirmError'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) { el.hidden = true; el.textContent = ''; }
+        });
+      }
+
+      function validate() {
+        clearErrors();
+        let ok = true;
+        const first = form.firstName.value.trim();
+        const last = form.lastName.value.trim();
+        const email = form.email.value.trim();
+        const password = form.password.value;
+        const confirm = form.confirmPassword.value;
+
+        if (!first) {
+          document.getElementById('firstNameError').textContent = 'First name is required.';
+          document.getElementById('firstNameError').hidden = false;
+          ok = false;
+        }
+        if (!last) {
+          document.getElementById('lastNameError').textContent = 'Last name is required.';
+          document.getElementById('lastNameError').hidden = false;
+          ok = false;
+        }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          document.getElementById('emailError').textContent = 'Enter a valid email address.';
+          document.getElementById('emailError').hidden = false;
+          ok = false;
+        }
+        if (password.length < 8) {
+          document.getElementById('passwordError').textContent = 'Password must be at least 8 characters.';
+          document.getElementById('passwordError').hidden = false;
+          ok = false;
+        }
+        if (password !== confirm) {
+          document.getElementById('confirmError').textContent = 'Passwords do not match.';
+          document.getElementById('confirmError').hidden = false;
+          ok = false;
+        }
+        if (!form.agree.checked) {
+          showError('You must agree to the Privacy Policy to continue.');
+          ok = false;
+        }
+        return ok;
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+        try {
+          const payload = {
+            first_name: form.firstName.value.trim(),
+            last_name: form.lastName.value.trim(),
+            email: form.email.value.trim(),
+            phone: form.phone.value.trim() || null,
+            password: form.password.value
+          };
+          const data = await GTF.auth.register(payload);
+          GTF.toast('Account created successfully.', 'success');
+          if (data.token) {
+            window.location.href = '/dashboard/';
+          } else {
+            window.location.href = '/login.html?registered=1';
+          }
+        } catch (err) {
+          const msg = err.data?.message || err.message || 'Unable to create account. Please try again.';
+          showError(msg);
+          GTF.toast(msg, 'error');
+        } finally {
+          submitBtn.classList.remove('btn-loading');
+          submitBtn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

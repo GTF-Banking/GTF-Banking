@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Global TrustFund</title>
+  <meta name="description" content="Sign in to your Global TrustFund banking account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <style>
+    .auth-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--gt-soft-white); }
+    .auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2.5rem 1.25rem; }
+    .auth-card {
+      width: 100%; max-width: 420px;
+      background: var(--gt-white); border: 1px solid var(--gt-border);
+      border-radius: var(--radius-xl); box-shadow: var(--gt-shadow-md);
+      padding: 2.25rem 2rem;
+    }
+    .auth-card h1 { font-size: 1.45rem; margin-bottom: 0.35rem; }
+    .auth-card .subtitle { color: var(--gt-muted-text); font-size: 0.925rem; margin-bottom: 1.75rem; }
+    .auth-footer-links { margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: var(--gt-muted-text); }
+    .auth-footer-links a { font-weight: 550; }
+    .password-wrap { position: relative; }
+    .password-wrap .toggle-pw {
+      position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--gt-muted-text); font-size: 0.8rem; font-weight: 500;
+      padding: 0.25rem 0.4rem; cursor: pointer;
+    }
+    .password-wrap .toggle-pw:hover { color: var(--gt-deep-green); }
+    .form-error-banner {
+      display: none; background: rgba(179,58,58,0.08); border: 1px solid rgba(179,58,58,0.25);
+      color: var(--gt-danger); padding: 0.75rem 1rem; border-radius: var(--radius-md);
+      font-size: 0.875rem; margin-bottom: 1.25rem;
+    }
+    .form-error-banner.visible { display: block; }
+    .btn-loading { position: relative; pointer-events: none; opacity: 0.75; }
+    .btn-loading::after {
+      content: ""; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; margin-left: 0.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .security-note {
+      margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--gt-border);
+      font-size: 0.8rem; color: var(--gt-muted-text); text-align: center; line-height: 1.5;
+    }
+  </style>
+</head>
+<body class="auth-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <div data-brand="full"></div>
+      <div class="header-actions">
+        <a href="/signup.html" class="btn btn-primary btn-sm">Open an Account</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <div data-brand="full" style="margin-bottom:1.75rem;"></div>
+      <h1>Sign in</h1>
+      <p class="subtitle">Access your Global TrustFund accounts securely.</p>
+
+      <div class="form-error-banner" id="errorBanner" role="alert"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="email">Email address</label>
+          <input class="form-input" type="email" id="email" name="email" autocomplete="username" required placeholder="you@example.com" />
+          <span class="form-error" id="emailError" hidden></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="password-wrap">
+            <input class="form-input" type="password" id="password" name="password" autocomplete="current-password" required placeholder="Enter your password" style="padding-right:4.5rem;" />
+            <button type="button" class="toggle-pw" id="togglePassword" aria-label="Show password">Show</button>
+          </div>
+          <span class="form-error" id="passwordError" hidden></span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.35rem;font-size:0.875rem;">
+          <label style="display:flex;align-items:center;gap:0.45rem;cursor:pointer;">
+            <input type="checkbox" id="remember" name="remember" style="accent-color:var(--gt-deep-green);" />
+            <span>Remember me</span>
+          </label>
+          <a href="/forgot-password.html">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;">Sign In</button>
+      </form>
+
+      <div class="auth-footer-links">
+        Don’t have an account? <a href="/signup.html">Open an account</a>
+      </div>
+
+      <div class="security-note">
+        Your security matters. Always sign in from a trusted device and never share your password.
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding:1.5rem 0;">
+    <div class="container">
+      <div class="footer-bottom" style="border:none;padding:0;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+        <span>© 2026 Global TrustFund</span>
+        <a href="/privacy.html" style="color:rgba(255,255,255,0.7);">Privacy</a>
+        <a href="/security.html" style="color:rgba(255,255,255,0.7);">Security</a>
+        <a href="/support.html" style="color:rgba(255,255,255,0.7);">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/env-bootstrap.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById('loginForm');
+      const errorBanner = document.getElementById('errorBanner');
+      const submitBtn = document.getElementById('submitBtn');
+      const togglePw = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('password');
+
+      if (GTF.auth.isAuthenticated()) {
+        const params = new URLSearchParams(window.location.search);
+        window.location.replace(params.get('return') || '/dashboard/');
+        return;
+      }
+
+      togglePw.addEventListener('click', () => {
+        const isPw = passwordInput.type === 'password';
+        passwordInput.type = isPw ? 'text' : 'password';
+        togglePw.textContent = isPw ? 'Hide' : 'Show';
+      });
+
+      function showError(msg) {
+        errorBanner.textContent = msg;
+        errorBanner.classList.add('visible');
+      }
+
+      function clearError() {
+        errorBanner.classList.remove('visible');
+        document.getElementById('emailError').hidden = true;
+        document.getElementById('passwordError').hidden = true;
+      }
+
+      function validate() {
+        clearError();
+        let ok = true;
+        const email = form.email.value.trim();
+        const password = form.password.value;
+        if (!email) {
+          document.getElementById('emailError').textContent = 'Email is required.';
+          document.getElementById('emailError').hidden = false;
+          ok = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          document.getElementById('emailError').textContent = 'Enter a valid email address.';
+          document.getElementById('emailError').hidden = false;
+          ok = false;
+        }
+        if (!password) {
+          document.getElementById('passwordError').textContent = 'Password is required.';
+          document.getElementById('passwordError').hidden = false;
+          ok = false;
+        }
+        return ok;
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+        submitBtn.classList.add('btn-loading');
+        submitBtn.disabled = true;
+        try {
+          await GTF.auth.login({
+            email: form.email.value.trim(),
+            password: form.password.value
+          });
+          GTF.toast('Signed in successfully.', 'success');
+          const params = new URLSearchParams(window.location.search);
+          window.location.href = params.get('return') || '/dashboard/';
+        } catch (err) {
+          const msg = err.status === 401 ? 'Invalid email or password.' : (err.message || 'Unable to sign in. Please try again.');
+          showError(msg);
+          GTF.toast(msg, 'error');
+        } finally {
+          submitBtn.classList.remove('btn-loading');
+          submitBtn.disabled = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
