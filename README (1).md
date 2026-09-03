@@ -1,1 +1,0 @@
-Backend architecture placeholder. Existing backend files can be merged here without overwriting them.
