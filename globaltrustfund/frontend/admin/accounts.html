@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accounts | Admin | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Operations</div>
+        <a href="/admin/">Dashboard</a>
+        <a href="/admin/customers.html">Customers</a>
+        <a href="/admin/accounts.html" class="active">Accounts</a>
+        <a href="/admin/transactions.html">Transactions</a>
+        <div class="nav-section">Risk &amp; Compliance</div>
+        <a href="/admin/compliance.html">Compliance</a>
+        <a href="/admin/audit.html">Audit Logs</a>
+        <div class="nav-section">Insights</div>
+        <a href="/admin/reports.html">Reports</a>
+        <a href="/admin/settings.html">Settings</a>
+      </nav>
+      <div class="sidebar-footer"><button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button></div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Accounts</h1>
+        <span class="badge badge-warning">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Account</th>
+                <th>Customer</th>
+                <th>Type</th>
+                <th>Currency</th>
+                <th>Balance</th>
+                <th>Status</th>
+                <th>Opened</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Account">****4521</td>
+                <td data-label="Customer">Demo Customer</td>
+                <td data-label="Type">checking</td>
+                <td data-label="Currency">USD</td>
+                <td data-label="Balance">$12,450.00</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Opened">12 Mar 2025</td>
+              </tr>
+              <tr>
+                <td data-label="Account">****8830</td>
+                <td data-label="Customer">Demo Customer</td>
+                <td data-label="Type">savings</td>
+                <td data-label="Currency">USD</td>
+                <td data-label="Balance">$10,200.00</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Opened">12 Mar 2025</td>
+              </tr>
+              <tr>
+                <td data-label="Account">****2291</td>
+                <td data-label="Customer">Demo Customer</td>
+                <td data-label="Type">savings</td>
+                <td data-label="Currency">USD</td>
+                <td data-label="Balance">$2,200.00</td>
+                <td data-label="Status"><span class="badge badge-warning">frozen</span></td>
+                <td data-label="Opened">01 Nov 2025</td>
+              </tr>
+              <tr>
+                <td data-label="Account">****5510</td>
+                <td data-label="Customer">Jordan Lee</td>
+                <td data-label="Type">checking</td>
+                <td data-label="Currency">USD</td>
+                <td data-label="Balance">$8,320.50</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Opened">03 Jun 2025</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else location.href = '/admin/login.html';
+    });
+  </script>
+</body>
+</html>

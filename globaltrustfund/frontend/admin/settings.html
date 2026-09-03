@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | Admin | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Operations</div>
+        <a href="/admin/">Dashboard</a>
+        <a href="/admin/customers.html">Customers</a>
+        <a href="/admin/accounts.html">Accounts</a>
+        <a href="/admin/transactions.html">Transactions</a>
+        <div class="nav-section">Risk &amp; Compliance</div>
+        <a href="/admin/compliance.html">Compliance</a>
+        <a href="/admin/audit.html">Audit Logs</a>
+        <div class="nav-section">Insights</div>
+        <a href="/admin/reports.html">Reports</a>
+        <a href="/admin/settings.html" class="active">Settings</a>
+      </nav>
+      <div class="sidebar-footer"><button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button></div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Settings</h1>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="max-width:560px;margin-bottom:1.25rem;">
+          <h2 style="font-size:1.05rem;margin-bottom:1rem;">Supported currencies</h2>
+          <div class="info-list">
+            <div class="info-item"><div><strong>USD</strong><span>United States Dollar — default</span></div></div>
+            <div class="info-item"><div><strong>EUR</strong><span>Euro</span></div></div>
+            <div class="info-item"><div><strong>GBP</strong><span>British Pound</span></div></div>
+          </div>
+          <p class="text-muted text-sm" style="margin-top:0.75rem;">Currency configuration should support multiple currencies rather than assuming USD only.</p>
+        </div>
+        <div class="card" style="max-width:560px;margin-bottom:1.25rem;">
+          <h2 style="font-size:1.05rem;margin-bottom:1rem;">Roles</h2>
+          <div class="info-list">
+            <div class="info-item"><div><strong>customer</strong><span>Standard banking user</span></div></div>
+            <div class="info-item"><div><strong>cashier</strong><span>Branch / teller operations</span></div></div>
+            <div class="info-item"><div><strong>manager</strong><span>Supervisory workflows</span></div></div>
+            <div class="info-item"><div><strong>admin</strong><span>Administrative access</span></div></div>
+            <div class="info-item"><div><strong>super_admin</strong><span>System configuration</span></div></div>
+          </div>
+        </div>
+        <div class="card" style="max-width:560px;">
+          <h2 style="font-size:1.05rem;margin-bottom:0.75rem;">Platform</h2>
+          <p class="text-muted text-sm">Demo mode is enabled. Connect Supabase and set <code>DEMO_MODE=false</code> before production use.</p>
+          <p class="text-muted text-sm" style="margin-top:0.5rem;">Environment: development · Never expose service-role keys to the browser.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else location.href = '/admin/login.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliance | Admin | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Operations</div>
+        <a href="/admin/">Dashboard</a>
+        <a href="/admin/customers.html">Customers</a>
+        <a href="/admin/accounts.html">Accounts</a>
+        <a href="/admin/transactions.html">Transactions</a>
+        <div class="nav-section">Risk &amp; Compliance</div>
+        <a href="/admin/compliance.html" class="active">Compliance</a>
+        <a href="/admin/audit.html">Audit Logs</a>
+        <div class="nav-section">Insights</div>
+        <a href="/admin/reports.html">Reports</a>
+        <a href="/admin/settings.html">Settings</a>
+      </nav>
+      <div class="sidebar-footer"><button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button></div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Compliance / KYC</h1>
+        <span class="badge badge-warning">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="admin-kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
+          <div class="admin-kpi"><div class="label">Pending</div><div class="value">37</div></div>
+          <div class="admin-kpi"><div class="label">Under review</div><div class="value">12</div></div>
+          <div class="admin-kpi"><div class="label">Requires info</div><div class="value">8</div></div>
+          <div class="admin-kpi"><div class="label">Alerts</div><div class="value">5</div></div>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Case</th>
+                <th>Customer</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Risk</th>
+                <th>Reviewer</th>
+                <th>Updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Case">KYC-2201</td>
+                <td data-label="Customer">Sam Rivera (C-1108)</td>
+                <td data-label="Type">Identity verification</td>
+                <td data-label="Status"><span class="badge badge-info">under_review</span></td>
+                <td data-label="Risk"><span class="badge badge-neutral">low</span></td>
+                <td data-label="Reviewer">—</td>
+                <td data-label="Updated">01 Sep 2026</td>
+              </tr>
+              <tr>
+                <td data-label="Case">KYC-2198</td>
+                <td data-label="Customer">Alex Kim (C-1120)</td>
+                <td data-label="Type">Document check</td>
+                <td data-label="Status"><span class="badge badge-warning">pending</span></td>
+                <td data-label="Risk"><span class="badge badge-neutral">low</span></td>
+                <td data-label="Reviewer">—</td>
+                <td data-label="Updated">28 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-label="Case">AML-0144</td>
+                <td data-label="Customer">Jordan Lee (C-1042)</td>
+                <td data-label="Type">High-value transfer review</td>
+                <td data-label="Status"><span class="badge badge-warning">requires_info</span></td>
+                <td data-label="Risk"><span class="badge badge-warning">medium</span></td>
+                <td data-label="Reviewer">Demo Admin</td>
+                <td data-label="Updated">31 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-label="Case">KYC-2100</td>
+                <td data-label="Customer">Demo Customer (C-1001)</td>
+                <td data-label="Type">Initial KYC</td>
+                <td data-label="Status"><span class="badge badge-warning">pending</span></td>
+                <td data-label="Risk"><span class="badge badge-neutral">low</span></td>
+                <td data-label="Reviewer">—</td>
+                <td data-label="Updated">12 Mar 2025</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-muted text-sm" style="margin-top:1rem;">Every sensitive decision should create an audit event. Statuses are illustrative for this demonstration.</p>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else location.href = '/admin/login.html';
+    });
+  </script>
+</body>
+</html>

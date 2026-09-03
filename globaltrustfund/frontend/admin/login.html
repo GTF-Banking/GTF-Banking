@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Sign In | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <style>
+    .auth-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--gt-soft-white); }
+    .auth-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.25rem; }
+    .auth-card {
+      width: 100%; max-width: 400px; background: #fff; border: 1px solid var(--gt-border);
+      border-radius: var(--radius-xl); box-shadow: var(--gt-shadow-md); padding: 2rem;
+    }
+    .form-error-banner {
+      display: none; background: rgba(179,58,58,0.08); border: 1px solid rgba(179,58,58,0.25);
+      color: var(--gt-danger); padding: 0.7rem 1rem; border-radius: var(--radius-md);
+      font-size: 0.875rem; margin-bottom: 1rem;
+    }
+    .form-error-banner.visible { display: block; }
+  </style>
+</head>
+<body class="auth-page">
+  <main class="auth-main">
+    <div class="auth-card">
+      <div data-brand="full" style="margin-bottom:1.5rem;"></div>
+      <h1 style="font-size:1.35rem;margin-bottom:0.3rem;">Admin Sign In</h1>
+      <p class="text-muted text-sm" style="margin-bottom:1.5rem;">Authorized personnel only.</p>
+      <div class="form-error-banner" id="errorBanner" role="alert"></div>
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" required autocomplete="username" value="admin@globaltrustfund.example" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-input" type="password" id="password" required autocomplete="current-password" placeholder="Admin1234!" />
+        </div>
+        <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;">Sign In</button>
+      </form>
+      <p class="text-muted text-sm" style="margin-top:1.25rem;text-align:center;">
+        <a href="/">← Public site</a>
+      </p>
+      <p class="text-muted text-xs" style="margin-top:1rem;text-align:center;">Demo: admin@globaltrustfund.example / Admin1234!</p>
+    </div>
+  </main>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/env-bootstrap.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const banner = document.getElementById('errorBanner');
+      banner.classList.remove('visible');
+      btn.disabled = true;
+      try {
+        const data = await GTF.auth.login({
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value
+        });
+        if (data.user && !['admin','super_admin','manager'].includes(data.user.role)) {
+          GTF.auth.clearSession();
+          banner.textContent = 'This account does not have admin access.';
+          banner.classList.add('visible');
+          return;
+        }
+        window.location.href = '/admin/';
+      } catch (err) {
+        banner.textContent = err.message || 'Invalid credentials.';
+        banner.classList.add('visible');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

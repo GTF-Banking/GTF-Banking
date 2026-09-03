@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customers | Admin | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">Operations</div>
+        <a href="/admin/">Dashboard</a>
+        <a href="/admin/customers.html" class="active">Customers</a>
+        <a href="/admin/accounts.html">Accounts</a>
+        <a href="/admin/transactions.html">Transactions</a>
+        <div class="nav-section">Risk &amp; Compliance</div>
+        <a href="/admin/compliance.html">Compliance</a>
+        <a href="/admin/audit.html">Audit Logs</a>
+        <div class="nav-section">Insights</div>
+        <a href="/admin/reports.html">Reports</a>
+        <a href="/admin/settings.html">Settings</a>
+      </nav>
+      <div class="sidebar-footer"><button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button></div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Customers</h1>
+        <span class="badge badge-warning">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="filter-bar">
+          <div class="form-group grow">
+            <label class="form-label" for="search">Search</label>
+            <input class="form-input" id="search" type="search" placeholder="Name, email, or ID" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="kycFilter">KYC status</label>
+            <select class="form-select" id="kycFilter">
+              <option value="">All</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+              <option value="under_review">Under review</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Customer ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>KYC</th>
+                <th>Accounts</th>
+                <th>Status</th>
+                <th>Registered</th>
+              </tr>
+            </thead>
+            <tbody id="custBody">
+              <tr>
+                <td data-label="ID">C-1001</td>
+                <td data-label="Name">Demo Customer</td>
+                <td data-label="Email">demo@globaltrustfund.example</td>
+                <td data-label="KYC"><span class="badge badge-warning">pending</span></td>
+                <td data-label="Accounts">3</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Registered">12 Mar 2025</td>
+              </tr>
+              <tr>
+                <td data-label="ID">C-1042</td>
+                <td data-label="Name">Jordan Lee</td>
+                <td data-label="Email">jordan.lee@example.com</td>
+                <td data-label="KYC"><span class="badge badge-success">approved</span></td>
+                <td data-label="Accounts">2</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Registered">03 Jun 2025</td>
+              </tr>
+              <tr>
+                <td data-label="ID">C-1108</td>
+                <td data-label="Name">Sam Rivera</td>
+                <td data-label="Email">sam.r@example.com</td>
+                <td data-label="KYC"><span class="badge badge-info">under_review</span></td>
+                <td data-label="Accounts">1</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Registered">18 Aug 2026</td>
+              </tr>
+              <tr>
+                <td data-label="ID">C-1120</td>
+                <td data-label="Name">Alex Kim</td>
+                <td data-label="Email">alex.kim@example.com</td>
+                <td data-label="KYC"><span class="badge badge-warning">pending</span></td>
+                <td data-label="Accounts">1</td>
+                <td data-label="Status"><span class="badge badge-success">active</span></td>
+                <td data-label="Registered">28 Aug 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else location.href = '/admin/login.html';
+    });
+  </script>
+</body>
+</html>
