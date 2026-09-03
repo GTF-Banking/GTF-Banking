@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cashier Portal | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/cashier/" class="active">Teller desk</a>
+        <a href="/admin/customers.html">Lookup customer</a>
+        <a href="/admin/accounts.html">Accounts</a>
+        <a href="/admin/transactions.html">Transactions</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Teller desk</h1>
+        <span class="badge badge-neutral">Cashier</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="max-width:520px;">
+          <h2 style="font-size:1.05rem;margin-bottom:0.75rem;">Quick customer lookup</h2>
+          <p class="text-muted text-sm" style="margin-bottom:1rem;">Search by customer number or email. Full deposit/withdrawal posting connects through the staff API when enabled.</p>
+          <div class="form-group">
+            <label class="form-label" for="q">Customer reference</label>
+            <input class="form-input" id="q" placeholder="C-1001 or email" />
+          </div>
+          <button class="btn btn-primary btn-sm" type="button" onclick="GTF.toast('Lookup will use the customers API when connected.', 'info')">Search</button>
+        </div>
+        <div class="card" style="margin-top:1.25rem;max-width:520px;">
+          <h2 style="font-size:1.05rem;margin-bottom:0.5rem;">Today (demo)</h2>
+          <div class="info-list">
+            <div class="info-item"><div><strong>Cash deposits</strong><span>8 · $12,400</span></div></div>
+            <div class="info-item"><div><strong>Withdrawals</strong><span>5 · $3,200</span></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else location.href = '/cashier/login.html';
+    });
+  </script>
+</body>
+</html>
