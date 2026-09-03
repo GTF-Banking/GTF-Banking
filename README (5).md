@@ -1,1 +1,0 @@
-Database layer placeholder for schema, migrations, RLS policies and seed data.
