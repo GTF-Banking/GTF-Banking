@@ -4,6 +4,7 @@
 
 Production-shaped digital banking platform: public site, customer dashboard, admin/manager/cashier portals, Express API, and Supabase (Auth + PostgreSQL + RLS).
 
+
 This software is **your product application**. Operating as a regulated bank or taking real deposits requires licenses, partners, and legal compliance in your jurisdiction.
 
 ---
