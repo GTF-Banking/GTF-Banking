@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Portal | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/manager/" class="active">Overview</a>
+        <a href="/admin/customers.html">Customers</a>
+        <a href="/admin/accounts.html">Accounts</a>
+        <a href="/admin/transactions.html">Transactions</a>
+        <a href="/admin/compliance.html">Compliance</a>
+        <a href="/admin/reports.html">Reports</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Manager overview</h1>
+        <span class="badge badge-neutral">Manager</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="admin-kpi-grid">
+          <div class="admin-kpi"><div class="label">Pending approvals</div><div class="value">12</div></div>
+          <div class="admin-kpi"><div class="label">KYC queue</div><div class="value">37</div></div>
+          <div class="admin-kpi"><div class="label">High-value tx (today)</div><div class="value">4</div></div>
+          <div class="admin-kpi"><div class="label">Open tickets</div><div class="value">14</div></div>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;margin-bottom:0.75rem;">Supervisory actions</h2>
+          <p class="text-muted text-sm">Use the navigation to review customers, accounts, transactions, and compliance cases. Approval workflows connect to the same admin data surfaces with manager-level permissions.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1rem;">
+            <a href="/admin/compliance.html" class="btn btn-primary btn-sm">Review compliance</a>
+            <a href="/admin/transactions.html" class="btn btn-secondary btn-sm">Monitor transactions</a>
+            <a href="/admin/reports.html" class="btn btn-ghost btn-sm">Reports</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else location.href = '/manager/login.html';
+    });
+  </script>
+</body>
+</html>
