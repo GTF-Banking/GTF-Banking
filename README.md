@@ -24,7 +24,7 @@ Open http://www.globaltrustfund.online
 
 ## Supabase setup (recommended)
 
-1. Create a project at [supabase.com](https://supabase.com)
+1. Create a project at https://gmdgdgieixztgniwinlv.supabase.co
 2. **SQL Editor** — run in order:
    - `database/schema/001_core.sql`
    - `database/policies/001_rls.sql`
