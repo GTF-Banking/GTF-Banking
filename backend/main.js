@@ -81,11 +81,14 @@ app.use((err, req, res, next) => {
 });
 
 /* ---------- Start ---------- */
-app.listen(PORT, () => {
-  console.log(`\n  Global TrustFund API running on http://localhost:${PORT}`);
-  console.log(`  Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`  Demo mode: ${process.env.DEMO_MODE === 'true' ? 'ON' : 'OFF'}\n`);
-});
+/* Vercel uses the exported Express app; local runs start the HTTP server. */
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n  Global TrustFund API running on http://localhost:${PORT}`);
+    console.log(`  Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`  Demo mode: ${process.env.DEMO_MODE === 'true' ? 'ON' : 'OFF'}\n`);
+  });
+}
 
 module.exports = app;
 
