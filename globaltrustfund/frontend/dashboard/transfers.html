@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transfers | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html" class="active">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Transfers</h1>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="max-width:520px;">
+          <h2 style="font-size:1.1rem;margin-bottom:0.35rem;">New transfer</h2>
+          <p class="text-muted text-sm" style="margin-bottom:1.5rem;">Move money between your accounts or to a saved recipient. Server-side validation is required before any real movement of funds.</p>
+          <form id="transferForm">
+            <div class="form-group">
+              <label class="form-label" for="fromAccount">From account</label>
+              <select class="form-select" id="fromAccount" required>
+                <option value="">Select account</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="toAccount">To (account or recipient)</label>
+              <input class="form-input" type="text" id="toAccount" required placeholder="Account number or beneficiary name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="amount">Amount</label>
+              <input class="form-input" type="number" id="amount" required min="0.01" step="0.01" placeholder="0.00" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="description">Description (optional)</label>
+              <input class="form-input" type="text" id="description" placeholder="e.g. Rent, savings transfer" />
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitBtn">Review transfer</button>
+          </form>
+          <div id="confirmBox" class="hidden" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--gt-border);">
+            <h3 style="font-size:1rem;margin-bottom:0.75rem;">Confirm transfer</h3>
+            <div id="confirmDetails" class="text-sm" style="margin-bottom:1rem;line-height:1.7;"></div>
+            <div style="display:flex;gap:0.75rem;">
+              <button type="button" class="btn btn-primary btn-sm" id="confirmBtn">Confirm</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="cancelBtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script>
+    let pending = null;
+    document.addEventListener('DOMContentLoaded', async () => {
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+        else window.location.href = '/login.html';
+      });
+      const { accounts } = await GTF.dashboard.getAccounts();
+      const sel = document.getElementById('fromAccount');
+      accounts.forEach(a => {
+        const opt = document.createElement('option');
+        opt.value = a.id;
+        opt.textContent = `${a.name} (${a.accountNumber}) — ${GTF.format.currency(a.available, a.currency)}`;
+        sel.appendChild(opt);
+      });
+
+      document.getElementById('transferForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const from = sel.options[sel.selectedIndex]?.text || '';
+        const to = document.getElementById('toAccount').value.trim();
+        const amount = parseFloat(document.getElementById('amount').value);
+        const desc = document.getElementById('description').value.trim();
+        if (!sel.value || !to || !(amount > 0)) {
+          GTF.toast('Please complete all required fields.', 'error');
+          return;
+        }
+        pending = { fromId: sel.value, fromLabel: from, to, amount, desc };
+        document.getElementById('confirmDetails').innerHTML = `
+          <div><strong>From:</strong> ${from}</div>
+          <div><strong>To:</strong> ${to}</div>
+          <div><strong>Amount:</strong> ${GTF.format.currency(amount)}</div>
+          ${desc ? `<div><strong>Description:</strong> ${desc}</div>` : ''}
+        `;
+        document.getElementById('confirmBox').classList.remove('hidden');
+      });
+
+      document.getElementById('cancelBtn').addEventListener('click', () => {
+        pending = null;
+        document.getElementById('confirmBox').classList.add('hidden');
+      });
+
+      document.getElementById('confirmBtn').addEventListener('click', async () => {
+        if (!pending) return;
+        document.getElementById('confirmBtn').disabled = true;
+        try {
+          await GTF.api('/transfers', { method: 'POST', body: pending });
+          GTF.toast('Transfer submitted successfully.', 'success');
+        } catch (err) {
+          // Demo fallback
+          GTF.toast('Transfer recorded in demo mode (API not connected). Reference: TRF-DEMO-' + Date.now().toString().slice(-6), 'info');
+        }
+        pending = null;
+        document.getElementById('confirmBox').classList.add('hidden');
+        document.getElementById('transferForm').reset();
+        document.getElementById('confirmBtn').disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>

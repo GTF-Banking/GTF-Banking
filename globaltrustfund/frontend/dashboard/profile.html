@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html" class="active">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Profile</h1>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="max-width:560px;">
+          <h2 style="font-size:1.1rem;margin-bottom:1.25rem;">Personal information</h2>
+          <form id="profileForm">
+            <div class="form-group">
+              <label class="form-label" for="fullName">Full name</label>
+              <input class="form-input" type="text" id="fullName" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" type="email" id="email" readonly style="background:var(--gt-soft-white);" />
+              <span class="form-hint">Email changes require verification support.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone</label>
+              <input class="form-input" type="tel" id="phone" placeholder="+1 555 000 0000" />
+            </div>
+            <div style="margin-bottom:1.25rem;">
+              <span class="text-sm text-muted">Verification status: </span>
+              <span class="badge badge-warning" id="kycBadge">pending</span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+        <div class="card" style="max-width:560px;margin-top:1.25rem;">
+          <h2 style="font-size:1.1rem;margin-bottom:0.75rem;">Security</h2>
+          <p class="text-muted text-sm" style="margin-bottom:1rem;">Manage password and session preferences.</p>
+          <a href="/forgot-password.html" class="btn btn-secondary btn-sm">Change password</a>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+        else window.location.href = '/login.html';
+      });
+      const user = GTF.auth.getUser() || { full_name: 'Demo Customer', email: 'demo@globaltrustfund.example' };
+      document.getElementById('fullName').value = user.full_name || '';
+      document.getElementById('email').value = user.email || '';
+      document.getElementById('phone').value = user.phone || '';
+      document.getElementById('profileForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        GTF.toast('Profile update will sync when the users API is connected.', 'info');
+      });
+    });
+  </script>
+</body>
+</html>

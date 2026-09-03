@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html" class="active">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Support</h1>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="max-width:560px;margin-bottom:1.25rem;">
+          <h2 style="font-size:1.1rem;margin-bottom:0.75rem;">Create a ticket</h2>
+          <form id="ticketForm">
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input class="form-input" type="text" id="subject" required placeholder="Brief summary of your issue" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-textarea" id="message" rows="4" required placeholder="Describe the issue in detail"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="priority">Priority</label>
+              <select class="form-select" id="priority">
+                <option value="normal">Normal</option>
+                <option value="low">Low</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit ticket</button>
+          </form>
+        </div>
+        <div class="card">
+          <h2 style="font-size:1.05rem;margin-bottom:0.75rem;">Your tickets</h2>
+          <p class="text-muted text-sm" style="margin-bottom:1rem;">Ticket history will load from the support API when connected.</p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead><tr><th>Date</th><th>Subject</th><th>Status</th><th>Priority</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td data-label="Date">Aug 15, 2026</td>
+                  <td data-label="Subject">Question about transfer limits</td>
+                  <td data-label="Status"><span class="badge badge-success">resolved</span></td>
+                  <td data-label="Priority">normal</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else window.location.href = '/login.html';
+    });
+    document.getElementById('ticketForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      GTF.toast('Ticket submitted in demo mode. It will sync when the support API is connected.', 'success');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

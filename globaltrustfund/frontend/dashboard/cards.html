@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cards | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <style>
+    .card-visual {
+      background: linear-gradient(135deg, #0B3D2E 0%, #145A43 100%);
+      border-radius: 14px;
+      padding: 1.5rem;
+      color: #fff;
+      max-width: 340px;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--gt-shadow-md);
+    }
+    .card-visual .pan { letter-spacing: 0.12em; font-size: 1.1rem; font-family: var(--gt-font-mono); }
+    .card-visual .meta { display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.85; }
+  </style>
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html" class="active">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Cards</h1>
+        <span class="badge badge-neutral">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+          <div class="card-visual">
+            <div>
+              <div class="text-xs" style="opacity:0.7;letter-spacing:0.08em;text-transform:uppercase;">Debit</div>
+              <div style="font-weight:600;margin-top:0.35rem;">Global TrustFund</div>
+            </div>
+            <div class="pan">•••• •••• •••• 4521</div>
+            <div class="meta">
+              <span>EXP ••/••</span>
+              <span class="badge badge-success" style="background:rgba(255,255,255,0.2);color:#fff;">Active</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="font-size:1.05rem;margin-bottom:0.75rem;">Card controls</h3>
+            <p class="text-muted text-sm" style="margin-bottom:1rem;">Sensitive card data is never shown in full. Controls below are illustrative for this demonstration platform.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+              <button class="btn btn-secondary btn-sm" type="button" onclick="GTF.toast('Freeze control will connect to the cards API.', 'info')">Freeze card</button>
+              <button class="btn btn-ghost btn-sm" type="button" onclick="GTF.toast('Spending limits will connect to the cards API.', 'info')">Spending limits</button>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:1.5rem;">
+          <h3 style="font-size:1.05rem;margin-bottom:0.75rem;">Recent card transactions</h3>
+          <div class="table-wrapper" style="border:none;">
+            <table class="data-table">
+              <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td data-label="Date">Aug 24, 2026</td>
+                  <td data-label="Description">Market POS</td>
+                  <td data-label="Amount">$64.20</td>
+                  <td data-label="Status"><span class="badge badge-success">completed</span></td>
+                </tr>
+                <tr>
+                  <td data-label="Date">Aug 22, 2026</td>
+                  <td data-label="Description">Fuel station</td>
+                  <td data-label="Amount">$45.00</td>
+                  <td data-label="Status"><span class="badge badge-success">completed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else window.location.href = '/login.html';
+    });
+  </script>
+</body>
+</html>

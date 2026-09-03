@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/" class="active">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Overview</h1>
+        <div class="topbar-actions" style="display:flex;align-items:center;gap:0.75rem;">
+          <span class="badge badge-neutral" id="demoBadge" style="display:none;">Demo data</span>
+          <span class="text-muted text-sm" id="userGreeting">—</span>
+        </div>
+      </header>
+      <main class="dashboard-content">
+        <p class="text-muted text-sm" style="margin-bottom:1.25rem;" id="welcomeMsg">Welcome back.</p>
+
+        <div class="kpi-grid" id="kpiGrid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Balance</div>
+            <div class="kpi-value" id="kpiTotal">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Available</div>
+            <div class="kpi-value" id="kpiAvailable">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Accounts</div>
+            <div class="kpi-value" id="kpiAccounts">—</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Pending</div>
+            <div class="kpi-value" id="kpiPending">—</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr;gap:1.25rem;">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+              <h2 style="font-size:1.05rem;margin:0;">Recent activity</h2>
+              <a href="/dashboard/transactions.html" class="text-sm font-semibold">View all</a>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-table" id="recentTable">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recentBody">
+                  <tr><td colspan="5"><div class="skeleton" style="height:20px;width:80%;"></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 style="font-size:1.05rem;margin-bottom:1rem;">Quick actions</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+              <a href="/dashboard/transfers.html" class="btn btn-primary btn-sm">Transfer</a>
+              <a href="/dashboard/payments.html" class="btn btn-secondary btn-sm">Pay</a>
+              <a href="/dashboard/accounts.html" class="btn btn-secondary btn-sm">Accounts</a>
+              <a href="/dashboard/support.html" class="btn btn-ghost btn-sm">Support</a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/role-guard.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Allow viewing with demo data even without auth for development
+      const user = GTF.auth.getUser();
+      const greeting = document.getElementById('userGreeting');
+      const welcome = document.getElementById('welcomeMsg');
+      if (user) {
+        greeting.textContent = user.full_name || user.email || 'Customer';
+        welcome.textContent = 'Welcome back' + (user.full_name ? ', ' + user.full_name.split(' ')[0] : '') + '.';
+      } else {
+        greeting.textContent = 'Guest (demo)';
+        welcome.textContent = 'Welcome — viewing demonstration data.';
+      }
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+        else window.location.href = '/login.html';
+      });
+
+      try {
+        const summary = await GTF.dashboard.getSummary();
+        document.getElementById('kpiTotal').textContent = GTF.format.currency(summary.totalBalance, summary.currency);
+        document.getElementById('kpiAvailable').textContent = GTF.format.currency(summary.availableBalance, summary.currency);
+        document.getElementById('kpiAccounts').textContent = summary.accountCount ?? '—';
+        document.getElementById('kpiPending').textContent = summary.pendingCount ?? '0';
+        const tbody = document.getElementById('recentBody');
+        const rows = summary.recent || [];
+        if (!rows.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="text-muted">No recent activity.</td></tr>';
+        } else {
+          tbody.innerHTML = rows.map(tx => `
+            <tr>
+              <td data-label="Date">${GTF.format.date(tx.date)}</td>
+              <td data-label="Description">${tx.description}</td>
+              <td data-label="Type">${GTF.dashboard.typeLabel(tx.type)}</td>
+              <td data-label="Amount">${GTF.format.currency(tx.amount)}</td>
+              <td data-label="Status"><span class="badge ${GTF.dashboard.statusBadge(tx.status)}">${tx.status}</span></td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) {
+        document.getElementById('kpiTotal').textContent = '—';
+        document.getElementById('kpiAvailable').textContent = '—';
+        document.getElementById('kpiAccounts').textContent = '—';
+        document.getElementById('kpiPending').textContent = '—';
+        document.getElementById('recentBody').innerHTML =
+          '<tr><td colspan="5" class="text-muted">Unable to load activity. Sign in and ensure Supabase is configured.</td></tr>';
+        if (window.GTF?.toast) GTF.toast(err.message || 'Failed to load dashboard', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transactions | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html" class="active">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Transactions</h1>
+        <span class="badge badge-neutral" id="demoBadge" style="display:none;">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="margin-bottom:1.25rem;">
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:flex-end;">
+            <div class="form-group" style="margin:0;flex:1;min-width:160px;">
+              <label class="form-label" for="search">Search</label>
+              <input class="form-input" type="search" id="search" placeholder="Description or reference" />
+            </div>
+            <div class="form-group" style="margin:0;min-width:140px;">
+              <label class="form-label" for="statusFilter">Status</label>
+              <select class="form-select" id="statusFilter">
+                <option value="">All</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin:0;min-width:140px;">
+              <label class="form-label" for="typeFilter">Type</label>
+              <select class="form-select" id="typeFilter">
+                <option value="">All</option>
+                <option value="deposit">Deposit</option>
+                <option value="withdrawal">Withdrawal</option>
+                <option value="transfer_out">Transfer</option>
+                <option value="payment">Payment</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Reference</th>
+                <th>Account</th>
+              </tr>
+            </thead>
+            <tbody id="txBody">
+              <tr><td colspan="7"><div class="skeleton" style="height:24px;"></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script>
+    let allTx = [];
+    function render(list) {
+      const tbody = document.getElementById('txBody');
+      if (!list.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-muted" style="text-align:center;padding:2rem;">No transactions found. Try adjusting your filters.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = list.map(tx => `
+        <tr>
+          <td data-label="Date">${GTF.format.datetime(tx.date)}</td>
+          <td data-label="Description">${tx.description}</td>
+          <td data-label="Type">${GTF.dashboard.typeLabel(tx.type)}</td>
+          <td data-label="Amount">${GTF.format.currency(tx.amount, tx.currency)}</td>
+          <td data-label="Status"><span class="badge ${GTF.dashboard.statusBadge(tx.status)}">${tx.status}</span></td>
+          <td data-label="Reference">${tx.reference || '—'}</td>
+          <td data-label="Account">${tx.account || '—'}</td>
+        </tr>
+      `).join('');
+    }
+    function applyFilters() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const st = document.getElementById('statusFilter').value;
+      const ty = document.getElementById('typeFilter').value;
+      let list = allTx;
+      if (q) list = list.filter(t => (t.description + ' ' + (t.reference||'')).toLowerCase().includes(q));
+      if (st) list = list.filter(t => t.status === st);
+      if (ty) list = list.filter(t => t.type === ty);
+      render(list);
+    }
+    document.addEventListener('DOMContentLoaded', async () => {
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+        else window.location.href = '/login.html';
+      });
+      const { transactions, _demo } = await GTF.dashboard.getTransactions();
+      if (_demo) document.getElementById('demoBadge').style.display = 'inline-flex';
+      allTx = transactions;
+      render(allTx);
+      document.getElementById('search').addEventListener('input', applyFilters);
+      document.getElementById('statusFilter').addEventListener('change', applyFilters);
+      document.getElementById('typeFilter').addEventListener('change', applyFilters);
+    });
+  </script>
+</body>
+</html>

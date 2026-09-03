@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accounts | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html" class="active">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Accounts</h1>
+        <span class="badge badge-neutral" id="demoBadge" style="display:none;">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div id="accountsList" class="feature-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+          <div class="card"><div class="skeleton" style="height:100px;"></div></div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+        else window.location.href = '/login.html';
+      });
+      const el = document.getElementById('accountsList');
+      let accounts = [];
+      try {
+        const res = await GTF.dashboard.getAccounts();
+        accounts = res.accounts || [];
+      } catch (err) {
+        el.innerHTML = '<div class="card state-error"><h3>Could not load accounts</h3><p class="text-muted">'+(err.message||'Check Supabase configuration.')+'</p></div>';
+        return;
+      }
+      if (!accounts.length) {
+        el.innerHTML = '<div class="card state-empty"><h3>No accounts</h3><p>No accounts found for this profile. Accounts are created automatically after first load when the database is connected.</p></div>';
+        return;
+      }
+      el.innerHTML = accounts.map(a => `
+        <article class="card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;">
+            <div>
+              <h3 style="font-size:1.05rem;margin:0 0 0.25rem;">${a.name}</h3>
+              <span class="text-muted text-sm">${a.type} · ${a.accountNumber}</span>
+            </div>
+            <span class="badge ${GTF.dashboard.statusBadge(a.status)}">${a.status}</span>
+          </div>
+          <div style="margin:1rem 0;">
+            <div class="text-muted text-xs" style="text-transform:uppercase;letter-spacing:0.04em;">Balance</div>
+            <div style="font-size:1.5rem;font-weight:650;color:var(--gt-deep-green);">${GTF.format.currency(a.balance, a.currency)}</div>
+            <div class="text-muted text-sm">Available: ${GTF.format.currency(a.available, a.currency)}</div>
+          </div>
+          <div class="text-muted text-sm">Opened ${GTF.format.date(a.openedAt)}</div>
+        </article>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

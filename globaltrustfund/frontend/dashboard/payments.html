@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments | Global TrustFund</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand" data-brand="full"></div>
+      <nav class="sidebar-nav">
+        <a href="/dashboard/">Overview</a>
+        <a href="/dashboard/accounts.html">Accounts</a>
+        <a href="/dashboard/transactions.html">Transactions</a>
+        <a href="/dashboard/transfers.html">Transfers</a>
+        <a href="/dashboard/payments.html" class="active">Payments</a>
+        <a href="/dashboard/cards.html">Cards</a>
+        <a href="/dashboard/profile.html">Profile</a>
+        <a href="/dashboard/support.html">Support</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <h1 style="font-size:1.25rem;margin:0;">Payments</h1>
+        <span class="badge badge-neutral">Demo data</span>
+      </header>
+      <main class="dashboard-content">
+        <div class="card" style="margin-bottom:1.25rem;">
+          <h2 style="font-size:1.05rem;margin-bottom:0.5rem;">Payment history</h2>
+          <p class="text-muted text-sm">Recent payments and bill-style transactions. Connect the payments API for live data.</p>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr><th>Date</th><th>Recipient / Merchant</th><th>Amount</th><th>Status</th><th>Reference</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Date">Aug 26, 2026</td>
+                <td data-label="Recipient">Utility Co.</td>
+                <td data-label="Amount">$128.50</td>
+                <td data-label="Status"><span class="badge badge-success">completed</span></td>
+                <td data-label="Reference">PAY-8821</td>
+              </tr>
+              <tr>
+                <td data-label="Date">Aug 24, 2026</td>
+                <td data-label="Recipient">Market POS</td>
+                <td data-label="Amount">$64.20</td>
+                <td data-label="Status"><span class="badge badge-success">completed</span></td>
+                <td data-label="Reference">POS-771</td>
+              </tr>
+              <tr>
+                <td data-label="Date">Aug 20, 2026</td>
+                <td data-label="Recipient">Internet Provider</td>
+                <td data-label="Amount">$59.99</td>
+                <td data-label="Status"><span class="badge badge-success">completed</span></td>
+                <td data-label="Reference">PAY-7710</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="/js/logo-loader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (GTF.auth.isAuthenticated()) GTF.auth.logout();
+      else window.location.href = '/login.html';
+    });
+  </script>
+</body>
+</html>
