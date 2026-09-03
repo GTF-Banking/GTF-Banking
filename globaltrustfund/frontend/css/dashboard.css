@@ -1,0 +1,165 @@
+/* ============================================================
+   Global TrustFund — Customer & Admin Dashboard Layout
+   ============================================================ */
+
+.dashboard-body {
+  background: var(--gt-soft-white);
+  min-height: 100vh;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--gt-deep-green);
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar-brand {
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-brand .brand-name {
+  color: #fff !important;
+}
+
+.sidebar-brand .brand-desc {
+  color: var(--gt-gold) !important;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  overflow-y: auto;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sidebar-nav a.active {
+  background: rgba(201, 162, 39, 0.18);
+  color: var(--gt-gold);
+}
+
+.sidebar-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-footer .btn-ghost {
+  color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+}
+
+.sidebar-footer .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+/* Main area */
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.75rem;
+  background: var(--gt-white);
+  border-bottom: 1px solid var(--gt-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.dashboard-content {
+  padding: 1.75rem;
+  flex: 1;
+}
+
+/* KPI cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.kpi-card {
+  background: var(--gt-white);
+  border: 1px solid var(--gt-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.35rem;
+  box-shadow: var(--gt-shadow-sm);
+}
+
+.kpi-card .kpi-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gt-muted-text);
+  margin-bottom: 0.35rem;
+}
+
+.kpi-card .kpi-value {
+  font-size: 1.5rem;
+  font-weight: 650;
+  color: var(--gt-deep-green);
+}
+
+.kpi-card .kpi-meta {
+  font-size: 0.8rem;
+  color: var(--gt-muted-text);
+  margin-top: 0.35rem;
+}
+
+/* Responsive sidebar */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .dashboard-content {
+    padding: 1.25rem;
+  }
+}

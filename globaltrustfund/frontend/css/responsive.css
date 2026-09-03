@@ -1,0 +1,129 @@
+/* ============================================================
+   Global TrustFund — Responsive Rules
+   ============================================================ */
+
+/* Tablet and below */
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .mobile-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--gt-white);
+    border-bottom: 1px solid var(--gt-border);
+    padding: var(--space-4) var(--space-6);
+    flex-direction: column;
+    gap: var(--space-1);
+    box-shadow: var(--gt-shadow-md);
+  }
+
+  .mobile-nav.open {
+    display: flex;
+  }
+
+  .mobile-nav a {
+    padding: var(--space-3) 0;
+    font-weight: 500;
+    color: var(--gt-dark-text);
+    border-bottom: 1px solid var(--gt-border);
+  }
+
+  .mobile-nav a:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .container {
+    padding-inline: var(--space-4);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .header-actions .btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .brand-text {
+    display: none; /* Keep only logo mark on very small screens if needed */
+  }
+
+  /* Tables → card-like on mobile */
+  .table-wrapper {
+    border: none;
+    background: transparent;
+  }
+
+  table.data-table thead {
+    display: none;
+  }
+
+  table.data-table,
+  table.data-table tbody,
+  table.data-table tr,
+  table.data-table td {
+    display: block;
+    width: 100%;
+  }
+
+  table.data-table tr {
+    background: var(--gt-white);
+    border: 1px solid var(--gt-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  table.data-table td {
+    padding: 0.35rem 0;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  table.data-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--gt-muted-text);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  .container-wide {
+    max-width: 1520px;
+  }
+}
